@@ -23,3 +23,17 @@ exports.onPreBootstrap = ({ store }, options) => {
     mkdirp.sync(dir);
   }
 };
+
+// U GRAPHQL LAYER DODAJEM NOVI TYPE, A TO CE BITI      BlogPostPage
+
+exports.createSchemaCustomization = ({ actions }) => {
+  actions.createTypes(`
+    type BlogPostPage implements Node @dontInfer {
+      id: ID!
+      title: String!
+      path: String!
+      updated: Date! @dateformat
+      body: String!
+    }
+  `);
+};
