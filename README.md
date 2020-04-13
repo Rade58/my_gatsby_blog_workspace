@@ -22,7 +22,17 @@ INSTALIRAM PLUGIN U TEMU
 
 ```js
 module.exports = {
-  plugins: ["gatsby-plugin-typescript"],
+  plugins: [
+
+    {
+      resolve: "gatsby-plugin-typescript",
+      // ALI TAKODJE ZELIM DA BUDE MOGUCE KORISCENJE PRAGME, I tsx-A
+      options: {
+        isTSX: true,
+        jsxPragma: 'jsx',
+        allExtensions: true
+      }
+    },
 };
 ```
 
@@ -69,3 +79,9 @@ JER ZELIM DA SPECIFICIRAM DA ESLINT IGNORISE KONFIGURACIJSKE FAJLOVE, BILO GDE D
 # :two: THEME DEPENDANCIES
 
 - `yarn workspace gatsby-theme-raedal add @emotion/core @mdx-js/mdx @mdx-js/react gatsby-plugin-mdx gatsby-plugin-theme-ui gatsby-source-filesystem mdx-utils mkdirp prism-react-renderer react-live theme-ui`
+
+MORAS INSTALIRATI I gatsby DA BI UOPSTE MOGAO BITI KORISCEN gatsby-source-filesystem
+
+ZATO MOZES U TEMI INSTALIRATI KAO PEER DEPENDANCIES I react I react-dom I gatsby
+
+- `yarn workspace gatsby-theme-raedal add gatsby react react-dom --peer`

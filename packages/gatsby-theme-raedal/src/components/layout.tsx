@@ -8,3 +8,15 @@ const Layout: FunctionComponent = ({ children }) => (
 );
 
 export default Layout;
+
+/* import React from "react";
+
+const Layout = ({ children }) => (
+  <>
+    <h1>LAYOUT KOMPONENTA</h1>
+    {children}
+  </>
+);
+
+export default Layout;
+ */
