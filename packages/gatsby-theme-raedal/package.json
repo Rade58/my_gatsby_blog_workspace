@@ -1,0 +1,10 @@
+{
+  "name": "gatsby-theme-raedal",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Rade",
+  "license": "MIT",
+  "dependencies": {
+    "gatsby-plugin-typescript": "^2.3.1"
+  }
+}
