@@ -5,10 +5,17 @@
   "author": "Rade",
   "license": "MIT",
   "dependencies": {
+    "@emotion/core": "^10.0.28",
+    "@mdx-js/mdx": "^1.5.8",
+    "@mdx-js/react": "^1.5.8",
     "gatsby-plugin-mdx": "^1.1.7",
     "gatsby-plugin-theme-ui": "^0.3.0",
     "gatsby-plugin-typescript": "^2.3.1",
     "gatsby-source-filesystem": "^2.2.2",
-    "mkdirp": "^1.0.4"
+    "mdx-utils": "^0.2.0",
+    "mkdirp": "^1.0.4",
+    "prism-react-renderer": "^1.0.2",
+    "react-live": "^2.2.2",
+    "theme-ui": "^0.3.1"
   }
 }

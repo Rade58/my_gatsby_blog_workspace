@@ -65,3 +65,7 @@ I U NJEGA SAM SVE PREKOPIRAO, PREKOPIRAO JER OVO JE KONFIGURACIJA FROM `airbnb`
 ## TAKODJE SAM PODESIO I `.eslintignore` FAJL
 
 JER ZELIM DA SPECIFICIRAM DA ESLINT IGNORISE KONFIGURACIJSKE FAJLOVE, BILO GDE DA SU
+
+# :two: THEME DEPENDANCIES
+
+- `yarn workspace gatsby-theme-raedal add @emotion/core @mdx-js/mdx @mdx-js/react gatsby-plugin-mdx gatsby-plugin-theme-ui gatsby-source-filesystem mdx-utils mkdirp prism-react-renderer react-live theme-ui`

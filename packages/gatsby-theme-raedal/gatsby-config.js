@@ -18,7 +18,9 @@ module.exports = (options) => {
       !useExternalMDX && {
         resolve: "gatsby-plugin-mdx",
         options: {
-          defaultLayouts: {},
+          defaultLayouts: {
+            default: require.resolve("./src/components/layout.tsx"),
+          },
         },
       },
       "gatsby-plugin-theme-ui",

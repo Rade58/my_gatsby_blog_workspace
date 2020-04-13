@@ -6,8 +6,20 @@ const path = require("path");
 const fs = require("fs");
 const mkdirp = require("mkdirp");
 
-// AKO NE POSTOJI     contentPATH    blogposts
+// AKO NE POSTOJI     contentPath    blogposts
 // ODNOSNO AKO U SITE FOLDERU NE POSTOJI        blogposts    FOLDER
 // KREIRATI GA
+exports.onPreBootstrap = ({ store }, options) => {
+  const { program } = store.getState(); // PROGRAM IMA INFO O SITE-U, KAO STO
+  //                                          JE DIREKTORIJUM   SITE-A
+  const { contentPath } = withDefaults(options);
+  const dir = path.join(program.directory, contentPath); // DAKEL OVOM SE
+  //                                                         APSOLUTNI
+  //                                                  DIREKTORIJUM SITE-A
 
-exports.onPreBootstrap = ({ store }, options) => {};
+  // AKO NE POSTOJI DIREKTORIJUM KREIRAM GA PO DEFAULTU NA      blogposts
+
+  if (!fs.existsSync(dir)) {
+    mkdirp.sync(dir);
+  }
+};
