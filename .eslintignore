@@ -1,3 +1,4 @@
 **/gatsby-config.js
 **/gatsby-node.js
 packages/gatsby-theme-raedal/index.js
+packages/gatsby-theme-raedal/utility/**

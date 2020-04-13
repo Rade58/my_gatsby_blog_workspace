@@ -5,6 +5,10 @@
   "author": "Rade",
   "license": "MIT",
   "dependencies": {
-    "gatsby-plugin-typescript": "^2.3.1"
+    "gatsby-plugin-mdx": "^1.1.7",
+    "gatsby-plugin-theme-ui": "^0.3.0",
+    "gatsby-plugin-typescript": "^2.3.1",
+    "gatsby-source-filesystem": "^2.2.2",
+    "mkdirp": "^1.0.4"
   }
 }
