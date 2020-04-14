@@ -1,5 +1,11 @@
 # DEVELOPMENT NOTES
 
+---
+
+ps. NEMOJ DA TI SE DESI DA IMAS ISTOIMENE FAJLOVE SA RAZLICITIM EKSTENZIJMA (.js, .jsx, .tsx) (GOMILA PROBLEMA A NEDOVOLJNO DOBRO LINTING PRAVILO DA TI TO OBZANI)
+
+---
+
 # :one: `package.json` TVOJE TEME **NEMA** `"private": true`
 
 ## MISLIM DA gatsby , react , react-dom MOZES DA INSTALIRAS KAO PEER DEPENDANCY U TEMI
@@ -22,17 +28,7 @@ INSTALIRAM PLUGIN U TEMU
 
 ```js
 module.exports = {
-  plugins: [
-
-    {
-      resolve: "gatsby-plugin-typescript",
-      // ALI TAKODJE ZELIM DA BUDE MOGUCE KORISCENJE PRAGME, I tsx-A
-      options: {
-        isTSX: true,
-        jsxPragma: 'jsx',
-        allExtensions: true
-      }
-    },
+  plugins: ["gatsy-plugin-typescript"],
 };
 ```
 
@@ -42,11 +38,13 @@ ps. OVO NEMA VEZE SA TYPESCRIPT-OM, ALI NEMOJ DA ZABORAVIS DA NA NIVOU blog-A DE
 
 ---
 
+_STO SE TICE SPECIFICIRANJA DEFAULT LAYOUT-A U `gatsby-config.js` I SPECIFICIRANJA TEMPLATE-OVA U `gatsby-node.js`_ **`OMOGUCENO TI JE DA KORISTIS .tsx KOMPONENTE`** (DAKLE I SA KONFIGURACIJSKE STRANE MOZES KORISTITI TYPESCRIPT)
+
 ## STO SE TICE TYPESCRIPT-OVI TYPE DEFINICIJA ZA RAZNE PAKETE INSTALIRAS IH U ROOT
 
 KORISTIS `-W` FLAG PRI INSTALACIJI
 
-- `yarn add -D -W @types/node @types/react @types/react-dom`
+- `yarn add -D -W @types/node @types/react @types/react-dom @types/theme-ui`
 
 ## TYPE CHECKING CES DEFINISATI TAKO STO CES TYPESCRIPT INSTALIRATI U ROOT-U KAO DEV DEPENDANCY; I TAK OSTO CES DEFINISATI tsconfig.js
 

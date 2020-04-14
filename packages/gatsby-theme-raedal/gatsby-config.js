@@ -7,17 +7,17 @@ module.exports = (options) => {
 
   return {
     plugins: [
-      // "gatsby-plugin-typescript",
+      "gatsby-plugin-typescript",
 
-      {
+      /* {
         resolve: "gatsby-plugin-typescript",
         // ALI TAKODJE ZELIM DA BUDE MOGUCE KORISCENJE PRAGME, I tsx-A
         options: {
           isTSX: true,
-          // jsxPragma: "jsx",
+          jsxPragma: "jsx",
           allExtensions: true,
         },
-      },
+      }, */
       {
         resolve: "gatsby-source-filesystem",
         options: {
@@ -33,7 +33,7 @@ module.exports = (options) => {
           },
         },
       },
-      // "gatsby-plugin-theme-ui",
+      "gatsby-plugin-theme-ui",
     ].filter(Boolean),
   };
 };

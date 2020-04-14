@@ -9,7 +9,7 @@
       "ES2015",
       "ES2017"
     ] /* Specify library files to be included in the compilation. */,
-    // "allowJs": true,                       /* Allow javascript files to be compiled. */
+    // "allowJs": true /* Allow javascript files to be compiled. */,
     // "checkJs": true,                       /* Report errors in .js files. */
     "jsx": "preserve" /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */,
     // "declaration": true,                   /* Generates corresponding '.d.ts' file. */
@@ -68,16 +68,5 @@
     "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */,
 
     "skipLibCheck": true
-  },
-  "include": [
-    "./packages/gatsby-theme-raedal/src/**/*",
-    "./sites/blog/src/**/*"
-  ],
-  "exclude": [
-    "./packages/gatsby-theme-raedal/gatsby-config.js",
-    "./sites/blog/gatsby-config.js",
-    "**/node_modules",
-    "**/.cache",
-    "**/public"
-  ]
+  }
 }

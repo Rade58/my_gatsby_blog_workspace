@@ -72,6 +72,7 @@ module.exports = {
     "react/forbid-prop-types": 0,
     "react/no-unescaped-entities": 0,
     "react/prop-types": 0,
+    "react/jsx-fragments": 1,
     "react/jsx-filename-extension": [
       1,
       {
@@ -81,7 +82,7 @@ module.exports = {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     quotes: [
-      2,
+      0,
       "backtick",
       {
         avoidEscape: true,
@@ -89,7 +90,7 @@ module.exports = {
     ],
     indent: ["error", 2, { SwitchCase: 1 }],
     "prettier/prettier": [
-      "error",
+      0,
       {
         trailingComma: "es5",
         semi: true,
