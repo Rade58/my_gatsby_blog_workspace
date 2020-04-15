@@ -1,5 +1,5 @@
-import { base } from "@theme-ui/presets";
-import { Theme } from 'theme-ui'
+import { deep as theme } from "@theme-ui/presets";
+import { Theme, ButtonProps } from 'theme-ui'
 
 
 // import { ThemeProvider } from "theme-ui";  // OVO NE KORISTIM OVDE
@@ -9,10 +9,20 @@ import { Theme } from 'theme-ui'
 //                                            DA BI MOGAO KORISTITI STILOVE
 //                                             KOJE BRING-UJE PRESET
 
-// ThemeProvider UZIMA TEMU KAO PROP
+// ThemeProvider UZIMA TEMU KAO PROP theme
 
-const myTheme: Theme = {
-  buttons: {
+const myButton: ButtonProps = {
 
-  }
+  bg: 'blanchedalmond'
+
 }
+
+
+
+const myTheme = {
+  ...theme,
+  myButton
+}
+
+
+export default myTheme
