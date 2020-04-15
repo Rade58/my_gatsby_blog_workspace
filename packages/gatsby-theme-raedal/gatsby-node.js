@@ -76,6 +76,12 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId }, options) => {
 
   const pageName = name !== "index" ? name : "";
 
+  // DODAJEM SLUG SUPPORT ODNOSNO SVE STO IMA slug U FRONTMATTER-U slug
+  // BI TREBALO DA BUDE PATH
+
+  let slug;
+  if (node.frontmatter.slug) slug = `/${node.frontmatter.slug}`;
+
   //
   actions.createNode({
     // CAK I OVA FUNKCIJA TRIGGER-UJE HOOK U CIJEM SAM OBIMU
@@ -86,7 +92,8 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId }, options) => {
     // OVO JE PATH KOJI CES KORISTITI U ADRESS BAR-U, DA SE RENDERUJE, PAGE
     // A TO SAMO KREIRANJE PAGE-A, CES DEFINISATI DOLE U HOOK-U
     // createPages
-    path: path.resolve("/", basePath, relativeDirectory, pageName),
+    // SERVIRAM slug AKO GA JE KORISNIK OBEZBEDIO
+    path: slug || path.resolve("/", basePath, relativeDirectory, pageName),
     internal: {
       type: "BlogPostPage",
       contentDigest,
