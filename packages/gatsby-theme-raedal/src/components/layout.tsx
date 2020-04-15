@@ -13,7 +13,7 @@ const Layout: FunctionComponent = ({ children }) => (
     />
     <header
       sx={{
-        bg: "olive",
+        bg: "tomato",
         color: "blabchedalmond",
         fontFamily: "Ubuntu",
         p: 10,
