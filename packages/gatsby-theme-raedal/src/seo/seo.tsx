@@ -6,6 +6,8 @@ export interface SeoI {
   lang: string;
   description: string;
   themeColor: string;
+
+  drvece: number;
 }
 
 const Seo: FunctionComponent<SeoI> = ({

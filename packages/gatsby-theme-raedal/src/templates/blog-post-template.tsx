@@ -16,11 +16,7 @@ interface BlogPostTemplateProps {
       title: string;
       body: string;
 
-      frontMatter: {
-        themeColor: string;
-        description: string;
-        lang: string;
-      };
+      frontMatter: SeoI;
     };
   };
 }
