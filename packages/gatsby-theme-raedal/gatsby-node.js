@@ -37,7 +37,18 @@ exports.createSchemaCustomization = ({ actions }) => {
       path: String!
       updated: Date! @dateformat
       body: String!
+
+      frontMatter: FrontMatter! 
+
     }
+
+    type FrontMatter {
+      title: String
+      lang: String
+      description: String
+      themeColor: String
+    }
+
   `);
 };
 
@@ -97,6 +108,13 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId }, options) => {
     internal: {
       type: "BlogPostPage",
       contentDigest,
+    },
+
+    frontMatter: {
+      title,
+      lang: node.frontmatter.lang || "en",
+      description: node.frontmatter.description || "moj sajt",
+      themeColor: "pink",
     },
   });
 };

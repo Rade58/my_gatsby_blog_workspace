@@ -6,6 +6,8 @@ import { graphql } from "gatsby";
 
 import BlogPost from "../components/blog-post";
 
+import { SeoI } from "../seo/seo";
+
 interface BlogPostTemplateProps {
   pageContext: any;
   data: {
@@ -13,6 +15,12 @@ interface BlogPostTemplateProps {
       updated: string;
       title: string;
       body: string;
+
+      frontMatter: {
+        themeColor: string;
+        description: string;
+        lang: string;
+      };
     };
   };
 }
@@ -23,13 +31,21 @@ export const query = graphql`
       updated(fromNow: true)
       title
       body
+
+      frontMatter {
+        themeColor
+        description
+        lang
+      }
     }
   }
 `;
 
 const BlogPostTemplate: FunctionComponent<BlogPostTemplateProps> = ({
   pageContext,
-  data: { page },
-}) => <BlogPost page={page} />;
+  data: {
+    page: { updated, title, body, frontMatter },
+  },
+}) => <BlogPost page={{ ...frontMatter, body, title, updated }} />;
 
 export default BlogPostTemplate;

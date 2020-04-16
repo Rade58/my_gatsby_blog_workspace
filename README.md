@@ -1,25 +1,11 @@
-# GATSBY THEME UI
+# HELMET JE PAKET KOJI SLUZI ZA SEO, PO MOM RAZUMEVANJU
 
-KREIRAO SAM FOLDER:
+INSTALIRACU HELMET (PLUGIN I PAKET)
 
-- `mkdir packages/gatsby-theme-raedal/src/gatsby-plugin-theme-ui`
+- `yarn workspace gatsby-theme-raedal add react-helmet gatsby-plugin-react-helmet`
 
-I FAJL U NJEMU
+INSTALIRAJ I TYPES
 
-- `touch packages/gatsby-theme-raedal/src/gatsby-plugin-theme-ui/index.ts`
+- `yarn -W -D add @types/react-helmet`
 
-# INSTALIRANJE `@theme-ui/presets` I TYPESCRIPT TYPE DEFINITIONSA
-
-- `yarn workspace gatsby-theme-raedal add @theme-ui/presets`
-
-# NAMERNO KRECEM OD PREDEFINED TEME
-
-OVO MOZES KORISTITI KAO REFERENCU: <https://theme-ui.com/theme-spec/>
-
-**U POGLEDU TOGA STA SVE MOZES DEFINISATI U POMENUTOM `packages/gatsby-theme-raedal/src/gatsby-plugin-theme-ui/index.ts` FAJLU**
-
-A OD PREDEFINED TEME KRECEM JER ZNAM DA JE MOGU TWEAK-OVATI KAKO ZELIM
-
-# NEMA TYPE DEFINITIONSA ZA @theme-ui/presets
-
-NAPRAVIO SAM GA [OVDE](missing_types/index.d.ts)
+# DEFIN

@@ -2,7 +2,7 @@
 import { jsx, ThemeProvider } from "theme-ui";
 
 import { Fragment, FunctionComponent } from "react";
-import { Global } from "@emotion/core";
+import { Global, css } from "@emotion/core";
 
 //
 import theme from "../gatsby-plugin-theme-ui/index";
@@ -16,7 +16,11 @@ const Layout: FunctionComponent = ({ children }) => (
           body: { margin: 0 },
         }}
       />
-      <header>
+      <header
+        css={css`
+          border-top: 14px solid purple;
+        `}
+      >
         <strong>Blog Post Layout</strong>
       </header>
       <main>{children}</main>
