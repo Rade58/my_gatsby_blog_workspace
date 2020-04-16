@@ -13,6 +13,10 @@ interface PageProp extends SeoI {
   title: string;
 }
 
+// TI SI U OVOJ KOMPONENTI INDIREKTNO RENDER-OVAO     Helmet
+// A Helmet CUSTOMLY ZA SVAKI PAGE INSERT-UJE head SECTION METADATA
+// JER SAM TAKO DEFINISAO
+
 const BlogPost: FunctionComponent<{
   page: PageProp;
 }> = ({ page: { body, updated, title, lang, description, themeColor } }) => (
