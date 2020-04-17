@@ -25,12 +25,12 @@ import LoremIpsum from "./dev-utility/lorem-ipsum";
 // REDUCER CU KORISTITI ZA STATE KOJI SE NE MANJE FROM PAGE TO PAGE
 
 enum ACTIONS_ENUM {
-  SCROLL_UP = "SCROLL_UP",
-  SCROLL_DOWN = "SCROLL_DOWN",
+  SCROLL_DOWN_MAIN = "SCROLL_DOWN_MAIN",
+  SCROLL_UP_MAIN = "SCROLL_UP_MAIN",
 }
 
 interface StateI {
-  blah: string;
+  scrollClass_main: "scroll-up" | "scroll-down";
 }
 
 const reducer: Reducer<StateI, ACTIONS_ENUM> = (state, action) => {
@@ -41,7 +41,11 @@ const reducer: Reducer<StateI, ACTIONS_ENUM> = (state, action) => {
 // ************   *************************************
 
 const Layout: FunctionComponent = ({ children }) => {
-  const state = useReducer(reducer, { blah: "" });
+  const defaultState: StateI = {
+    scrollClass_main: "scroll-up",
+  };
+
+  const [{ scrollClass_main }, dispatch] = useReducer(reducer, defaultState);
 
   return (
     <Fragment>
