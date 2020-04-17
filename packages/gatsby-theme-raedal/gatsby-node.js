@@ -2,7 +2,12 @@ const withDefaults = require("./utility/utility-options"); // DEFAULTS SU
 //                                                         basePath ->  "/""
 //                                                   contentPath  -> "blogposts"
 //                                                   useExternalMDX  --> false
+// ZA METADATA (ODNONO ZA ONO STO CE KONZUMIRATI Helmet NA KRAJU)
+const withSiteHelmetDefaults = require("./utility/utility-site-metadata");
+//
+
 const path = require("path");
+// SAMO SE KORISTI INSIDE     onPreBootstrap
 const fs = require("fs");
 const mkdirp = require("mkdirp");
 
@@ -27,8 +32,10 @@ exports.onPreBootstrap = ({ store }, options) => {
 // U GRAPHQL LAYER DODAJEM NOVI TYPE, A TO CE BITI      BlogPostPage
 
 // I OVO CE DODATI DVA QUERY-JA U GRAPHQL LAYER (ALI U OVOM TRENUKU
-// NEMA NODE-A , MORAS IH NAPRAVITI)
+// NEMA NODE-A , MORAS IH NAPRAVITI) (STO SAM KASNIJE I URADIO)
 
+// DEFINISAO SAM JOS JEDAN TYPE TO CATER MY NEEDS, ALI TO JE SAMO TYPE, KOJI
+// SE KORISTI U       BlogPostPage    TYPE
 exports.createSchemaCustomization = ({ actions }) => {
   actions.createTypes(`
     type BlogPostPage implements Node @dontInfer {
@@ -38,15 +45,15 @@ exports.createSchemaCustomization = ({ actions }) => {
       updated: Date! @dateformat
       body: String!
 
-      frontMatter: FrontMatter! 
+      frontMatter: MyFrontMatter! 
 
     }
 
-    type FrontMatter {
-      title: String
-      lang: String
-      description: String
-      themeColor: String
+    type MyFrontMatter {
+      title: String!
+      lang: String!
+      description: String!
+      themeColor: String!
     }
 
   `);
@@ -93,7 +100,12 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId }, options) => {
   let slug;
   if (node.frontmatter.slug) slug = `/${node.frontmatter.slug}`;
 
-  //
+  //  SITE METADATA (ODNONO ONO STO CE KONZUMIRATI Helemet)
+  const { lang, themeColor, description } = withSiteHelmetDefaults(
+    node.frontmatter
+  );
+  // KAO STO VIDIS IZDVAJAM GA IZ FRONTMATTER-A
+
   actions.createNode({
     // CAK I OVA FUNKCIJA TRIGGER-UJE HOOK U CIJEM SAM OBIMU
     id,
@@ -111,10 +123,11 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId }, options) => {
     },
 
     frontMatter: {
+      // TITLE IMAM NA DVA MESTA, NIJE NI BITNO
       title,
-      lang: node.frontmatter.lang || "en",
-      description: node.frontmatter.description || "moj sajt",
-      themeColor: "pink",
+      lang,
+      description,
+      themeColor,
     },
   });
 };

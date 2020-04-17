@@ -3,13 +3,12 @@ const withDefaults = require("./utility/utility-options"); // DEFAULTS SU
 //                                                   contentPath  -> "blogposts"
 //                                                   useExternalMDX  --> false
 
-const siteMetadata = require("./src/seo/siteMetadata");
+// const siteMetadata = require("./src/seo/siteMetadata");
 
 module.exports = (options) => {
   const { contentPath, useExternalMDX } = withDefaults(options);
 
   return {
-    siteMetadata,
     plugins: [
       "gatsby-plugin-typescript",
 
