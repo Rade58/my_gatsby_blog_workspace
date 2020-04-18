@@ -18,37 +18,41 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
 
   const divRef = useRef<HTMLDivElement>(null);
 
-  const [indicatorWidth, setIndicatorWidth] = useState(8);
   const divRefWidth = useRef(0);
   const bodyHeightRef = useRef(0);
+  const windowHeightRef = useRef(0);
+
+  const factorRef = useRef(0);
 
   const [setupStage, setSetupStage] = useState(true);
 
   useLayoutEffect(() => {
-    const windowEl = window || document.documentElement;
     const bodyEl = document.body || document.getElementsByTagName("body")[0];
+    const windowEl = window || document.documentElement;
 
     if (setupStage) {
       if (divRef.current) {
-        divRefWidth.current = divRef.current.clientWidth;
-        bodyHeightRef.current = bodyEl.clientHeight;
+        divRefWidth.current = divRef.current.offsetWidth;
+        bodyHeightRef.current = bodyEl.scrollHeight;
+
+        factorRef.current = bodyHeightRef.current / 100;
+        windowHeightRef.current = windowEl.innerHeight;
 
         console.log({
+          factor: factorRef.current,
           bodyHeight: bodyHeightRef.current,
           windowScrollY: currentWindowScrollY,
           divWidth: divRefWidth.current,
-        });
-
-        bodyEl.addEventListener("scroll", function scrollListener() {
-          // console.log(windowEl.scrollY);
-
-          console.log("aaaaaaaaaaaaaaaaaaa");
         });
       }
     }
 
     setSetupStage(false);
-  }, [setupStage, currentWindowScrollY]);
+  }, []);
+
+  const indicatorWidthPercent =
+    (100 / (bodyHeightRef.current - windowHeightRef.current)) *
+    currentWindowScrollY;
 
   return (
     <div
@@ -69,9 +73,7 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
           transition-timing-function: linear; */
 
           background-color: ${fill};
-          width: ${bodyHeightRef.current > currentWindowScrollY
-            ? currentWindowScrollY /* eslint-disable-line indent*/
-            : bodyHeightRef.current /* eslint-disable-line indent*/}px;
+          width: ${indicatorWidthPercent}%;
           height: 100%;
           margin: 0;
           padding: 0;

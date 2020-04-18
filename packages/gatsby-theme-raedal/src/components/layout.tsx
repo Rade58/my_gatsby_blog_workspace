@@ -204,6 +204,8 @@ const Layout: FunctionComponent = ({ children }) => {
           {/* /////////-----------------------///////////////// */}
           {/* SAMO TU DA STVORI PROSTOR */}
           <LoremIpsum />
+          <LoremIpsum />
+          <LoremIpsum />
           {/* /////////////////////// */}
         </main>
         <button
