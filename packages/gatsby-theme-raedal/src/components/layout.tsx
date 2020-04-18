@@ -6,30 +6,21 @@ import {
   useState,
   useReducer,
   useRef,
-  useLayoutEffect,
+  useEffect,
+  // -->  types
   FunctionComponent,
   Reducer,
-  ReducerState,
-  ReducerAction,
-  useEffect,
-  createRef,
-  RefObject,
 } from "react";
-
-//
-// import { createPortal } from "react-dom";
-
-//
 
 import { Global, css } from "@emotion/core";
 
-//
 import theme from "../gatsby-plugin-theme-ui/index";
-//
 
 // LOREM IPSUM
 import LoremIpsum from "./dev-utility/lorem-ipsum";
 //
+
+import ScrollIndicator from "./scroll-indicator";
 
 // ********  REDUCER STUFF DOLE   ********************
 // REDUCER CU KORISTITI ZA STATE KOJI SE NE MANJE FROM PAGE TO PAGE
@@ -79,9 +70,9 @@ const Layout: FunctionComponent = ({ children }) => {
   // KORISCENJE REDUCER FUNKCIJE
   const [reducedState, dispatch] = useReducer(reducer, defaultState);
 
-  //
   ////////////////////////////////////////////////////////////////
 
+  // REGULISE STA CU DEFINISATI U useEffect-u
   const [
     scrollHandlerAttachedOnBody,
     setScrollHandlerAttachedOnBody,
@@ -103,6 +94,7 @@ const Layout: FunctionComponent = ({ children }) => {
 
     if (bodyEl && !scrollHandlerAttachedOnBody) {
       // POSTARAO SAM SE DA    scrollHandlerAttachedOnBody  BUDE       false    SAMO NA POCETKU (DOLE SAM ZVAO NJEGOVU PROMENU)
+
       bodyEl.onscroll = (e) => {
         if (currentScrollRef.current) {
           // console.log(currentScrollRef.current - windowEl.scrollY);
@@ -122,10 +114,9 @@ const Layout: FunctionComponent = ({ children }) => {
         });
       };
 
+      //
       setScrollHandlerAttachedOnBody(true);
     }
-
-    // console.log({ windowEl, bodyEl });
   }, [scrollHandlerAttachedOnBody, reducedState.currentScroll]);
 
   ////////////////////////////////////////////////////////////////////////////
@@ -148,10 +139,10 @@ const Layout: FunctionComponent = ({ children }) => {
         bodyEl.onscroll = null;
       }
     };
-  }, []); // MORA EMPTY ARRAY
+  }, []); // MORA EMPTY ARRAY DA BI PRI UNMOUNTING-U ZAVAO GORNJI RETURNED CLEANUP CALLBACK
   ////////////////////////////////////////////////////////////////////////
 
-  const { scrolled_class } = reducedState;
+  const { scrolled_class, currentScroll } = reducedState;
 
   return (
     <Fragment>
@@ -186,7 +177,7 @@ const Layout: FunctionComponent = ({ children }) => {
             &.pull-up {
               top: -56px;
             }
-            /* u suprotnom se spusta */
+            /* u suprotnom se spusta (ODNOSNO VRACA U POCETNI POLOZAJ) */
             &.pull-down {
               top: 0;
             }
@@ -194,6 +185,11 @@ const Layout: FunctionComponent = ({ children }) => {
           className={scrolled_class}
         >
           <strong>Blog Post Layout</strong>
+          <ScrollIndicator
+            bc="white"
+            fill="green"
+            currentWindowScrollY={currentScroll}
+          />
         </header>
         <main>
           {children}
@@ -203,7 +199,7 @@ const Layout: FunctionComponent = ({ children }) => {
               font-size: 28px;
             `}
           >
-            {reducedState.currentScroll}
+            {currentScroll}
           </div>
           {/* /////////-----------------------///////////////// */}
           {/* SAMO TU DA STVORI PROSTOR */}
