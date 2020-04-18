@@ -36,10 +36,12 @@ import LoremIpsum from "./dev-utility/lorem-ipsum";
 
 enum ACTION_TYPES_ENUM {
   CHANGE_CURRENT_SCROLL = "CHANGE_CURRENT_SCROLL",
+  SET_TO_SCROLL_UP_CLASS = "SET_TO_SCROLL_UP_CLASS",
+  SET_TO_SCROLL_DOWN_CLASS = "SET_TO_SCROLL_DOWN_CLASS",
 }
 
 interface StateI {
-  scrolled_up: boolean;
+  scrolled_class: "pull-up" | "pull-down";
   currentScroll: number;
 }
 
@@ -53,11 +55,19 @@ const reducer: Reducer<StateI, { type: ACTION_TYPES_ENUM; payload?: any }> = (
     return { ...state, currentScroll: action.payload };
   }
 
+  if (action.type === ACTION_TYPES_ENUM.SET_TO_SCROLL_DOWN_CLASS) {
+    return { ...state, scrolled_class: "pull-up" };
+  }
+
+  if (action.type === ACTION_TYPES_ENUM.SET_TO_SCROLL_UP_CLASS) {
+    return { ...state, scrolled_class: "pull-down" };
+  }
+
   return state;
 };
 
 const defaultState: StateI = {
-  scrolled_up: false,
+  scrolled_class: "pull-down",
   currentScroll: 0,
 };
 
@@ -95,9 +105,13 @@ const Layout: FunctionComponent = ({ children }) => {
       // POSTARAO SAM SE DA    scrollHandlerAttachedOnBody  BUDE       false    SAMO NA POCETKU (DOLE SAM ZVAO NJEGOVU PROMENU)
       bodyEl.onscroll = (e) => {
         if (currentScrollRef.current) {
-          console.log(currentScrollRef.current - windowEl.scrollY);
-
+          // console.log(currentScrollRef.current - windowEl.scrollY);
           //
+          if (currentScrollRef.current - windowEl.scrollY < 0) {
+            dispatch({ type: ACTION_TYPES_ENUM.SET_TO_SCROLL_DOWN_CLASS });
+          } else {
+            dispatch({ type: ACTION_TYPES_ENUM.SET_TO_SCROLL_UP_CLASS });
+          }
         }
 
         const capturedScrollY = windowEl.scrollY;
@@ -111,17 +125,33 @@ const Layout: FunctionComponent = ({ children }) => {
       setScrollHandlerAttachedOnBody(true);
     }
 
-    /* return function cleanup() {
-      if (bodyEl.onscroll && scrol) {
-        console.log("CLEANING UP");
-        bodyEl.onscroll = null;
-      }
-    };
- */
     // console.log({ windowEl, bodyEl });
   }, [scrollHandlerAttachedOnBody, reducedState.currentScroll]);
 
   ////////////////////////////////////////////////////////////////////////////
+
+  /////////////////////******   CLENUP useEffect  (DA MOGUCE JE DEFINISATI MULTIPLE useEffects) */
+
+  // ZASTO SAM OVDE DEFINISAO CLEANUPM PA TO JE ZATO STO SE RETURNED FUNKCIJA
+  // IZ useEffecta RUNN-UJE SVAKU PUT KADA SE NEKI DEPENDANCY IZ DEPENDANCY NIZA
+  // PROMENIO
+  // ALI JA CU SADA OVDE STAVITI PRAZAN DEPENDANCY ARRAY
+  // eslint-disable-next-line
+  useEffect(() => {
+    return () => {
+      console.log("Use Effect 2");
+
+      const bodyEl = document.body || document.getElementsByTagName("body")[0];
+
+      // OVO CE BITI TRUE, KADA SE PRVI PUT IZVRSI GORNJI
+      if (scrollHandlerAttachedOnBody && bodyEl.onscroll) {
+        bodyEl.onscroll = null;
+      }
+    };
+  }, []); // MORA EMPTY ARRAY
+  ////////////////////////////////////////////////////////////////////////
+
+  const { scrolled_class } = reducedState;
 
   return (
     <Fragment>
@@ -151,17 +181,17 @@ const Layout: FunctionComponent = ({ children }) => {
             /* transition */
             transition-property: top;
             transition-timing-function: ease-in;
-            transition-duration: 0.8s;
+            transition-duration: 0.2s;
             /* kada scroll-ujem down element treba da se digne above */
-            &.scroll-down {
-              top: -52px;
+            &.pull-up {
+              top: -56px;
             }
             /* u suprotnom se spusta */
-            &.scroll-up {
+            &.pull-down {
               top: 0;
             }
           `}
-          // className={headerScrollClass}
+          className={scrolled_class}
         >
           <strong>Blog Post Layout</strong>
         </header>
