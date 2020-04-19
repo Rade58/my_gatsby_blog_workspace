@@ -32,29 +32,43 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
 
   const [setupStage, setSetupStage] = useState(true);
 
+  const [windowElementInnerWidth, setWindowElementInnerWidth] = useState(0);
+
   useLayoutEffect(() => {
+    console.log("Use effect");
+
     const bodyEl = document.body || document.getElementsByTagName("body")[0];
     const windowEl = window || document.documentElement;
 
-    if (setupStage) {
-      if (divRef.current) {
-        divRefWidth.current = divRef.current.offsetWidth;
-        bodyHeightRef.current = bodyEl.scrollHeight;
+    // console.log(windowElementInnerWidth);
 
-        factorRef.current = bodyHeightRef.current / 100;
-        windowHeightRef.current = windowEl.innerHeight;
+    if (divRef.current) {
+      divRefWidth.current = divRef.current.offsetWidth;
+      bodyHeightRef.current = bodyEl.scrollHeight;
 
-        /* console.log({
-          factor: factorRef.current,
-          bodyHeight: bodyHeightRef.current,
-          windowScrollY: currentWindowScrollY,
-          divWidth: divRefWidth.current,
-        }); */
+      factorRef.current = bodyHeightRef.current / 100;
+      windowHeightRef.current = windowEl.innerHeight;
+
+      /* console.log({
+        factor: factorRef.current,
+        bodyHeight: bodyHeightRef.current,
+        windowScrollY: currentWindowScrollY,
+        divWidth: divRefWidth.current,
+      }); */
+
+      if (setupStage) {
+        windowEl.onresize = () => {
+          // console.log("resized");
+
+          // console.log(windowEl.innerWidth);
+
+          setWindowElementInnerWidth(windowEl.innerWidth);
+        };
       }
     }
 
     setSetupStage(false);
-  }, []);
+  }, [windowElementInnerWidth, setupStage]);
 
   const indicatorWidthPercent =
     (100 / (bodyHeightRef.current - windowHeightRef.current)) *
