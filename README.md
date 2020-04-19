@@ -7,5 +7,3 @@ INSTALIRACU HELMET (PLUGIN I PAKET)
 INSTALIRAJ I TYPES
 
 - `yarn -W -D add @types/react-helmet`
-
-# DEFIN

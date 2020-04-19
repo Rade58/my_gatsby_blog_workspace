@@ -22,6 +22,12 @@ import LoremIpsum from "./dev-utility/lorem-ipsum";
 
 import ScrollIndicator from "./scroll-indicator";
 
+// IKONE
+import githubIconUrl from "../ICONS/AJ_using/github_full.svg";
+//
+
+console.log(githubIconUrl);
+
 // ********  REDUCER STUFF DOLE   ********************
 // REDUCER CU KORISTITI ZA STATE KOJI SE NE MANJE FROM PAGE TO PAGE
 

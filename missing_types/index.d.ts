@@ -28,3 +28,9 @@ declare module "@theme-ui/presets" {
   export = presets
 }
 
+/**
+ * @description svg image
+ */
+
+declare module '*.svg'
+
