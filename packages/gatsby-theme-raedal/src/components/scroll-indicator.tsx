@@ -89,7 +89,7 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
 
         background-image: ${bcImg};
 
-        & div {
+        & > div {
           /* transition-property: width;
           transition-duration: 0.6s;
           transition-timing-function: linear; */
