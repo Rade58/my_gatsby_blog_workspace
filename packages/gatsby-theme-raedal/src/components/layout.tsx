@@ -151,7 +151,7 @@ const Layout: FunctionComponent = ({ children }) => {
           styles={{
             body: {
               margin: "4px",
-              backgroundColor: "olive",
+              backgroundColor: "rgb(27, 34, 39)",
               paddingTop: "56px",
             },
           }}
@@ -160,10 +160,16 @@ const Layout: FunctionComponent = ({ children }) => {
           css={css`
             /* border-top: 14px solid purple; */
 
-            height: 56px;
+            height: 58px;
             border-bottom: black 2px solid;
 
             background-color: #ffffff;
+
+            background-image: linear-gradient(
+              to right,
+              rgb(63, 44, 56),
+              rgb(38, 45, 59)
+            );
 
             position: fixed;
             width: 100%;
@@ -184,11 +190,17 @@ const Layout: FunctionComponent = ({ children }) => {
           `}
           className={scrolled_class}
         >
+          <a href="https://twitter.com/ra_decodes">Rade</a>
           <strong>Blog Post Layout</strong>
           <ScrollIndicator
-            bc="white"
-            fill="green"
+            bc="rgb(38, 45, 59)"
+            fill="rgba(153, 67, 95, 0.74)"
             currentWindowScrollY={currentScroll}
+            bcImg="linear-gradient(
+              to right,
+              rgba(63, 44, 56, 1),
+              rgba(38, 45, 59, 1)
+            )"
           />
         </header>
         <main>

@@ -7,14 +7,20 @@ interface ScrollIndicatorProps {
   bc: string;
   fill: string;
   currentWindowScrollY: number;
+  bcImg: string;
 }
 
 const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
   bc = "tomato",
   fill = "olive",
   currentWindowScrollY = 0,
+  bcImg = `linear-gradient(
+    to right,
+    rgb(63, 44, 56),
+    rgb(38, 45, 59)
+  )`,
 }) => {
-  console.log(currentWindowScrollY);
+  // console.log(currentWindowScrollY);
 
   const divRef = useRef<HTMLDivElement>(null);
 
@@ -38,12 +44,12 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
         factorRef.current = bodyHeightRef.current / 100;
         windowHeightRef.current = windowEl.innerHeight;
 
-        console.log({
+        /* console.log({
           factor: factorRef.current,
           bodyHeight: bodyHeightRef.current,
           windowScrollY: currentWindowScrollY,
           divWidth: divRefWidth.current,
-        });
+        }); */
       }
     }
 
@@ -66,6 +72,8 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
         left: 0;
         margin: 0;
         padding: 0;
+
+        background-image: ${bcImg};
 
         & div {
           /* transition-property: width;
