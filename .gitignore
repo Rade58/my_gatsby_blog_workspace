@@ -74,3 +74,5 @@ yarn-error.log
 # ICONS
 
 packages/gatsby-theme-raedal/src/ICONS/devicons-master
+packages/gatsby-theme-raedal/src/ICONS/mfglabs-iconset-master
+packages/gatsby-theme-raedal/src/ICONS/captain_svg

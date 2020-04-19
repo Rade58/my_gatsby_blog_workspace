@@ -29,7 +29,7 @@ declare module "@theme-ui/presets" {
 }
 
 /**
- * @description svg image
+ * @description svg image uri  (base64)
  */
 
 declare module '*.svg'

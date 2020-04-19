@@ -26,7 +26,8 @@ import LoremIpsum from "./dev-utility/lorem-ipsum";
 import ScrollIndicator from "./scroll-indicator";
 
 // IKONE (data: URI-EVI)
-import gitHubIconUri from "../ICONS/AJ_using/github_full.svg";
+import gitHubIconUri from "../ICONS/AJ_using/github_badge.svg";
+import twitterIconUri from "../ICONS/AJ_using/twitter_circle.svg";
 //
 
 // ********  REDUCER STUFF DOLE   ********************
@@ -220,10 +221,10 @@ const Layout: FunctionComponent = ({ children }) => {
               <img src={gitHubIconUri} alt="github logo" />
             </a>
             <a href="https://twitter.com/ra_decodes">
-              <img src={gitHubIconUri} alt="github logo" />
+              <img src={twitterIconUri} alt="twitter icon" />
             </a>
-            <a href="https://twitter.com/ra_decodes">
-              <img src={gitHubIconUri} alt="github logo" />
+            <a href="https://github.com/Rade58">
+              <img src={gitHubIconUri} alt="github icon" />
             </a>
           </section>
 
