@@ -22,13 +22,8 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
 }) => {
   // console.log(currentWindowScrollY);
 
-  const divRef = useRef<HTMLDivElement>(null);
-
-  const divRefWidth = useRef(0);
   const bodyHeightRef = useRef(0);
   const windowHeightRef = useRef(0);
-
-  const factorRef = useRef(0);
 
   const [setupStage, setSetupStage] = useState(true);
 
@@ -42,29 +37,25 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
 
     // console.log(windowElementInnerWidth);
 
-    if (divRef.current) {
-      divRefWidth.current = divRef.current.offsetWidth;
-      bodyHeightRef.current = bodyEl.scrollHeight;
+    bodyHeightRef.current = bodyEl.scrollHeight;
 
-      factorRef.current = bodyHeightRef.current / 100;
-      windowHeightRef.current = windowEl.innerHeight;
+    windowHeightRef.current = windowEl.innerHeight;
 
-      /* console.log({
+    /* console.log({
         factor: factorRef.current,
         bodyHeight: bodyHeightRef.current,
         windowScrollY: currentWindowScrollY,
         divWidth: divRefWidth.current,
       }); */
 
-      if (setupStage) {
-        windowEl.onresize = () => {
-          // console.log("resized");
+    if (setupStage) {
+      windowEl.onresize = () => {
+        // console.log("resized");
 
-          // console.log(windowEl.innerWidth);
+        // console.log(windowEl.innerWidth);
 
-          setWindowElementInnerWidth(windowEl.innerWidth);
-        };
-      }
+        setWindowElementInnerWidth(windowEl.innerWidth);
+      };
     }
 
     setSetupStage(false);
@@ -76,7 +67,6 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
 
   return (
     <div
-      ref={divRef}
       css={css`
         width: 100%;
         background-color: ${bc};
