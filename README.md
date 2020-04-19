@@ -1,9 +1,9 @@
-# HELMET JE PAKET KOJI SLUZI ZA SEO, PO MOM RAZUMEVANJU
+# INSTALIRACU GATSBY IMAGE
 
-INSTALIRACU HELMET (PLUGIN I PAKET)
+- `yarn workspace gatsby-theme-raedal add gatsby-image`
 
-- `yarn workspace gatsby-theme-raedal add react-helmet gatsby-plugin-react-helmet`
+ALI NECU GA JOS KORISTITI
 
-INSTALIRAJ I TYPES
+JER CU COMMON IMAGES, ODNONO SVGS LOAD-OVATI UZ POMOC img ELEMENTA I KORISTICU SVG IMAGES
 
-- `yarn -W -D add @types/react-helmet`
+KONKRETNO CU TO URADITI ZA SOCIAL ICONS

@@ -1,4 +1,7 @@
 /** @jsx jsx */
+// gatsby-image   KOMPONENTA
+import GatsbyImage from "gatsby-image";
+
 import { jsx, ThemeProvider } from "theme-ui";
 
 import {
@@ -22,11 +25,9 @@ import LoremIpsum from "./dev-utility/lorem-ipsum";
 
 import ScrollIndicator from "./scroll-indicator";
 
-// IKONE
-import githubIconUrl from "../ICONS/AJ_using/github_full.svg";
+// IKONE (data: URI-EVI)
+import gitHubIconUri from "../ICONS/AJ_using/github_full.svg";
 //
-
-console.log(githubIconUrl);
 
 // ********  REDUCER STUFF DOLE   ********************
 // REDUCER CU KORISTITI ZA STATE KOJI SE NE MANJE FROM PAGE TO PAGE
@@ -166,6 +167,8 @@ const Layout: FunctionComponent = ({ children }) => {
           css={css`
             /* border-top: 14px solid purple; */
 
+            display: flex;
+
             height: 58px;
             border-bottom: black 2px solid;
 
@@ -196,8 +199,35 @@ const Layout: FunctionComponent = ({ children }) => {
           `}
           className={scrolled_class}
         >
-          <a href="https://twitter.com/ra_decodes">Rade</a>
-          <strong>Blog Post Layout</strong>
+          <section
+            className="solial-icons"
+            css={css`
+              display: flex;
+
+              justify-content: center;
+              align-items: center;
+
+              border: pink solid 2px;
+              width: 50%;
+              margin-left: auto;
+
+              & a {
+                margin: 0 5%;
+              }
+            `}
+          >
+            <a href="https://twitter.com/ra_decodes">
+              <img src={gitHubIconUri} alt="github logo" />
+            </a>
+            <a href="https://twitter.com/ra_decodes">
+              <img src={gitHubIconUri} alt="github logo" />
+            </a>
+            <a href="https://twitter.com/ra_decodes">
+              <img src={gitHubIconUri} alt="github logo" />
+            </a>
+          </section>
+
+          <strong>Layout</strong>
           <ScrollIndicator
             bc="rgb(38, 45, 59)"
             fill="rgba(153, 67, 95, 0.74)"
