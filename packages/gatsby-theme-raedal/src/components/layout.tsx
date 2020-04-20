@@ -32,6 +32,8 @@ import ScrollIndicator from "./scroll-indicator";
 import gitHubIconUri from "../ICONS/AJ_using/github_badge.svg";
 import twitterIconUri from "../ICONS/AJ_using/twitter_circle.svg";
 //
+import NavInHeader from "./nav-header";
+//
 
 // ********  REDUCER STUFF DOLE   ********************
 // REDUCER CU KORISTITI ZA STATE KOJI SE NE MANJE FROM PAGE TO PAGE
@@ -233,6 +235,7 @@ const Layout: FunctionComponent = ({ children }) => {
             `}
             className={scrolled_class}
           >
+            <NavInHeader />
             <section
               className="solial-icons"
               css={css`
@@ -242,26 +245,24 @@ const Layout: FunctionComponent = ({ children }) => {
                 align-items: center;
 
                 border: pink solid 2px;
-                width: 50%;
+                width: 28%;
                 margin-left: auto;
 
                 & a {
-                  margin: 0 5%;
+                  margin: 0 2%;
                 }
               `}
             >
               <a href="https://twitter.com/ra_decodes">
                 <img src={gitHubIconUri} alt="github logo" />
               </a>
-              <a href="https://twitter.com/ra_decodes">
+              <a href="https://twitter.com/ra_decodes" target="blank">
                 <img src={twitterIconUri} alt="twitter icon" />
               </a>
-              <a href="https://github.com/Rade58">
+              <a href="https://github.com/Rade58" target="blank">
                 <img src={gitHubIconUri} alt="github icon" />
               </a>
             </section>
-
-            <strong>Layout</strong>
             <ScrollIndicator
               pigDirection={
                 scrolled_class === "pull-up" ? "to-left" : "to-right"
