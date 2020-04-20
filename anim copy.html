@@ -26,7 +26,7 @@
         /* background */
 
         animation-name: motion;
-        animation-duration: 0.8s;
+        animation-duration: 0.38s;
         animation-iteration-count: infinite;
 
         animation-timing-function: steps(7, end);
@@ -37,7 +37,9 @@
       div.someDiv {
         width: 56px;
         display: inline-block;
-        border: tomato solid 0px;
+        border: tomato solid 1px;
+
+        /* transform: rotateY(180deg); */
       }
 
       div.konti:hover div {
@@ -54,11 +56,5 @@
         }
       }
     </style>
-
-    <script>
-      const konti = document.getElementsByClassName("konti");
-
-      window.onscrol = () => {};
-    </script>
   </body>
 </html>

@@ -34,3 +34,9 @@ declare module "@theme-ui/presets" {
 
 declare module '*.svg'
 
+/**
+ * @description png image uri  (base64)
+ */
+
+declare module '*.png'
+

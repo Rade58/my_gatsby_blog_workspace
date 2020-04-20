@@ -1,7 +1,15 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui";
-import { useLayoutEffect, useState, useRef, FunctionComponent } from "react";
+import {
+  useLayoutEffect,
+  useState,
+  useRef,
+  FunctionComponent,
+  useEffect,
+} from "react";
 import { css } from "@emotion/core";
+
+import Pig from "./pig";
 
 interface ScrollIndicatorProps {
   bc: string;
@@ -22,6 +30,10 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
 }) => {
   // console.log(currentWindowScrollY);
 
+  const [previousWindowScrollY, setPreviousWindowScrollY] = useState(0);
+
+  const resizingDivRef = useRef<HTMLDivElement>(null);
+
   const bodyHeightRef = useRef(0);
   const windowHeightRef = useRef(0);
 
@@ -29,41 +41,88 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
 
   const [windowElementInnerWidth, setWindowElementInnerWidth] = useState(0);
 
+  const timerId = useRef<any>(null);
+
+  const [animationStop, setAnimationStop] = useState(false);
+
   useLayoutEffect(() => {
     console.log("Use effect");
 
     const bodyEl = document.body || document.getElementsByTagName("body")[0];
     const windowEl = window || document.documentElement;
 
-    // console.log(windowElementInnerWidth);
-
     bodyHeightRef.current = bodyEl.scrollHeight;
-
     windowHeightRef.current = windowEl.innerHeight;
 
-    /* console.log({
-        factor: factorRef.current,
-        bodyHeight: bodyHeightRef.current,
-        windowScrollY: currentWindowScrollY,
-        divWidth: divRefWidth.current,
-      }); */
+    // ANIMATION SIMULATION
+
+    // timer for stopig animation
+    /* const timerId = setInterval(() => {
+      console.log("stop animation");
+    }, 80); */
 
     if (setupStage) {
       windowEl.onresize = () => {
-        // console.log("resized");
-
-        // console.log(windowEl.innerWidth);
-
         setWindowElementInnerWidth(windowEl.innerWidth);
       };
+
+      // OBSERVER
+
+      const mutationCallback: MutationCallback = (mutationList, observer) => {
+        mutationList.forEach((mutation) => {
+          if (mutation.type === "attributes") {
+            // console.log("start animation, start animation");
+
+            setAnimationStop(false);
+
+            timerId.current = setTimeout(() => {
+              // console.log("stop that");
+
+              setAnimationStop(true);
+            }, 1200);
+          }
+        });
+      };
+
+      const resizingElementObserver = new MutationObserver(mutationCallback);
+
+      if (resizingDivRef.current) {
+        resizingElementObserver.observe(resizingDivRef.current, {
+          attributes: true,
+        });
+      }
     }
 
     setSetupStage(false);
   }, [windowElementInnerWidth, setupStage]);
 
+  // NOVI USE EFECT, KOJ ISE TRIGGER-UJE ZA SVAKI SCROLL
+
+  let pigDirectionKlasa: "pig-right" | "pig-left" | undefined;
+
+  if (currentWindowScrollY > previousWindowScrollY) {
+    //
+    pigDirectionKlasa = "pig-right";
+  } else if (currentWindowScrollY < previousWindowScrollY) {
+    pigDirectionKlasa = "pig-left";
+  }
+
+  useEffect(() => {
+    // console.log({ currentWindowScrollY, previousWindowScrollY });
+    // setTimeout(() => {
+    setPreviousWindowScrollY(currentWindowScrollY);
+    // }, 100);
+  }, [animationStop]);
+
   const indicatorWidthPercent =
     (100 / (bodyHeightRef.current - windowHeightRef.current)) *
     currentWindowScrollY;
+
+  //    ANIM CLASSES
+  // console.log(animationStop ? "stop-animation" : "start-animation");
+  ////////////////
+
+  // console.log(currentWindowScrollY, previousWindowScrollY);
 
   return (
     <div
@@ -92,7 +151,11 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
         }
       `}
     >
-      <div />
+      <Pig />
+      <div ref={resizingDivRef} title={`${indicatorWidthPercent}`}>
+        {/* {pigDirectionKlasa} &nbsp; */}
+        {/* {animationStop ? "stop-animation" : "start-animation"} */}
+      </div>
     </div>
   );
 };
