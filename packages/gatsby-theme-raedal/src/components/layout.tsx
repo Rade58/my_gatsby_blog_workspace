@@ -286,12 +286,32 @@ const Layout: FunctionComponent = ({ children }) => {
             /* flex-direction: column; */
 
             display: grid;
+
+            @media screen and (min-width: 918px) {
+              grid-template-areas:
+                " . a a a a a . "
+                " . a a a a a b "
+                " . a a a a a b "
+                " . a a a a a t "
+                " . a a a a a . ";
+            }
+            @media screen and (min-width: 1100px) {
+              grid-template-areas:
+                " . a a a a . . "
+                " . a a a a b b "
+                " t a a a a b b "
+                " t a a a a . . "
+                " . a a a a . . ";
+            }
+
             grid-template-areas:
-              " . . a a a . . "
-              " . . a a a b b "
-              " . t a a a b b "
-              " . t a a a . . "
-              " . . a a a . . ";
+              " a a a "
+              " a a a "
+              " a a a "
+              " a a a "
+              " a a a "
+              " b b b "
+              " t t t ";
 
             & article {
               &.post-article {
@@ -300,6 +320,8 @@ const Layout: FunctionComponent = ({ children }) => {
             }
 
             & section.adds {
+              margin-top: 42px;
+
               grid-area: b;
 
               border: pink solid 4px;
@@ -307,6 +329,8 @@ const Layout: FunctionComponent = ({ children }) => {
 
             & section.social-posting {
               grid-area: t;
+
+              border: yellow solid 2px;
             }
           `}
         >
