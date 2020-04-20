@@ -10,9 +10,11 @@ import {
   useReducer,
   useRef,
   useEffect,
+  createContext,
   // -->  types
   FunctionComponent,
   Reducer,
+  Context,
 } from "react";
 
 import { Global, css } from "@emotion/core";
@@ -70,9 +72,14 @@ const defaultState: StateI = {
   currentScroll: 0,
 };
 
+//
 // ***************************************************
 // ************       REDUCER STVARI GORE       ******
 // ***************************************************
+
+// CONTEXT
+//
+export const appContext: Context<StateI> = createContext(defaultState);
 
 const Layout: FunctionComponent = ({ children }) => {
   // KORISCENJE REDUCER FUNKCIJE
@@ -230,6 +237,7 @@ const Layout: FunctionComponent = ({ children }) => {
 
           <strong>Layout</strong>
           <ScrollIndicator
+            pigDirection={scrolled_class === "pull-up" ? "to-left" : "to-right"}
             bc="rgb(38, 45, 59)"
             fill="rgba(153, 67, 95, 0.74)"
             currentWindowScrollY={currentScroll}

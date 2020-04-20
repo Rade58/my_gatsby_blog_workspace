@@ -16,6 +16,7 @@ interface ScrollIndicatorProps {
   fill: string;
   currentWindowScrollY: number;
   bcImg: string;
+  pigDirection: "to-left" | "to-right";
 }
 
 const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
@@ -27,6 +28,7 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
     rgb(63, 44, 56),
     rgb(38, 45, 59)
   )`,
+  pigDirection,
 }) => {
   // console.log(currentWindowScrollY);
 
@@ -79,7 +81,7 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
               // console.log("stop that");
 
               setAnimationStop(true);
-            }, 1200);
+            }, 250);
           }
         });
       };
@@ -138,7 +140,7 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
 
         background-image: ${bcImg};
 
-        & > div {
+        & > div.resizer {
           /* transition-property: width;
           transition-duration: 0.6s;
           transition-timing-function: linear; */
@@ -151,8 +153,16 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
         }
       `}
     >
-      <Pig />
-      <div ref={resizingDivRef} title={`${indicatorWidthPercent}`}>
+      <Pig
+        pigDirectionKlasa={pigDirection}
+        animationStop={animationStop}
+        marginLeft={indicatorWidthPercent}
+      />
+      <div
+        ref={resizingDivRef}
+        title={`${indicatorWidthPercent}`}
+        className="resizer"
+      >
         {/* {pigDirectionKlasa} &nbsp; */}
         {/* {animationStop ? "stop-animation" : "start-animation"} */}
       </div>
