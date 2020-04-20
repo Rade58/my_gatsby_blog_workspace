@@ -1,5 +1,5 @@
 import { deep as theme } from "@theme-ui/presets";
-import { Theme, ButtonProps } from 'theme-ui'
+import { Theme, ButtonProps, TextProps, ThemeProviderProps } from 'theme-ui'
 
 
 // import { ThemeProvider } from "theme-ui";  // OVO NE KORISTIM OVDE
@@ -13,10 +13,15 @@ import { Theme, ButtonProps } from 'theme-ui'
 
 const myButton: ButtonProps = {
 
-  bg: 'blanchedalmond'
+
 
 }
 
+const typography: Theme = {
+  fontSizes: {
+
+  }
+}
 
 
 const myTheme = {

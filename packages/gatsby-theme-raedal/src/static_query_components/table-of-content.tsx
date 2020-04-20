@@ -30,7 +30,9 @@ const TableOfContent: FunctionComponent = () => {
     <NavInHeader>
       <Fragment>
         {data.allPosts.nodes.map(({ title, path }) => (
-          <Link to={path}>{title}</Link>
+          <Link to={path} key={title}>
+            {title}{" "}
+          </Link>
         ))}
       </Fragment>
     </NavInHeader>

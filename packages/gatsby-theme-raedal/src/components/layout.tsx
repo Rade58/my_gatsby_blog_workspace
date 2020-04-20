@@ -37,6 +37,7 @@ import TableOfContent from "../static_query_components/table-of-content";
 
 // ********  REDUCER STUFF DOLE   ********************
 // REDUCER CU KORISTITI ZA STATE KOJI SE NE MANJE FROM PAGE TO PAGE
+console.log(theme.fontSizes);
 
 export enum ACTION_TYPES_ENUM {
   CHANGE_CURRENT_SCROLL = "CHANGE_CURRENT_SCROLL",
@@ -189,120 +190,161 @@ const Layout: FunctionComponent = ({ children }) => {
   return (
     <Fragment>
       <Provider value={{ dispatch, reducedState }}>
-        <ThemeProvider theme={theme}>
-          <Global
-            styles={{
-              body: {
-                margin: "4px",
-                backgroundColor: "rgb(27, 34, 39)",
-                paddingTop: "56px",
-              },
-            }}
-          />
-          <header
-            css={css`
-              /* border-top: 14px solid purple; */
+        {/* <ThemeProvider theme={theme}> */}
+        <Global
+          styles={{
+            body: {
+              margin: "4px",
+              backgroundColor: "rgb(27, 34, 39)",
+              paddingTop: "56px",
+            },
+          }}
+        />
+        <header
+          css={css`
+            /* border-top: 14px solid purple; */
 
+            display: flex;
+
+            height: 58px;
+            border-bottom: black 2px solid;
+
+            background-color: #ffffff;
+
+            background-image: linear-gradient(
+              to right,
+              rgb(63, 44, 56),
+              rgb(38, 45, 59)
+            );
+
+            position: fixed;
+            width: 100%;
+            left: 0;
+
+            /* transition */
+            transition-property: top;
+            transition-timing-function: ease-in;
+            transition-duration: 0.2s;
+            /* kada scroll-ujem down element treba da se digne above */
+            &.pull-up {
+              top: -56px;
+            }
+            /* u suprotnom se spusta (ODNOSNO VRACA U POCETNI POLOZAJ) */
+            &.pull-down {
+              top: 0;
+            }
+          `}
+          className={scrolled_class}
+        >
+          <TableOfContent />
+          <section
+            className="solial-icons"
+            css={css`
               display: flex;
 
-              height: 58px;
-              border-bottom: black 2px solid;
+              justify-content: center;
+              align-items: center;
 
-              background-color: #ffffff;
+              border: pink solid 2px;
+              width: 28%;
+              margin-left: auto;
 
-              background-image: linear-gradient(
-                to right,
-                rgb(63, 44, 56),
-                rgb(38, 45, 59)
-              );
-
-              position: fixed;
-              width: 100%;
-              left: 0;
-
-              /* transition */
-              transition-property: top;
-              transition-timing-function: ease-in;
-              transition-duration: 0.2s;
-              /* kada scroll-ujem down element treba da se digne above */
-              &.pull-up {
-                top: -56px;
-              }
-              /* u suprotnom se spusta (ODNOSNO VRACA U POCETNI POLOZAJ) */
-              &.pull-down {
-                top: 0;
+              & a {
+                margin: 0 2%;
               }
             `}
-            className={scrolled_class}
           >
-            <TableOfContent />
-            <section
-              className="solial-icons"
-              css={css`
-                display: flex;
-
-                justify-content: center;
-                align-items: center;
-
-                border: pink solid 2px;
-                width: 28%;
-                margin-left: auto;
-
-                & a {
-                  margin: 0 2%;
-                }
-              `}
-            >
-              <a href="https://twitter.com/ra_decodes">
-                <img src={gitHubIconUri} alt="github logo" />
-              </a>
-              <a href="https://twitter.com/ra_decodes" target="blank">
-                <img src={twitterIconUri} alt="twitter icon" />
-              </a>
-              <a href="https://github.com/Rade58" target="blank">
-                <img src={gitHubIconUri} alt="github icon" />
-              </a>
-            </section>
-            <ScrollIndicator
-              pigDirection={
-                scrolled_class === "pull-up" ? "to-left" : "to-right"
-              }
-              bc="rgb(38, 45, 59)"
-              fill="rgba(153, 67, 95, 0.74)"
-              currentWindowScrollY={currentScroll}
-              bcImg="linear-gradient(
+            <a href="https://twitter.com/ra_decodes">
+              <img src={gitHubIconUri} alt="github logo" />
+            </a>
+            <a href="https://twitter.com/ra_decodes" target="blank">
+              <img src={twitterIconUri} alt="twitter icon" />
+            </a>
+            <a href="https://github.com/Rade58" target="blank">
+              <img src={gitHubIconUri} alt="github icon" />
+            </a>
+          </section>
+          <ScrollIndicator
+            pigDirection={scrolled_class === "pull-up" ? "to-left" : "to-right"}
+            bc="rgb(38, 45, 59)"
+            fill="rgba(153, 67, 95, 0.74)"
+            currentWindowScrollY={currentScroll}
+            bcImg="linear-gradient(
               to right,
               rgba(63, 44, 56, 1),
               rgba(38, 45, 59, 1)
               )"
-            />
-          </header>
-          <main>
-            {children}
-            {/* /////////-----------------------///////////////// */}
-            <div
-              css={css`
-                font-size: 28px;
-              `}
-            >
-              {currentScroll}
+          />
+        </header>
+        <main
+          css={css`
+            /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+                sans-serif; */
+
+            /* display: flex; */
+            /* flex-direction: column; */
+
+            display: grid;
+            grid-template-areas:
+              " . . a a a . . "
+              " . . a a a b b "
+              " . t a a a b b "
+              " . t a a a . . "
+              " . . a a a . . ";
+
+            & article {
+              &.post-article {
+                grid-area: a;
+              }
+            }
+
+            & section.adds {
+              grid-area: b;
+
+              border: pink solid 4px;
+            }
+
+            & section.social-posting {
+              grid-area: t;
+            }
+          `}
+        >
+          {children}
+          <section className="adds">
+            <h4>Adds</h4>
+            <div>
+              Donec pellentesque pharetra lectus, vel malesuada neque euismod
+              id. Quisque porta aliquam augue non sagittis. Nulla dui nulla,
+              efficitur eu sagittis ac, sollicitudin eu urna. Ut pretium, sapien
+              eu scelerisque consequat, dolor felis cursus ipsum, in consectetur
+              nulla nulla in ex. Vestibulum non diam imperdiet, ornare mauris
+              at, aliquam est.
             </div>
-            {/* /////////-----------------------///////////////// */}
-            {/* SAMO TU DA STVORI PROSTOR */}
-            <LoremIpsum />
-            <LoremIpsum />
-            <LoremIpsum />
-            {/* /////////////////////// */}
-          </main>
-          <button
-            sx={{
-              variant: "myButton",
-            }}
-            type="button"
-          >
-            Press me
-          </button>
-        </ThemeProvider>
+          </section>
+          <section className="social-posting">twitter instagram</section>
+          {/* /////////-----------------------///////////////// */}
+          {/* <div
+            css={css`
+              font-size: 28px;
+            `}
+          /> */}
+          {/* /////////-----------------------///////////////// */}
+          {/* SAMO TU DA STVORI PROSTOR */}
+          {/* <LoremIpsum /> */}
+          {/* <LoremIpsum /> */}
+          {/* <LoremIpsum /> */}
+          {/* /////////////////////// */}
+        </main>
+        {/* <button
+          sx={{
+            variant: "myButton",
+          }}
+          type="button"
+        >
+          Press me
+        </button> */}
+        {/* </ThemeProvider> */}
       </Provider>
     </Fragment>
   );

@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui";
+import { css } from "@emotion/core";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import { FunctionComponent } from "react";
 import Layout from "./layout";
@@ -27,9 +28,26 @@ const BlogPost: FunctionComponent<{
       description={description}
       themeColor={themeColor}
     />
-    <h2>{title}</h2>
-    <MDXRenderer>{body}</MDXRenderer>
-    <p>This page was updated {updated}</p>
+    {/* <h2>{title}</h2> */}
+    <article
+      className="post-article"
+      css={css`
+        border: tomato solid 4px;
+        margin-top: 48px;
+
+        h1 {
+          font-family: Oxygen, Ubuntu, Roboto, Cantarell, "Open Sans",
+            "Helvetica Neue", sans-serif;
+          font-weight: 300;
+          color: #fff;
+          margin: 0 auto;
+          width: fit-content;
+        }
+      `}
+    >
+      <MDXRenderer>{body}</MDXRenderer>
+      <p>This page was updated {updated}</p>
+    </article>
   </Layout>
 );
 
