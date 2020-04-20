@@ -5,6 +5,8 @@ const withDefaults = require("./utility/utility-options"); // DEFAULTS SU
 
 // const siteMetadata = require("./src/seo/siteMetadata");
 
+const remarkSlug = require("remark-slug");
+
 module.exports = (options) => {
   const { contentPath, useExternalMDX } = withDefaults(options);
 
@@ -34,6 +36,7 @@ module.exports = (options) => {
           defaultLayouts: {
             default: require.resolve("./src/components/layout.tsx"),
           },
+          remarkPlugins: [remarkSlug],
         },
       },
       "gatsby-plugin-theme-ui",

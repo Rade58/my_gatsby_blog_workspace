@@ -190,177 +190,179 @@ const Layout: FunctionComponent = ({ children }) => {
   return (
     <Fragment>
       <Provider value={{ dispatch, reducedState }}>
-        {/* <ThemeProvider theme={theme}> */}
-        <Global
-          styles={{
-            body: {
-              margin: "4px",
-              backgroundColor: "rgb(27, 34, 39)",
-              paddingTop: "56px",
-            },
-          }}
-        />
-        <header
-          css={css`
-            /* border-top: 14px solid purple; */
-
-            display: flex;
-
-            height: 58px;
-            border-bottom: black 2px solid;
-
-            background-color: #ffffff;
-
-            background-image: linear-gradient(
-              to right,
-              rgb(63, 44, 56),
-              rgb(38, 45, 59)
-            );
-
-            position: fixed;
-            width: 100%;
-            left: 0;
-
-            /* transition */
-            transition-property: top;
-            transition-timing-function: ease-in;
-            transition-duration: 0.2s;
-            /* kada scroll-ujem down element treba da se digne above */
-            &.pull-up {
-              top: -56px;
-            }
-            /* u suprotnom se spusta (ODNOSNO VRACA U POCETNI POLOZAJ) */
-            &.pull-down {
-              top: 0;
-            }
-          `}
-          className={scrolled_class}
-        >
-          <TableOfContent />
-          <section
-            className="solial-icons"
+        <ThemeProvider theme={theme}>
+          <Global
+            styles={{
+              body: {
+                margin: "4px",
+                backgroundColor: "rgb(27, 34, 39)",
+                paddingTop: "56px",
+              },
+            }}
+          />
+          <header
             css={css`
+              /* border-top: 14px solid purple; */
+
               display: flex;
 
-              justify-content: center;
-              align-items: center;
+              height: 58px;
+              border-bottom: black 2px solid;
 
-              border: pink solid 2px;
-              width: 28%;
-              margin-left: auto;
+              background-color: #ffffff;
 
-              & a {
-                margin: 0 2%;
+              background-image: linear-gradient(
+                to right,
+                rgb(63, 44, 56),
+                rgb(38, 45, 59)
+              );
+
+              position: fixed;
+              width: 100%;
+              left: 0;
+
+              /* transition */
+              transition-property: top;
+              transition-timing-function: ease-in;
+              transition-duration: 0.2s;
+              /* kada scroll-ujem down element treba da se digne above */
+              &.pull-up {
+                top: -56px;
+              }
+              /* u suprotnom se spusta (ODNOSNO VRACA U POCETNI POLOZAJ) */
+              &.pull-down {
+                top: 0;
               }
             `}
+            className={scrolled_class}
           >
-            <a href="https://twitter.com/ra_decodes">
-              <img src={gitHubIconUri} alt="github logo" />
-            </a>
-            <a href="https://twitter.com/ra_decodes" target="blank">
-              <img src={twitterIconUri} alt="twitter icon" />
-            </a>
-            <a href="https://github.com/Rade58" target="blank">
-              <img src={gitHubIconUri} alt="github icon" />
-            </a>
-          </section>
-          <ScrollIndicator
-            pigDirection={scrolled_class === "pull-up" ? "to-left" : "to-right"}
-            bc="rgb(38, 45, 59)"
-            fill="rgba(153, 67, 95, 0.74)"
-            currentWindowScrollY={currentScroll}
-            bcImg="linear-gradient(
+            <TableOfContent />
+            <section
+              className="solial-icons"
+              css={css`
+                display: flex;
+
+                justify-content: center;
+                align-items: center;
+
+                border: pink solid 2px;
+                width: 28%;
+                margin-left: auto;
+
+                & a {
+                  margin: 0 2%;
+                }
+              `}
+            >
+              <a href="https://twitter.com/ra_decodes">
+                <img src={gitHubIconUri} alt="github logo" />
+              </a>
+              <a href="https://twitter.com/ra_decodes" target="blank">
+                <img src={twitterIconUri} alt="twitter icon" />
+              </a>
+              <a href="https://github.com/Rade58" target="blank">
+                <img src={gitHubIconUri} alt="github icon" />
+              </a>
+            </section>
+            <ScrollIndicator
+              pigDirection={
+                scrolled_class === "pull-up" ? "to-left" : "to-right"
+              }
+              bc="rgb(38, 45, 59)"
+              fill="rgba(153, 67, 95, 0.74)"
+              currentWindowScrollY={currentScroll}
+              bcImg="linear-gradient(
               to right,
               rgba(63, 44, 56, 1),
               rgba(38, 45, 59, 1)
               )"
-          />
-        </header>
-        <main
-          css={css`
-            /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+            />
+          </header>
+          <main
+            css={css`
+              /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
                 Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
                 sans-serif; */
 
-            /* display: flex; */
-            /* flex-direction: column; */
+              /* display: flex; */
+              /* flex-direction: column; */
 
-            display: grid;
+              display: grid;
 
-            @media screen and (min-width: 918px) {
-              grid-template-areas:
-                " . a a a a a . "
-                " . a a a a a b "
-                " . a a a a a b "
-                " . a a a a a t "
-                " . a a a a a . ";
-            }
-            @media screen and (min-width: 1100px) {
-              grid-template-areas:
-                " . a a a a . . "
-                " . a a a a b b "
-                " t a a a a b b "
-                " t a a a a . . "
-                " . a a a a . . ";
-            }
-
-            grid-template-areas:
-              " a a a "
-              " a a a "
-              " a a a "
-              " a a a "
-              " a a a "
-              " b b b "
-              " t t t ";
-
-            & article {
-              &.post-article {
-                grid-area: a;
+              @media screen and (min-width: 918px) {
+                grid-template-areas:
+                  " . a a a a a . "
+                  " . a a a a a b "
+                  " . a a a a a b "
+                  " . a a a a a t "
+                  " . a a a a a . ";
               }
-            }
+              @media screen and (min-width: 1100px) {
+                grid-template-areas:
+                  " . a a a a . . "
+                  " . a a a a b b "
+                  " t a a a a b b "
+                  " t a a a a . . "
+                  " . a a a a . . ";
+              }
 
-            & section.adds {
-              margin-top: 42px;
+              grid-template-areas:
+                " a a a "
+                " a a a "
+                " a a a "
+                " a a a "
+                " a a a "
+                " b b b "
+                " t t t ";
 
-              grid-area: b;
+              & article {
+                &.post-article {
+                  grid-area: a;
+                }
+              }
 
-              border: pink solid 4px;
-            }
+              & section.adds {
+                margin-top: 42px;
 
-            & section.social-posting {
-              grid-area: t;
+                grid-area: b;
 
-              border: yellow solid 2px;
-            }
-          `}
-        >
-          {children}
-          <section className="adds">
-            <h4>Adds</h4>
-            <div>
-              Donec pellentesque pharetra lectus, vel malesuada neque euismod
-              id. Quisque porta aliquam augue non sagittis. Nulla dui nulla,
-              efficitur eu sagittis ac, sollicitudin eu urna. Ut pretium, sapien
-              eu scelerisque consequat, dolor felis cursus ipsum, in consectetur
-              nulla nulla in ex. Vestibulum non diam imperdiet, ornare mauris
-              at, aliquam est.
-            </div>
-          </section>
-          <section className="social-posting">twitter instagram</section>
-          {/* /////////-----------------------///////////////// */}
-          {/* <div
+                border: pink solid 4px;
+              }
+
+              & section.social-posting {
+                grid-area: t;
+
+                border: yellow solid 2px;
+              }
+            `}
+          >
+            {children}
+            <section className="adds">
+              <h4>Adds</h4>
+              <div>
+                Donec pellentesque pharetra lectus, vel malesuada neque euismod
+                id. Quisque porta aliquam augue non sagittis. Nulla dui nulla,
+                efficitur eu sagittis ac, sollicitudin eu urna. Ut pretium,
+                sapien eu scelerisque consequat, dolor felis cursus ipsum, in
+                consectetur nulla nulla in ex. Vestibulum non diam imperdiet,
+                ornare mauris at, aliquam est.
+              </div>
+            </section>
+            <section className="social-posting">twitter instagram</section>
+            {/* /////////-----------------------///////////////// */}
+            {/* <div
             css={css`
               font-size: 28px;
             `}
           /> */}
-          {/* /////////-----------------------///////////////// */}
-          {/* SAMO TU DA STVORI PROSTOR */}
-          {/* <LoremIpsum /> */}
-          {/* <LoremIpsum /> */}
-          {/* <LoremIpsum /> */}
-          {/* /////////////////////// */}
-        </main>
-        {/* <button
+            {/* /////////-----------------------///////////////// */}
+            {/* SAMO TU DA STVORI PROSTOR */}
+            {/* <LoremIpsum /> */}
+            {/* <LoremIpsum /> */}
+            {/* <LoremIpsum /> */}
+            {/* /////////////////////// */}
+          </main>
+          {/* <button
           sx={{
             variant: "myButton",
           }}
@@ -368,7 +370,7 @@ const Layout: FunctionComponent = ({ children }) => {
         >
           Press me
         </button> */}
-        {/* </ThemeProvider> */}
+        </ThemeProvider>
       </Provider>
     </Fragment>
   );
