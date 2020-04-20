@@ -15,6 +15,7 @@ import {
   FunctionComponent,
   Reducer,
   Context,
+  Dispatch,
 } from "react";
 
 import { Global, css } from "@emotion/core";
@@ -77,9 +78,24 @@ const defaultState: StateI = {
 // ************       REDUCER STVARI GORE       ******
 // ***************************************************
 
-// CONTEXT
-//
-export const appContext: Context<StateI> = createContext(defaultState);
+// CONTEXT  === !==  === !==  === !==  === !==  === !==
+
+interface ContextStateI {
+  dispatch?: Dispatch<{
+    type: ACTION_TYPES_ENUM;
+    payload?: any;
+  }>;
+
+  reducedState: StateI;
+}
+
+export const blogContext: Context<ContextStateI> = createContext({
+  reducedState: defaultState,
+});
+
+const { Provider } = blogContext;
+
+// === !==  === !==  === !==  === !==  === !==  === !==
 
 const Layout: FunctionComponent = ({ children }) => {
   // KORISCENJE REDUCER FUNKCIJE
@@ -161,119 +177,123 @@ const Layout: FunctionComponent = ({ children }) => {
 
   return (
     <Fragment>
-      <ThemeProvider theme={theme}>
-        <Global
-          styles={{
-            body: {
-              margin: "4px",
-              backgroundColor: "rgb(27, 34, 39)",
-              paddingTop: "56px",
-            },
-          }}
-        />
-        <header
-          css={css`
-            /* border-top: 14px solid purple; */
-
-            display: flex;
-
-            height: 58px;
-            border-bottom: black 2px solid;
-
-            background-color: #ffffff;
-
-            background-image: linear-gradient(
-              to right,
-              rgb(63, 44, 56),
-              rgb(38, 45, 59)
-            );
-
-            position: fixed;
-            width: 100%;
-            left: 0;
-
-            /* transition */
-            transition-property: top;
-            transition-timing-function: ease-in;
-            transition-duration: 0.2s;
-            /* kada scroll-ujem down element treba da se digne above */
-            &.pull-up {
-              top: -56px;
-            }
-            /* u suprotnom se spusta (ODNOSNO VRACA U POCETNI POLOZAJ) */
-            &.pull-down {
-              top: 0;
-            }
-          `}
-          className={scrolled_class}
-        >
-          <section
-            className="solial-icons"
+      <Provider value={{ dispatch, reducedState }}>
+        <ThemeProvider theme={theme}>
+          <Global
+            styles={{
+              body: {
+                margin: "4px",
+                backgroundColor: "rgb(27, 34, 39)",
+                paddingTop: "56px",
+              },
+            }}
+          />
+          <header
             css={css`
+              /* border-top: 14px solid purple; */
+
               display: flex;
 
-              justify-content: center;
-              align-items: center;
+              height: 58px;
+              border-bottom: black 2px solid;
 
-              border: pink solid 2px;
-              width: 50%;
-              margin-left: auto;
+              background-color: #ffffff;
 
-              & a {
-                margin: 0 5%;
+              background-image: linear-gradient(
+                to bottom,
+                rgb(63, 44, 56),
+                rgb(38, 45, 59)
+              );
+
+              position: fixed;
+              width: 100%;
+              left: 0;
+
+              /* transition */
+              transition-property: top;
+              transition-timing-function: ease-in;
+              transition-duration: 0.2s;
+              /* kada scroll-ujem down element treba da se digne above */
+              &.pull-up {
+                top: -56px;
+              }
+              /* u suprotnom se spusta (ODNOSNO VRACA U POCETNI POLOZAJ) */
+              &.pull-down {
+                top: 0;
               }
             `}
+            className={scrolled_class}
           >
-            <a href="https://twitter.com/ra_decodes">
-              <img src={gitHubIconUri} alt="github logo" />
-            </a>
-            <a href="https://twitter.com/ra_decodes">
-              <img src={twitterIconUri} alt="twitter icon" />
-            </a>
-            <a href="https://github.com/Rade58">
-              <img src={gitHubIconUri} alt="github icon" />
-            </a>
-          </section>
+            <section
+              className="solial-icons"
+              css={css`
+                display: flex;
 
-          <strong>Layout</strong>
-          <ScrollIndicator
-            pigDirection={scrolled_class === "pull-up" ? "to-left" : "to-right"}
-            bc="rgb(38, 45, 59)"
-            fill="rgba(153, 67, 95, 0.74)"
-            currentWindowScrollY={currentScroll}
-            bcImg="linear-gradient(
+                justify-content: center;
+                align-items: center;
+
+                border: pink solid 2px;
+                width: 50%;
+                margin-left: auto;
+
+                & a {
+                  margin: 0 5%;
+                }
+              `}
+            >
+              <a href="https://twitter.com/ra_decodes">
+                <img src={gitHubIconUri} alt="github logo" />
+              </a>
+              <a href="https://twitter.com/ra_decodes">
+                <img src={twitterIconUri} alt="twitter icon" />
+              </a>
+              <a href="https://github.com/Rade58">
+                <img src={gitHubIconUri} alt="github icon" />
+              </a>
+            </section>
+
+            <strong>Layout</strong>
+            <ScrollIndicator
+              pigDirection={
+                scrolled_class === "pull-up" ? "to-left" : "to-right"
+              }
+              bc="rgb(38, 45, 59)"
+              fill="rgba(153, 67, 95, 0.74)"
+              currentWindowScrollY={currentScroll}
+              bcImg="linear-gradient(
               to right,
               rgba(63, 44, 56, 1),
               rgba(38, 45, 59, 1)
-            )"
-          />
-        </header>
-        <main>
-          {children}
-          {/* /////////-----------------------///////////////// */}
-          <div
-            css={css`
-              font-size: 28px;
-            `}
+              )"
+            />
+          </header>
+          <main>
+            {children}
+            {/* /////////-----------------------///////////////// */}
+            <div
+              css={css`
+                font-size: 28px;
+              `}
+            >
+              {currentScroll}
+            </div>
+            {/* /////////-----------------------///////////////// */}
+            {/* SAMO TU DA STVORI PROSTOR */}
+            <LoremIpsum />
+            <LoremIpsum />
+            <LoremIpsum />
+            {/* /////////////////////// */}
+          </main>
+          <button
+            sx={{
+              variant: "myButton",
+            }}
+            type="button"
           >
-            {currentScroll}
-          </div>
-          {/* /////////-----------------------///////////////// */}
-          {/* SAMO TU DA STVORI PROSTOR */}
-          <LoremIpsum />
-          <LoremIpsum />
-          <LoremIpsum />
-          {/* /////////////////////// */}
-        </main>
-        <button
-          sx={{
-            variant: "myButton",
-          }}
-          type="button"
-        >
-          Press me
-        </button>
-      </ThemeProvider>
+            Press me
+          </button>
+        </ThemeProvider>
+      </Provider>
     </Fragment>
   );
 };

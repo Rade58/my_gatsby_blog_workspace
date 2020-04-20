@@ -32,7 +32,7 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
 }) => {
   // console.log(currentWindowScrollY);
 
-  const [previousWindowScrollY, setPreviousWindowScrollY] = useState(0);
+  // const [previousWindowScrollY, setPreviousWindowScrollY] = useState(0);
 
   const resizingDivRef = useRef<HTMLDivElement>(null);
 
@@ -100,7 +100,7 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
 
   // NOVI USE EFECT, KOJ ISE TRIGGER-UJE ZA SVAKI SCROLL
 
-  let pigDirectionKlasa: "pig-right" | "pig-left" | undefined;
+  /* let pigDirectionKlasa: "pig-right" | "pig-left" | undefined;
 
   if (currentWindowScrollY > previousWindowScrollY) {
     //
@@ -114,7 +114,7 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
     // setTimeout(() => {
     setPreviousWindowScrollY(currentWindowScrollY);
     // }, 100);
-  }, [animationStop]);
+  }, [animationStop]); */
 
   const indicatorWidthPercent =
     (100 / (bodyHeightRef.current - windowHeightRef.current)) *
@@ -141,10 +141,6 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
         background-image: ${bcImg};
 
         & > div.resizer {
-          /* transition-property: width;
-          transition-duration: 0.6s;
-          transition-timing-function: linear; */
-
           background-color: ${fill};
           width: ${indicatorWidthPercent}%;
           height: 100%;
@@ -153,19 +149,28 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
         }
       `}
     >
-      <Pig
-        pigDirectionKlasa={pigDirection}
-        animationStop={animationStop}
-        marginLeft={indicatorWidthPercent}
+      <div
+        css={css`
+          width: 100%;
+          height: 38px;
+          border: pink solid 0px;
+          background-image: linear-gradient(
+            to top,
+            rgb(63, 44, 56),
+            rgb(38, 45, 59),
+            ${bc}
+          );
+          /* rgb(27, 34, 39) */
+          padding: 0;
+          margin: 0;
+        `}
       />
+      <Pig animationStop={animationStop} leftPercents={indicatorWidthPercent} />
       <div
         ref={resizingDivRef}
         title={`${indicatorWidthPercent}`}
         className="resizer"
-      >
-        {/* {pigDirectionKlasa} &nbsp; */}
-        {/* {animationStop ? "stop-animation" : "start-animation"} */}
-      </div>
+      />
     </div>
   );
 };

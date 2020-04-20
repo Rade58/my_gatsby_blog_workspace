@@ -1,27 +1,29 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui";
-import { FunctionComponent } from "react";
+import { FunctionComponent, useContext } from "react";
 import { css, keyframes } from "@emotion/core";
 import pigUri from "../ICONS/AJ_using/piggy_sprite.png";
+
+import { blogContext } from "./layout";
 
 console.log(pigUri);
 
 interface PigProps {
-  animationStop: boolean;
-  pigDirectionKlasa: "to-right" | "to-left";
-  marginLeft: number;
+  animationStop?: boolean;
+  pigDirectionKlasa?: "pull-down" | "pull-up";
+  leftPercents?: number;
 }
 
 const Pig: FunctionComponent<PigProps> = ({
   animationStop,
   pigDirectionKlasa,
-  marginLeft,
+  leftPercents,
 }) => {
   const animationStatus: "running" | "paused" = animationStop
     ? "paused"
     : "running";
 
-  const angle: 180 | 0 = pigDirectionKlasa === "to-right" ? 180 : 0;
+  const angle: 180 | 0 = pigDirectionKlasa === "pull-down" ? 180 : 0;
 
   const stripski = keyframes`
   
@@ -46,6 +48,8 @@ const Pig: FunctionComponent<PigProps> = ({
         /* & :hover > div {
           animation-play-state: running;
         } */
+
+        background-color: tomato;
       `}
     >
       {/* eslint-disable-next-line */}
@@ -63,7 +67,8 @@ const Pig: FunctionComponent<PigProps> = ({
           display: inline-block;
           border: tomato solid 0px;
           position: absolute;
-          left: ${marginLeft}%;
+
+          left: ${leftPercents}%;
 
           /* &:hover > div.sprite {
             animation-play-state: running;
@@ -73,7 +78,7 @@ const Pig: FunctionComponent<PigProps> = ({
             border: currentColor solid 0px;
             /* width: calc(100%/19); */
 
-            transform: rotateY(${angle}deg);
+            transform: rotateY(${angle}deg) translateY(-36px);
 
             padding: 18.8px;
             box-sizing: border-box;
@@ -102,4 +107,22 @@ const Pig: FunctionComponent<PigProps> = ({
   );
 };
 
-export default Pig;
+const PigWithState: FunctionComponent<PigProps> = ({
+  animationStop,
+  pigDirectionKlasa,
+  leftPercents,
+}) => {
+  const { reducedState, dispatch } = useContext(blogContext);
+
+  // console.log({ reducedState, dispatch });
+
+  return (
+    <Pig
+      animationStop={animationStop}
+      leftPercents={leftPercents}
+      pigDirectionKlasa={reducedState.scrolled_class}
+    />
+  );
+};
+
+export default PigWithState;
