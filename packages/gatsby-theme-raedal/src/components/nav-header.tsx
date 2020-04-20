@@ -6,7 +6,7 @@ import { css } from "@emotion/core";
 
 import { FunctionComponent } from "react";
 
-const NavInHeader: FunctionComponent = () => {
+const NavInHeader: FunctionComponent = ({ children }) => {
   const a = "";
 
   return (
@@ -35,6 +35,8 @@ const NavInHeader: FunctionComponent = () => {
         }
       `}
     >
+      {children}
+
       <Link to="/">React</Link>
       <Link to="/">GraphQL</Link>
       <Link to="/">Typescript</Link>

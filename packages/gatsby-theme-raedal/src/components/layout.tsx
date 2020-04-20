@@ -32,7 +32,7 @@ import ScrollIndicator from "./scroll-indicator";
 import gitHubIconUri from "../ICONS/AJ_using/github_badge.svg";
 import twitterIconUri from "../ICONS/AJ_using/twitter_circle.svg";
 //
-import NavInHeader from "./nav-header";
+import TableOfContent from "../static_query_components/table-of-content";
 //
 
 // ********  REDUCER STUFF DOLE   ********************
@@ -235,7 +235,7 @@ const Layout: FunctionComponent = ({ children }) => {
             `}
             className={scrolled_class}
           >
-            <NavInHeader />
+            <TableOfContent />
             <section
               className="solial-icons"
               css={css`
