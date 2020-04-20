@@ -36,23 +36,23 @@ import twitterIconUri from "../ICONS/AJ_using/twitter_circle.svg";
 // ********  REDUCER STUFF DOLE   ********************
 // REDUCER CU KORISTITI ZA STATE KOJI SE NE MANJE FROM PAGE TO PAGE
 
-enum ACTION_TYPES_ENUM {
+export enum ACTION_TYPES_ENUM {
   CHANGE_CURRENT_SCROLL = "CHANGE_CURRENT_SCROLL",
   SET_TO_SCROLL_UP_CLASS = "SET_TO_SCROLL_UP_CLASS",
   SET_TO_SCROLL_DOWN_CLASS = "SET_TO_SCROLL_DOWN_CLASS",
+  PIG_DISAPEAR = "PIG_DISAPEAR",
 }
 
 interface StateI {
   scrolled_class: "pull-up" | "pull-down";
   currentScroll: number;
+  pigDisapear: boolean;
 }
 
 const reducer: Reducer<StateI, { type: ACTION_TYPES_ENUM; payload?: any }> = (
   state,
   action
 ) => {
-  let placeholder;
-
   if (action.type === ACTION_TYPES_ENUM.CHANGE_CURRENT_SCROLL) {
     return { ...state, currentScroll: action.payload };
   }
@@ -65,12 +65,19 @@ const reducer: Reducer<StateI, { type: ACTION_TYPES_ENUM; payload?: any }> = (
     return { ...state, scrolled_class: "pull-down" };
   }
 
+  if (action.type === ACTION_TYPES_ENUM.PIG_DISAPEAR) {
+    const prevPigDisapearance = state.pigDisapear;
+
+    return { ...state, pigDisapear: !prevPigDisapearance };
+  }
+
   return state;
 };
 
 const defaultState: StateI = {
   scrolled_class: "pull-down",
   currentScroll: 0,
+  pigDisapear: false,
 };
 
 //
@@ -80,11 +87,13 @@ const defaultState: StateI = {
 
 // CONTEXT  === !==  === !==  === !==  === !==  === !==
 
+export type BlogDispatch = Dispatch<{
+  type: ACTION_TYPES_ENUM;
+  payload?: any;
+}>;
+
 interface ContextStateI {
-  dispatch?: Dispatch<{
-    type: ACTION_TYPES_ENUM;
-    payload?: any;
-  }>;
+  dispatch?: BlogDispatch;
 
   reducedState: StateI;
 }
@@ -200,7 +209,7 @@ const Layout: FunctionComponent = ({ children }) => {
               background-color: #ffffff;
 
               background-image: linear-gradient(
-                to bottom,
+                to right,
                 rgb(63, 44, 56),
                 rgb(38, 45, 59)
               );

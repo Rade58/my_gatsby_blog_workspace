@@ -4,7 +4,7 @@ import { FunctionComponent, useContext } from "react";
 import { css, keyframes } from "@emotion/core";
 import pigUri from "../ICONS/AJ_using/piggy_sprite.png";
 
-import { blogContext } from "./layout";
+import { blogContext, BlogDispatch, ACTION_TYPES_ENUM } from "./layout";
 
 console.log(pigUri);
 
@@ -12,12 +12,16 @@ interface PigProps {
   animationStop?: boolean;
   pigDirectionKlasa?: "pull-down" | "pull-up";
   leftPercents?: number;
+  pigDisapear?: boolean;
+  dispatch?: BlogDispatch;
 }
 
 const Pig: FunctionComponent<PigProps> = ({
   animationStop,
   pigDirectionKlasa,
   leftPercents,
+  pigDisapear,
+  dispatch,
 }) => {
   const animationStatus: "running" | "paused" = animationStop
     ? "paused"
@@ -48,7 +52,7 @@ const Pig: FunctionComponent<PigProps> = ({
         /* & :hover > div {
           animation-play-state: running;
         } */
-
+        display: ${pigDisapear ? "none" : "block"};
         background-color: tomato;
       `}
     >
@@ -56,10 +60,10 @@ const Pig: FunctionComponent<PigProps> = ({
       <div
         role="img"
         onKeyDown={(e) => {
-          (e.target as HTMLDivElement).style.display = "none";
+          if (dispatch) dispatch({ type: ACTION_TYPES_ENUM.PIG_DISAPEAR });
         }}
         onClick={(e) => {
-          (e.target as HTMLDivElement).style.display = "none";
+          if (dispatch) dispatch({ type: ACTION_TYPES_ENUM.PIG_DISAPEAR });
         }}
         className="someDiv"
         css={css`
@@ -91,7 +95,7 @@ const Pig: FunctionComponent<PigProps> = ({
             /* background */
 
             animation-name: ${stripski};
-            animation-duration: 0.48s;
+            animation-duration: 0.22s;
             animation-iteration-count: infinite;
 
             animation-timing-function: steps(7, end);
@@ -109,7 +113,6 @@ const Pig: FunctionComponent<PigProps> = ({
 
 const PigWithState: FunctionComponent<PigProps> = ({
   animationStop,
-  pigDirectionKlasa,
   leftPercents,
 }) => {
   const { reducedState, dispatch } = useContext(blogContext);
@@ -121,6 +124,8 @@ const PigWithState: FunctionComponent<PigProps> = ({
       animationStop={animationStop}
       leftPercents={leftPercents}
       pigDirectionKlasa={reducedState.scrolled_class}
+      pigDisapear={reducedState.pigDisapear}
+      dispatch={dispatch}
     />
   );
 };

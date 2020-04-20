@@ -2,21 +2,25 @@
 import { jsx } from "theme-ui";
 import {
   useLayoutEffect,
+  useContext,
   useState,
   useRef,
   FunctionComponent,
-  useEffect,
 } from "react";
 import { css } from "@emotion/core";
 
 import Pig from "./pig";
+
+//
+import { blogContext, ACTION_TYPES_ENUM } from "./layout";
+//
 
 interface ScrollIndicatorProps {
   bc: string;
   fill: string;
   currentWindowScrollY: number;
   bcImg: string;
-  pigDirection: "to-left" | "to-right";
+  pigDirection?: "to-left" | "to-right";
 }
 
 const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
@@ -28,11 +32,8 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
     rgb(63, 44, 56),
     rgb(38, 45, 59)
   )`,
-  pigDirection,
 }) => {
-  // console.log(currentWindowScrollY);
-
-  // const [previousWindowScrollY, setPreviousWindowScrollY] = useState(0);
+  const { reducedState, dispatch } = useContext(blogContext);
 
   const resizingDivRef = useRef<HTMLDivElement>(null);
 
@@ -55,13 +56,6 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
 
     bodyHeightRef.current = bodyEl.scrollHeight;
     windowHeightRef.current = windowEl.innerHeight;
-
-    // ANIMATION SIMULATION
-
-    // timer for stopig animation
-    /* const timerId = setInterval(() => {
-      console.log("stop animation");
-    }, 80); */
 
     if (setupStage) {
       windowEl.onresize = () => {
@@ -98,33 +92,9 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
     setSetupStage(false);
   }, [windowElementInnerWidth, setupStage]);
 
-  // NOVI USE EFECT, KOJ ISE TRIGGER-UJE ZA SVAKI SCROLL
-
-  /* let pigDirectionKlasa: "pig-right" | "pig-left" | undefined;
-
-  if (currentWindowScrollY > previousWindowScrollY) {
-    //
-    pigDirectionKlasa = "pig-right";
-  } else if (currentWindowScrollY < previousWindowScrollY) {
-    pigDirectionKlasa = "pig-left";
-  }
-
-  useEffect(() => {
-    // console.log({ currentWindowScrollY, previousWindowScrollY });
-    // setTimeout(() => {
-    setPreviousWindowScrollY(currentWindowScrollY);
-    // }, 100);
-  }, [animationStop]); */
-
   const indicatorWidthPercent =
     (100 / (bodyHeightRef.current - windowHeightRef.current)) *
     currentWindowScrollY;
-
-  //    ANIM CLASSES
-  // console.log(animationStop ? "stop-animation" : "start-animation");
-  ////////////////
-
-  // console.log(currentWindowScrollY, previousWindowScrollY);
 
   return (
     <div
@@ -149,16 +119,29 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
         }
       `}
     >
+      {/* eslint-disable-next-line */}
       <div
+        role="img"
+        onClick={() => {
+          if (dispatch) {
+            dispatch({ type: ACTION_TYPES_ENUM.PIG_DISAPEAR });
+          }
+        }}
+        onKeyDown={() => {
+          if (dispatch) {
+            dispatch({ type: ACTION_TYPES_ENUM.PIG_DISAPEAR });
+          }
+        }}
         css={css`
+          display: ${reducedState.pigDisapear ? "none" : "block"};
+
           width: 100%;
           height: 38px;
           border: pink solid 0px;
           background-image: linear-gradient(
-            to top,
+            to right,
             rgb(63, 44, 56),
-            rgb(38, 45, 59),
-            ${bc}
+            rgb(38, 45, 59)
           );
           /* rgb(27, 34, 39) */
           padding: 0;
