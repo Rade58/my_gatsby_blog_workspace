@@ -12,13 +12,24 @@
 ///////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////
 // STO ZNACI DA BIH STVARI TREBAO PAKOVATI I IZVOZITI PO
-// SLEDECEM PRINCIPU (ODNOSNO ZANIMA ME DEFAULT EXPORT)
+// SLEDECEM PRINCIPU
 
-// USTVARI JEDAN CE BITI DEFAULT EXPORT, A DRUGI NAMED
+// DEFINISACU DVA TAKORECI "SPECIJALNA" EXPORT-A
+//( IMACE PORED SEBE    $       SIGN, AL ISTAVIO SAM IM I DESCRIPTION-E    )
 
-//    DAKLE PO DEFAULT-U BIH IZVEZAO JEDAN OBJEKAT KOJI BI IMAO
-// SLEDECE PROPERTIJE
-//    createState
+//   (1)   IZVEZAO BI JEDAN OBJEKAT KOJI BI IMAO
+// NA SEBI        KONTEKSTOVU,      Provider    KOMPONENTU
+//              I IAMO BI   IMAO BI       reducer-A
+
+// I OVO GORE UPRAVO KADA SE NEGDE KORISTI   KREIRA DAKLE PROVIDER-A
+// U KOJI MOZE UGRADITI ONO STO BI SE DOBILO IZ     useReducer-a
+
+//   (2)    A NAMED EXPORT BI BIO TAJ KOJI BI NA SEBI IMAO
+// ONO STO JE POTREBNO DA SE STATE KORISTI
+// KAO STO SU, SAMI  context    NAMENJEN ZA useContext HOOK
+// ILI Consumer KOMPONENTA
+
+//
 
 import {
   createContext,
@@ -66,6 +77,9 @@ export const reducer: Reducer<
   return state;
 };
 
+/**
+ * @description (1) OVAJ OBJEKAT PORED DISPATCH FUNKCIJE JE JEDAN OD DEFAULT-OVA ZADAT PRI POZIVANJU    createContext-A (TO JE OVDE VEC URADJENO ;  (2)  A KORISTI SE KAO I DEFAULT STATE ZA REDUCER-A
+ */
 export const defaultState: HeaderStateI = {
   scrolled_class: "pull-down",
   currentScroll: 0,
@@ -99,4 +113,16 @@ const headerContext: Context<ContextHeaderStateI> = createContext({
 // ALI IZVOZIM I    Consumer    KOMPONENTU
 export const { Provider, Consumer } = headerContext;
 
-export default headerContext;
+/**
+ * @description Ne zaboravi da ti treba useContext HOOK (U FUNCTION COMPONENTS-IMA, JE TONAJBOLJI NACIN ZA KORISCENJE ONOGA STO TI OBEZBEDJUJE CONTEXT) (CONTEXT JE VEC KRIRAN U FAJLU IZ KOJEG SI OVO UVEZAO)
+ */
+export const $_useReducerState = { headerContext, Consumer };
+
+/**
+ * @description SVE STO TI TREBA ZA KREIRANJE STATE STORE-A I NJEGOCO SLANJE KROZ CONTEXT (OVDE CE TI TREBATI   useReducer  HOOK ) (CONTEXT JE VEC KRIRAN U FAJLU IZ KOJEG SI OVO UVEZAO)
+ */
+export const $_createReducerState = {
+  HeaderStateProvider: Provider,
+  headerReducer: reducer,
+  defaultState,
+};
