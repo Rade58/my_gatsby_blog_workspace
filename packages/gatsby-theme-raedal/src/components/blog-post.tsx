@@ -35,13 +35,24 @@ const BlogPost: FunctionComponent<{
         border: tomato solid 4px;
         margin-top: 48px;
 
-        h1 {
+        & > h1 {
           font-family: Oxygen, Ubuntu, Roboto, Cantarell, "Open Sans",
             "Helvetica Neue", sans-serif;
           font-weight: 300;
           color: #fff;
           margin: 0 auto;
           width: fit-content;
+        }
+
+        & > h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+          & > a {
+            text-decoration-line: none;
+            color: inherit;
+          }
         }
       `}
     >

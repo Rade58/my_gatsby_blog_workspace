@@ -4,7 +4,7 @@ import { FunctionComponent, useContext } from "react";
 import { css, keyframes } from "@emotion/core";
 import pigUri from "../ICONS/AJ_using/piggy_sprite.png";
 
-import { blogContext, BlogDispatch, ACTION_TYPES_ENUM } from "./layout";
+/* import { blogContext, BlogDispatch, ACTION_TYPES_ENUM } from "./layout"; */
 
 console.log(pigUri);
 
@@ -58,6 +58,7 @@ const Pig: FunctionComponent<PigProps> = ({
     >
       {/* eslint-disable-next-line */}
       <div
+        style={{ left: `${leftPercents}%` }}
         role="img"
         onKeyDown={(e) => {
           if (dispatch) dispatch({ type: ACTION_TYPES_ENUM.PIG_DISAPEAR });
@@ -71,8 +72,6 @@ const Pig: FunctionComponent<PigProps> = ({
           display: inline-block;
           border: tomato solid 0px;
           position: absolute;
-
-          left: ${leftPercents}%;
 
           /* &:hover > div.sprite {
             animation-play-state: running;
@@ -99,13 +98,14 @@ const Pig: FunctionComponent<PigProps> = ({
             animation-iteration-count: infinite;
 
             animation-timing-function: steps(7, end);
-
-            animation-play-state: ${animationStatus};
           }
         `}
       >
         {/* eslint-disable-next-line */}
-        <div className="sprite"></div>
+        <div
+          className="sprite"
+          style={{ animationPlayState: `${animationStatus}` }}
+        />
       </div>
     </div>
   );

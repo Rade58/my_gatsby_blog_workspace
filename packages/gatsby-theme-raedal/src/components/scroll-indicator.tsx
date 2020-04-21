@@ -99,8 +99,11 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
   return (
     <div
       css={css`
-        width: 100%;
+        background-image: ${bcImg};
+
         background-color: ${bc};
+
+        width: 100%;
         height: 4px;
         position: absolute;
         bottom: -4px;
@@ -108,11 +111,9 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
         margin: 0;
         padding: 0;
 
-        background-image: ${bcImg};
-
         & > div.resizer {
           background-color: ${fill};
-          width: ${indicatorWidthPercent}%;
+
           height: 100%;
           margin: 0;
           padding: 0;
@@ -153,6 +154,7 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
         ref={resizingDivRef}
         title={`${indicatorWidthPercent}`}
         className="resizer"
+        style={{ width: `${indicatorWidthPercent}%` }}
       />
     </div>
   );
