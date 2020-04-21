@@ -27,9 +27,10 @@
 //   (2)    A NAMED EXPORT BI BIO TAJ KOJI BI NA SEBI IMAO
 // ONO STO JE POTREBNO DA SE STATE KORISTI
 // KAO STO SU, SAMI  context    NAMENJEN ZA useContext HOOK
-// ILI Consumer KOMPONENTA
+// I OD TOGA BIH JA PRAVIO CUSTOM HOOK
+// I TAJ HOOK BI BIO KORISCEN GDE GOD ZELIM (POD USLOVOM DA JE TO 
+// "GDE GOD", U NEKOM GORNJEM LEVELU, KORISTILO, POMENUTOG PROVIDER-A) 
 
-//
 
 import {
   createContext,
@@ -51,6 +52,12 @@ export interface HeaderStateI {
   currentScroll: number;
   pigDisapear: boolean;
 }
+
+
+//
+// ***************************************************
+// ************       REDUCER STVARI        ******
+// ***************************************************
 
 export const reducer: Reducer<
   HeaderStateI,
@@ -78,7 +85,7 @@ export const reducer: Reducer<
 };
 
 /**
- * @description (1) OVAJ OBJEKAT PORED DISPATCH FUNKCIJE JE JEDAN OD DEFAULT-OVA ZADAT PRI POZIVANJU    createContext-A (TO JE OVDE VEC URADJENO ;  (2)  A KORISTI SE KAO I DEFAULT STATE ZA REDUCER-A
+ * @description (1) OVAJ OBJEKAT, PORED DISPATCH FUNKCIJE JE JEDAN OD DEFAULT-OVA ZADAT PRI POZIVANJU    createContext-A (TO JE OVDE VEC URADJENO ;  (2)  A KORISTI SE KAO I DEFAULT STATE ZA REDUCER-A
  */
 export const defaultState: HeaderStateI = {
   scrolled_class: "pull-down",
@@ -86,20 +93,17 @@ export const defaultState: HeaderStateI = {
   pigDisapear: false,
 };
 
-//
-// ***************************************************
-// ************       REDUCER STVARI GORE       ******
-// ***************************************************
 
-// CONTEXT  === !==  === !==  === !==  === !==  === !==
 
-export type HeaderConDispatch = Dispatch<{
+// CONTEXT stuff  === !==  === !==  === !==  === !==  === !==
+
+export type HeaderContDispatch = Dispatch<{
   type: ACTION_TYPES_ENUM;
   payload?: any;
 }>;
 
 export interface ContextHeaderStateI {
-  headerDispatch?: HeaderConDispatch;
+  headerDispatch?: HeaderContDispatch;
 
   reducedHeaderState: HeaderStateI;
 }
@@ -116,7 +120,7 @@ export const { Provider, Consumer } = headerContext;
 /**
  * @description Ne zaboravi da ti treba useContext HOOK (U FUNCTION COMPONENTS-IMA, JE TONAJBOLJI NACIN ZA KORISCENJE ONOGA STO TI OBEZBEDJUJE CONTEXT) (CONTEXT JE VEC KRIRAN U FAJLU IZ KOJEG SI OVO UVEZAO)
  */
-export const $_useReducerState = { headerContext, Consumer };
+export const $_useReducerState = { headerContext };
 
 /**
  * @description SVE STO TI TREBA ZA KREIRANJE STATE STORE-A I NJEGOCO SLANJE KROZ CONTEXT (OVDE CE TI TREBATI   useReducer  HOOK ) (CONTEXT JE VEC KRIRAN U FAJLU IZ KOJEG SI OVO UVEZAO)
