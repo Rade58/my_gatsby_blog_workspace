@@ -1,21 +1,16 @@
 /** @jsx jsx */
 // gatsby-image   KOMPONENTA
-import GatsbyImage from "gatsby-image";
+// import GatsbyImage from "gatsby-image";
 
 import { jsx, ThemeProvider } from "theme-ui";
 
 import {
   Fragment,
   useState,
-  useReducer,
   useRef,
   useEffect,
-  createContext,
   // -->  types
   FunctionComponent,
-  Reducer,
-  Context,
-  Dispatch,
 } from "react";
 
 import { Global, css } from "@emotion/core";
@@ -23,21 +18,25 @@ import { Global, css } from "@emotion/core";
 import theme from "../gatsby-plugin-theme-ui/index";
 
 // LOREM IPSUM
-import LoremIpsum from "./dev-utility/lorem-ipsum";
+// import LoremIpsum from "./dev-utility/lorem-ipsum";
 //
 
+// ********  HEADER STATE PROVIDER   ********************
 //
-import Header from "./header";
-
-// ********  REDUCER STUFF DOLE   ********************
-// REDUCER CU KORISTITI ZA STATE KOJI SE NE MANJE FROM PAGE TO PAGE
-console.log(theme.fontSizes);
-
+import HeaderStateProvider from "../context_n_reducers/context_providers/headerStateProvider";
+// ********  useHeader CUSTOM HOOK   ********************
+import useHeader from "../custom_hooks/useHeader";
 // === !==  === !==  === !==  === !==  === !==  === !==
 
+// console.log(theme.fontSizes);
+
 const Layout: FunctionComponent = ({ children }) => {
-  // KORISCENJE REDUCER FUNKCIJE
-  const [reducedState, dispatch] = useReducer(reducer, defaultState);
+  // === !==
+
+  const [state, Header, dispatch] = useHeader();
+  console.log(state);
+
+  // === !==
 
   ////////////////////////////////////////////////////////////////
 
@@ -52,22 +51,20 @@ const Layout: FunctionComponent = ({ children }) => {
   // OVA FUNKCIJA SE MORA TRIGGEROVATI, DA SE SCROLL HANDLER ZAKACI NA BODY (TO
   // SE DESAVA SAM OJEDNOM)
 
-  useEffect(() => {
+  /* useEffect(() => {
     const windowEl: Window = window || document.documentElement;
     const bodyEl: HTMLElement =
       document.body || document.getElementsByTagName("body")[0];
 
-    // OVO JE MORALO OVAKO, ODNOSNO REFERENCA SE STALNO MENJA KADA
-    // SE TRIGGER-UJE OVAJ EFFECT CALLBACK
+    
     currentScrollRef.current = reducedState.currentScroll;
 
     if (bodyEl && !scrollHandlerAttachedOnBody) {
-      // POSTARAO SAM SE DA    scrollHandlerAttachedOnBody  BUDE       false    SAMO NA POCETKU (DOLE SAM ZVAO NJEGOVU PROMENU)
+      /
 
       bodyEl.onscroll = (e) => {
         if (currentScrollRef.current) {
-          // console.log(currentScrollRef.current - windowEl.scrollY);
-          //
+          /
           if (currentScrollRef.current - windowEl.scrollY < 0) {
             dispatch({ type: ACTION_TYPES_ENUM.SET_TO_SCROLL_DOWN_CLASS });
           } else {
@@ -87,125 +84,120 @@ const Layout: FunctionComponent = ({ children }) => {
       setScrollHandlerAttachedOnBody(true);
     }
   }, [scrollHandlerAttachedOnBody, reducedState.currentScroll]);
+ */
 
-  ////////////////////////////////////////////////////////////////////////////
-
-  /////////////////////******   CLENUP useEffect  (DA MOGUCE JE DEFINISATI MULTIPLE useEffects) */
-
-  // ZASTO SAM OVDE DEFINISAO CLEANUPM PA TO JE ZATO STO SE RETURNED FUNKCIJA
-  // IZ useEffecta RUNN-UJE SVAKU PUT KADA SE NEKI DEPENDANCY IZ DEPENDANCY NIZA
-  // PROMENIO
-  // ALI JA CU SADA OVDE STAVITI PRAZAN DEPENDANCY ARRAY
-  // eslint-disable-next-line
-  useEffect(() => {
+  /* useEffect(() => {
     return () => {
       console.log("Use Effect 2");
 
       const bodyEl = document.body || document.getElementsByTagName("body")[0];
 
-      // OVO CE BITI TRUE, KADA SE PRVI PUT IZVRSI GORNJI
       if (scrollHandlerAttachedOnBody && bodyEl.onscroll) {
         bodyEl.onscroll = null;
       }
     };
-  }, []); // MORA EMPTY ARRAY DA BI PRI UNMOUNTING-U ZAVAO GORNJI RETURNED CLEANUP CALLBACK
+  }, []); */
   ////////////////////////////////////////////////////////////////////////
 
-  const { scrolled_class, currentScroll } = reducedState;
+  // const { scrolled_class, currentScroll } = reducedState;
 
   return (
     <Fragment>
-      <Provider value={{ dispatch, reducedState }}>
-        <ThemeProvider theme={theme}>
-          <Global
-            styles={{
-              body: {
-                margin: "4px",
-                backgroundColor: "rgb(27, 34, 39)",
-                paddingTop: "56px",
-                scrollBehavior: "revert",
-              },
-            }}
-          />
+      {/* <Provider value={{ dispatch, reducedState }}> */}
+      <ThemeProvider theme={theme}>
+        <Global
+          styles={{
+            body: {
+              margin: "4px",
+              backgroundColor: "rgb(27, 34, 39)",
+              paddingTop: "56px",
+              scrollBehavior: "revert",
+            },
+          }}
+        />
+        {/* HEADER STATE PROVIDER */}
+        <HeaderStateProvider>
           <Header />
-          <main
-            css={css`
-              display: grid;
+        </HeaderStateProvider>
+        {/* '''''''''''''''''''' */}
+        <main
+          css={css`
+            display: grid;
 
-              @media screen and (min-width: 918px) {
-                grid-template-areas:
-                  " . a a a a a . "
-                  " . a a a a a b "
-                  " . a a a a a b "
-                  " . a a a a a t "
-                  " . a a a a a . ";
-              }
-              @media screen and (min-width: 1100px) {
-                grid-template-areas:
-                  " . a a a a . . "
-                  " . a a a a b b "
-                  " t a a a a b b "
-                  " t a a a a . . "
-                  " . a a a a . . ";
-              }
-
+            @media screen and (min-width: 918px) {
               grid-template-areas:
-                " a a a "
-                " a a a "
-                " a a a "
-                " a a a "
-                " a a a "
-                " b b b "
-                " t t t ";
+                " . a a a a a . "
+                " . a a a a a b "
+                " . a a a a a b "
+                " . a a a a a t "
+                " . a a a a a . ";
+            }
+            @media screen and (min-width: 1100px) {
+              grid-template-areas:
+                " . a a a a . . "
+                " . a a a a b b "
+                " t a a a a b b "
+                " t a a a a . . "
+                " . a a a a . . ";
+            }
 
-              & article {
-                &.post-article {
-                  grid-area: a;
-                }
+            grid-template-areas:
+              " a a a "
+              " a a a "
+              " a a a "
+              " a a a "
+              " a a a "
+              " b b b "
+              " t t t ";
+
+            & article {
+              &.post-article {
+                grid-area: a;
               }
+            }
 
-              & section.adds {
-                margin-top: 42px;
+            & section.adds {
+              margin-top: 42px;
 
-                grid-area: b;
+              grid-area: b;
 
-                border: pink solid 4px;
-              }
+              border: pink solid 4px;
+            }
 
-              & section.social-posting {
-                grid-area: t;
+            & section.social-posting {
+              grid-area: t;
 
-                border: yellow solid 2px;
-              }
-            `}
-          >
-            {children}
-            <section className="adds">
-              <h4>Adds</h4>
-              <div>
-                Donec pellentesque pharetra lectus, vel malesuada neque euismod
-                id. Quisque porta aliquam augue non sagittis. Nulla dui nulla,
-                efficitur eu sagittis ac, sollicitudin eu urna. Ut pretium,
-                sapien eu scelerisque consequat, dolor felis cursus ipsum, in
-                consectetur nulla nulla in ex. Vestibulum non diam imperdiet,
-                ornare mauris at, aliquam est.
-              </div>
-            </section>
-            <section className="social-posting">twitter instagram</section>
-            {/* /////////-----------------------///////////////// */}
-            {/* <div
+              border: yellow solid 2px;
+            }
+          `}
+        >
+          {children}
+          <section className="adds">
+            <h4>Adds</h4>
+            <div>
+              Donec pellentesque pharetra lectus, vel malesuada neque euismod
+              id. Quisque porta aliquam augue non sagittis. Nulla dui nulla,
+              efficitur eu sagittis ac, sollicitudin eu urna. Ut pretium, sapien
+              eu scelerisque consequat, dolor felis cursus ipsum, in consectetur
+              nulla nulla in ex. Vestibulum non diam imperdiet, ornare mauris
+              at, aliquam est.
+            </div>
+          </section>
+          <section className="social-posting">twitter instagram</section>
+          {/* /////////-----------------------///////////////// */}
+          {/* <div
             css={css`
               font-size: 28px;
             `}
           /> */}
-            {/* /////////-----------------------///////////////// */}
-            {/* SAMO TU DA STVORI PROSTOR */}
-            {/* <LoremIpsum /> */}
-            {/* <LoremIpsum /> */}
-            {/* <LoremIpsum /> */}
-            {/* /////////////////////// */}
-          </main>
-          {/* <button
+          {/* /////////-----------------------///////////////// */}
+          {/* SAMO TU DA STVORI PROSTOR */}
+          {/* <LoremIpsum /> */}
+          {/* <LoremIpsum /> */}
+          {/* <LoremIpsum /> */}
+          {/* /////////////////////// */}
+        </main>
+        {/* <button
           sx={{
             variant: "myButton",
           }}
@@ -213,8 +205,8 @@ const Layout: FunctionComponent = ({ children }) => {
         >
           Press me
         </button> */}
-        </ThemeProvider>
-      </Provider>
+      </ThemeProvider>
+      {/* </Provider> */}
     </Fragment>
   );
 };

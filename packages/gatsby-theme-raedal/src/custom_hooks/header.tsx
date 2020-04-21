@@ -5,7 +5,7 @@ import { css } from "@emotion/core";
 
 import { FunctionComponent, useReducer } from "react";
 
-import ScrollIndicator from "./scroll-indicator";
+import ScrollIndicator from "../components/scroll-indicator";
 
 // IKONE (data: URI-EVI)
 import gitHubIconUri from "../ICONS/AJ_using/github_badge.svg";
