@@ -61,7 +61,7 @@ const Pig: FunctionComponent<PigProps> = ({
         /* display: ${pigDisapear ? "none" : "block"}; */
         background-color: tomato;
       `}
-      sx={{ display: `{pigDisapear ? "none" : "block"}` }}
+      sx={{ display: pigDisapear ? "none" : "block" }}
     >
       {/* eslint-disable-next-line */}
       <div
