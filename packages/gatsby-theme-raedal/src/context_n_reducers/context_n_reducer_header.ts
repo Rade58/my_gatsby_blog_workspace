@@ -68,21 +68,30 @@ export const reducer: Reducer<
   { type: ACTION_TYPES_ENUM; payload?: any }
 > = (state, action) => {
 
-  console.log("__ === __ !== __ __ === __ !==")
-  console.log(state)
-  console.log("__ === __ !== __ __ === __ !==")
+  /*  console.log("__ === __ !== __ __ === __ !==")
+   console.log(state)
+   console.log("__ === __ !== __ __ === __ !==") */
 
-  if (action.type === ACTION_TYPES_ENUM.CHANGE_CURRENT_SCROLL) {
-    return { ...state, currentScroll: action.payload };
+
+  if (action.type === ACTION_TYPES_ENUM.CHANGE_CURRENT_SCROLL && state) {
+
+    const { currentScroll } = state
+
+    const scrolled_class: "pull-up" | "pull-down" = (currentScroll > action.payload ? "pull-down" : "pull-up")
+
+    return { ...state, currentScroll: action.payload, scrolled_class };
+
+
+
   }
 
-  if (action.type === ACTION_TYPES_ENUM.SET_TO_SCROLL_DOWN_CLASS) {
+  /* if (action.type === ACTION_TYPES_ENUM.SET_TO_SCROLL_DOWN_CLASS) {
     return { ...state, scrolled_class: "pull-up" };
   }
 
   if (action.type === ACTION_TYPES_ENUM.SET_TO_SCROLL_UP_CLASS) {
     return { ...state, scrolled_class: "pull-down" };
-  }
+  } */
 
   if (action.type === ACTION_TYPES_ENUM.PIG_DISAPEAR) {
     const prevPigDisapearance = state.pigDisapear;

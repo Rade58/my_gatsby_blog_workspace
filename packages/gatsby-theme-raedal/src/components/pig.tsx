@@ -87,7 +87,7 @@ const Pig: FunctionComponent<PigProps> = ({
             border: currentColor solid 0px;
             /* width: calc(100%/19); */
 
-            transform: rotateY(${angle}deg) translateY(-36px);
+            /* transform: rotateY(${angle}deg) translateY(-36px); */
 
             padding: 18.8px;
             box-sizing: border-box;
@@ -99,7 +99,7 @@ const Pig: FunctionComponent<PigProps> = ({
             background-size: 26rem;
             /* background */
 
-            animation-name: ${stripski};
+            /* animation-name: ${stripski}; */
             animation-duration: 0.22s;
             animation-iteration-count: infinite;
 
@@ -110,7 +110,11 @@ const Pig: FunctionComponent<PigProps> = ({
         {/* eslint-disable-next-line */}
         <div
           className="sprite"
-          style={{ animationPlayState: `${animationStatus}` }}
+          sx={{
+            animationName: `${stripski}`,
+            transform: `rotateY(${angle}deg) translateY(-36px)`,
+            animationPlayState: `${animationStatus}`,
+          }}
         />
       </div>
     </div>

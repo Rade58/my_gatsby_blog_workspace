@@ -37,9 +37,9 @@ import ScrollIndicator from "../components/scroll-indicator";
 //
 
 export type UseHeaderCustomHookReturn = [
-  HeaderStateI,
-  FunctionComponent,
-  HeaderContDispatch
+  // HeaderStateI,
+  FunctionComponent
+  // HeaderContDispatch
 ];
 
 const useHeaderState: () => UseHeaderCustomHookReturn = () => {
@@ -90,7 +90,7 @@ const useHeaderState: () => UseHeaderCustomHookReturn = () => {
         bodyEl.onscroll = (e) => {
           console.log("onscroll is working");
 
-          if (currentScrollRef.current) {
+          /* if (currentScrollRef.current) {
             if (currentScrollRef.current - windowEl.scrollY < 0) {
               headerDispatch({
                 type: ACTION_TYPES_ENUM.SET_TO_SCROLL_DOWN_CLASS,
@@ -100,7 +100,7 @@ const useHeaderState: () => UseHeaderCustomHookReturn = () => {
                 type: ACTION_TYPES_ENUM.SET_TO_SCROLL_UP_CLASS,
               });
             }
-          }
+          } */
 
           const capturedScrollY = windowEl.scrollY;
 
@@ -205,7 +205,6 @@ const useHeaderState: () => UseHeaderCustomHookReturn = () => {
           pigDirection={scrolled_class === "pull-up" ? "to-left" : "to-right"}
           bc="rgb(38, 45, 59)"
           fill="rgba(153, 67, 95, 0.74)"
-          // currentWindowScrollY={currentScroll}
           bcImg="linear-gradient(
       to right,
       rgba(63, 44, 56, 1),
@@ -218,7 +217,7 @@ const useHeaderState: () => UseHeaderCustomHookReturn = () => {
 
   // I SVI ONI IDU ZAJEDNO KAO, JEDAN HOOK
 
-  return [reducedHeaderState_$, Header, headerDispatch_$];
+  return [Header];
 };
 
 export default useHeaderState;
