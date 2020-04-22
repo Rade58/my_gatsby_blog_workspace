@@ -137,7 +137,9 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
           headerDispatch({ type: ACTION_TYPES_ENUM.PIG_DISAPEAR });
         }}
         css={css`
-          display: ${reducedHeaderState.pigDisapear ? "none" : "block"};
+          @media screen and (min-width: 918px) {
+            height: 38px;
+          }
 
           width: 100%;
           /* -------------------------------------------------------  */
@@ -154,6 +156,9 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
           padding: 0;
           margin: 0;
         `}
+        sx={{
+          display: `${reducedHeaderState.pigDisapear ? "none" : "block"}`,
+        }}
       />
       <Pig animationStop={animationStop} leftPercents={indicatorWidthPercent} />
       <div

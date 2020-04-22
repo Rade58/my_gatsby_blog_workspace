@@ -58,9 +58,10 @@ const Pig: FunctionComponent<PigProps> = ({
         /* & :hover > div {
           animation-play-state: running;
         } */
-        display: ${pigDisapear ? "none" : "block"};
+        /* display: ${pigDisapear ? "none" : "block"}; */
         background-color: tomato;
       `}
+      sx={{ display: `{pigDisapear ? "none" : "block"}` }}
     >
       {/* eslint-disable-next-line */}
       <div
@@ -74,6 +75,12 @@ const Pig: FunctionComponent<PigProps> = ({
         }}
         className="someDiv"
         css={css`
+          @media screen and (min-width: 918px) {
+            margin-top: -1px;
+
+            width: 53px;
+          }
+
           /* -------------------------------------------------------------*/
 
           margin-top: 5.8px;
@@ -88,22 +95,19 @@ const Pig: FunctionComponent<PigProps> = ({
           border: tomato solid 0px;
           position: absolute;
 
-          /* &:hover > div.sprite {
-            animation-play-state: running;
-          } */
-
           & > div.sprite {
             border: currentColor solid 0px;
             /* width: calc(100%/19); */
 
-            /* transform: rotateY(${angle}deg) translateY(-36px); */
-
+            @media screen and (min-width: 918px) {
+              padding: 18.9px;
+              background-size: 26rem;
+            }
 
             /* -------------------------------------------------------------*/
             /* padding: 18.8px; */
             padding: 14.8px;
             /* -------------------------------------------------------------*/
-
 
             box-sizing: border-box;
 
@@ -117,16 +121,11 @@ const Pig: FunctionComponent<PigProps> = ({
 
             height: 18px;
             /* ------------------------ */
-            /* background */
             /* ------------------------------------------------- */
-
-            /* animation-name: ${stripski}; */
             animation-duration: 0.22s;
             animation-iteration-count: infinite;
 
             animation-timing-function: steps(7, end);
-
-
           }
         `}
       >
