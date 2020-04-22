@@ -12,8 +12,11 @@ import { css } from "@emotion/core";
 import Pig from "./pig";
 
 //
-import { blogContext, ACTION_TYPES_ENUM } from "./layout";
+// import { blogContext, ACTION_TYPES_ENUM } from "./layout";
 //
+
+//
+import { $_useReducerState } from "../context_n_reducers/context_n_reducer_header";
 
 interface ScrollIndicatorProps {
   bc: string;
@@ -33,7 +36,11 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
     rgb(38, 45, 59)
   )`,
 }) => {
-  const { reducedState, dispatch } = useContext(blogContext);
+  const { ACTION_TYPES_ENUM } = $_useReducerState;
+
+  const { reducedHeaderState, headerDispatch } = useContext(
+    $_useReducerState.headerContext
+  );
 
   const resizingDivRef = useRef<HTMLDivElement>(null);
 
@@ -124,17 +131,13 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
       <div
         role="img"
         onClick={() => {
-          if (dispatch) {
-            dispatch({ type: ACTION_TYPES_ENUM.PIG_DISAPEAR });
-          }
+          headerDispatch({ type: ACTION_TYPES_ENUM.PIG_DISAPEAR });
         }}
         onKeyDown={() => {
-          if (dispatch) {
-            dispatch({ type: ACTION_TYPES_ENUM.PIG_DISAPEAR });
-          }
+          headerDispatch({ type: ACTION_TYPES_ENUM.PIG_DISAPEAR });
         }}
         css={css`
-          display: ${reducedState.pigDisapear ? "none" : "block"};
+          display: ${reducedHeaderState.pigDisapear ? "none" : "block"};
 
           width: 100%;
           height: 38px;

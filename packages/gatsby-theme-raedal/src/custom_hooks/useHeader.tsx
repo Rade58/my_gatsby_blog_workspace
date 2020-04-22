@@ -9,9 +9,19 @@
 
 // ALI JA CU SADA PROBATI OVDE DA KORISTIM useContext
 
+/** @jsx jsx */
+import { jsx } from "theme-ui";
+
 import { css } from "@emotion/core";
 
-import React, { useContext, FunctionComponent } from "react";
+import {
+  useContext,
+  useLayoutEffect,
+  useEffect,
+  useRef,
+  useState,
+  FunctionComponent,
+} from "react";
 
 import {
   $_useReducerState,
@@ -19,6 +29,12 @@ import {
   HeaderStateI,
   HeaderContDispatch,
 } from "../context_n_reducers/context_n_reducer_header";
+
+// KOMPONENTE
+import NavInHeader from "../components/nav-header";
+import ScrollIndicator from "../components/scroll-indicator";
+
+//
 
 export type UseHeaderCustomHookReturn = [
   HeaderStateI,
@@ -28,53 +44,139 @@ export type UseHeaderCustomHookReturn = [
 
 const useHeaderState: () => UseHeaderCustomHookReturn = () => {
   // REDUCER STATE
-  const { reducedHeaderState, headerDispatch } = useContext(
+  /* const { reducedHeaderState, headerDispatch } = useContext(
     $_useReducerState.headerContext
-  );
+  ); */
 
-  const { scrolled_class } = reducedHeaderState;
+  /* console.log("__ === __ !== __ __ === __ !==");
+  console.log(headerDispatch);
+  console.log("__ === __ !== __ __ === __ !==");  */
+
+  let reducedHeaderState_$: HeaderStateI;
+  let headerDispatch_$: HeaderContDispatch;
+
+  const { ACTION_TYPES_ENUM } = $_useReducerState;
+
+  // const { scrolled_class, currentScroll, pigDisapear } = reducedHeaderState;
 
   // KOMPONENTA
 
-  const Header: FunctionComponent = ({ children }) => (
-    <header
-      css={css`
-        /* border-top: 14px solid purple; */
+  const Header: FunctionComponent = () => {
+    const { reducedHeaderState, headerDispatch } = useContext(
+      $_useReducerState.headerContext
+    );
 
-        display: flex;
+    reducedHeaderState_$ = reducedHeaderState;
+    headerDispatch_$ = headerDispatch;
 
-        height: 58px;
-        border-bottom: black 2px solid;
+    const { scrolled_class, currentScroll, pigDisapear } = reducedHeaderState;
 
-        background-color: #ffffff;
+    const currentScrollRef = useRef<number>(0);
+    const [
+      scrollHandlerAttachedOnBody,
+      setScrollHandlerAttachedOnBody,
+    ] = useState(false);
 
-        background-image: linear-gradient(
-          to right,
-          rgb(63, 44, 56),
-          rgb(38, 45, 59)
-        );
+    // CITANJE SA window-A UZ KORISCENJE    useLayoutEffect   -A
+    // __ === __ !== __ __ === __ !== __/ __ === __ !== __ __ === __ !== __
+    useLayoutEffect(() => {
+      const windowEl: Window = window || document.documentElement;
+      const bodyEl: HTMLElement =
+        document.body || document.getElementsByTagName("body")[0];
 
-        position: fixed;
-        width: 100%;
-        left: 0;
+      currentScrollRef.current = currentScroll;
 
-        /* transition */
-        transition-property: top;
-        transition-timing-function: ease-in;
-        transition-duration: 0.2s;
-        /* kada scroll-ujem down element treba da se digne above */
-        &.pull-up {
-          top: -56px;
+      if (bodyEl && !scrollHandlerAttachedOnBody) {
+        bodyEl.onscroll = (e) => {
+          console.log("onscroll is working");
+
+          if (currentScrollRef.current) {
+            if (currentScrollRef.current - windowEl.scrollY < 0) {
+              headerDispatch({
+                type: ACTION_TYPES_ENUM.SET_TO_SCROLL_DOWN_CLASS,
+              });
+            } else {
+              headerDispatch({
+                type: ACTION_TYPES_ENUM.SET_TO_SCROLL_UP_CLASS,
+              });
+            }
+          }
+
+          const capturedScrollY = windowEl.scrollY;
+
+          headerDispatch({
+            type: ACTION_TYPES_ENUM.CHANGE_CURRENT_SCROLL,
+            payload: capturedScrollY,
+          });
+        };
+
+        //
+        setScrollHandlerAttachedOnBody(true);
+      }
+    }, [scrollHandlerAttachedOnBody]);
+
+    // __ === __ !== __ __ === __ !== __/ __ === __ !== __ __ === __ !== __
+
+    // eslint-disable-next-line
+    useEffect(() => {
+      // CLEANING UP ZATO RETURN-UJE FUNKCIJU
+      return () => {
+        console.log("Use Effect 2");
+
+        const bodyEl =
+          document.body || document.getElementsByTagName("body")[0];
+
+        if (scrollHandlerAttachedOnBody && bodyEl.onscroll) {
+          bodyEl.onscroll = null;
         }
-        /* u suprotnom se spusta (ODNOSNO VRACA U POCETNI POLOZAJ) */
-        &.pull-down {
-          top: 0;
-        }
-      `}
-      className={scrolled_class}
-    >
-      {children}
-      {/* <TableOfContent />
+      };
+    }, []);
+    ////////////////////////////////////////////////////////////////////////
+
+    /*  headerDispatch({
+      type: ACTION_TYPES_ENUM.CHANGE_CURRENT_SCROLL,
+      payload: 200,
+    }); */
+
+    return (
+      <header
+        css={css`
+          /* border-top: 14px solid purple; */
+
+          display: flex;
+
+          height: 58px;
+          border-bottom: black 2px solid;
+
+          background-color: #ffffff;
+
+          background-image: linear-gradient(
+            to right,
+            rgb(63, 44, 56),
+            rgb(38, 45, 59)
+          );
+
+          position: fixed;
+          width: 100%;
+          left: 0;
+
+          /* transition */
+          transition-property: top;
+          transition-timing-function: ease-in;
+          transition-duration: 0.2s;
+          /* kada scroll-ujem down element treba da se digne above */
+          &.pull-up {
+            top: -56px;
+          }
+          /* u suprotnom se spusta (ODNOSNO VRACA U POCETNI POLOZAJ) */
+          &.pull-down {
+            top: 0;
+          }
+        `}
+        className={scrolled_class}
+      >
+        <NavInHeader />
+
         <section
           className="solial-icons"
           css={css`
@@ -92,33 +194,36 @@ const useHeaderState: () => UseHeaderCustomHookReturn = () => {
             }
           `}
         >
-          <a href="https://twitter.com/ra_decodes">
-            <img src={gitHubIconUri} alt="github logo" />
-          </a>
-          <a href="https://twitter.com/ra_decodes" target="blank">
-            <img src={twitterIconUri} alt="twitter icon" />
-          </a>
-          <a href="https://github.com/Rade58" target="blank">
-            <img src={gitHubIconUri} alt="github icon" />
-          </a>
+          {currentScroll}
+          {/* <a href="https://twitter.com/ra_decodes">
+          <img src={gitHubIconUri} alt="github logo" />
+        </a>
+        <a href="https://twitter.com/ra_decodes" target="blank">
+          <img src={twitterIconUri} alt="twitter icon" />
+        </a>
+        <a href="https://github.com/Rade58" target="blank">
+          <img src={gitHubIconUri} alt="github icon" />
+        </a> */}
         </section>
         <ScrollIndicator
+          currentWindowScrollY={currentScroll}
           pigDirection={scrolled_class === "pull-up" ? "to-left" : "to-right"}
           bc="rgb(38, 45, 59)"
           fill="rgba(153, 67, 95, 0.74)"
-          currentWindowScrollY={currentScroll}
+          // currentWindowScrollY={currentScroll}
           bcImg="linear-gradient(
       to right,
       rgba(63, 44, 56, 1),
       rgba(38, 45, 59, 1)
       )"
-        /> */}
-    </header>
-  );
+        />
+      </header>
+    );
+  };
 
   // I SVI ONI IDU ZAJEDNO KAO, JEDAN HOOK
 
-  return [reducedHeaderState, Header, headerDispatch];
+  return [reducedHeaderState_$, Header, headerDispatch_$];
 };
 
 export default useHeaderState;

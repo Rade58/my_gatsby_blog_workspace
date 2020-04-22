@@ -8,7 +8,6 @@ import {
   Fragment,
   useState,
   useRef,
-  useEffect,
   // -->  types
   FunctionComponent,
 } from "react";
@@ -29,12 +28,25 @@ import useHeader from "../custom_hooks/useHeader";
 // === !==  === !==  === !==  === !==  === !==  === !==
 
 // console.log(theme.fontSizes);
+import { ACTION_TYPES_ENUM } from "../context_n_reducers/context_n_reducer_header";
+//
 
 const Layout: FunctionComponent = ({ children }) => {
   // === !==
 
   const [state, Header, dispatch] = useHeader();
   console.log(state);
+
+  let a = 28;
+
+  /* for (let i = 0; i < 14; i += 1) {
+    console.log(state);
+
+    dispatch({
+      type: ACTION_TYPES_ENUM.CHANGE_CURRENT_SCROLL,
+      payload: a += 2,
+    });
+  } */
 
   // === !==
 
@@ -50,54 +62,6 @@ const Layout: FunctionComponent = ({ children }) => {
 
   // OVA FUNKCIJA SE MORA TRIGGEROVATI, DA SE SCROLL HANDLER ZAKACI NA BODY (TO
   // SE DESAVA SAM OJEDNOM)
-
-  /* useEffect(() => {
-    const windowEl: Window = window || document.documentElement;
-    const bodyEl: HTMLElement =
-      document.body || document.getElementsByTagName("body")[0];
-
-    
-    currentScrollRef.current = reducedState.currentScroll;
-
-    if (bodyEl && !scrollHandlerAttachedOnBody) {
-      /
-
-      bodyEl.onscroll = (e) => {
-        if (currentScrollRef.current) {
-          /
-          if (currentScrollRef.current - windowEl.scrollY < 0) {
-            dispatch({ type: ACTION_TYPES_ENUM.SET_TO_SCROLL_DOWN_CLASS });
-          } else {
-            dispatch({ type: ACTION_TYPES_ENUM.SET_TO_SCROLL_UP_CLASS });
-          }
-        }
-
-        const capturedScrollY = windowEl.scrollY;
-
-        dispatch({
-          type: ACTION_TYPES_ENUM.CHANGE_CURRENT_SCROLL,
-          payload: capturedScrollY,
-        });
-      };
-
-      //
-      setScrollHandlerAttachedOnBody(true);
-    }
-  }, [scrollHandlerAttachedOnBody, reducedState.currentScroll]);
- */
-
-  /* useEffect(() => {
-    return () => {
-      console.log("Use Effect 2");
-
-      const bodyEl = document.body || document.getElementsByTagName("body")[0];
-
-      if (scrollHandlerAttachedOnBody && bodyEl.onscroll) {
-        bodyEl.onscroll = null;
-      }
-    };
-  }, []); */
-  ////////////////////////////////////////////////////////////////////////
 
   // const { scrolled_class, currentScroll } = reducedState;
 

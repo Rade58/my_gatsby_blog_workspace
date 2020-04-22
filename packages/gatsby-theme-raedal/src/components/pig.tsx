@@ -6,6 +6,12 @@ import pigUri from "../ICONS/AJ_using/piggy_sprite.png";
 
 /* import { blogContext, BlogDispatch, ACTION_TYPES_ENUM } from "./layout"; */
 
+import {
+  $_useReducerState,
+  HeaderContDispatch,
+  ACTION_TYPES_ENUM,
+} from "../context_n_reducers/context_n_reducer_header";
+
 console.log(pigUri);
 
 interface PigProps {
@@ -13,7 +19,7 @@ interface PigProps {
   pigDirectionKlasa?: "pull-down" | "pull-up";
   leftPercents?: number;
   pigDisapear?: boolean;
-  dispatch?: BlogDispatch;
+  dispatch?: HeaderContDispatch;
 }
 
 const Pig: FunctionComponent<PigProps> = ({
@@ -115,7 +121,13 @@ const PigWithState: FunctionComponent<PigProps> = ({
   animationStop,
   leftPercents,
 }) => {
-  const { reducedState, dispatch } = useContext(blogContext);
+  const { reducedHeaderState, headerDispatch } = useContext(
+    $_useReducerState.headerContext
+  );
+
+  // const {ACTION_TYPES_ENUM} = $_useReducerState
+
+  const { pigDisapear, scrolled_class } = reducedHeaderState;
 
   // console.log({ reducedState, dispatch });
 
@@ -123,9 +135,9 @@ const PigWithState: FunctionComponent<PigProps> = ({
     <Pig
       animationStop={animationStop}
       leftPercents={leftPercents}
-      pigDirectionKlasa={reducedState.scrolled_class}
-      pigDisapear={reducedState.pigDisapear}
-      dispatch={dispatch}
+      pigDirectionKlasa={scrolled_class}
+      pigDisapear={pigDisapear}
+      dispatch={headerDispatch}
     />
   );
 };

@@ -26,8 +26,9 @@
 
 //   (2)     A KAO DRUGI EXPORT IZVEZAO BI CONTEXT
 // ONO STO JE POTREBNO DA SE STATE (OMOGUCEN BY THE REDUCER)
-// USSTVARI KORISTI
+// USTVARI KORISTI
 // DAKLE, TO JE  context    NAMENJEN ZA useContext HOOK
+// OVAJ DRUGI IZVOZ TREBA DA IMAM I ACTIONS ENUM, ZATO CI I NJEGA TU UVRSTITI
 
 
 // STO SE TICE (1) MOGAO BIH DA TO ISKORISTIM DA NAPRAVIM CUSTOM HOOK
@@ -66,6 +67,11 @@ export const reducer: Reducer<
   HeaderStateI,
   { type: ACTION_TYPES_ENUM; payload?: any }
 > = (state, action) => {
+
+  console.log("__ === __ !== __ __ === __ !==")
+  console.log(state)
+  console.log("__ === __ !== __ __ === __ !==")
+
   if (action.type === ACTION_TYPES_ENUM.CHANGE_CURRENT_SCROLL) {
     return { ...state, currentScroll: action.payload };
   }
@@ -106,16 +112,18 @@ export type HeaderContDispatch = Dispatch<{
 }>;
 
 export interface ContextHeaderStateI {
-  headerDispatch: HeaderContDispatch | any;
+  headerDispatch: HeaderContDispatch;
 
   reducedHeaderState: HeaderStateI;
 }
 
 // OVO JE SAMO DEFAULT STATE I REDUCER-A NEMA JOS
 const headerContext: Context<ContextHeaderStateI> = createContext({
+  // DAKLE OVE DVE VREDNOSTI SU SAM ODEFAULT-OVI
+
   reducedHeaderState: defaultState,
   // eslint-disable-next-line
-  headerDispatch: () => { }
+  headerDispatch: ({ type, payload }) => { }  // MISLIM DA JE BITNO STO SI OBEZBEDIO OVAKAV DEFAULT (SADA KADA BUDES KORISTIO OVAJ CONTEXT U DRUGIM FAJLOVIMA, IAMCES TACNE TYPE-OVE)
 });
 
 // GOTO VO CES UVEK KORISTITI     useContext    HOOK
@@ -126,9 +134,9 @@ export const { Provider, Consumer } = headerContext;
 
 // (2)
 /**
- * @description Ne zaboravi da ti treba useContext HOOK (U FUNCTION COMPONENTS-IMA, JE TONAJBOLJI NACIN ZA KORISCENJE ONOGA STO TI OBEZBEDJUJE CONTEXT) (CONTEXT JE VEC KRERAN U FAJLU IZ KOJEG SI OVO UVEZAO) (USTVARI OVAJ OBJEKAT IMA SAMO JEDAN PROPERTI (NISAM TAK OZELEO DA BUDE, JER SAM KASNIJE ODUZEO STVARI IZ OVOG OBJEKATA, ALI U REDU JE))
+ * @description Ne zaboravi da ti treba useContext HOOK (U FUNCTION COMPONENTS-IMA, JE TO NAJBOLJI NACIN ZA KORISCENJE ONOGA STO TI OBEZBEDJUJE CONTEXT) (CONTEXT JE VEC KRERAN U FAJLU IZ KOJEG SI OVO UVEZAO); A I SAM ZANS DA CE TI TREBATI ACTION, ZATO SU ONI OVDE
  */
-export const $_useReducerState = { headerContext };
+export const $_useReducerState = { headerContext, ACTION_TYPES_ENUM };
 
 
 
