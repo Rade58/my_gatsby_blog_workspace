@@ -26,13 +26,18 @@ import {
 import {
   $_useReducerState,
   // types  (  FOR    RETURNED ARRAY)
-  HeaderStateI,
-  HeaderContDispatch,
+  /* HeaderStateI,
+  HeaderContDispatch, */
 } from "../context_n_reducers/context_n_reducer_header";
 
 // KOMPONENTE
 import NavInHeader from "../components/nav-header";
 import ScrollIndicator from "../components/scroll-indicator";
+
+//
+
+import gitHubIconUri from "../ICONS/AJ_using/github_badge.svg";
+import twitterIconUri from "../ICONS/AJ_using/twitter_circle.svg";
 
 //
 
@@ -52,9 +57,9 @@ const useHeaderState: () => UseHeaderCustomHookReturn = () => {
   console.log(headerDispatch);
   console.log("__ === __ !== __ __ === __ !==");  */
 
-  let reducedHeaderState_$: HeaderStateI;
+  /* let reducedHeaderState_$: HeaderStateI;
   let headerDispatch_$: HeaderContDispatch;
-
+ */
   const { ACTION_TYPES_ENUM } = $_useReducerState;
 
   // const { scrolled_class, currentScroll, pigDisapear } = reducedHeaderState;
@@ -66,8 +71,8 @@ const useHeaderState: () => UseHeaderCustomHookReturn = () => {
       $_useReducerState.headerContext
     );
 
-    reducedHeaderState_$ = reducedHeaderState;
-    headerDispatch_$ = headerDispatch;
+    /* reducedHeaderState_$ = reducedHeaderState;
+    headerDispatch_$ = headerDispatch; */
 
     const { scrolled_class, currentScroll, pigDisapear } = reducedHeaderState;
 
@@ -138,6 +143,7 @@ const useHeaderState: () => UseHeaderCustomHookReturn = () => {
         css={css`
           /* border-top: 14px solid purple; */
 
+          z-index: 100;
           display: flex;
 
           height: 58px;
@@ -190,15 +196,15 @@ const useHeaderState: () => UseHeaderCustomHookReturn = () => {
           `}
         >
           {currentScroll}
-          {/* <a href="https://twitter.com/ra_decodes">
-          <img src={gitHubIconUri} alt="github logo" />
-        </a>
-        <a href="https://twitter.com/ra_decodes" target="blank">
-          <img src={twitterIconUri} alt="twitter icon" />
-        </a>
-        <a href="https://github.com/Rade58" target="blank">
-          <img src={gitHubIconUri} alt="github icon" />
-        </a> */}
+          <a href="https://twitter.com/ra_decodes">
+            <img src={gitHubIconUri} alt="github logo" />
+          </a>
+          <a href="https://twitter.com/ra_decodes" target="blank">
+            <img src={twitterIconUri} alt="twitter icon" />
+          </a>
+          <a href="https://github.com/Rade58" target="blank">
+            <img src={gitHubIconUri} alt="github icon" />
+          </a>
         </section>
         <ScrollIndicator
           currentWindowScrollY={currentScroll}

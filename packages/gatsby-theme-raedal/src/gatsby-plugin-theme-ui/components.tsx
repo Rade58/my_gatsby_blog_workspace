@@ -2,6 +2,7 @@
 
 import { jsx } from "theme-ui";
 import { FunctionComponent } from "react";
+import { css } from "@emotion/core";
 
 type HeadingsI = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
@@ -18,8 +19,34 @@ const heading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
   if (!props.id) return <Tag {...props} />; // eslint-disable-line
 
   return (
-    // eslint-disable-next-line
-    <Tag {...props}>
+    <Tag
+      // eslint-disable-next-line
+      {...props}
+      css={css`
+        position: relative;
+        z-index: 50;
+
+        padding-top: 45px;
+        padding-bottom: 18px;
+
+        & > a {
+          text-decoration-line: none;
+          color: inherit;
+          margin-left: 10%;
+
+          /* box-sizing: border-box; */
+
+          border: pink solid 1px;
+
+          &:hover::before {
+            content: "🔗";
+            font-size: 1.2rem;
+            position: absolute;
+            top: -12px;
+          }
+        }
+      `}
+    >
       <a href={`#${props.id}`}>{props.children}</a>
     </Tag>
   );

@@ -43,17 +43,6 @@ const BlogPost: FunctionComponent<{
           margin: 0 auto;
           width: fit-content;
         }
-
-        & > h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-          & > a {
-            text-decoration-line: none;
-            color: inherit;
-          }
-        }
       `}
     >
       <MDXRenderer>{body}</MDXRenderer>

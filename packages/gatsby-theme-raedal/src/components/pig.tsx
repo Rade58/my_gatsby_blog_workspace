@@ -74,7 +74,16 @@ const Pig: FunctionComponent<PigProps> = ({
         }}
         className="someDiv"
         css={css`
-          width: 53px;
+          /* -------------------------------------------------------------*/
+
+          margin-top: 5.8px;
+
+          width: 42px;
+          /* width: 53px; */
+          /* ''''''''''''' */
+          /* height: 28px; */
+          /* -------------------------------------------------------------*/
+
           display: inline-block;
           border: tomato solid 0px;
           position: absolute;
@@ -89,21 +98,35 @@ const Pig: FunctionComponent<PigProps> = ({
 
             /* transform: rotateY(${angle}deg) translateY(-36px); */
 
-            padding: 18.8px;
+
+            /* -------------------------------------------------------------*/
+            /* padding: 18.8px; */
+            padding: 14.8px;
+            /* -------------------------------------------------------------*/
+
+
             box-sizing: border-box;
 
             background-color: transparent;
             background-image: url(${pigUri});
             background-repeat: no-repeat;
 
-            background-size: 26rem;
+            /* ------------------------------------------------ */
+            /* background-size: 26rem; */
+            background-size: 328px;
+
+            height: 18px;
+            /* ------------------------ */
             /* background */
+            /* ------------------------------------------------- */
 
             /* animation-name: ${stripski}; */
             animation-duration: 0.22s;
             animation-iteration-count: infinite;
 
             animation-timing-function: steps(7, end);
+
+
           }
         `}
       >

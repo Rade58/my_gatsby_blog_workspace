@@ -140,7 +140,10 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
           display: ${reducedHeaderState.pigDisapear ? "none" : "block"};
 
           width: 100%;
-          height: 38px;
+          /* -------------------------------------------------------  */
+          /* height: 38px; */
+          height: 30px;
+          /* -------------------------------------------------------  */
           border: pink solid 0px;
           background-image: linear-gradient(
             to right,
