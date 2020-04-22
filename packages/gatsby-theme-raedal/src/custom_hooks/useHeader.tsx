@@ -133,11 +133,6 @@ const useHeaderState: () => UseHeaderCustomHookReturn = () => {
     }, []);
     ////////////////////////////////////////////////////////////////////////
 
-    /*  headerDispatch({
-      type: ACTION_TYPES_ENUM.CHANGE_CURRENT_SCROLL,
-      payload: 200,
-    }); */
-
     return (
       <header
         css={css`
