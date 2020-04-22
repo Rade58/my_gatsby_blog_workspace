@@ -28,46 +28,20 @@ import useHeader from "../custom_hooks/useHeader";
 // === !==  === !==  === !==  === !==  === !==  === !==
 
 // console.log(theme.fontSizes);
-import { ACTION_TYPES_ENUM } from "../context_n_reducers/context_n_reducer_header";
+// import { ACTION_TYPES_ENUM } from "../context_n_reducers/context_n_reducer_header";
 //
 
 const Layout: FunctionComponent = ({ children }) => {
   // === !==
 
-  const [state, Header, dispatch] = useHeader();
-  console.log(state);
-
-  let a = 28;
-
-  /* for (let i = 0; i < 14; i += 1) {
-    console.log(state);
-
-    dispatch({
-      type: ACTION_TYPES_ENUM.CHANGE_CURRENT_SCROLL,
-      payload: a += 2,
-    });
-  } */
+  const [Header] = useHeader();
 
   // === !==
 
   ////////////////////////////////////////////////////////////////
 
-  // REGULISE STA CU DEFINISATI U useEffect-u
-  const [
-    scrollHandlerAttachedOnBody,
-    setScrollHandlerAttachedOnBody,
-  ] = useState(false);
-
-  const currentScrollRef = useRef<number>();
-
-  // OVA FUNKCIJA SE MORA TRIGGEROVATI, DA SE SCROLL HANDLER ZAKACI NA BODY (TO
-  // SE DESAVA SAM OJEDNOM)
-
-  // const { scrolled_class, currentScroll } = reducedState;
-
   return (
     <Fragment>
-      {/* <Provider value={{ dispatch, reducedState }}> */}
       <ThemeProvider theme={theme}>
         <Global
           styles={{
@@ -136,6 +110,7 @@ const Layout: FunctionComponent = ({ children }) => {
           `}
         >
           {children}
+          {/* ZAMENI OVO KONKRETNIM KOMPONENTAMA, KADA IH BUDES NAPRAVIO */}
           <section className="adds">
             <h4>Adds</h4>
             <div>
@@ -148,6 +123,7 @@ const Layout: FunctionComponent = ({ children }) => {
             </div>
           </section>
           <section className="social-posting">twitter instagram</section>
+          {/* ------------------------------------------------------------- */}
           {/* /////////-----------------------///////////////// */}
           {/* <div
             css={css`
@@ -170,7 +146,6 @@ const Layout: FunctionComponent = ({ children }) => {
           Press me
         </button> */}
       </ThemeProvider>
-      {/* </Provider> */}
     </Fragment>
   );
 };
