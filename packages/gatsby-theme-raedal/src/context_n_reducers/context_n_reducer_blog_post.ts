@@ -57,7 +57,7 @@ export interface ContextBlogPostStateI {
 }
 
 // OVO JE SAMO DEFAULT STATE I REDUCER-A NEMA JOS
-const blogPostContext: Context<ContextBlogPostStateI> = createContext({
+export const blogPostContext: Context<ContextBlogPostStateI> = createContext({
   // DAKLE OVE DVE VREDNOSTI SU SAM ODEFAULT-OVI
 
   reducedBlogPostState: defaultState,

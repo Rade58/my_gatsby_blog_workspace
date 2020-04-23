@@ -57,7 +57,7 @@ export interface ContextLayoutStateI {
 }
 
 // OVO JE SAMO DEFAULT STATE I REDUCER-A NEMA JOS
-const layoutContext: Context<ContextLayoutStateI> = createContext({
+export const layoutContext: Context<ContextLayoutStateI> = createContext({
   // DAKLE OVE DVE VREDNOSTI SU SAM ODEFAULT-OVI
 
   reducedLayoutState: defaultState,

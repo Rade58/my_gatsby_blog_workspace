@@ -4,7 +4,11 @@ import { css } from "@emotion/core";
 
 import { MDXRenderer } from "gatsby-plugin-mdx";
 
-import { FunctionComponent } from "react";
+import { useContext, FunctionComponent } from "react";
+
+// OVDE ZELIM DA KORISTIM BLOG POST STATE (STO SAM I URADIO, DOLE U KOMPONENTI)
+import { blogPostContext } from "../context_n_reducers/context_n_reducer_blog_post";
+//
 
 interface ArticlePropsI {
   updated: string;
@@ -12,6 +16,14 @@ interface ArticlePropsI {
 }
 
 const Article: FunctionComponent<ArticlePropsI> = ({ body, updated }) => {
+  //
+  const { reducedBlogPostState } = useContext(blogPostContext);
+  //
+
+  const { pigDisapear } = reducedBlogPostState;
+
+  console.log({ pigDisapear });
+
   return (
     <article
       sx={{

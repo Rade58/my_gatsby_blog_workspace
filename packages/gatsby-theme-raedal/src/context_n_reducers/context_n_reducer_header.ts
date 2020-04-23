@@ -127,7 +127,7 @@ export interface ContextHeaderStateI {
 }
 
 // OVO JE SAMO DEFAULT STATE I REDUCER-A NEMA JOS
-const headerContext: Context<ContextHeaderStateI> = createContext({
+export const headerContext: Context<ContextHeaderStateI> = createContext({
   // DAKLE OVE DVE VREDNOSTI SU SAM ODEFAULT-OVI
 
   reducedHeaderState: defaultState,
