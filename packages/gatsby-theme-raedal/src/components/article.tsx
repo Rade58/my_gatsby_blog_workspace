@@ -28,7 +28,7 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body, updated }) => {
     <article
       sx={{
         h2: {
-          paddingTop: "58px",
+          paddingTop: pigDisapear ? "58px" : "18px",
           paddingBottom: "18px",
         },
       }}
