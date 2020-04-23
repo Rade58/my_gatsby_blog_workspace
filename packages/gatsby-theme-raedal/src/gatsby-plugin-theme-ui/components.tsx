@@ -4,6 +4,8 @@ import { jsx } from "theme-ui";
 import { FunctionComponent } from "react";
 import { css } from "@emotion/core";
 
+import Code from "../components/mdx-theme-ui-overrides/code";
+
 type HeadingsI = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
 // PRAVIM FUNKCIJU KOJA OUTPUT-UJE KOMPONENTU
@@ -57,6 +59,7 @@ const components = {
   h4: heading("h4"),
   h5: heading("h5"),
   h6: heading("h6"), */
+  pre: Code,
 };
 
 export default components;

@@ -12,8 +12,6 @@ import {
   ACTION_TYPES_ENUM,
 } from "../context_n_reducers/context_n_reducer_header";
 
-console.log(pigUri);
-
 interface PigProps {
   animationStop?: boolean;
   pigDirectionKlasa?: "pull-down" | "pull-up";
