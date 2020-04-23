@@ -24,7 +24,7 @@ Aliquam nec feugiat turpis. Vivamus vehicula ultrices mauris, quis luctus elit a
 
 In tempus faucibus commodo. Curabitur dictum rutrum metus, sit amet interdum ipsum condimentum vel. Curabitur eget quam et tellus tristique lobortis congue eu nunc. Aliquam erat volutpat. Integer sollicitudin id lectus id finibus. Morbi sed ultrices metus, at ullamcorper ipsum. Nullam eget arcu tortor. Maecenas tincidunt egestas feugiat. Nullam mollis scelerisque lectus quis consequat. Praesent eget nunc tortor. Suspendisse neque nunc, laoreet eu sapien nec, mollis sagittis lorem. Quisque nulla nibh, mattis eu volutpat ut, blandit quis nisl.
 
-```css
+```
 body {
   background-color: pink;
 }
@@ -34,7 +34,20 @@ Curabitur varius a neque ut gravida. Nulla tempor venenatis quam, eget pharetra 
 
 Sed mattis dui eget dui pellentesque euismod. Pellentesque et commodo risus, ac consectetur neque. Nam viverra lorem ut sagittis elementum. Sed eget enim sit amet tellus ultricies elementum at nec mauris. Etiam vulputate augue a leo blandit, et tempor turpis convallis. Suspendisse non vulputate leo, a tincidunt est. Morbi sit amet urna diam. Mauris varius justo quis massa tincidunt tincidunt.
 
-##
+```graphql
+enum Role {
+  ADMIN
+  MEMBER
+  GUEST
+}
+
+type User {
+  id: ID!
+  role: Role!
+  email: String!
+  password: String!
+}
+```
 
 Praesent metus erat, semper eu justo ac, ullamcorper vestibulum lorem. Integer non luctus ligula, nec iaculis massa. Nulla non magna imperdiet dui congue facilisis commodo nec neque. Praesent condimentum est vitae metus porta, vitae suscipit lacus feugiat. Curabitur at elit at sem egestas malesuada. In scelerisque nisl in pellentesque interdum. Pellentesque non turpis scelerisque, ornare libero commodo, hendrerit leo. Integer gravida nulla magna, nec eleifend nisi tempus vel. Integer convallis, nunc ac semper pharetra, justo velit ullamcorper libero, vel porta dui velit eget risus. Mauris fermentum mi sed est hendrerit suscipit. Morbi fringilla aliquam augue, rhoncus iaculis enim dapibus sit amet. Aliquam auctor justo sed metus aliquet, aliquam maximus sapien tristique.
 

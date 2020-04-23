@@ -4,7 +4,7 @@ import { jsx } from "theme-ui";
 import { FunctionComponent } from "react";
 import Highlight, { defaultProps } from "prism-react-renderer";
 
-import theme from "prism-react-renderer/themes/oceanicNext";
+import theme from "prism-react-renderer/themes/dracula";
 
 // DIREKTNO IZ MOG APP-A
 // POSTO NISAM NISTA MOGAO DA UVEZEM IZ mdx-utils, KORISTIM OVU FUNKCIJU
@@ -50,7 +50,7 @@ const Code: FunctionComponent = (props) => {
           sx={{
             variant: "prism-highlight",
             p: 2,
-            overflow: "scroll",
+            overflow: "auto",
           }}
         >
           {tokens.map((line, i) => (
