@@ -2,6 +2,8 @@ import React, { useReducer, FunctionComponent } from "react";
 
 import { $_createReducerState } from "../context_n_reducer_header";
 
+// DAVANJE ODREDJENIH GRANA STATE-A
+
 const ProviderHeaderState: FunctionComponent = ({ children }) => {
   const {
     HeaderStateProvider,
