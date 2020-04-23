@@ -1,4 +1,5 @@
-// https://github.com/Rade58/1_pure_react_project/blob/17_testing/src/useDropdown.js
+// https://github.com/Rade58/1_pure_react_project/blob/17_testing/src/useDropdown.js (ISPOSTAVILO SE NA KRAJU DA OVO NIJE POMOGLO JER JE
+// IPAK REC O DRUGACIJEM PRINCIPU)
 
 // KORISTIM DAKLE PRINICIM, KOJI JE PRIMENJEN U GORNJEM LINKU
 // ZATO CU SADA DEFINISATI CUSTOM HOOK

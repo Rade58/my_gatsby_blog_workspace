@@ -30,6 +30,12 @@ const BlogPost: FunctionComponent<{
     />
     {/* <h2>{title}</h2> */}
     <article
+      sx={{
+        "[h2, h3, h4, h5, h6]": {
+          paddingTop: "45px",
+          paddingBottom: "18px",
+        },
+      }}
       className="post-article"
       css={css`
         border: tomato solid 4px;

@@ -26,9 +26,6 @@ const heading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
         position: relative;
         z-index: 50;
 
-        padding-top: 45px;
-        padding-bottom: 18px;
-
         & > a {
           text-decoration-line: none;
           color: inherit;
@@ -42,7 +39,8 @@ const heading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
             content: "🔗";
             font-size: 1.2rem;
             position: absolute;
-            top: -12px;
+            top: 2px;
+            left: 5px;
           }
         }
       `}

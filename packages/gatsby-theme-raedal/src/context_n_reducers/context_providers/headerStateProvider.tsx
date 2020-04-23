@@ -14,8 +14,8 @@ const ProviderHeaderState: FunctionComponent = ({ children }) => {
     defaultState
   );
 
-  console.log({ reducedHeaderState, headerDispatch });
-  console.log(headerDispatch.name);
+  // console.log({ reducedHeaderState, headerDispatch });
+  // console.log(headerDispatch.name);
 
   return (
     <HeaderStateProvider value={{ reducedHeaderState, headerDispatch }}>
