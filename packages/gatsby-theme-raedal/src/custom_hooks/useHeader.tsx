@@ -94,7 +94,7 @@ const useHeaderState: () => UseHeaderCustomHookReturn = () => {
 
       if (bodyEl && !scrollHandlerAttachedOnBody) {
         bodyEl.onscroll = (e) => {
-          console.log("onscroll is working");
+          // console.log("onscroll is working");
 
           /* if (currentScrollRef.current) {
             if (currentScrollRef.current - windowEl.scrollY < 0) {
@@ -127,7 +127,7 @@ const useHeaderState: () => UseHeaderCustomHookReturn = () => {
     useEffect(() => {
       // CLEANING UP ZATO RETURN-UJE FUNKCIJU
       return () => {
-        console.log("Use Effect 2");
+        // console.log("Use Effect 2");
 
         const bodyEl =
           document.body || document.getElementsByTagName("body")[0];

@@ -59,6 +59,23 @@ const LazyPrismHighlighter = loadable(async () => {
   }> = (props) => {
     const { code, language, children } = props;
 
+    const { ACTION_TYPES_ENUM, headerContext } = $_useReducerState;
+
+    const { headerDispatch } = useContext(headerContext);
+
+    useLayoutEffect(() => {
+      console.log("*********USE LAYOUT EFFECT**********");
+
+      const bodyEl = document.body || document.getElementsByTagName("body")[0];
+
+      // console.log(bodyEl.scrollHeight);
+
+      headerDispatch({
+        type: ACTION_TYPES_ENUM.CHANGE_BODY_HEIGHT,
+        payload: bodyEl.scrollHeight,
+      });
+    }, []);
+
     return (
       <Highlight
         {...props}
@@ -87,44 +104,6 @@ const LazyPrismHighlighter = loadable(async () => {
 
 const Code: FunctionComponent = (props) => {
   //
-  const { ACTION_TYPES_ENUM, headerContext } = $_useReducerState;
-
-  const { headerDispatch } = useContext(headerContext);
-
-  const preElementRef = useRef<HTMLPreElement>(null);
-
-  // MUTATION OBSERVER   ---------------------------------
-
-  //   ---------------------------------
-
-  const [setupStage, setSetupStage] = useState(true);
-
-  useLayoutEffect(() => {
-    console.log("************pre OBSERVER*****************");
-    console.log(preElementRef.current && !setupStage);
-
-    if (preElementRef.current && !setupStage) {
-      const mutationCallback: MutationCallback = (mutationList, observer) => {
-        const windowEl = window || document.documentElement;
-
-        console.log(windowEl.scrollY);
-
-        headerDispatch({
-          type: ACTION_TYPES_ENUM.CHANGE_CURRENT_SCROLL,
-          payload: windowEl.scrollY,
-        });
-      };
-
-      const preElementObserver = new MutationObserver(mutationCallback);
-      preElementObserver.observe(preElementRef.current, {
-        subtree: true,
-        childList: true,
-        attributes: true,
-      });
-
-      setSetupStage(true);
-    }
-  }, [preElementRef.current, setupStage, setSetupStage]);
 
   //
 
@@ -141,7 +120,6 @@ const Code: FunctionComponent = (props) => {
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         //  EVO TI CES OVDE UPRAVO KORISTII VARIANT KOJI SE ZOVE    prism-highlight
         <pre
-          ref={preElementRef}
           className={className}
           style={style}
           sx={{

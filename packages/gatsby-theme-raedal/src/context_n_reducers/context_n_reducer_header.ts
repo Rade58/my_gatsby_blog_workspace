@@ -49,12 +49,14 @@ export enum ACTION_TYPES_ENUM {
   SET_TO_SCROLL_UP_CLASS = "SET_TO_SCROLL_UP_CLASS",
   SET_TO_SCROLL_DOWN_CLASS = "SET_TO_SCROLL_DOWN_CLASS",
   PIG_DISAPEAR = "PIG_DISAPEAR",
+  CHANGE_BODY_HEIGHT = "CHANGE_BODY_HEIGHT"
 }
 
 export interface HeaderStateI {
   scrolled_class: "pull-up" | "pull-down";
   currentScroll: number;
   pigDisapear: boolean;
+  bodyHeight: number
 }
 
 
@@ -81,23 +83,22 @@ export const reducer: Reducer<
 
     return { ...state, currentScroll: action.payload, scrolled_class };
 
-
-
   }
 
-  /* if (action.type === ACTION_TYPES_ENUM.SET_TO_SCROLL_DOWN_CLASS) {
-    return { ...state, scrolled_class: "pull-up" };
-  }
-
-  if (action.type === ACTION_TYPES_ENUM.SET_TO_SCROLL_UP_CLASS) {
-    return { ...state, scrolled_class: "pull-down" };
-  } */
 
   if (action.type === ACTION_TYPES_ENUM.PIG_DISAPEAR) {
     const prevPigDisapearance = state.pigDisapear;
 
     return { ...state, pigDisapear: !prevPigDisapearance };
   }
+
+  if (action.type === ACTION_TYPES_ENUM.CHANGE_BODY_HEIGHT) {
+
+    return { ...state, bodyHeight: action.payload }
+
+  }
+
+
 
   return state;
 };
@@ -109,6 +110,7 @@ export const defaultState: HeaderStateI = {
   scrolled_class: "pull-down",
   currentScroll: 0,
   pigDisapear: false,
+  bodyHeight: 0
 };
 
 

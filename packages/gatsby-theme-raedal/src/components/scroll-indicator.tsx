@@ -56,13 +56,18 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
   const [animationStop, setAnimationStop] = useState(false);
 
   useLayoutEffect(() => {
-    console.log("Use effect");
+    // console.log("Use effect");
 
     const bodyEl = document.body || document.getElementsByTagName("body")[0];
     const windowEl = window || document.documentElement;
 
     bodyHeightRef.current = bodyEl.scrollHeight;
     windowHeightRef.current = windowEl.innerHeight;
+
+    headerDispatch({
+      type: ACTION_TYPES_ENUM.CHANGE_BODY_HEIGHT,
+      payload: bodyHeightRef.current,
+    });
 
     if (setupStage) {
       windowEl.onresize = () => {
@@ -99,9 +104,28 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
     setSetupStage(false);
   }, [windowElementInnerWidth, setupStage]);
 
-  const indicatorWidthPercent =
-    (100 / (bodyHeightRef.current - windowHeightRef.current)) *
+  /* console.log(
+    "-----------",
+    (100 / (reducedHeaderState.bodyHeight - windowHeightRef.current)) *
+      currentWindowScrollY,
+    "----------------"
+  );
+
+  let indicatorPercents = (100 / (reducedHeaderState.bodyHeight - windowHeightRef.current)) *
+  currentWindowScrollY
+
+  while(indicatorPercents > 100){
+
+  }
+ */
+
+  const percentValue =
+    (100 / (reducedHeaderState.bodyHeight - windowHeightRef.current)) *
     currentWindowScrollY;
+
+  const indicatorWidthPercent = percentValue;
+
+  // console.log(indicatorWidthPercent);
 
   return (
     <div
