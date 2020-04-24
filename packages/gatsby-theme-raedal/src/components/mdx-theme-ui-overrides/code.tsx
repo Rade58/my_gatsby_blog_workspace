@@ -1,7 +1,16 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui";
 
-import { Fragment, FunctionComponent, ReactNode } from "react";
+import {
+  Fragment,
+  useContext,
+  useRef,
+  useLayoutEffect,
+  useEffect,
+  FunctionComponent,
+  ReactNode,
+  useState,
+} from "react";
 
 // EVO UVEZAO SAM LOADABLE
 import loadable from "@loadable/component";
@@ -26,9 +35,12 @@ import preToCodeBlock from "../../utility/preToCodeBlock";
 // === !===
 // === !===
 // === !===
-import useScrollHeightGiver from "../just_functionality/hooks/useScrollHeightGiver";
+import UseScrollHeightGiver from "../just_functionality/hooks/useScrollHeightGiver";
 // === !===
 // === !===
+
+import { $_useReducerState } from "../../context_n_reducers/context_n_reducer_header";
+
 // === !===
 // === !===
 
@@ -74,6 +86,48 @@ const LazyPrismHighlighter = loadable(async () => {
 // DODATNO HIGHLIGHTOVATI SPECIFIC REDOVI
 
 const Code: FunctionComponent = (props) => {
+  //
+  const { ACTION_TYPES_ENUM, headerContext } = $_useReducerState;
+
+  const { headerDispatch } = useContext(headerContext);
+
+  const preElementRef = useRef<HTMLPreElement>(null);
+
+  // MUTATION OBSERVER   ---------------------------------
+
+  //   ---------------------------------
+
+  const [setupStage, setSetupStage] = useState(true);
+
+  useLayoutEffect(() => {
+    console.log("************pre OBSERVER*****************");
+    console.log(preElementRef.current && !setupStage);
+
+    if (preElementRef.current && !setupStage) {
+      const mutationCallback: MutationCallback = (mutationList, observer) => {
+        const windowEl = window || document.documentElement;
+
+        console.log(windowEl.scrollY);
+
+        headerDispatch({
+          type: ACTION_TYPES_ENUM.CHANGE_CURRENT_SCROLL,
+          payload: windowEl.scrollY,
+        });
+      };
+
+      const preElementObserver = new MutationObserver(mutationCallback);
+      preElementObserver.observe(preElementRef.current, {
+        subtree: true,
+        childList: true,
+        attributes: true,
+      });
+
+      setSetupStage(true);
+    }
+  }, [preElementRef.current, setupStage, setSetupStage]);
+
+  //
+
   const codeProps = preToCodeBlock(props);
 
   if (!codeProps) {
@@ -87,6 +141,7 @@ const Code: FunctionComponent = (props) => {
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         //  EVO TI CES OVDE UPRAVO KORISTII VARIANT KOJI SE ZOVE    prism-highlight
         <pre
+          ref={preElementRef}
           className={className}
           style={style}
           sx={{
