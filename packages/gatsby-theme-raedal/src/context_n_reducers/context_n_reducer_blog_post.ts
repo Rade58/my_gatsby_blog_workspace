@@ -8,10 +8,12 @@ import {
 
 export enum BLOG_POST_ACTION_TYPES_ENUM {
   PIG_AND_TRACK_DISAPEARD = "PIG_AND_TRACK_DISAPEARD",
+  WINDOW_SCROLL_HEIGHT = "WINDOW_SCROLL_HEIGHT"
 }
 
 export interface BlogPostStateI {
   pigDisapear: boolean;
+  currentScroll: number
 }
 
 
@@ -39,6 +41,7 @@ export const blogPostReducer: Reducer<
  */
 export const defaultState: BlogPostStateI = {
   pigDisapear: false,
+  currentScroll: 0
 };
 
 

@@ -80,14 +80,14 @@ const Layout: FunctionComponent = ({ children }) => {
                 // width: "100%",    // DA NISAM DODAO MARGINE, MOGAO SAM
                 //                      DEFINISATI width: 100%
 
-                width: "calc(100% - 4px)",
+                // width: "calc(100vw - 4px)",
               },
             }}
           />
           {/* HEADER STATE PROVIDER */}
-          <HeaderStateProvider>
-            <Header />
-          </HeaderStateProvider>
+
+          <Header />
+
           {/* '''''''''''''''''''' */}
           <Main>{children}</Main>
           {/* <button

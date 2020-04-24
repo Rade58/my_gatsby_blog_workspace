@@ -10,6 +10,8 @@ import Seo, { SeoI } from "../seo/seo";
 //
 import { $_createBlogPostReducerState } from "../context_n_reducers/context_n_reducer_blog_post";
 
+import HeaderStateProvider from "../context_n_reducers/context_providers/headerStateProvider";
+
 interface PageProp extends SeoI {
   body: string;
   updated: string;
@@ -36,16 +38,18 @@ const BlogPost: FunctionComponent<{
 
   return (
     <BlogPostStateProvider value={{ reducedBlogPostState, blogPostDispatch }}>
-      <Layout>
-        <Seo
-          title={title}
-          lang={lang}
-          description={description}
-          themeColor={themeColor}
-        />
-        {/* <h2>{title}</h2> */}
-        <Article updated={updated} body={body} />
-      </Layout>
+      <HeaderStateProvider>
+        <Layout>
+          <Seo
+            title={title}
+            lang={lang}
+            description={description}
+            themeColor={themeColor}
+          />
+          {/* <h2>{title}</h2> */}
+          <Article updated={updated} body={body} />
+        </Layout>
+      </HeaderStateProvider>
     </BlogPostStateProvider>
   );
 };

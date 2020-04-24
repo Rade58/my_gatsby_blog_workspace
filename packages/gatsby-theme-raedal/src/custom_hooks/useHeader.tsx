@@ -147,6 +147,8 @@ const useHeaderState: () => UseHeaderCustomHookReturn = () => {
           z-index: 100;
           display: flex;
 
+          /* width: 100%; */
+
           height: 58px;
           border-bottom: black 2px solid;
 

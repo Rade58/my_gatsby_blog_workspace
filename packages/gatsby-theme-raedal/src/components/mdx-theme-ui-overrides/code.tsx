@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui";
 
-import { FunctionComponent, ReactNode } from "react";
+import { Fragment, FunctionComponent, ReactNode } from "react";
 
 // EVO UVEZAO SAM LOADABLE
 import loadable from "@loadable/component";
@@ -11,12 +11,25 @@ import theme from "prism-react-renderer/themes/dracula";
 
 // === !===
 
-import { Language, PrismTheme, RenderProps } from "prism-react-renderer";
+import {
+  // defaultProps,
+  Language,
+  PrismTheme,
+  RenderProps,
+} from "prism-react-renderer";
 // GORNJI RenderProps  SAM UVEZAO NA HACKABLE NACIN TAK OSTO SAM OTISAO
 // U TYPE DEFINITION I IZVEZAO GA (AKO IKADA UPDATE-UJES TYPE DEF ZA LOADABLE,
 // OPET CE TYPESCRIPT YELL-OVATI NA TEBE)
 import preToCodeBlock from "../../utility/preToCodeBlock";
 
+// === !===
+// === !===
+// === !===
+// === !===
+import useScrollHeightGiver from "../just_functionality/hooks/useScrollHeightGiver";
+// === !===
+// === !===
+// === !===
 // === !===
 
 // A SADA CU DA KORISTIM LOADABLE
@@ -61,32 +74,16 @@ const LazyPrismHighlighter = loadable(async () => {
 // DODATNO HIGHLIGHTOVATI SPECIFIC REDOVI
 
 const Code: FunctionComponent = (props) => {
-  // U SUSTINI OVO CE EXPOSE-OVATI DA LI JE
-  // PRILIKOM PISANJA MDX PROSLEDJEN LANGUAGE PROP
-  // KOJI ZADAJE, KOJI JE JEZIK U CODE BLOKU
   const codeProps = preToCodeBlock(props);
 
-  // AKO SI U MDX FAJLU       PISAO SAMO IZMEDJU      ```     ```
-  // BEZ IKAKVOG ARGUMENTA KOJI BI SE ODNOSIO N JEZIK
-  // ONDA SERVIRAS pre TAG, BEZ HIGHLIGHTING-A
-
   if (!codeProps) {
-    return <pre {...props} />; // eslint-disable-line
+    return <pre {...props} />;
   }
-
-  // U SUPROTNOM KORISTIM SVE KOMPONENTE, KOJE SAM UVEZAO IZ
-  // 'prism-react-renderer'
 
   const { codeString, language } = codeProps;
 
   return (
-    <Highlight
-      // eslint-disable-next-line
-      {...defaultProps}
-      code={codeString}
-      language={language}
-      theme={theme}
-    >
+    <LazyPrismHighlighter code={codeString} language={language} theme={theme}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         //  EVO TI CES OVDE UPRAVO KORISTII VARIANT KOJI SE ZOVE    prism-highlight
         <pre
@@ -100,17 +97,15 @@ const Code: FunctionComponent = (props) => {
           }}
         >
           {tokens.map((line, i) => (
-            // eslint-disable-next-line
             <div {...getLineProps({ line, key: i })}>
               {line.map((token, key) => (
-                // eslint-disable-next-line
                 <span {...getTokenProps({ token, key })} />
               ))}
             </div>
           ))}
         </pre>
       )}
-    </Highlight>
+    </LazyPrismHighlighter>
   );
 };
 
