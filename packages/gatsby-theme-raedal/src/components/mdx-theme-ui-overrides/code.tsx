@@ -50,7 +50,8 @@ const Code: FunctionComponent = (props) => {
           sx={{
             variant: "prism-highlight",
             p: 2,
-            overflow: "auto",
+            overflowX: "scroll",
+            // width: "100vw",
           }}
         >
           {tokens.map((line, i) => (

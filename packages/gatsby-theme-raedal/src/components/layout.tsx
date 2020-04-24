@@ -65,10 +65,22 @@ const Layout: FunctionComponent = ({ children }) => {
           <Global
             styles={{
               body: {
+                // PRIMETIO SAM DA JE JASON KADA JE DEFINISAO ZA BODY
+                // USTVARI DODAO MARGINE 4px
+                // PA SAM I JA DODAO; IAKO NE ZNAM ZASTO
+
                 margin: "4px",
                 backgroundColor: "rgb(27, 34, 39)",
                 paddingTop: "56px",
                 scrollBehavior: "smooth",
+
+                // OBRATI PAZNJU DA KADA DODAS MARGINE, TI CES IMATO OVERFLOW SCROLL
+                // ZA BODY STO NIJE DOBRO
+
+                // width: "100%",    // DA NISAM DODAO MARGINE, MOGAO SAM
+                //                      DEFINISATI width: 100%
+
+                width: "calc(100% - 4px)",
               },
             }}
           />

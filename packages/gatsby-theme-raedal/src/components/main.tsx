@@ -24,6 +24,8 @@ const Main: FunctionComponent = ({ children }) => {
       css={css`
         display: grid;
 
+        grid-template-columns: repeat(7, 1fr);
+
         @media screen and (min-width: 918px) {
           grid-template-areas:
             " . a a a a a . "
