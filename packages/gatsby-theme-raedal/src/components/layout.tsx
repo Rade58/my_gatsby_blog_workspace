@@ -80,7 +80,7 @@ const Layout: FunctionComponent = ({ children }) => {
               // OBRATI PAZNJU DA KADA DODAS MARGINE, TI CES IMATO OVERFLOW SCROLL
               // ZA BODY STO NIJE DOBRO
 
-              // width: "100%",    // DA NISAM DODAO MARGINE, MOGAO SAM
+              //width: "100%", // DA NISAM DODAO MARGINE, MOGAO SAM
               //                      DEFINISATI width: 100%
 
               // width: "calc(100vw - 4px)",

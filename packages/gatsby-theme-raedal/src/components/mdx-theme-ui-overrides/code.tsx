@@ -1,6 +1,8 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui";
 
+import { css } from "@emotion/core";
+
 import {
   useContext,
   useLayoutEffect,
@@ -121,7 +123,6 @@ const Code: FunctionComponent = (props) => {
             variant: "prism-highlight",
             p: 2,
             overflowX: "scroll",
-            // width: "100vw",
           }}
         >
           {tokens.map((line, i) => (

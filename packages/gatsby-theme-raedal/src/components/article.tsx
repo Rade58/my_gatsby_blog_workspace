@@ -31,7 +31,10 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body, updated }) => {
           paddingTop: pigDisapear ? "58px" : "18px",
           paddingBottom: "18px",
         },
+        /* display: "flex",
+        flexDirection: "column", */
       }}
+      // style={{ display: "flex" }}
       className="post-article"
       css={css`
         border: tomato solid 4px;

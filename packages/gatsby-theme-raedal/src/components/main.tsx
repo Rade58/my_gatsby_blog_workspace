@@ -24,39 +24,52 @@ const Main: FunctionComponent = ({ children }) => {
       css={css`
         display: grid;
 
-        /* width: 100vw; */
+        width: 100vw;
 
-        grid-template-columns: repeat(7, 1fr);
+        grid-template-columns: repeat(12, minmax(0, 1fr));
 
         @media screen and (min-width: 918px) {
           grid-template-areas:
-            " . a a a a a . "
-            " . a a a a a b "
-            " . a a a a a b "
-            " . a a a a a t "
-            " . a a a a a . ";
+            " . . a a a a . ."
+            " . . a a a a b b"
+            " . . a a a a b b"
+            " . . a a a a t t"
+            " . . a a a a t t";
         }
         @media screen and (min-width: 1100px) {
           grid-template-areas:
-            " . a a a a . . "
-            " . a a a a b b "
-            " t a a a a b b "
-            " t a a a a . . "
-            " . a a a a . . ";
+            " . . a a a a . . "
+            " . . a a a a b b "
+            " t t a a a a b b "
+            " t t a a a a . . "
+            " . . a a a a . . ";
         }
 
         grid-template-areas:
-          " a a a a a a a"
-          " a a a a a a a"
-          " a a a a a a a"
-          " a a a a a a a"
-          " a a a a a a a"
-          " b b b b b b b"
-          " t t t t t t t";
+          " a a a a a a a a"
+          " a a a a a a a a"
+          " a a a a a a a a"
+          " a a a a a a a a"
+          " a a a a a a a a"
+          " b b b b b b b b"
+          " b b b b b b b b"
+          " b b b b b b b b"
+          " t t t t t t t t"
+          " t t t t t t t t"
+          " t t t t t t t t";
 
         & article {
           &.post-article {
             grid-area: a;
+            /* width: 60vw; */
+
+            display: flex;
+
+            flex-direction: column;
+
+            pre {
+              /* width: 100%; */
+            }
           }
         }
 
