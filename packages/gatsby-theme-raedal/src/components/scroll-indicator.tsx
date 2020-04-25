@@ -76,7 +76,7 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
 
       // OBSERVER
 
-      /* const mutationCallback: MutationCallback = (mutationList, observer) => {
+      const mutationCallback: MutationCallback = (mutationList, observer) => {
         mutationList.forEach((mutation) => {
           if (mutation.type === "attributes") {
             // console.log("start animation, start animation");
@@ -98,7 +98,7 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
         resizingElementObserver.observe(resizingDivRef.current, {
           attributes: true,
         });
-      } */
+      }
     }
 
     setSetupStage(false);
@@ -187,9 +187,9 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
       <Pig animationStop={animationStop} leftPercents={indicatorWidthPercent} />
       <div
         ref={resizingDivRef}
-        title={`${indicatorWidthPercent}`}
+        // title={`${indicatorWidthPercent}`}
         className="resizer"
-        style={{ width: `${indicatorWidthPercent}%` }}
+        sx={{ width: `${indicatorWidthPercent}%` }}
       />
     </div>
   );

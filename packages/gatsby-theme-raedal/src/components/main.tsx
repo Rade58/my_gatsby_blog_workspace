@@ -46,13 +46,13 @@ const Main: FunctionComponent = ({ children }) => {
         }
 
         grid-template-areas:
-          " a a a "
-          " a a a "
-          " a a a "
-          " a a a "
-          " a a a "
-          " b b b "
-          " t t t ";
+          " a a a a a a a"
+          " a a a a a a a"
+          " a a a a a a a"
+          " a a a a a a a"
+          " a a a a a a a"
+          " b b b b b b b"
+          " t t t t t t t";
 
         & article {
           &.post-article {

@@ -58,12 +58,17 @@ const Pig: FunctionComponent<PigProps> = ({
         } */
         /* display: ${pigDisapear ? "none" : "block"}; */
         background-color: tomato;
+        width: 100%;
       `}
-      sx={{ display: pigDisapear ? "none" : "block" }}
+      style={{ display: pigDisapear ? "none" : "block" }}
     >
       {/* eslint-disable-next-line */}
       <div
-        style={{ left: `${leftPercents}%` }}
+        style={{
+          // left: `${leftPercents}%`
+          // transform: `translateX(${leftPercents}%)`,
+          marginLeft: `${leftPercents}%`,
+        }}
         role="img"
         onKeyDown={(e) => {
           if (dispatch) dispatch({ type: ACTION_TYPES_ENUM.PIG_DISAPEAR });
