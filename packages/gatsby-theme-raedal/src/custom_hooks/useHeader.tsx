@@ -198,7 +198,7 @@ const useHeaderState: () => UseHeaderCustomHookReturn = () => {
             }
           `}
         >
-          {currentScroll}
+          {/* {currentScroll} */}
           <a href="https://twitter.com/ra_decodes">
             <img src={gitHubIconUri} alt="github logo" />
           </a>
