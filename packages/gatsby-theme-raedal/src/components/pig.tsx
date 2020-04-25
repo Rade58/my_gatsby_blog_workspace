@@ -125,7 +125,7 @@ const Pig: FunctionComponent<PigProps> = ({
             height: 18px;
             /* ------------------------ */
             /* ------------------------------------------------- */
-            animation-duration: 0.38s;
+            animation-duration: 0.24s;
             animation-iteration-count: infinite;
 
             animation-timing-function: steps(7, end);
