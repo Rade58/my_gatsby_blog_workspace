@@ -13,7 +13,6 @@ export enum BLOG_POST_ACTION_TYPES_ENUM {
 
 export interface BlogPostStateI {
   pigDisapear: boolean;
-  currentScroll: number
 }
 
 
@@ -41,7 +40,6 @@ export const blogPostReducer: Reducer<
  */
 export const defaultState: BlogPostStateI = {
   pigDisapear: false,
-  currentScroll: 0
 };
 
 

@@ -180,7 +180,7 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
           padding: 0;
           margin: 0;
         `}
-        sx={{
+        style={{
           display: `${reducedHeaderState.pigDisapear ? "none" : "block"}`,
         }}
       />
@@ -189,7 +189,7 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
         ref={resizingDivRef}
         // title={`${indicatorWidthPercent}`}
         className="resizer"
-        sx={{ width: `${indicatorWidthPercent}%` }}
+        style={{ width: `${indicatorWidthPercent}%` }}
       />
     </div>
   );

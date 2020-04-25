@@ -2,14 +2,10 @@
 import { jsx } from "theme-ui";
 
 import {
-  Fragment,
   useContext,
-  useRef,
   useLayoutEffect,
-  useEffect,
   FunctionComponent,
   ReactNode,
-  useState,
 } from "react";
 
 // EVO UVEZAO SAM LOADABLE
@@ -35,7 +31,6 @@ import preToCodeBlock from "../../utility/preToCodeBlock";
 // === !===
 // === !===
 // === !===
-import UseScrollHeightGiver from "../just_functionality/hooks/useScrollHeightGiver";
 // === !===
 // === !===
 

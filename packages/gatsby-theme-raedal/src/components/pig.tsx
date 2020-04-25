@@ -129,6 +129,7 @@ const Pig: FunctionComponent<PigProps> = ({
             animation-iteration-count: infinite;
 
             animation-timing-function: steps(7, end);
+            animation-play-state: paused;
           }
         `}
       >
@@ -137,6 +138,9 @@ const Pig: FunctionComponent<PigProps> = ({
           className="sprite"
           sx={{
             animationName: `${stripski}`,
+            // animationPlayState: "paused",
+          }}
+          style={{
             transform: `rotateY(${angle}deg) translateY(-36px)`,
             animationPlayState: `${animationStatus}`,
           }}

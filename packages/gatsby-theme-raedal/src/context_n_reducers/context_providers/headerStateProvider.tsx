@@ -36,9 +36,7 @@ const ProviderHeaderState: FunctionComponent = ({ children }) => {
     blogPostContext,
   } = $_useBlogPostReducerState;
 
-  const { blogPostDispatch, reducedBlogPostState } = useContext(
-    blogPostContext
-  );
+  const { blogPostDispatch } = useContext(blogPostContext);
 
   useEffect(() => {
     blogPostDispatch({

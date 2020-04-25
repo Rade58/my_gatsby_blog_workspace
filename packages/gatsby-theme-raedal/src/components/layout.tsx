@@ -59,41 +59,41 @@ const Layout: FunctionComponent = ({ children }) => {
     <Fragment>
       <ThemeProvider theme={theme}>
         {/*  ODAVDE MOZE DA IDE   Layout  STATE  PROVIDER   */}
-        <LayoutStateProvider
+        {/* <LayoutStateProvider
           value={{ reducedLayoutState, layoutDispatch: dispatchToLayout }}
-        >
-          <Global
-            styles={{
-              html: {
-                scrollBehavior: "smooth",
-              },
-              body: {
-                // PRIMETIO SAM DA JE JASON KADA JE DEFINISAO ZA BODY
-                // USTVARI DODAO MARGINE 4px
-                // PA SAM I JA DODAO; IAKO NE ZNAM ZASTO
+        > */}
+        <Global
+          styles={{
+            html: {
+              scrollBehavior: "smooth",
+            },
+            body: {
+              // PRIMETIO SAM DA JE JASON KADA JE DEFINISAO ZA BODY
+              // USTVARI DODAO MARGINE 4px
+              // PA SAM I JA DODAO; IAKO NE ZNAM ZASTO
 
-                margin: "4px",
-                backgroundColor: "rgb(27, 34, 39)",
-                paddingTop: "56px",
-                // scrollBehavior: "smooth",
+              margin: "4px",
+              backgroundColor: "rgb(27, 34, 39)",
+              paddingTop: "56px",
+              // scrollBehavior: "smooth",
 
-                // OBRATI PAZNJU DA KADA DODAS MARGINE, TI CES IMATO OVERFLOW SCROLL
-                // ZA BODY STO NIJE DOBRO
+              // OBRATI PAZNJU DA KADA DODAS MARGINE, TI CES IMATO OVERFLOW SCROLL
+              // ZA BODY STO NIJE DOBRO
 
-                // width: "100%",    // DA NISAM DODAO MARGINE, MOGAO SAM
-                //                      DEFINISATI width: 100%
+              // width: "100%",    // DA NISAM DODAO MARGINE, MOGAO SAM
+              //                      DEFINISATI width: 100%
 
-                // width: "calc(100vw - 4px)",
-              },
-            }}
-          />
-          {/* HEADER STATE PROVIDER */}
+              // width: "calc(100vw - 4px)",
+            },
+          }}
+        />
+        {/* HEADER STATE PROVIDER */}
 
-          <Header />
+        <Header />
 
-          {/* '''''''''''''''''''' */}
-          <Main>{children}</Main>
-          {/* <button
+        {/* '''''''''''''''''''' */}
+        <Main>{children}</Main>
+        {/* <button
           sx={{
             variant: "myButton",
           }}
@@ -101,7 +101,7 @@ const Layout: FunctionComponent = ({ children }) => {
           >
           Press me
         </button> */}
-        </LayoutStateProvider>
+        {/* </LayoutStateProvider> */}
       </ThemeProvider>
     </Fragment>
   );
