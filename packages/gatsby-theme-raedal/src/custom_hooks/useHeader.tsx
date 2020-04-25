@@ -86,9 +86,8 @@ const useHeaderState: () => UseHeaderCustomHookReturn = () => {
     // CITANJE SA window-A UZ KORISCENJE    useLayoutEffect   -A
     // __ === __ !== __ __ === __ !== __/ __ === __ !== __ __ === __ !== __
     useLayoutEffect(() => {
-      const windowEl: Window = window || document.documentElement;
-      const bodyEl: HTMLElement =
-        document.body || document.getElementsByTagName("body")[0];
+      const windowEl = document.documentElement;
+      const bodyEl = document.body || document.getElementsByTagName("body")[0];
 
       currentScrollRef.current = currentScroll;
 
@@ -108,7 +107,7 @@ const useHeaderState: () => UseHeaderCustomHookReturn = () => {
             }
           } */
 
-          const capturedScrollY = windowEl.scrollY;
+          const capturedScrollY = windowEl.scrollTop || window.scrollY;
 
           headerDispatch({
             type: ACTION_TYPES_ENUM.CHANGE_CURRENT_SCROLL,
