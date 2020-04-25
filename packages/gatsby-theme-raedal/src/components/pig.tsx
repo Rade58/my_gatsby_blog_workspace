@@ -1,37 +1,98 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui";
-import { FunctionComponent, useContext } from "react";
+import {
+  forwardRef,
+  useContext,
+  FunctionComponent,
+  useEffect,
+  useLayoutEffect,
+  Ref,
+  MutableRefObject,
+  useState,
+  useRef,
+} from "react";
 import { css, keyframes } from "@emotion/core";
 import pigUri from "../ICONS/AJ_using/piggy_sprite.png";
 
 /* import { blogContext, BlogDispatch, ACTION_TYPES_ENUM } from "./layout"; */
 
+// DOLE SAM FORWARDOVAO REF (CISTO NAPOMINJEM PA VIDI KAKO TO IZGLEDA)
+
 import {
   $_useReducerState,
-  HeaderContDispatch,
   ACTION_TYPES_ENUM,
 } from "../context_n_reducers/context_n_reducer_header";
 
 interface PigProps {
-  animationStop?: boolean;
-  pigDirectionKlasa?: "pull-down" | "pull-up";
   leftPercents?: number;
-  pigDisapear?: boolean;
-  dispatch?: HeaderContDispatch;
 }
 
-const Pig: FunctionComponent<PigProps> = ({
-  animationStop,
-  pigDirectionKlasa,
-  leftPercents,
-  pigDisapear,
-  dispatch,
-}) => {
+const Pig = forwardRef<HTMLDivElement, PigProps>(function PigComponent(
+  { leftPercents },
+  ref
+) {
+  const [animationStop, setAnimationStop] = useState(true);
+
+  // === !== !== ===    MUTATION OBSERVER STUFF
+
+  const resizingDivRef = ref as MutableRefObject<HTMLDivElement>;
+
+  const windowEl = document.documentElement || window;
+
+  if (windowEl instanceof Window) {
+    windowEl.scrollY;
+  }
+
+  // const [animationStop, setAnimationStop] = useState(true);
+
+  // ______________________________
+
+  const resizingElementObserver = useRef<MutationObserver>();
+
+  useLayoutEffect(() => {
+    console.log(resizingDivRef.current);
+
+    const mutationCallback: MutationCallback = (mutationList, observer) => {
+      mutationList.forEach((mutation) => {
+        if (mutation.type === "attributes") {
+          console.log("start animation, start animation");
+
+          setAnimationStop(false);
+
+          setTimeout(() => {
+            // console.log("stop that");
+
+            setAnimationStop(true);
+          }, 250);
+        }
+      });
+    };
+
+    if (!resizingElementObserver.current) {
+      resizingElementObserver.current = new MutationObserver(mutationCallback);
+    }
+
+    if (resizingDivRef.current && resizingElementObserver.current) {
+      resizingElementObserver.current.observe(resizingDivRef.current, {
+        attributes: true,
+      });
+    }
+  }, [resizingDivRef.current]);
+
+  useEffect(
+    () => () => {
+      if (resizingElementObserver.current)
+        resizingElementObserver.current.disconnect();
+      console.log("disconnected", resizingElementObserver);
+    },
+    []
+  );
+
+  // === !== !== ===
+
   const animationStatus: "running" | "paused" = animationStop
     ? "paused"
     : "running";
-
-  const angle: 180 | 0 = pigDirectionKlasa === "pull-down" ? 180 : 0;
 
   const stripski = keyframes`
   
@@ -45,6 +106,15 @@ const Pig: FunctionComponent<PigProps> = ({
   
   `;
 
+  const { reducedHeaderState, headerDispatch } = useContext(
+    $_useReducerState.headerContext
+  );
+
+  // const {ACTION_TYPES_ENUM} = $_useReducerState
+
+  const { pigDisapear, scrolled_class } = reducedHeaderState;
+
+  const angle: 180 | 0 = scrolled_class === "pull-down" ? 180 : 0;
   return (
     <div
       className="konti"
@@ -71,10 +141,12 @@ const Pig: FunctionComponent<PigProps> = ({
         }}
         role="img"
         onKeyDown={(e) => {
-          if (dispatch) dispatch({ type: ACTION_TYPES_ENUM.PIG_DISAPEAR });
+          if (headerDispatch)
+            headerDispatch({ type: ACTION_TYPES_ENUM.PIG_DISAPEAR });
         }}
         onClick={(e) => {
-          if (dispatch) dispatch({ type: ACTION_TYPES_ENUM.PIG_DISAPEAR });
+          if (headerDispatch)
+            headerDispatch({ type: ACTION_TYPES_ENUM.PIG_DISAPEAR });
         }}
         className="someDiv"
         css={css`
@@ -148,31 +220,6 @@ const Pig: FunctionComponent<PigProps> = ({
       </div>
     </div>
   );
-};
+});
 
-const PigWithState: FunctionComponent<PigProps> = ({
-  animationStop,
-  leftPercents,
-}) => {
-  const { reducedHeaderState, headerDispatch } = useContext(
-    $_useReducerState.headerContext
-  );
-
-  // const {ACTION_TYPES_ENUM} = $_useReducerState
-
-  const { pigDisapear, scrolled_class } = reducedHeaderState;
-
-  // console.log({ reducedState, dispatch });
-
-  return (
-    <Pig
-      animationStop={animationStop}
-      leftPercents={leftPercents}
-      pigDirectionKlasa={scrolled_class}
-      pigDisapear={pigDisapear}
-      dispatch={headerDispatch}
-    />
-  );
-};
-
-export default PigWithState;
+export default Pig;

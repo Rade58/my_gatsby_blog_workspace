@@ -51,10 +51,6 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
 
   const [windowElementInnerWidth, setWindowElementInnerWidth] = useState(0);
 
-  const timerId = useRef<any>(null);
-
-  const [animationStop, setAnimationStop] = useState(false);
-
   useLayoutEffect(() => {
     // console.log("Use effect");
 
@@ -76,7 +72,7 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
 
       // OBSERVER
 
-      const mutationCallback: MutationCallback = (mutationList, observer) => {
+      /* const mutationCallback: MutationCallback = (mutationList, observer) => {
         mutationList.forEach((mutation) => {
           if (mutation.type === "attributes") {
             // console.log("start animation, start animation");
@@ -98,7 +94,7 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
         resizingElementObserver.observe(resizingDivRef.current, {
           attributes: true,
         });
-      }
+      } */
     }
 
     setSetupStage(false);
@@ -184,10 +180,11 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
           display: `${reducedHeaderState.pigDisapear ? "none" : "block"}`,
         }}
       />
-      <Pig animationStop={animationStop} leftPercents={indicatorWidthPercent} />
+      <Pig ref={resizingDivRef} leftPercents={indicatorWidthPercent} />
+
       <div
         ref={resizingDivRef}
-        // title={`${indicatorWidthPercent}`}
+        data-indicator-percents={`${indicatorWidthPercent}`}
         className="resizer"
         style={{ width: `${indicatorWidthPercent}%` }}
       />

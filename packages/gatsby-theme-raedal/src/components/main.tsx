@@ -24,7 +24,7 @@ const Main: FunctionComponent = ({ children }) => {
       css={css`
         display: grid;
 
-        width: 100vw;
+        /* width: 100vw; */
 
         grid-template-columns: repeat(8, minmax(0, 1fr));
 
