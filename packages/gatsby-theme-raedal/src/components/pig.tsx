@@ -23,33 +23,144 @@ import {
   ACTION_TYPES_ENUM,
 } from "../context_n_reducers/context_n_reducer_header";
 
-interface PigProps {
-  leftPercents?: number;
-}
+const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
+  const { reducedHeaderState, headerDispatch } = useContext(
+    $_useReducerState.headerContext
+  );
 
-const Pig = forwardRef<HTMLDivElement, PigProps>(function PigComponent(
-  { leftPercents },
-  ref
-) {
+  const { pigDisapear, scrolled_class, bodyHeight } = reducedHeaderState;
+
   const [animationStop, setAnimationStop] = useState(true);
 
   // === !== !== ===    MUTATION OBSERVER STUFF
 
   const resizingDivRef = ref as MutableRefObject<HTMLDivElement>;
 
-  const windowEl = document.documentElement || window;
-
-  if (windowEl instanceof Window) {
-    windowEl.scrollY;
-  }
-
   // const [animationStop, setAnimationStop] = useState(true);
 
   // ______________________________
-
+  // OVO IZBACI
   const resizingElementObserver = useRef<MutationObserver>();
 
-  useLayoutEffect(() => {
+  //______________________   READING SCROLL BUT USING REFS
+  // === === === !== !== !== === === ===_______________________________________
+  // === === === !== !== !== === === ===_______________________________________
+
+  // const indicatorPercentRef = useRef<number>(0);
+
+  // -------------------------------------------
+  /* const bodyHeightRef = useRef<number>(0);
+  bodyHeightRef.current = bodyHeight; */
+  // -------------------------------------------
+
+  const [creatingFactor, setCreatingFactor] = useState(true);
+
+  // _____-----______ REFS FORR BODY AND WINDOW  -------
+
+  const windowRef = useRef<Window>();
+  const bodyRef = useRef<HTMLElement>();
+  // ------------------------------------------------------
+  const [scrollIndicatorWidth, setScrollIndicatorWidth] = useState(0);
+  // const scrollIndicatorWidthRef = useRef<number>();
+  // scrollIndicatorWidthRef.current = scrollIndicatorWidth;
+
+  console.log("---__________-----________");
+  console.log(scrollIndicatorWidth);
+  console.log("---__________-----________");
+
+  // ------------------------------------------------------
+  const bodyHeightRef = useRef<number>();
+
+  // ------------------------------------------------------
+  const [percentFactor, setPercentFactor] = useState(0);
+
+  // ------------------------------------------------------
+
+  // console.log(bodyHeight);
+
+  useEffect(() => {
+    if (!windowRef.current) {
+      windowRef.current = window;
+    }
+    if (!bodyRef.current) {
+      bodyRef.current =
+        document.body || document.getElementsByTagName("body")[0];
+
+      setPercentFactor(
+        windowRef.current.scrollY /
+          (bodyRef.current.scrollHeight - windowRef.current.innerHeight)
+      );
+
+      console.log(bodyHeightRef.current);
+    }
+
+    if (windowRef.current && bodyRef.current) {
+      windowRef.current.onresize = (e) => {
+        if (bodyRef.current) {
+          bodyHeightRef.current = bodyRef.current.scrollHeight;
+
+          if (!creatingFactor) setCreatingFactor(true);
+        }
+      };
+
+      bodyRef.current.onscroll = (e) => {
+        if (
+          bodyRef.current &&
+          bodyRef.current.clientWidth &&
+          windowRef.current &&
+          windowRef.current.scrollY
+          // bodyHeightRef.current &&
+          // percentFactor.current
+        ) {
+          console.log({ H: bodyHeightRef.current, P: percentFactor });
+
+          if (bodyHeightRef.current !== bodyRef.current.scrollHeight) {
+            bodyHeightRef.current = bodyRef.current.scrollHeight;
+          }
+
+          if (bodyHeightRef.current) {
+            // scrollIndicatorWidthRef.current =
+            setScrollIndicatorWidth(
+              (100 * windowRef.current.scrollY) /
+                (bodyHeightRef.current - windowRef.current.innerHeight)
+            );
+
+            if (resizingDivRef.current) {
+              console.log("RESIZING DIV REF");
+
+              resizingDivRef.current.style.width = `${
+                (100 * windowRef.current.scrollY) /
+                (bodyHeightRef.current - windowRef.current.innerHeight)
+              }%`;
+            }
+          }
+
+          // console.log(scrollIndicatorWidthRef.current);
+        }
+      };
+    }
+
+    /* if (creatingFactor) {
+      if (windowRef.current && bodyRef.current) {
+        console.log("afssdfdasfgfdgdfgdfgsdfgdfgdf");
+        console.log("afssdfdasfgfdgdfgdfgsdfgdfgdf");
+        console.log("afssdfdasfgfdgdfgdfgsdfgdfgdf");
+        console.log("afssdfdasfgfdgdfgdfgsdfgdfgdf");
+
+        setPercentFactor(
+          windowRef.current.scrollY /
+            (bodyRef.current.scrollHeight - windowRef.current.innerHeight)
+        );
+      }
+
+      setCreatingFactor(false);
+    } */
+  }, [windowRef, bodyRef, percentFactor, bodyHeightRef]);
+
+  // === === === !== !== !== === === ===_______________________________________
+  // === === === !== !== !== === === ===_______________________________________
+
+  /* useLayoutEffect(() => {
     console.log(resizingDivRef.current);
 
     const mutationCallback: MutationCallback = (mutationList, observer) => {
@@ -87,7 +198,7 @@ const Pig = forwardRef<HTMLDivElement, PigProps>(function PigComponent(
     },
     []
   );
-
+ */
   // === !== !== ===
 
   const animationStatus: "running" | "paused" = animationStop
@@ -106,15 +217,8 @@ const Pig = forwardRef<HTMLDivElement, PigProps>(function PigComponent(
   
   `;
 
-  const { reducedHeaderState, headerDispatch } = useContext(
-    $_useReducerState.headerContext
-  );
-
-  // const {ACTION_TYPES_ENUM} = $_useReducerState
-
-  const { pigDisapear, scrolled_class } = reducedHeaderState;
-
   const angle: 180 | 0 = scrolled_class === "pull-down" ? 180 : 0;
+
   return (
     <div
       className="konti"
@@ -137,7 +241,7 @@ const Pig = forwardRef<HTMLDivElement, PigProps>(function PigComponent(
         style={{
           // left: `${leftPercents}%`
           // transform: `translateX(${leftPercents}%)`,
-          marginLeft: `${leftPercents}%`,
+          marginLeft: `${scrollIndicatorWidth}%`,
         }}
         role="img"
         onKeyDown={(e) => {

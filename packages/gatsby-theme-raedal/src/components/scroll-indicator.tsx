@@ -66,12 +66,7 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
     });
 
     if (setupStage) {
-      windowEl.onresize = () => {
-        setWindowElementInnerWidth(windowEl.innerWidth);
-      };
-
       // OBSERVER
-
       /* const mutationCallback: MutationCallback = (mutationList, observer) => {
         mutationList.forEach((mutation) => {
           if (mutation.type === "attributes") {
@@ -115,11 +110,11 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
   }
  */
 
-  const percentValue =
+  /*  const percentValue =
     (100 / (reducedHeaderState.bodyHeight - windowHeightRef.current)) *
     currentWindowScrollY;
 
-  const indicatorWidthPercent = percentValue;
+  const indicatorWidthPercent = percentValue; */
 
   // console.log(indicatorWidthPercent);
 
@@ -180,13 +175,13 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
           display: `${reducedHeaderState.pigDisapear ? "none" : "block"}`,
         }}
       />
-      {/* <Pig ref={resizingDivRef} leftPercents={indicatorWidthPercent} /> */}
+      <Pig ref={resizingDivRef} /* leftPercents={indicatorWidthPercent} */ />
 
       <div
         ref={resizingDivRef}
-        // data-indicator-percents={`${indicatorWidthPercent}`}
+        // data-indicatorPercents={`${indicatorWidthPercent}`}
         className="resizer"
-        style={{ width: `${indicatorWidthPercent}%` }}
+        // style={{ width: `${indicatorWidthPercent}%` }}
       />
     </div>
   );

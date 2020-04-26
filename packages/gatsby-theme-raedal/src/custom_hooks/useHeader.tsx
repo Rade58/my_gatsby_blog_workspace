@@ -85,7 +85,7 @@ const useHeaderState: () => UseHeaderCustomHookReturn = () => {
 
     // CITANJE SA window-A UZ KORISCENJE    useLayoutEffect   -A
     // __ === __ !== __ __ === __ !== __/ __ === __ !== __ __ === __ !== __
-    useLayoutEffect(() => {
+    /* useLayoutEffect(() => {
       const windowEl = document.documentElement;
       const bodyEl = document.body || document.getElementsByTagName("body")[0];
 
@@ -94,18 +94,6 @@ const useHeaderState: () => UseHeaderCustomHookReturn = () => {
       if (bodyEl && !scrollHandlerAttachedOnBody) {
         bodyEl.onscroll = (e) => {
           // console.log("onscroll is working");
-
-          /* if (currentScrollRef.current) {
-            if (currentScrollRef.current - windowEl.scrollY < 0) {
-              headerDispatch({
-                type: ACTION_TYPES_ENUM.SET_TO_SCROLL_DOWN_CLASS,
-              });
-            } else {
-              headerDispatch({
-                type: ACTION_TYPES_ENUM.SET_TO_SCROLL_UP_CLASS,
-              });
-            }
-          } */
 
           const capturedScrollY = windowEl.scrollTop || window.scrollY;
 
@@ -120,7 +108,7 @@ const useHeaderState: () => UseHeaderCustomHookReturn = () => {
         //
         setScrollHandlerAttachedOnBody(true);
       }
-    }, [scrollHandlerAttachedOnBody]);
+    }, [scrollHandlerAttachedOnBody]); */
 
     // __ === __ !== __ __ === __ !== __/ __ === __ !== __ __ === __ !== __
 
