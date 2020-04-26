@@ -61,22 +61,16 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
   const bodyRef = useRef<HTMLElement>();
   // ------------------------------------------------------
   const [scrollIndicatorWidth, setScrollIndicatorWidth] = useState(0);
-  // const scrollIndicatorWidthRef = useRef<number>();
-  // scrollIndicatorWidthRef.current = scrollIndicatorWidth;
-
-  console.log("---__________-----________");
-  console.log(scrollIndicatorWidth);
-  console.log("---__________-----________");
+  const [rotateClass, setRotateClass] = useState<"turn-left" | "turn-right">(
+    "turn-right"
+  );
 
   // ------------------------------------------------------
   const bodyHeightRef = useRef<number>();
 
   // ------------------------------------------------------
-  const [percentFactor, setPercentFactor] = useState(0);
 
   // ------------------------------------------------------
-
-  // console.log(bodyHeight);
 
   useEffect(() => {
     if (!windowRef.current) {
@@ -85,21 +79,12 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
     if (!bodyRef.current) {
       bodyRef.current =
         document.body || document.getElementsByTagName("body")[0];
-
-      setPercentFactor(
-        windowRef.current.scrollY /
-          (bodyRef.current.scrollHeight - windowRef.current.innerHeight)
-      );
-
-      console.log(bodyHeightRef.current);
     }
 
     if (windowRef.current && bodyRef.current) {
       windowRef.current.onresize = (e) => {
         if (bodyRef.current) {
           bodyHeightRef.current = bodyRef.current.scrollHeight;
-
-          if (!creatingFactor) setCreatingFactor(true);
         }
       };
 
@@ -109,72 +94,76 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
           bodyRef.current.clientWidth &&
           windowRef.current &&
           windowRef.current.scrollY
-          // bodyHeightRef.current &&
-          // percentFactor.current
         ) {
-          console.log({ H: bodyHeightRef.current, P: percentFactor });
-
           if (bodyHeightRef.current !== bodyRef.current.scrollHeight) {
             bodyHeightRef.current = bodyRef.current.scrollHeight;
           }
 
           if (bodyHeightRef.current) {
-            // scrollIndicatorWidthRef.current =
-            setScrollIndicatorWidth(
+            const scrollIndicatorPercents =
               (100 * windowRef.current.scrollY) /
-                (bodyHeightRef.current - windowRef.current.innerHeight)
-            );
-
+              (bodyHeightRef.current - windowRef.current.innerHeight);
             if (resizingDivRef.current) {
-              console.log("RESIZING DIV REF");
+              /* const largerCond =
+                scrollIndicatorPercents >
+                (100 * resizingDivRef.current.offsetWidth) /
+                  windowRef.current.innerWidth;
 
-              resizingDivRef.current.style.width = `${
-                (100 * windowRef.current.scrollY) /
-                (bodyHeightRef.current - windowRef.current.innerHeight)
-              }%`;
+              const lesserCond =
+                scrollIndicatorPercents <
+                (100 * resizingDivRef.current.offsetWidth) /
+                  windowRef.current.innerWidth;
+
+              if (largerCond) {
+                if (rotateClass !== "turn-right") {
+                  setRotateClass("turn-right");
+                }
+              }
+
+              if (lesserCond) {
+                if (rotateClass !== "turn-left") {
+                  setRotateClass("turn-left");
+                }
+              } */
+
+              setTimeout(() => {
+                setAnimationStop(false);
+              }, 1400);
+
+              setTimeout(() => {
+                setScrollIndicatorWidth(scrollIndicatorPercents);
+              }, 1200);
+
+              resizingDivRef.current.style.width = `${scrollIndicatorPercents}%`;
             }
           }
-
-          // console.log(scrollIndicatorWidthRef.current);
         }
       };
     }
-
-    /* if (creatingFactor) {
-      if (windowRef.current && bodyRef.current) {
-        console.log("afssdfdasfgfdgdfgdfgsdfgdfgdf");
-        console.log("afssdfdasfgfdgdfgdfgsdfgdfgdf");
-        console.log("afssdfdasfgfdgdfgdfgsdfgdfgdf");
-        console.log("afssdfdasfgfdgdfgdfgsdfgdfgdf");
-
-        setPercentFactor(
-          windowRef.current.scrollY /
-            (bodyRef.current.scrollHeight - windowRef.current.innerHeight)
-        );
-      }
-
-      setCreatingFactor(false);
-    } */
-  }, [windowRef, bodyRef, percentFactor, bodyHeightRef]);
+  }, [windowRef, bodyRef, bodyHeightRef, resizingDivRef, rotateClass]);
 
   // === === === !== !== !== === === ===_______________________________________
   // === === === !== !== !== === === ===_______________________________________
 
-  /* useLayoutEffect(() => {
-    console.log(resizingDivRef.current);
+  /*   useLayoutEffect(() => {
+    // console.log(resizingDivRef.current);
 
     const mutationCallback: MutationCallback = (mutationList, observer) => {
       mutationList.forEach((mutation) => {
         if (mutation.type === "attributes") {
-          console.log("start animation, start animation");
+          // console.log("start animation, start animation");
 
-          setAnimationStop(false);
+          console.log(mutation.type);
 
           setTimeout(() => {
             // console.log("stop that");
 
             setAnimationStop(true);
-          }, 250);
+          }, 450);
+
+          // console.log("stop that");
+
+          setAnimationStop(false);
         }
       });
     };
@@ -188,7 +177,7 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
         attributes: true,
       });
     }
-  }, [resizingDivRef.current]);
+  }, [resizingDivRef.current]); */
 
   useEffect(
     () => () => {
@@ -198,7 +187,6 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
     },
     []
   );
- */
   // === !== !== ===
 
   const animationStatus: "running" | "paused" = animationStop
@@ -217,7 +205,7 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
   
   `;
 
-  const angle: 180 | 0 = scrolled_class === "pull-down" ? 180 : 0;
+  const angle: 180 | 0 = rotateClass === "turn-left" ? 180 : 0;
 
   return (
     <div
@@ -242,6 +230,11 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
           // left: `${leftPercents}%`
           // transform: `translateX(${leftPercents}%)`,
           marginLeft: `${scrollIndicatorWidth}%`,
+          transitionProperty: "margin-left",
+          transitionDuration: "4s",
+        }}
+        onTransitionEnd={() => {
+          setAnimationStop(true);
         }}
         role="img"
         onKeyDown={(e) => {
