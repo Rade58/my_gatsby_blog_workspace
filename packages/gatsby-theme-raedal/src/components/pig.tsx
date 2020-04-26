@@ -40,7 +40,7 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
 
   // ______________________________
   // OVO IZBACI
-  const resizingElementObserver = useRef<MutationObserver>();
+  // const resizingElementObserver = useRef<MutationObserver>();
 
   //______________________   READING SCROLL BUT USING REFS
   // === === === !== !== !== === === ===_______________________________________
@@ -61,9 +61,13 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
   const bodyRef = useRef<HTMLElement>();
   // ------------------------------------------------------
   const [scrollIndicatorWidth, setScrollIndicatorWidth] = useState(0);
+  // MOZDA I NE TREBA
   const [rotateClass, setRotateClass] = useState<"turn-left" | "turn-right">(
     "turn-right"
   );
+  // OVO TREBA
+
+  const currentBodyScrollHeightRef = useRef<number>();
 
   // ------------------------------------------------------
   const bodyHeightRef = useRef<number>();
@@ -72,16 +76,21 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
 
   // ------------------------------------------------------
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!windowRef.current) {
       windowRef.current = window;
     }
     if (!bodyRef.current) {
       bodyRef.current =
         document.body || document.getElementsByTagName("body")[0];
+      currentBodyScrollHeightRef.current = bodyRef.current.scrollHeight;
     }
 
     if (windowRef.current && bodyRef.current) {
+      if (resizingDivRef.current) {
+        resizingDivRef.current.style.width = `${0}%`;
+      }
+
       windowRef.current.onresize = (e) => {
         if (bodyRef.current) {
           bodyHeightRef.current = bodyRef.current.scrollHeight;
@@ -104,28 +113,10 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
               (100 * windowRef.current.scrollY) /
               (bodyHeightRef.current - windowRef.current.innerHeight);
             if (resizingDivRef.current) {
-              /* const largerCond =
-                scrollIndicatorPercents >
-                (100 * resizingDivRef.current.offsetWidth) /
-                  windowRef.current.innerWidth;
-
-              const lesserCond =
-                scrollIndicatorPercents <
-                (100 * resizingDivRef.current.offsetWidth) /
-                  windowRef.current.innerWidth;
-
-              if (largerCond) {
-                if (rotateClass !== "turn-right") {
-                  setRotateClass("turn-right");
-                }
-              }
-
-              if (lesserCond) {
-                if (rotateClass !== "turn-left") {
-                  setRotateClass("turn-left");
-                }
-              } */
-
+              /* console.log(
+                currentBodyScrollHeightRef.current 
+              );
+                      */
               setTimeout(() => {
                 setAnimationStop(false);
               }, 1400);
@@ -138,11 +129,18 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
             }
           }
         }
+        if (windowRef.current) {
+          headerDispatch({
+            type: ACTION_TYPES_ENUM.CHANGE_CURRENT_SCROLL,
+            payload: windowRef.current.scrollY,
+          });
+        }
       };
     }
-  }, [windowRef, bodyRef, bodyHeightRef, resizingDivRef, rotateClass]);
+  }, [windowRef, bodyRef, bodyHeightRef, resizingDivRef]);
 
   // === === === !== !== !== === === ===_______________________________________
+
   // === === === !== !== !== === === ===_______________________________________
 
   /*   useLayoutEffect(() => {
@@ -179,14 +177,14 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
     }
   }, [resizingDivRef.current]); */
 
-  useEffect(
+  /*  useEffect(
     () => () => {
       if (resizingElementObserver.current)
         resizingElementObserver.current.disconnect();
       console.log("disconnected", resizingElementObserver);
     },
     []
-  );
+  ); */
   // === !== !== ===
 
   const animationStatus: "running" | "paused" = animationStop
@@ -205,7 +203,7 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
   
   `;
 
-  const angle: 180 | 0 = rotateClass === "turn-left" ? 180 : 0;
+  const angle: 180 | 0 = scrolled_class === "pull-down" ? 180 : 0;
 
   return (
     <div
@@ -233,7 +231,7 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
           transitionProperty: "margin-left",
           transitionDuration: "4s",
         }}
-        onTransitionEnd={() => {
+        onTransitionEndCapture={() => {
           setAnimationStop(true);
         }}
         role="img"

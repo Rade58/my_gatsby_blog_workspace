@@ -181,7 +181,7 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
         ref={resizingDivRef}
         // data-indicatorPercents={`${indicatorWidthPercent}`}
         className="resizer"
-        // style={{ width: `${indicatorWidthPercent}%` }}
+        style={{ width: `${0}%` }}
       />
     </div>
   );

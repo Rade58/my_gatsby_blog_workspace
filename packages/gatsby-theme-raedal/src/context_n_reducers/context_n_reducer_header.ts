@@ -81,6 +81,10 @@ export const reducer: Reducer<
 
     const scrolled_class: "pull-up" | "pull-down" = (currentScroll > action.payload ? "pull-down" : "pull-up")
 
+    /* console.log("COMMING FRO MTHE REDUCER")
+    console.log(state.currentScroll, action.payload)
+    console.log("COMMING FRO MTHE REDUCER")
+ */
     return { ...state, currentScroll: action.payload, scrolled_class };
 
   }
