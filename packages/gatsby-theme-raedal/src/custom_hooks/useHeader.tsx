@@ -109,10 +109,12 @@ const useHeaderState: () => UseHeaderCustomHookReturn = () => {
 
           const capturedScrollY = windowEl.scrollTop || window.scrollY;
 
-          headerDispatch({
-            type: ACTION_TYPES_ENUM.CHANGE_CURRENT_SCROLL,
-            payload: capturedScrollY,
-          });
+          setTimeout(() => {
+            headerDispatch({
+              type: ACTION_TYPES_ENUM.CHANGE_CURRENT_SCROLL,
+              payload: capturedScrollY,
+            });
+          }, 500);
         };
 
         //

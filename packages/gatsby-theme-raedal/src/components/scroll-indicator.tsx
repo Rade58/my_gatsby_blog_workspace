@@ -180,11 +180,11 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
           display: `${reducedHeaderState.pigDisapear ? "none" : "block"}`,
         }}
       />
-      <Pig ref={resizingDivRef} leftPercents={indicatorWidthPercent} />
+      {/* <Pig ref={resizingDivRef} leftPercents={indicatorWidthPercent} /> */}
 
       <div
         ref={resizingDivRef}
-        data-indicator-percents={`${indicatorWidthPercent}`}
+        // data-indicator-percents={`${indicatorWidthPercent}`}
         className="resizer"
         style={{ width: `${indicatorWidthPercent}%` }}
       />

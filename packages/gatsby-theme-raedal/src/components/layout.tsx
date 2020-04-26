@@ -65,7 +65,7 @@ const Layout: FunctionComponent = ({ children }) => {
         <Global
           styles={{
             html: {
-              scrollBehavior: "smooth",
+              // scrollBehavior: "smooth",    // OVO NEMOJ DA ENABLE-UJES
             },
             body: {
               // PRIMETIO SAM DA JE JASON KADA JE DEFINISAO ZA BODY
