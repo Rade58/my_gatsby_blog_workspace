@@ -20,9 +20,11 @@ import theme from "prism-react-renderer/themes/dracula";
 
 import {
   // defaultProps,
+  Prism,
   Language,
   PrismTheme,
   RenderProps,
+  DefaultProps,
 } from "prism-react-renderer";
 // GORNJI RenderProps  SAM UVEZAO NA HACKABLE NACIN TAK OSTO SAM OTISAO
 // U TYPE DEFINITION I IZVEZAO GA (AKO IKADA UPDATE-UJES TYPE DEF ZA LOADABLE,
@@ -54,9 +56,25 @@ const LazyPrismHighlighter = loadable(async () => {
     code: string;
     theme: PrismTheme;
     children: (props: RenderProps) => ReactNode;
+    metastring?: string;
   }> = (props) => {
-    const { code, language, children } = props;
+    // IZ PROP-A CU IZDVOJITI metastring
 
+    const { code, language, children, metastring } = props;
+
+    console.log({ metastring });
+
+    // DAKLE ODAVDE CU KRENUTI SA DEFINISANJEM
+    // DODAVANJA HIGHLIGHTING-A ZA REDOVE
+
+    // REG EXP SAM VEC FORMIRAO
+    const REG = /\{([\d-,]+)\}/g;
+
+    // SADA DA DEFINISEM I FUNKCIJU
+
+    // const blahFunkcija = () => {};
+
+    // === !== === !== === !==
     // const { ACTION_TYPES_ENUM, headerContext } = $_useReducerState;
 
     // const { headerDispatch } = useContext(headerContext);
@@ -99,22 +117,15 @@ const LazyPrismHighlighter = loadable(async () => {
   return LazyPrismHighlight;
 });
 
-// POSTO SAM DEFINISDAO LAZY LOADING, POMENUTOG LIBRARY-JA, JA CU SADA
-// UPOTREBITI DOLE
-// RANIJE SAM KORISTIO SAMO Highlight  A SADA CU SVE WRAPP-OVATI U
-//       LazyPrismHighlight      UZ PROSLEDJIVANJE PROPS-A NARAVNO
-
-// A U OBIMU      Code        KOMPONENTE, MORAM KREIRATI FUNKCIJU
-// KOJA CE IZRACUNATI BROJ REDOV-A
-// I ZADATI KLASU, UZ POMOC KOJE CE SE MOCI
-// DODATNO HIGHLIGHTOVATI SPECIFIC REDOVI
-
-const Code: FunctionComponent = (props) => {
+const Code: FunctionComponent<{ metastring?: string }> = (props) => {
   //
-
+  const { metastring } = props;
+  console.log({ metastring });
   //
 
   const codeProps = preToCodeBlock(props);
+
+  console.log(codeProps.metastring);
 
   if (!codeProps) {
     return <pre {...props} />;
@@ -125,7 +136,8 @@ const Code: FunctionComponent = (props) => {
   return (
     <LazyPrismHighlighter code={codeString} language={language} theme={theme}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        //  EVO TI CES OVDE UPRAVO KORISTII VARIANT KOJI SE ZOVE    prism-highlight (OVO SAM REKAO DAVNO RANIJE)
+        //  EVO TI CES OVDE UPRAVO KORISTII VARIANT KOJI SE ZOVE
+        // prism-highlight (OVO SAM REKAO DAVNO RANIJE)
         <pre
           className={className}
           style={style}
@@ -137,7 +149,9 @@ const Code: FunctionComponent = (props) => {
         >
           {tokens.map((line, i) => (
             <div {...getLineProps({ line, key: i })}>
+              {/* SLEDECIM SPAN-OM SE ZADAVAJU NAUMBERI */}
               <span className="line-number-style">{i + 1}</span>
+              {/* ------------------------------------------- */}
               {line.map((token, key) => (
                 <span {...getTokenProps({ token, key })} />
               ))}
