@@ -6,7 +6,7 @@ import { jsx, ThemeProvider } from "theme-ui";
 
 import {
   Fragment,
-  useReducer,
+  // useReducer,
   // useState,
   // useRef,
   // -->  types
@@ -28,14 +28,14 @@ import Main from "./main";
 // === !==  === !==  === !==  === !==  === !==  === !==
 
 // CONTEXT ZA Layout LEVEL
-import { $_createLayoutReducerState } from "../context_n_reducers/context_n_reducer_layout";
+/* import { $_createLayoutReducerState } from "../context_n_reducers/_context_n_reducer_layout"; */
 
 // === !==  === !==  === !==  === !==  === !==  === !==
-const {
+/* const {
   LayoutStateProvider,
   layoutReducer,
   defaultLayoutState,
-} = $_createLayoutReducerState;
+} = $_createLayoutReducerState; */
 // === !==  === !==  === !==  === !==  === !==  === !==
 
 // console.log(theme.fontSizes);
@@ -48,10 +48,10 @@ const Layout: FunctionComponent = ({ children }) => {
   const [Header] = useHeader();
 
   // === !==  LAYOUT REDUCER
-  const [reducedLayoutState, dispatchToLayout] = useReducer(
+  /* const [reducedLayoutState, dispatchToLayout] = useReducer(
     layoutReducer,
     defaultLayoutState
-  );
+  ); */
 
   ////////////////////////////////////////////////////////////////
 

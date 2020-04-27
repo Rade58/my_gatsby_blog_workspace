@@ -199,8 +199,6 @@ const useHeaderState: () => UseHeaderCustomHookReturn = () => {
           </a>
         </section>
         <ScrollIndicator
-          currentWindowScrollY={currentScroll}
-          pigDirection={scrolled_class === "pull-up" ? "to-left" : "to-right"}
           bc="rgb(38, 45, 59)"
           fill="rgba(153, 67, 95, 0.74)"
           bcImg="linear-gradient(

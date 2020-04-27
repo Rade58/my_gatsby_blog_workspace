@@ -37,6 +37,7 @@ import preToCodeBlock from "../../utility/preToCodeBlock";
 // === !===
 
 import { $_useReducerState } from "../../context_n_reducers/context_n_reducer_header";
+import { $_useBlogPostReducerState } from "../../context_n_reducers/context_n_reducer_blog_post";
 
 // === !===
 // === !===
@@ -56,9 +57,16 @@ const LazyPrismHighlighter = loadable(async () => {
   }> = (props) => {
     const { code, language, children } = props;
 
-    const { ACTION_TYPES_ENUM, headerContext } = $_useReducerState;
+    // const { ACTION_TYPES_ENUM, headerContext } = $_useReducerState;
 
-    const { headerDispatch } = useContext(headerContext);
+    // const { headerDispatch } = useContext(headerContext);
+
+    const {
+      BLOG_POST_ACTION_TYPES_ENUM,
+      blogPostContext,
+    } = $_useBlogPostReducerState;
+
+    const { blogPostDispatch } = useContext(blogPostContext);
 
     useLayoutEffect(() => {
       console.log("*********USE LAYOUT EFFECT**********");
@@ -67,10 +75,12 @@ const LazyPrismHighlighter = loadable(async () => {
 
       // console.log(bodyEl.scrollHeight);
 
-      headerDispatch({
+      /* headerDispatch({
         type: ACTION_TYPES_ENUM.CHANGE_BODY_HEIGHT,
         payload: bodyEl.scrollHeight,
-      });
+      }); */
+
+      // blogPostDispatch
     }, []);
 
     return (

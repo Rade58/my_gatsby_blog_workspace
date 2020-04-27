@@ -62,12 +62,12 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
   // ------------------------------------------------------
   const [scrollIndicatorWidth, setScrollIndicatorWidth] = useState(0);
   // MOZDA I NE TREBA
-  const [rotateClass, setRotateClass] = useState<"turn-left" | "turn-right">(
+  /* const [rotateClass, setRotateClass] = useState<"turn-left" | "turn-right">(
     "turn-right"
-  );
+  ); */
   // OVO TREBA
 
-  const currentBodyScrollHeightRef = useRef<number>();
+  // const currentBodyScrollHeightRef = useRef<number>();
 
   // ------------------------------------------------------
   const bodyHeightRef = useRef<number>();
@@ -76,6 +76,9 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
 
   // ------------------------------------------------------
 
+  let timerId1: NodeJS.Timeout;
+  let timerId2: NodeJS.Timeout;
+
   useLayoutEffect(() => {
     if (!windowRef.current) {
       windowRef.current = window;
@@ -83,7 +86,7 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
     if (!bodyRef.current) {
       bodyRef.current =
         document.body || document.getElementsByTagName("body")[0];
-      currentBodyScrollHeightRef.current = bodyRef.current.scrollHeight;
+      // currentBodyScrollHeightRef.current = bodyRef.current.scrollHeight;
     }
 
     if (windowRef.current && bodyRef.current) {
@@ -113,11 +116,11 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
               (100 * windowRef.current.scrollY) /
               (bodyHeightRef.current - windowRef.current.innerHeight);
             if (resizingDivRef.current) {
-              /* console.log(
-                currentBodyScrollHeightRef.current 
-              );
-                      */
-              setTimeout(() => {
+              // KADA PRITISNEM ONAJ HEADER, KOJI ONDA POSTAJE ACTIVE
+              // I JUMP-UJE STRANICU DA SE IZRAVNA SA NASLOVOM
+              // OVO DOLE POSTAJE NO OP
+
+              timerId1 = setTimeout(() => {
                 setAnimationStop(false);
               }, 1400);
 

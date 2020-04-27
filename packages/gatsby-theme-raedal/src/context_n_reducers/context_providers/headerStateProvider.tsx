@@ -31,7 +31,7 @@ const ProviderHeaderState: FunctionComponent = ({ children }) => {
 
   // MEDJUTIM DISPATCHING CES MORATI OBAVITI U      useEffect-U
 
-  const {
+  /* const {
     BLOG_POST_ACTION_TYPES_ENUM,
     blogPostContext,
   } = $_useBlogPostReducerState;
@@ -46,7 +46,7 @@ const ProviderHeaderState: FunctionComponent = ({ children }) => {
     reducedHeaderState.pigDisapear,
     blogPostDispatch,
     BLOG_POST_ACTION_TYPES_ENUM,
-  ]);
+  ]); */
 
   //  === !== === !== === !== === !== === !== === !== === !== === !== === !==
 

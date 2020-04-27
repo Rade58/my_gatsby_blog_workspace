@@ -11,17 +11,18 @@ import { css } from "@emotion/core";
 
 import Pig from "./pig";
 
+import { $_useBlogPostReducerState } from "../context_n_reducers/context_n_reducer_blog_post";
+
 //
 // import { blogContext, ACTION_TYPES_ENUM } from "./layout";
 //
 
 //
-import { $_useReducerState } from "../context_n_reducers/context_n_reducer_header";
+/* import { $_useReducerState } from "../context_n_reducers/context_n_reducer_header"; */
 
 interface ScrollIndicatorProps {
   bc: string;
   fill: string;
-  currentWindowScrollY: number;
   bcImg: string;
   pigDirection?: "to-left" | "to-right";
 }
@@ -29,94 +30,30 @@ interface ScrollIndicatorProps {
 const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
   bc = "tomato",
   fill = "olive",
-  currentWindowScrollY = 0,
   bcImg = `linear-gradient(
     to right,
     rgb(63, 44, 56),
     rgb(38, 45, 59)
   )`,
 }) => {
-  const { ACTION_TYPES_ENUM } = $_useReducerState;
+  // const { ACTION_TYPES_ENUM } = $_useReducerState;
 
-  const { reducedHeaderState, headerDispatch } = useContext(
+  /* const { reducedHeaderState, headerDispatch } = useContext(
     $_useReducerState.headerContext
+  ); */
+
+  const {
+    BLOG_POST_ACTION_TYPES_ENUM,
+    blogPostContext,
+  } = $_useBlogPostReducerState;
+
+  const { blogPostDispatch, reducedBlogPostState } = useContext(
+    blogPostContext
   );
+
+  const { pigDisapear } = reducedBlogPostState;
 
   const resizingDivRef = useRef<HTMLDivElement>(null);
-
-  const bodyHeightRef = useRef(0);
-  const windowHeightRef = useRef(0);
-
-  const [setupStage, setSetupStage] = useState(true);
-
-  const [windowElementInnerWidth, setWindowElementInnerWidth] = useState(0);
-
-  useLayoutEffect(() => {
-    // console.log("Use effect");
-
-    const bodyEl = document.body || document.getElementsByTagName("body")[0];
-    const windowEl = window || document.documentElement;
-
-    bodyHeightRef.current = bodyEl.scrollHeight;
-    windowHeightRef.current = windowEl.innerHeight;
-
-    headerDispatch({
-      type: ACTION_TYPES_ENUM.CHANGE_BODY_HEIGHT,
-      payload: bodyHeightRef.current,
-    });
-
-    if (setupStage) {
-      // OBSERVER
-      /* const mutationCallback: MutationCallback = (mutationList, observer) => {
-        mutationList.forEach((mutation) => {
-          if (mutation.type === "attributes") {
-            // console.log("start animation, start animation");
-
-            setAnimationStop(false);
-
-            timerId.current = setTimeout(() => {
-              // console.log("stop that");
-
-              setAnimationStop(true);
-            }, 250);
-          }
-        });
-      };
-
-      const resizingElementObserver = new MutationObserver(mutationCallback);
-
-      if (resizingDivRef.current) {
-        resizingElementObserver.observe(resizingDivRef.current, {
-          attributes: true,
-        });
-      } */
-    }
-
-    setSetupStage(false);
-  }, [windowElementInnerWidth, setupStage]);
-
-  /* console.log(
-    "-----------",
-    (100 / (reducedHeaderState.bodyHeight - windowHeightRef.current)) *
-      currentWindowScrollY,
-    "----------------"
-  );
-
-  let indicatorPercents = (100 / (reducedHeaderState.bodyHeight - windowHeightRef.current)) *
-  currentWindowScrollY
-
-  while(indicatorPercents > 100){
-
-  }
- */
-
-  /*  const percentValue =
-    (100 / (reducedHeaderState.bodyHeight - windowHeightRef.current)) *
-    currentWindowScrollY;
-
-  const indicatorWidthPercent = percentValue; */
-
-  // console.log(indicatorWidthPercent);
 
   return (
     <div
@@ -146,10 +83,14 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
       <div
         role="img"
         onClick={() => {
-          headerDispatch({ type: ACTION_TYPES_ENUM.PIG_DISAPEAR });
+          blogPostDispatch({
+            type: BLOG_POST_ACTION_TYPES_ENUM.PIG_AND_TRACK_DISAPEARD,
+          });
         }}
         onKeyDown={() => {
-          headerDispatch({ type: ACTION_TYPES_ENUM.PIG_DISAPEAR });
+          blogPostDispatch({
+            type: BLOG_POST_ACTION_TYPES_ENUM.PIG_AND_TRACK_DISAPEARD,
+          });
         }}
         css={css`
           @media screen and (min-width: 918px) {
@@ -172,7 +113,7 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
           margin: 0;
         `}
         style={{
-          display: `${reducedHeaderState.pigDisapear ? "none" : "block"}`,
+          display: `${pigDisapear ? "none" : "block"}`,
         }}
       />
       <Pig ref={resizingDivRef} /* leftPercents={indicatorWidthPercent} */ />
@@ -181,7 +122,7 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
         ref={resizingDivRef}
         // data-indicatorPercents={`${indicatorWidthPercent}`}
         className="resizer"
-        style={{ width: `${0}%` }}
+        style={{ width: "0%" }}
       />
     </div>
   );
