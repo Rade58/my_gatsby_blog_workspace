@@ -245,6 +245,8 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
         }}
         className="someDiv"
         css={css`
+          transition-timing-function: ease-out;
+
           @media screen and (min-width: 918px) {
             margin-top: -1px;
 

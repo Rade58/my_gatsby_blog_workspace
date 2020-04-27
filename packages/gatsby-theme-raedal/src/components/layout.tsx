@@ -88,8 +88,9 @@ const Layout: FunctionComponent = ({ children }) => {
           }}
         />
         {/* HEADER STATE PROVIDER */}
-
-        <Header />
+        <HeaderStateProvider>
+          <Header />
+        </HeaderStateProvider>
 
         {/* '''''''''''''''''''' */}
         <Main>{children}</Main>

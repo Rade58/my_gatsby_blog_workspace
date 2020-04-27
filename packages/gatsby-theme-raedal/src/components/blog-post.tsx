@@ -38,18 +38,16 @@ const BlogPost: FunctionComponent<{
 
   return (
     <BlogPostStateProvider value={{ reducedBlogPostState, blogPostDispatch }}>
-      <HeaderStateProvider>
-        <Layout>
-          <Seo
-            title={title}
-            lang={lang}
-            description={description}
-            themeColor={themeColor}
-          />
-          {/* <h2>{title}</h2> */}
-          <Article updated={updated} body={body} />
-        </Layout>
-      </HeaderStateProvider>
+      <Layout>
+        <Seo
+          title={title}
+          lang={lang}
+          description={description}
+          themeColor={themeColor}
+        />
+        {/* <h2>{title}</h2> */}
+        <Article updated={updated} body={body} />
+      </Layout>
     </BlogPostStateProvider>
   );
 };
