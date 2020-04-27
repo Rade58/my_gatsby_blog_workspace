@@ -74,6 +74,7 @@ module.exports = {
     "react/prop-types": 0,
     "react/jsx-fragments": 0,
     "react/jsx-props-no-spreading": 1,
+    "prefer-destructuring": 1,
     "react/jsx-filename-extension": [
       1,
       {

@@ -89,3 +89,15 @@ DAKLE NAPISI NA PRIMER `ts` CODEBLOCK, ALI UZ `ts` TI DODAJ I OVO NA PRIMER `{1,
 DAKLE OVAK ONESTO BI TI NAPISAO U MDX FAJLU, UZ CODE BLOCK:
 
 - `ts {1,4-6,9,12,16,28-30}`
+
+## ISTO TAKO VODI RACUNA O `metdata` PROP-U
+
+NAIME, JA SAM GA IZ NEKOG RAZLOGA NASAO U OKVIRU children-A ;**ODNONO U OKVIRU children-OVIH PROPS-A**
+
+ZASTO JE TO TAK OBILO NE ZNAM
+
+ALI NAJBOLJE JE DA URADIS OVAKO
+
+```javascript
+const metastring = props.metastring || props.children.props.metastring;
+```
