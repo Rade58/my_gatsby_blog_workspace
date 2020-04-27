@@ -76,8 +76,8 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
 
   // ------------------------------------------------------
 
-  let timerId1: NodeJS.Timeout;
-  let timerId2: NodeJS.Timeout;
+  const timerId1 = useRef<NodeJS.Timeout>();
+  const timerId2 = useRef<NodeJS.Timeout>();
 
   useLayoutEffect(() => {
     if (!windowRef.current) {
@@ -120,11 +120,11 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
               // I JUMP-UJE STRANICU DA SE IZRAVNA SA NASLOVOM
               // OVO DOLE POSTAJE NO OP
 
-              timerId1 = setTimeout(() => {
+              timerId1.current = setTimeout(() => {
                 setAnimationStop(false);
               }, 1400);
 
-              setTimeout(() => {
+              timerId2.current = setTimeout(() => {
                 setScrollIndicatorWidth(scrollIndicatorPercents);
               }, 1200);
 
@@ -141,6 +141,14 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
       };
     }
   }, [windowRef, bodyRef, bodyHeightRef, resizingDivRef]);
+
+  useEffect(
+    () => () => {
+      timerId1.current ? clearTimeout(timerId1.current) : null;
+      timerId2.current ? clearTimeout(timerId2.current) : null;
+    },
+    []
+  );
 
   // === === === !== !== !== === === ===_______________________________________
 
