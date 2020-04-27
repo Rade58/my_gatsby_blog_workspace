@@ -142,12 +142,13 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
     }
   }, [windowRef, bodyRef, bodyHeightRef, resizingDivRef]);
 
+  // CLEANING ON UNMOUNTING
   useEffect(
     () => () => {
       timerId1.current ? clearTimeout(timerId1.current) : null;
       timerId2.current ? clearTimeout(timerId2.current) : null;
     },
-    []
+    [] // NE ZABORAVI OVO
   );
 
   // === === === !== !== !== === === ===_______________________________________
