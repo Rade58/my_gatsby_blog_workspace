@@ -53,7 +53,7 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
   bodyHeightRef.current = bodyHeight; */
   // -------------------------------------------
 
-  const [creatingFactor, setCreatingFactor] = useState(true);
+  // const [creatingFactor, setCreatingFactor] = useState(true);
 
   // _____-----______ REFS FORR BODY AND WINDOW  -------
 

@@ -61,27 +61,27 @@ const LazyPrismHighlighter = loadable(async () => {
 
     // const { headerDispatch } = useContext(headerContext);
 
-    const {
-      BLOG_POST_ACTION_TYPES_ENUM,
-      blogPostContext,
-    } = $_useBlogPostReducerState;
+    // const {
+    //   BLOG_POST_ACTION_TYPES_ENUM,
+    //   blogPostContext,
+    // } = $_useBlogPostReducerState;
 
-    const { blogPostDispatch } = useContext(blogPostContext);
+    // const { blogPostDispatch } = useContext(blogPostContext);
 
-    useLayoutEffect(() => {
+    /* useLayoutEffect(() => {
       console.log("*********USE LAYOUT EFFECT**********");
 
       const bodyEl = document.body || document.getElementsByTagName("body")[0];
 
       // console.log(bodyEl.scrollHeight);
 
-      /* headerDispatch({
+      headerDispatch({
         type: ACTION_TYPES_ENUM.CHANGE_BODY_HEIGHT,
         payload: bodyEl.scrollHeight,
-      }); */
+      });
 
       // blogPostDispatch
-    }, []);
+    }, []); */
 
     return (
       <Highlight
@@ -125,7 +125,7 @@ const Code: FunctionComponent = (props) => {
   return (
     <LazyPrismHighlighter code={codeString} language={language} theme={theme}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        //  EVO TI CES OVDE UPRAVO KORISTII VARIANT KOJI SE ZOVE    prism-highlight
+        //  EVO TI CES OVDE UPRAVO KORISTII VARIANT KOJI SE ZOVE    prism-highlight (OVO SAM REKAO DAVNO RANIJE)
         <pre
           className={className}
           style={style}
@@ -137,6 +137,7 @@ const Code: FunctionComponent = (props) => {
         >
           {tokens.map((line, i) => (
             <div {...getLineProps({ line, key: i })}>
+              <span className="line-number-style">{i + 1}</span>
               {line.map((token, key) => (
                 <span {...getTokenProps({ token, key })} />
               ))}
