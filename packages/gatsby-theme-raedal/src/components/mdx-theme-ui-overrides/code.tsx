@@ -207,47 +207,78 @@ const Code: FunctionComponent<{
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         //  EVO TI CES OVDE UPRAVO KORISTII VARIANT KOJI SE ZOVE
         // prism-highlight (OVO SAM REKAO DAVNO RANIJE)
-        <pre
-          className={className}
-          style={style}
+        <div
+          className="language-styles"
+          data-language={`${language}`}
           sx={{
-            variant: "prism-highlight",
-            p: 2,
-            overflowX: "scroll",
+            "[data-language]::before": {
+              content: `${language}`,
+              display: "block",
+
+              fontSize: "4rem",
+              borderColor: "red",
+              width: "500px",
+
+              /* [data-language~="graphql"] {
+                background-color: pink;
+              } */
+            },
           }}
           css={css`
             /* OVO CE BITI KLASA KOJA HIGHLIGHT-UJE SPECIFIC LINE */
             .highlight-specific-line {
               background-color: #d43c6a73;
             }
+
+            .line-number-style {
+              display: inline-block;
+              width: 2rem;
+              border: pink solid 0px;
+              color: #d4c6d1c4;
+              font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+                sans-serif;
+              font-size: 0.7rem;
+              user-select: none;
+            }
           `}
         >
-          {tokens.map((line, i) => {
-            // EVO STA SAM URADIO, DAKLE ONIM LINE PROPSIMA
-            // SAM PRIDODAO KALSU
+          <pre
+            className={className}
+            style={style}
+            sx={{
+              variant: "prism-highlight",
+              p: 2,
+              overflowX: "scroll",
+            }}
+          >
+            {tokens.map((line, i) => {
+              // EVO STA SAM URADIO, DAKLE ONIM LINE PROPSIMA
+              // SAM PRIDODAO KALSU
 
-            const lineProps = getLineProps({ line, key: i });
+              const lineProps = getLineProps({ line, key: i });
 
-            // NE ZABORAVI    i + 1   JER REDOVI KRECU OD 1
-            const neuLineProps = findLineNumber(i + 1)
-              ? {
-                  ...lineProps,
-                  className: `${lineProps.className} highlight-specific-line`,
-                }
-              : { ...lineProps };
+              // NE ZABORAVI    i + 1   JER REDOVI KRECU OD 1
+              const neuLineProps = findLineNumber(i + 1)
+                ? {
+                    ...lineProps,
+                    className: `${lineProps.className} highlight-specific-line`,
+                  }
+                : { ...lineProps };
 
-            return (
-              <div {...neuLineProps}>
-                {/* SLEDECIM SPAN-OM SE ZADAVAJU NAUMBERI */}
-                <span className="line-number-style">{i + 1}</span>
-                {/* ------------------------------------------- */}
-                {line.map((token, key) => (
-                  <span {...getTokenProps({ token, key })} />
-                ))}
-              </div>
-            );
-          })}
-        </pre>
+              return (
+                <div {...neuLineProps}>
+                  {/* SLEDECIM SPAN-OM SE ZADAVAJU NAUMBERI */}
+                  <span className="line-number-style">{i + 1}</span>
+                  {/* ------------------------------------------- */}
+                  {line.map((token, key) => (
+                    <span {...getTokenProps({ token, key })} />
+                  ))}
+                </div>
+              );
+            })}
+          </pre>
+        </div>
       )}
     </LazyPrismHighlighter>
   );
