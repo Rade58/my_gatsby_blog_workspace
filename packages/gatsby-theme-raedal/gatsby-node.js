@@ -196,7 +196,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   `);
 
   if (result.errors) {
-    reporter.panic("filed to find blog post nodes", result.errors);
+    reporter.panic("failed to find blog post nodes", result.errors);
   }
 
   const blogPostIdsAndPaths = result.data.pages.nodes;
