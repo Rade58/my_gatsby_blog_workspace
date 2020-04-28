@@ -85,6 +85,10 @@ const Layout: FunctionComponent = ({ children }) => {
 
               // width: "calc(100vw - 4px)",
             },
+
+            "[data-language]": {
+              border: "red solid 16px",
+            },
           }}
         />
         {/* HEADER STATE PROVIDER */}

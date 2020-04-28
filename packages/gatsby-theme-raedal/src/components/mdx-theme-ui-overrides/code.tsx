@@ -29,17 +29,18 @@ import {
 // GORNJI RenderProps  SAM UVEZAO NA HACKABLE NACIN TAK OSTO SAM OTISAO
 // U TYPE DEFINITION I IZVEZAO GA (AKO IKADA UPDATE-UJES TYPE DEF ZA LOADABLE,
 // OPET CE TYPESCRIPT YELL-OVATI NA TEBE)
+// === !===
+// === !===
+// === !===
+import styled from "@emotion/styled";
+// === !===
+// === !===
+// === !===
+
 import preToCodeBlock from "../../utility/preToCodeBlock";
 
-// === !===
-// === !===
-// === !===
-// === !===
-// === !===
-// === !===
-
-import { $_useReducerState } from "../../context_n_reducers/context_n_reducer_header";
-import { $_useBlogPostReducerState } from "../../context_n_reducers/context_n_reducer_blog_post";
+/* import { $_useReducerState } from "../../context_n_reducers/context_n_reducer_header";
+import { $_useBlogPostReducerState } from "../../context_n_reducers/context_n_reducer_blog_post"; */
 
 // === !===
 // === !===
@@ -210,20 +211,6 @@ const Code: FunctionComponent<{
         <div
           className="language-styles"
           data-language={`${language}`}
-          sx={{
-            "[data-language]::before": {
-              content: `${language}`,
-              display: "block",
-
-              fontSize: "4rem",
-              borderColor: "red",
-              width: "500px",
-
-              /* [data-language~="graphql"] {
-                background-color: pink;
-              } */
-            },
-          }}
           css={css`
             /* OVO CE BITI KLASA KOJA HIGHLIGHT-UJE SPECIFIC LINE */
             .highlight-specific-line {

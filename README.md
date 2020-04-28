@@ -101,3 +101,15 @@ ALI NAJBOLJE JE DA URADIS OVAKO
 ```javascript
 const metastring = props.metastring || props.children.props.metastring;
 ```
+
+## TAKODJE U OKVIRU OVOG BRANCH-A, JA SAM ODLUCIO DA NAPRAVIM I LANGUAGE TAB, ZA SVAKI CODE BLOK
+
+AKO NE USPEM SAM OVAJ TUTORIJAL CE POSLUZITI
+
+<https://www.lekoarts.de/en/blog/language-tabs-for-gatsbys-code-blocks>
+
+## TAKODJE SAM ODLUCIO DA KORISTIM STYLED COMPONENENT
+
+ODNOSNO `@emotion/styled`
+
+- `yarn workspace gatsby-theme-raedal add @emotion/styled`
