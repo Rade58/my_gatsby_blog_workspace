@@ -87,7 +87,12 @@ const Layout: FunctionComponent = ({ children }) => {
             },
 
             "[data-language]": {
-              border: "red solid 16px",
+              border: "red solid 1px",
+
+              "&::before": {
+                content: "attr(data-language)",
+                display: "inline-block",
+              },
             },
           }}
         />

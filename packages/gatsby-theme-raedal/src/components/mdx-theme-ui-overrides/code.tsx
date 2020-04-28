@@ -4,8 +4,8 @@ import { jsx } from "theme-ui";
 import { css } from "@emotion/core";
 
 import {
-  useContext,
-  useLayoutEffect,
+  // useContext,
+  // useLayoutEffect,
   FunctionComponent,
   ReactNode,
 } from "react";
@@ -43,14 +43,24 @@ import preToCodeBlock from "../../utility/preToCodeBlock";
 import { $_useBlogPostReducerState } from "../../context_n_reducers/context_n_reducer_blog_post"; */
 
 // === !===
+
 // === !===
 
 // A SADA CU DA KORISTIM LOADABLE
 const LazyPrismHighlighter = loadable(async () => {
   const PrismModule = await import("prism-react-renderer");
+
   const Highlight = PrismModule.default;
 
   const { defaultProps } = PrismModule;
+
+  // DA POKUSAM DA WRAPP-UJEM      Highlight        INTO STYLED COMPONENT
+  const StyledHighlight = styled(Highlight)`
+    [data-language] {
+      border: blanchedalmon solid 2px;
+    }
+  `;
+  // I KORISTICU StyledHighlight UMESTO Highlight
 
   const LazyPrismHighlight: FunctionComponent<{
     language: Language;
