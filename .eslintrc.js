@@ -90,7 +90,7 @@ module.exports = {
         avoidEscape: true,
       },
     ],
-    indent: ["error", 2, { SwitchCase: 1 }],
+    indent: ["warn", 2, { SwitchCase: 1 }],
     "prettier/prettier": [
       0,
       {

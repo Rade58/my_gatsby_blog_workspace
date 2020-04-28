@@ -147,7 +147,7 @@ const Code: FunctionComponent<{
 
   // SADA DA DEFINISEM I FUNKCIJU
 
-  const findLineNumbers = (meta: string | undefined, iterator: number) => {
+  const takeLineNumbersToHighlight = (meta: string | undefined) => {
     if (meta && REG.exec) {
       const arrayOfEntities = REG.exec(meta);
 
@@ -182,23 +182,25 @@ const Code: FunctionComponent<{
         }
       });
 
-      /* return splittedArrayOfNumbers
-        .concat(nonSplittedArrayOfNumbers)
-        .includes(iterator); */
-
-      return splittedArrayOfNumbers
-        .concat(nonSplittedArrayOfNumbers)
-        .some((val) => val === iterator);
-
-      // console.log(splittedArrayOfNumbers.concat(nonSplittedArrayOfNumbers));
+      return splittedArrayOfNumbers.concat(nonSplittedArrayOfNumbers);
     }
 
-    return false;
+    return [];
   };
 
-  console.log(findLineNumbers(metastring, 6));
+  const lineNumbersToHighlightArray = takeLineNumbersToHighlight(metastring);
 
-  // console.log({ ...props });
+  const findLineNumber = (iterator: number) =>
+    lineNumbersToHighlightArray.some((member) => member === iterator);
+
+  console.log(lineNumbersToHighlightArray);
+
+  // SADA TI NE MOZES DIREKTNO DA OSTAVLJAS     style   ATRIBUT
+  // NA DONJI div KAKO BI STILIZOVAO SPECIFIC LINE
+  // MORAS TO URADITI PUTEM KLASE
+
+  // UGLAVNOM MORAO SI DODATI KLASU LINE PROPSIMA I ONDA PROSLEDITI LINE PROPSE
+  // DIV-U
 
   return (
     <LazyPrismHighlighter code={codeString} language={language} theme={theme}>
@@ -213,26 +215,38 @@ const Code: FunctionComponent<{
             p: 2,
             overflowX: "scroll",
           }}
+          css={css`
+            /* OVO CE BITI KLASA KOJA HIGHLIGHT-UJE SPECIFIC LINE */
+            .highlight-specific-line {
+              background-color: #d43c6a73;
+            }
+          `}
         >
-          {tokens.map((line, i) => (
-            <div {...getLineProps({ line, key: i })}>
-              {/* SLEDECIM SPAN-OM SE ZADAVAJU NAUMBERI */}
-              <span
-                style={{
-                  backgroundColor: findLineNumbers(metastring, i)
-                    ? "tomato"
-                    : "inherit",
-                }}
-                className="line-number-style"
-              >
-                {i + 1}
-              </span>
-              {/* ------------------------------------------- */}
-              {line.map((token, key) => (
-                <span {...getTokenProps({ token, key })} />
-              ))}
-            </div>
-          ))}
+          {tokens.map((line, i) => {
+            // EVO STA SAM URADIO, DAKLE ONIM LINE PROPSIMA
+            // SAM PRIDODAO KALSU
+
+            const lineProps = getLineProps({ line, key: i });
+
+            // NE ZABORAVI    i + 1   JER REDOVI KRECU OD 1
+            const neuLineProps = findLineNumber(i + 1)
+              ? {
+                  ...lineProps,
+                  className: `${lineProps.className} highlight-specific-line`,
+                }
+              : { ...lineProps };
+
+            return (
+              <div {...neuLineProps}>
+                {/* SLEDECIM SPAN-OM SE ZADAVAJU NAUMBERI */}
+                <span className="line-number-style">{i + 1}</span>
+                {/* ------------------------------------------- */}
+                {line.map((token, key) => (
+                  <span {...getTokenProps({ token, key })} />
+                ))}
+              </div>
+            );
+          })}
         </pre>
       )}
     </LazyPrismHighlighter>
