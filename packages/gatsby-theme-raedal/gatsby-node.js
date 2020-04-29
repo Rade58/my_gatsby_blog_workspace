@@ -235,6 +235,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         nodes {
           frontmatter {
             slug
+            title
           }
           headings {
             value
@@ -258,15 +259,15 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   // console.log(JSON.stringify(idsAndHeadingsValues, null, 2));
 
-  blogPostIdsAndPaths.forEach(({ id, path }, index) => {
+  blogPostIdsAndPaths.forEach(({ id, path, title }, index) => {
     // SADA OVDE MOGU DA IZFILTRIRAM REZULTATE, I PROSLEDIM IH KROZ CONTEXT
 
     let headings;
 
     // console.log(idsAndHeadingsValues[index].frontmatter.slug, path);
 
-    /* for (let i = 0; i <= idsAndHeadingsValues.length; i++) {
-      if (
+    for (let i = 0; i <= idsAndHeadingsValues.length; i++) {
+      i; /* f (
         idsAndHeadingsValues &&
         idsAndHeadingsValues[i] &&
         idsAndHeadingsValues[i].frontmatter &&
@@ -278,11 +279,18 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         console.log(idsAndHeadingsValues[i], headings);
         console.log("=================================");
       }
+      
+      if(
+        idsAndHeadingsValues[i] &&
+        idsAndHeadingsValues[i].frontmatter &&
+      ){
+
+      } */
     }
- */
+
     actions.createPage({
       context: {
-        id /* , headings: headings && headings.length ? headings : [] */,
+        id,
       }, // QUERY VARIJABLA, ZA QUERY OPERATION U TEMPLATE-U
       path, // PATH NA KOJEM CE BITI RENDERED PAGE (PATH URL U ADRESS BAR-U)
       component: require.resolve("./src/templates/blog-post-template.tsx"),
