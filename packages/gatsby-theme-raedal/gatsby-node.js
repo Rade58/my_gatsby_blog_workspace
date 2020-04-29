@@ -76,12 +76,13 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId }, options) => {
 
   // console.log(node.parent ? getNode(node.parent).sourceInstanceName : "nista");
 
+  // console.log(JSON.stringify(node, null, 2));
+  // console.log(node.internal ? node.internal.type : "nothing");
+
   if (!node.parent) return;
 
   // AKO POTICE ON BILO CEGA DRUGOG STO NIJE      gatsby-plugin-mdx
   // NE TREBA MI NI TADA
-
-  if (node.internal.owner !== "gatsby-plugin-mdx") return;
 
   const parentNode = getNode(node.parent);
 
@@ -103,12 +104,13 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId }, options) => {
 
   // === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !==
 
-  /*  console.log(
+  console.log(
     "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
-  ); */
-  // console.log(graphql);
-
-  // === !== === !== === !== === !== === !== !== === !== === !== === !== === !== === !==
+  );
+  // console.log(node.headings);
+  console.log(
+    "=== !== === !== === !== === !== === !== !== === !== === !== === !== === !== === !==="
+  );
 
   const pageName = name !== "index" ? name : "";
 
@@ -166,6 +168,17 @@ exports.createResolvers = ({ createResolvers }) => {
 
           const mdxType = info.schema.getType("Mdx");
 
+          console.log(
+            "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
+          );
+          // const headingsBlah = info.schema.getType("MdxHeadingMdx").getFields();
+
+          // console.log(JSON.stringify(headingsBlah, null, 2));
+          // console.log(headingsBlah.headings);
+          console.log(
+            "=== !== === !== === !== === !== === !== !== === !== === !== === !== === !== === !==="
+          );
+
           const mdxFields = mdxType.getFields();
 
           const bodyResolver = mdxFields.body.resolve;
@@ -208,12 +221,13 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         nodes {
           id
           path
+          title
         }
       }
     }
   `);
 
-  // DAKLE OVDE IZDVAJAM SVE HEDING-SE
+  // DAKLE OVDE IZDVAJAM SVE HEADING-SE
   // MISLIM DA MI JE remark-slug PLUGIN OMOGUCIO DA PRAVIM OVAKAV QUERY
   const idsAndHeadings = await graphql(`
     query UzmiNasloveIIdjeve {
@@ -242,7 +256,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   const idsAndHeadingsValues = idsAndHeadings.data.headings.nodes;
 
-  console.log(JSON.stringify(idsAndHeadingsValues, null, 2));
+  // console.log(JSON.stringify(idsAndHeadingsValues, null, 2));
 
   blogPostIdsAndPaths.forEach(({ id, path }, index) => {
     // SADA OVDE MOGU DA IZFILTRIRAM REZULTATE, I PROSLEDIM IH KROZ CONTEXT
@@ -267,7 +281,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     }
  */
     actions.createPage({
-      context: { id, headings: headings && headings.length ? headings : [] }, // QUERY VARIJABLA, ZA QUERY OPERATION U TEMPLATE-U
+      context: {
+        id /* , headings: headings && headings.length ? headings : [] */,
+      }, // QUERY VARIJABLA, ZA QUERY OPERATION U TEMPLATE-U
       path, // PATH NA KOJEM CE BITI RENDERED PAGE (PATH URL U ADRESS BAR-U)
       component: require.resolve("./src/templates/blog-post-template.tsx"),
     });
