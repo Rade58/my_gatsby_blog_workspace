@@ -8,8 +8,16 @@ import BlogPost from "../components/blog-post";
 
 import { SeoI } from "../seo/seo";
 
+export interface PageContextI {
+  id?: string;
+  heading?: {
+    value?: string;
+    depth?: number;
+  };
+}
+
 interface BlogPostTemplateProps {
-  pageContext: any;
+  pageContext: PageContextI;
   data: {
     page: {
       updated: string;
@@ -42,6 +50,20 @@ const BlogPostTemplate: FunctionComponent<BlogPostTemplateProps> = ({
   data: {
     page: { updated, title, body, frontMatter },
   },
-}) => <BlogPost page={{ ...frontMatter, body, title, updated }} />;
+}) => {
+  console.log("**********************************************");
+  console.log("**********************************************");
+  console.log("**********************************************");
+  console.log("**********************************************");
+  console.log(pageContext);
+  console.log("**********************************************");
+  console.log("**********************************************");
+  console.log("**********************************************");
+  console.log("**********************************************");
+
+  return (
+    <BlogPost page={{ ...frontMatter, body, title, updated, pageContext }} />
+  );
+};
 
 export default BlogPostTemplate;

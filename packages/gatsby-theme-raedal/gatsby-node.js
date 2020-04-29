@@ -36,6 +36,7 @@ exports.onPreBootstrap = ({ store }, options) => {
 
 // DEFINISAO SAM JOS JEDAN TYPE TO CATER MY NEEDS, ALI TO JE SAMO TYPE, KOJI
 // SE KORISTI U       BlogPostPage    TYPE
+
 exports.createSchemaCustomization = ({ actions }) => {
   actions.createTypes(`
     type BlogPostPage implements Node @dontInfer {
@@ -45,7 +46,8 @@ exports.createSchemaCustomization = ({ actions }) => {
       updated: Date! @dateformat
       body: String!
 
-      frontMatter: MyFrontMatter! 
+      frontMatter: MyFrontMatter!
+      myHeadings: [Heading!] 
 
     }
 
@@ -54,6 +56,11 @@ exports.createSchemaCustomization = ({ actions }) => {
       lang: String!
       description: String!
       themeColor: String!
+    }
+
+    type Heading {
+      value: String!
+      depth: Int!
     }
 
   `);
@@ -66,6 +73,8 @@ exports.createSchemaCustomization = ({ actions }) => {
 exports.onCreateNode = ({ node, actions, getNode, createNodeId }, options) => {
   // AKO NEMA PARENTA POTICE OD       gatsby-source-filesystem
   // NE TREBA MI ONDA
+
+  // console.log(node.parent ? getNode(node.parent).sourceInstanceName : "nista");
 
   if (!node.parent) return;
 
@@ -91,6 +100,15 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId }, options) => {
 
   const { contentDigest } = node.internal;
   const { title } = node.frontmatter || name;
+
+  // === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !==
+
+  /*  console.log(
+    "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
+  ); */
+  // console.log(graphql);
+
+  // === !== === !== === !== === !== === !== !== === !== === !== === !== === !== === !==
 
   const pageName = name !== "index" ? name : "";
 
@@ -195,15 +213,61 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     }
   `);
 
-  if (result.errors) {
-    reporter.panic("failed to find blog post nodes", result.errors);
+  // DAKLE OVDE IZDVAJAM SVE HEDING-SE
+  // MISLIM DA MI JE remark-slug PLUGIN OMOGUCIO DA PRAVIM OVAKAV QUERY
+  const idsAndHeadings = await graphql(`
+    query UzmiNasloveIIdjeve {
+      headings: allMdx {
+        nodes {
+          frontmatter {
+            slug
+          }
+          headings {
+            value
+            depth
+          }
+        }
+      }
+    }
+  `);
+
+  if (result.errors || idsAndHeadings.errors) {
+    reporter.panic(
+      "not successfull query ili vise njih",
+      result.errors || idsAndHeadings.errors
+    );
   }
 
   const blogPostIdsAndPaths = result.data.pages.nodes;
 
-  blogPostIdsAndPaths.forEach(({ id, path }) => {
+  const idsAndHeadingsValues = idsAndHeadings.data.headings.nodes;
+
+  console.log(JSON.stringify(idsAndHeadingsValues, null, 2));
+
+  blogPostIdsAndPaths.forEach(({ id, path }, index) => {
+    // SADA OVDE MOGU DA IZFILTRIRAM REZULTATE, I PROSLEDIM IH KROZ CONTEXT
+
+    let headings;
+
+    // console.log(idsAndHeadingsValues[index].frontmatter.slug, path);
+
+    /* for (let i = 0; i <= idsAndHeadingsValues.length; i++) {
+      if (
+        idsAndHeadingsValues &&
+        idsAndHeadingsValues[i] &&
+        idsAndHeadingsValues[i].frontmatter &&
+        path === idsAndHeadingsValues[i].frontmatter.slug
+      ) {
+        headings = idsAndHeadingsValues[i].headings;
+
+        console.log("=================================");
+        console.log(idsAndHeadingsValues[i], headings);
+        console.log("=================================");
+      }
+    }
+ */
     actions.createPage({
-      context: { id }, // QUERY VARIJABLA, ZA QUERY OPERATION U TEMPLATE-U
+      context: { id, headings: headings && headings.length ? headings : [] }, // QUERY VARIJABLA, ZA QUERY OPERATION U TEMPLATE-U
       path, // PATH NA KOJEM CE BITI RENDERED PAGE (PATH URL U ADRESS BAR-U)
       component: require.resolve("./src/templates/blog-post-template.tsx"),
     });

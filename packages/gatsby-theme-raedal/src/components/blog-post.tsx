@@ -12,10 +12,13 @@ import { $_createBlogPostReducerState } from "../context_n_reducers/context_n_re
 
 import HeaderStateProvider from "../context_n_reducers/context_providers/headerStateProvider";
 
+import { PageContextI } from "../templates/blog-post-template";
+
 interface PageProp extends SeoI {
   body: string;
   updated: string;
   title: string;
+  pageContext: PageContextI;
 }
 
 // TI SI U OVOJ KOMPONENTI INDIREKTNO RENDER-OVAO     Helmet
@@ -24,12 +27,16 @@ interface PageProp extends SeoI {
 
 const BlogPost: FunctionComponent<{
   page: PageProp;
-}> = ({ page: { body, updated, title, lang, description, themeColor } }) => {
+}> = ({
+  page: { body, updated, title, lang, description, themeColor, pageContext },
+}) => {
   const {
     BlogPostStateProvider,
     defaultBlogPostState,
     blogPostReducer,
   } = $_createBlogPostReducerState;
+
+  console.log(pageContext);
 
   const [reducedBlogPostState, blogPostDispatch] = useReducer(
     blogPostReducer,
