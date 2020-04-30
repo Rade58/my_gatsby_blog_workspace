@@ -279,51 +279,37 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             }
           `,
           { id: parentId } // EVO OVDE SAM PROSLEDIO QUERY VARIJABLU
-        )
-          .then((queryResult) => {
-            // ZNAS DA RESULTAT GRAPHQL QUERY-JA, UVEK POSTOJI
-            // DAKLE ERROR INSTANCA NIKADA NIJE THROWN
+        ).then((queryResult) => {
+          // ZNAS DA RESULTAT GRAPHQL QUERY-JA, UVEK POSTOJI
+          // DAKLE ERROR INSTANCA NIKADA NIJE THROWN
 
-            actions.createPage({
-              context: {
-                id,
-                headings: queryResult.data.mdx.headings,
-              },
-              path,
-              // component: componentPath,
-              component: require.resolve(
-                "./src/templates/blog-post-template.tsx"
-              ),
-            });
+          // ALI AKO POSTOJI    error     PROPERTI
+          // TO ZNACI DA QUERY NIJE BIO USPESAN
 
-            res();
-          })
-          .catch((err) => {
-            console.log("REJECTED");
-            console.log(err);
-            rej();
+          if (queryResult.error) {
+            reporter.panic(
+              "Couldnt get headings for the current page",
+              queryResult.error
+            );
+          }
+
+          actions.createPage({
+            context: {
+              id,
+              headings: queryResult.data.mdx.headings,
+            },
+            path,
+            // component: componentPath,
+            component: require.resolve(
+              "./src/templates/blog-post-template.tsx"
+            ),
           });
+
+          res();
+        });
       })
     );
   }
 
   return Promise.all(arrayOfPromises);
-
-  /*  blogPostIdsAndPaths.forEach(({ id, path }, index) => {
-    // SADA OVDE MOGU DA IZFILTRIRAM REZULTATE, I PROSLEDIM IH KROZ CONTEXT
-
-    let headings;
-
-    // console.log(idsAndHeadingsValues[index].frontmatter.slug, path);
-
-    
-
-    actions.createPage({
-      context: {
-        id,
-      }, // QUERY VARIJABLA, ZA QUERY OPERATION U TEMPLATE-U
-      path, // PATH NA KOJEM CE BITI RENDERED PAGE (PATH URL U ADRESS BAR-U)
-      component: require.resolve("./src/templates/blog-post-template.tsx"),
-    });
-  }); */
 };
