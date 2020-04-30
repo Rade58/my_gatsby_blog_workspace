@@ -56,7 +56,16 @@ export interface ContextBlogPostStateI {
   blogPostDispatch: BlogPostContDispatch;
 
   reducedBlogPostState: BlogPostStateI;
-  headings: HeadingI[]
+  headings: HeadingI[];
+  relativeLink: string;
+
+  seo: {
+    title: string;
+    lang: string;
+    description: string;
+    themeColor: string;
+  }
+
 }
 
 // OVO JE SAMO DEFAULT STATE I REDUCER-A NEMA JOS
@@ -66,7 +75,14 @@ export const blogPostContext: Context<ContextBlogPostStateI> = createContext({
   reducedBlogPostState: defaultState,
   // eslint-disable-next-line
   blogPostDispatch: ({ type, payload }) => { },  // MISLIM DA JE BITNO STO SI OBEZBEDIO OVAKAV DEFAULT (SADA KADA BUDES KORISTIO OVAJ CONTEXT U DRUGIM FAJLOVIMA, IAMCES TACNE TYPE-OVE)
-  headings: [{ depth: 0, value: "nothing" }]
+  headings: [{ depth: 0, value: "nothing" }],
+  relativeLink: "nothing",
+  seo: {
+    description: "placeholder",
+    lang: "en",
+    themeColor: "none",
+    title: "basic title"
+  }
 });
 
 // GOTO VO CES UVEK KORISTITI     useContext    HOOK

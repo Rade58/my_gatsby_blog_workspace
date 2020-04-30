@@ -40,7 +40,7 @@ const Main: FunctionComponent = ({ children }) => {
         }
         @media screen and (min-width: 1100px) {
           grid-template-areas:
-            " . . a a a a . . "
+            " . . a a a a b b "
             " . . a a a a b b "
             " t t a a a a b b "
             " t t a a a a . . "
@@ -82,7 +82,7 @@ const Main: FunctionComponent = ({ children }) => {
 
           border: pink solid 8px;
 
-          align-self: stretch;
+          /* align-self: stretch; */
         }
 
         & section.social-posting {

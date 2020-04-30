@@ -3,9 +3,12 @@ import { jsx } from "theme-ui";
 import { css } from "@emotion/core";
 // import { MDXRenderer } from "gatsby-plugin-mdx";
 import { FunctionComponent, useReducer } from "react";
+//
+import { Router } from "@reach/router";
+//
 import Layout from "./layout";
 //
-import Article from "./article";
+// import Article from "./article";
 import Seo, { SeoI } from "../seo/seo";
 //
 import { $_createBlogPostReducerState } from "../context_n_reducers/context_n_reducer_blog_post";
@@ -19,6 +22,7 @@ interface PageProp extends SeoI {
   updated: string;
   title: string;
   headings: Headings;
+  relativeLink: string;
 }
 
 // TI SI U OVOJ KOMPONENTI INDIREKTNO RENDER-OVAO     Helmet
@@ -28,7 +32,16 @@ interface PageProp extends SeoI {
 const BlogPost: FunctionComponent<{
   page: PageProp;
 }> = ({
-  page: { body, updated, title, lang, description, themeColor, headings },
+  page: {
+    body,
+    updated,
+    title,
+    lang,
+    description,
+    themeColor,
+    headings,
+    relativeLink,
+  },
 }) => {
   const {
     BlogPostStateProvider,
@@ -43,20 +56,30 @@ const BlogPost: FunctionComponent<{
     defaultBlogPostState
   );
 
+  console.log(relativeLink);
+
   return (
     <BlogPostStateProvider
-      value={{ reducedBlogPostState, blogPostDispatch, headings }}
+      value={{
+        reducedBlogPostState,
+        blogPostDispatch,
+        headings,
+        relativeLink,
+        seo: { title, lang, description, themeColor },
+      }}
     >
-      <Layout>
-        <Seo
-          title={title}
-          lang={lang}
-          description={description}
-          themeColor={themeColor}
-        />
-        {/* <h2>{title}</h2> */}
-        <Article updated={updated} body={body} />
-      </Layout>
+      <Router>
+        <Layout path={encodeURI(relativeLink)} updated={updated} body={body} />
+        {/* ZA NASLOVE */}
+        {headings.map(({ value }) => (
+          <Layout
+            key={value + relativeLink}
+            path={`${encodeURI(relativeLink)}#${encodeURI(value)}`}
+            updated={updated}
+            body={body}
+          />
+        ))}
+      </Router>
     </BlogPostStateProvider>
   );
 };

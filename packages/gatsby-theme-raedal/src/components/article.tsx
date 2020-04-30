@@ -26,16 +26,20 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body, updated }) => {
 
   return (
     <article
-      sx={{
-        h2: {
+      sx={
+        {
+          /* h2: {
           paddingTop: !pigDisapear ? "58px" : "18px",
           paddingBottom: "18px",
-        },
-        /* display: "flex",
+        }, */
+          /* display: "flex",
         flexDirection: "column", */
-      }}
+        }
+      }
       // style={{ display: "flex" }}
-      className="post-article"
+      className={`post-article ${
+        !pigDisapear ? "pig-reapeard" : "pig-disapeard"
+      }`}
       css={css`
         border: tomato solid 4px;
         margin-top: 48px;
@@ -47,6 +51,18 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body, updated }) => {
           color: #fff;
           margin: 0 auto;
           width: fit-content;
+        }
+
+        &.pig-disapeard {
+          & > h2 {
+            padding-top: 18px;
+          }
+        }
+
+        &.pig-reapeard {
+          & > h2 {
+            padding-top: 58px;
+          }
         }
       `}
     >

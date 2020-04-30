@@ -4,11 +4,14 @@
 
 import { jsx, ThemeProvider } from "theme-ui";
 
+// import { RouterProps } from "@reach/router";
+
 import {
   Fragment,
   // useReducer,
   // useState,
   // useRef,
+  useContext,
   // -->  types
   FunctionComponent,
 } from "react";
@@ -20,11 +23,19 @@ import theme from "../gatsby-plugin-theme-ui/index";
 // ********  HEADER STATE PROVIDER   ********************
 //
 import HeaderStateProvider from "../context_n_reducers/context_providers/headerStateProvider";
+
+// **********************Blog Post Context stuff
+import { $_useBlogPostReducerState } from "../context_n_reducers/context_n_reducer_blog_post";
+
+// ********************************************
+
 // ********  useHeader CUSTOM HOOK   ********************
 import useHeader from "../custom_hooks/useHeader";
 // === !==  === !==  === !==  === !==  === !==  === !==
 
 import Main from "./main";
+import Article from "./article";
+import Seo from "../seo/seo";
 // === !==  === !==  === !==  === !==  === !==  === !==
 
 // CONTEXT ZA Layout LEVEL
@@ -42,7 +53,13 @@ import Main from "./main";
 // import { ACTION_TYPES_ENUM } from "../context_n_reducers/context_n_reducer_header";
 //
 
-const Layout: FunctionComponent = ({ children }) => {
+interface LayoutPropsI {
+  body: string;
+  updated: string;
+  path?: string;
+}
+
+const Layout: FunctionComponent<LayoutPropsI> = ({ body, updated }) => {
   // === !==
 
   const [Header] = useHeader();
@@ -54,6 +71,10 @@ const Layout: FunctionComponent = ({ children }) => {
   ); */
 
   ////////////////////////////////////////////////////////////////
+
+  const { blogPostContext } = $_useBlogPostReducerState;
+
+  const { seo } = useContext(blogPostContext);
 
   return (
     <Fragment>
@@ -102,7 +123,11 @@ const Layout: FunctionComponent = ({ children }) => {
         </HeaderStateProvider>
 
         {/* '''''''''''''''''''' */}
-        <Main>{children}</Main>
+        <Main>
+          <Seo {...seo} />
+
+          <Article updated={updated} body={body} />
+        </Main>
         {/* <button
           sx={{
             variant: "myButton",

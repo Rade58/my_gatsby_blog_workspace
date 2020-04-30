@@ -297,6 +297,11 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             context: {
               id,
               headings: queryResult.data.mdx.headings,
+              // path MOZE BITI CONFLICTING NAME
+              // ZATO SAM IZBRAO DA
+              // (A OVO MI JE POTREBNO ZA LINK TAG
+              // KOD LINKED HEADERS-A)
+              relativeLink: path,
             },
             path,
             // component: componentPath,

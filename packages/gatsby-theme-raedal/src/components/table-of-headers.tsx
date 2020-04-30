@@ -1,6 +1,9 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui";
 
+import { Link } from "gatsby";
+import { AnchorLink } from "gatsby-plugin-anchor-links";
+
 import { css } from "@emotion/core";
 
 import { useContext, FunctionComponent } from "react";
@@ -18,8 +21,7 @@ interface TableOfHeadingsProps {
 const TableOfHeadings: FunctionComponent<TableOfHeadingsProps> = (props) => {
   const { blogPostContext } = $_useBlogPostReducerState;
 
-  // eslint-disable-next-line
-  const { headings } = props.headings ? props : useContext(blogPostContext);
+  const { headings, relativeLink } = useContext(blogPostContext);
 
   return (
     // OVO JE SAMO PROBNO IME KLASE (UKLONI OVO I DEFINISI PRAVU KLASU)
@@ -27,14 +29,20 @@ const TableOfHeadings: FunctionComponent<TableOfHeadingsProps> = (props) => {
       className="adds"
       css={css`
         position: sticky;
-        top: 4px;
+        top: 14vh;
       `}
     >
       <ul>
         {headings &&
           headings.map(({ depth, value }) => (
             <li key={`${value}-${depth}`}>
-              <a href={`#${encodeURI(value.toLowerCase())}`}>{value}</a>
+              <Link
+                to={`${encodeURI(relativeLink)}#${encodeURI(
+                  value.toLowerCase()
+                )}`}
+              >
+                {value}
+              </Link>
             </li>
           ))}
       </ul>

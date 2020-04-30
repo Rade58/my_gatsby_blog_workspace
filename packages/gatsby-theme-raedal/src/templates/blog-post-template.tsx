@@ -16,8 +16,8 @@ export interface HeadingI {
 export type Headings = HeadingI[];
 
 export interface PageContextI {
-  id?: string;
   headings: Headings;
+  relativeLink: string;
 }
 
 interface BlogPostTemplateProps {
@@ -77,9 +77,13 @@ const BlogPostTemplate: FunctionComponent<BlogPostTemplateProps> = ({
 
   // ZATO ZA SADA, SAMO IZDVAJAM     hedings  IZ   pageContext-A
 
-  const { headings } = pageContext;
+  const { headings, relativeLink } = pageContext;
 
-  return <BlogPost page={{ ...frontMatter, body, title, updated, headings }} />;
+  return (
+    <BlogPost
+      page={{ ...frontMatter, body, title, updated, headings, relativeLink }}
+    />
+  );
 };
 
 export default BlogPostTemplate;
