@@ -5,6 +5,7 @@ import {
   Dispatch,
   Context,
 } from "react";
+import { HeadingI } from "../templates/blog-post-template";
 
 export enum BLOG_POST_ACTION_TYPES_ENUM {
   PIG_AND_TRACK_DISAPEARD = "PIG_AND_TRACK_DISAPEARD",
@@ -55,6 +56,7 @@ export interface ContextBlogPostStateI {
   blogPostDispatch: BlogPostContDispatch;
 
   reducedBlogPostState: BlogPostStateI;
+  headings: HeadingI[]
 }
 
 // OVO JE SAMO DEFAULT STATE I REDUCER-A NEMA JOS
@@ -63,7 +65,8 @@ export const blogPostContext: Context<ContextBlogPostStateI> = createContext({
 
   reducedBlogPostState: defaultState,
   // eslint-disable-next-line
-  blogPostDispatch: ({ type, payload }) => { }  // MISLIM DA JE BITNO STO SI OBEZBEDIO OVAKAV DEFAULT (SADA KADA BUDES KORISTIO OVAJ CONTEXT U DRUGIM FAJLOVIMA, IAMCES TACNE TYPE-OVE)
+  blogPostDispatch: ({ type, payload }) => { },  // MISLIM DA JE BITNO STO SI OBEZBEDIO OVAKAV DEFAULT (SADA KADA BUDES KORISTIO OVAJ CONTEXT U DRUGIM FAJLOVIMA, IAMCES TACNE TYPE-OVE)
+  headings: [{ depth: 0, value: "nothing" }]
 });
 
 // GOTO VO CES UVEK KORISTITI     useContext    HOOK

@@ -44,7 +44,9 @@ const BlogPost: FunctionComponent<{
   );
 
   return (
-    <BlogPostStateProvider value={{ reducedBlogPostState, blogPostDispatch }}>
+    <BlogPostStateProvider
+      value={{ reducedBlogPostState, blogPostDispatch, headings }}
+    >
       <Layout>
         <Seo
           title={title}

@@ -5,6 +5,8 @@ import { css } from "@emotion/core";
 
 import { FunctionComponent } from "react";
 
+import TableOfHeadings from "./table-of-headers";
+
 // LOREM IPSUM
 // import LoremIpsum from "./dev-utility/lorem-ipsum";
 //
@@ -30,7 +32,7 @@ const Main: FunctionComponent = ({ children }) => {
 
         @media screen and (min-width: 918px) {
           grid-template-areas:
-            " . . a a a a . ."
+            " . . a a a a b b"
             " . . a a a a b b"
             " . . a a a a b b"
             " . . a a a a t t"
@@ -78,7 +80,9 @@ const Main: FunctionComponent = ({ children }) => {
 
           grid-area: b;
 
-          border: pink solid 4px;
+          border: pink solid 8px;
+
+          align-self: stretch;
         }
 
         & section.social-posting {
@@ -90,7 +94,8 @@ const Main: FunctionComponent = ({ children }) => {
     >
       {children}
       {/* ZAMENI OVO KONKRETNIM KOMPONENTAMA, KADA IH BUDES NAPRAVIO */}
-      <section className="adds">
+      <TableOfHeadings />
+      {/* <section className="adds">
         <h4>Adds</h4>
         <div>
           Donec pellentesque pharetra lectus, vel malesuada neque euismod id.
@@ -100,7 +105,7 @@ const Main: FunctionComponent = ({ children }) => {
           nulla in ex. Vestibulum non diam imperdiet, ornare mauris at, aliquam
           est.
         </div>
-      </section>
+      </section> */}
       <section className="social-posting">twitter instagram</section>
       {/* ------------------------------------------------------------- */}
       {/* /////////-----------------------///////////////// */}

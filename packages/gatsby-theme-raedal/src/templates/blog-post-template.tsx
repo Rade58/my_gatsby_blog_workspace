@@ -9,8 +9,8 @@ import BlogPost from "../components/blog-post";
 import { SeoI } from "../seo/seo";
 
 export interface HeadingI {
-  value?: string;
-  depth?: number;
+  value: string;
+  depth: number;
 }
 
 export type Headings = HeadingI[];
