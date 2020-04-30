@@ -38,6 +38,9 @@ exports.onPreBootstrap = ({ store }, options) => {
 // SE KORISTI U       BlogPostPage    TYPE
 
 exports.createSchemaCustomization = ({ actions }) => {
+  //  RANIJE SAM MISLI ODA OVDE DODAM JOS NOVIH TYPE-OVA, ALI
+  // SAM ODUSTAO JER NISU TREBALI
+
   actions.createTypes(`
     type BlogPostPage implements Node @dontInfer {
       id: ID!
@@ -47,7 +50,6 @@ exports.createSchemaCustomization = ({ actions }) => {
       body: String!
 
       frontMatter: MyFrontMatter!
-      myHeadings: [Heading!] 
 
     }
 
@@ -56,11 +58,6 @@ exports.createSchemaCustomization = ({ actions }) => {
       lang: String!
       description: String!
       themeColor: String!
-    }
-
-    type Heading {
-      value: String!
-      depth: Int!
     }
 
   `);
@@ -104,13 +101,13 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId }, options) => {
 
   // === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !==
 
-  console.log(
+  /* console.log(
     "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
-  );
+  ); */
   // console.log(node.headings);
-  console.log(
+  /* console.log(
     "=== !== === !== === !== === !== === !== !== === !== === !== === !== === !== === !==="
-  );
+  ); */
 
   const pageName = name !== "index" ? name : "";
 
@@ -213,9 +210,10 @@ exports.createResolvers = ({ createResolvers }) => {
 //                                                     RENDERED)
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
-  const componentPath = require.resolve(
-    "./src/templates/blog-post-template.tsx"
-  );
+  // POSTO SAM PRAVIO MULTIPLE QUERIES MORAO SAM DA UPOTREBIM
+  // Promise.all
+
+  //  //   SADA DA OBJASNIM STA SAM URADIO  /////
 
   // OD RANIJE ZNAM DA JE PARENT NODE MOM     BlogPostPage-U
   // USTVARI    Mdx
@@ -248,7 +246,10 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   `);
 
   if (result.errors) {
-    reporter.panic("not successfull query ili vise njih", result.errors);
+    reporter.panic(
+      "Something went wrong with QUERY FOR ALL OF YOUR BLOG POSTS",
+      result.errors
+    );
   }
 
   const blogPostIdsAndPaths = result.data.pages.nodes;
@@ -265,47 +266,48 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     const { id, path } = blogPost;
 
     arrayOfPromises.push(
-      graphql(
-        `
-          query GetIdAndHeadings($id: String!) {
-            mdx(id: { eq: $id }) {
-              headings(depth: h2) {
-                value
-                depth
+      new Promise((res, rej) => {
+        graphql(
+          `
+            query GetIdAndHeadings($id: String!) {
+              mdx(id: { eq: $id }) {
+                headings(depth: h2) {
+                  value
+                  depth
+                }
               }
             }
-          }
-        `,
-        { id: parentId } // EVO OVDE SAM PROSLEDIO QUERY VARIJABLU
-      )
-        .then((queryResult) => {
-          console.log("//////////////////////////////////");
-          console.log("//////////////////////////////////");
-          console.log(JSON.stringify(data, null, 2));
-          // console.log(headings);
-          console.log("//////////////////////////////////");
-          console.log("//////////////////////////////////");
+          `,
+          { id: parentId } // EVO OVDE SAM PROSLEDIO QUERY VARIJABLU
+        )
+          .then((queryResult) => {
+            // ZNAS DA RESULTAT GRAPHQL QUERY-JA, UVEK POSTOJI
+            // DAKLE ERROR INSTANCA NIKADA NIJE THROWN
 
-          return actions.createPage({
-            context: {
-              id,
-              headings: queryResult.data.mdx.headings,
-            },
-            path,
-            component: componentPath,
-            /* component: require.resolve(
-              "./src/templates/blog-post-template.tsx"
-            ), */
+            actions.createPage({
+              context: {
+                id,
+                headings: queryResult.data.mdx.headings,
+              },
+              path,
+              // component: componentPath,
+              component: require.resolve(
+                "./src/templates/blog-post-template.tsx"
+              ),
+            });
+
+            res();
+          })
+          .catch((err) => {
+            console.log("REJECTED");
+            console.log(err);
+            rej();
           });
-        })
-        .catch(() => {
-          console.log("nothing found");
-          return 1;
-        })
+      })
     );
-
-    return Promise.all(arrayOfPromises);
   }
+
+  return Promise.all(arrayOfPromises);
 
   /*  blogPostIdsAndPaths.forEach(({ id, path }, index) => {
     // SADA OVDE MOGU DA IZFILTRIRAM REZULTATE, I PROSLEDIM IH KROZ CONTEXT

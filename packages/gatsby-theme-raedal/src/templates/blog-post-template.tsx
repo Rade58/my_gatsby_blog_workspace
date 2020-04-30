@@ -8,12 +8,14 @@ import BlogPost from "../components/blog-post";
 
 import { SeoI } from "../seo/seo";
 
+export interface HeadingsI {
+  value?: string;
+  depth?: number;
+}
+
 export interface PageContextI {
   id?: string;
-  heading?: {
-    value?: string;
-    depth?: number;
-  };
+  headings: HeadingsI;
 }
 
 interface BlogPostTemplateProps {
@@ -51,7 +53,13 @@ const BlogPostTemplate: FunctionComponent<BlogPostTemplateProps> = ({
     page: { updated, title, body, frontMatter },
   },
 }) => {
-  console.log("**********************************************");
+  // NAJBOLJE BI BIL ODA NE PROSLEDJUJES CEO PAGE CONTEXT
+  // IPAK SE TAM ONALZAZI id I SLICNE STVARI
+
+  // NE ZNAM DA LI GA JE DOBRO EXPOSE-OVATI ILI NE
+  // ALI JA IPAK NECU
+
+  /*  console.log("**********************************************");
   console.log("**********************************************");
   console.log("**********************************************");
   console.log("**********************************************");
@@ -59,11 +67,17 @@ const BlogPostTemplate: FunctionComponent<BlogPostTemplateProps> = ({
   console.log("**********************************************");
   console.log("**********************************************");
   console.log("**********************************************");
-  console.log("**********************************************");
+  console.log("**********************************************"); */
 
-  return (
-    <BlogPost page={{ ...frontMatter, body, title, updated, pageContext }} />
-  );
+  // DAKLE IZDVAJACU ENTITET PO ENTITEK, KAKO MOJ BLOG MOZDA BUDE
+  // KORISTIO NEKE DRUGE FEATURE-E KOJE PODESAVAM NA BACKEND-U,
+  // PA CU IH "UVODITI", OVDE SA OVOG TEMPLATE-A
+
+  // ZATO ZA SADA, SAMO IZDVAJAM     hedings  IZ   pageContext-A
+
+  const { headings } = pageContext;
+
+  return <BlogPost page={{ ...frontMatter, body, title, updated, headings }} />;
 };
 
 export default BlogPostTemplate;
