@@ -12,13 +12,13 @@ import { $_createBlogPostReducerState } from "../context_n_reducers/context_n_re
 
 import HeaderStateProvider from "../context_n_reducers/context_providers/headerStateProvider";
 
-import { HeadingsI } from "../templates/blog-post-template";
+import { Headings } from "../templates/blog-post-template";
 
 interface PageProp extends SeoI {
   body: string;
   updated: string;
   title: string;
-  headings: HeadingsI;
+  headings: Headings;
 }
 
 // TI SI U OVOJ KOMPONENTI INDIREKTNO RENDER-OVAO     Helmet

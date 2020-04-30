@@ -8,14 +8,16 @@ import BlogPost from "../components/blog-post";
 
 import { SeoI } from "../seo/seo";
 
-export interface HeadingsI {
+export interface HeadingI {
   value?: string;
   depth?: number;
 }
 
+export type Headings = HeadingI[];
+
 export interface PageContextI {
   id?: string;
-  headings: HeadingsI;
+  headings: Headings;
 }
 
 interface BlogPostTemplateProps {
