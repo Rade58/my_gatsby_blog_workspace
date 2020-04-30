@@ -168,16 +168,16 @@ exports.createResolvers = ({ createResolvers }) => {
 
           const mdxType = info.schema.getType("Mdx");
 
-          console.log(
+          /*  console.log(
             "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
-          );
+          ); */
           // const headingsBlah = info.schema.getType("MdxHeadingMdx").getFields();
 
           // console.log(JSON.stringify(headingsBlah, null, 2));
           // console.log(headingsBlah.headings);
-          console.log(
+          /* console.log(
             "=== !== === !== === !== === !== === !== !== === !== === !== === !== === !== === !==="
-          );
+          ); */
 
           const mdxFields = mdxType.getFields();
 
@@ -213,80 +213,108 @@ exports.createResolvers = ({ createResolvers }) => {
 //                                                     RENDERED)
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
-  // OPET NAPOMENA DA OVDE PRAVIM QUERY ZA SVIM  BlogPostPage   NODE-OVIMA
-  // OD KOJIH PRAVIM
+  const componentPath = require.resolve(
+    "./src/templates/blog-post-template.tsx"
+  );
+
+  // OD RANIJE ZNAM DA JE PARENT NODE MOM     BlogPostPage-U
+  // USTVARI    Mdx
+  // I JA MOGU UZETI PARNT-OV ID
+  // I NA OSNOVU PARENT-OVOG ID-JA JA BIH EXEQUETE-OVAO
+
+  // I ONO STA NISI ZNAO OD RANIJE JESTE DA MOZES PROSLEDJIVATI
+  // VARIJABLE OVIM QUERY-JIMA (TAKO DA CU SADA QIERY-EVATI ZA HEADINGSIMA, NA
+  // OSNOVU ID-JA PARENT-A  BlogPostPage-A)
+
+  // DAKLE OVAJ ID OSTAJE ISTI SAMO STO PORED SVEG OSTALOG QUERY-UJEM ZA
+  //    id    -JEM    NODE-A, KOJEI JE PARENT NODE
+
+  // TO JE ZATO STO CU KASNIJE NA OSNOVU TOG id-JA JA USTVARI PRAVITI
+  // QUERY ZA HEADINGSIMA
+
   const result = await graphql(`
-    query {
+    query MyPages {
       pages: allBlogPostPage {
         nodes {
           id
           path
-          title
-        }
-      }
-    }
-  `);
 
-  // DAKLE OVDE IZDVAJAM SVE HEADING-SE
-  // MISLIM DA MI JE remark-slug PLUGIN OMOGUCIO DA PRAVIM OVAKAV QUERY
-  const idsAndHeadings = await graphql(`
-    query UzmiNasloveIIdjeve {
-      headings: allMdx {
-        nodes {
-          frontmatter {
-            slug
-            title
-          }
-          headings {
-            value
-            depth
+          parent {
+            id
           }
         }
       }
     }
   `);
 
-  if (result.errors || idsAndHeadings.errors) {
-    reporter.panic(
-      "not successfull query ili vise njih",
-      result.errors || idsAndHeadings.errors
-    );
+  if (result.errors) {
+    reporter.panic("not successfull query ili vise njih", result.errors);
   }
 
   const blogPostIdsAndPaths = result.data.pages.nodes;
 
-  const idsAndHeadingsValues = idsAndHeadings.data.headings.nodes;
+  // ODLUCIO SAM DA UMESTO forEach OVDE KORISTIM ASYNC ITERATOR
+  // JER CU PRAVITI NOVE QUERY-JE, A KAO STO ZNAS ON ISU OVDE ASINHRONI
 
-  // console.log(JSON.stringify(idsAndHeadingsValues, null, 2));
+  const arrayOfPromises = [];
 
-  blogPostIdsAndPaths.forEach(({ id, path, title }, index) => {
+  for (let blogPost of blogPostIdsAndPaths) {
+    const parentId = blogPost.parent.id;
+
+    // console.log({ parentId });
+    const { id, path } = blogPost;
+
+    arrayOfPromises.push(
+      graphql(
+        `
+          query GetIdAndHeadings($id: String!) {
+            mdx(id: { eq: $id }) {
+              headings(depth: h2) {
+                value
+                depth
+              }
+            }
+          }
+        `,
+        { id: parentId } // EVO OVDE SAM PROSLEDIO QUERY VARIJABLU
+      )
+        .then((queryResult) => {
+          console.log("//////////////////////////////////");
+          console.log("//////////////////////////////////");
+          console.log(JSON.stringify(data, null, 2));
+          // console.log(headings);
+          console.log("//////////////////////////////////");
+          console.log("//////////////////////////////////");
+
+          return actions.createPage({
+            context: {
+              id,
+              headings: queryResult.data.mdx.headings,
+            },
+            path,
+            component: componentPath,
+            /* component: require.resolve(
+              "./src/templates/blog-post-template.tsx"
+            ), */
+          });
+        })
+        .catch(() => {
+          console.log("nothing found");
+          return 1;
+        })
+    );
+
+    return Promise.all(arrayOfPromises);
+  }
+
+  /*  blogPostIdsAndPaths.forEach(({ id, path }, index) => {
     // SADA OVDE MOGU DA IZFILTRIRAM REZULTATE, I PROSLEDIM IH KROZ CONTEXT
 
     let headings;
 
     // console.log(idsAndHeadingsValues[index].frontmatter.slug, path);
 
-    for (let i = 0; i <= idsAndHeadingsValues.length; i++) {
-      i; /* f (
-        idsAndHeadingsValues &&
-        idsAndHeadingsValues[i] &&
-        idsAndHeadingsValues[i].frontmatter &&
-        path === idsAndHeadingsValues[i].frontmatter.slug
-      ) {
-        headings = idsAndHeadingsValues[i].headings;
-
-        console.log("=================================");
-        console.log(idsAndHeadingsValues[i], headings);
-        console.log("=================================");
-      }
-      
-      if(
-        idsAndHeadingsValues[i] &&
-        idsAndHeadingsValues[i].frontmatter &&
-      ){
-
-      } */
-    }
+    
 
     actions.createPage({
       context: {
@@ -295,5 +323,5 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       path, // PATH NA KOJEM CE BITI RENDERED PAGE (PATH URL U ADRESS BAR-U)
       component: require.resolve("./src/templates/blog-post-template.tsx"),
     });
-  });
+  }); */
 };
