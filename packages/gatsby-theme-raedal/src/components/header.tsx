@@ -42,7 +42,7 @@ import twitterIconUri from "../ICONS/AJ_using/twitter_circle.svg";
 
 //
 
-// import { $_useBlogPostReducerState } from "../context_n_reducers/context_n_reducer_blog_post";
+import { $_useBlogPostReducerState } from "../context_n_reducers/context_n_reducer_blog_post";
 
 //
 
@@ -58,9 +58,6 @@ const Header: FunctionComponent = () => {
   const { reducedHeaderState /* , headerDispatch  */ } = useContext(
     $_useReducerState.headerContext
   );
-
-  /* reducedHeaderState_$ = reducedHeaderState;
-    headerDispatch_$ = headerDispatch; */
 
   const {
     scrolled_class /* , currentScroll, pigDisapear  */,
@@ -92,8 +89,15 @@ const Header: FunctionComponent = () => {
   }, []);
   ////////////////////////////////////////////////////////////////////////
 
+  // === !== === !== === !== === !== === !== === !== === !== === !== === !== === !==
+  // MUTATION OBSERVER WILL TRIGGER ON ANY DISPATCH
+  // ZBOG PROMENE ATRIBUT NA REF-U
+
+  // === !== === !== === !== === !== === !== === !== === !== === !== === !== === !==
+
   return (
     <header
+      className={scrolled_class}
       css={css`
         /* border-top: 14px solid purple; */
 
@@ -130,7 +134,6 @@ const Header: FunctionComponent = () => {
           top: 0;
         }
       `}
-      className={scrolled_class}
     >
       <NavInHeader />
 

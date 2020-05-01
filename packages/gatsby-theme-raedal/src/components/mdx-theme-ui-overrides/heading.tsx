@@ -30,6 +30,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
   return (
     <Tag
       {...props}
+      id={undefined}
       css={css`
         position: relative;
         z-index: 50;
@@ -52,10 +53,22 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
           content: "🔗";
           font-size: 1.8rem;
           position: absolute;
-          left: -16px;
+          left: -30px;
         }
       `}
     >
+      <div
+        id={props.id}
+        css={css`
+          border: tomato solid 1px;
+
+          padding-top: calc(30px + 58px);
+
+          @media screen and (min-width: 918px) {
+            padding-top: calc(38px + 58px);
+          }
+        `}
+      />
       <Link to={`${encodeURI(relativeLink)}#${props.id}`}> </Link>
       {props.children}
     </Tag>

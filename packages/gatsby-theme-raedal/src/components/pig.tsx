@@ -23,10 +23,19 @@ import {
   ACTION_TYPES_ENUM,
 } from "../context_n_reducers/context_n_reducer_header";
 
+import { $_useBlogPostReducerState } from "../context_n_reducers/context_n_reducer_blog_post";
+
 const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
   const { reducedHeaderState, headerDispatch } = useContext(
     $_useReducerState.headerContext
   );
+
+  const {
+    BLOG_POST_ACTION_TYPES_ENUM,
+    blogPostContext,
+  } = $_useBlogPostReducerState;
+
+  const { blogPostDispatch } = useContext(blogPostContext);
 
   const { pigDisapear, scrolled_class, bodyHeight } = reducedHeaderState;
 
@@ -218,6 +227,18 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
   `;
 
   const angle: 180 | 0 = scrolled_class === "pull-down" ? 180 : 0;
+
+  /* if (scrolled_class === "pull-down") {
+    blogPostDispatch({
+      type: BLOG_POST_ACTION_TYPES_ENUM.HEADER_PULL_CHANGE,
+      payload: "pulled-down",
+    });
+  } else {
+    blogPostDispatch({
+      type: BLOG_POST_ACTION_TYPES_ENUM.HEADER_PULL_CHANGE,
+      payload: "pulled-up",
+    });
+  } */
 
   return (
     <div

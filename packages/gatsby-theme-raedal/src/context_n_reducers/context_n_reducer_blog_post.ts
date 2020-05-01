@@ -37,17 +37,12 @@ export const blogPostReducer: Reducer<
 
   if (action.type === BLOG_POST_ACTION_TYPES_ENUM.HEADER_PULL_CHANGE) {
 
-    const prevHederPullClass = state.header_pull_class
-
-    const currentHeaderPullClass = action.payload
-
-    if (currentHeaderPullClass === "pulled-up" && prevHederPullClass !== "pulled-up") {
-      return { ...state, header_pull_class: "pulled-up" }
+    if (action.payload === "pulled-up" && state.header_pull_class !== "pulled-up") {
+      return { ...state, header_pull_class: action.payload }
     }
 
-    if (currentHeaderPullClass === "pulled-down" && prevHederPullClass !== "pulled-down") {
-
-      return { ...state, header_pull_class: "pulled-down" }
+    if (action.payload === "pulled-down" && state.header_pull_class !== "pulled-down") {
+      return { ...state, header_pull_class: action.payload }
     }
 
 

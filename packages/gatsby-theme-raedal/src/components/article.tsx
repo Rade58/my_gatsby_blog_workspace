@@ -22,6 +22,8 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body, updated }) => {
 
   const { pigDisapear, header_pull_class } = reducedBlogPostState;
 
+  console.log(header_pull_class);
+
   console.log({ pigDisapear });
 
   useEffect(
@@ -67,13 +69,13 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body, updated }) => {
 
         &.pig-disapeard {
           & > h2 {
-            margin-top: 18px;
+            /* margin-top: 18px; */
           }
         }
 
         &.pig-reapeard {
           & > h2 {
-            margin-top: calc(2 * 58px);
+            /* margin-top: calc(38px + 58px); */
           }
         }
       `}
