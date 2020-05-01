@@ -31,7 +31,7 @@ import { $_useBlogPostReducerState } from "../context_n_reducers/context_n_reduc
 // ********************************************
 
 // ********  useHeader CUSTOM HOOK   ********************
-import useHeader from "../custom_hooks/useHeader";
+import Header from "./header";
 // === !==  === !==  === !==  === !==  === !==  === !==
 
 import Main from "./main";
@@ -62,8 +62,6 @@ interface LayoutPropsI {
 
 const Layout: FunctionComponent<LayoutPropsI> = ({ body, updated }) => {
   // === !==
-
-  const [Header] = useHeader();
 
   // === !==  LAYOUT REDUCER
   /* const [reducedLayoutState, dispatchToLayout] = useReducer(
