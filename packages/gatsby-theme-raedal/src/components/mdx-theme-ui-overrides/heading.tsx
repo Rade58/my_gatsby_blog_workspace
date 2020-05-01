@@ -35,8 +35,9 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
         z-index: 50;
 
         border: blanchedalmond solid 1px;
-
-        & > a {
+        margin-left: auto;
+        margin-right: auto;
+        width: max-content & > a {
           text-decoration-line: none;
           color: inherit;
           margin-left: 10%;
@@ -49,8 +50,9 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
 
         &:hover > a::before {
           content: "🔗";
-          font-size: 1.2rem;
-          /* position: absolute; */
+          font-size: 1.8rem;
+          position: absolute;
+          left: -16px;
         }
       `}
     >

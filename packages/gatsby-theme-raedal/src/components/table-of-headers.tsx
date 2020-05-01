@@ -26,14 +26,17 @@ const TableOfHeadings: FunctionComponent<TableOfHeadingsProps> = (props) => {
   return (
     // OVO JE SAMO PROBNO IME KLASE (UKLONI OVO I DEFINISI PRAVU KLASU)
     <section
+      style={{ display: headings.length ? "inline-block" : "none" }}
       className="adds"
       css={css`
         position: sticky;
+        border: pink solid 8px;
         top: 14vh;
       `}
     >
       <ul>
         {headings &&
+          headings.length !== 0 &&
           headings.map(({ depth, value }) => (
             <li key={`${value}-${depth}`}>
               <Link

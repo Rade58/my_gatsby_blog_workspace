@@ -145,6 +145,8 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
   // CLEANING ON UNMOUNTING
   useEffect(
     () => () => {
+      console.log("PIG IS UNMOUNTING!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
       timerId1.current ? clearTimeout(timerId1.current) : null;
       timerId2.current ? clearTimeout(timerId2.current) : null;
     },

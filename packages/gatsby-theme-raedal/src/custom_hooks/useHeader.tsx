@@ -86,6 +86,8 @@ const useHeaderState: () => UseHeaderCustomHookReturn = () => {
         if (scrollHandlerAttachedOnBody && bodyEl.onscroll) {
           bodyEl.onscroll = null;
         }
+
+        console.log("!!!!HEADER IS UNMOUNTING!!!!");
       };
     }, []);
     ////////////////////////////////////////////////////////////////////////

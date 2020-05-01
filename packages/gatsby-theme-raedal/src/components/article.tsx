@@ -4,7 +4,7 @@ import { css } from "@emotion/core";
 
 import { MDXRenderer } from "gatsby-plugin-mdx";
 
-import { useContext, FunctionComponent } from "react";
+import { useContext, FunctionComponent, useEffect } from "react";
 
 // OVDE ZELIM DA KORISTIM BLOG POST STATE (STO SAM I URADIO, DOLE U KOMPONENTI)
 import { blogPostContext } from "../context_n_reducers/context_n_reducer_blog_post";
@@ -23,6 +23,13 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body, updated }) => {
   const { pigDisapear, header_pull_class } = reducedBlogPostState;
 
   console.log({ pigDisapear });
+
+  useEffect(
+    () => () => {
+      console.log("~~~~~!! ARTICLE UNMOUNTED !!~~~~~");
+    },
+    []
+  );
 
   return (
     <article
@@ -60,37 +67,13 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body, updated }) => {
 
         &.pig-disapeard {
           & > h2 {
-            padding-top: 18px;
-          }
-
-          &.pulled-up {
-            & > h2 {
-              padding-top: 18px;
-            }
-          }
-
-          &.pulled-down {
-            & > h2 {
-              padding-top: 58px;
-            }
+            margin-top: 18px;
           }
         }
 
         &.pig-reapeard {
           & > h2 {
-            padding-top: 58px;
-          }
-
-          &.pulled-up {
-            & > h2 {
-              padding-top: 18px;
-            }
-          }
-
-          &.pulled-down {
-            & > h2 {
-              padding-top: 108px;
-            }
+            margin-top: calc(2 * 58px);
           }
         }
       `}

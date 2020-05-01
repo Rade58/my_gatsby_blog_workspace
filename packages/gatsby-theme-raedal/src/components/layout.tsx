@@ -12,6 +12,7 @@ import {
   // useState,
   // useRef,
   useContext,
+  useEffect,
   // -->  types
   FunctionComponent,
 } from "react";
@@ -76,6 +77,13 @@ const Layout: FunctionComponent<LayoutPropsI> = ({ body, updated }) => {
 
   const { seo } = useContext(blogPostContext);
 
+  useEffect(
+    () => () => {
+      console.log("!!!! LAYOUT UNMOUNTING !!!!");
+    },
+    []
+  );
+
   return (
     <Fragment>
       <ThemeProvider theme={theme}>
@@ -125,7 +133,6 @@ const Layout: FunctionComponent<LayoutPropsI> = ({ body, updated }) => {
         {/* '''''''''''''''''''' */}
         <Main>
           <Seo {...seo} />
-
           <Article updated={updated} body={body} />
         </Main>
         {/* <button

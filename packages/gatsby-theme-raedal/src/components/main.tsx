@@ -80,8 +80,6 @@ const Main: FunctionComponent = ({ children }) => {
 
           grid-area: b;
 
-          border: pink solid 8px;
-
           /* align-self: stretch; */
         }
 

@@ -68,6 +68,7 @@ const BlogPost: FunctionComponent<{
         seo: { title, lang, description, themeColor },
       }}
     >
+      {/* <HeaderStateProvider> */}
       {/* <Layout body={body} updated={updated} /> */}
 
       <Router>
@@ -82,6 +83,7 @@ const BlogPost: FunctionComponent<{
           />
         ))}
       </Router>
+      {/* </HeaderStateProvider> */}
     </BlogPostStateProvider>
   );
 };
