@@ -10,10 +10,12 @@ import { HeadingI } from "../templates/blog-post-template";
 export enum BLOG_POST_ACTION_TYPES_ENUM {
   PIG_AND_TRACK_DISAPEARD = "PIG_AND_TRACK_DISAPEARD",
   WINDOW_SCROLL_HEIGHT = "WINDOW_SCROLL_HEIGHT",
+  HEADER_PULL_CHANGE = "HEADER_PULL_CHANGE"
 }
 
 export interface BlogPostStateI {
   pigDisapear: boolean;
+  header_pull_class: "pulled-down" | "pulled-up"
 }
 
 
@@ -33,6 +35,26 @@ export const blogPostReducer: Reducer<
     return { ...state, pigDisapear: !prevPigDisapearance };
   }
 
+  if (action.type === BLOG_POST_ACTION_TYPES_ENUM.HEADER_PULL_CHANGE) {
+
+    const prevHederPullClass = state.header_pull_class
+
+    const currentHeaderPullClass = action.payload
+
+    if (currentHeaderPullClass === "pulled-up" && prevHederPullClass !== "pulled-up") {
+      return { ...state, header_pull_class: "pulled-up" }
+    }
+
+    if (currentHeaderPullClass === "pulled-down" && prevHederPullClass !== "pulled-down") {
+
+      return { ...state, header_pull_class: "pulled-down" }
+    }
+
+
+    return state
+  }
+
+
   return state;
 };
 
@@ -41,6 +63,7 @@ export const blogPostReducer: Reducer<
  */
 export const defaultState: BlogPostStateI = {
   pigDisapear: false,
+  header_pull_class: "pulled-down"
 };
 
 

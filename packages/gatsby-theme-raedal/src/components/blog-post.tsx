@@ -68,9 +68,11 @@ const BlogPost: FunctionComponent<{
         seo: { title, lang, description, themeColor },
       }}
     >
-      <Router>
+      <Layout body={body} updated={updated} />
+
+      {/* <Router>
         <Layout path={encodeURI(relativeLink)} updated={updated} body={body} />
-        {/* ZA NASLOVE */}
+
         {headings.map(({ value }) => (
           <Layout
             key={value + relativeLink}
@@ -79,7 +81,7 @@ const BlogPost: FunctionComponent<{
             body={body}
           />
         ))}
-      </Router>
+      </Router> */}
     </BlogPostStateProvider>
   );
 };

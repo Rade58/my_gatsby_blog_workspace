@@ -20,7 +20,7 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body, updated }) => {
   const { reducedBlogPostState } = useContext(blogPostContext);
   //
 
-  const { pigDisapear } = reducedBlogPostState;
+  const { pigDisapear, header_pull_class } = reducedBlogPostState;
 
   console.log({ pigDisapear });
 
@@ -39,7 +39,7 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body, updated }) => {
       // style={{ display: "flex" }}
       className={`post-article ${
         !pigDisapear ? "pig-reapeard" : "pig-disapeard"
-      }`}
+      } ${header_pull_class}`}
       css={css`
         border: tomato solid 4px;
         margin-top: 48px;
@@ -53,15 +53,44 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body, updated }) => {
           width: fit-content;
         }
 
+        & > h2 {
+          transition-property: padding-top;
+          transition-duration: 200ms;
+        }
+
         &.pig-disapeard {
           & > h2 {
             padding-top: 18px;
+          }
+
+          &.pulled-up {
+            & > h2 {
+              padding-top: 18px;
+            }
+          }
+
+          &.pulled-down {
+            & > h2 {
+              padding-top: 58px;
+            }
           }
         }
 
         &.pig-reapeard {
           & > h2 {
             padding-top: 58px;
+          }
+
+          &.pulled-up {
+            & > h2 {
+              padding-top: 18px;
+            }
+          }
+
+          &.pulled-down {
+            & > h2 {
+              padding-top: 108px;
+            }
           }
         }
       `}

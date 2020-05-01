@@ -27,6 +27,8 @@ const ProviderHeaderState: FunctionComponent = ({ children }) => {
     defaultState
   );
 
+  // const { scrolled_class } = reducedHeaderState;
+
   // EVO OVDE UPOTREBLJAVAM useContext
 
   // MEDJUTIM DISPATCHING CES MORATI OBAVITI U      useEffect-U

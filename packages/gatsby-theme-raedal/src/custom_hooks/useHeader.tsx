@@ -42,6 +42,10 @@ import twitterIconUri from "../ICONS/AJ_using/twitter_circle.svg";
 
 //
 
+import { $_useBlogPostReducerState } from "../context_n_reducers/context_n_reducer_blog_post";
+
+//
+
 export type UseHeaderCustomHookReturn = [
   // HeaderStateI,
   FunctionComponent
@@ -49,22 +53,6 @@ export type UseHeaderCustomHookReturn = [
 ];
 
 const useHeaderState: () => UseHeaderCustomHookReturn = () => {
-  // REDUCER STATE
-  /* const { reducedHeaderState, headerDispatch } = useContext(
-    $_useReducerState.headerContext
-  ); */
-
-  /* console.log("__ === __ !== __ __ === __ !==");
-  console.log(headerDispatch);
-  console.log("__ === __ !== __ __ === __ !==");  */
-
-  /* let reducedHeaderState_$: HeaderStateI;
-  let headerDispatch_$: HeaderContDispatch;
- */
-  const { ACTION_TYPES_ENUM } = $_useReducerState;
-
-  // const { scrolled_class, currentScroll, pigDisapear } = reducedHeaderState;
-
   // KOMPONENTA
 
   const Header: FunctionComponent = () => {
@@ -77,38 +65,12 @@ const useHeaderState: () => UseHeaderCustomHookReturn = () => {
 
     const { scrolled_class, currentScroll, pigDisapear } = reducedHeaderState;
 
-    const currentScrollRef = useRef<number>(0);
+    // const currentScrollRef = useRef<number>(0);
+
     const [
       scrollHandlerAttachedOnBody,
       setScrollHandlerAttachedOnBody,
     ] = useState(false);
-
-    // CITANJE SA window-A UZ KORISCENJE    useLayoutEffect   -A
-    // __ === __ !== __ __ === __ !== __/ __ === __ !== __ __ === __ !== __
-    /* useLayoutEffect(() => {
-      const windowEl = document.documentElement;
-      const bodyEl = document.body || document.getElementsByTagName("body")[0];
-
-      currentScrollRef.current = currentScroll;
-
-      if (bodyEl && !scrollHandlerAttachedOnBody) {
-        bodyEl.onscroll = (e) => {
-          // console.log("onscroll is working");
-
-          const capturedScrollY = windowEl.scrollTop || window.scrollY;
-
-          setTimeout(() => {
-            headerDispatch({
-              type: ACTION_TYPES_ENUM.CHANGE_CURRENT_SCROLL,
-              payload: capturedScrollY,
-            });
-          }, 500);
-        };
-
-        //
-        setScrollHandlerAttachedOnBody(true);
-      }
-    }, [scrollHandlerAttachedOnBody]); */
 
     // __ === __ !== __ __ === __ !== __/ __ === __ !== __ __ === __ !== __
 
@@ -127,6 +89,50 @@ const useHeaderState: () => UseHeaderCustomHookReturn = () => {
       };
     }, []);
     ////////////////////////////////////////////////////////////////////////
+
+    // PRACENJE MUTATION-A NA HEADER-U (TJ NJEGOVOG class ATRIBUTA)
+
+    // UZECU BLOG POST REDUCER STATE IME TRENUTNE KLASE
+    /*  const {
+      blogPostContext,
+      BLOG_POST_ACTION_TYPES_ENUM,
+    } = $_useBlogPostReducerState;
+    //
+    const { blogPostDispatch } = useContext(blogPostContext);
+
+    const headerRef = useRef<HTMLElement>(null);
+
+    useEffect(() => {
+      if (headerRef.current) {
+        const headerMutationCallback: MutationCallback = (
+          mutationsList,
+          observer
+        ) => {
+          if (mutationsList[0].attributeName === "class") {
+            console.log(mutationsList);
+            if (headerRef.current && headerRef.current.classList) {
+              if (headerRef.current.classList.contains("pull-down")) {
+                blogPostDispatch({
+                  type: BLOG_POST_ACTION_TYPES_ENUM.HEADER_PULL_CHANGE,
+                  payload: "pulled-down",
+                });
+              } else if (headerRef.current.classList.contains("pull-up")) {
+                blogPostDispatch({
+                  type: BLOG_POST_ACTION_TYPES_ENUM.HEADER_PULL_CHANGE,
+                  payload: "pulled-up",
+                });
+              }
+            }
+          }
+        };
+
+        const hederMutationObserver = new MutationObserver(
+          headerMutationCallback
+        );
+
+        hederMutationObserver.observe(headerRef.current, { attributes: true });
+      }
+    }, [headerRef]); */
 
     return (
       <header
