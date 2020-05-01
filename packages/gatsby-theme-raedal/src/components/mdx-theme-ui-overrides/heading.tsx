@@ -34,6 +34,8 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
         position: relative;
         z-index: 50;
 
+        border: blanchedalmond solid 1px;
+
         & > a {
           text-decoration-line: none;
           color: inherit;
