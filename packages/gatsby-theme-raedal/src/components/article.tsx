@@ -62,21 +62,9 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body, updated }) => {
           width: fit-content;
         }
 
-        & > h2 {
+        & > div > h2 {
           transition-property: padding-top;
           transition-duration: 200ms;
-        }
-
-        &.pig-disapeard {
-          & > h2 {
-            /* margin-top: 18px; */
-          }
-        }
-
-        &.pig-reapeard {
-          & > h2 {
-            /* margin-top: calc(38px + 58px); */
-          }
         }
       `}
     >

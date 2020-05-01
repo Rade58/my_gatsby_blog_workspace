@@ -91,6 +91,9 @@ export const reducer: Reducer<
 
 
   if (action.type === ACTION_TYPES_ENUM.PIG_DISAPEAR) {
+
+    console.log("REDUCER PIG DISAPEAR")
+
     const prevPigDisapearance = state.pigDisapear;
 
     return { ...state, pigDisapear: !prevPigDisapearance };

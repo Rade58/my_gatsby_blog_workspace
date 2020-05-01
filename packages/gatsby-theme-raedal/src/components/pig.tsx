@@ -23,19 +23,19 @@ import {
   ACTION_TYPES_ENUM,
 } from "../context_n_reducers/context_n_reducer_header";
 
-import { $_useBlogPostReducerState } from "../context_n_reducers/context_n_reducer_blog_post";
+// import { $_useBlogPostReducerState } from "../context_n_reducers/context_n_reducer_blog_post";
 
 const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
   const { reducedHeaderState, headerDispatch } = useContext(
     $_useReducerState.headerContext
   );
 
-  const {
+  /* const {
     BLOG_POST_ACTION_TYPES_ENUM,
     blogPostContext,
   } = $_useBlogPostReducerState;
 
-  const { blogPostDispatch } = useContext(blogPostContext);
+  const { blogPostDispatch } = useContext(blogPostContext); */
 
   const { pigDisapear, scrolled_class, bodyHeight } = reducedHeaderState;
 
@@ -240,6 +240,8 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
     });
   } */
 
+  // console.log(pigDisapear);
+
   return (
     <div
       className="konti"
@@ -255,7 +257,7 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
         background-color: tomato;
         width: 100%;
       `}
-      style={{ display: pigDisapear ? "none" : "block" }}
+      // style={{ display: pigDisapear ? "none" : "block" }}
     >
       {/* eslint-disable-next-line */}
       <div
@@ -270,14 +272,6 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
           setAnimationStop(true);
         }}
         role="img"
-        onKeyDown={(e) => {
-          if (headerDispatch)
-            headerDispatch({ type: ACTION_TYPES_ENUM.PIG_DISAPEAR });
-        }}
-        onClick={(e) => {
-          if (headerDispatch)
-            headerDispatch({ type: ACTION_TYPES_ENUM.PIG_DISAPEAR });
-        }}
         className="someDiv"
         css={css`
           transition-timing-function: ease-out;
@@ -340,6 +334,14 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
         {/* eslint-disable-next-line */}
         <div
           className="sprite"
+          onKeyDown={(e) => {
+            if (headerDispatch)
+              headerDispatch({ type: ACTION_TYPES_ENUM.PIG_DISAPEAR });
+          }}
+          onClick={(e) => {
+            if (headerDispatch)
+              headerDispatch({ type: ACTION_TYPES_ENUM.PIG_DISAPEAR });
+          }}
           sx={{
             animationName: `${stripski}`,
             // animationPlayState: "paused",
@@ -347,6 +349,7 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
           style={{
             transform: `rotateY(${angle}deg) translateY(-36px)`,
             animationPlayState: `${animationStatus}`,
+            display: pigDisapear ? "none" : "block",
           }}
         />
       </div>

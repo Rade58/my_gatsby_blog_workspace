@@ -13,6 +13,11 @@ import Pig from "./pig";
 
 import { $_useBlogPostReducerState } from "../context_n_reducers/context_n_reducer_blog_post";
 
+import {
+  $_useReducerState,
+  ACTION_TYPES_ENUM,
+} from "../context_n_reducers/context_n_reducer_header";
+
 //
 // import { blogContext, ACTION_TYPES_ENUM } from "./layout";
 //
@@ -51,9 +56,15 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
     blogPostContext
   );
 
-  const { pigDisapear } = reducedBlogPostState;
+  // const { pigDisapear } = reducedBlogPostState;
 
   const resizingDivRef = useRef<HTMLDivElement>(null);
+
+  const { reducedHeaderState, headerDispatch } = useContext(
+    $_useReducerState.headerContext
+  );
+
+  const { pigDisapear, scrolled_class, bodyHeight } = reducedHeaderState;
 
   return (
     <div
@@ -83,11 +94,15 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
       <div
         role="img"
         onClick={() => {
+          headerDispatch({ type: ACTION_TYPES_ENUM.PIG_DISAPEAR });
+
           blogPostDispatch({
             type: BLOG_POST_ACTION_TYPES_ENUM.PIG_AND_TRACK_DISAPEARD,
           });
         }}
         onKeyDown={() => {
+          headerDispatch({ type: ACTION_TYPES_ENUM.PIG_DISAPEAR });
+
           blogPostDispatch({
             type: BLOG_POST_ACTION_TYPES_ENUM.PIG_AND_TRACK_DISAPEARD,
           });
@@ -122,7 +137,10 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
         ref={resizingDivRef}
         // data-indicatorPercents={`${indicatorWidthPercent}`}
         className="resizer"
-        style={{ width: "0%" }}
+        style={{
+          width: "0%",
+          // display: `${pigDisapear ? "none" : "block"}`,
+        }}
       />
     </div>
   );

@@ -25,53 +25,65 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
 
   const { blogPostContext } = $_useBlogPostReducerState;
 
-  const { relativeLink } = useContext(blogPostContext);
+  const { relativeLink, reducedBlogPostState } = useContext(blogPostContext);
+
+  const { pigDisapear } = reducedBlogPostState;
 
   return (
-    <Tag
-      {...props}
-      id={undefined}
+    <div
+      style={{
+        paddingTop: pigDisapear ? "59px" : "calc(38px + 58px)",
+      }}
+      className="heading-above"
+      id={props.id}
       css={css`
-        position: relative;
-        z-index: 50;
+        border: tomato solid 1px;
 
-        border: blanchedalmond solid 1px;
-        margin-left: auto;
-        margin-right: auto;
-        width: max-content & > a {
-          text-decoration-line: none;
-          color: inherit;
-          margin-left: 10%;
+        display: flex;
 
-          /* box-sizing: border-box; */
+        padding-top: calc(30px + 58px);
+        padding-bottom: 0px;
 
-          border: pink solid 1px;
-          position: relative;
-        }
-
-        &:hover > a::before {
-          content: "🔗";
-          font-size: 1.8rem;
-          position: absolute;
-          left: -30px;
+        @media screen and (min-width: 918px) {
+          padding-top: calc(38px + 58px);
         }
       `}
     >
-      <div
-        id={props.id}
+      <Tag
+        {...props}
+        id={undefined}
         css={css`
-          border: tomato solid 1px;
+          position: relative;
+          z-index: 50;
 
-          padding-top: calc(30px + 58px);
+          border: blanchedalmond solid 1px;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 0;
+          margin-bottom: 0;
+          width: max-content & > a {
+            text-decoration-line: none;
+            color: inherit;
+            margin-left: 10%;
 
-          @media screen and (min-width: 918px) {
-            padding-top: calc(38px + 58px);
+            /* box-sizing: border-box; */
+
+            border: pink solid 1px;
+            position: relative;
+          }
+
+          &:hover > a::before {
+            content: "🔗";
+            font-size: 1.8rem;
+            position: absolute;
+            left: -30px;
           }
         `}
-      />
-      <Link to={`${encodeURI(relativeLink)}#${props.id}`}> </Link>
-      {props.children}
-    </Tag>
+      >
+        <Link to={`${encodeURI(relativeLink)}#${props.id}`}> </Link>
+        {props.children}
+      </Tag>
+    </div>
   );
 };
 
