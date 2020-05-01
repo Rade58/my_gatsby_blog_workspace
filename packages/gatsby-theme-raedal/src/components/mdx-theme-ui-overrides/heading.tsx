@@ -39,6 +39,9 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
       css={css`
         border: tomato solid 1px;
 
+        transition-property: margin-top;
+        transition-duration: 4s;
+
         display: flex;
 
         padding-top: calc(30px + 58px);
