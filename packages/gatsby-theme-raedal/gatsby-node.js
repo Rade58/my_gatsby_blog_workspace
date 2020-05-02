@@ -134,7 +134,7 @@ exports.createSchemaCustomization = ({ actions }) => {
 //   ZATIM      gatsby-plugin-mdx         JE NAPRAVIO ODREDJENE NODE-OVE
 // DOBRO, A sourceInstaceName POTICE OD MOG PLUGINA       gatsby-plugin-raedal
 
-const groupPagesNames = []; // IDEJA JE DA U OVAJ NIZ STAVLJAM VREDNOSTI
+const groupPagesNamesAndIds = []; // IDEJA JE DA U OVAJ NIZ STAVLJAM VREDNOSTI
 //                                 group      FIELD SA FRONTMATTER-A
 
 exports.onCreateNode = ({ node, actions, getNode, createNodeId }, options) => {
@@ -194,16 +194,45 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId }, options) => {
   console.log(
     "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
   );
-  console.log(group, groupColor);
+  // console.log(group, groupColor);
   // console.log(JSON.stringify(node.frontmatter, null, 2));
-  console.log(JSON.stringify(groupPagesNames, null, 2));
-  groupPagesNames.push(group);
+  groupPagesNamesAndIds.push(group);
+  console.log(JSON.stringify(groupPagesNamesAndIds, null, 2));
   console.log(
     "=== !== === !== === !== === !== === !== !== === !== === !== === !== === !== === !==="
   );
 
   // JA MOGU DODATI ODREDJENE PROPERTIJE, KOJI SE TICU
   // RELATED      GroupPage-A
+
+  // I TO NAJBOLJE D IH ISKALKULISEM OVDE (JASNO TIO JE DA groupPage FIELD SME
+  // BITI null)
+
+  // EVO OVO JE OBJEKAT, KOJI TREBA DA SE DODAJE KAO VREDNOST blogPost FIELD-A
+  // NA BlogPostPage NODE-U (I KADA MALO BOLJE RAZMISLIS OVO TI NEKAKO SUZAVA, ILI NAZIRES PRICU ZA STA CES SVE MORATI DA DEFINISES RESOLVER)
+
+  let groupPageObject;
+
+  // OVIM SLEDECIM USTVARI REGULISAM DA L ICE SE KREIRATI NOVI ID ILI NE
+
+  if (!groupPagesNamesAndIds[group]) {
+    groupPageObject = {
+      id: `GroupPage-${node.id}`, // MOZDA OVE NISAM OVAKO TREBAO RADITI (VEC
+      //NEKI RANDOM BROJ ZATO STO NEMAM NEKU
+      // RELACIJU  JEDAN Mdx NASPRAM JEDNOG
+      // GroupPage ID-JA )
+      name: group,
+      path: group,
+    };
+  } else {
+    groupPageObject = {
+      id: groupPagesNamesAndIds[group],
+      name: group,
+      path: group,
+    };
+  }
+
+  const groupPage = !group ? null : groupPageObject;
 
   actions.createNode({
     // CAK I OVA FUNKCIJA TRIGGER-UJE HOOK U CIJEM SAM OBIMU (INFO OD RANIJE)
@@ -230,13 +259,7 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId }, options) => {
     },
 
     // EVO GA, PRVO KREIRAM SVE ONO STO MOGU OBEZBEDITI A TICE SE GROUP PAGE-A
-
-    groupPage: !group
-      ? null
-      : {
-          name: group,
-          path: group,
-        },
+    groupPage,
   });
 };
 
