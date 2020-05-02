@@ -3,7 +3,7 @@ const withDefaults = require("./utility/utility-options"); // DEFAULTS SU
 //                                                   contentPath  -> "blogposts"
 //                                                   useExternalMDX  --> false
 //
-const withSiteHelmetDefaults = require("./utility/utility-site-metadata"); // HELMET DEFAULTS (ONO STO SE SERVIRA ZA DEFAULT ZA FIELD frontMatter KOJI SAM KREIRAO)
+const withSiteHelmetDefaults = require("./utility/utility-site-metadata"); // HELMET DEFAULTS (ONO STO SE SERVIRA ZA DEFAULT ZA FIELD frontMatter KOJI SAM KREIRAO) (DODAO SAM U FUNKCIJU I DEFAULTOVE ZA    group    I   groupColor     )
 //
 
 const path = require("path");
@@ -73,7 +73,7 @@ exports.createSchemaCustomization = ({ actions }) => {
 
       groupPage: GroupPage
 
-      allPosibleGroupPages: [GroupPage]!
+      allPosibleGroupPagesOfBlog: [GroupPage]!
 
     }
 
@@ -86,13 +86,15 @@ exports.createSchemaCustomization = ({ actions }) => {
 
     type GroupPage implements Node @dontInfer {
 
+      id: ID!
+
       name: String!
       path: String!
 
       blogPostPages: [BlogPostPage!]!
 
 
-      allPosibleGroupPages: [GroupPage!]!
+      allPosibleGroupPagesOfBlog: [GroupPage!]!
 
 
     }
@@ -102,6 +104,20 @@ exports.createSchemaCustomization = ({ actions }) => {
   `);
 };
 
+// STA MOGU NASLUTITI POSTO SAM KRIRAO, PO DVA, TAKORECI KOMPLEKSIJA FIELDA
+// NA DVA TYPE-A
+
+//  BlogPostPage    SADA IMA FIELD-OVE   groupPage: GroupPage
+//                                      allPosibleGroupPages: [GroupPage]!
+
+// I OBADVA CE IZISKIVATI     RESOLVERE
+// I ISTO VAZI I ZA       blogPostPages: [BlogPostPage!]!
+//                        allPosibleGroupPages: [GroupPage!]!
+//   NA     GroupPage-U
+
+// I ONI IZISKUJU RESOLVER-E
+
+//      CISTO, JOS INFORMATIVNO DA TI NAPOMENEM
 // DAKLE POSTO GORNJI NOVI TYPE IMPLEMENTIRA      Node
 // TO ZNACI DA CE BITI KRIRANA DVA NOVA QUERY-JA U GRAPHQL LAYERU
 // STO MOZES ODMAH I PROVERITI U PLAYGROUND-U ILI     Graphiql
@@ -112,12 +128,14 @@ exports.createSchemaCustomization = ({ actions }) => {
 // === ~~ === ~~ ===
 
 // DAKLE SLEDECI HOOK SE IZVRSVA NA SVAKI CREATION         Node-A
+// I KADA KREIRAS NOVE NODE-OVE U OBIMU TOG HOOK-A (I TO OPET TRIGGER-UJE POMENUTI HOOK)
 // ------ SECAM SE OVAKVOG POREDKA  -----------------------------------
 //              gatsby-source-filesystem    JE NAPRAVIO ODREDJENE NODE-OVE
 //   ZATIM      gatsby-plugin-mdx         JE NAPRAVIO ODREDJENE NODE-OVE
 // DOBRO, A sourceInstaceName POTICE OD MOG PLUGINA       gatsby-plugin-raedal
 
-const posibleGroupPageNames = []; // IDEJA JE DA U OVAJ NIZ STAVLJAM IMENA
+const groupPagesNames = []; // IDEJA JE DA U OVAJ NIZ STAVLJAM VREDNOSTI
+//                                 group      FIELD SA FRONTMATTER-A
 
 exports.onCreateNode = ({ node, actions, getNode, createNodeId }, options) => {
   if (!node.parent) return; // OVO JE I DALJE OK
@@ -135,20 +153,11 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId }, options) => {
   //                                                CONTENT, KOJI LOAD-UJES
   //                                                  SA TVOJOM TEMOM
   // ODNOSNO TO BI TREBALO DA JE RELATIVNO NA      sites/blog/blogposts     (U SLUCAJU blog SITE-A)
-
-  const id = createNodeId(`BlogPostPage-${node.id}`);
+  const id = createNodeId(`BlogPostPage-${node.id}`); // OVO JE ID ZA
+  //                                          BlogPostPage    NODE
 
   const { contentDigest } = node.internal;
   const { title } = node.frontmatter || name;
-
-  // === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !==
-
-  /* console.log(
-    "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
-  ); */
-  /* console.log(
-    "=== !== === !== === !== === !== === !== !== === !== === !== === !== === !== === !==="
-  ); */
 
   const pageName = name !== "index" ? name : "";
 
@@ -161,17 +170,43 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId }, options) => {
   //  SITE METADATA (ODNONO ONO STO CE KONZUMIRATI Helemet)
   // OVDE SAM,
   // UPRAVO DODAO I DEFAULT ZA        group     FIELD
-  const { lang, themeColor, description, group } = withSiteHelmetDefaults(
-    node.frontmatter
-  );
+  const {
+    lang,
+    themeColor,
+    description,
+    group, // OVO JE VEZANO ZA GROUP PAGE
+    groupColor, // KAO I OVO
+  } = withSiteHelmetDefaults(node.frontmatter);
   // E KAKO JA MOGU DA ISKORISTIM       group       INFO
   //    MORAM GA ISKORISTITI ZA      FIELD NA  BlogPostPage  NODE TYPE-U
   // TO JE, SASVIM JASNO
 
-  // ALI JA ZELI MDA KREIRAM NOVI NODE ALI OVAJ NODE, JA KREIRAM SAMO JEDANPUT
+  // ALI JA ZELIM DA KREIRAM NOVI NODE ALI OVAJ NODE, JA KREIRAM SAMO JEDANPUT
+
+  // === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !==
+
+  // DAKLE MORA SE PRAVITI NODE
+
+  // SVAKI PUT PROVERAVAS DA LI NIZ CONTAIN-UJE    group
+  // AKO CONTAIN-UJE NE PRAVIS NODE
+  // IDEJA JE  NAPRAVI NODE I STAVI       group     U     NIZ
+
+  console.log(
+    "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
+  );
+  console.log(group, groupColor);
+  // console.log(JSON.stringify(node.frontmatter, null, 2));
+  console.log(JSON.stringify(groupPagesNames, null, 2));
+  groupPagesNames.push(group);
+  console.log(
+    "=== !== === !== === !== === !== === !== !== === !== === !== === !== === !== === !==="
+  );
+
+  // JA MOGU DODATI ODREDJENE PROPERTIJE, KOJI SE TICU
+  // RELATED      GroupPage-A
 
   actions.createNode({
-    // CAK I OVA FUNKCIJA TRIGGER-UJE HOOK U CIJEM SAM OBIMU
+    // CAK I OVA FUNKCIJA TRIGGER-UJE HOOK U CIJEM SAM OBIMU (INFO OD RANIJE)
     id,
     title,
     updated: modifiedTime,
@@ -193,6 +228,15 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId }, options) => {
       description,
       themeColor,
     },
+
+    // EVO GA, PRVO KREIRAM SVE ONO STO MOGU OBEZBEDITI A TICE SE GROUP PAGE-A
+
+    groupPage: !group
+      ? null
+      : {
+          name: group,
+          path: group,
+        },
   });
 };
 

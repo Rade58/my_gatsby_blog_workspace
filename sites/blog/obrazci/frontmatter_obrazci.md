@@ -4,7 +4,7 @@ description: "neki description"
 lang: "en"
 themeColor: "blanchedalmond"
 slug: graphql/client side/intro
-grupa: graphql
+group: graphql
 group-color: "#e04681"
 ---
 
