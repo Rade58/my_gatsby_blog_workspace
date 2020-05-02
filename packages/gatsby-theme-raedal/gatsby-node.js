@@ -111,32 +111,30 @@ exports.createSchemaCustomization = ({ actions }) => {
 
 // === ~~ === ~~ ===
 
+// DAKLE SLEDECI HOOK SE IZVRSVA NA SVAKI CREATION         Node-A
+// ------ SECAM SE OVAKVOG POREDKA  -----------------------------------
+//              gatsby-source-filesystem    JE NAPRAVIO ODREDJENE NODE-OVE
+//   ZATIM      gatsby-plugin-mdx         JE NAPRAVIO ODREDJENE NODE-OVE
+// DOBRO, A sourceInstaceName POTICE OD MOG PLUGINA       gatsby-plugin-raedal
+
+const posibleGroupPageNames = []; // IDEJA JE DA U OVAJ NIZ STAVLJAM IMENA
+
 exports.onCreateNode = ({ node, actions, getNode, createNodeId }, options) => {
-  // AKO NEMA PARENTA POTICE OD       gatsby-source-filesystem
-  // NE TREBA MI ONDA
-
-  // console.log(node.parent ? getNode(node.parent).sourceInstanceName : "nista");
-
-  // console.log(JSON.stringify(node, null, 2));
-  // console.log(node.internal ? node.internal.type : "nothing");
-
-  if (!node.parent) return;
-
-  // AKO POTICE ON BILO CEGA DRUGOG STO NIJE      gatsby-plugin-mdx
-  // NE TREBA MI NI TADA
+  if (!node.parent) return; // OVO JE I DALJE OK
 
   const parentNode = getNode(node.parent);
 
   // AKO NIJE LOADED BY MY THEME, NI TAJ MI NE TREBA
   if (parentNode.sourceInstanceName !== "gatsby-theme-raedal") return;
 
-  const { basePath } = withDefaults(options); // PO DEFAULT-U     /
+  const { basePath } = withDefaults(options); // PO DEFAULT-U     /  OVDE NISAM NISTA DODATNO DODAVAO STO SE TICE DEFAULT-OVA (MOZES DA POGLEDAS FAJL FUNKCIJE KOJA PRAVI DEFAULT-OVE)
 
   const { name, modifiedTime, relativeDirectory } = parentNode; // RELATIVAN
   //                                                DIREKTORIJUM U ODNOSU NA
   //                                                 FOLDER U KOJEM JE SAV
   //                                                CONTENT, KOJI LOAD-UJES
   //                                                  SA TVOJOM TEMOM
+  // ODNOSNO TO BI TREBALO DA JE RELATIVNO NA      sites/blog/blogposts     (U SLUCAJU blog SITE-A)
 
   const id = createNodeId(`BlogPostPage-${node.id}`);
 
@@ -148,7 +146,6 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId }, options) => {
   /* console.log(
     "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
   ); */
-  // console.log(node.headings);
   /* console.log(
     "=== !== === !== === !== === !== === !== !== === !== === !== === !== === !== === !==="
   ); */
@@ -162,10 +159,16 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId }, options) => {
   if (node.frontmatter.slug) slug = `/${node.frontmatter.slug}`;
 
   //  SITE METADATA (ODNONO ONO STO CE KONZUMIRATI Helemet)
-  const { lang, themeColor, description } = withSiteHelmetDefaults(
+  // OVDE SAM,
+  // UPRAVO DODAO I DEFAULT ZA        group     FIELD
+  const { lang, themeColor, description, group } = withSiteHelmetDefaults(
     node.frontmatter
   );
-  // KAO STO VIDIS IZDVAJAM GA IZ FRONTMATTER-A
+  // E KAKO JA MOGU DA ISKORISTIM       group       INFO
+  //    MORAM GA ISKORISTITI ZA      FIELD NA  BlogPostPage  NODE TYPE-U
+  // TO JE, SASVIM JASNO
+
+  // ALI JA ZELI MDA KREIRAM NOVI NODE ALI OVAJ NODE, JA KREIRAM SAMO JEDANPUT
 
   actions.createNode({
     // CAK I OVA FUNKCIJA TRIGGER-UJE HOOK U CIJEM SAM OBIMU
