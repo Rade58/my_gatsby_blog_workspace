@@ -134,8 +134,8 @@ exports.createSchemaCustomization = ({ actions }) => {
 //   ZATIM      gatsby-plugin-mdx         JE NAPRAVIO ODREDJENE NODE-OVE
 // DOBRO, A sourceInstaceName POTICE OD MOG PLUGINA       gatsby-plugin-raedal
 
-const groupPagesNamesAndIds = []; // IDEJA JE DA U OVAJ NIZ STAVLJAM VREDNOSTI
-//                                 group      FIELD SA FRONTMATTER-A
+const groupPagesNamesAndIds = {}; // IDEJA JE DA U OVAJ OBJEKAT STAVLJAM
+//                                  GROUP NAME - ID PAROVE
 
 exports.onCreateNode = ({ node, actions, getNode, createNodeId }, options) => {
   if (!node.parent) return; // OVO JE I DALJE OK
@@ -196,7 +196,6 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId }, options) => {
   );
   // console.log(group, groupColor);
   // console.log(JSON.stringify(node.frontmatter, null, 2));
-  groupPagesNamesAndIds.push(group);
   console.log(JSON.stringify(groupPagesNamesAndIds, null, 2));
   console.log(
     "=== !== === !== === !== === !== === !== !== === !== === !== === !== === !== === !==="
@@ -215,7 +214,8 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId }, options) => {
 
   // OVIM SLEDECIM USTVARI REGULISAM DA L ICE SE KREIRATI NOVI ID ILI NE
 
-  if (!groupPagesNamesAndIds[group]) {
+  if (!groupPagesNamesAndIds[group] && group) {
+    // group NE SME BITI null (POSTOJI MOGUCNOST DA SE null UZME KAO PROPERTI KADA KORISTIS [] NOTATION PRI ASSIGNMENTU PROPERTIJA)
     groupPageObject = {
       id: `GroupPage-${node.id}`, // MOZDA OVE NISAM OVAKO TREBAO RADITI (VEC
       //NEKI RANDOM BROJ ZATO STO NEMAM NEKU
@@ -224,6 +224,8 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId }, options) => {
       name: group,
       path: group,
     };
+
+    groupPagesNamesAndIds[group] = `GroupPage-${node.id}`;
   } else {
     groupPageObject = {
       id: groupPagesNamesAndIds[group],
