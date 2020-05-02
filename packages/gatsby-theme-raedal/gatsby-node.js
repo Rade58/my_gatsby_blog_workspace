@@ -2,8 +2,8 @@ const withDefaults = require("./utility/utility-options"); // DEFAULTS SU
 //                                                         basePath ->  "/""
 //                                                   contentPath  -> "blogposts"
 //                                                   useExternalMDX  --> false
-// ZA METADATA (ODNONO ZA ONO STO CE KONZUMIRATI Helmet NA KRAJU)
-const withSiteHelmetDefaults = require("./utility/utility-site-metadata");
+//
+const withSiteHelmetDefaults = require("./utility/utility-site-metadata"); // HELMET DEFAULTS (ONO STO SE SERVIRA ZA DEFAULT ZA FIELD frontMatter KOJI SAM KREIRAO)
 //
 
 const path = require("path");
@@ -29,18 +29,38 @@ exports.onPreBootstrap = ({ store }, options) => {
   }
 };
 
-// U GRAPHQL LAYER DODAJEM NOVI TYPE, A TO CE BITI      BlogPostPage
+// POTREBNO JE DODATI NOVI TYPE
+// A TAJ NOVI TYPE TREBA DA IMA FIELD, SA KOJEG CE SE MOCI
+// QUERRY-EVATI SVAKI BLOG POST
 
-// I OVO CE DODATI DVA QUERY-JA U GRAPHQL LAYER (ALI U OVOM TRENUKU
-// NEMA NODE-A , MORAS IH NAPRAVITI) (STO SAM KASNIJE I URADIO)
+// NOVI TYPE ISTO TAKO DA IMPLEMENTIRA      Node    TYPE (DA BI SE ZA NJEGA KREIRALI QUERY-JI)
 
-// DEFINISAO SAM JOS JEDAN TYPE TO CATER MY NEEDS, ALI TO JE SAMO TYPE, KOJI
-// SE KORISTI U       BlogPostPage    TYPE
+// NEKA SE NOVI TYPE NAZIVA         GroupPage
+
+// (1) NAJAVAZNIJA STVAR KOJU CE ON IMATI NA SEBI JESTE FIELD CIJE CE TYPE BITI
+//                            NIZ       BlogPostPage    TYPE-OVA
+
+//            TAJ FIELD SE MOZE ZVATI       blogPostPages
+
+//                                   SAKLE OVAJ NIZ CE BITI NON NULABLE
+//                                   JER AKO NEMA     BlogPosPage  -OVA U NIZU
+//                                    NEMA POTREBA I DA POSTOJI (ALI OVO JE
+// EDGE CASE KOJI NECU NIKAD IMATI, JER NECE PSIOTOJATI GroupPage AKO ZA NJEGA
+// NEMA BlogPostPage-OVA)
+
+// (1) A MORAM PROSIRITI I  BlogPostPage TAKO DA ON IMA NA SEBI FIELD
+//      KOJI CE BITI TYPED SA         GroupPage
+// FIELD SE MOZE ZVATI    groupPage
+// NARAVNO OVAJ FIELD MOZE BITI    NULLABLE, DAKLE TREBA DA SME DA BUDE null
+// JER NEKI PAGE-OVI NECE IMATI SVOJ RELATED GROUP PAGE
+
+// ***************   ALI STA JOS MOZE BITI NAROCITO KORISNO  *********
+//  PA TO DA OBA   TYPE-A    , I    BlogPostPage      I     GroupPage
+// IAMJU USTVARI FIELD, KOJI CE OPET BITI ARRAY SA SVIM MOGUCIM
+//          GroupPage    -OVIMA
+// KOJI MOGU POSTOJATI NA MOM CELOKUPNOM BLOGU, MOM CELOM APP-U
 
 exports.createSchemaCustomization = ({ actions }) => {
-  //  RANIJE SAM MISLI ODA OVDE DODAM JOS NOVIH TYPE-OVA, ALI
-  // SAM ODUSTAO JER NISU TREBALI
-
   actions.createTypes(`
     type BlogPostPage implements Node @dontInfer {
       id: ID!
@@ -48,8 +68,12 @@ exports.createSchemaCustomization = ({ actions }) => {
       path: String!
       updated: Date! @dateformat
       body: String!
-
+      
       frontMatter: MyFrontMatter!
+
+      groupPage: GroupPage
+
+      allPosibleGroupPages: [GroupPage]!
 
     }
 
@@ -60,12 +84,28 @@ exports.createSchemaCustomization = ({ actions }) => {
       themeColor: String!
     }
 
+    type GroupPage implements Node @dontInfer {
+
+      name: String!
+      path: String!
+
+      blogPostPages: [BlogPostPage!]!
+
+
+      allPosibleGroupPages: [GroupPage!]!
+
+
+    }
+
+
+
   `);
 };
 
-// EVO OVAKO DEFINISEM PRAVLJANJE NODE-OVA
-// I JA OVDE KONKRETNO ZELI MDA HANDLE-UJEM ONE NODE-OVE
-// KOJEJE KREIRAO     gatsby-plugin-mdx
+// DAKLE POSTO GORNJI NOVI TYPE IMPLEMENTIRA      Node
+// TO ZNACI DA CE BITI KRIRANA DVA NOVA QUERY-JA U GRAPHQL LAYERU
+// STO MOZES ODMAH I PROVERITI U PLAYGROUND-U ILI     Graphiql
+// === ~~ === ~~ ===
 
 exports.onCreateNode = ({ node, actions, getNode, createNodeId }, options) => {
   // AKO NEMA PARENTA POTICE OD       gatsby-source-filesystem
