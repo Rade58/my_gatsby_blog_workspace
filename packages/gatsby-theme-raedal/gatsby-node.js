@@ -105,6 +105,10 @@ exports.createSchemaCustomization = ({ actions }) => {
 // DAKLE POSTO GORNJI NOVI TYPE IMPLEMENTIRA      Node
 // TO ZNACI DA CE BITI KRIRANA DVA NOVA QUERY-JA U GRAPHQL LAYERU
 // STO MOZES ODMAH I PROVERITI U PLAYGROUND-U ILI     Graphiql
+
+// NOVI QUERY-JI BI TREBALO DA SE ZOVU    allGroupPage      I
+// groupPage
+
 // === ~~ === ~~ ===
 
 exports.onCreateNode = ({ node, actions, getNode, createNodeId }, options) => {
