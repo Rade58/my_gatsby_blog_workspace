@@ -37,7 +37,8 @@ module.exports = (options) => {
         resolve: "gatsby-plugin-mdx",
         options: {
           defaultLayouts: {
-            default: require.resolve("./src/components/layout.tsx"),
+            default: require.resolve("./src/components/layout.tsx"), // OVO JE DEFAULT ZA BLOG POST PAGES
+            // A OVDE BI TREBALO DA DODAM NEKI DEFAULT LAYOUT I ZA   GROUP PAGE
           },
           remarkPlugins: [remarkSlug],
         },

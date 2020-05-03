@@ -465,17 +465,17 @@ exports.createResolvers = ({ createResolvers }) => {
           if (source.groupPage && source.groupPage.id) {
             const blogPostId = source.groupPage.id;
 
-            console.log("SOURC SOURCE SOURCE");
+            /* console.log("SOURC SOURCE SOURCE");
             console.log(source);
-            console.log("SOURC SOURCE SOURCE");
+            console.log("SOURC SOURCE SOURCE"); */
 
             groupPageInstance = context.nodeModel.getNodeById({
               id: blogPostId,
             });
 
-            console.log("-------INSTANCE INSTANCE-----------");
+            /* console.log("-------INSTANCE INSTANCE-----------");
             console.log(groupPageInstance);
-            console.log("-------INSTANCE INSTANCE-----------");
+            console.log("-------INSTANCE INSTANCE-----------"); */
           }
 
           return groupPageInstance;
@@ -683,6 +683,33 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   // TAKO DA MOZEZ await    OVATI TVOJE QUERY-JE
   // JEDINO STO BI PRVO TREBALO DA OBEZBEDIS JESTE **** TEMPLATE KOMPONENTA ****
   // === !== === !== === !== === !== === !== === !== === !== === !==
+  // STA BIH OVDE TREBAO PRVO URADI (DILEMA JE DA LI SMEM DA AWAIT-UJEM)
+  // I DA LI BI, UOPSTE BILO DOBRO DA KORISTIM DONJI Promise.all BILO
+  // PA NE MORAM, JA JEDNOSTAVNO MOGU DA GA AWAIT-UJEM
+  // === !== === !== === !== === !== === !== === !== === !== === !==
 
-  return Promise.all(arrayOfPromises);
+  // DAKEL OVAJ PROMISE JE RANIJE BIO RETURNED FROM THIS FUNCTION
+  //  return Promise.all(arrayOfPromises);
+  //                  JA CU SADA DA GA await-UJEM
+  // PA CU NAKON TOG AWAITING-A PRAVITI NOVE QUERY-JE
+
+  await Promise.all(arrayOfPromises);
+
+  // // === !== === !== === !== === !== === !== === !== === !== === !==
+
+  //    jedna digresija
+
+  // KAD BOLJE RAZMISLIS ILI KADA BUDES PRAVIO NEKI NOVI SITE
+  // MOZDA JE IPAK NAJBOLJE DA SE KRENE MZODA OD GROUP PAGE-OVA, PA DA SE ONDA
+  // DEFINISE KREIRANJE  BlogPostPage-OVA (SADA JE KASNO DA TAK ONESTO RADIM,
+  // ALI NECE BITI NI POTREBNO) (MOZDA BIH TADA BOLJE DEFINISAO SCHEMA-E I RESOLVERE)
+
+  // // === !== === !== === !== === !== === !== === !== === !== === !==
+  // SADA MOGU PRAVITI NOVE QUERY-JE (NARAVNO OPET JE DOBRA PRAKSA, PRVO IH
+  // NAPRAVITI U   Graphiql-U    )
+  // A KADA ZAVSIS SA SLEDECIM QUERY-JIMA, MOZES SE VERATITI NA   KREIRANJE
+  // BlogPostPage-A, KAKO BI TAM OQUERY-OVAO ONO DODATN OSTA TI TREBA, A ODNOSI
+  // SE NA LINK DO GROUP PAGE-A I KEYWORDS
+
+  // NARAVNO OPET CU PRVO QUERY-OVATI ZA SVIG       GroupPage     NODE-OVIMA
 };
