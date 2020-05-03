@@ -72,7 +72,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       frontMatter: MyFrontMatter!
 
       groupPage: GroupPage
-
+      
       allPosibleGroupPagesOfBlog: [GroupPage]!
 
     }
@@ -107,6 +107,10 @@ exports.createSchemaCustomization = ({ actions }) => {
 
   `);
 };
+// ************************
+// MOZE BITI DA SU GORNJI      allPosibleGroupPagesOfBlog      FIELD-OVI, NA
+// OBA TYPE-A, ODNONO NODE-A, IPAK VISAK
+// ************************
 
 // STA MOGU NASLUTITI POSTO SAM KRIRAO, PO DVA, TAKORECI KOMPLEKSIJA FIELDA
 // NA DVA TYPE-A
@@ -263,6 +267,13 @@ exports.onCreateNode = (
         type: "GroupPage",
         contentDigest: currentGroupPageContentDigest,
       },
+
+      // ALI STA JE SADA OVDE PROBLEMATICNO, PA PROBLEMATICNO JE TO STO NEMAM
+      //      blogPostsPages         FIELD, KOJI TREBA DA IMA ARRAY
+      //                                      BlogPostPage-OVA
+
+      // I DEFINITIVNO ZA NJEGA JA MORAM NAPISATI RESOLVER (I TO CE BITI PRVI
+      // RESOLVER KOJI CU NAPISATI U OVOM STADIJUMU PROJEKTA)
     });
     // A BILO KOJI FIELD, KOJI SAM ZAOSTAO DA DEFINISEM ZA OVAJ GroupPage  NODE
     // JER NIJE BILO MOGUCE
@@ -382,6 +393,15 @@ exports.createResolvers = ({ createResolvers }) => {
         },
       },
     },
+    // EVO DEFINISEM RESOLVER ZA     blogPostPages   FIELD NA      GroupPage    TYPE-U
+    /*  GroupPage: {
+      blogPostPages: (source, arguments, context, info) => {
+
+        // PA POTREBNO JE UZETI SVE NODE-OVE 
+
+
+      }
+    } */
   });
 };
 
