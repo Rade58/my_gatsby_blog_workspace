@@ -3,7 +3,6 @@
 // import GatsbyImage from "gatsby-image";
 
 import { jsx, ThemeProvider } from "theme-ui";
-
 // import { RouterProps } from "@reach/router";
 
 import {

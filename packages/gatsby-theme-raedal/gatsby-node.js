@@ -91,6 +91,10 @@ exports.createSchemaCustomization = ({ actions }) => {
       name: String!
       path: String!
 
+      groupColor: String!
+
+      updated: Date! @dateformat
+
       blogPostPages: [BlogPostPage!]!
 
 
@@ -137,7 +141,16 @@ exports.createSchemaCustomization = ({ actions }) => {
 const groupPagesNamesAndIds = {}; // IDEJA JE DA U OVAJ OBJEKAT STAVLJAM
 //                                  GROUP NAME - ID PAROVE
 
-exports.onCreateNode = ({ node, actions, getNode, createNodeId }, options) => {
+// SVI HELPERI SU OVDE OBJASNJENI:     https://www.gatsbyjs.org/docs/node-api-helpers/#createContentDigest
+exports.onCreateNode = (
+  { node, actions, getNode, createNodeId, createContentDigest },
+  options
+) => {
+  // OVOG PUTA SAM IZ GORNJEG PRVOG ARGUMENTA IZDVOIO, JOS JEDAN HELPER
+  // A TO JE HELPER ZA KREIRANJE CONTENT DIGEST-A
+  // TREBA MI JER ZELIM DA KREIRAM TAJ NOVI DIGEST ZA SVAKI OD NOVIH
+  // NODE-OVA KOJE CU KREIRATI (OVO SLUZI ZA CACHING, SAMO NAPOMINJEM)
+
   if (!node.parent) return; // OVO JE I DALJE OK
 
   const parentNode = getNode(node.parent);
@@ -191,15 +204,11 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId }, options) => {
   // AKO CONTAIN-UJE NE PRAVIS NODE
   // IDEJA JE  NAPRAVI NODE I STAVI       group     U     NIZ
 
-  console.log(
-    "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
-  );
+  // console.log("=== !== === !== === !== === !== === !== === !== === !== === !== === !== ===");
   // console.log(group, groupColor);
   // console.log(JSON.stringify(node.frontmatter, null, 2));
-  console.log(JSON.stringify(groupPagesNamesAndIds, null, 2));
-  console.log(
-    "=== !== === !== === !== === !== === !== !== === !== === !== === !== === !== === !==="
-  );
+  // console.log(JSON.stringify(groupPagesNamesAndIds, null, 2));
+  // console.log("=== !== === !== === !== === !== === !== !== === !== === !== === !== === !== === !===");
 
   // JA MOGU DODATI ODREDJENE PROPERTIJE, KOJI SE TICU
   // RELATED      GroupPage-A
@@ -216,16 +225,67 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId }, options) => {
 
   if (!groupPagesNamesAndIds[group] && group) {
     // group NE SME BITI null (POSTOJI MOGUCNOST DA SE null UZME KAO PROPERTI KADA KORISTIS [] NOTATION PRI ASSIGNMENTU PROPERTIJA)
+
+    const groupPageId = `GroupPage-${node.id}`;
+
+    // === !== === !== === !== === !==
+    // U OBIMU OVE IZJAVE JA BIH USTVARI TREBAO DA KREIRAM NOVI Node
+    // ODNONO NOVI    GroupPage   NODE  (JER OVDE ZNAM DA OVDE IMAS
+    //  group     SA NOVOM VREDNOSCU   )
+
+    // !======================================!   VAZNO
+    // OVAJ PUT KREIRAM POTPUNO NOVI          contentDigest (TO SLUZI ZA
+    // CACHING)
+    // ZA TO IMAM FUNKCIJU    createContentDigest
+    // TREBALO BI DA JE NAHRANIM SA STRINGOM ILI OBJEKTOM, KOJI IMA INFO
+    // SVOJSTVEN ZA TRENUTNO PRAVLJENI NODE
+    const currentGroupPageContentDigest = createContentDigest({
+      group,
+      groupPageId, // ZADAO OBJEKAT SA TRENUTNIM group STRINGOM I ID-JEM TRENUTNOG GROUP-A
+    });
+
+    // MISLIM DA SADA IMAM SVE STO JE POTREBNO ZA KREIRANJE NOVOG NODE-A
+    actions.createNode({
+      id: groupPageId,
+      name: group,
+      path: group,
+      groupColor,
+      // STAVICU I UPDATED PA CU VIDETI (IAKO NISAM SIGURAN DA CE OVO BITI
+      // UPDATED AKO SE DODA ILI (OSTAJE TI DA QUERY-UJES I VIDIS DA L ICE TI
+      // DATI PRAVI INFO))
+      updated: modifiedTime, // MISLI MDA OVO SAMO POKAZUJE VREME ZA KREIRANI
+      //                       ILI UPDATE-OVANI MDX FAJL, KOJI SE TRENUTNO
+      //                                        KREIRA, U ISTOM NAVRATU KAD SE
+      //                                        KREIRA OVA GroupPage INSTANCA
+      //    parent-A   STVARNO NEMA
+      // I NEMA SMISLA BILO STA STAVLJATI ZA PARENT-A
+      internal: {
+        type: "GroupPage",
+        contentDigest: currentGroupPageContentDigest,
+      },
+    });
+    // A BILO KOJI FIELD, KOJI SAM ZAOSTAO DA DEFINISEM ZA OVAJ GroupPage  NODE
+    // JER NIJE BILO MOGUCE
+    // ILI, DOLE ZA ODREDJENI FIELD   BlogPostPage-A  NODE-A
+    // DEFINISACU UZ POMOC RESOLVER-A
+
+    // MOZES DA NASTAVIS SA DEFINISANJEM ONOGA CIME CE BITI NAHRANJEN
+    // groupPage      FIELD       BlogPostPage
+
     groupPageObject = {
-      id: `GroupPage-${node.id}`, // MOZDA OVE NISAM OVAKO TREBAO RADITI (VEC
+      id: groupPageId, // MOZDA OVE NISAM OVAKO TREBAO RADITI (VEC
       //NEKI RANDOM BROJ ZATO STO NEMAM NEKU
       // RELACIJU  JEDAN Mdx NASPRAM JEDNOG
       // GroupPage ID-JA )
       name: group,
       path: group,
+      groupColor,
+      updated: modifiedTime,
     };
 
-    groupPagesNamesAndIds[group] = `GroupPage-${node.id}`;
+    groupPagesNamesAndIds[group] = groupPageId;
+
+    // === !== === !== === !== === !==
   } else {
     groupPageObject = {
       id: groupPagesNamesAndIds[group],
@@ -262,12 +322,25 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId }, options) => {
 
     // EVO GA, PRVO KREIRAM SVE ONO STO MOGU OBEZBEDITI A TICE SE GROUP PAGE-A
     groupPage,
+    // ALI IPAK BEZ OBZIRA STA SAM OBEZBEDIO, JA CU PRAVITI RESOLVER-A ZA OVAJ
+    // FIELD
   });
 };
 
 // KREIRANJE RESOLVER ZA body FIELD
 
+//  SADA CU KREIRATI RESOLVER-A I ZA      groupPage     FIELD NA    BlogPostPage
+//                                                                      TYPE-U
+
 exports.createResolvers = ({ createResolvers }) => {
+  console.log(
+    "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
+  );
+  console.log(groupPagesNamesAndIds);
+  console.log(
+    "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
+  );
+
   createResolvers({
     BlogPostPage: {
       body: {
