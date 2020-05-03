@@ -359,6 +359,9 @@ exports.onCreateNode = (
     groupPage,
     // ALI IPAK BEZ OBZIRA STA SAM OBEZBEDIO, JA CU PRAVITI RESOLVER-A ZA OVAJ
     // FIELD
+    // ***** I ZATO JE PROSLEDJIVANJE OBJEKAT SA VECIM BROJEM PROPERTIJA BILO
+    // SUVISNO, JER SAMO MI JE POTREBAN ID DA BIH PREME NJEMU GET-OVAO
+    // POTREBNI NODE
   });
 };
 
@@ -449,6 +452,33 @@ exports.createResolvers = ({ createResolvers }) => {
           }
 
           return pathAndNameArray;
+        },
+      },
+      // KREIRAM I groupPage RESOLVER
+      groupPage: {
+        type: "GroupPage",
+        resolve: (source, arguments, context, info) => {
+          let groupPageInstance = null;
+
+          // MORAM HANDLE-OVATI SLUCAJ KADA BlogPostPage
+          // NEMA SVOJ RELATED    GroupPage
+          if (source.groupPage && source.groupPage.id) {
+            const blogPostId = source.groupPage.id;
+
+            console.log("SOURC SOURCE SOURCE");
+            console.log(source);
+            console.log("SOURC SOURCE SOURCE");
+
+            groupPageInstance = context.nodeModel.getNodeById({
+              id: blogPostId,
+            });
+
+            console.log("-------INSTANCE INSTANCE-----------");
+            console.log(groupPageInstance);
+            console.log("-------INSTANCE INSTANCE-----------");
+          }
+
+          return groupPageInstance;
         },
       },
     },
