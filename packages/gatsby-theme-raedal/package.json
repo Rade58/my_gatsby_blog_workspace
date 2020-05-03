@@ -13,7 +13,6 @@
     "@theme-ui/presets": "^0.3.0",
     "@theme-ui/typography": "^0.3.0",
     "gatsby-image": "^2.3.4",
-    "gatsby-plugin-anchor-links": "^1.1.1",
     "gatsby-plugin-mdx": "^1.1.7",
     "gatsby-plugin-react-helmet": "^3.2.3",
     "gatsby-plugin-theme-ui": "^0.3.0",

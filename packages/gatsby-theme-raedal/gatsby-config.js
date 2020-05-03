@@ -13,9 +13,9 @@ module.exports = (options) => {
   return {
     plugins: [
       "gatsby-plugin-typescript",
-      {
+      /* {
         resolve: "gatsby-plugin-anchor-links",
-      },
+      }, */
 
       /* {
         resolve: "gatsby-plugin-typescript",
