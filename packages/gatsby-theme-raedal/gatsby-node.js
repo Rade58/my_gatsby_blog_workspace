@@ -95,7 +95,7 @@ exports.createSchemaCustomization = ({ actions }) => {
 
       updated: Date! @dateformat
 
-      blogPostPages: [BlogPostPage!]!
+      blogPostPages: [BlogPostPage]!
 
 
       allPosibleGroupPagesOfBlog: [GroupPage!]!
@@ -344,13 +344,13 @@ exports.onCreateNode = (
 //                                                                      TYPE-U
 
 exports.createResolvers = ({ createResolvers }) => {
-  console.log(
+  /*  console.log(
     "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
   );
   console.log(groupPagesNamesAndIds);
   console.log(
     "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
-  );
+  ); */
 
   createResolvers({
     BlogPostPage: {
@@ -394,14 +394,34 @@ exports.createResolvers = ({ createResolvers }) => {
       },
     },
     // EVO DEFINISEM RESOLVER ZA     blogPostPages   FIELD NA      GroupPage    TYPE-U
-    /*  GroupPage: {
-      blogPostPages: (source, arguments, context, info) => {
+    GroupPage: {
+      blogPostPages: {
+        type: "[BlogPostPage]!",
+        resolve: (source, arguments, context, info) => {
+          console.log(
+            "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
+          );
+          console.log(
+            JSON.stringify(
+              {
+                source,
+                arguments,
+                context,
+              },
+              null,
+              2
+            )
+          );
+          console.log(
+            "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
+          );
 
-        // PA POTREBNO JE UZETI SVE NODE-OVE 
+          // PA POTREBNO JE UZETI SVE NODE-OVE
 
-
-      }
-    } */
+          return [];
+        },
+      },
+    },
   });
 };
 
