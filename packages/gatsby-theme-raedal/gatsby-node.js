@@ -711,5 +711,28 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   // BlogPostPage-A, KAKO BI TAM OQUERY-OVAO ONO DODATN OSTA TI TREBA, A ODNOSI
   // SE NA LINK DO GROUP PAGE-A I KEYWORDS
 
-  // NARAVNO OPET CU PRVO QUERY-OVATI ZA SVIG       GroupPage     NODE-OVIMA
+  // NARAVNO PRVO QUERY-OVATI ZA SVIM       GroupPage     NODE-OVIMA
+
+  const allGroupPagesIdsAndPaths = await graphql(`
+    query TakeGroupPages {
+      allGroupPage {
+        # DAKLE OVO NE BI TREBAL ODA BUDE VELIKI QUERY
+        # JER KAO STO SAM REAKAO KORISTICU		QUERY
+        # NA TEMPLATE KOMPONENTI-U DA BIH OBEZBEDIO
+        # DATA KORAKTERISTICAN ZA SVAK IPAGE
+        # DAKLE QUERIES CE SE EXEQUTE-OVATI INDIVIDUALY
+        # KROZ TEMPLATE
+
+        # DAKLE SAMO TI TREBA ID (STO CES KORISTITI ZA BUDUCE QUERY-JE)
+        # ODNONO INDIVIDUALNE
+
+        # I TREBA TI path NA KOJEM    path    NA KOJEM CE BITI KREIRAN PAGE
+
+        nodes {
+          id
+          path
+        }
+      }
+    }
+  `);
 };
