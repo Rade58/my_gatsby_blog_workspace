@@ -73,7 +73,7 @@ exports.createSchemaCustomization = ({ actions }) => {
 
       groupPage: GroupPage
       
-      allPosibleGroupPagesOfBlog: [GroupPage]!
+      allPosibleGroupPagesOfBlog: [GroupNameAndPath!]!
 
     }
 
@@ -98,12 +98,15 @@ exports.createSchemaCustomization = ({ actions }) => {
       blogPostPages: [BlogPostPage]!
 
 
-      allPosibleGroupPagesOfBlog: [GroupPage!]!
-
+      allPosibleGroupPagesOfBlog: [GroupNameAndPath!]!
 
     }
 
 
+    type GroupNameAndPath {
+      name: String!
+      path: String!
+    }
 
   `);
 };
@@ -252,7 +255,7 @@ exports.onCreateNode = (
     actions.createNode({
       id: groupPageId,
       name: group,
-      path: group,
+      path: "/" + group,
       groupColor,
       // STAVICU I UPDATED PA CU VIDETI (IAKO NISAM SIGURAN DA CE OVO BITI
       // UPDATED AKO SE DODA ILI (OSTAJE TI DA QUERY-UJES I VIDIS DA L ICE TI
@@ -289,7 +292,7 @@ exports.onCreateNode = (
       // RELACIJU  JEDAN Mdx NASPRAM JEDNOG
       // GroupPage ID-JA )
       name: group,
-      path: group,
+      path: "/" + group,
       groupColor,
       updated: modifiedTime,
     };
@@ -391,6 +394,25 @@ exports.createResolvers = ({ createResolvers }) => {
           // KOMPONENTI, (DAKLE KADA QUERY-UJEM body STAVLJAM GA U TU
           // KOMPONENTU )
         },
+
+        // POSTO ISTI FIELD POSTOJI I NA GroupPage TYPE-U
+        // DAO SAM KOD NJEGA OBJASNJENJE
+
+        allPosibleGroupPagesOfBlog: {
+          type: "[GroupNameAndPath!]!",
+
+          resolve: () => {
+            let pathAndNameArray = [];
+
+            const groupKeys = Object.keys(groupPagesNamesAndIds);
+
+            for (let member of groupKeys) {
+              pathAndNameArray.push({ name: member, path: "/" + member });
+            }
+
+            return pathAndNameArray;
+          },
+        },
       },
     },
     // EVO DEFINISEM RESOLVER ZA     blogPostPages   FIELD NA      GroupPage    TYPE-U
@@ -398,10 +420,14 @@ exports.createResolvers = ({ createResolvers }) => {
       blogPostPages: {
         type: "[BlogPostPage]!",
         resolve: (source, arguments, context, info) => {
+          const blogPostType = info.schema.getType("BlogPostPage");
+
+          const blogPostFields = blogPostType.getFields();
+
           console.log(
             "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
           );
-          console.log(
+          /* console.log(
             JSON.stringify(
               {
                 source,
@@ -411,7 +437,10 @@ exports.createResolvers = ({ createResolvers }) => {
               null,
               2
             )
-          );
+          ); */
+
+          console.log(JSON.stringify(blogPostFields, null, 2));
+
           console.log(
             "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
           );
@@ -419,6 +448,27 @@ exports.createResolvers = ({ createResolvers }) => {
           // PA POTREBNO JE UZETI SVE NODE-OVE
 
           return [];
+        },
+      },
+
+      // KREIRANJE RESOLVER-A ZA      allPosibleGroupPagesOfBlog
+      // JE LAKSE JER SAM JA SVE TE VREDNSOTI STAVIO U NIZ (SECAS SE?)
+      // groupPagesNamesAndIds (ON JE U GLOBALNOM OBIMU IZVAN BILO KOG HOOK-A)
+      // DAKLE DOSTUPAN TOKOM BUILDA
+
+      allPosibleGroupPagesOfBlog: {
+        type: "[GroupNameAndPath!]!",
+
+        resolve: () => {
+          let pathAndNameArray = [];
+
+          const groupKeys = Object.keys(groupPagesNamesAndIds);
+
+          for (let member of groupKeys) {
+            pathAndNameArray.push({ name: member, path: "/" + member });
+          }
+
+          return pathAndNameArray;
         },
       },
     },
