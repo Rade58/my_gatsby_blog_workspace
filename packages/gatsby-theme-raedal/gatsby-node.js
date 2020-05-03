@@ -431,6 +431,7 @@ exports.createResolvers = ({ createResolvers }) => {
           blogPages
           */
 
+          /* 
           console.log(
             "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
           );
@@ -440,7 +441,7 @@ exports.createResolvers = ({ createResolvers }) => {
           console.log(
             "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
           );
-
+              */
           const groupKeys = Object.keys(groupPagesNamesAndIds);
 
           for (let member of groupKeys) {
@@ -456,13 +457,40 @@ exports.createResolvers = ({ createResolvers }) => {
       blogPostPages: {
         type: "[BlogPostPage]!",
         resolve: (source, arguments, context, info) => {
-          const blogPostType = info.schema.getType("BlogPostPage");
+          // const blogPostType = info.schema.getType("BlogPostPage");
 
-          const blogPostFields = blogPostType.getFields();
+          // const blogPostFields = blogPostType.getFields();
 
-          // PA POTREBNO JE UZETI SVE NODE-OVE
+          // I OVDE FILTIRIRAM ID-JEVE IZ          groupPagesNamesAndIds
+          //                                        OBJEKTA
 
-          return [];
+          /* console.log(
+            "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
+          ); */
+
+          // console.log(JSON.stringify(source, null, 2));
+
+          // console.log(source.name);
+
+          console.log(groupPagesNamesAndIds[source.name].blogPages); // TI OVO MOZES SERVIRATI KAO POVRATNU VREDNOST ( TO BI BILO I NAJBOLJE DA URADIS )
+
+          const blogPostIdsArray = groupPagesNamesAndIds[source.name].blogPages;
+
+          let blogPostArray = [];
+
+          for (let blogPostId of blogPostIdsArray) {
+            blogPostArray.push(
+              context.nodeModel.getNodeById({
+                id: blogPostId,
+              })
+            );
+          }
+
+          /* console.log(
+            "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
+          ); */
+
+          return blogPostArray;
         },
       },
 
