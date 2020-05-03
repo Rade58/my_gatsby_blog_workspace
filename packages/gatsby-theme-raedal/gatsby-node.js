@@ -561,6 +561,15 @@ exports.createResolvers = ({ createResolvers }) => {
 //                                                    GDE PAGE TREBA BITI
 //                                                     RENDERED)
 
+// === !== === !== === !== === !== === !== === !== === !== === !==
+// SADA KREIRAM           GroupPage
+// === !== === !== === !== === !== === !== === !== === !== === !==
+// JA MISLIM DA CU MOCI DA ISKORISTIM Promise.all KOJI VEC DOLE POSTOJI
+// MEDJUTIM MORACU OBEZBEDITI TEMPLATE, ZA TAJ Group PAGE
+// ZAPAMTI DA body NECES IMATI, JER TI OVE GROUP PAGE-OVE GENERISES SAM
+// (NE GENERISES IH OD MDX-A, DAKLE GROUP PAGE-OVI NEMAJU SVOG PARENT-A)
+// === !== === !== === !== === !== === !== === !== === !== === !==
+
 exports.createPages = async ({ actions, graphql, reporter }) => {
   // POSTO SAM PRAVIO MULTIPLE QUERIES MORAO SAM DA UPOTREBIM
   // Promise.all
@@ -667,6 +676,13 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       })
     );
   }
+
+  // === !== === !== === !== === !== === !== === !== === !== === !==
+  // DAKLE ISKORISTICU OPET ISTI ARRAY OF PROMISES
+  // CONVINIENT JE TO STO JE OVO    async   FUNKCIJA
+  // TAKO DA MOZEZ await    OVATI TVOJE QUERY-JE
+  // JEDINO STO BI PRVO TREBALO DA OBEZBEDIS JESTE **** TEMPLATE KOMPONENTA ****
+  // === !== === !== === !== === !== === !== === !== === !== === !==
 
   return Promise.all(arrayOfPromises);
 };
