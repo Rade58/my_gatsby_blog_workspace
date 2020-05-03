@@ -73,7 +73,7 @@ exports.createSchemaCustomization = ({ actions }) => {
 
       groupPage: GroupPage
       
-      allPosibleGroupPagesOfBlog: [GroupNameAndPath!]!
+      allBlogKeywords: [GroupNameAndPath!]!
 
     }
 
@@ -98,20 +98,20 @@ exports.createSchemaCustomization = ({ actions }) => {
       blogPostPages: [BlogPostPage]!
 
 
-      allPosibleGroupPagesOfBlog: [GroupNameAndPath!]!
+      allBlogKeywords: [GroupNameAndPath!]!
 
     }
 
 
     type GroupNameAndPath {
-      name: String!
+      keyword: String!
       path: String!
     }
 
   `);
 };
 // ************************
-// MOZE BITI DA SU GORNJI      allPosibleGroupPagesOfBlog      FIELD-OVI, NA
+// MOZE BITI DA SU GORNJI      allBlogKeywords      FIELD-OVI, NA
 // OBA TYPE-A, ODNONO NODE-A, IPAK VISAK
 // ************************
 
@@ -397,21 +397,21 @@ exports.createResolvers = ({ createResolvers }) => {
 
         // POSTO ISTI FIELD POSTOJI I NA GroupPage TYPE-U
         // DAO SAM KOD NJEGA OBJASNJENJE
+      },
 
-        allPosibleGroupPagesOfBlog: {
-          type: "[GroupNameAndPath!]!",
+      allBlogKeywords: {
+        type: "[GroupNameAndPath!]!",
 
-          resolve: () => {
-            let pathAndNameArray = [];
+        resolve: () => {
+          let pathAndNameArray = [];
 
-            const groupKeys = Object.keys(groupPagesNamesAndIds);
+          const groupKeys = Object.keys(groupPagesNamesAndIds);
 
-            for (let member of groupKeys) {
-              pathAndNameArray.push({ name: member, path: "/" + member });
-            }
+          for (let member of groupKeys) {
+            pathAndNameArray.push({ keyword: member, path: "/" + member });
+          }
 
-            return pathAndNameArray;
-          },
+          return pathAndNameArray;
         },
       },
     },
@@ -451,12 +451,12 @@ exports.createResolvers = ({ createResolvers }) => {
         },
       },
 
-      // KREIRANJE RESOLVER-A ZA      allPosibleGroupPagesOfBlog
+      // KREIRANJE RESOLVER-A ZA      allBlogKeywords
       // JE LAKSE JER SAM JA SVE TE VREDNSOTI STAVIO U NIZ (SECAS SE?)
       // groupPagesNamesAndIds (ON JE U GLOBALNOM OBIMU IZVAN BILO KOG HOOK-A)
       // DAKLE DOSTUPAN TOKOM BUILDA
 
-      allPosibleGroupPagesOfBlog: {
+      allBlogKeywords: {
         type: "[GroupNameAndPath!]!",
 
         resolve: () => {
@@ -465,7 +465,7 @@ exports.createResolvers = ({ createResolvers }) => {
           const groupKeys = Object.keys(groupPagesNamesAndIds);
 
           for (let member of groupKeys) {
-            pathAndNameArray.push({ name: member, path: "/" + member });
+            pathAndNameArray.push({ keyword: member, path: "/" + member });
           }
 
           return pathAndNameArray;
