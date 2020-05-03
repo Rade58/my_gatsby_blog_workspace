@@ -235,6 +235,16 @@ exports.onCreateNode = (
 
     const groupPageId = `GroupPage-${node.id}`;
 
+    groupPagesNamesAndIds[group] = { groupPageId };
+
+    // moram kolektovati i id-jeve BlogPostPage-OVA
+
+    if (!groupPagesNamesAndIds[group]["blogPages"]) {
+      groupPagesNamesAndIds[group].blogPages = [];
+    }
+
+    groupPagesNamesAndIds[group].blogPages.push(id);
+
     // === !== === !== === !== === !==
     // U OBIMU OVE IZJAVE JA BIH USTVARI TREBAO DA KREIRAM NOVI Node
     // ODNONO NOVI    GroupPage   NODE  (JER OVDE ZNAM DA OVDE IMAS
@@ -297,14 +307,25 @@ exports.onCreateNode = (
       updated: modifiedTime,
     };
 
-    groupPagesNamesAndIds[group] = groupPageId;
+    if (!groupPagesNamesAndIds[group]["blogPages"]) {
+      groupPagesNamesAndIds[group].blogPages = [];
+    }
+
+    groupPagesNamesAndIds[group].blogPages.push(id);
 
     // === !== === !== === !== === !==
   } else {
+    if (!groupPagesNamesAndIds[group]["blogPages"]) {
+      groupPagesNamesAndIds[group].blogPages = [];
+    }
+
+    groupPagesNamesAndIds[group].blogPages.push(id);
+
     groupPageObject = {
-      id: groupPagesNamesAndIds[group],
+      id: groupPagesNamesAndIds[group].groupPageId,
       name: group,
-      path: group,
+      path: "/" + group,
+      groupColor,
     };
   }
 
@@ -405,6 +426,21 @@ exports.createResolvers = ({ createResolvers }) => {
         resolve: () => {
           let pathAndNameArray = [];
 
+          /*
+          groupPageId
+          blogPages
+          */
+
+          console.log(
+            "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
+          );
+
+          console.log(JSON.stringify(groupPagesNamesAndIds, null, 2));
+
+          console.log(
+            "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
+          );
+
           const groupKeys = Object.keys(groupPagesNamesAndIds);
 
           for (let member of groupKeys) {
@@ -423,27 +459,6 @@ exports.createResolvers = ({ createResolvers }) => {
           const blogPostType = info.schema.getType("BlogPostPage");
 
           const blogPostFields = blogPostType.getFields();
-
-          console.log(
-            "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
-          );
-          /* console.log(
-            JSON.stringify(
-              {
-                source,
-                arguments,
-                context,
-              },
-              null,
-              2
-            )
-          ); */
-
-          console.log(JSON.stringify(blogPostFields, null, 2));
-
-          console.log(
-            "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
-          );
 
           // PA POTREBNO JE UZETI SVE NODE-OVE
 
