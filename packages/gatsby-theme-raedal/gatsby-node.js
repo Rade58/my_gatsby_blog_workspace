@@ -233,7 +233,7 @@ exports.onCreateNode = (
   if (!groupPagesNamesAndIds[group] && group) {
     // group NE SME BITI null (POSTOJI MOGUCNOST DA SE null UZME KAO PROPERTI KADA KORISTIS [] NOTATION PRI ASSIGNMENTU PROPERTIJA)
 
-    const groupPageId = `GroupPage-${node.id}`;
+    const groupPageId = createNodeId(`GroupPage-${node.id}`);
 
     groupPagesNamesAndIds[group] = { groupPageId };
 
@@ -307,14 +307,14 @@ exports.onCreateNode = (
       updated: modifiedTime,
     };
 
-    if (!groupPagesNamesAndIds[group]["blogPages"]) {
+    /* if (!groupPagesNamesAndIds[group]["blogPages"]) {
       groupPagesNamesAndIds[group].blogPages = [];
     }
 
-    groupPagesNamesAndIds[group].blogPages.push(id);
+    groupPagesNamesAndIds[group].blogPages.push(id); */
 
     // === !== === !== === !== === !==
-  } else {
+  } else if (group) {
     if (!groupPagesNamesAndIds[group]["blogPages"]) {
       groupPagesNamesAndIds[group].blogPages = [];
     }
