@@ -9,6 +9,10 @@ import GroupPage from "../components/group-page";
 // DAKLE VODIM RACUAN STA M ISVE TREBA, IAKO MISLIM DA BI TREBA
 // SVE
 
+export interface GroupPageData {
+  blah: any;
+}
+
 export const TakeOneGroupPage = graphql`
   query TakeOneGroupPage($id: String!) {
     groupPage(id: { eq: $id }) {
