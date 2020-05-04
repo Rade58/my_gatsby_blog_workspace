@@ -18,6 +18,8 @@ import { GroupPageTemplatePropsI } from "../templates/group-page-template";
 const GroupPage: FunctionComponent<GroupPageTemplatePropsI> = (props) => {
   const a = 0;
 
+  // JA CU SADA
+
   return <StringifiedProps {...props} />;
 };
 
