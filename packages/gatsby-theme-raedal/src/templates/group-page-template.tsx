@@ -9,8 +9,46 @@ import GroupPage from "../components/group-page";
 // DAKLE VODIM RACUAN STA M ISVE TREBA, IAKO MISLIM DA BI TREBA
 // SVE
 
-export interface GroupPageData {
-  blah: any;
+export interface GroupPageContextPropI {
+  id: string;
+}
+
+export interface PageKeywords {
+  keyword: string;
+  path: string;
+}
+
+export type keywordsArray = PageKeywords[];
+
+export interface BlogPostPageI {
+  title: string;
+  path: string;
+  updated: string;
+  frontMatter: {
+    description: string;
+    themeColor: string;
+  };
+}
+
+export type blogPostPageArray = BlogPostPageI[];
+
+export interface GroupPageI {
+  id: string;
+  name: string;
+  path: string;
+  groupColor: string;
+  updated: string;
+  blogPostPages: blogPostPageArray;
+  allBlogKeywords: keywordsArray;
+}
+
+export interface GroupPageDataPropI {
+  groupPage: GroupPageI;
+}
+
+export interface GroupPageTemplatePropsI {
+  pageContext: GroupPageContextPropI;
+  data: GroupPageDataPropI;
 }
 
 export const TakeOneGroupPage = graphql`
@@ -65,10 +103,14 @@ export const TakeOneGroupPage = graphql`
 // I REFERENCIRANJEM KOMPONENTA KOJA TREBA SVE QUERIED PODATKE
 // DA RENDER-UJE
 
-const GroupPageTemplate: FunctionComponent = (props) => {
+const GroupPageTemplate: FunctionComponent<GroupPageTemplatePropsI> = (
+  props
+) => {
   // pageContext    NECES UPOTREBLAVATI, ALI ZNAJ DA TI JE OVDE DOSTUUPAN ONAJ
   //                                    id   (ODNOSNO QUERY VARIJABLA)
   const pageContext = props;
+
+  // props.data.groupPage    (OVDE SU TI SVI TVOJI PODACI)
 
   return <GroupPage {...props} />;
 };
