@@ -746,7 +746,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   // DOBRO, DA SADA RESTRUKTURIRAM PODATKE
 
-  const groupArray = allGroupPagesIdsAndPath.data.group;
+  const groupArray = allGroupPagesIdsAndPaths.data.group;
 
   for (let singleGroupPageData of groupArray) {
     // PRAVIM JEDAN GROUP PAGE ZA DRUGIM
