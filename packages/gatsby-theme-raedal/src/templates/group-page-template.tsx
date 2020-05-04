@@ -44,7 +44,7 @@ export interface LocationI {
 }
 
 export interface GroupPageI {
-  id: string;
+  // id: string;
   name: string;
   path: string;
   groupColor: string;
