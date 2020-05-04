@@ -728,7 +728,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
  */
   const allGroupPagesIdsAndPaths = await graphql(`
     query TakeGroupPages {
-      allGroupPage {
+      group: allGroupPage {
         nodes {
           id
           path
@@ -743,4 +743,21 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   //         ---- DODAVANJE NOVOG DEFAULT LAYOUT-A U CONFIG FAJL  ----
   // ***** TO JE NAIME MDX STVAR, KOJA ME TRENUTNO NE ZANIMA *****
   // MISLIM DA MI POMENUTO NECE TREBATI, ALI CU TO, JOS ISPITATI
+
+  // DOBRO, DA SADA RESTRUKTURIRAM PODATKE
+
+  const groupArray = allGroupPagesIdsAndPath.data.group;
+
+  for (let singleGroupPageData of groupArray) {
+    // PRAVIM JEDAN GROUP PAGE ZA DRUGIM
+
+    actions.createPage({
+      // PROSLEDJUJEM QUERY VARIJABLU, KROZ CONTEXT
+      context: { id: singleGroupPageData.id },
+      // PATH NA KOJEM CE BITI GENERISAN PAGE
+      path: singleGroupPageData.path,
+      // KOMPONENTA, KOJA CE BITI RENDERED
+      component: require.resolve("./src/templates/group-page-template.tsx"),
+    });
+  }
 };
