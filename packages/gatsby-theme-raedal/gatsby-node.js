@@ -502,7 +502,7 @@ exports.createResolvers = ({ createResolvers }) => {
 
           // console.log(source.name);
 
-          console.log(groupPagesNamesAndIds[source.name].blogPages); // TI OVO MOZES SERVIRATI KAO POVRATNU VREDNOST ( TO BI BILO I NAJBOLJE DA URADIS )
+          // console.log(groupPagesNamesAndIds[source.name].blogPages); // TI OVO MOZES SERVIRATI KAO POVRATNU VREDNOST ( TO BI BILO I NAJBOLJE DA URADIS )
 
           const blogPostIdsArray = groupPagesNamesAndIds[source.name].blogPages;
 
@@ -746,7 +746,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   // DOBRO, DA SADA RESTRUKTURIRAM PODATKE
 
-  const groupArray = allGroupPagesIdsAndPaths.data.group;
+  console.log(JSON.stringify(allGroupPagesIdsAndPaths, null, 2));
+
+  const groupArray = allGroupPagesIdsAndPaths.data.group.nodes;
 
   for (let singleGroupPageData of groupArray) {
     // PRAVIM JEDAN GROUP PAGE ZA DRUGIM
