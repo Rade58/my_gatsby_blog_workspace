@@ -6,7 +6,7 @@ import { FunctionComponent } from "react";
 import theme from "../../gatsby-plugin-theme-ui/index";
 ////////////////////////////////////////////////////
 
-import GroupPage from "../group-page";
+import GroupPage from "./group-page";
 
 const GroupPageLayout: FunctionComponent = (props) => {
   const stvari = "";

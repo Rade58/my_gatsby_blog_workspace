@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 import { graphql } from "gatsby";
 
 // OVO JE KOMPONENTA KOJU CU DA POPULATE-UJEM
-import GroupPage from "../components/group-page";
+import GroupPage from "../components/group-page-components/group-page";
 
 // UVESCU KOMPONENTU, KADA JE NAPRAVIM
 // A SADA CU NAPRAVITI QUERY

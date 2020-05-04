@@ -26,11 +26,11 @@ MEDJUTIM, KADA BUDES PUBLISH-OVAO BLOG, MORACES PRE TOGA DA **`TAKORECI, LIFT-UJ
 
 ALI ZA SADA, SAMO CES U VESTI TEMU U
 
-- `packages/gatsby-theme-raedal/src/components/group-page.tsx` (IPAK NISAM OVDE UVEZAO TEMU; ODLUCIO SAM IPAK DA ISTO NAPRAVIM NOVI LAYOUT, U KOJI CU UVOZITI UPRAVO `group-page` KOMPONENTU **I KROZ LAYOUT CU OBEZBEDITI TEMU**)
+- `packages/gatsby-theme-raedal/src/components/group-page-components/group-page.tsx` (IPAK NISAM OVDE UVEZAO TEMU; ODLUCIO SAM IPAK DA ISTO NAPRAVIM NOVI LAYOUT, U KOJI CU UVOZITI UPRAVO `group-page` KOMPONENTU **I KROZ LAYOUT CU OBEZBEDITI TEMU**)
 
 I TAMO CES PROVIDE-OVATI TEMU, KROZ `ThemeProvider` KAO STO SI TO RADIO I U Layout KOMPONENTI ZA BLOG POST
 
-U `packages/gatsby-theme-raedal/src/components/group-page.tsx` CES UVESTI LAYOUT
+U `packages/gatsby-theme-raedal/src/components/group-page-components/group-page.tsx` CES UVESTI LAYOUT
 
 TI CES USTVARI SADA NAPRAVITI LAYOUT KOMPONENTU SAMO ZA GROUP PAGE, I TAMO CES PROVIDE-OVATI TEMU, I DALJE CES U TAJ LAYOUT PRAVITI COMPOSING
 
@@ -192,4 +192,26 @@ VIDIS DA TI SAMI GRAPHQL VEC PRUZA DOSTA INFORMACIJA
 
 # STO SE TICE CONTEXT API, NAJBOLJE JE KREIRATI JEDAN CONTEXT, KOJI CE BITI WRAPPED AROUND SLEDECE KOMPONENTE
 
-- `packages/gatsby-theme-raedal/src/components/group-page.tsx`
+- `packages/gatsby-theme-raedal/src/components/group-page-components/group-page.tsx`
+
+DA LI DA KORISTIM REDUCER-A (PA VEROVATNO CE TREBATI)
+
+# MOZDA BIH TREBAO DA OVDE UPOTREBIS MAL OVISE 'SKOLSKU UPOTREBU' HOC (HIGHER ORDER KOMPONENTI)
+
+---
+
+**USTVARI POSTO SADA KORISTIM HOOKS, NECU KORISTITI HOC PRINCIP VEC NESTO SLICNO NJEMU A STA SE ZOVE** `CUSTOM HOOKS`
+
+<https://reactjs.org/docs/hooks-custom.html>
+
+---
+
+FUNKCIJA, KOJA RETURN-UJE POTPUNO NOVU KOMPONENTU, A UZIMA JEDNU KOMPONENTU
+
+**DAKLE J PROVIDE-UJEM CUSTOM LOGIKU, I RETURN-UJEM **
+
+TAK OSTO CES IMATI OBICNE KOMPONENTE, KOJE PRIHVATAJU PROPS-E, A TI TE KOMPONENTE MOZES DA WRAPP-UJES UNUTAR KOMPONENTE KOJA BI BILA TAKVA KOMPONENTA DA OBEZBEDJUJE CONTEXT-OV STATE
+
+**`Note that a HOC doesn’t modify the input component, nor does it use inheritance to copy its behavior. Rather, a HOC composes the original component by wrapping it in a container component. A HOC is a pure function with zero side-effects.`**
+
+**Don’t Mutate the Original Component. Use Composition.**
