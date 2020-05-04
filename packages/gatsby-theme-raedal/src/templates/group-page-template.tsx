@@ -120,7 +120,7 @@ const GroupPageTemplate: FunctionComponent<GroupPageTemplatePropsI> = (
 ) => {
   // pageContext    NECES UPOTREBLAVATI, ALI ZNAJ DA TI JE OVDE DOSTUPAN ONAJ
   //                                    id   (ODNOSNO QUERY VARIJABLA)
-  const pageContext = props;
+  const { pageContext } = props;
 
   // props.data.groupPage    (OVDE SU TI SVI TVOJI PODACI)
 
