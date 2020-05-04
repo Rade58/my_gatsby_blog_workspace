@@ -32,6 +32,17 @@ export interface BlogPostPageI {
 
 export type blogPostPageArray = BlogPostPageI[];
 
+export interface LocationI {
+  // OVO SU SAMO NEKI KOJI POSTOJE na location PROPU (ALI ZA SADA MENI ONI NISU
+  // BITNI, VEC SAMO POKAZUJEM DA SU DOSTUPNI)
+  href: string;
+  origin: string;
+  protocol: "http:" | "https:";
+  host: string;
+  hostname: string;
+  port: string;
+}
+
 export interface GroupPageI {
   id: string;
   name: string;
@@ -49,6 +60,7 @@ export interface GroupPageDataPropI {
 export interface GroupPageTemplatePropsI {
   pageContext: GroupPageContextPropI;
   data: GroupPageDataPropI;
+  location: LocationI;
 }
 
 export const TakeOneGroupPage = graphql`
@@ -106,7 +118,7 @@ export const TakeOneGroupPage = graphql`
 const GroupPageTemplate: FunctionComponent<GroupPageTemplatePropsI> = (
   props
 ) => {
-  // pageContext    NECES UPOTREBLAVATI, ALI ZNAJ DA TI JE OVDE DOSTUUPAN ONAJ
+  // pageContext    NECES UPOTREBLAVATI, ALI ZNAJ DA TI JE OVDE DOSTUPAN ONAJ
   //                                    id   (ODNOSNO QUERY VARIJABLA)
   const pageContext = props;
 
