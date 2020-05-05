@@ -35,7 +35,7 @@ export const groupPageReducer: Reducer<GroupPageReducedStateI, GroupPageReducerA
 /**
  * @description (1) OVAJ OBJEKAT, PORED DISPATCH FUNKCIJE JE JEDAN OD DEFAULT-OVA ZADAT PRI POZIVANJU    createContext-A (TO JE OVDE VEC URADJENO ;  (2)  A KORISTI SE KAO I DEFAULT STATE ZA REDUCER-A
  DAKLE PRI KORISCENJU useReducer HOOK, TI CES PROSLEDITI I OVAJ DEFAULT STATE*/
-export const defaultReducerStaste: GroupPageReducedStateI = {
+export const defaultReducerState: GroupPageReducedStateI = {
 
 }
 
@@ -62,7 +62,7 @@ export interface GroupPageContextStateI {
 export const groupPageContext: Context<GroupPageContextStateI> = createContext({
   // eslint-disable-next-line
   groupPageDispatch: ({ type, payload }) => { },
-  reducedState: defaultReducerStaste,
+  reducedState: defaultReducerState,
   groupPage: {
     allBlogKeywords: [{ keyword: "", path: "" }],
     blogPostPages: [{
@@ -109,6 +109,6 @@ export const $_useGroupPageState = {
 export const $_createGroupPageReducerState = {
   groupPageReducer,
   GroupPageStateProvider,
-  defaultReducerStaste
+  defaultReducerState
 }
 
