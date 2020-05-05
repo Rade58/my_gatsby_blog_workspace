@@ -39,4 +39,7 @@ const GroupPageStateProvider: FunctionComponent<GroupPageProviderI> = (
   );
 };
 
+/**
+ * @description PROVIDER KOMPONENTA KOJOJ SU REDUCED STATE I DISPATCHER VEC OBEZBEDJENI, A ONO STA TREBA DA JOJ SE PROSLEDI JESU SAMO PODACI DOBIJENI IZ GRAPHQL QUERY-JA (STO JE EXECUTE-OVANO U GROUP PAGE TEMPLATE-U)
+ */
 export default GroupPageStateProvider;

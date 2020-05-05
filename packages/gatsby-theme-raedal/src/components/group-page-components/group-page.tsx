@@ -5,29 +5,26 @@ import { FunctionComponent } from "react";
 // dev utility
 import StringifiedProps from "../dev-utility/StringifyProps";
 //
-//
-// /////
-// NECU DA MENJAM NIKAKVO STANJE POVODOM PROPSA, KOJE JE
 import { GroupPageTemplatePropsI } from "../../templates/group-page-template";
-// ZATO SAM KAO STO VIDIS GORE, UVEZAO ISTI INTERFACE, KOJIM SAM
-// TYPE-OVAO PROPSE TEMPLATE KOMPONENTE
+//
+// === !==
+// UVOZIM SADA PROVIDER KOMPONENTU, KOJA CE VEC IMATI USPOSTAVLJENI REDUCER STATE PASSED IN
+import GroupPageStateProvider from "./custom_hooks_n_providers/provide-gp-state";
+//
 
-// DAKLE POTREBNO JE OBEZBEDITI CONTEXT
-// OVDE BI BIO NJEGOV PROVIDER
-
-// A ONO STO BI BILO PROVIDED JESU ONI PROPSI KOJI SU MI POTREBNI
-
-// DAKLE TREBAM SE ODLUCITI STA BI TO BILO DOBRO PROSLEDITI
-// USTVARI TO BI TREBAL ODA BUDU      cons {groupPage} = props.data
-
-// ALI ZASTO NE BI URADIO NEKAKAV FUTURE PROOFING I OBEZBEDIO SVE
-
-// piatanje je da li bih trebao koristiti reducer-a (MOZDA CE ZATREBATI)
+// SAMO JOJ TREBAM OBEZBEDITI DATA IZ GRAPHQL QUERY-JA
 
 const GroupPage: FunctionComponent<GroupPageTemplatePropsI> = (props) => {
-  const a = 0;
+  const { groupPage } = props.data; // eslint-disable-line
+  const { children } = props;
 
-  return <StringifiedProps {...props} />;
+  return (
+    <GroupPageStateProvider groupPage={groupPage}>
+      {children}
+    </GroupPageStateProvider>
+  );
+
+  // return <StringifiedProps {...props} />;
 };
 
 export default GroupPage;
