@@ -11,15 +11,17 @@ import theme from "../../gatsby-plugin-theme-ui/index";
 // I SVE WRAPP-UJEM U GroupPage, JER ONA NOSI SAV STATE (I REDUCER-OV I ONAJ
 // UZET OD QUERY-JA)
 
-import StringifiedProps from "../dev-utility/StringifyProps";
+// import StringifiedProps from "../dev-utility/StringifyProps";
+import StringifiedContextState from "../dev-utility/StringifiedContextState";
 
-const LayoutGroupPage: FunctionComponent = (props) => {
+const LayoutGroupPage: FunctionComponent = () => {
   const stvari = "";
 
   return (
     <Fragment>
       <ThemeProvider theme={theme}>
-        <StringifiedProps />
+        {/* <StringifiedProps /> */}
+        <StringifiedContextState />
       </ThemeProvider>
     </Fragment>
   );
