@@ -1,5 +1,5 @@
 import { deep as theme } from "@theme-ui/presets";
-import { Theme, ButtonProps, TextProps, ThemeProviderProps } from 'theme-ui'
+import { Theme, ButtonProps, TextProps, ThemeProviderProps, Divider, DividerProps, BoxProps } from 'theme-ui'
 
 
 // import { ThemeProvider } from "theme-ui";  // OVO NE KORISTIM OVDE
@@ -17,16 +17,36 @@ const myButton: ButtonProps = {
 
 }
 
+
+
+
+
 const typography: Theme = {
   fontSizes: {
 
-  }
+  },
+
 }
 
 
-const myTheme = {
+const playgroundObject: Theme = {
+  borderStyles: {
+    headerBorder: "#d42e66 solid 2px"
+  },
+
+}
+
+
+
+const myTheme: Theme = {
   ...theme,
-  myButton
+  borders: {
+    primary: { border: "#d42e66 solid 2px" }
+  },
+  /* buttons: {
+    primary: {colo}
+  } */
+
 }
 
 

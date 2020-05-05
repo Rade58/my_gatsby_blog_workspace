@@ -14,6 +14,9 @@ import theme from "../../gatsby-plugin-theme-ui/index";
 // import StringifiedProps from "../dev-utility/StringifyProps";
 import StringifiedContextState from "../dev-utility/StringifiedContextState";
 
+// components
+import Header from "./header-group";
+
 const LayoutGroupPage: FunctionComponent = () => {
   const stvari = "";
 
@@ -21,6 +24,7 @@ const LayoutGroupPage: FunctionComponent = () => {
     <Fragment>
       <ThemeProvider theme={theme}>
         {/* <StringifiedProps /> */}
+        <Header />
         <StringifiedContextState />
       </ThemeProvider>
     </Fragment>

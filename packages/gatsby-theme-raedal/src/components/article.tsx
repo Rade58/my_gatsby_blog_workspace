@@ -37,6 +37,7 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body, updated }) => {
     <article
       sx={
         {
+          // border: { variant: "borders.headerBorder" },
           /* h2: {
           paddingTop: !pigDisapear ? "58px" : "18px",
           paddingBottom: "18px",
