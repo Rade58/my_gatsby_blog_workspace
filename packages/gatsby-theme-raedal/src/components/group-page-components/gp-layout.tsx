@@ -1,17 +1,28 @@
 /** @jsx jsx */
 import { jsx, ThemeProvider } from "theme-ui";
-import { FunctionComponent } from "react";
+import { Fragment, FunctionComponent } from "react";
 
 // PROVIDING TEME
 import theme from "../../gatsby-plugin-theme-ui/index";
 ////////////////////////////////////////////////////
 
-import GroupPage from "./group-page";
+// ONO CIME CU UVESTI U OVU KOMPONENTU JESTE
+//    GroupPage      KOMPONENTA, KOJA IMA UGRADJEN SAV STATE
+// I SVE WRAPP-UJEM U GroupPage, JER ONA NOSI SAV STATE (I REDUCER-OV I ONAJ
+// UZET OD QUERY-JA)
 
-const GroupPageLayout: FunctionComponent = (props) => {
+import StringifiedProps from "../dev-utility/StringifyProps";
+
+const LayoutGroupPage: FunctionComponent = (props) => {
   const stvari = "";
 
-  return <div>nesto</div>;
+  return (
+    <Fragment>
+      <ThemeProvider theme={theme}>
+        <StringifiedProps />
+      </ThemeProvider>
+    </Fragment>
+  );
 };
 
-export default GroupPageLayout;
+export default LayoutGroupPage;
