@@ -14,8 +14,12 @@ import { additionalStyles } from "../../common-styles";
 // I SVE WRAPP-UJEM U GroupPage, JER ONA NOSI SAV STATE (I REDUCER-OV I ONAJ
 // UZET OD QUERY-JA)
 
+// dev utilities  === !== === !==
 // import StringifiedProps from "../dev-utility/StringifyProps";
 import StringifiedContextState from "../dev-utility/StringifiedContextState";
+import AddsPlaceholder from "../dev-utility/addsPlaceholder";
+import BuyMyCourse from "../dev-utility/coursePlaceholder";
+// === !== === !==
 
 // components
 import Header from "./header-group";
@@ -42,6 +46,8 @@ const LayoutGroupPage: FunctionComponent = () => {
           {/* <StringifiedContextState /> */}
           <Cards />
           <Keywords />
+          <AddsPlaceholder />
+          <BuyMyCourse />
         </Main>
       </ThemeProvider>
     </Fragment>

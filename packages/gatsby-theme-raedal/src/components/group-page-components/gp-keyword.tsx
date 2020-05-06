@@ -13,6 +13,7 @@ import { PageKeywords } from "../../templates/group-page-template";
 const KeywordLink = styled(Link)`
   & {
     border: pink solid 1px;
+    color: blanchedalmond;
   }
 `;
 

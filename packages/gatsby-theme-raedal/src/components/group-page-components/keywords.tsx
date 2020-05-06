@@ -16,6 +16,7 @@ const Keywords: FunctionComponent = () => {
 
   return (
     <section
+      className="keywords"
       css={css`
         display: flex;
         border: pink solid 1px;

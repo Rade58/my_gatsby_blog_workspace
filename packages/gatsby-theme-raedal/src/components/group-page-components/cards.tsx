@@ -19,7 +19,7 @@ const Cards: FunctionComponent = () => {
   const { blogPostPages } = groupPage;
 
   return (
-    <section>
+    <section className="cards">
       {blogPostPages.map((blogPostData) => (
         <Card
           {...blogPostData}
