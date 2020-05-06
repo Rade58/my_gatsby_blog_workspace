@@ -19,6 +19,8 @@ import StringifiedContextState from "../dev-utility/StringifiedContextState";
 
 // components
 import Header from "./header-group";
+import Main from "./gp-main";
+import Cards from "./cards";
 
 const LayoutGroupPage: FunctionComponent = () => {
   const stvari = "";
@@ -35,7 +37,10 @@ const LayoutGroupPage: FunctionComponent = () => {
       <ThemeProvider theme={theme}>
         {/* <StringifiedProps /> */}
         <Header />
-        <StringifiedContextState />
+        <Main>
+          {/* <StringifiedContextState /> */}
+          <Cards />
+        </Main>
       </ThemeProvider>
     </Fragment>
   );
