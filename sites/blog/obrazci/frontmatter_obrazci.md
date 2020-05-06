@@ -6,6 +6,7 @@ themeColor: "blanchedalmond"
 slug: graphql/client side/intro
 group: graphql
 group-color: "#e04681"
+keywordTextColor: "#fff"
 ---
 
 DAKLE IDEJA JE DA SE FORMIRAJU STRANICE NE KOJIMA CE BITI TABLE OF CONTENT, ALI VEZAN SAMO, ZA ODREDJENU TEMU, KOJA JE VEZANA ZA `group`

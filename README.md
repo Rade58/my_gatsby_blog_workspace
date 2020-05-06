@@ -27,3 +27,25 @@ I ZATO NECU MORATI NISTA UKLANJATI ILI BRISATI
 SAMO MALO PROSIRENJE
 
 A KAKO SAM GA PROSIRIO POGLEDAJ U gatsby-node.js FAJLU
+
+# OBRATI PAZNJU DA `allBlogKeywords` FIELD IMAS NA DVA TYPE-A, I NA GroupPage I NA BlogPostPage
+
+# :one::one: TI MOZES DA RAUNN-UJES QUERY I U SAMOM RESOLVERU :one::one:
+
+KORISTIS SLEDECE INSIDE RESOLVER:
+
+- `context.nodeModel.runQuery()`
+
+<https://www.gatsbyjs.org/docs/schema-customization/#accessing-gatsbys-data-store-from-field-resolvers>
+
+# :two::two: ALI MOZES I DA UZMES SVE NODE-OVE NEKOG TYPE-A :two::two:
+
+KORISTIS SLEDECE INSIDE RESOLVER:
+
+- `context.nodeModel.getAllNodes()`
+
+<https://www.gatsbyjs.org/docs/schema-customization/#accessing-gatsbys-data-store-from-field-resolvers>
+
+`NA TEBI JE DA ODLUCIS STA CES KORISTITI OD PREDHODNA DVA APPROACH-A`
+
+# :three: ETO NA OSNOVU OVE DVE INFORMACIJE SAZNAJEM DA SAM ZA ONAJ PLUGIN KOJI MI OBEZBEDJUJE HEDINGSE, MOGAO NAPRAVITI QUERY, A NE KORISTITI TEZI NACIN, KOJI SAM IMPLEMENTIRAO U HOOK-U `createPages`

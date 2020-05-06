@@ -29,37 +29,6 @@ exports.onPreBootstrap = ({ store }, options) => {
   }
 };
 
-// POTREBNO JE DODATI NOVI TYPE
-// A TAJ NOVI TYPE TREBA DA IMA FIELD, SA KOJEG CE SE MOCI
-// QUERRY-EVATI SVAKI BLOG POST
-
-// NOVI TYPE ISTO TAKO DA IMPLEMENTIRA      Node    TYPE (DA BI SE ZA NJEGA KREIRALI QUERY-JI)
-
-// NEKA SE NOVI TYPE NAZIVA         GroupPage
-
-// (1) NAJAVAZNIJA STVAR KOJU CE ON IMATI NA SEBI JESTE FIELD CIJE CE TYPE BITI
-//                            NIZ       BlogPostPage    TYPE-OVA
-
-//            TAJ FIELD SE MOZE ZVATI       blogPostPages
-
-//                                   SAKLE OVAJ NIZ CE BITI NON NULABLE
-//                                   JER AKO NEMA     BlogPosPage  -OVA U NIZU
-//                                    NEMA POTREBA I DA POSTOJI (ALI OVO JE
-// EDGE CASE KOJI NECU NIKAD IMATI, JER NECE PSIOTOJATI GroupPage AKO ZA NJEGA
-// NEMA BlogPostPage-OVA)
-
-// (1) A MORAM PROSIRITI I  BlogPostPage TAKO DA ON IMA NA SEBI FIELD
-//      KOJI CE BITI TYPED SA         GroupPage
-// FIELD SE MOZE ZVATI    groupPage
-// NARAVNO OVAJ FIELD MOZE BITI    NULLABLE, DAKLE TREBA DA SME DA BUDE null
-// JER NEKI PAGE-OVI NECE IMATI SVOJ RELATED GROUP PAGE
-
-// ***************   ALI STA JOS MOZE BITI NAROCITO KORISNO  *********
-//  PA TO DA OBA   TYPE-A    , I    BlogPostPage      I     GroupPage
-// IAMJU USTVARI FIELD, KOJI CE OPET BITI ARRAY SA SVIM MOGUCIM
-//          GroupPage    -OVIMA
-// KOJI MOGU POSTOJATI NA MOM CELOKUPNOM BLOGU, MOM CELOM APP-U
-
 exports.createSchemaCustomization = ({ actions }) => {
   actions.createTypes(`
     type BlogPostPage implements Node @dontInfer {
@@ -93,6 +62,8 @@ exports.createSchemaCustomization = ({ actions }) => {
 
       groupColor: String!
 
+      keywordTextColor: String!
+
       updated: Date! @dateformat
 
       blogPostPages: [BlogPostPage]!
@@ -106,45 +77,26 @@ exports.createSchemaCustomization = ({ actions }) => {
     type GroupNameAndPath {
       keyword: String!
       path: String!
-      theme: String!
+      keywordColor: String!
+      keywordTextColor: String!
     }
 
   `);
 };
-// ************************
-// MOZE BITI DA SU GORNJI      allBlogKeywords      FIELD-OVI, NA
-// OBA TYPE-A, ODNONO NODE-A, IPAK VISAK
-// ************************
+// KAO STO VIDIS GORE SAM PROSIRIO      GroupNameAndPathType, DODAJUCI
+// keywordColor I keywordTextColor
 
-// STA MOGU NASLUTITI POSTO SAM KRIRAO, PO DVA, TAKORECI KOMPLEKSIJA FIELDA
-// NA DVA TYPE-A
+// ALI SHVATIO SAM DA MI TREBA text COLOR ZA GroupPage TYPE
+// DAKLE OVO JE ZBOG TOGA STO ZELIM DA IMAM TACNE BOJE ZA KEYWORDS
+// JER CE SE TI KEYWORD-OVI ODNOSITI NA REACT , GRAPHQL, GATSBY I OSTALO
+// A ZELIM DA IMAM TACNE BOJE TIH KEYWORD LINKOVA
+// STO SE TICE AMBLEMA, E PA TO MI JE VEC SUVISNO
 
-//  BlogPostPage    SADA IMA FIELD-OVE   groupPage: GroupPage
-//                                      allPosibleGroupPages: [GroupPage]!
+// novi field na GroupPage TYPE-U BICE              keywordTextColor
 
-// I OBADVA CE IZISKIVATI     RESOLVERE
-// I ISTO VAZI I ZA       blogPostPages: [BlogPostPage!]!
-//                        allPosibleGroupPages: [GroupPage!]!
-//   NA     GroupPage-U
+// I ZAVISICE OD TOGA STA JE N MDX STRANI U FRONTMATTER-U UNETO, KAO:
 
-// I ONI IZISKUJU RESOLVER-E
-
-//      CISTO, JOS INFORMATIVNO DA TI NAPOMENEM
-// DAKLE POSTO GORNJI NOVI TYPE IMPLEMENTIRA      Node
-// TO ZNACI DA CE BITI KRIRANA DVA NOVA QUERY-JA U GRAPHQL LAYERU
-// STO MOZES ODMAH I PROVERITI U PLAYGROUND-U ILI     Graphiql
-
-// NOVI QUERY-JI BI TREBALO DA SE ZOVU    allGroupPage      I
-// groupPage
-
-// === ~~ === ~~ ===
-
-// DAKLE SLEDECI HOOK SE IZVRSVA NA SVAKI CREATION         Node-A
-// I KADA KREIRAS NOVE NODE-OVE U OBIMU TOG HOOK-A (I TO OPET TRIGGER-UJE POMENUTI HOOK)
-// ------ SECAM SE OVAKVOG POREDKA  -----------------------------------
-//              gatsby-source-filesystem    JE NAPRAVIO ODREDJENE NODE-OVE
-//   ZATIM      gatsby-plugin-mdx         JE NAPRAVIO ODREDJENE NODE-OVE
-// DOBRO, A sourceInstaceName POTICE OD MOG PLUGINA       gatsby-plugin-raedal
+//                      -
 
 const groupPagesNamesAndIds = {}; // IDEJA JE DA U OVAJ OBJEKAT STAVLJAM
 //                                  GROUP NAME - ID PAROVE
