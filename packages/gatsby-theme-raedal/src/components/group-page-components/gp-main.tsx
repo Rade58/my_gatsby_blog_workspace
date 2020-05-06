@@ -13,6 +13,8 @@ const MainGp: FunctionComponent = (props) => {
     <main
       css={css`
         border: crimson solid 1px;
+        display: grid;
+        padding: 10px;
       `}
     >
       {children}

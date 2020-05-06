@@ -21,6 +21,7 @@ import StringifiedContextState from "../dev-utility/StringifiedContextState";
 import Header from "./header-group";
 import Main from "./gp-main";
 import Cards from "./cards";
+import Keywords from "./keywords";
 
 const LayoutGroupPage: FunctionComponent = () => {
   const stvari = "";
@@ -40,6 +41,7 @@ const LayoutGroupPage: FunctionComponent = () => {
         <Main>
           {/* <StringifiedContextState /> */}
           <Cards />
+          <Keywords />
         </Main>
       </ThemeProvider>
     </Fragment>
