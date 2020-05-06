@@ -31,7 +31,7 @@ const typography: Theme = {
 
 const playgroundObject: Theme = {
   borderStyles: {
-    headerBorder: "#d42e66 solid 2px"
+
   },
 
 }
@@ -43,11 +43,11 @@ const myTheme: Theme = {
   borders: {
     primary: { border: "#d42e66 solid 2px" }
   },
-  /* buttons: {
-    primary: {colo}
-  } */
+
 
 }
+
+
 
 
 export default myTheme

@@ -46,6 +46,8 @@ import { $_useBlogPostReducerState } from "../context_n_reducers/context_n_reduc
 
 //
 
+import { additionalStyles } from "../common-styles";
+
 /* export type UseHeaderCustomHookReturn = [
   // HeaderStateI,
   FunctionComponent
@@ -98,6 +100,9 @@ const Header: FunctionComponent = () => {
   return (
     <header
       className={scrolled_class}
+      sx={{
+        backgroundImage: additionalStyles.headerBackgroundImage,
+      }}
       css={css`
         /* border-top: 14px solid purple; */
 
@@ -111,11 +116,11 @@ const Header: FunctionComponent = () => {
 
         background-color: #ffffff;
 
-        background-image: linear-gradient(
+        /* background-image: linear-gradient(
           to right,
           rgb(63, 44, 56),
           rgb(38, 45, 59)
-        );
+        ); */
 
         position: fixed;
         width: 100%;

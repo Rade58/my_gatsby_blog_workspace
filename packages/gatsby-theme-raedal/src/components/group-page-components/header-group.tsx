@@ -2,6 +2,8 @@
 import { jsx } from "theme-ui";
 import { FunctionComponent } from "react";
 
+import { additionalStyles } from "../../common-styles";
+
 const Header: FunctionComponent = () => {
   let a;
 
@@ -9,10 +11,10 @@ const Header: FunctionComponent = () => {
     <header
       sx={{
         variant: "borders.primary",
+        backgroundImage: additionalStyles.headerBackgroundImage,
       }}
     >
       Neki Header
-      <button sx={{}}>Press the me</button>
     </header>
   );
 };

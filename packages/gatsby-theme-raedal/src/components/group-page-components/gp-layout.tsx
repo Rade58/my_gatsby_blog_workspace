@@ -1,10 +1,13 @@
 /** @jsx jsx */
 import { jsx, ThemeProvider } from "theme-ui";
+import { Global } from "@emotion/core";
 import { Fragment, FunctionComponent } from "react";
 
 // PROVIDING TEME
 import theme from "../../gatsby-plugin-theme-ui/index";
 ////////////////////////////////////////////////////
+import { additionalStyles } from "../../common-styles";
+//
 
 // ONO CIME CU UVESTI U OVU KOMPONENTU JESTE
 //    GroupPage      KOMPONENTA, KOJA IMA UGRADJEN SAV STATE
@@ -22,6 +25,13 @@ const LayoutGroupPage: FunctionComponent = () => {
 
   return (
     <Fragment>
+      <Global
+        styles={{
+          body: {
+            backgroundColor: additionalStyles.bodyBackgroundColor,
+          },
+        }}
+      />
       <ThemeProvider theme={theme}>
         {/* <StringifiedProps /> */}
         <Header />
