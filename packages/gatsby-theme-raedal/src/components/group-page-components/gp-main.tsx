@@ -21,10 +21,10 @@ const MainGp: FunctionComponent = (props) => {
         grid-template-columns: repeat(8, minmax(0, 1fr));
 
         grid-template-areas:
-          "s s c c c c . ."
           "s s c c c c a a"
-          "k k c c c c a a"
-          "k k c c c c . .";
+          "k k c c c c . ."
+          ". . c c c c . ."
+          ". . c c c c . .";
 
         & section {
           display: flex;
@@ -36,8 +36,17 @@ const MainGp: FunctionComponent = (props) => {
 
           &.keywords {
             flex-direction: row;
-            align-items: baseline;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: flex-start;
+            position: sticky;
+            top: 10px;
+
             grid-area: k;
+
+            & > * {
+              margin: 4px;
+            }
           }
         }
 
@@ -46,6 +55,10 @@ const MainGp: FunctionComponent = (props) => {
 
           &.adds {
             grid-area: a;
+            flex-direction: column;
+
+            position: sticky;
+            top: 10px;
           }
 
           &.courses {

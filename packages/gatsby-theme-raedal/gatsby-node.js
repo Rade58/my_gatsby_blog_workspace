@@ -106,6 +106,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     type GroupNameAndPath {
       keyword: String!
       path: String!
+      theme: String!
     }
 
   `);
