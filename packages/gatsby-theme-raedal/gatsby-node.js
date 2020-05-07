@@ -1,3 +1,6 @@
+const mkdirp = require("mkdirp");
+const pathPackage = require("path");
+const fs = require("fs");
 const withDefaults = require("./utility/utility-options"); // DEFAULTS SU
 //                                                         basePath ->  "/""
 //                                                   contentPath  -> "blogposts"
@@ -6,10 +9,7 @@ const withDefaults = require("./utility/utility-options"); // DEFAULTS SU
 const withSiteHelmetDefaults = require("./utility/utility-site-metadata"); // HELMET DEFAULTS (ONO STO SE SERVIRA ZA DEFAULT ZA FIELD frontMatter KOJI SAM KREIRAO) (DODAO SAM U FUNKCIJU I DEFAULTOVE ZA    group    I   groupColor     )
 //
 
-const path = require("path");
 // SAMO SE KORISTI INSIDE     onPreBootstrap
-const fs = require("fs");
-const mkdirp = require("mkdirp");
 
 // AKO NE POSTOJI     contentPath    blogposts
 // ODNOSNO AKO U SITE FOLDERU NE POSTOJI        blogposts    FOLDER
@@ -18,7 +18,7 @@ exports.onPreBootstrap = ({ store }, options) => {
   const { program } = store.getState(); // PROGRAM IMA INFO O SITE-U, KAO STO
   //                                          JE DIREKTORIJUM   SITE-A
   const { contentPath } = withDefaults(options);
-  const dir = path.join(program.directory, contentPath); // DAKEL OVOM SE
+  const dir = pathPackage.join(program.directory, contentPath); // DAKEL OVOM SE
   //                                                         APSOLUTNI
   //                                                  DIREKTORIJUM SITE-A
 
@@ -28,6 +28,8 @@ exports.onPreBootstrap = ({ store }, options) => {
     mkdirp.sync(dir);
   }
 };
+
+// ZELIM DAKLE DA DEFINISEM DIREKTIVU  ,      NEKA SE ZOVE        datefns
 
 exports.createSchemaCustomization = ({ actions }) => {
   actions.createTypes(`
@@ -158,7 +160,7 @@ exports.onCreateNode = (
 
     // moram kolektovati i id-jeve BlogPostPage-OVA
 
-    if (!groupPagesNamesAndIds[group]["blogPages"]) {
+    if (!groupPagesNamesAndIds[group].blogPages) {
       groupPagesNamesAndIds[group].blogPages = [];
     }
 
@@ -184,7 +186,7 @@ exports.onCreateNode = (
     actions.createNode({
       id: groupPageId,
       name: group,
-      path: "/" + group.toLowerCase(),
+      path: pathPackage.resolve("/", group.toLowerCase()),
       groupColor,
       keywordTextColor,
       keywordBorderColor,
@@ -198,7 +200,7 @@ exports.onCreateNode = (
     groupPageObject = {
       id: groupPageId,
       name: group,
-      path: "/" + group.toLowerCase(),
+      path: pathPackage.resolve("/", group.toLowerCase()),
       groupColor,
       keywordTextColor,
       keywordBorderColor,
@@ -207,7 +209,7 @@ exports.onCreateNode = (
 
     // === !== === !== === !== === !==
   } else if (group) {
-    if (!groupPagesNamesAndIds[group]["blogPages"]) {
+    if (!groupPagesNamesAndIds[group].blogPages) {
       groupPagesNamesAndIds[group].blogPages = [];
     }
 
@@ -216,7 +218,7 @@ exports.onCreateNode = (
     groupPageObject = {
       id: groupPagesNamesAndIds[group].groupPageId,
       name: group,
-      path: "/" + group.toLowerCase(),
+      path: pathPackage.resolve("/", group.toLowerCase()),
       groupColor,
       keywordTextColor,
       keywordBorderColor,
@@ -231,7 +233,8 @@ exports.onCreateNode = (
     title,
     updated: modifiedTime,
     parent: node.id,
-    path: slug || path.resolve("/", basePath, relativeDirectory, pageName),
+    path:
+      slug || pathPackage.resolve("/", basePath, relativeDirectory, pageName),
     internal: {
       type: "BlogPostPage",
       contentDigest,
@@ -266,7 +269,7 @@ exports.createResolvers = ({ createResolvers }) => {
     BlogPostPage: {
       body: {
         type: "String!",
-        resolve: (source, arguments, context, info) => {
+        resolve: (source, args, context, info) => {
           const mdxType = info.schema.getType("Mdx");
 
           /* console.log(
@@ -279,7 +282,7 @@ exports.createResolvers = ({ createResolvers }) => {
 
           const mdxNode = context.nodeModel.getNodeById({ id: source.parent });
 
-          return bodyResolver(mdxNode, arguments, context, {
+          return bodyResolver(mdxNode, args, context, {
             fieldName: "body",
           });
         },
@@ -288,13 +291,14 @@ exports.createResolvers = ({ createResolvers }) => {
       allBlogKeywords: {
         type: "[GroupNameAndPath!]!",
 
-        resolve: (source, arguments, context, info) => {
+        resolve: (source, args, context, info) => {
           const arrayOfKeywordObjects = [];
 
           const allGroupPages = context.nodeModel.getAllNodes({
             type: "GroupPage",
           });
 
+          // eslint-disable-next-line
           for (let groupPage of allGroupPages) {
             arrayOfKeywordObjects.push({
               keyword: groupPage.name,
@@ -313,7 +317,7 @@ exports.createResolvers = ({ createResolvers }) => {
       // KREIRAM I groupPage RESOLVER
       groupPage: {
         type: "GroupPage",
-        resolve: (source, arguments, context, info) => {
+        resolve: (source, args, context, info) => {
           let groupPageInstance = null;
 
           if (source.groupPage && source.groupPage.id) {
@@ -332,7 +336,7 @@ exports.createResolvers = ({ createResolvers }) => {
     GroupPage: {
       blogPostPages: {
         type: "[BlogPostPage]!",
-        resolve: (source, arguments, context, info) => {
+        resolve: (source, args, context, info) => {
           console.log(
             "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
           );
@@ -344,8 +348,9 @@ exports.createResolvers = ({ createResolvers }) => {
 
           const blogPostIdsArray = groupPagesNamesAndIds[source.name].blogPages;
 
-          let blogPostArray = [];
+          const blogPostArray = [];
 
+          // eslint-disable-next-line
           for (let blogPostId of blogPostIdsArray) {
             blogPostArray.push(
               context.nodeModel.getNodeById({
@@ -361,7 +366,7 @@ exports.createResolvers = ({ createResolvers }) => {
       allBlogKeywords: {
         type: "[GroupNameAndPath!]!",
 
-        resolve: (source, arguments, context, info) => {
+        resolve: (source, args, context, info) => {
           // === !== === !== === !== === !==
 
           const { name } = source;
@@ -376,6 +381,7 @@ exports.createResolvers = ({ createResolvers }) => {
             JSON.stringify({ allGroupPagesInResolver, source }, null, 2)
           ); */
 
+          // eslint-disable-next-line
           for (let groupPage of allGroupPages) {
             if (name !== groupPage.name) {
               arrayOfKeywordObjects.push({
@@ -469,6 +475,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   const arrayOfPromises = [];
 
+  // eslint-disable-next-line
   for (let blogPost of blogPostIdsAndPaths) {
     const parentId = blogPost.parent.id;
 
@@ -548,6 +555,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   const groupArray = allGroupPagesIdsAndPaths.data.group.nodes;
 
+  // eslint-disable-next-line
   for (let singleGroupPageData of groupArray) {
     // PRAVIM JEDAN GROUP PAGE ZA DRUGIM
 

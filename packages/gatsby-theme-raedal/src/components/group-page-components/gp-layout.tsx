@@ -37,6 +37,8 @@ const LayoutGroupPage: FunctionComponent = () => {
         styles={{
           body: {
             backgroundColor: additionalStyles.bodyBackgroundColor,
+            fontFamily:
+              "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
           },
         }}
       />

@@ -22,6 +22,12 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
       }}
       css={css`
         display: flex;
+
+        & {
+          h4 {
+            font-size: 28px;
+          }
+        }
       `}
     >
       <Link to={path}>
