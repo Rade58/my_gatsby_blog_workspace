@@ -149,6 +149,7 @@ exports.onCreateNode = (
     description,
     group, // OVO JE VEZANO ZA GROUP PAGE
     groupColor, // KAO I OVO
+    keywordTextColor,
   } = withSiteHelmetDefaults(node.frontmatter);
   // E KAKO JA MOGU DA ISKORISTIM       group       INFO
   //    MORAM GA ISKORISTITI ZA      FIELD NA  BlogPostPage  NODE TYPE-U
@@ -220,6 +221,7 @@ exports.onCreateNode = (
       name: group,
       path: "/" + group,
       groupColor,
+      keywordTextColor,
       // STAVICU I UPDATED PA CU VIDETI (IAKO NISAM SIGURAN DA CE OVO BITI
       // UPDATED AKO SE DODA ILI (OSTAJE TI DA QUERY-UJES I VIDIS DA L ICE TI
       // DATI PRAVI INFO))
@@ -257,6 +259,7 @@ exports.onCreateNode = (
       name: group,
       path: "/" + group,
       groupColor,
+      keywordTextColor,
       updated: modifiedTime,
     };
 
@@ -279,6 +282,7 @@ exports.onCreateNode = (
       name: group,
       path: "/" + group,
       groupColor,
+      keywordTextColor,
     };
   }
 
@@ -379,32 +383,39 @@ exports.createResolvers = ({ createResolvers }) => {
       allBlogKeywords: {
         type: "[GroupNameAndPath!]!",
 
-        resolve: () => {
-          let pathAndNameArray = [];
+        resolve: (source, arguments, context, info) => {
+          /* let pathAndNameArray = [];
 
-          /*
-          groupPageId
-          blogPages
-          */
-
-          /* 
-          console.log(
-            "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
-          );
-
-          console.log(JSON.stringify(groupPagesNamesAndIds, null, 2));
-
-          console.log(
-            "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
-          );
-              */
           const groupKeys = Object.keys(groupPagesNamesAndIds);
 
           for (let member of groupKeys) {
             pathAndNameArray.push({ keyword: member, path: "/" + member });
+          } */
+
+          // === !== === !== === !== === !==
+
+          const arrayOfKeywordObjects = [];
+
+          const allGroupPages = context.nodeModel.getAllNodes({
+            type: "GroupPage",
+          });
+
+          /* console.log(
+            JSON.stringify({ allGroupPagesInResolver, source }, null, 2)
+          ); */
+
+          for (let groupPage of allGroupPages) {
+            arrayOfKeywordObjects.push({
+              keyword: groupPage.name,
+              path: groupPage.path,
+              keywordColor: groupPage.groupColor,
+              keywordTextColor: groupPage.keywordTextColor,
+            });
           }
 
-          return pathAndNameArray;
+          // === !== === !== === !== === !==
+
+          return arrayOfKeywordObjects;
         },
       },
       // KREIRAM I groupPage RESOLVER
@@ -485,16 +496,43 @@ exports.createResolvers = ({ createResolvers }) => {
       allBlogKeywords: {
         type: "[GroupNameAndPath!]!",
 
-        resolve: () => {
-          let pathAndNameArray = [];
+        resolve: (source, arguments, context, info) => {
+          /* let pathAndNameArray = [];
 
           const groupKeys = Object.keys(groupPagesNamesAndIds);
 
           for (let member of groupKeys) {
             pathAndNameArray.push({ keyword: member, path: "/" + member });
+          } */
+
+          // === !== === !== === !== === !==
+
+          const { name } = source;
+
+          const arrayOfKeywordObjects = [];
+
+          const allGroupPages = context.nodeModel.getAllNodes({
+            type: "GroupPage",
+          });
+
+          /* console.log(
+            JSON.stringify({ allGroupPagesInResolver, source }, null, 2)
+          ); */
+
+          for (let groupPage of allGroupPages) {
+            if (name !== groupPage.name) {
+              arrayOfKeywordObjects.push({
+                keyword: groupPage.name,
+                path: groupPage.path,
+                keywordColor: groupPage.groupColor,
+                keywordTextColor: groupPage.keywordTextColor,
+              });
+            }
           }
 
-          return pathAndNameArray;
+          // === !== === !== === !== === !==
+
+          return arrayOfKeywordObjects;
         },
       },
     },
@@ -690,6 +728,13 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     }
   `);
 
+  if (allGroupPagesIdsAndPaths.errors) {
+    reporter.panic(
+      "Something went wrong with QUERY FOR ALL OF YOUR GROUP PAGES",
+      allGroupPagesIdsAndPaths.errors
+    );
+  }
+
   // NARAVNO, SADA TI TREBA TEMPLATE, JER CES TAJ TEMPLATE
 
   // *****************  ono sto necu raditi trenutno jeste
@@ -699,7 +744,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   // DOBRO, DA SADA RESTRUKTURIRAM PODATKE
 
-  console.log(JSON.stringify(allGroupPagesIdsAndPaths, null, 2));
+  // console.log(JSON.stringify(allGroupPagesIdsAndPaths, null, 2));
 
   const groupArray = allGroupPagesIdsAndPaths.data.group.nodes;
 
