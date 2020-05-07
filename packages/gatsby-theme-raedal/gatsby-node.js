@@ -133,12 +133,21 @@ exports.onCreateNode = (
 
   // === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !==
 
+  if (group) {
+    console.log({
+      group,
+      low: group.toLowerCase(),
+    });
+  }
+
   // console.log("=== !== === !== === !== === !== === !== === !== === !== === !== === !== ===");
   // console.log("=== !== === !== === !== === !== === !== !== === !== === !== === !== === !== === !===");
 
   let groupPageObject;
 
   // OVIM SLEDECIM USTVARI REGULISAM DA L ICE SE KREIRATI NOVI ID ILI NE
+
+  // const lowGroup = group?group.toLowerCase():null;
 
   if (!groupPagesNamesAndIds[group] && group) {
     // group NE SME BITI null (POSTOJI MOGUCNOST DA SE null UZME KAO PROPERTI KADA KORISTIS [] NOTATION PRI ASSIGNMENTU PROPERTIJA)
@@ -175,7 +184,7 @@ exports.onCreateNode = (
     actions.createNode({
       id: groupPageId,
       name: group,
-      path: "/" + group,
+      path: "/" + group.toLowerCase(),
       groupColor,
       keywordTextColor,
       keywordBorderColor,
@@ -189,7 +198,7 @@ exports.onCreateNode = (
     groupPageObject = {
       id: groupPageId,
       name: group,
-      path: "/" + group,
+      path: "/" + group.toLowerCase(),
       groupColor,
       keywordTextColor,
       keywordBorderColor,
@@ -207,7 +216,7 @@ exports.onCreateNode = (
     groupPageObject = {
       id: groupPagesNamesAndIds[group].groupPageId,
       name: group,
-      path: "/" + group,
+      path: "/" + group.toLowerCase(),
       groupColor,
       keywordTextColor,
       keywordBorderColor,
@@ -327,8 +336,8 @@ exports.createResolvers = ({ createResolvers }) => {
           console.log(
             "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
           );
-          console.log(source);
-          console.log(groupPagesNamesAndIds);
+          /*   console.log(source);
+          console.log(groupPagesNamesAndIds); */
           console.log(
             "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
           );
