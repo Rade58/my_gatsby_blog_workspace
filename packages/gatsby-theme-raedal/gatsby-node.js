@@ -324,9 +324,14 @@ exports.createResolvers = ({ createResolvers }) => {
       blogPostPages: {
         type: "[BlogPostPage]!",
         resolve: (source, arguments, context, info) => {
-          /* console.log(
+          console.log(
             "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
-          ); */
+          );
+          console.log(source);
+          console.log(groupPagesNamesAndIds);
+          console.log(
+            "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
+          );
 
           const blogPostIdsArray = groupPagesNamesAndIds[source.name].blogPages;
 
