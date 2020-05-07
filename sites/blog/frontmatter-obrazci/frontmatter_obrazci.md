@@ -7,7 +7,6 @@ slug: graphql/client side/intro
 group: graphql
 group-color: "#e04681"
 keywordTextColor: "#fff"
-keywordColor: "crimson"
 keywordBorderColor: "pink"
 ---
 

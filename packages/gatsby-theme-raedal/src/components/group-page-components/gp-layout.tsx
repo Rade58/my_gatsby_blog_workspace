@@ -19,6 +19,7 @@ import { additionalStyles } from "../../common-styles";
 import StringifiedContextState from "../dev-utility/StringifiedContextState";
 import AddsPlaceholder from "../dev-utility/addsPlaceholder";
 import BuyMyCourse from "../dev-utility/coursePlaceholder";
+import Lorem from "../dev-utility/lorem-ipsum";
 // === !== === !==
 
 // components
@@ -48,6 +49,7 @@ const LayoutGroupPage: FunctionComponent = () => {
           <Keywords />
           <AddsPlaceholder />
           <BuyMyCourse />
+          <Lorem />
         </Main>
       </ThemeProvider>
     </Fragment>

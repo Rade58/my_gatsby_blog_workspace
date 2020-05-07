@@ -24,7 +24,16 @@ const MainGp: FunctionComponent = (props) => {
           "s s c c c c a a"
           "k k c c c c . ."
           ". . c c c c . ."
-          ". . c c c c . .";
+          ". . c c c c . ."
+          ". . l l l l . ."
+          ". . l l l l . ."
+          ". . l l l l . .";
+
+        & .lorem {
+          grid-area: l;
+          display: flex;
+          flex-direction: column;
+        }
 
         & section {
           display: flex;
@@ -40,7 +49,7 @@ const MainGp: FunctionComponent = (props) => {
             justify-content: flex-start;
             align-items: flex-start;
             position: sticky;
-            top: 10px;
+            top: 20px;
 
             grid-area: k;
 

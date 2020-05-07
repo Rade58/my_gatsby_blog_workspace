@@ -8,7 +8,7 @@ const LoremIpsum: FunctionComponent = () => (
   <div
     className="lorem"
     css={css`
-      width: 50vw;
+      /* width: 50vw; */
       border: blanchedalmond solid 2px;
       margin: 0 auto;
     `}
