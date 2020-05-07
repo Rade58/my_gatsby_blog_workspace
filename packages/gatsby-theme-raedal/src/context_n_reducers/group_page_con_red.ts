@@ -64,7 +64,7 @@ export const groupPageContext: Context<GroupPageContextStateI> = createContext({
   groupPageDispatch: ({ type, payload }) => { },
   reducedState: defaultReducerState,
   groupPage: {
-    allBlogKeywords: [{ keyword: "", path: "", keywordColor: "", keywordTextColor: "" }],
+    allBlogKeywords: [{ keyword: "", path: "", keywordColor: "", keywordTextColor: "", keywordBorderColor: "" }],
     blogPostPages: [{
       title: "",
       path: "",

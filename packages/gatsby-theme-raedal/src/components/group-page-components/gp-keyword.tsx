@@ -13,11 +13,17 @@ import { PageKeywords } from "../../templates/group-page-template";
 // STILIZOVACU LINK KROZ STYLED COMPONENT
 
 const GpKeyword: FunctionComponent<PageKeywords> = (props) => {
-  const { keyword, path, keywordColor, keywordTextColor } = props;
+  const {
+    keyword,
+    path,
+    keywordColor,
+    keywordTextColor,
+    keywordBorderColor,
+  } = props;
 
   const KeywordLink = styled(Link)`
     & {
-      border: blanchedalmond solid 2px;
+      border: ${keywordBorderColor} solid 2px;
       border-radius: 4px;
 
       color: ${keywordTextColor};

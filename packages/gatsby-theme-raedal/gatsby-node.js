@@ -64,6 +64,8 @@ exports.createSchemaCustomization = ({ actions }) => {
 
       keywordTextColor: String!
 
+      keywordBorderColor: String!
+
       updated: Date! @dateformat
 
       blogPostPages: [BlogPostPage]!
@@ -79,6 +81,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       path: String!
       keywordColor: String!
       keywordTextColor: String!
+      keywordBorderColor: String!
     }
 
   `);
@@ -150,6 +153,7 @@ exports.onCreateNode = (
     group, // OVO JE VEZANO ZA GROUP PAGE
     groupColor, // KAO I OVO
     keywordTextColor,
+    keywordBorderColor,
   } = withSiteHelmetDefaults(node.frontmatter);
   // E KAKO JA MOGU DA ISKORISTIM       group       INFO
   //    MORAM GA ISKORISTITI ZA      FIELD NA  BlogPostPage  NODE TYPE-U
@@ -222,6 +226,7 @@ exports.onCreateNode = (
       path: "/" + group,
       groupColor,
       keywordTextColor,
+      keywordBorderColor,
       // STAVICU I UPDATED PA CU VIDETI (IAKO NISAM SIGURAN DA CE OVO BITI
       // UPDATED AKO SE DODA ILI (OSTAJE TI DA QUERY-UJES I VIDIS DA L ICE TI
       // DATI PRAVI INFO))
@@ -260,6 +265,7 @@ exports.onCreateNode = (
       path: "/" + group,
       groupColor,
       keywordTextColor,
+      keywordBorderColor,
       updated: modifiedTime,
     };
 
@@ -283,6 +289,7 @@ exports.onCreateNode = (
       path: "/" + group,
       groupColor,
       keywordTextColor,
+      keywordBorderColor,
     };
   }
 
@@ -410,6 +417,7 @@ exports.createResolvers = ({ createResolvers }) => {
               path: groupPage.path,
               keywordColor: groupPage.groupColor,
               keywordTextColor: groupPage.keywordTextColor,
+              keywordBorderColor: groupPage.keywordBorderColor,
             });
           }
 
@@ -526,6 +534,7 @@ exports.createResolvers = ({ createResolvers }) => {
                 path: groupPage.path,
                 keywordColor: groupPage.groupColor,
                 keywordTextColor: groupPage.keywordTextColor,
+                keywordBorderColor: groupPage.keywordBorderColor,
               });
             }
           }

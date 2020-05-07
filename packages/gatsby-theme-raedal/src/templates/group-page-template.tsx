@@ -18,6 +18,7 @@ export interface PageKeywords {
   path: string;
   keywordColor: string;
   keywordTextColor: string;
+  keywordBorderColor: string;
 }
 
 export type keywordsArray = PageKeywords[];
