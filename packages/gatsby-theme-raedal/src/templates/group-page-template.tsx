@@ -16,6 +16,8 @@ export interface GroupPageContextPropI {
 export interface PageKeywords {
   keyword: string;
   path: string;
+  keywordColor: string;
+  keywordTextColor: string;
 }
 
 export type keywordsArray = PageKeywords[];
@@ -105,6 +107,8 @@ export const TakeOneGroupPage = graphql`
       allBlogKeywords {
         keyword
         path
+        keywordColor
+        keywordTextColor
       }
     }
   }
