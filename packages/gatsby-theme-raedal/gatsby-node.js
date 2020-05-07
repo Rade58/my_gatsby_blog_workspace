@@ -89,31 +89,16 @@ exports.createSchemaCustomization = ({ actions }) => {
 // KAO STO VIDIS GORE SAM PROSIRIO      GroupNameAndPathType, DODAJUCI
 // keywordColor I keywordTextColor
 
-// ALI SHVATIO SAM DA MI TREBA text COLOR ZA GroupPage TYPE
-// DAKLE OVO JE ZBOG TOGA STO ZELIM DA IMAM TACNE BOJE ZA KEYWORDS
-// JER CE SE TI KEYWORD-OVI ODNOSITI NA REACT , GRAPHQL, GATSBY I OSTALO
-// A ZELIM DA IMAM TACNE BOJE TIH KEYWORD LINKOVA
-// STO SE TICE AMBLEMA, E PA TO MI JE VEC SUVISNO
-
-// novi field na GroupPage TYPE-U BICE              keywordTextColor
-
-// I ZAVISICE OD TOGA STA JE N MDX STRANI U FRONTMATTER-U UNETO, KAO:
-
 //                      -
 
 const groupPagesNamesAndIds = {}; // IDEJA JE DA U OVAJ OBJEKAT STAVLJAM
-//                                  GROUP NAME - ID PAROVE
+//                                  GROUP NAME - ID PAROVE (ALI IMA JOS TOGA STA)
 
 // SVI HELPERI SU OVDE OBJASNJENI:     https://www.gatsbyjs.org/docs/node-api-helpers/#createContentDigest
 exports.onCreateNode = (
   { node, actions, getNode, createNodeId, createContentDigest },
   options
 ) => {
-  // OVOG PUTA SAM IZ GORNJEG PRVOG ARGUMENTA IZDVOIO, JOS JEDAN HELPER
-  // A TO JE HELPER ZA KREIRANJE CONTENT DIGEST-A
-  // TREBA MI JER ZELIM DA KREIRAM TAJ NOVI DIGEST ZA SVAKI OD NOVIH
-  // NODE-OVA KOJE CU KREIRATI (OVO SLUZI ZA CACHING, SAMO NAPOMINJEM)
-
   if (!node.parent) return; // OVO JE I DALJE OK
 
   const parentNode = getNode(node.parent);
@@ -121,14 +106,10 @@ exports.onCreateNode = (
   // AKO NIJE LOADED BY MY THEME, NI TAJ MI NE TREBA
   if (parentNode.sourceInstanceName !== "gatsby-theme-raedal") return;
 
-  const { basePath } = withDefaults(options); // PO DEFAULT-U     /  OVDE NISAM NISTA DODATNO DODAVAO STO SE TICE DEFAULT-OVA (MOZES DA POGLEDAS FAJL FUNKCIJE KOJA PRAVI DEFAULT-OVE)
+  const { basePath } = withDefaults(options); // PO DEFAULT-U
 
-  const { name, modifiedTime, relativeDirectory } = parentNode; // RELATIVAN
-  //                                                DIREKTORIJUM U ODNOSU NA
-  //                                                 FOLDER U KOJEM JE SAV
-  //                                                CONTENT, KOJI LOAD-UJES
-  //                                                  SA TVOJOM TEMOM
-  // ODNOSNO TO BI TREBALO DA JE RELATIVNO NA      sites/blog/blogposts     (U SLUCAJU blog SITE-A)
+  const { name, modifiedTime, relativeDirectory } = parentNode;
+
   const id = createNodeId(`BlogPostPage-${node.id}`); // OVO JE ID ZA
   //                                          BlogPostPage    NODE
 
@@ -137,15 +118,9 @@ exports.onCreateNode = (
 
   const pageName = name !== "index" ? name : "";
 
-  // DODAJEM SLUG SUPPORT ODNOSNO SVE STO IMA slug U FRONTMATTER-U slug
-  // BI TREBALO DA BUDE PATH
-
   let slug;
   if (node.frontmatter.slug) slug = `/${node.frontmatter.slug}`;
 
-  //  SITE METADATA (ODNONO ONO STO CE KONZUMIRATI Helemet)
-  // OVDE SAM,
-  // UPRAVO DODAO I DEFAULT ZA        group     FIELD
   const {
     lang,
     themeColor,
@@ -155,34 +130,11 @@ exports.onCreateNode = (
     keywordTextColor,
     keywordBorderColor,
   } = withSiteHelmetDefaults(node.frontmatter);
-  // E KAKO JA MOGU DA ISKORISTIM       group       INFO
-  //    MORAM GA ISKORISTITI ZA      FIELD NA  BlogPostPage  NODE TYPE-U
-  // TO JE, SASVIM JASNO
-
-  // ALI JA ZELIM DA KREIRAM NOVI NODE ALI OVAJ NODE, JA KREIRAM SAMO JEDANPUT
 
   // === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !==
 
-  // DAKLE MORA SE PRAVITI NODE
-
-  // SVAKI PUT PROVERAVAS DA LI NIZ CONTAIN-UJE    group
-  // AKO CONTAIN-UJE NE PRAVIS NODE
-  // IDEJA JE  NAPRAVI NODE I STAVI       group     U     NIZ
-
   // console.log("=== !== === !== === !== === !== === !== === !== === !== === !== === !== ===");
-  // console.log(group, groupColor);
-  // console.log(JSON.stringify(node.frontmatter, null, 2));
-  // console.log(JSON.stringify(groupPagesNamesAndIds, null, 2));
   // console.log("=== !== === !== === !== === !== === !== !== === !== === !== === !== === !== === !===");
-
-  // JA MOGU DODATI ODREDJENE PROPERTIJE, KOJI SE TICU
-  // RELATED      GroupPage-A
-
-  // I TO NAJBOLJE D IH ISKALKULISEM OVDE (JASNO TIO JE DA groupPage FIELD SME
-  // BITI null)
-
-  // EVO OVO JE OBJEKAT, KOJI TREBA DA SE DODAJE KAO VREDNOST blogPost FIELD-A
-  // NA BlogPostPage NODE-U (I KADA MALO BOLJE RAZMISLIS OVO TI NEKAKO SUZAVA, ILI NAZIRES PRICU ZA STA CES SVE MORATI DA DEFINISES RESOLVER)
 
   let groupPageObject;
 
@@ -227,40 +179,15 @@ exports.onCreateNode = (
       groupColor,
       keywordTextColor,
       keywordBorderColor,
-      // STAVICU I UPDATED PA CU VIDETI (IAKO NISAM SIGURAN DA CE OVO BITI
-      // UPDATED AKO SE DODA ILI (OSTAJE TI DA QUERY-UJES I VIDIS DA L ICE TI
-      // DATI PRAVI INFO))
-      updated: modifiedTime, // MISLI MDA OVO SAMO POKAZUJE VREME ZA KREIRANI
-      //                       ILI UPDATE-OVANI MDX FAJL, KOJI SE TRENUTNO
-      //                                        KREIRA, U ISTOM NAVRATU KAD SE
-      //                                        KREIRA OVA GroupPage INSTANCA
-      //    parent-A   STVARNO NEMA
-      // I NEMA SMISLA BILO STA STAVLJATI ZA PARENT-A
+      updated: modifiedTime,
       internal: {
         type: "GroupPage",
         contentDigest: currentGroupPageContentDigest,
       },
-
-      // ALI STA JE SADA OVDE PROBLEMATICNO, PA PROBLEMATICNO JE TO STO NEMAM
-      //      blogPostsPages         FIELD, KOJI TREBA DA IMA ARRAY
-      //                                      BlogPostPage-OVA
-
-      // I DEFINITIVNO ZA NJEGA JA MORAM NAPISATI RESOLVER (I TO CE BITI PRVI
-      // RESOLVER KOJI CU NAPISATI U OVOM STADIJUMU PROJEKTA)
     });
-    // A BILO KOJI FIELD, KOJI SAM ZAOSTAO DA DEFINISEM ZA OVAJ GroupPage  NODE
-    // JER NIJE BILO MOGUCE
-    // ILI, DOLE ZA ODREDJENI FIELD   BlogPostPage-A  NODE-A
-    // DEFINISACU UZ POMOC RESOLVER-A
-
-    // MOZES DA NASTAVIS SA DEFINISANJEM ONOGA CIME CE BITI NAHRANJEN
-    // groupPage      FIELD       BlogPostPage
 
     groupPageObject = {
-      id: groupPageId, // MOZDA OVE NISAM OVAKO TREBAO RADITI (VEC
-      //NEKI RANDOM BROJ ZATO STO NEMAM NEKU
-      // RELACIJU  JEDAN Mdx NASPRAM JEDNOG
-      // GroupPage ID-JA )
+      id: groupPageId,
       name: group,
       path: "/" + group,
       groupColor,
@@ -268,12 +195,6 @@ exports.onCreateNode = (
       keywordBorderColor,
       updated: modifiedTime,
     };
-
-    /* if (!groupPagesNamesAndIds[group]["blogPages"]) {
-      groupPagesNamesAndIds[group].blogPages = [];
-    }
-
-    groupPagesNamesAndIds[group].blogPages.push(id); */
 
     // === !== === !== === !== === !==
   } else if (group) {
@@ -301,10 +222,6 @@ exports.onCreateNode = (
     title,
     updated: modifiedTime,
     parent: node.id,
-    // OVO JE PATH KOJI CES KORISTITI U ADRESS BAR-U, DA SE RENDERUJE, PAGE
-    // A TO SAMO KREIRANJE PAGE-A, CES DEFINISATI DOLE U HOOK-U
-    // createPages
-    // SERVIRAM slug AKO GA JE KORISNIK OBEZBEDIO
     path: slug || path.resolve("/", basePath, relativeDirectory, pageName),
     internal: {
       type: "BlogPostPage",
@@ -319,13 +236,7 @@ exports.onCreateNode = (
       themeColor,
     },
 
-    // EVO GA, PRVO KREIRAM SVE ONO STO MOGU OBEZBEDITI A TICE SE GROUP PAGE-A
     groupPage,
-    // ALI IPAK BEZ OBZIRA STA SAM OBEZBEDIO, JA CU PRAVITI RESOLVER-A ZA OVAJ
-    // FIELD
-    // ***** I ZATO JE PROSLEDJIVANJE OBJEKAT SA VECIM BROJEM PROPERTIJA BILO
-    // SUVISNO, JER SAMO MI JE POTREBAN ID DA BIH PREME NJEMU GET-OVAO
-    // POTREBNI NODE
   });
 };
 
@@ -338,7 +249,6 @@ exports.createResolvers = ({ createResolvers }) => {
   /*  console.log(
     "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
   );
-  console.log(groupPagesNamesAndIds);
   console.log(
     "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
   ); */
@@ -348,21 +258,8 @@ exports.createResolvers = ({ createResolvers }) => {
       body: {
         type: "String!",
         resolve: (source, arguments, context, info) => {
-          // U SUSTINI NA source JESTE PARENT NODE , A TO JE NODE KOJI JE
-          // LOADED SA gatsby-plugin-mdx
-
-          // E PA SA NJEGA CITAS body FIELD   I DAJES GA BODY-JU      BlogPostPage
-          // NODE-A
-
           const mdxType = info.schema.getType("Mdx");
 
-          /*  console.log(
-            "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
-          ); */
-          // const headingsBlah = info.schema.getType("MdxHeadingMdx").getFields();
-
-          // console.log(JSON.stringify(headingsBlah, null, 2));
-          // console.log(headingsBlah.headings);
           /* console.log(
             "=== !== === !== === !== === !== === !== !== === !== === !== === !== === !== === !==="
           ); */
@@ -376,40 +273,18 @@ exports.createResolvers = ({ createResolvers }) => {
           return bodyResolver(mdxNode, arguments, context, {
             fieldName: "body",
           });
-
-          // A STA JE TAJ body KOJI JE UZET SA NODEA-A, KOJI JE Mdx TYPE-A?
-          // PA TO JE STRINGIFIED FUNKCIJA NAMENJENE        MDXRenderer
-          // KOMPONENTI, (DAKLE KADA QUERY-UJEM body STAVLJAM GA U TU
-          // KOMPONENTU )
         },
-
-        // POSTO ISTI FIELD POSTOJI I NA GroupPage TYPE-U
-        // DAO SAM KOD NJEGA OBJASNJENJE
       },
 
       allBlogKeywords: {
         type: "[GroupNameAndPath!]!",
 
         resolve: (source, arguments, context, info) => {
-          /* let pathAndNameArray = [];
-
-          const groupKeys = Object.keys(groupPagesNamesAndIds);
-
-          for (let member of groupKeys) {
-            pathAndNameArray.push({ keyword: member, path: "/" + member });
-          } */
-
-          // === !== === !== === !== === !==
-
           const arrayOfKeywordObjects = [];
 
           const allGroupPages = context.nodeModel.getAllNodes({
             type: "GroupPage",
           });
-
-          /* console.log(
-            JSON.stringify({ allGroupPagesInResolver, source }, null, 2)
-          ); */
 
           for (let groupPage of allGroupPages) {
             arrayOfKeywordObjects.push({
@@ -432,22 +307,12 @@ exports.createResolvers = ({ createResolvers }) => {
         resolve: (source, arguments, context, info) => {
           let groupPageInstance = null;
 
-          // MORAM HANDLE-OVATI SLUCAJ KADA BlogPostPage
-          // NEMA SVOJ RELATED    GroupPage
           if (source.groupPage && source.groupPage.id) {
             const blogPostId = source.groupPage.id;
-
-            /* console.log("SOURC SOURCE SOURCE");
-            console.log(source);
-            console.log("SOURC SOURCE SOURCE"); */
 
             groupPageInstance = context.nodeModel.getNodeById({
               id: blogPostId,
             });
-
-            /* console.log("-------INSTANCE INSTANCE-----------");
-            console.log(groupPageInstance);
-            console.log("-------INSTANCE INSTANCE-----------"); */
           }
 
           return groupPageInstance;
@@ -459,22 +324,9 @@ exports.createResolvers = ({ createResolvers }) => {
       blogPostPages: {
         type: "[BlogPostPage]!",
         resolve: (source, arguments, context, info) => {
-          // const blogPostType = info.schema.getType("BlogPostPage");
-
-          // const blogPostFields = blogPostType.getFields();
-
-          // I OVDE FILTIRIRAM ID-JEVE IZ          groupPagesNamesAndIds
-          //                                        OBJEKTA
-
           /* console.log(
             "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
           ); */
-
-          // console.log(JSON.stringify(source, null, 2));
-
-          // console.log(source.name);
-
-          // console.log(groupPagesNamesAndIds[source.name].blogPages); // TI OVO MOZES SERVIRATI KAO POVRATNU VREDNOST ( TO BI BILO I NAJBOLJE DA URADIS )
 
           const blogPostIdsArray = groupPagesNamesAndIds[source.name].blogPages;
 
@@ -488,31 +340,14 @@ exports.createResolvers = ({ createResolvers }) => {
             );
           }
 
-          /* console.log(
-            "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
-          ); */
-
           return blogPostArray;
         },
       },
-
-      // KREIRANJE RESOLVER-A ZA      allBlogKeywords
-      // JE LAKSE JER SAM JA SVE TE VREDNSOTI STAVIO U NIZ (SECAS SE?)
-      // groupPagesNamesAndIds (ON JE U GLOBALNOM OBIMU IZVAN BILO KOG HOOK-A)
-      // DAKLE DOSTUPAN TOKOM BUILDA
 
       allBlogKeywords: {
         type: "[GroupNameAndPath!]!",
 
         resolve: (source, arguments, context, info) => {
-          /* let pathAndNameArray = [];
-
-          const groupKeys = Object.keys(groupPagesNamesAndIds);
-
-          for (let member of groupKeys) {
-            pathAndNameArray.push({ keyword: member, path: "/" + member });
-          } */
-
           // === !== === !== === !== === !==
 
           const { name } = source;
@@ -677,55 +512,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     );
   }
 
-  // === !== === !== === !== === !== === !== === !== === !== === !==
-  // DAKLE ISKORISTICU OPET ISTI ARRAY OF PROMISES
-  // CONVINIENT JE TO STO JE OVO    async   FUNKCIJA
-  // TAKO DA MOZEZ await    OVATI TVOJE QUERY-JE
-  // JEDINO STO BI PRVO TREBALO DA OBEZBEDIS JESTE **** TEMPLATE KOMPONENTA ****
-  // === !== === !== === !== === !== === !== === !== === !== === !==
-  // STA BIH OVDE TREBAO PRVO URADI (DILEMA JE DA LI SMEM DA AWAIT-UJEM)
-  // I DA LI BI, UOPSTE BILO DOBRO DA KORISTIM DONJI Promise.all BILO
-  // PA NE MORAM, JA JEDNOSTAVNO MOGU DA GA AWAIT-UJEM
-  // === !== === !== === !== === !== === !== === !== === !== === !==
-
-  // DAKEL OVAJ PROMISE JE RANIJE BIO RETURNED FROM THIS FUNCTION
-  //  return Promise.all(arrayOfPromises);
-  //                  JA CU SADA DA GA await-UJEM
-  // PA CU NAKON TOG AWAITING-A PRAVITI NOVE QUERY-JE
-
   await Promise.all(arrayOfPromises);
 
-  // // === !== === !== === !== === !== === !== === !== === !== === !==
-
-  //    jedna digresija
-
-  // KAD BOLJE RAZMISLIS ILI KADA BUDES PRAVIO NEKI NOVI SITE
-  // MOZDA JE IPAK NAJBOLJE DA SE KRENE MZODA OD GROUP PAGE-OVA, PA DA SE ONDA
-  // DEFINISE KREIRANJE  BlogPostPage-OVA (SADA JE KASNO DA TAK ONESTO RADIM,
-  // ALI NECE BITI NI POTREBNO) (MOZDA BIH TADA BOLJE DEFINISAO SCHEMA-E I RESOLVERE)
-
-  // // === !== === !== === !== === !== === !== === !== === !== === !==
-  // SADA MOGU PRAVITI NOVE QUERY-JE (NARAVNO OPET JE DOBRA PRAKSA, PRVO IH
-  // NAPRAVITI U   Graphiql-U    )
-  // A KADA ZAVSIS SA SLEDECIM QUERY-JIMA, MOZES SE VERATITI NA   KREIRANJE
-  // BlogPostPage-A, KAKO BI TAM OQUERY-OVAO ONO DODATN OSTA TI TREBA, A ODNOSI
-  // SE NA LINK DO GROUP PAGE-A I KEYWORDS
-
-  // NARAVNO PRVO QUERY-OVATI ZA SVIM       GroupPage     NODE-OVIMA
-
-  // # DAKLE OVO NE BI TREBAL ODA BUDE VELIKI QUERY
-  /* # JER KAO STO SAM REAKAO KORISTICU		QUERY
-  # NA TEMPLATE KOMPONENTI-U DA BIH OBEZBEDIO
-  # DATA KORAKTERISTICAN ZA SVAK IPAGE
-  # DAKLE QUERIES CE SE EXEQUTE-OVATI INDIVIDUALY
-  # KROZ TEMPLATE
-
-  # DAKLE SAMO TI TREBA ID (STO CES KORISTITI ZA BUDUCE QUERY-JE)
-  # ODNONO INDIVIDUALNE
-
-  # I TREBA TI path NA KOJEM    path    NA KOJEM CE BITI KREIRAN PAGE
-
- */
   const allGroupPagesIdsAndPaths = await graphql(`
     query TakeGroupPages {
       group: allGroupPage {
@@ -743,17 +531,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       allGroupPagesIdsAndPaths.errors
     );
   }
-
-  // NARAVNO, SADA TI TREBA TEMPLATE, JER CES TAJ TEMPLATE
-
-  // *****************  ono sto necu raditi trenutno jeste
-  //         ---- DODAVANJE NOVOG DEFAULT LAYOUT-A U CONFIG FAJL  ----
-  // ***** TO JE NAIME MDX STVAR, KOJA ME TRENUTNO NE ZANIMA *****
-  // MISLIM DA MI POMENUTO NECE TREBATI, ALI CU TO, JOS ISPITATI
-
-  // DOBRO, DA SADA RESTRUKTURIRAM PODATKE
-
-  // console.log(JSON.stringify(allGroupPagesIdsAndPaths, null, 2));
 
   const groupArray = allGroupPagesIdsAndPaths.data.group.nodes;
 
