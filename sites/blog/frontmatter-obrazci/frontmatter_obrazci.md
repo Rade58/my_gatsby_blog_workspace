@@ -5,7 +5,7 @@ lang: "en"
 themeColor: "blanchedalmond"
 slug: graphql/client side/intro
 group: graphql
-group-color: "#e04681"
+groupColor: "#e04681"
 keywordTextColor: "#fff"
 keywordBorderColor: "pink"
 ---

@@ -110,6 +110,7 @@ export const TakeOneGroupPage = graphql`
         path
         keywordColor
         keywordTextColor
+        keywordBorderColor
       }
     }
   }
