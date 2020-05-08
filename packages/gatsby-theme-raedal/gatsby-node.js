@@ -1,6 +1,11 @@
 const mkdirp = require("mkdirp");
 const pathPackage = require("path");
 const fs = require("fs");
+// UVOZIM NOVI KAKET, KOJI CU KORISTITI PRI DEFINISANJU FIELD EXTENSION-A
+const { format: formatDate, parseISO } = require("date-fns");
+// MOZES KORISTITI RUNKIT I DOKUMENTE, DA SAZNAS KAKAV SVE DATUM MOZES KONSTUISATI SA POMENUTIM PAKETOM
+//    https://date-fns.org/v2.13.0/docs/format
+
 const withDefaults = require("./utility/utility-options"); // DEFAULTS SU
 //                                                         basePath ->  "/""
 //                                                   contentPath  -> "blogposts"
@@ -32,12 +37,64 @@ exports.onPreBootstrap = ({ store }, options) => {
 // ZELIM DAKLE DA DEFINISEM DIREKTIVU  ,      NEKA SE ZOVE        datefns
 
 exports.createSchemaCustomization = ({ actions }) => {
-  actions.createTypes(`
+  const { createTypes, createFieldExtension } = actions;
+
+  // EVO KAKO KREIRAM EXTENSION
+  // KOJI CE UZIMATI FI
+  createFieldExtension({
+    name: "formateDateFns",
+    args: {
+      MMMMwoyyyy: {
+        type: "Boolean!",
+        defaultValue: true,
+      },
+      eeeeMMMMwoyyyy: {
+        type: "Boolean!",
+        defaultValue: true,
+      },
+    },
+    // E MORAM PISATI I NESTO STO SE ZOVE extend FUNKCIJA
+    extend(options, prevFieldConfig) {
+      return {
+        args: {
+          MMMMwoyyyy: "Boolean",
+          eeeeMMMMwoyyyy: "Boolean",
+        },
+        // PISEM I RESOLVER-A
+        resolve(source, args, context, info) {
+          const { defaultFieldResolver } = context; //
+
+          const fieldValue = defaultFieldResolver(source, args, context, info);
+          // OVO GORE MOZDA NECE TREBATI
+
+          console.log(fieldValue);
+
+          if (args.MMMMwoyyyy) {
+            return formatDate(parseISO(fieldValue), "MMMM wo, yyyy");
+          }
+
+          if (args.eeeeMMMMwoyyyy) {
+            return formatDate(parseISO(fieldValue), "eeee, MMMM wo, yyyy");
+          }
+
+          return fieldValue;
+        },
+      };
+    },
+  });
+
+  // EVO DODAO SAM I NOVI FIELD GDE KORISTIM EXTENSION, ODNONO DIREKTIVU
+  // I TO JE KORISTIM NA DVA MESTA, ODNONO NA DVA FIELDA, U DVA RAZLICITA TYPE-A
+
+  createTypes(`
     type BlogPostPage implements Node @dontInfer {
       id: ID!
       title: String!
       path: String!
       updated: Date! @dateformat
+
+      updatedFns: Date! @formateDateFns
+
       body: String!
       
       frontMatter: MyFrontMatter!
@@ -69,6 +126,9 @@ exports.createSchemaCustomization = ({ actions }) => {
       keywordBorderColor: String!
 
       updated: Date! @dateformat
+
+      updatedFns: Date! @formateDateFns
+
 
       blogPostPages: [BlogPostPage]!
 
@@ -191,6 +251,7 @@ exports.onCreateNode = (
       keywordTextColor,
       keywordBorderColor,
       updated: modifiedTime,
+      updatedFns: modifiedTime,
       internal: {
         type: "GroupPage",
         contentDigest: currentGroupPageContentDigest,
@@ -205,6 +266,7 @@ exports.onCreateNode = (
       keywordTextColor,
       keywordBorderColor,
       updated: modifiedTime,
+      updatedFns: modifiedTime,
     };
 
     // === !== === !== === !== === !==
@@ -232,6 +294,7 @@ exports.onCreateNode = (
     id,
     title,
     updated: modifiedTime,
+    updatedFns: modifiedTime,
     parent: node.id,
     path:
       slug || pathPackage.resolve("/", basePath, relativeDirectory, pageName),
