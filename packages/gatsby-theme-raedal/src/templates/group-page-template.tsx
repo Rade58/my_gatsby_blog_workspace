@@ -92,12 +92,9 @@ export const TakeOneGroupPage = graphql`
         title
         path
 
-        # OVO MI NECE TREBATI JER SAM KREIRAO POTPUNO NOVI FORMAT
-        # updated(fromNow: true) # OVDE MI TREBA UPDATED (KORISTICE)
-
-        # DAKLE KORISTIM NOVI FIELD KOJI SAM DEFINISAO I KOJI ZAHTEVA ARGUMENTE
-        # USTVARI NE ZAHTEVA ALI AKO NE DODAM BICE RETURNED SAMO TIME STRING
-        updatedFns(MMMMDoyyyy: true)
+        #
+        updated(fromNow: true) # OVDE MI TREBA UPDATED (KORISTICE)
+        # updatedFns(MMMMDoyyyy: true)   (ISPRAVKA OVO SAM DEPRECATE-OVAO)
 
         # POSTO CES KREIRATI CARD-OVE TVOJI BLOG POSTOVA
         # TREBACE TI DESCRIPTION (MOZDA IKORISTIS BAS TAJ DESCRIPTION)
