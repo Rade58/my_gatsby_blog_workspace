@@ -397,8 +397,18 @@ exports.createResolvers = ({ createResolvers }) => {
     },
     // EVO DEFINISEM RESOLVER ZA     blogPostPages   FIELD NA      GroupPage    TYPE-U
     GroupPage: {
+      // MORACU DA DODADAM I INPUT TYPE
+      // A OVAJ ME ZANIMA:
+      //                          BlogPostPageSortInput
+      //
+
       blogPostPages: {
         type: "[BlogPostPage]!",
+        // OVDE VRSIM TAJ TYPING INPUT FIELD-OVA
+        args: {
+          sort: "BlogPostPageSortInput",
+        },
+        //
         resolve: (source, args, context, info) => {
           console.log(
             "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
