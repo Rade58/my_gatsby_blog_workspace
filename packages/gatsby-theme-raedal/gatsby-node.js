@@ -400,29 +400,29 @@ exports.createResolvers = ({ createResolvers }) => {
       // MORACU DA DODADAM I INPUT TYPE
       // A OVAJ ME ZANIMA:
       //                          BlogPostPageSortInput
-      //
 
       blogPostPages: {
         type: "[BlogPostPage]!",
         // OVDE VRSIM TAJ TYPING INPUT FIELD-OVA
         args: {
-          sort: "BlogPostPageSortInput",
+          sort: "BlogPostPageSortInput!", // (SAMO ZBOG OVOGA DOZVOLJENO TI JE DA NA FILD-U DODAJE S ARGUMENT)
         },
         //
         resolve: (source, args, context, info) => {
           console.log(
             "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
           );
-          /*   console.log(source);
-          console.log(groupPagesNamesAndIds); */
+          // ONO STA TI TREBA JE SAMO       source.name
+          // JER CES PREMA TOME PRAVITI QUERY
+          console.log(source.name);
           console.log(
             "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
           );
 
-          const blogPostIdsArray = groupPagesNamesAndIds[source.name].blogPages;
+          // OVO JE OVDE BILO RANIJE STO JE TEDIOUS
 
+          /* const blogPostIdsArray = groupPagesNamesAndIds[source.name].blogPages;
           const blogPostArray = [];
-
           // eslint-disable-next-line
           for (let blogPostId of blogPostIdsArray) {
             blogPostArray.push(
@@ -431,8 +431,7 @@ exports.createResolvers = ({ createResolvers }) => {
               })
             );
           }
-
-          return blogPostArray;
+          return blogPostArray; */
         },
       },
 
