@@ -39,8 +39,8 @@ exports.onPreBootstrap = ({ store }, options) => {
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes, createFieldExtension } = actions;
 
-  // EVO KAKO KREIRAM EXTENSION
-  // KOJI CE UZIMATI FI
+  // KREIRAO SAM DIREKTIVU (EXTENSION), ALI NA KRAJU SAM DEPRECATE-OVAO FIELD-OVE GDE JE KORISTIM
+  // ZATO STO date-fns NESTO NE RADI BAS DOBRO
   createFieldExtension({
     name: "formateDateFns",
     args: {
@@ -57,8 +57,8 @@ exports.createSchemaCustomization = ({ actions }) => {
     extend(options, prevFieldConfig) {
       return {
         args: {
-          MMMMwoyyyy: "Boolean",
-          eeeeMMMMwoyyyy: "Boolean",
+          MMMMDoyyyy: "Boolean",
+          eeeeMMMMDoyyyy: "Boolean",
         },
         // PISEM I RESOLVER-A
         resolve(source, args, context, info) {
@@ -69,12 +69,12 @@ exports.createSchemaCustomization = ({ actions }) => {
 
           console.log(fieldValue);
 
-          if (args.MMMMwoyyyy) {
-            return formatDate(parseISO(fieldValue), "MMMM wo, yyyy");
+          if (args.MMMMDoyyyy) {
+            return formatDate(parseISO(fieldValue), "MMMM, Do, yyyy");
           }
 
-          if (args.eeeeMMMMwoyyyy) {
-            return formatDate(parseISO(fieldValue), "eeee, MMMM wo, yyyy");
+          if (args.eeeeMMMMDoyyyy) {
+            return formatDate(parseISO(fieldValue), "eeee, MMMM, Do, yyyy");
           }
 
           return fieldValue;
@@ -93,7 +93,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       path: String!
       updated: Date! @dateformat
 
-      updatedFns: Date! @formateDateFns
+      updatedFns: Date! @formateDateFns @deprecated(reason: "date-fns paket ne radi nesto dobro")
 
       body: String!
       
@@ -127,7 +127,7 @@ exports.createSchemaCustomization = ({ actions }) => {
 
       updated: Date! @dateformat
 
-      updatedFns: Date! @formateDateFns
+      updatedFns: Date! @formateDateFns @deprecated(reason: "date=fns paket ne radi nesto dobro")
 
 
       blogPostPages: [BlogPostPage]!
