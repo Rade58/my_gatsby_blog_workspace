@@ -421,7 +421,7 @@ exports.createResolvers = ({ createResolvers }) => {
 
           // OVO JE OVDE BILO RANIJE STO JE TEDIOUS
 
-          /* const blogPostIdsArray = groupPagesNamesAndIds[source.name].blogPages;
+          const blogPostIdsArray = groupPagesNamesAndIds[source.name].blogPages;
           const blogPostArray = [];
           // eslint-disable-next-line
           for (let blogPostId of blogPostIdsArray) {
@@ -431,7 +431,23 @@ exports.createResolvers = ({ createResolvers }) => {
               })
             );
           }
-          return blogPostArray; */
+
+          // === !== === !== ===
+
+          // DAKLE PRVO PRAVIM QUERY U ODNOSU NA        name
+
+          const blogPosts = context.nodeModel.runQuery({
+            query: {
+              filter: { groupPage: { name: { eq: source.name } } },
+            },
+            type: "BlogPostPage",
+          });
+
+          console.log(blogPosts);
+
+          // === !== === !== ===
+
+          return blogPostArray;
         },
       },
 
