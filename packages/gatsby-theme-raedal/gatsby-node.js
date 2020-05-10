@@ -405,7 +405,7 @@ exports.createResolvers = ({ createResolvers }) => {
         type: "[BlogPostPage]!",
         // OVDE VRSIM TAJ TYPING INPUT FIELD-OVA
         args: {
-          sort: "BlogPostPageSortInput!", // (SAMO ZBOG OVOGA DOZVOLJENO TI JE DA NA FILD-U DODAJE S ARGUMENT)
+          sort: "BlogPostPageSortInput", // (SAMO ZBOG OVOGA DOZVOLJENO TI JE DA NA FILD-U DODAJE S ARGUMENT)
         },
         //
         resolve: (source, args, context, info) => {
