@@ -11,7 +11,7 @@ import { BlogPostPageI as BlogPostCardPropsI } from "../../templates/group-page-
 //
 
 const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
-  const { path, title, frontMatter } = props;
+  const { path, title, frontMatter, updated } = props; // EVO KORISTIM I updated
 
   const { description, themeColor } = frontMatter;
 
@@ -27,6 +27,11 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
           h4 {
             font-size: 28px;
           }
+
+          h3 {
+            align-self: flex-end;
+            margin-left: auto;
+          }
         }
       `}
     >
@@ -34,6 +39,7 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
         <h4>{title}</h4>
         <p>{description}</p>
       </Link>
+      <h3>{updated}</h3>
     </div>
   );
 };

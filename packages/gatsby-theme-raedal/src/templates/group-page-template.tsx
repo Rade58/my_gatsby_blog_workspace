@@ -86,8 +86,7 @@ export const TakeOneGroupPage = graphql`
 
         # I ZELIM POSEBAN FORMAT DATUMA ZA SLEDECI FIELD-U
         # ZATO SAM GA PRVO PRAVIO QUERY U GRAPHI-JU
-
-        updated(fromNow: true) # OVDE MI TREBA UPDATED (KORISTICE)
+        updated(formatString: "MMM Do Y") # DAKLE OVAJ FORMAT ZELIM DA KORISTIM
         # updatedFns(MMMMDoyyyy: true)   (ISPRAVKA OVO SAM DEPRECATE-OVAO)
 
         # POSTO CES KREIRATI CARD-OVE TVOJI BLOG POSTOVA
