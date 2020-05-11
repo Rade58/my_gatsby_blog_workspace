@@ -16,15 +16,16 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
 
   const { description, themeColor } = frontMatter;
 
-  const { bodyBackgroundColor } = additionalStyles;
+  const { bodyBackgroundColor, cardBackgroundColor } = additionalStyles;
 
   return (
     <Fragment>
       <div
         sx={{
           // borderBottom: `${themeColor} solid 4px`,
-          borderTop: "transparent solid 4px",
+          borderTop: "transparent solid 0px",
           borderLeft: `${themeColor} solid 4px`,
+          backgroundColor: `${cardBackgroundColor}`,
         }}
         css={css`
         display: flex;
@@ -56,6 +57,7 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
             width: fit-content;
             color: white;
             margin-left:12px;
+            margin-right: 18px;
           }
 
           div.styled-cont {
@@ -70,7 +72,7 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
             background-image: linear-gradient(
               225deg,
               ${themeColor} 49%,
-              ${bodyBackgroundColor} 50%
+              ${cardBackgroundColor} 50%
             );
 
             border-radius: 100% 0% 100% 0% / 0% 100% 0% 100% ;
