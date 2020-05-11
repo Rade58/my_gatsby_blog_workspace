@@ -84,7 +84,9 @@ export const TakeOneGroupPage = graphql`
         title
         path
 
-        #
+        # I ZELIM POSEBAN FORMAT DATUMA ZA SLEDECI FIELD-U
+        # ZATO SAM GA PRVO PRAVIO QUERY U GRAPHI-JU
+
         updated(fromNow: true) # OVDE MI TREBA UPDATED (KORISTICE)
         # updatedFns(MMMMDoyyyy: true)   (ISPRAVKA OVO SAM DEPRECATE-OVAO)
 
