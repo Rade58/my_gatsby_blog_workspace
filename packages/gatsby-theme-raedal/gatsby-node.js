@@ -414,15 +414,15 @@ exports.createResolvers = ({ createResolvers }) => {
           );
           // ONO STA TI TREBA JE       source.name
           // JER CES PREMA TOME PRAVITI QUERY
-          console.log(source.name);
+          /* console.log(source.name);
           console.log(
             "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
-          );
+          ); */
           // I TREBA TI args.sort    ALI IMAJ NA UMU DA POSTOJI MOGUCNOST DA KORISNIK NIJE PROSLEDIO ARGUMENT
-          console.log(args.sort);
+          /* console.log(args.sort);
           console.log(
             "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
-          );
+          ); */
 
           // OVO JE OVDE BILO RANIJE STO JE TEDIOUS, I NECU OVO VISE KORISTITI
 
