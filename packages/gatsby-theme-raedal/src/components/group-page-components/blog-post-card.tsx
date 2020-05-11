@@ -30,7 +30,7 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
             font-size: 28px;
           }
 
-          h3 {
+          time {
             align-self: flex-end;
             margin-left: auto;
             white-space: nowrap;
@@ -51,7 +51,7 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
         <h4>{title}</h4>
         <p>{description}</p>
       </Link>
-      <h3>{updated}</h3>
+      <time>{updated}</time>
     </div>
   );
 };

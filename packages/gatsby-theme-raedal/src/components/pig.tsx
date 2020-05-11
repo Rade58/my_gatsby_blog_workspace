@@ -158,6 +158,10 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
 
       timerId1.current ? clearTimeout(timerId1.current) : null;
       timerId2.current ? clearTimeout(timerId2.current) : null;
+
+      if (bodyRef.current && bodyRef.current.onscroll) {
+        bodyRef.current.onscroll = null;
+      }
     },
     [] // NE ZABORAVI OVO
   );
