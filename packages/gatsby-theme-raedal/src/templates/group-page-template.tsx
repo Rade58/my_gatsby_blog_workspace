@@ -76,17 +76,9 @@ export const TakeOneGroupPage = graphql`
       groupColor
       updated(fromNow: true)
 
-      # videcu da li ce mi time icemu koristiti
-      # GORNJI TIME (KAO STO VIDIS, IDU ARGUMENTI)
+      # EVO KAO STO VIDIS PRILIKOM QUERYING SAM ZADAO ARGUMENTE
 
-      # DAKLE SADA IZDVAJAM STVARI KOJE
-      # SU POTREBNE SA SVAKI BLOG POST PAGE
-      # KOJI JE RELATED
-      # JER NAJMANJE STO CU URADITI JESTE
-      # DEFINISANJE CARD-OVA I OSTAVLJANJE LINKOVA
-      # DO TIH GROUP PAGE-OVA
-
-      blogPostPages {
+      blogPostPages(sort: { fields: updated, order: DESC }) {
         # OVO JE SVE STO TI TREBA DA U JEDNOM CARDU
         # NA GroupPage-U, PRIKAZES I DA LINKUJES BLOG POST PAGE
         title

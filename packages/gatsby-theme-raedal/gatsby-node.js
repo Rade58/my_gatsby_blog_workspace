@@ -408,20 +408,25 @@ exports.createResolvers = ({ createResolvers }) => {
           sort: "BlogPostPageSortInput", // (SAMO ZBOG OVOGA DOZVOLJENO TI JE DA NA FILD-U DODAJE S ARGUMENT)
         },
         //
-        resolve: (source, args, context, info) => {
+        resolve: async (source, args, context, info) => {
           console.log(
             "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
           );
-          // ONO STA TI TREBA JE SAMO       source.name
+          // ONO STA TI TREBA JE       source.name
           // JER CES PREMA TOME PRAVITI QUERY
           console.log(source.name);
           console.log(
             "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
           );
+          // I TREBA TI args.sort    ALI IMAJ NA UMU DA POSTOJI MOGUCNOST DA KORISNIK NIJE PROSLEDIO ARGUMENT
+          console.log(args.sort);
+          console.log(
+            "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
+          );
 
-          // OVO JE OVDE BILO RANIJE STO JE TEDIOUS
+          // OVO JE OVDE BILO RANIJE STO JE TEDIOUS, I NECU OVO VISE KORISTITI
 
-          const blogPostIdsArray = groupPagesNamesAndIds[source.name].blogPages;
+          /* const blogPostIdsArray = groupPagesNamesAndIds[source.name].blogPages;
           const blogPostArray = [];
           // eslint-disable-next-line
           for (let blogPostId of blogPostIdsArray) {
@@ -430,24 +435,38 @@ exports.createResolvers = ({ createResolvers }) => {
                 id: blogPostId,
               })
             );
+          } */
+
+          // === !== === !== ===
+
+          let blogPostPages; // OVO CE EVENTUALLY BITI RETURNED JER CE IMATI
+          // QUERIED BLOG POSTS OBJECTS NA SEBI
+
+          // DAKLE KADA NE POSTOJI      sort   ARG
+
+          if (!args.sort) {
+            blogPostPages = await context.nodeModel.runQuery({
+              filter: { groupPage: { name: { eq: source.name } } },
+            });
+          } else {
+            // I KADA POSTOJI
+
+            blogPostPages = await context.nodeModel.runQuery({
+              query: {
+                filter: { groupPage: { name: { eq: source.name } } },
+                // DAKLE SAMO OVO ZDAJEM , A U      packages/gatsby-theme-raedal/src/templates/group-page-template.tsx
+                // POGLEDAJ, USTVARI KAKAVE SI VARIJABLE PROSLEDIO (U PITANJU SU ENUMI)
+                sort: args.sort,
+              },
+              type: "BlogPostPage",
+            });
           }
 
-          // === !== === !== ===
-
-          // DAKLE PRVO PRAVIM QUERY U ODNOSU NA        name
-
-          const blogPosts = context.nodeModel.runQuery({
-            query: {
-              filter: { groupPage: { name: { eq: source.name } } },
-            },
-            type: "BlogPostPage",
-          });
-
-          console.log(blogPosts);
+          return blogPostPages;
 
           // === !== === !== ===
 
-          return blogPostArray;
+          // return blogPostArray;   // DAKLE OVO JE BILO RANIJE I TO VISE NE KORISTIM
         },
       },
 
