@@ -23,6 +23,8 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
       css={css`
         display: flex;
 
+        margin-bottom: 12px;
+
         & {
           h4 {
             font-size: 28px;
@@ -31,6 +33,16 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
           h3 {
             align-self: flex-end;
             margin-left: auto;
+            white-space: nowrap;
+            border: yellow solid 1px;
+            width: max-content;
+            margin-bottom: 0;
+          }
+
+          a {
+            text-decoration-line: none;
+            border: 1px solid blanchedalmond;
+            width: fit-content;
           }
         }
       `}
