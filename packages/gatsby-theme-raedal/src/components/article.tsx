@@ -29,6 +29,8 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body, updated }) => {
   useEffect(
     () => () => {
       console.log("~~~~~!! ARTICLE UNMOUNTED !!~~~~~");
+
+      if (document.body.onscroll) document.body.onscroll = null;
     },
     []
   );

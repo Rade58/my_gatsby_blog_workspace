@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui";
+import { css } from "@emotion/core";
 
 import { useContext, FunctionComponent } from "react";
 
@@ -19,7 +20,12 @@ const Cards: FunctionComponent = () => {
   const { blogPostPages } = groupPage;
 
   return (
-    <section className="cards">
+    <section
+      className="cards"
+      css={css`
+        margin: 8px 14px 0 14px;
+      `}
+    >
       {blogPostPages.map((blogPostData) => (
         <Card
           {...blogPostData}

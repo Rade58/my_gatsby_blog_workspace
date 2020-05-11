@@ -101,7 +101,7 @@ const Layout: FunctionComponent<LayoutPropsI> = ({ body, updated }) => {
               margin: "4px",
               backgroundColor: "rgb(27, 34, 39)",
               paddingTop: "56px",
-              // scrollBehavior: "smooth",
+              scrollBehavior: "smooth",
 
               // OBRATI PAZNJU DA KADA DODAS MARGINE, TI CES IMATO OVERFLOW SCROLL
               // ZA BODY STO NIJE DOBRO

@@ -141,7 +141,7 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
             }
           }
         }
-        if (windowRef.current) {
+        if (windowRef.current && bodyRef.current && bodyRef.current.onscroll) {
           headerDispatch({
             type: ACTION_TYPES_ENUM.CHANGE_CURRENT_SCROLL,
             payload: windowRef.current.scrollY,
