@@ -21,8 +21,8 @@ const MainGp: FunctionComponent = (props) => {
         grid-template-columns: repeat(8, minmax(0, 1fr));
 
         grid-template-areas:
-          "s s c c c c a a"
-          "k k c c c c . ."
+          "s s h h h h a a"
+          "k k c c c c a a"
           ". . c c c c . ."
           ". . c c c c . ."
           ". . l l l l . ."
@@ -33,6 +33,12 @@ const MainGp: FunctionComponent = (props) => {
           grid-area: l;
           display: flex;
           flex-direction: column;
+        }
+
+        & h1.heading-major {
+          color: #fff;
+          grid-area: h;
+          height: min-content;
         }
 
         & section {

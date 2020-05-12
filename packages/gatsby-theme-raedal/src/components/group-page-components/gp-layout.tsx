@@ -27,6 +27,7 @@ import Header from "./header-group";
 import Main from "./gp-main";
 import Cards from "./cards";
 import Keywords from "./keywords";
+import HeadingMajor from "./heading-major";
 
 const LayoutGroupPage: FunctionComponent = () => {
   const stvari = "";
@@ -46,6 +47,7 @@ const LayoutGroupPage: FunctionComponent = () => {
         {/* <StringifiedProps /> */}
         <Header />
         <Main>
+          <HeadingMajor />
           {/* <StringifiedContextState /> */}
           <Cards />
           <Keywords />
