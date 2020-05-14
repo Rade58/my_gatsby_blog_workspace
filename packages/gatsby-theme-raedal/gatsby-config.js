@@ -17,7 +17,7 @@ module.exports = (options) => {
         resolve: "gatsby-plugin-anchor-links",
       }, */
 
-      /* {
+      /* {   // OVO NIKAD NIJE NI TREBALO (IZAZIVA ERROR)
         resolve: "gatsby-plugin-typescript",
         // ALI TAKODJE ZELIM DA BUDE MOGUCE KORISCENJE PRAGME, I tsx-A
         options: {
@@ -37,8 +37,10 @@ module.exports = (options) => {
         resolve: "gatsby-plugin-mdx",
         options: {
           defaultLayouts: {
-            default: require.resolve("./src/components/layout.tsx"), // OVO JE DEFAULT ZA BLOG POST PAGES
-            // A OVDE BI TREBALO DA DODAM NEKI DEFAULT LAYOUT I ZA   GROUP PAGE
+            default: require.resolve("./src/components/layout.tsx"), // OVO JE DEFAULT ZA PAGES
+            // ALI ONE KOJE NISU KREIRANE SA MOJIM PLUGINOM
+            // DAKLE CIJI CORRESPONDING MDX FAJLOVI NISU STAVLJENI U FOLDER       blogposts
+            // NA SITE NIVOU
           },
           remarkPlugins: [remarkSlug],
         },
