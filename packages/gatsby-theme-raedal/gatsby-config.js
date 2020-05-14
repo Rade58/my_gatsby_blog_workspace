@@ -7,7 +7,11 @@ const withDefaults = require("./utility/utility-options"); // DEFAULTS SU
 // const siteMetadata = require("./src/seo/siteMetadata");
 
 module.exports = (options) => {
-  const { contentPath, useExternalMDX } = withDefaults(options);
+  // SADA IZDVAJAM I      groupsPath
+  const { contentPath, useExternalMDX, groupsPath } = withDefaults(options);
+
+  // DAKLE TO CE BITI PATH FOLDER-A, RELATIVAN PATH NA SITE
+  // GDE CU STAVLJATI MOJE GROUP PAGES
 
   return {
     plugins: [
@@ -19,6 +23,19 @@ module.exports = (options) => {
           path: contentPath,
         },
       },
+      // DAKLE POTREBNO JE SAMO DODATI JOS JEDNU KONFIGURACIJU
+      // SOURCE FILESYSTEM-A
+      // === !== === !==
+      {
+        resolve: "garsby-source-filesystem",
+        options: {
+          // ALI SADA MORAM KORISTITI DRUGI NAME OSIM ONOG IMENA
+          //            gatsby-theme-raedal
+          name: "group-pages-raedal",
+          path: groupsPath,
+        },
+      },
+      // === !== === !==
       !useExternalMDX && {
         resolve: "gatsby-plugin-mdx",
         options: {
