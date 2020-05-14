@@ -12,9 +12,11 @@ const HeadingMajor: FunctionComponent = () => {
 
   const { groupPage } = useContext(groupPageContext);
 
-  const { name, groupColor } = groupPage; // NAME CE BITI ONO STA JE U TITLE-U
+  const { name, groupColor, keywordBorderColor, keywordTextColor } = groupPage; // NAME CE BITI ONO STA JE U TITLE-U
   // DOBRA IDEJA JE DA OVDE STAVIS I EMOJI
   // ODNOSNO SVAKI PAGE TREBA DA IMA KARAKTERISTICAN EMOJI
+
+  // console.log({ keywordBorderColor, keywordTextColor });
 
   return (
     <div
@@ -28,10 +30,16 @@ const HeadingMajor: FunctionComponent = () => {
           margin-left: auto;
           margin-right: auto;
 
+          
           & span {
             &.group-name-span {
-              text-shadow: 1px 1px 1px ${groupColor};
-              color: blanchedalmond;
+              /* background-color: ${groupColor};
+              text-shadow: 1px 1px 1px ${keywordTextColor};
+              color: ${keywordBorderColor}; */
+              text-decoration-line: overline underline;
+          text-decoration-style: solid;
+          text-decoration-color: ${groupColor};
+
             }
           }
         `}

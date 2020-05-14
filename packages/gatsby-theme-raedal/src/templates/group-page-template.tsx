@@ -51,6 +51,10 @@ export interface GroupPageI {
   name: string;
   path: string;
   groupColor: string;
+  // OVO SAM DODAO
+  keywordTextColor: string;
+  keywordBorderColor: string;
+  //
   updated: string;
   blogPostPages: blogPostPageArray;
   allBlogKeywords: keywordsArray;
@@ -74,6 +78,13 @@ export const TakeOneGroupPage = graphql`
       name
       path
       groupColor
+
+      #    DAKLE ZELIM DA QUERY-UJEM I ZA COLORIM KARKTERISTICNIM ZA TRENUTNI SUBJECT
+      #    GROUP PAGE-A
+      keywordTextColor
+      keywordBorderColor
+      #
+
       updated(fromNow: true)
 
       # EVO KAO STO VIDIS PRILIKOM QUERYING SAM ZADAO ARGUMENTE
