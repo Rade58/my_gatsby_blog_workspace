@@ -39,7 +39,7 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
             font-size: 28px;
             border: 1px solid black;
             transition-property: transform;
-            transition-duration: 1.2s;
+            transition-duration: 0.78s;
           }
 
           time {
@@ -122,7 +122,7 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
           width: 80%;
           margin: 12px auto;
           transition-property: all;
-          transition-duration: 1.2s;
+          transition-duration: 0.6s;
         `}
       />
     </Fragment>

@@ -1,6 +1,8 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui";
 
+import { css } from "@emotion/core";
+
 import { FunctionComponent, useContext } from "react";
 
 import { $_useGroupPageState } from "../../context_n_reducers/group_page_con_red";
@@ -14,7 +16,16 @@ const HeadingMajor: FunctionComponent = () => {
   // DOBRA IDEJA JE DA OVDE STAVIS I EMOJI
   // ODNOSNO SVAKI PAGE TREBA DA IMA KARAKTERISTICAN EMOJI
 
-  return <h1 className="heading-major">{name}</h1>;
+  return (
+    <div
+      className="heading-major"
+      css={css`
+        display: flex;
+      `}
+    >
+      <h1> {name}</h1>
+    </div>
+  );
 };
 
 export default HeadingMajor;

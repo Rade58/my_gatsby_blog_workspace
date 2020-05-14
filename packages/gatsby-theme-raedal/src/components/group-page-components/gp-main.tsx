@@ -35,10 +35,13 @@ const MainGp: FunctionComponent = (props) => {
           flex-direction: column;
         }
 
-        & h1.heading-major {
-          color: #fff;
+        & div.heading-major {
           grid-area: h;
-          height: min-content;
+          & h1 {
+            border: tomato solid 1px;
+            color: #fff;
+            height: min-content;
+          }
         }
 
         & section {
@@ -54,6 +57,7 @@ const MainGp: FunctionComponent = (props) => {
             flex-wrap: wrap;
             justify-content: flex-start;
             align-items: flex-start;
+            align-content: flex-start;
             position: sticky;
             top: 20px;
 
