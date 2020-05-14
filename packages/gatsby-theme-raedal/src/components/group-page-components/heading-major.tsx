@@ -30,23 +30,28 @@ const HeadingMajor: FunctionComponent = () => {
           margin-left: auto;
           margin-right: auto;
 
-          
           & span {
             &.group-name-span {
-              /* background-color: ${groupColor};
-              text-shadow: 1px 1px 1px ${keywordTextColor};
-              color: ${keywordBorderColor}; */
               text-decoration-line: overline underline;
-          text-decoration-style: solid;
-          text-decoration-color: ${groupColor};
+              text-decoration-style: solid;
+              text-decoration-color: ${groupColor};
+              /* border-right: ${groupColor} medium groove; */
+              /* border-left: ${groupColor} medium double; */
+              font-family: - -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            }
 
+            &.emo {
+              border-right: groove ${groupColor} thick;
+              border-left: groove ${groupColor} thick;
+              /* padding: 4.8px; */
+              
             }
           }
         `}
       >
         All <span className="group-name-span">{name}</span> tutorials
         &nbsp;&nbsp;{" "}
-        <span role="img" aria-label="img">
+        <span className="emo" role="img" aria-label="img">
           ⬇️
         </span>
       </h1>

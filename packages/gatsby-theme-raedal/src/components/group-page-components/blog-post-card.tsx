@@ -7,12 +7,24 @@ import { Link } from "gatsby";
 import { Fragment, FunctionComponent } from "react";
 
 // typescript PropS TYPE
-import { BlogPostPageI as BlogPostCardPropsI } from "../../templates/group-page-template";
+import { BlogPostPageI } from "../../templates/group-page-template";
 //
 import { additionalStyles } from "../../common-styles";
 
+interface BlogPostCardPropsI extends BlogPostPageI {
+  keywordTextColor: string;
+  keywordBorderColor: string;
+}
+
 const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
-  const { path, title, frontMatter, updated } = props; // EVO KORISTIM I updated
+  const {
+    path,
+    title,
+    frontMatter,
+    updated,
+    keywordTextColor,
+    keywordBorderColor,
+  } = props; // EVO KORISTIM I updated
 
   const { description, themeColor } = frontMatter;
 
@@ -24,7 +36,7 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
         sx={{
           // borderBottom: `${themeColor} solid 4px`,
           borderTop: "transparent solid 0px",
-          borderLeft: `${themeColor} solid 4px`,
+          borderLeft: `transparent solid 4px`,
           backgroundColor: `${cardBackgroundColor}`,
         }}
         css={css`
@@ -83,6 +95,10 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
           }
 
           &:hover {
+
+          /* border-left: ${themeColor} solid 4px; */
+
+            border-left-color: ${themeColor};
 
             opacity: 0.48;
             /* border-bottom-color: transparent; */

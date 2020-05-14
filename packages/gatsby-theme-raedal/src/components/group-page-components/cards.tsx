@@ -17,7 +17,7 @@ const Cards: FunctionComponent = () => {
 
   const { groupPage } = useContext(groupPageContext);
 
-  const { blogPostPages } = groupPage;
+  const { blogPostPages, keywordTextColor, keywordBorderColor } = groupPage;
 
   return (
     <section
@@ -29,6 +29,8 @@ const Cards: FunctionComponent = () => {
       {blogPostPages.map((blogPostData) => (
         <Card
           {...blogPostData}
+          keywordBorderColor={keywordBorderColor}
+          keywordTextColor={keywordTextColor}
           key={`${blogPostData.title}-${blogPostData.path}`}
         />
       ))}
