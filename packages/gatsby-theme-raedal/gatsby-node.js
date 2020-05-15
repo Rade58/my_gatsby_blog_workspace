@@ -321,8 +321,10 @@ exports.onCreateNode = (
       name: group,
       path: pathPackage.resolve("/", group.toLowerCase()),
       // DODAJEM I   lang     I   description
-      groupColor,
+      lang,
+      description,
       //
+      groupColor,
       keywordTextColor,
       keywordBorderColor,
       updated: modifiedTime,
