@@ -197,6 +197,7 @@ exports.onCreateNode = (
 
   const parentNode = getNode(node.parent);
 
+  console.log(parentNode.sourceInstanceName);
   // AKO NIJE LOADED BY MY THEME, NI TAJ MI NE TREBA (I TO JE TU BILO OD RANIJE)
   if (parentNode.sourceInstanceName !== "gatsby-theme-raedal") return;
   // A SADA IMAM I DRUGI SOURCE (NAMERNO CU DA NAPRAVIM I DRUGU USLOVNU IZJAVU)
@@ -224,8 +225,15 @@ exports.onCreateNode = (
 
   // === !== === PRVO KREIRAM NODE-OVE ZA BLOG POST PAGE !== === !== ===
   // === !== === ODNOSNO PREMESTAM SVU LOGIKU U OVU USLOVNU IZJAVU!== === !== ===
+  console.log("=======================================================");
+  console.log(parentNode.sourceInstanceName === "gatsby-theme-raedal");
+  console.log("=======================================================");
 
   if (parentNode.sourceInstanceName === "gatsby-theme-raedal") {
+    //
+    console.log(parentNode.sourceInstanceName);
+    //
+
     const id = createNodeId(`BlogPostPage-${node.id}`);
 
     const { contentDigest } = node.internal;
@@ -276,7 +284,7 @@ exports.onCreateNode = (
       // OVO CE MI BITI BITNO ZA RESOLVER-A
       // NAIME TREBA SAMO DA OBEZBEDIM NAME OF THE GROUP
       groupPage: {
-        group, // OVO JE ONAJ GROUP NAME
+        name: group, // OVO JE ONAJ GROUP NAME
       },
 
       // MISLIM DA TI VEC IMAS RESOLVER KOJI UPRAVO UZIMA GORNJI
@@ -289,8 +297,12 @@ exports.onCreateNode = (
 
   // === !== ===  KREIRAM NODE-OVE ZA GROUP STRANICE !== === !== ===
   // === !== ===   !== === !== ===
-
+  console.log("=======================================================");
+  console.log(parentNode.sourceInstanceName === "group-pages-raedal");
+  console.log("=======================================================");
   if (parentNode.sourceInstanceName === "group-pages-raedal") {
+    console.log(parentNode.sourceInstanceName);
+
     const id = createNodeId(`GroupPage-${node.id}`);
 
     // IZDVAJAM STA MI TREBA IZ FRONTMATTER-A
@@ -329,6 +341,9 @@ exports.onCreateNode = (
       keywordBorderColor,
       updated: modifiedTime,
       updatedFns: modifiedTime,
+      // TREBA DA POSTOJI I PARENT
+      parent: node.id,
+      //
       internal: {
         type: "GroupPage",
         contentDigest,
@@ -420,52 +435,16 @@ exports.createResolvers = ({ createResolvers }) => {
     },
     // EVO DEFINISEM RESOLVER ZA     blogPostPages   FIELD NA      GroupPage    TYPE-U
     GroupPage: {
-      // MORACU DA DODADAM I INPUT TYPE
-      // A OVAJ ME ZANIMA:
-      //                          BlogPostPageSortInput
-
+      //
       blogPostPages: {
         type: "[BlogPostPage]!",
-        // OVDE VRSIM TAJ TYPING INPUT FIELD-OVA
+
         args: {
-          sort: "BlogPostPageSortInput", // (SAMO ZBOG OVOGA DOZVOLJENO TI JE DA NA FILD-U DODAJE S ARGUMENT)
+          sort: "BlogPostPageSortInput",
         },
         //
         resolve: async (source, args, context, info) => {
-          /* console.log(
-            "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
-          ); */
-          // ONO STA TI TREBA JE       source.name
-          // JER CES PREMA TOME PRAVITI QUERY
-          /* console.log(source.name);
-          console.log(
-            "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
-          ); */
-          // I TREBA TI args.sort    ALI IMAJ NA UMU DA POSTOJI MOGUCNOST DA KORISNIK NIJE PROSLEDIO ARGUMENT
-          /* console.log(args.sort);
-          console.log(
-            "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
-          ); */
-
-          // OVO JE OVDE BILO RANIJE STO JE TEDIOUS, I NECU OVO VISE KORISTITI
-
-          /* const blogPostIdsArray = groupPagesNamesAndIds[source.name].blogPages;
-          const blogPostArray = [];
-          // eslint-disable-next-line
-          for (let blogPostId of blogPostIdsArray) {
-            blogPostArray.push(
-              context.nodeModel.getNodeById({
-                id: blogPostId,
-              })
-            );
-          } */
-
-          // === !== === !== ===
-
-          let blogPostPages; // OVO CE EVENTUALLY BITI RETURNED JER CE IMATI
-          // QUERIED BLOG POSTS OBJECTS NA SEBI
-
-          // DAKLE KADA NE POSTOJI      sort   ARG
+          let blogPostPages;
 
           if (!args.sort) {
             blogPostPages = await context.nodeModel.runQuery({
