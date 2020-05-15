@@ -128,6 +128,11 @@ exports.createSchemaCustomization = ({ actions }) => {
       name: String!
       path: String!
 
+      lang: String!
+
+      description: String!
+
+
       groupColor: String!
 
       keywordTextColor: String!
@@ -167,7 +172,7 @@ exports.createSchemaCustomization = ({ actions }) => {
 // (1) IZ RESOLVERA SAM GA POTPUNO UKLONIO, JER GA ONI VISE NE KORISTE
 // (2) JEDINO SE KORISTI PRI KREIRANJU GROUP PAGE-OVA, A TO CE USKORO BITI
 //                    UKLONJENO
-
+// CIM GA PODVUCE ESLINT ZNACU DA JE NO-OP
 const groupPagesNamesAndIds = {}; // MORACE BITI UKLONJENO JER NEMA NIKAKV
 //                                  NACIN DA KORISTI CACHE
 //            OVO JE PREDPSOTVKA JER JA JESAM KORISTIO CONTEND DIGEST
@@ -208,149 +213,127 @@ exports.onCreateNode = (
   // OVO OSTAJE ISTO   (   "/""     JE basePath )
   const { basePath } = withDefaults(options); // PO DEFAULT-U
 
+  // I OVO SU ZAJEDNICKE STVARI ZA SVAKI NODE OD
+  // MOJE DVE VRSTE NODE-OVA, KOJE ZA SADA HANDLE-UJEM
   const { name, modifiedTime, relativeDirectory } = parentNode;
 
-  const id = createNodeId(`BlogPostPage-${node.id}`); // OVO JE ID ZA
-  //                                          BlogPostPage    NODE
+  // === !== ODAVDE CU DEFINISATI KREIRANJE NODE-OVA !== ===
 
-  const { contentDigest } = node.internal;
-  const { title } = node.frontmatter || name;
+  // === ===  IZDVAJAM PRVO STVARI KOJE SU ZAJEDNICKE ZA SVAKI NODE === !==
+  //      IPAK NE BOLJE JE DA RADIM SVE U USLOVNIM IZJAVAMA
 
-  const pageName = name !== "index" ? name : "";
+  // === !== === PRVO KREIRAM NODE-OVE ZA BLOG POST PAGE !== === !== ===
+  // === !== === ODNOSNO PREMESTAM SVU LOGIKU U OVU USLOVNU IZJAVU!== === !== ===
 
-  let slug;
-  if (node.frontmatter.slug) slug = `/${node.frontmatter.slug}`;
+  if (parentNode.sourceInstanceName === "gatsby-theme-raedal") {
+    const id = createNodeId(`BlogPostPage-${node.id}`);
 
-  const {
-    lang,
-    themeColor,
-    description,
-    group, // OVO JE VEZANO ZA GROUP PAGE
-    groupColor, // KAO I OVO
-    keywordTextColor,
-    keywordBorderColor,
-  } = withSiteHelmetDefaults(node.frontmatter);
+    const { contentDigest } = node.internal;
 
-  // === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !==
+    const { title } = node.frontmatter || name;
 
-  /*   if (group) {
-    console.log({
-      group,
-      low: group.toLowerCase(),
+    const pageName = name !== "index" ? name : "";
+
+    let slug;
+    if (node.frontmatter.slug) slug = `/${node.frontmatter.slug}`;
+
+    const {
+      lang,
+      themeColor,
+      description,
+      group, // OVO JE VEZANO ZA GROUP PAGE
+      // ALI OVO JE SADA VISAK I TREBA DA GA HANDLEF-UJE SAMO
+      // GROUP NODE, DAKLE ON TREBA DA OBEZBEDJUJE TE PODATKE
+      // STO ZNACI DA SLEDECE STVARI NECES VISE UNOSITI KROZ FRONTMATTER
+      // BLOG POST MDX-OVA
+      /* groupColor,
+      keywordTextColor,
+      keywordBorderColor, */ // ALI NEKA IH OVDE DA ZNAS STA TEBA DA
+      //                            STAVIS U FRONTMATTER GROUP PAGE-A
+    } = withSiteHelmetDefaults(node.frontmatter);
+
+    actions.createNode({
+      // CAK I OVA FUNKCIJA TRIGGER-UJE HOOK U CIJEM SAM OBIMU (INFO OD RANIJE)
+      id,
+      title,
+      updated: modifiedTime,
+      updatedFns: modifiedTime,
+      parent: node.id,
+      path:
+        slug || pathPackage.resolve("/", basePath, relativeDirectory, pageName),
+      internal: {
+        type: "BlogPostPage",
+        contentDigest,
+      },
+
+      frontMatter: {
+        // TITLE IMAM NA DVA MESTA, NIJE NI BITNO
+        title,
+        lang,
+        description,
+        themeColor,
+      },
+      // OVO CE MI BITI BITNO ZA RESOLVER-A
+      // NAIME TREBA SAMO DA OBEZBEDIM NAME OF THE GROUP
+      groupPage: {
+        group, // OVO JE ONAJ GROUP NAME
+      },
+
+      // MISLIM DA TI VEC IMAS RESOLVER KOJI UPRAVO UZIMA GORNJI
+      // group FIELD I SA NJEGA UZIMA STA MU TREBA DA BI QUERY-EOVAO
+      // APROPRIATE GROUP PAGE
     });
+
+    /////////////////////////////////////////////////////////////////
   }
- */
-  // console.log("=== !== === !== === !== === !== === !== === !== === !== === !== === !== ===");
-  // console.log("=== !== === !== === !== === !== === !== !== === !== === !== === !== === !== === !===");
 
-  let groupPageObject;
+  // === !== ===  KREIRAM NODE-OVE ZA GROUP STRANICE !== === !== ===
+  // === !== ===   !== === !== ===
 
-  // OVIM SLEDECIM USTVARI REGULISAM DA L ICE SE KREIRATI NOVI ID ILI NE
+  if (parentNode.sourceInstanceName === "group-pages-raedal") {
+    const id = createNodeId(`GroupPage-${node.id}`);
 
-  // const lowGroup = group?group.toLowerCase():null;
+    // IZDVAJAM STA MI TREBA IZ FRONTMATTER-A
+    // DAKLE I GROUP PAGES, MDX-OVI IMAJU (ODNONO TREBA DA IAMJU)
+    //    group     FIELD SA IMENOM GRUPE
 
-  if (!groupPagesNamesAndIds[group] && group) {
-    // group NE SME BITI null (POSTOJI MOGUCNOST DA SE null UZME KAO PROPERTI KADA KORISTIS [] NOTATION PRI ASSIGNMENTU PROPERTIJA)
+    const {
+      group,
+      groupColor,
+      keywordBorderColor,
+      keywordTextColor,
+      // NEKA TU BUDU PROPERTIJI I LANG I DESCRIPTION
+      lang,
+      description,
+      // JER SVAKAKO CE MI POMENUTE STVARI TREBA TI ZA
+      // SEO
+      // ZATO SKOKNI SAD U SDL DA DODAS I OVE TYPE-OVE
+    } = withSiteHelmetDefaults(node.frontmatter);
 
-    const groupPageId = createNodeId(`GroupPage-${node.id}`);
-
-    groupPagesNamesAndIds[group] = { groupPageId };
-
-    // moram kolektovati i id-jeve BlogPostPage-OVA
-
-    if (!groupPagesNamesAndIds[group].blogPages) {
-      groupPagesNamesAndIds[group].blogPages = [];
-    }
-
-    groupPagesNamesAndIds[group].blogPages.push(id);
+    const { contentDigest } = node.internal;
 
     // === !== === !== === !== === !==
-    // U OBIMU OVE IZJAVE JA BIH USTVARI TREBAO DA KREIRAM NOVI Node
-    // ODNONO NOVI    GroupPage   NODE  (JER OVDE ZNAM DA OVDE IMAS
-    //  group     SA NOVOM VREDNOSCU   )
-
-    // !======================================!   VAZNO
-    // OVAJ PUT KREIRAM POTPUNO NOVI          contentDigest (TO SLUZI ZA
-    // CACHING)
-    // ZA TO IMAM FUNKCIJU    createContentDigest
-    // TREBALO BI DA JE NAHRANIM SA STRINGOM ILI OBJEKTOM, KOJI IMA INFO
-    // SVOJSTVEN ZA TRENUTNO PRAVLJENI NODE
-    const currentGroupPageContentDigest = createContentDigest({
-      group,
-      groupPageId, // ZADAO OBJEKAT SA TRENUTNIM group STRINGOM I ID-JEM TRENUTNOG GROUP-A
-    });
+    // === !== === !== === !== === !==
 
     // MISLIM DA SADA IMAM SVE STO JE POTREBNO ZA KREIRANJE NOVOG NODE-A
     actions.createNode({
-      id: groupPageId,
+      id,
       name: group,
       path: pathPackage.resolve("/", group.toLowerCase()),
+      // DODAJEM I   lang     I   description
       groupColor,
+      //
       keywordTextColor,
       keywordBorderColor,
       updated: modifiedTime,
       updatedFns: modifiedTime,
       internal: {
         type: "GroupPage",
-        contentDigest: currentGroupPageContentDigest,
+        contentDigest,
       },
     });
-
-    groupPageObject = {
-      id: groupPageId,
-      name: group,
-      path: pathPackage.resolve("/", group.toLowerCase()),
-      groupColor,
-      keywordTextColor,
-      keywordBorderColor,
-      updated: modifiedTime,
-      updatedFns: modifiedTime,
-    };
-
-    // === !== === !== === !== === !==
-  } else if (group) {
-    if (!groupPagesNamesAndIds[group].blogPages) {
-      groupPagesNamesAndIds[group].blogPages = [];
-    }
-
-    groupPagesNamesAndIds[group].blogPages.push(id);
-
-    groupPageObject = {
-      id: groupPagesNamesAndIds[group].groupPageId,
-      name: group,
-      path: pathPackage.resolve("/", group.toLowerCase()),
-      groupColor,
-      keywordTextColor,
-      keywordBorderColor,
-    };
   }
-
-  const groupPage = !group ? null : groupPageObject;
-
-  actions.createNode({
-    // CAK I OVA FUNKCIJA TRIGGER-UJE HOOK U CIJEM SAM OBIMU (INFO OD RANIJE)
-    id,
-    title,
-    updated: modifiedTime,
-    updatedFns: modifiedTime,
-    parent: node.id,
-    path:
-      slug || pathPackage.resolve("/", basePath, relativeDirectory, pageName),
-    internal: {
-      type: "BlogPostPage",
-      contentDigest,
-    },
-
-    frontMatter: {
-      // TITLE IMAM NA DVA MESTA, NIJE NI BITNO
-      title,
-      lang,
-      description,
-      themeColor,
-    },
-
-    groupPage,
-  });
+  // === !== === !== === !== === !==
 };
 
 // KREIRANJE RESOLVER ZA body FIELD
