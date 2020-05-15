@@ -178,18 +178,29 @@ exports.onCreateNode = (
 
   // OVDE ZELIM DA NAPRAVIM PROVERU O KOJOJ SAM GOVORIO
   // === !== === !== === !== ===
-  if (getNode(node.parent).sourceInstanceName === "group-pages-raedal") {
-    // PROVERAVAM DA L ICE SE POJAVITI ONAJ NAME KOJI SAM ZADAO
-    // U CONFIGURACIJSKOM FAJLU GATSBY-JA
-    console.log(getNode(node.parent).sourceInstanceName);
-  }
+  // if (getNode(node.parent).sourceInstanceName === "group-pages-raedal") {
+  // PROVERAVAM DA L ICE SE POJAVITI ONAJ NAME KOJI SAM ZADAO
+  // U CONFIGURACIJSKOM FAJLU GATSBY-JA
+  // console.log(getNode(node.parent).sourceInstanceName);
+  // }
   // === !== === !== === !== ===
 
   const parentNode = getNode(node.parent);
 
-  // AKO NIJE LOADED BY MY THEME, NI TAJ MI NE TREBA
+  // AKO NIJE LOADED BY MY THEME, NI TAJ MI NE TREBA (I TO JE TU BILO OD RANIJE)
   if (parentNode.sourceInstanceName !== "gatsby-theme-raedal") return;
+  // A SADA IMAM I DRUGI SOURCE (NAMERNO CU DA NAPRAVIM I DRUGU USLOVNU IZJAVU)
+  if (parentNode.sourceInstanceName !== "group-pages-raedal") return;
 
+  // E AL ISADA CU IMATI VISE USLOVNIH IZJAVA
+  // ODNOSNO TREBACE MI JEDNA USLOVNA IZJAVA DA HANDLE-UJEM ONO
+  // STO DOLAZI OD
+  //                                    "gatsby-theme-raedal"
+
+  // I DRUGA ZA ONO STA DOLAZI OD       "group-pages-raedal"
+  // ZATO BI OVDE TREBALO DA COMMIT-UJEM
+
+  // OVO OSTAJE ISTO   (   "/""     JE basePath )
   const { basePath } = withDefaults(options); // PO DEFAULT-U
 
   const { name, modifiedTime, relativeDirectory } = parentNode;
