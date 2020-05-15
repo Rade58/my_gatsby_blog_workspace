@@ -197,18 +197,7 @@ exports.onCreateNode = (
 
   const parentNode = getNode(node.parent);
 
-  // console.log(parentNode.sourceInstanceName);
-  // AKO NIJE LOADED BY MY THEME, NI TAJ MI NE TREBA (I TO JE TU BILO OD RANIJE)
-  // A SADA IMAM I DRUGI SOURCE (NAMERNO CU DA NAPRAVIM I DRUGI USLOV)
-  if (
-    parentNode.sourceInstanceName !== "gatsby-theme-raedal" ||
-    parentNode.sourceInstanceName !== "group-pages-raedal"
-  ) {
-    return;
-  }
-  // TAK ODA SAM OBJEDINIO DVA USLOVA
-
-  // E AL ISADA CU IMATI VISE USLOVNIH IZJAVA
+  // IMACU VISE USLOVNIH IZJAVA
   // ODNOSNO TREBACE MI JEDNA USLOVNA IZJAVA DA HANDLE-UJEM ONO
   // STO DOLAZI OD
   //                                    "gatsby-theme-raedal"
@@ -423,18 +412,20 @@ exports.createResolvers = ({ createResolvers }) => {
       // KREIRAM I groupPage RESOLVER
       groupPage: {
         type: "GroupPage",
-        resolve: (source, args, context, info) => {
-          let groupPageInstance = null;
+        // MORA ASYNC
+        resolve: async (source, args, context, info) => {
+          const groupPageInstance = await context.nodeModel.runQuery({
+            type: "GroupPage",
+            query: {
+              filter: { name: { eq: source.groupPage.name } },
+            },
+          });
 
-          if (source.groupPage && source.groupPage.id) {
-            const blogPostId = source.groupPage.id;
+          console.log(groupPageInstance);
 
-            groupPageInstance = context.nodeModel.getNodeById({
-              id: blogPostId,
-            });
-          }
+          if (!groupPageInstance) return null;
 
-          return groupPageInstance;
+          return groupPageInstance[0] || { name: "bilo koje ime" };
         },
       },
     },
