@@ -197,11 +197,16 @@ exports.onCreateNode = (
 
   const parentNode = getNode(node.parent);
 
-  console.log(parentNode.sourceInstanceName);
+  // console.log(parentNode.sourceInstanceName);
   // AKO NIJE LOADED BY MY THEME, NI TAJ MI NE TREBA (I TO JE TU BILO OD RANIJE)
-  if (parentNode.sourceInstanceName !== "gatsby-theme-raedal") return;
-  // A SADA IMAM I DRUGI SOURCE (NAMERNO CU DA NAPRAVIM I DRUGU USLOVNU IZJAVU)
-  if (parentNode.sourceInstanceName !== "group-pages-raedal") return;
+  // A SADA IMAM I DRUGI SOURCE (NAMERNO CU DA NAPRAVIM I DRUGI USLOV)
+  if (
+    parentNode.sourceInstanceName !== "gatsby-theme-raedal" ||
+    parentNode.sourceInstanceName !== "group-pages-raedal"
+  ) {
+    return;
+  }
+  // TAK ODA SAM OBJEDINIO DVA USLOVA
 
   // E AL ISADA CU IMATI VISE USLOVNIH IZJAVA
   // ODNOSNO TREBACE MI JEDNA USLOVNA IZJAVA DA HANDLE-UJEM ONO
@@ -225,9 +230,9 @@ exports.onCreateNode = (
 
   // === !== === PRVO KREIRAM NODE-OVE ZA BLOG POST PAGE !== === !== ===
   // === !== === ODNOSNO PREMESTAM SVU LOGIKU U OVU USLOVNU IZJAVU!== === !== ===
-  console.log("=======================================================");
+  /* console.log("=======================================================");
   console.log(parentNode.sourceInstanceName === "gatsby-theme-raedal");
-  console.log("=======================================================");
+  console.log("======================================================="); */
 
   if (parentNode.sourceInstanceName === "gatsby-theme-raedal") {
     //
@@ -297,9 +302,9 @@ exports.onCreateNode = (
 
   // === !== ===  KREIRAM NODE-OVE ZA GROUP STRANICE !== === !== ===
   // === !== ===   !== === !== ===
-  console.log("=======================================================");
+  /* console.log("=======================================================");
   console.log(parentNode.sourceInstanceName === "group-pages-raedal");
-  console.log("=======================================================");
+  console.log("======================================================="); */
   if (parentNode.sourceInstanceName === "group-pages-raedal") {
     console.log(parentNode.sourceInstanceName);
 

@@ -159,19 +159,27 @@ JEDINO STO SE TAJ OBJEKAT KORISTI PRI KREIRANJU PAGE-OVA A DO TOGA JOS NISAM DOS
 
 EVO STA BIH TREBAO URADITI U `onCreateNode` HOOK-U
 
-:one: **DVE USLOVNE IZJAVE**
+:one: **TRI USLOVA**
+
+`**A AKO DOBRO VIDIS NAMERNO RETURN-UJEM FUNKCIJU AKO NISU U PITANJU JEDAN OD DVA SOURCE INSTANCE NAME-A**`
 
 ```js
+
+//
+if (
+  parentNode.sourceInstanceName !== "gatsby-theme-raedal"
+  || 
+  parentNode.sourceInstanceName !== "group-pages-raedal"
+) return;
+//
+
+
 if (parentNode.sourceInstanceName === "gatsby-theme-raedal"){
-
-// OVDE DEFINISEM KREIRANJE NODE-OVA ZA BLOG POST
-
+  // OVDE DEFINISEM KREIRANJE NODE-OVA ZA BLOG POST
 }
 
 if (parentNode.sourceInstanceName === "group-pages-raedal"){
-
-// OVDE DEFINISEM KREIRANJE NODE-OVA ZA GROUP PAGE
-
+  // OVDE DEFINISEM KREIRANJE NODE-OVA ZA GROUP PAGE 
 }
 
 ```
