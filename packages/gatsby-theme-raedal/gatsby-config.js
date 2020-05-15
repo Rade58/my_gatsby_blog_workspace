@@ -27,7 +27,7 @@ module.exports = (options) => {
       // SOURCE FILESYSTEM-A
       // === !== === !==
       {
-        resolve: "garsby-source-filesystem",
+        resolve: "gatsby-source-filesystem",
         options: {
           // ALI SADA MORAM KORISTITI DRUGI NAME OSIM ONOG IMENA
           //            gatsby-theme-raedal

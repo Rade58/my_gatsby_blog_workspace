@@ -10,27 +10,36 @@ const withDefaults = require("./utility/utility-options"); // DEFAULTS SU
 //                                                         basePath ->  "/""
 //                                                   contentPath  -> "blogposts"
 //                                                   useExternalMDX  --> false
+//                A DODAO SAM I NOVI DEFAULT ZA     groupsPath  -->    "grouppages"
 //
 const withSiteHelmetDefaults = require("./utility/utility-site-metadata"); // HELMET DEFAULTS (ONO STO SE SERVIRA ZA DEFAULT ZA FIELD frontMatter KOJI SAM KREIRAO) (DODAO SAM U FUNKCIJU I DEFAULTOVE ZA    group    I   groupColor     )
 //
 
-// SAMO SE KORISTI INSIDE     onPreBootstrap
-
-// AKO NE POSTOJI     contentPath    blogposts
-// ODNOSNO AKO U SITE FOLDERU NE POSTOJI        blogposts    FOLDER
-// KREIRATI GA
 exports.onPreBootstrap = ({ store }, options) => {
-  const { program } = store.getState(); // PROGRAM IMA INFO O SITE-U, KAO STO
-  //                                          JE DIREKTORIJUM   SITE-A
-  const { contentPath } = withDefaults(options);
-  const dir = pathPackage.join(program.directory, contentPath); // DAKEL OVOM SE
+  const { program } = store.getState();
+
+  // DAKLE SADA IZDVAJAM I      groupsPath
+  // I ZELIM DA SE NA NIVOU SITE-A KREIRA     FOLDER AKO GA NEMA
+
+  const { contentPath, groupsPath } = withDefaults(options);
+
+  const blogDir = pathPackage.join(program.directory, contentPath); // DAKEL OVOM SE
   //                                                         APSOLUTNI
   //                                                  DIREKTORIJUM SITE-A
 
-  // AKO NE POSTOJI DIREKTORIJUM KREIRAM GA PO DEFAULTU NA      blogposts
+  // PRAVIM NOVI ABSOLUTNI PATH, OVAJ PUT ZA FOLDER ZA GROUP PAGE MDXES
 
-  if (!fs.existsSync(dir)) {
-    mkdirp.sync(dir);
+  const groupsDir = pathPackage.join(program.directory, groupsPath);
+
+  // OVO SAM RANIJE RADIO
+  if (!fs.existsSync(blogDir)) {
+    mkdirp.sync(blogDir);
+  }
+
+  // SAD RADIM ISTO, SAMO ZA PREDHODNI PATH
+  if (!fs.existsSync(groupsDir)) {
+    // DAKLE KREIRAM FOLDER AKO GA NEMA
+    mkdirp.sync(groupsDir);
   }
 };
 
@@ -67,7 +76,7 @@ exports.createSchemaCustomization = ({ actions }) => {
           const fieldValue = defaultFieldResolver(source, args, context, info);
           // OVO GORE MOZDA NECE TREBATI
 
-          console.log(fieldValue);
+          // console.log(fieldValue);
 
           if (args.MMMMDoyyyy) {
             return formatDate(parseISO(fieldValue), "MMMM, Do, yyyy");
@@ -151,10 +160,14 @@ exports.createSchemaCustomization = ({ actions }) => {
 // KAO STO VIDIS GORE SAM PROSIRIO      GroupNameAndPathType, DODAJUCI
 // keywordColor I keywordTextColor
 
-//                      -
+// EVENTUALLY, VEMO BRZO CU OVO IZBACITI
+// OVAJ OBJEKAT NIJE DOBRA STVAR
 
-const groupPagesNamesAndIds = {}; // IDEJA JE DA U OVAJ OBJEKAT STAVLJAM
-//                                  GROUP NAME - ID PAROVE (ALI IMA JOS TOGA STA)
+const groupPagesNamesAndIds = {}; // MORACE BITI UKLONJENO JER NEMA NIKAKV
+//                                  NACIN DA KORISTI CACHE
+//            OVO JE PREDPSOTVKA JER JA JESAM KORISTIO CONTEND DIGEST
+//                                   PRI KREIRANJU NODE-OVA ALI NEMA VEZE
+//                                SADA CU I ONAKO IAMTI CORRESPONDING MDXES
 
 // SVI HELPERI SU OVDE OBJASNJENI:     https://www.gatsbyjs.org/docs/node-api-helpers/#createContentDigest
 exports.onCreateNode = (
@@ -162,6 +175,15 @@ exports.onCreateNode = (
   options
 ) => {
   if (!node.parent) return; // OVO JE I DALJE OK
+
+  // OVDE ZELIM DA NAPRAVIM PROVERU O KOJOJ SAM GOVORIO
+  // === !== === !== === !== ===
+  if (getNode(node.parent).sourceInstanceName === "group-pages-raedal") {
+    // PROVERAVAM DA L ICE SE POJAVITI ONAJ NAME KOJI SAM ZADAO
+    // U CONFIGURACIJSKOM FAJLU GATSBY-JA
+    console.log(getNode(node.parent).sourceInstanceName);
+  }
+  // === !== === !== === !== ===
 
   const parentNode = getNode(node.parent);
 
@@ -195,13 +217,13 @@ exports.onCreateNode = (
 
   // === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !== === !==
 
-  if (group) {
+  /*   if (group) {
     console.log({
       group,
       low: group.toLowerCase(),
     });
   }
-
+ */
   // console.log("=== !== === !== === !== === !== === !== === !== === !== === !== === !== ===");
   // console.log("=== !== === !== === !== === !== === !== !== === !== === !== === !== === !== === !===");
 
@@ -409,9 +431,9 @@ exports.createResolvers = ({ createResolvers }) => {
         },
         //
         resolve: async (source, args, context, info) => {
-          console.log(
+          /* console.log(
             "=== !== === !== === !== === !== === !== === !== === !== === !== === !== ==="
-          );
+          ); */
           // ONO STA TI TREBA JE       source.name
           // JER CES PREMA TOME PRAVITI QUERY
           /* console.log(source.name);
