@@ -90,9 +90,11 @@ export const groupPageContext: Context<GroupPageContextStateI> = createContext({
     //
 
     updated: "",
+    // DODAJEM DVA DODATNA DEFAULT-A
+    lang: "en",
+    description: "",
+    //
   },
-  // KAO STO MSE MOZE PRIMETITI OVO PROSLEDJIVANJE DEFAULT-OVA JE
-  // MALO BILO BRUTALNO
 });
 
 // UZUMAM PROVIDER-A, CONSUMER MI NE TREBA, JER NE KORISTIM

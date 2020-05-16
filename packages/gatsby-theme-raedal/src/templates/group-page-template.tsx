@@ -47,6 +47,11 @@ export interface LocationI {
 }
 
 export interface GroupPageI {
+  // DODAJEM DVA DODATNA FIELDA
+  lang: string;
+  description: string;
+  //
+
   // id: string;
   name: string;
   path: string;

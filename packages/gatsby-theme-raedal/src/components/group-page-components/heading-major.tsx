@@ -43,7 +43,10 @@ const HeadingMajor: FunctionComponent = () => {
             &.emo {
               border-right: groove ${groupColor} thick;
               border-left: groove ${groupColor} thick;
+              border-top: ridge ${groupColor} thick;
               /* padding: 4.8px; */
+              padding-left: 4px;
+              padding-right: 3px;
               
             }
           }

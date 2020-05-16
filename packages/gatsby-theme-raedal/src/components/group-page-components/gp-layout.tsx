@@ -8,6 +8,8 @@ import theme from "../../gatsby-plugin-theme-ui/index";
 ////////////////////////////////////////////////////
 import { additionalStyles } from "../../common-styles";
 //
+import GroupSeo from "../../seo/group-seo";
+//
 
 // ONO CIME CU UVESTI U OVU KOMPONENTU JESTE
 //    GroupPage      KOMPONENTA, KOJA IMA UGRADJEN SAV STATE
@@ -43,6 +45,9 @@ const LayoutGroupPage: FunctionComponent = () => {
           },
         }}
       />
+      {/* MOZDA JE OVO DOBRO MESTO ZA HELMET */}
+      <GroupSeo />
+      {/* ---------- */}
       <ThemeProvider theme={theme}>
         {/* <StringifiedProps /> */}
         <Header />
