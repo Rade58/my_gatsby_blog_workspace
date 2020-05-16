@@ -3,7 +3,7 @@ import { jsx, Image } from "theme-ui";
 
 import { css } from "@emotion/core";
 
-import { FunctionComponent, useContext } from "react";
+import { FunctionComponent, useContext, useEffect, useRef } from "react";
 
 import { $_useGroupPageState } from "../../context_n_reducers/group_page_con_red";
 
@@ -18,14 +18,39 @@ const HeadingMajor: FunctionComponent = () => {
 
   // console.log({ keywordBorderColor, keywordTextColor });
 
+  const imageRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    import(`../../ICONS/devicons-in-use/${name.toLowerCase()}.svg`).then(
+      (res) => {
+        console.log(res);
+
+        if (imageRef.current) {
+          imageRef.current.src = res.default;
+        }
+      }
+    );
+  }, [imageRef, name]);
+
   return (
     <div
       className="heading-major"
       css={css`
         display: flex;
+        flex-direction: row;
       `}
     >
       {/* <Image /> */}
+      <span>
+        <img
+          alt="subject-logo"
+          ref={imageRef}
+          css={css`
+            width: 4rem;
+            border: pink solid 1px;
+          `}
+        />
+      </span>
       <h1
         css={css`
           margin-left: auto;
