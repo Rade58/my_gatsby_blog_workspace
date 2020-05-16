@@ -173,7 +173,7 @@ exports.createSchemaCustomization = ({ actions }) => {
 // (2) JEDINO SE KORISTI PRI KREIRANJU GROUP PAGE-OVA, A TO CE USKORO BITI
 //                    UKLONJENO
 // CIM GA PODVUCE ESLINT ZNACU DA JE NO-OP
-const groupPagesNamesAndIds = {}; // MORACE BITI UKLONJENO JER NEMA NIKAKV
+// const groupPagesNamesAndIds = {}; // MORACE BITI UKLONJENO JER NEMA NIKAKV
 //                                  NACIN DA KORISTI CACHE
 //            OVO JE PREDPSOTVKA JER JA JESAM KORISTIO CONTEND DIGEST
 //                                   PRI KREIRANJU NODE-OVA ALI NEMA VEZE
@@ -423,9 +423,11 @@ exports.createResolvers = ({ createResolvers }) => {
 
           console.log(groupPageInstance);
 
-          if (!groupPageInstance) return null;
-
-          return groupPageInstance[0] || { name: "bilo koje ime" };
+          if (!groupPageInstance) return null; // groupPage FIELD SME BITI NULL JER SAM TAKO DOZVOLIO
+          //
+          return groupPageInstance[0] || { name: "bilo koje ime" }; // NIKADA SE NECE DESITI DA
+          //                                                              DA VREDNOST BUDE POSLE ||
+          //                                                              ALI IPAK SAM TO HANDLE-OVAO
         },
       },
     },
