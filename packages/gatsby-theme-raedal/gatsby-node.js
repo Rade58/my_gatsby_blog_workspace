@@ -225,7 +225,7 @@ exports.onCreateNode = (
 
   if (parentNode.sourceInstanceName === "gatsby-theme-raedal") {
     //
-    console.log(parentNode.sourceInstanceName);
+    // console.log(parentNode.sourceInstanceName);
     //
 
     const id = createNodeId(`BlogPostPage-${node.id}`);
@@ -295,7 +295,7 @@ exports.onCreateNode = (
   console.log(parentNode.sourceInstanceName === "group-pages-raedal");
   console.log("======================================================="); */
   if (parentNode.sourceInstanceName === "group-pages-raedal") {
-    console.log(parentNode.sourceInstanceName);
+    // console.log(parentNode.sourceInstanceName);
 
     const id = createNodeId(`GroupPage-${node.id}`);
 
@@ -421,7 +421,7 @@ exports.createResolvers = ({ createResolvers }) => {
             },
           });
 
-          console.log(groupPageInstance);
+          // console.log(groupPageInstance);
 
           if (!groupPageInstance) return null; // groupPage FIELD SME BITI NULL JER SAM TAKO DOZVOLIO
           //
