@@ -129,9 +129,9 @@ exports.createSchemaCustomization = ({ actions }) => {
       path: String!
 
       lang: String!
-
       description: String!
 
+      iconPath: String!
 
       groupColor: String!
 

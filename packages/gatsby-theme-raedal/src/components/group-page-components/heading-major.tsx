@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx } from "theme-ui";
+import { jsx, Image } from "theme-ui";
 
 import { css } from "@emotion/core";
 
@@ -25,6 +25,7 @@ const HeadingMajor: FunctionComponent = () => {
         display: flex;
       `}
     >
+      {/* <Image /> */}
       <h1
         css={css`
           margin-left: auto;
