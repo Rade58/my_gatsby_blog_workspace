@@ -6,6 +6,14 @@ const withDefaults = require("./utility/utility-options"); // DEFAULTS SU
 
 // const siteMetadata = require("./src/seo/siteMetadata");
 
+// ENVIROMENT STUFF   ///////////////////////
+
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
+//////////////////////////////////////////
+
 module.exports = (options) => {
   // SADA IZDVAJAM I      groupsPath
   const { contentPath, useExternalMDX, groupsPath } = withDefaults(options);
@@ -33,6 +41,15 @@ module.exports = (options) => {
           //            gatsby-theme-raedal
           name: "group-pages-raedal",
           path: groupsPath,
+        },
+      },
+      // === !== === !==   OVO JE DOBRO MESTO ZA KONFIGURIRANJE     ****    CLOUDINARY-JA   ****   === !== === !==
+      {
+        // OVO JE SAMO KONFIGURACIJA ZA IKONE IZ MOJE TEME
+        resolve: "gatsby-source-filesystem",
+        options: {
+          name: "group-icons",
+          path: "/gatsby-theme-raedal/src/ICONS/devicons-in-use",
         },
       },
       // === !== === !==
