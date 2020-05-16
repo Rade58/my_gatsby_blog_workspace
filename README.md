@@ -36,4 +36,4 @@ DAKLE SVE IMAGE ASSETE NEKA LOAD-UJE CLOUDINARY
 
 JA ZELIM DAKLE DA CLOUDINARY KORISTIM NA NIVOU MOJE TEME
 
-- `yarn `
+- `yarn workspace gatsby-theme-raedal add gatsby-transformer-cloudinary`
