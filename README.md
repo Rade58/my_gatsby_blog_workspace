@@ -60,6 +60,39 @@ PA POKUSAJ, KAKO BI VIDEO STA MOZES DOBITI OD NJIH
 
 ***
 
+EVO KAKAV SAM QUERY USPEO DA KREIRAM
+
+```php
+query TakeDevicon($relPath: String!){
+  allFile(filter: {internal: {mediaType: {eq: "image/svg+xml"}}, relativePath: {eq: $relPath}}) {
+  	
+  	nodes {
+      absolutePath
+      relativePath
+      
+      # OVO SAM SAMO OSTAVIO DA TI KAZEM DA JE MOGUCE QUERY-EOVATI
+      # I NA OSNOVU 		ext					(EXTENSIONA, KAO STO JE U MOM SLUCAJU    .svg   )
+      # ALI TO NISAM ZNAO PA SAM KORISTIO					mediaType
+      ext
+      
+      
+      #  A STO SE TICE RELATIVE PATHA
+      # PA TO JE SAMO IME FAJLA, JER SVI TI DA SE IZRAZIM STATIC ASSETS,
+      # KOJE LOAD-UJE FILESYSTEM SU 		U TOP LEVELU (NISU U NIKAKVOM FOLDERU
+      # BEZ OBZIRA STO SI IM TI NAMENIO FOLDER U SITE FOLDERU PRILIKOM BUILD-A
+      
+      
+    }
+  }
+}
+```
+
+OVO BI BILA QUERY VARIJABLA KOJU BI MOZDA PROSLEDJIVAO DA UZMES NODE
+
+```json
+{"relPath": "graphql.svg"}
+```
+
 # :three: KREIRACU RESOLVER-A ZA POMENUTI FIELD
 
 GDE CU KAO STO SAM REKAO CITATI ASINHRONO SADRZAJ SVG FAJLA
