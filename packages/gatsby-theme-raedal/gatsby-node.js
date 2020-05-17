@@ -469,15 +469,21 @@ exports.createResolvers = ({ createResolvers }) => {
             //
 
             const fileReadPromise = new Promise((res, rej) => {
-              fs.readFile(absolutePath, "utf8", (error, result) => {
-                if (error) {
-                  return rej(error);
+              // IPAK NECU "utf-8"   VEC    "base64"
+              fs.readFile(
+                absolutePath,
+                /* "utf8", */
+                { encoding: "base64" },
+                (error, result) => {
+                  if (error) {
+                    return rej(error);
+                  }
+
+                  console.log(result);
+
+                  return res(result);
                 }
-
-                console.log(result);
-
-                return res(result);
-              });
+              );
             });
 
             // console.log({ resultArray });
