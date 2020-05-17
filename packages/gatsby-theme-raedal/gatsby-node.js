@@ -131,7 +131,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       lang: String!
       description: String!
 
-      iconPath: String!
+      icon: String!
 
       groupColor: String!
 
@@ -342,9 +342,12 @@ exports.onCreateNode = (
         type: "GroupPage",
         contentDigest,
       },
+
+      // EVO OVDE PROSLEDJUJEM GROUP NAME === !== === !==
+      icon: group,
+      // === !== === !== === !== === !== === !== === !==
     });
   }
-  // === !== === !== === !== === !==
 };
 
 // KREIRANJE RESOLVER ZA body FIELD
@@ -433,7 +436,40 @@ exports.createResolvers = ({ createResolvers }) => {
     },
     // EVO DEFINISEM RESOLVER ZA     blogPostPages   FIELD NA      GroupPage    TYPE-U
     GroupPage: {
-      //
+      // === !== === !== === !== === !==
+      // EVO PRAVIM RESOLVER-A ZA             iconPath
+      icon: {
+        type: "String!",
+        resolve: async (source, args, context, info) => {
+          // console.log(source.icon);
+
+          const name = source.icon.toLowerCase();
+
+          /* const svgString = await fs.readFile(
+            pathPackage.resolve(
+              __dirname,
+              "/src/ICONS/devicons-in-use",
+              `/${name}.svg`
+            )
+          );
+         */
+          pathPackage.resolve();
+
+          // console.log(svgString);
+          console.log(
+            pathPackage.resolve([
+              __dirname,
+              "/src/ICONS/devicons-in-use",
+              `/${name}.svg`,
+            ])
+          );
+
+          return source.icon;
+        },
+      },
+
+      // === !== === !== !== === !== ===
+      // === !== === !== !== === !== ===
       blogPostPages: {
         type: "[BlogPostPage]!",
 
