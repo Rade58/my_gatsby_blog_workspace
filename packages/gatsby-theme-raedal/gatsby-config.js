@@ -49,7 +49,7 @@ module.exports = (options) => {
         resolve: "gatsby-source-filesystem",
         options: {
           name: "group-icons",
-          path: "devicons-in-use",
+          path: "cloud-images",
         },
       },
       // CLOUDINARY CONFIGURACIJA
@@ -60,7 +60,7 @@ module.exports = (options) => {
           apiKey: process.env.CLOUDINARY_API_KEY,
           apiSecret: process.env.CLOUDINARY_API_SECRET,
           // A IME FOLDER NA CLOUD-U MOZE BITI RANDOM
-          uploadFolder: "raedal-blog-devicons",
+          uploadFolder: "raedal-blog",
         },
       },
       // === !== === !==  === !== === !== === !== === !== === !== === !== === !== === !==
