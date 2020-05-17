@@ -1,4 +1,5 @@
 const remarkSlug = require("remark-slug");
+const fs = require("fs");
 const withDefaults = require("./utility/utility-options"); // DEFAULTS SU
 //                                                         basePath ->  "/""
 //                                                   contentPath  -> "blogposts"

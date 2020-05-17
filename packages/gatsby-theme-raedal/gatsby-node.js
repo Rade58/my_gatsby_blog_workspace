@@ -441,41 +441,53 @@ exports.createResolvers = ({ createResolvers }) => {
       icon: {
         type: "String!",
         resolve: async (source, args, context, info) => {
-          // console.log(source.icon);
+          // GROUP NAME SE NALAZI U     source.icon
+          // A DA SE NE ZEZNEM, path PAKET SAM UVEZAO KAO     pathPackage
 
-          const name = source.icon.toLowerCase();
+          // MISLIM DA JE U OVOM SLUCAJU U PITANJU TYPE       File
 
-          /* const svgString = await fs.readFile(
-            pathPackage.resolve(
-              __dirname,
-              "/src/ICONS/devicons-in-use",
-              `/${name}.svg`
-            )
-          );
-         */
-          // pathPackage.resolve();
+          if (source.icon) {
+            const name = source.icon.toLowerCase();
+            const relPath = `${name}.svg`;
 
-          // console.log(svgString);
+            // BICE RETURNED ARRAY, ALI IMACE SAMO JEDAN CLAN
 
-          /* console.log(
-            pathPackage.resolve([
-              __dirname,
-              "/src/ICONS/devicons-in-use",
-              `/${name}.svg`,
-            ])
-          ); */
+            const resultArray = await context.nodeModel.runQuery({
+              type: "File",
+              query: {
+                // OVO SAM PREKOPIRAO SVE IZ ONOG QUERY-JA, KOJEG SAM VEC NAPRAVIO U Graphiql-U
+                // I ONO STO SAM PROSLEDIO JE KAO STO VIDIS relPath
+                filter: {
+                  internal: { mediaType: { eq: "image/svg+xml" } },
+                  relativePath: { eq: relPath },
+                },
+              },
+            });
 
-          console.log(
-            require.resolve(__dirname, "/src/ICONS/", `/${name}.svg`)
-          );
+            // IZDVAJAM ABSOLUTE PATH NEOPHODAN ZA READING FILE-A
+            const { absolutePath } = resultArray[0];
+            //
 
-          console.log({
-            dirname: __dirname,
+            const fileReadPromise = new Promise((res, rej) => {
+              fs.readFile(absolutePath, "utf8", (error, result) => {
+                if (error) {
+                  return rej(error);
+                }
 
-            something: "something",
-          });
+                console.log(result);
 
-          return source.icon;
+                return res(result);
+              });
+            });
+
+            // console.log({ resultArray });
+
+            // return source.icon;
+
+            return fileReadPromise;
+          }
+
+          return "nesto";
         },
       },
 
