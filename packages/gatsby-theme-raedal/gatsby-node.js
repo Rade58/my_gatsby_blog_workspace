@@ -132,7 +132,6 @@ exports.createSchemaCustomization = ({ actions }) => {
       description: String!
 
       icon: String!
-      icons: [String!]
 
       groupColor: String!
 
@@ -465,6 +464,10 @@ exports.createResolvers = ({ createResolvers }) => {
               `/${name}.svg`,
             ])
           ); */
+
+          console.log(
+            require.resolve(__dirname, "/src/ICONS/", `/${name}.svg`)
+          );
 
           console.log({
             dirname: __dirname,

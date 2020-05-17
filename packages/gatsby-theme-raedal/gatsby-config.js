@@ -60,6 +60,19 @@ module.exports = (options) => {
       }, */
       // === !== === !==  === !== === !== === !== === !== === !== === !== === !== === !==
       // === !== === !== === !== === !== === !== === !== === !== === !== === !== === !==
+      // OVIM ZELIM DA LOAD-UJEM SVE MOGUCE IKONICE VEZANE ZA SITE, ODNOSNO DEVICONS-E
+      // DAKLE TO RADIM JER ZELIM DA I NJIH MOGU QUERY-OVATI I MOZDA DA I KORISTIM, NJIHOV
+      // STRINGIFIED OBLIK
+      {
+        resolve: "gatsby-source-filesystem",
+        options: {
+          name: "devicons-raedal",
+          path: "devicons-in-use", // OVO JE DAKLE IME FOLDERA KOJE CE BITI NA SITE LEVEL-U
+        },
+      },
+
+      // === !== === !== === !== === !== === !== === !== === !== === !== === !== === !==
+      // === !== === !== === !== === !== === !== === !== === !== === !== === !== === !==
       !useExternalMDX && {
         resolve: "gatsby-plugin-mdx",
         options: {
