@@ -47,6 +47,10 @@ export interface LocationI {
 }
 
 export interface GroupPageI {
+  // DODAJEM icon
+  icon: string;
+  //
+
   // DODAJEM DVA DODATNA FIELDA
   lang: string;
   description: string;
@@ -78,6 +82,12 @@ export interface GroupPageTemplatePropsI {
 export const TakeOneGroupPage = graphql`
   query TakeOneGroupPage($id: String!) {
     groupPage(id: { eq: $id }) {
+      # QUERY-UJEM    icon    ALI I   description   I lang   (KOJE SAM RANIJE ZABORAVIO)
+
+      icon
+      lang
+      description
+
       # PRVO PODACI POTREBNI ZA KONKRETAN GROUP PAGE
       id
       name
