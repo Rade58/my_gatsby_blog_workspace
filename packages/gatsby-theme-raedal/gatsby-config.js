@@ -50,6 +50,7 @@ module.exports = (options) => {
         options: {
           name: "group-icons",
           path: "cloud-images",
+          // path: "gatsby-theme-raedal/src/ICONS/devicons-in-use/cloud-images",
         },
       },
       // CLOUDINARY CONFIGURACIJA
