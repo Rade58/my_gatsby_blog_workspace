@@ -4,14 +4,13 @@ const withDefaults = require("./utility/utility-options"); // DEFAULTS SU
 //                                                   contentPath  -> "blogposts"
 //                                                   useExternalMDX  --> false
 
-// const siteMetadata = require("./src/seo/siteMetadata");
-
+// === !== === !== === !== SAMO PRIVREMENO COMMENTED OUT
 // ENVIROMENT STUFF   ///////////////////////
 
-require("dotenv").config({
+/* require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
-});
-
+}); */
+// === !== === !== === !== === !== === !==
 //////////////////////////////////////////
 
 module.exports = (options) => {
@@ -31,26 +30,21 @@ module.exports = (options) => {
           path: contentPath,
         },
       },
-      // DAKLE POTREBNO JE SAMO DODATI JOS JEDNU KONFIGURACIJU
-      // SOURCE FILESYSTEM-A
       // === !== === !==
       {
         resolve: "gatsby-source-filesystem",
         options: {
-          // ALI SADA MORAM KORISTITI DRUGI NAME OSIM ONOG IMENA
-          //            gatsby-theme-raedal
           name: "group-pages-raedal",
           path: groupsPath,
         },
       },
       // === !== === !==   OVO JE DOBRO MESTO ZA KONFIGURIRANJE     ****    CLOUDINARY-JA   ****   === !== === !==
-      {
-        // OVO JE SAMO KONFIGURACIJA ZA IKONE IZ MOJE TEME
+      // === !== === !== === !== === !== === !== PRIVREMENO COMMENTED OUT === !== === !== === !==
+      /* {
         resolve: "gatsby-source-filesystem",
         options: {
           name: "group-icons",
-          path: "cloud-images",
-          // path: "gatsby-theme-raedal/src/ICONS/devicons-in-use/cloud-images",
+          path: "cloud-images"
         },
       },
       // CLOUDINARY CONFIGURACIJA
@@ -63,7 +57,7 @@ module.exports = (options) => {
           // A IME FOLDER NA CLOUD-U MOZE BITI RANDOM
           uploadFolder: "raedal-blog",
         },
-      },
+      }, */
       // === !== === !==  === !== === !== === !== === !== === !== === !== === !== === !==
       // === !== === !== === !== === !== === !== === !== === !== === !== === !== === !==
       !useExternalMDX && {

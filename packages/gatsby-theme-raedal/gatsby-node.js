@@ -132,6 +132,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       description: String!
 
       icon: String!
+      icons: [String!]
 
       groupColor: String!
 
@@ -453,16 +454,23 @@ exports.createResolvers = ({ createResolvers }) => {
             )
           );
          */
-          pathPackage.resolve();
+          // pathPackage.resolve();
 
           // console.log(svgString);
-          console.log(
+
+          /* console.log(
             pathPackage.resolve([
               __dirname,
               "/src/ICONS/devicons-in-use",
               `/${name}.svg`,
             ])
-          );
+          ); */
+
+          console.log({
+            dirname: __dirname,
+
+            something: "something",
+          });
 
           return source.icon;
         },
