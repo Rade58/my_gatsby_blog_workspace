@@ -49,10 +49,22 @@ module.exports = (options) => {
         resolve: "gatsby-source-filesystem",
         options: {
           name: "group-icons",
-          path: "/gatsby-theme-raedal/src/ICONS/devicons-in-use",
+          path: "devicons-in-use",
         },
       },
-      // === !== === !==
+      // CLOUDINARY CONFIGURACIJA
+      {
+        resolve: "gatsby-transformer-cloudinary",
+        options: {
+          cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+          apiKey: process.env.CLOUDINARY_API_KEY,
+          apiSecret: process.env.CLOUDINARY_API_SECRET,
+          // A IME FOLDER NA CLOUD-U MOZE BITI RANDOM
+          uploadFolder: "raedal-blog-devicons",
+        },
+      },
+      // === !== === !==  === !== === !== === !== === !== === !== === !== === !== === !==
+      // === !== === !== === !== === !== === !== === !== === !== === !== === !== === !==
       !useExternalMDX && {
         resolve: "gatsby-plugin-mdx",
         options: {

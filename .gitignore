@@ -77,6 +77,6 @@ packages/gatsby-theme-raedal/src/ICONS/mfglabs-iconset-master
 packages/gatsby-theme-raedal/src/ICONS/captain_svg
 packages/gatsby-theme-raedal/src/ICONS/devicons-svgs
 
-
 # ENVIROMENT VARIABLES
 packages/gatsby-theme-raedal/.env.development
+sites/blog/.env.development
