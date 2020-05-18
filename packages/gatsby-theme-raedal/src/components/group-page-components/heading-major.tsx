@@ -39,21 +39,32 @@ const HeadingMajor: FunctionComponent = () => {
   }, [imageRef, name]); */
   // === !== === !== === !== === !== === !== === !==
 
-  console.log(icon);
+  // console.log(icon);
 
   return (
     <div
       className="heading-major"
       css={css`
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+
+        & span.devicon {
+          border: red solid 0px;
+          /* width: min-content; */
+        }
       `}
     >
-      <span>
+      <span className="devicon">
         <img
           css={css`
-            width: 4rem;
-            border: pink solid 1px;
+            width: 3rem;
+            border: pink solid 0px;
+            margin-left: auto;
+            margin-right: auto;
           `}
           src={`data:image/svg+xml;base64,${icon}`}
           alt="subject-logo"
@@ -70,8 +81,8 @@ const HeadingMajor: FunctionComponent = () => {
       </span>
       <h1
         css={css`
-          margin-left: auto;
-          margin-right: auto;
+          
+          border: solid 0px white;
 
           & span {
             &.group-name-span {

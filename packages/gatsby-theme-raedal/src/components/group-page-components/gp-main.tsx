@@ -38,9 +38,9 @@ const MainGp: FunctionComponent = (props) => {
         & div.heading-major {
           grid-area: h;
           & h1 {
-            border: tomato solid 0px;
-            color: #fff;
-            height: min-content;
+            /* border: tomato solid 0px; */
+            /* color: #fff; */
+            /* height: min-content; */
           }
         }
 
