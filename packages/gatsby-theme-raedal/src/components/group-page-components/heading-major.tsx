@@ -1,6 +1,11 @@
 /** @jsx jsx */
 import { jsx, Image } from "theme-ui";
 
+// UVESCU   gatsby-image
+// NE MOZE DA SE RESOLV-UJE UVOZ NIKAKO
+// import GatsbyImage from "gatsby-image";   // OVO NE MOZE DA SE UVEZE NIKAKO
+// NE ZNAM ZASTO?
+
 import { css } from "@emotion/core";
 
 import { FunctionComponent, useContext, useEffect, useRef } from "react";
@@ -12,13 +17,17 @@ const HeadingMajor: FunctionComponent = () => {
 
   const { groupPage } = useContext(groupPageContext);
 
-  const { name, groupColor, keywordBorderColor, keywordTextColor } = groupPage; // NAME CE BITI ONO STA JE U TITLE-U
-  // DOBRA IDEJA JE DA OVDE STAVIS I EMOJI
-  // ODNOSNO SVAKI PAGE TREBA DA IMA KARAKTERISTICAN EMOJI
+  const {
+    name,
+    groupColor,
+    keywordBorderColor,
+    keywordTextColor,
+    icon,
+  } = groupPage; // NAME CE BITI ONO STA JE U TITLE-U
 
-  // console.log({ keywordBorderColor, keywordTextColor });
-
-  const imageRef = useRef<HTMLImageElement>(null);
+  // === !== === !== === !== === !== === !== === !==
+  // NECU KORISTITI VISE  NI    useRef  A NI    useEffect
+  /* const imageRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     import(`../../ICONS/devicons-in-use/${name.toLowerCase()}.svg`).then(
@@ -30,7 +39,10 @@ const HeadingMajor: FunctionComponent = () => {
         }
       }
     );
-  }, [imageRef, name]);
+  }, [imageRef, name]); */
+  // === !== === !== === !== === !== === !== === !==
+
+  console.log(icon);
 
   return (
     <div
@@ -40,16 +52,24 @@ const HeadingMajor: FunctionComponent = () => {
         flex-direction: row;
       `}
     >
-      {/* <Image /> */}
       <span>
         <img
+          css={css`
+            width: 4rem;
+            border: pink solid 1px;
+          `}
+          src={`data:image/svg+xml;base64,${icon}`}
+          alt="subject-logo"
+        />
+        {/* OVO JE BILO RANIJE (NE KORISTIM VISE) */}
+        {/* <img
           alt="subject-logo"
           ref={imageRef}
           css={css`
             width: 4rem;
             border: pink solid 1px;
           `}
-        />
+        /> */}
       </span>
       <h1
         css={css`

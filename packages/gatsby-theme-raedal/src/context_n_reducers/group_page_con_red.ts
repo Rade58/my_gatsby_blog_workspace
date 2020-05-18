@@ -94,6 +94,8 @@ export const groupPageContext: Context<GroupPageContextStateI> = createContext({
     lang: "en",
     description: "",
     //
+    // DODAO I icon
+    icon: "",
   },
 });
 

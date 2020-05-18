@@ -1,10 +1,10 @@
 /**
- * @description Preset themes for theme-ui 
+ * @description Preset themes for theme-ui
  * @author Rade
  */
 
 declare module "@theme-ui/presets" {
-  import { Theme } from 'theme-ui'
+  import { Theme } from "theme-ui";
 
   enum themeNames {
     base = "base",
@@ -19,24 +19,40 @@ declare module "@theme-ui/presets" {
     bootstrap = "bootstrap",
     bulma = "bulma",
     polaris = "polaris",
-    tailwind = "tailwind"
+    tailwind = "tailwind",
   }
 
+  const presets: Record<themeNames, Theme>;
 
-  const presets: Record<themeNames, Theme>
-
-  export = presets
+  export = presets;
 }
 
 /**
  * @description svg image uri  (base64)
  */
 
-declare module '*.svg'
+declare module "*.svg";
 
 /**
  * @description png image uri  (base64)
  */
 
-declare module '*.png'
+declare module "*.png";
 
+/**
+ * @desciption gatsby-image PAKET TYPESCRIPT DEFINICIJA (FALILA JE PA SAM JE JA ZADAO) (PROBLEM JE JEDINO STO ESLINT GOVORI DA JE URESOLVED UVOZ, ZATO UVEK IGNORISM LINE GDE UVOZIM OVAJ PAKET)
+ * @author Rade
+ *
+ */
+declare module "gatsby-image" {
+  import { FunctionComponent } from "react";
+
+  type gatsbyImage = FunctionComponent<{
+    fixed?: any;
+    fluid?: any;
+  }>;
+
+  const GatsbyImage: gatsbyImage;
+
+  export = GatsbyImage;
+}

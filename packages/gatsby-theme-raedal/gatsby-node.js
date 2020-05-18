@@ -479,7 +479,7 @@ exports.createResolvers = ({ createResolvers }) => {
                     return rej(error);
                   }
 
-                  console.log(result);
+                  // console.log(result);
 
                   return res(result);
                 }
