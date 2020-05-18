@@ -96,6 +96,8 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
       bodyRef.current =
         document.body || document.getElementsByTagName("body")[0];
       // currentBodyScrollHeightRef.current = bodyRef.current.scrollHeight;
+
+      // bodyRef.current.scrollBy({ top: 200 });
     }
 
     if (windowRef.current && bodyRef.current) {

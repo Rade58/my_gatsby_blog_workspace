@@ -30,7 +30,6 @@
 // DAKLE, TO JE  context    NAMENJEN ZA useContext HOOK
 // OVAJ DRUGI IZVOZ TREBA DA IMAM I ACTIONS ENUM, ZATO CI I NJEGA TU UVRSTITI
 
-
 // STO SE TICE (1) MOGAO BIH DA TO ISKORISTIM DA NAPRAVIM CUSTOM HOOK
 
 // A STO SE TICE (2) TO BIH KORISTIO U SVAKOJ KOMPONENTI, KOJA JE
@@ -49,16 +48,15 @@ export enum ACTION_TYPES_ENUM {
   SET_TO_SCROLL_UP_CLASS = "SET_TO_SCROLL_UP_CLASS",
   SET_TO_SCROLL_DOWN_CLASS = "SET_TO_SCROLL_DOWN_CLASS",
   PIG_DISAPEAR = "PIG_DISAPEAR",
-  CHANGE_BODY_HEIGHT = "CHANGE_BODY_HEIGHT"
+  CHANGE_BODY_HEIGHT = "CHANGE_BODY_HEIGHT",
 }
 
 export interface HeaderStateI {
   scrolled_class: "pull-up" | "pull-down";
   currentScroll: number;
   pigDisapear: boolean;
-  bodyHeight: number
+  bodyHeight: number;
 }
-
 
 //
 // ***************************************************
@@ -69,30 +67,25 @@ export const reducer: Reducer<
   HeaderStateI,
   { type: ACTION_TYPES_ENUM; payload?: any }
 > = (state, action) => {
-
   /*  console.log("__ === __ !== __ __ === __ !==")
    console.log(state)
    console.log("__ === __ !== __ __ === __ !==") */
 
-
   if (action.type === ACTION_TYPES_ENUM.CHANGE_CURRENT_SCROLL && state) {
+    const { currentScroll } = state;
 
-    const { currentScroll } = state
-
-    const scrolled_class: "pull-up" | "pull-down" = (currentScroll > action.payload ? "pull-down" : "pull-up")
+    const scrolled_class: "pull-up" | "pull-down" =
+      currentScroll > action.payload ? "pull-down" : "pull-up";
 
     /* console.log("COMMING FRO MTHE REDUCER")
     console.log(state.currentScroll, action.payload)
     console.log("COMMING FRO MTHE REDUCER")
  */
     return { ...state, currentScroll: action.payload, scrolled_class };
-
   }
 
-
   if (action.type === ACTION_TYPES_ENUM.PIG_DISAPEAR) {
-
-    console.log("REDUCER PIG DISAPEAR")
+    console.log("REDUCER PIG DISAPEAR");
 
     const prevPigDisapearance = state.pigDisapear;
 
@@ -100,12 +93,8 @@ export const reducer: Reducer<
   }
 
   if (action.type === ACTION_TYPES_ENUM.CHANGE_BODY_HEIGHT) {
-
-    return { ...state, bodyHeight: action.payload }
-
+    return { ...state, bodyHeight: action.payload };
   }
-
-
 
   return state;
 };
@@ -115,12 +104,10 @@ export const reducer: Reducer<
  */
 export const defaultState: HeaderStateI = {
   scrolled_class: "pull-down",
-  currentScroll: 0,
+  currentScroll: 8,
   pigDisapear: false,
-  bodyHeight: 0
+  bodyHeight: 0,
 };
-
-
 
 // CONTEXT stuff  === !==  === !==  === !==  === !==  === !==
 
@@ -141,22 +128,18 @@ export const headerContext: Context<ContextHeaderStateI> = createContext({
 
   reducedHeaderState: defaultState,
   // eslint-disable-next-line
-  headerDispatch: ({ type, payload }) => { }  // MISLIM DA JE BITNO STO SI OBEZBEDIO OVAKAV DEFAULT (SADA KADA BUDES KORISTIO OVAJ CONTEXT U DRUGIM FAJLOVIMA, IAMCES TACNE TYPE-OVE)
+  headerDispatch: ({ type, payload }) => {}, // MISLIM DA JE BITNO STO SI OBEZBEDIO OVAKAV DEFAULT (SADA KADA BUDES KORISTIO OVAJ CONTEXT U DRUGIM FAJLOVIMA, IAMCES TACNE TYPE-OVE)
 });
 
 // GOTO VO CES UVEK KORISTITI     useContext    HOOK
 // ALI IZVOZIM I    Consumer    KOMPONENTU
 export const { Provider, Consumer } = headerContext;
 
-
-
 // (2)
 /**
  * @description Ne zaboravi da ti treba useContext HOOK (U FUNCTION COMPONENTS-IMA, JE TO NAJBOLJI NACIN ZA KORISCENJE ONOGA STO TI OBEZBEDJUJE CONTEXT) (CONTEXT JE VEC KRERAN U FAJLU IZ KOJEG SI OVO UVEZAO); A I SAM ZANS DA CE TI TREBATI ACTION, ZATO SU ONI OVDE
  */
 export const $_useReducerState = { headerContext, ACTION_TYPES_ENUM };
-
-
 
 // (`)
 /**
