@@ -1,10 +1,7 @@
 /** @jsx jsx */
 import { jsx, Image } from "theme-ui";
 
-// UVESCU   gatsby-image
-// NE MOZE DA SE RESOLV-UJE UVOZ NIKAKO
-// import GatsbyImage from "gatsby-image";   // OVO NE MOZE DA SE UVEZE NIKAKO
-// NE ZNAM ZASTO?
+import GatsbyImage from "gatsby-image";
 
 import { css } from "@emotion/core";
 

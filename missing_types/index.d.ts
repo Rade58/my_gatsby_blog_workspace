@@ -44,7 +44,8 @@ declare module "*.png";
  * @author Rade
  *
  */
-declare module "gatsby-image" {
+declare module "nothing";
+/* declare module "gatsby-image" {
   import { FunctionComponent } from "react";
 
   type gatsbyImage = FunctionComponent<{
@@ -56,3 +57,4 @@ declare module "gatsby-image" {
 
   export = GatsbyImage;
 }
+ */
