@@ -169,8 +169,11 @@ const Code: FunctionComponent<{
 
     const searched = meta.match(/^_/);
 
-    // eslint-disable-next-line
-    return !searched && !meta.length ? true : false;
+    console.log({ searched });
+
+    if (searched && searched.length) return false;
+
+    if (!searched) return true;
   };
 
   // ***********************************************************************************
