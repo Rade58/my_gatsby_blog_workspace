@@ -126,6 +126,8 @@ const Layout: FunctionComponent<LayoutPropsI> = ({ body, updated }) => {
               /* width: "calc(100vw - 4px)", */
             }
 
+            /** ZA CODE BLOCK (DISPLAY LANGUAGE-A, I DISPLAY PATH-A) */
+
             [data-language] {
               border: red solid 1px;
 
@@ -134,6 +136,20 @@ const Layout: FunctionComponent<LayoutPropsI> = ({ body, updated }) => {
                 display: inline-block;
               }
             }
+
+            [data-code-path] {
+              &::after {
+                content: attr(data-code-path);
+              }
+            }
+
+            [data-code-path="0"] {
+              &::after {
+                display: none;
+              }
+            }
+
+            /*  ---------------------------------- */
           `}
         />
         {/* HEADER STATE PROVIDER */}

@@ -149,7 +149,12 @@ const Code: FunctionComponent<{
 
   const REG = /\{([\d-,]+)\}/g;
 
-  // **************  NO NUMBERS , NO LANG********************************************************
+  // FORMIRACU REGEXP ZA PRONALAZENJE ONOGA STA SE NALAZI IZMEDJU      (      I      )
+
+  const codePathREG = /\(([\w\d\W/]+)\)/; // POTREBNO JE MAETASTRING MATCH-OBVATI SA OVIM
+  //                                          I UZETI PRVI CAPTURING GROUP     A TO JE   [1]
+
+  // **************  NO NUMBERS , NO LANG, FIND CODE PATH********************************************************
   // ***********************************************************************************
   /**
    *
@@ -172,6 +177,25 @@ const Code: FunctionComponent<{
     }
 
     return false;
+  };
+
+  /**
+   *
+   * @param meta OVO JE metastring, KOJ INARAVNO STOJI UZ CODE BLOCK
+   * @description TREBA DAKLE DA DA false AKO NEMA MATCH-A, I TREBA DA DA STRING AKO IMA MATCH-A;
+   * I NA OSNOVU OVE FUNKCIJE TREBA DA SE ZADA ILI NE ZADA ATRIBUT NA CODE BLOK-U
+   * (NA PRIMER U data-code-path)
+   * AKO JE FALSE U PITANJU ATRIBUT BI TREBALO DA IMA VREDNOST NULA (0)
+   * NA OSNOVU TE DVE VREDNOSTI TI MOZES DEFINISATI GENERISANJE SADRZINE ILI NE
+   * ALI TO VEZANO ZA CSS SAM URADIO U GLOBALNI MSTILOVIMA U packages/gatsby-theme-raedal/src/components/layout.tsx
+   * @returns path string | false
+   */
+  const takeCodePath = (meta: string) => {
+    const arr = meta.match(codePathREG);
+
+    if (!arr) return false;
+
+    return arr[1];
   };
 
   // ***********************************************************************************
@@ -253,6 +277,9 @@ const Code: FunctionComponent<{
         <div
           className="language-styles"
           data-language={`${nolang(language) ? "" : language}`}
+          data-code-path={`${
+            takeCodePath(metastring) ? takeCodePath(metastring) : 0
+          }`}
           css={css`
             /* CISTO DA ZNAS DA TI SE SLEDECE NALAZI  U     packages/gatsby-theme-raedal/src/components/layout.tsx    (U GLOBAL STILOVIMA)  */
             /*[data-language] {
