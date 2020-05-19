@@ -147,20 +147,34 @@ const Code: FunctionComponent<{
 
   const REG = /\{([\d-,]+)\}/g;
 
-  // **************  NO NUMBERS ****************
-
+  // **************  NO NUMBERS , NO LANG********************************************************
+  // ***********************************************************************************
   /**
    *
    * @param meta OVO JE metastring, KOJ INARAVNO STOJI UZ CODE BLOCK
    * @description UPOREDI OVO SA METASTRING-OM, I AKO JE TRUE, NECE BITI PRIKAZANI, LINE NUMBERS
    */
   const nonum = (meta: string) => {
-    if (!metastring) return false;
+    if (!meta) return false;
 
-    return meta.includes("nonum");
+    return meta.includes("//nonum\\");
+  };
+  /**
+   *
+   * @param meta OVO JE metastring, KOJ INARAVNO STOJI UZ CODE BLOCK
+   * @description PRONALAZI     _      AKO JE PRVI KARAKTER U metastring-u
+   */
+  const nolang = (meta: string) => {
+    if (!meta) return true;
+
+    const searched = meta.match(/^_/);
+
+    // eslint-disable-next-line
+    return !searched && !meta.length ? true : false;
   };
 
-  // **********************************************
+  // ***********************************************************************************
+  // ***********************************************************************************
 
   // DA IZDVOJIM ODMAH I metastring     (POSTOJI MOGUCNOST DA SE ON NALAZI NA   children-U, ODNONO NJEGOVIM PROPS-IMA)
 
@@ -237,6 +251,18 @@ const Code: FunctionComponent<{
           className="language-styles"
           data-language={`${language}`}
           css={css`
+            /* CISTO DA ZNAS DA TI SE SLEDECE NALAZI  U     packages/gatsby-theme-raedal/src/components/layout.tsx    (U GLOBAL STILOVIMA)  */
+            /*[data-language] {
+              border: red solid 1px;
+
+              &::before {
+                content: attr(data-language);
+                display: inline-block;
+              }
+            }*/
+            /*  JER IZ NEKOG RAZLOGA KADA GA DEFINISEM OVDE NE RADI  */
+            /* --------------------------------------- */
+
             /* OVO CE BITI KLASA KOJA HIGHLIGHT-UJE SPECIFIC LINE */
             .highlight-specific-line {
               background-color: #d43c6a73;

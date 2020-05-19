@@ -2,7 +2,7 @@
 import { jsx } from "theme-ui";
 
 import { Link } from "gatsby";
-import { AnchorLink } from "gatsby-plugin-anchor-links";
+// import { AnchorLink } from "gatsby-plugin-anchor-links";
 
 import { css } from "@emotion/core";
 
@@ -40,9 +40,9 @@ const TableOfHeadings: FunctionComponent<TableOfHeadingsProps> = (props) => {
           headings.map(({ depth, value }) => (
             <li key={`${value}-${depth}`}>
               <Link
-                to={`${encodeURI(relativeLink)}#${encodeURI(
-                  value.toLowerCase().replace(" ", "-")
-                )}`}
+                to={`${encodeURI(relativeLink)}#${encodeURI(value.toLowerCase())
+                  .replace(/%20/g, "-")
+                  .replace(/ /g, "-")}`}
               >
                 {value}
               </Link>
