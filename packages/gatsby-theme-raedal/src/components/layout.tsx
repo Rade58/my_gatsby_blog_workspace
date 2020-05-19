@@ -138,8 +138,14 @@ const Layout: FunctionComponent<LayoutPropsI> = ({ body, updated }) => {
             }
 
             [data-code-path] {
+              position: relative;
               &::after {
                 content: attr(data-code-path);
+                position: absolute;
+                top: 0;
+                right: 0;
+                color: crimson;
+                background-color: white;
               }
             }
 
