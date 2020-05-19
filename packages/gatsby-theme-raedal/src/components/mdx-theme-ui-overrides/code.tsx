@@ -147,6 +147,21 @@ const Code: FunctionComponent<{
 
   const REG = /\{([\d-,]+)\}/g;
 
+  // **************  NO NUMBERS ****************
+
+  /**
+   *
+   * @param meta OVO JE metastring, KOJ INARAVNO STOJI UZ CODE BLOCK
+   * @description UPOREDI OVO SA METASTRING-OM, I AKO JE TRUE, NECE BITI PRIKAZANI, LINE NUMBERS
+   */
+  const nonum = (meta: string) => {
+    if (!metastring) return false;
+
+    return meta.includes("nonum");
+  };
+
+  // **********************************************
+
   // DA IZDVOJIM ODMAH I metastring     (POSTOJI MOGUCNOST DA SE ON NALAZI NA   children-U, ODNONO NJEGOVIM PROPS-IMA)
 
   // eslint-disable-next-line
@@ -228,7 +243,7 @@ const Code: FunctionComponent<{
             }
 
             .line-number-style {
-              display: inline-block;
+              display: ${!nonum(metastring) ? "inline-block" : "none"};
               /* display: none; */
               width: 2rem;
               border: pink solid 0px;
