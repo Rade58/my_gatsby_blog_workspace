@@ -252,7 +252,7 @@ const Code: FunctionComponent<{
             }}
             css={css`
               @media screen and (min-width: 918px) {
-                font-size: 16px;
+                font-size: 14px;
               }
 
               font-size: 12px;

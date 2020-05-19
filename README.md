@@ -70,5 +70,5 @@ A ONDA CU U `packages/gatsby-theme-raedal/src/components/layout.tsx`, U GLOBAL S
 
 ONDA CU U `packages/gatsby-theme-raedal/src/components/mdx-theme-ui-overrides/code.tsx`, KORISTITI, POMENUTI FONT
 
-
+**OVO JE BIO VARIABLE FONT** 
 
