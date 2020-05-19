@@ -229,14 +229,21 @@ const Code: FunctionComponent<{
 
             .line-number-style {
               display: inline-block;
+              /* display: none; */
               width: 2rem;
               border: pink solid 0px;
-              color: #d4c6d1c4;
+              color: #ac8ca688;
               font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
                 Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
                 sans-serif;
-              font-size: 0.7rem;
+              font-size: 12px;
               user-select: none;
+            }
+
+            @media screen and (min-width: 918px) {
+              .line-number-style {
+                font-size: 14px;
+              }
             }
           `}
         >
@@ -258,6 +265,10 @@ const Code: FunctionComponent<{
               font-size: 12px;
 
               font-family: "Fira Code", monospace, "monospace";
+
+              span.token.comment {
+                font-style: italic;
+              }
             `}
           >
             {tokens.map((line, i) => {

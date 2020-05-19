@@ -70,5 +70,15 @@ A ONDA CU U `packages/gatsby-theme-raedal/src/components/layout.tsx`, U GLOBAL S
 
 ONDA CU U `packages/gatsby-theme-raedal/src/components/mdx-theme-ui-overrides/code.tsx`, KORISTITI, POMENUTI FONT
 
-**OVO JE BIO VARIABLE FONT** 
+**JA SAM USTVARI KORISTIO VARIABLE FONT**
+
+A SAZNAO SAM KAKO SE KORISTI SA OVE STRANICE: <https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Fonts/Variable_Fonts_Guide>
+
+# STA SAM JOS IZMEDJU OSTALOG DEFINISAO
+
+- MEDIA QUERIES ZA VELICINU FONTA U CODE BLOCK-U
+
+- ISTO POMENUTO ZA LINE NUMBERS U CODE BLOCK-U
+
+- *DEFINISAO DA KOMENTARI BUDU ITALIC* (GOVORIM O CODE BLOCK-U)
 
