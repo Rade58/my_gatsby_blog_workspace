@@ -126,6 +126,8 @@ const Code: FunctionComponent<{
 
   //
 
+  console.log({ props });
+
   const codeProps = preToCodeBlock(props);
 
   if (!codeProps) {
@@ -157,23 +159,19 @@ const Code: FunctionComponent<{
   const nonum = (meta: string) => {
     if (!meta) return false;
 
-    return meta.includes("//nonum\\");
+    return meta.includes("//nonum\\"); // OVO NIJE REGEXP
   };
   /**
    *
    * @param meta OVO JE metastring, KOJ INARAVNO STOJI UZ CODE BLOCK
-   * @description PRONALAZI     _      AKO JE PRVI KARAKTER U metastring-u
+   * @description AKO JE ZADATO " " ZA language ONDA CE RETURNOVATI TRUE (OVO JE PRVENSTVANO DEFINISANO JER **OVO JE JEDINI NACIN DA KORISTIM metastring A DA NISAM DEFINISAO LANGUAGE**)
    */
-  const nolang = (meta: string) => {
-    if (!meta) return true;
+  const nolang = (lang: string) => {
+    if (lang === "_") {
+      return true;
+    }
 
-    const searched = meta.match(/^_/);
-
-    console.log({ searched });
-
-    if (searched && searched.length) return false;
-
-    if (!searched) return true;
+    return false;
   };
 
   // ***********************************************************************************
@@ -236,7 +234,9 @@ const Code: FunctionComponent<{
   const findLineNumber = (iterator: number) =>
     lineNumbersToHighlightArray.some((member) => member === iterator);
 
-  console.log(lineNumbersToHighlightArray);
+  // console.log(lineNumbersToHighlightArray);
+  /** */
+  // nolang(metastring);
 
   // SADA TI NE MOZES DIREKTNO DA OSTAVLJAS     style   ATRIBUT
   // NA DONJI div KAKO BI STILIZOVAO SPECIFIC LINE
@@ -252,7 +252,7 @@ const Code: FunctionComponent<{
         // prism-highlight (OVO SAM REKAO DAVNO RANIJE)
         <div
           className="language-styles"
-          data-language={`${language}`}
+          data-language={`${nolang(language) ? "" : language}`}
           css={css`
             /* CISTO DA ZNAS DA TI SE SLEDECE NALAZI  U     packages/gatsby-theme-raedal/src/components/layout.tsx    (U GLOBAL STILOVIMA)  */
             /*[data-language] {

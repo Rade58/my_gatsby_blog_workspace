@@ -49,14 +49,14 @@ const BlogPost: FunctionComponent<{
     blogPostReducer,
   } = $_createBlogPostReducerState;
 
-  console.log({ headings });
+  // console.log({ headings });
 
   const [reducedBlogPostState, blogPostDispatch] = useReducer(
     blogPostReducer,
     defaultBlogPostState
   );
 
-  console.log(relativeLink);
+  // console.log(relativeLink);
 
   return (
     <BlogPostStateProvider
