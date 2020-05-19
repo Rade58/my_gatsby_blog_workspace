@@ -89,38 +89,52 @@ const Layout: FunctionComponent<LayoutPropsI> = ({ body, updated }) => {
           value={{ reducedLayoutState, layoutDispatch: dispatchToLayout }}
         > */}
         <Global
-          styles={{
-            html: {
-              // scrollBehavior: "smooth",    // OVO NEMOJ DA ENABLE-UJES
-            },
-            body: {
-              // PRIMETIO SAM DA JE JASON KADA JE DEFINISAO ZA BODY
-              // USTVARI DODAO MARGINE 4px
-              // PA SAM I JA DODAO; IAKO NE ZNAM ZASTO
+          styles={css`
+            /* DEFINISUCU OVDE     @font-face    NAMENJEN ZA CODE BLOCK  (ODNOSN OZA PRISM)    */
 
-              margin: "4px",
-              backgroundColor: "rgb(27, 34, 39)",
-              paddingTop: "56px",
-              scrollBehavior: "smooth",
+            @font-face {
+              font-family: "Fira Code";
+              src: url("../../fonts/fira/FiraCode-VariableFont_wght.ttf")
+                format("ttf-variations");
 
-              // OBRATI PAZNJU DA KADA DODAS MARGINE, TI CES IMATO OVERFLOW SCROLL
-              // ZA BODY STO NIJE DOBRO
+              font-weight: 125 950;
+              font-stretch: 75% 125%;
+              font-style: oblique 0deg 20deg;
+            }
 
-              //width: "100%", // DA NISAM DODAO MARGINE, MOGAO SAM
-              //                      DEFINISATI width: 100%
+            html {
+              /*  */
+            }
 
-              // width: "calc(100vw - 4px)",
-            },
+            body {
+              /* PRIMETIO SAM DA JE JASON KADA JE DEFINISAO ZA BODY */
+              /* USTVARI DODAO MARGINE 4px */
+              /* PA SAM I JA DODAO; IAKO NE ZNAM ZASTO */
 
-            "[data-language]": {
-              border: "red solid 1px",
+              margin: 4px;
+              background-color: rgb(27, 34, 39);
+              padding-top: 56px;
+              scroll-behavior: "smooth";
 
-              "&::before": {
-                content: "attr(data-language)",
-                display: "inline-block",
-              },
-            },
-          }}
+              /* OBRATI PAZNJU DA KADA DODAS MARGINE, TI CES IMATO OVERFLOW SCROLL */
+              /* ZA BODY STO NIJE DOBRO */
+
+              /*  */
+              /* width: 100%; // DA NISAM DODAO MARGINE, MOGAO SAM */
+              /* DEFINISATI width: 100% */
+
+              /* width: "calc(100vw - 4px)", */
+            }
+
+            [data-language] {
+              border: red solid 1px;
+
+              &::before {
+                content: attr(data-language);
+                display: inline-block;
+              }
+            }
+          `}
         />
         {/* HEADER STATE PROVIDER */}
         <HeaderStateProvider>

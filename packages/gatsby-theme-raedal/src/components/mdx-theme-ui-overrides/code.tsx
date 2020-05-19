@@ -248,7 +248,7 @@ const Code: FunctionComponent<{
               p: 2,
               overflowX: "scroll",
               /* fontSize: "12px;", */
-              wordSpacing: "0.3em",
+              // wordSpacing: "0.3em",
             }}
             css={css`
               @media screen and (min-width: 918px) {
@@ -257,17 +257,7 @@ const Code: FunctionComponent<{
 
               font-size: 12px;
 
-              @font-face {
-                font-family: "MyWebFont";
-                src: url("webfont.eot"); /* IE9 Compat Modes */
-                src: url("webfont.eot?#iefix") format("embedded-opentype"),
-                  /* IE6-IE8 */ url("webfont.woff2") format("woff2"),
-                  /* Super Modern Browsers */ url("webfont.woff") format("woff"),
-                  /* Pretty Modern Browsers */ url("webfont.ttf")
-                    format("truetype"),
-                  /* Safari, Android, iOS */ url("webfont.svg#svgFontName")
-                    format("svg"); /* Legacy iOS */
-              }
+              font-family: "Fira Code", monospace, "monospace";
             `}
           >
             {tokens.map((line, i) => {
