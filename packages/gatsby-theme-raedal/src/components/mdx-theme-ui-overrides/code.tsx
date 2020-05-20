@@ -191,6 +191,8 @@ const Code: FunctionComponent<{
    * @returns path string | false
    */
   const takeCodePath = (meta: string) => {
+    if (!meta) return false;
+
     const arr = meta.match(codePathREG);
 
     if (!arr) return false;
