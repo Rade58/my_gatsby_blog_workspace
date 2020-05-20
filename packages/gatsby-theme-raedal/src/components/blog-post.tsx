@@ -15,7 +15,12 @@ import { $_createBlogPostReducerState } from "../context_n_reducers/context_n_re
 
 import HeaderStateProvider from "../context_n_reducers/context_providers/headerStateProvider";
 
-import { Headings } from "../templates/blog-post-template";
+// UVESCU TYPE-OVE ZA       groupPage      I ZA        allBlogKeywords
+
+import { Headings, GroupPagePickedI } from "../templates/blog-post-template"; // OVDE SAM SAMO UVEZAO TYPE ZA
+//                                                              groupPage  (TO JE ONAJ STO SAM SAMO PICK=OVAO STA M ITREBA, JER MI NE TREBA SVE)
+// UVOZIM DAKLE ONAJ VEZAN ZA KEYWORDS
+import { PageKeywords } from "../templates/group-page-template";
 
 interface PageProp extends SeoI {
   body: string;
@@ -23,6 +28,10 @@ interface PageProp extends SeoI {
   title: string;
   headings: Headings;
   relativeLink: string;
+  // PROSIRUJEM PROP TYPE-OVE
+  groupPage: GroupPagePickedI;
+  allBlogKeywords: PageKeywords[]; // SAD SE MOZES VRATITI U TEMPLATE DA PROSLEDIS SVE STA TREBA,
+  //                                  ZA OVU KOMPONENTU,  A VIDECES ERROR AKO TO NA URADIS JER NI JEDAN OD OFIELD-OVA NIJE OPTIONAL
 }
 
 // TI SI U OVOJ KOMPONENTI INDIREKTNO RENDER-OVAO     Helmet
@@ -41,6 +50,9 @@ const BlogPost: FunctionComponent<{
     themeColor,
     headings,
     relativeLink,
+    // uzimam i ovo
+    allBlogKeywords,
+    groupPage,
   },
 }) => {
   const {
@@ -66,6 +78,8 @@ const BlogPost: FunctionComponent<{
         headings,
         relativeLink,
         seo: { title, lang, description, themeColor },
+        allBlogKeywords,
+        groupPage,
       }}
     >
       {/* <HeaderStateProvider> */}

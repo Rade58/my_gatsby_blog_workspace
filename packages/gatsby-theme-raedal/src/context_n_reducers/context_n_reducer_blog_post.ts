@@ -5,19 +5,22 @@ import {
   Dispatch,
   Context,
 } from "react";
-import { HeadingI } from "../templates/blog-post-template";
+
+// UVOZIM DVA TYPE-A, KOJA MI TREBAJU (HeadingI JE TU BIO OD RANIJE)
+import { HeadingI, GroupPagePickedI } from "../templates/blog-post-template";
+import { PageKeywords } from "../templates/group-page-template";
+//
 
 export enum BLOG_POST_ACTION_TYPES_ENUM {
   PIG_AND_TRACK_DISAPEARD = "PIG_AND_TRACK_DISAPEARD",
   WINDOW_SCROLL_HEIGHT = "WINDOW_SCROLL_HEIGHT",
-  HEADER_PULL_CHANGE = "HEADER_PULL_CHANGE"
+  HEADER_PULL_CHANGE = "HEADER_PULL_CHANGE",
 }
 
 export interface BlogPostStateI {
   pigDisapear: boolean;
-  header_pull_class: "pulled-down" | "pulled-up"
+  header_pull_class: "pulled-down" | "pulled-up";
 }
-
 
 //
 // ***************************************************
@@ -28,7 +31,6 @@ export const blogPostReducer: Reducer<
   BlogPostStateI,
   { type: BLOG_POST_ACTION_TYPES_ENUM; payload?: any }
 > = (state, action) => {
-
   if (action.type === BLOG_POST_ACTION_TYPES_ENUM.PIG_AND_TRACK_DISAPEARD) {
     const prevPigDisapearance = state.pigDisapear;
 
@@ -36,19 +38,22 @@ export const blogPostReducer: Reducer<
   }
 
   if (action.type === BLOG_POST_ACTION_TYPES_ENUM.HEADER_PULL_CHANGE) {
-
-    if (action.payload === "pulled-up" && state.header_pull_class !== "pulled-up") {
-      return { ...state, header_pull_class: action.payload }
+    if (
+      action.payload === "pulled-up" &&
+      state.header_pull_class !== "pulled-up"
+    ) {
+      return { ...state, header_pull_class: action.payload };
     }
 
-    if (action.payload === "pulled-down" && state.header_pull_class !== "pulled-down") {
-      return { ...state, header_pull_class: action.payload }
+    if (
+      action.payload === "pulled-down" &&
+      state.header_pull_class !== "pulled-down"
+    ) {
+      return { ...state, header_pull_class: action.payload };
     }
 
-
-    return state
+    return state;
   }
-
 
   return state;
 };
@@ -58,10 +63,8 @@ export const blogPostReducer: Reducer<
  DAKLE PRI KORISCENJU useReducer HOOK, TI CES PROSLEDITI I OVAJ DEFAULT STATE*/
 export const defaultState: BlogPostStateI = {
   pigDisapear: false,
-  header_pull_class: "pulled-down"
+  header_pull_class: "pulled-down",
 };
-
-
 
 // CONTEXT stuff  === !==  === !==  === !==  === !==  === !==
 
@@ -82,8 +85,12 @@ export interface ContextBlogPostStateI {
     lang: string;
     description: string;
     themeColor: string;
-  }
+  };
 
+  // PROSIRUJEM TYPE-OVE
+
+  groupPage: GroupPagePickedI;
+  allBlogKeywords: PageKeywords[];
 }
 
 // OVO JE SAMO DEFAULT STATE I REDUCER-A NEMA JOS
@@ -92,30 +99,45 @@ export const blogPostContext: Context<ContextBlogPostStateI> = createContext({
 
   reducedBlogPostState: defaultState,
   // eslint-disable-next-line
-  blogPostDispatch: ({ type, payload }) => { },  // MISLIM DA JE BITNO STO SI OBEZBEDIO OVAKAV DEFAULT (SADA KADA BUDES KORISTIO OVAJ CONTEXT U DRUGIM FAJLOVIMA, IAMCES TACNE TYPE-OVE)
+  blogPostDispatch: ({ type, payload }) => {}, // MISLIM DA JE BITNO STO SI OBEZBEDIO OVAKAV DEFAULT (SADA KADA BUDES KORISTIO OVAJ CONTEXT U DRUGIM FAJLOVIMA, IAMCES TACNE TYPE-OVE)
   headings: [{ depth: 0, value: "nothing" }],
   relativeLink: "nothing",
   seo: {
     description: "placeholder",
     lang: "en",
     themeColor: "none",
-    title: "basic title"
-  }
+    title: "default title",
+  },
+  // DODAJEM I OSTATAK DEFAULT-OVA
+  groupPage: {
+    groupColor: "#fff",
+    icon: "",
+    name: "",
+    path: "",
+  },
+  allBlogKeywords: [
+    {
+      keyword: "",
+      path: "",
+      keywordBorderColor: "",
+      keywordColor: "",
+      keywordTextColor: "",
+    },
+  ],
 });
 
 // GOTO VO CES UVEK KORISTITI     useContext    HOOK
 // ALI IZVOZIM I    Consumer    KOMPONENTU
 export const { Provider, Consumer } = blogPostContext;
 
-
-
 // (2)
 /**
  * @description Ne zaboravi da ti treba useContext HOOK (U FUNCTION COMPONENTS-IMA, JE TO NAJBOLJI NACIN ZA KORISCENJE ONOGA STO TI OBEZBEDJUJE CONTEXT) (CONTEXT JE VEC KRERAN U FAJLU IZ KOJEG SI OVO UVEZAO); A I SAM ZNANS DA CE TI TREBATI ACTION, ZATO SU I ONI OVDE
  */
-export const $_useBlogPostReducerState = { blogPostContext, BLOG_POST_ACTION_TYPES_ENUM };
-
-
+export const $_useBlogPostReducerState = {
+  blogPostContext,
+  BLOG_POST_ACTION_TYPES_ENUM,
+};
 
 // (1)
 /**
@@ -124,5 +146,5 @@ export const $_useBlogPostReducerState = { blogPostContext, BLOG_POST_ACTION_TYP
 export const $_createBlogPostReducerState = {
   BlogPostStateProvider: Provider,
   blogPostReducer,
-  defaultBlogPostState: defaultState
+  defaultBlogPostState: defaultState,
 };
