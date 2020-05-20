@@ -32,6 +32,7 @@ const TableOfHeadings: FunctionComponent<TableOfHeadingsProps> = (props) => {
         position: sticky;
         border: pink solid 8px;
         top: 14vh;
+        height: min-content;
       `}
     >
       <ul>

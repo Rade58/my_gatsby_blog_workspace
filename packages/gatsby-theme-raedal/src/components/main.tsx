@@ -7,6 +7,9 @@ import { FunctionComponent } from "react";
 
 import TableOfHeadings from "./table-of-headers";
 
+// SADA UVOZIM Keyword KOMPONENTU, KOJ UZELIM DA RENDER-UJEM KAO DEO GRID-A
+import Keywords from "./keywords";
+
 // LOREM IPSUM
 // import LoremIpsum from "./dev-utility/lorem-ipsum";
 //
@@ -32,19 +35,19 @@ const Main: FunctionComponent = ({ children }) => {
 
         @media screen and (min-width: 918px) {
           grid-template-areas:
-            " . . a a a a b b"
-            " . . a a a a b b"
-            " . . a a a a b b"
-            " . . a a a a t t"
-            " . . a a a a t t";
+            " . a a a a a b b"
+            " k a a a a a b b"
+            " k a a a a a b b"
+            " . a a a a a t t"
+            " . a a a a a . .";
         }
         @media screen and (min-width: 1100px) {
           grid-template-areas:
-            " . . a a a a b b "
-            " . . a a a a b b "
-            " t t a a a a b b "
-            " t t a a a a . . "
-            " . . a a a a . . ";
+            " . a a a a a a b "
+            " k a a a a a a b "
+            " . t a a a a a b "
+            " . t a a a a a t "
+            " . k a a a a a t ";
         }
 
         grid-template-areas:
@@ -58,7 +61,9 @@ const Main: FunctionComponent = ({ children }) => {
           " b b b b b b b b"
           " t t t t t t t t"
           " t t t t t t t t"
-          " t t t t t t t t";
+          " t t t t t t t t"
+          " k k k k k k k k"
+          " k k k k k k k k";
 
         & article {
           &.post-article {
@@ -87,12 +92,23 @@ const Main: FunctionComponent = ({ children }) => {
           grid-area: t;
 
           border: yellow solid 2px;
+          position: sticky;
+
+          top: 38vh;
+        }
+
+        & section.keywords {
+          grid-area: k;
+          position: sticky;
+          top: 28vh;
         }
       `}
     >
       {children}
       {/* ZAMENI OVO KONKRETNIM KOMPONENTAMA, KADA IH BUDES NAPRAVIO */}
       <TableOfHeadings />
+      {/* EVO OVDE MOZES RENDER-OVATI Keywords */}
+      <Keywords />
       {/* <section className="adds">
         <h4>Adds</h4>
         <div>
