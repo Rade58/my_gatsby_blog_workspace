@@ -61,7 +61,8 @@ const HeadingMajor: FunctionComponent = () => {
       <span className="devicon">
         <img
           css={css`
-            width: 3rem;
+            /* width: 3rem; */
+            height: 3rem;
             border: pink solid 0px;
             margin-left: auto;
             margin-right: auto;

@@ -23,7 +23,7 @@ const GpKeyword: FunctionComponent<PageKeywords> = (props) => {
 
   const KeywordLink = styled(Link)`
     & {
-      border: ${keywordBorderColor} solid 0px;
+      border: ${keywordBorderColor} solid 1px;
       border-radius: 2.8px;
       font-size: 14px;
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
