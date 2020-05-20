@@ -128,33 +128,6 @@ const Layout: FunctionComponent<LayoutPropsI> = ({ body, updated }) => {
 
             /** ZA CODE BLOCK (DISPLAY LANGUAGE-A, I DISPLAY PATH-A) */
 
-            [data-language] {
-              border: red solid 1px;
-
-              &::before {
-                content: attr(data-language);
-                display: inline-block;
-              }
-            }
-
-            [data-code-path] {
-              position: relative;
-              &::after {
-                content: attr(data-code-path);
-                position: absolute;
-                top: 0;
-                right: 0;
-                color: crimson;
-                background-color: white;
-              }
-            }
-
-            [data-code-path="0"] {
-              &::after {
-                display: none;
-              }
-            }
-
             /*  ---------------------------------- */
           `}
         />

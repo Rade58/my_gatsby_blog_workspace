@@ -276,10 +276,6 @@ const Code: FunctionComponent<{
         // prism-highlight (OVO SAM REKAO DAVNO RANIJE)
         <div
           className="language-styles"
-          data-language={`${nolang(language) ? "" : language}`}
-          data-code-path={`${
-            takeCodePath(metastring) ? takeCodePath(metastring) : 0
-          }`}
           css={css`
             /* CISTO DA ZNAS DA TI SE SLEDECE NALAZI  U     packages/gatsby-theme-raedal/src/components/layout.tsx    (U GLOBAL STILOVIMA)  */
             /*[data-language] {
@@ -318,6 +314,51 @@ const Code: FunctionComponent<{
             }
           `}
         >
+          {/* === !== === !== === !== === !== LANGUAGE TAB , PATH TAB === !== === !== === !== === !==  */}
+          <div
+            className="pathnlang"
+            css={css`
+              border: pink solid 1px;
+              display: flex;
+              flex-wrap: wrap;
+
+              [data-language] {
+                border: red solid 1px;
+
+                &::before {
+                  content: attr(data-language);
+                  display: inline-block;
+                }
+              }
+
+              [data-code-path] {
+                margin-left: auto;
+                position: relative;
+                &::after {
+                  content: attr(data-code-path);
+                  /* position: absolute; */
+                  /* top: 0; */
+                  /* right: 0; */
+                  color: crimson;
+                  background-color: white;
+                }
+              }
+
+              [data-code-path="0"] {
+                &::after {
+                  display: none;
+                }
+              }
+            `}
+          >
+            <div data-language={`${nolang(language) ? "" : language}`} />
+            <div
+              data-code-path={`${
+                takeCodePath(metastring) ? takeCodePath(metastring) : 0
+              }`}
+            />
+          </div>
+          {/* === !== === !== === !== === !== === !== === !== === !== === !==  */}
           <pre
             className={className}
             style={style}
