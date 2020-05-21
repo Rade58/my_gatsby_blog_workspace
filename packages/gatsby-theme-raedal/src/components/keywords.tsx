@@ -32,9 +32,9 @@ const Keywords: FunctionComponent = () => {
         align-content: flex-start;
         height: min-content;
 
-        & > * {
+        /* & > a {
           margin: 4px;
-        }
+        } */
       `}
     >
       {allBlogKeywords.map((member) => (

@@ -87,10 +87,10 @@ const MainGp: FunctionComponent = (props) => {
             top: 20px;
 
             grid-area: k;
-
+            /* 
             & > * {
               margin: 4px;
-            }
+            } */
           }
         }
 

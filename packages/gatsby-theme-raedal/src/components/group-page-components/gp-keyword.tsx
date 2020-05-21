@@ -30,7 +30,7 @@ const GpKeyword: FunctionComponent<PageKeywords> = (props) => {
       font-weight: 600;
       text-decoration: none;
       padding: 4px;
-      margin: 0;
+      margin: 4px;
       color: ${keywordTextColor};
       background-color: ${keywordColor};
     }
