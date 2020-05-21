@@ -209,23 +209,10 @@ exports.onCreateNode = (
 
   const parentNode = getNode(node.parent);
 
-  // OVO OSTAJE ISTO   (   "/"     JE basePath )
+  // OVO OSTAJE ISTO   (   "/"     JE basePath ) (NAPISAO RANIJE)
   const { basePath } = withDefaults(options); // PO DEFAULT-U
 
-  // I OVO SU ZAJEDNICKE STVARI ZA SVAKI NODE OD
-  // MOJE DVE VRSTE NODE-OVA, KOJE ZA SADA HANDLE-UJEM
   const { name, modifiedTime, relativeDirectory } = parentNode;
-
-  // === !== ODAVDE CU DEFINISATI KREIRANJE NODE-OVA !== ===
-
-  // === ===  IZDVAJAM PRVO STVARI KOJE SU ZAJEDNICKE ZA SVAKI NODE === !==
-  //      IPAK NE BOLJE JE DA RADIM SVE U USLOVNIM IZJAVAMA
-
-  // === !== === PRVO KREIRAM NODE-OVE ZA BLOG POST PAGE !== === !== ===
-  // === !== === ODNOSNO PREMESTAM SVU LOGIKU U OVU USLOVNU IZJAVU!== === !== ===
-  /* console.log("=======================================================");
-  console.log(parentNode.sourceInstanceName === "gatsby-theme-raedal");
-  console.log("======================================================="); */
 
   if (parentNode.sourceInstanceName === "gatsby-theme-raedal") {
     //
@@ -244,24 +231,29 @@ exports.onCreateNode = (
     if (node.frontmatter.slug) slug = `/${node.frontmatter.slug}`;
 
     const {
+      // EVO IZDVOJIO SAM I       createdAt     (SADA SAM OTREBA DA GA UPOTREBIS, KAO NOVI FIELD, PRI KREIRANJU NODE-A)
+      createdAt,
+      //
       lang,
       themeColor,
       description,
-      group, // OVO JE VEZANO ZA GROUP PAGE
-      // ALI OVO JE SADA VISAK I TREBA DA GA HANDLEF-UJE SAMO
-      // GROUP NODE, DAKLE ON TREBA DA OBEZBEDJUJE TE PODATKE
-      // STO ZNACI DA SLEDECE STVARI NECES VISE UNOSITI KROZ FRONTMATTER
-      // BLOG POST MDX-OVA
+      group,
       /* groupColor,
       keywordTextColor,
-      keywordBorderColor, */ // ALI NEKA IH OVDE DA ZNAS STA TEBA DA
-      //                            STAVIS U FRONTMATTER GROUP PAGE-A
-    } = withSiteHelmetDefaults(node.frontmatter);
+      keywordBorderColor, */ // OVO COMMENTED OUT PROVIDE-UJE GROUP PAGE (NE TREBA OVDE)
+    } = withSiteHelmetDefaults(node.frontmatter); // MISLEADING IME FUNKCIJE, ALI NEKA OSTANE
 
     actions.createNode({
       // CAK I OVA FUNKCIJA TRIGGER-UJE HOOK U CIJEM SAM OBIMU (INFO OD RANIJE)
       id,
       title,
+      // EVO OVDE CU DODATI       createdAt     FIELD
+      createdAt,
+      // A ONAJ FIELD, KOJI CE SE MORATI RESOLVE-OVATI JESTE        isUpdated
+
+      //  ZA SADA SAM MU PROSLEDIO      false    (ALI TO I NIJE BITNO JER CES U RESOLVER-U KORISTITI source)
+      // A source   JESTE SVE DATO OD OVOG NODE-A
+      // === !== === !== ===
       updated: modifiedTime,
       updatedFns: modifiedTime,
       parent: node.id,
