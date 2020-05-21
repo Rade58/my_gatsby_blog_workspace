@@ -71,8 +71,8 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body, updated }) => {
         }
       `}
     >
-      <MDXRenderer>{body}</MDXRenderer>
       <p>This page was updated {updated}</p>
+      <MDXRenderer>{body}</MDXRenderer>
     </article>
   );
 };

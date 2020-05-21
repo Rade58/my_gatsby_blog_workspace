@@ -100,7 +100,7 @@ const Main: FunctionComponent = ({ children }) => {
         & section.keywords {
           grid-area: k;
           position: sticky;
-          top: 28vh;
+          top: 58vh;
         }
       `}
     >
