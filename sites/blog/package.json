@@ -17,6 +17,7 @@
     "play": "GATSBY_GRAPHQL_IDE=playground gatsby develop",
     "clean": "gatsby clean",
     "prod": "gatsby build",
-    "serve": "gatsby serve"
+    "serve": "gatsby serve",
+    "currdate": "node utility/printCurrentDate.ts"
   }
 }
