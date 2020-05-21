@@ -23,6 +23,11 @@ import { Headings, GroupPagePickedI } from "../templates/blog-post-template"; //
 import { PageKeywords } from "../templates/group-page-template";
 
 interface PageProp extends SeoI {
+  // JOS DVA NOVA PROP TYPE-A, PRE NEGO STO ODEM DA DODAJEM NOVE TYPE-OVE I DEFINISEM
+  // ODGOVARAJUCE DEFAULT VREDNOSTI U CONTEXT-U
+  createdAt: string;
+  isUpdated: boolean;
+  //
   body: string;
   updated: string;
   title: string;
@@ -42,6 +47,10 @@ const BlogPost: FunctionComponent<{
   page: PageProp;
 }> = ({
   page: {
+    //
+    createdAt,
+    isUpdated,
+    //
     body,
     updated,
     title,
@@ -80,6 +89,8 @@ const BlogPost: FunctionComponent<{
         seo: { title, lang, description, themeColor },
         allBlogKeywords,
         groupPage,
+        createdAt,
+        isUpdated,
       }}
     >
       {/* <HeaderStateProvider> */}

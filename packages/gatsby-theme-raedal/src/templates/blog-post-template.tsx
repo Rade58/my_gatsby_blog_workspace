@@ -40,6 +40,11 @@ interface BlogPostTemplateProps {
   pageContext: PageContextI;
   data: {
     page: {
+      // TYPE-UJEM, JOS DVA NOVA FIELD-A, ZA KOJIMA CU QUERY-EOVATI
+      createdAt: string;
+      isUpdated: boolean;
+      //
+
       updated: string;
       title: string;
       body: string;
@@ -59,6 +64,11 @@ interface BlogPostTemplateProps {
 export const query = graphql`
   query TakeBlogPostPagzus($id: String) {
     page: blogPostPage(id: { eq: $id }) {
+      # QUERY-UJEM ZA JOS DVA FIELD-A
+      createdAt(formatString: "MMM Do, Y") # A OVO JE FORMAT KOJI SAM IZABRAO
+      isUpdated
+      #
+
       title
       updated(fromNow: true) # TREBA MI I DALJE fromNow
       body
@@ -127,6 +137,10 @@ const BlogPostTemplate: FunctionComponent<BlogPostTemplateProps> = ({
   // IZDVOJICU I      groupPage      I          allBlogKeywords
 
   const {
+    // IZDVAJAM, JOS DVA FIELD-A
+    createdAt,
+    isUpdated,
+    //
     updated,
     title,
     body,
@@ -141,6 +155,10 @@ const BlogPostTemplate: FunctionComponent<BlogPostTemplateProps> = ({
     <BlogPost
       page={{
         ...frontMatter,
+        // PROSLEDJUJEM JOS DVA FIELD-A, PRE NEGO STO REDEFINISEM PROPP TYPES ZA OVU KOMPONENTU
+        createdAt,
+        isUpdated,
+        //
         body,
         title,
         updated,

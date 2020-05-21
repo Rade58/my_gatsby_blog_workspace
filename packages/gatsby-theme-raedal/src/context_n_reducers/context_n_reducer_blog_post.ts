@@ -91,15 +91,32 @@ export interface ContextBlogPostStateI {
 
   groupPage: GroupPagePickedI;
   allBlogKeywords: PageKeywords[];
+
+  createdAt: string;
+  isUpdated: boolean;
 }
 
 // OVO JE SAMO DEFAULT STATE I REDUCER-A NEMA JOS
 export const blogPostContext: Context<ContextBlogPostStateI> = createContext({
   // DAKLE OVE DVE VREDNOSTI SU SAM ODEFAULT-OVI
 
+  createdAt: " ",
+  // NISAM MOGAO DRUGACIJE ZADATI VREDNOST NEGO OVAKO
+  // === !== === !== === !== === !== === !== === !== === !==
+  // *******************************************************
+  // === !== === !== === !== === !== === !== === !== === !==
+  // OVO MI JE JAKO BITNO DA PRIMETIS, JER MI NIJE JASNO ZASTO
+  // BAS OVAKO MORAM DA ZADAM VREDNOST
+
+  isUpdated: Boolean(false),
+  //=== !== === !== === !== === !== === !== === !== === !==
+  // ******************************************************
+  //=== !== === !== === !== === !== === !== === !== === !==
+
   reducedBlogPostState: defaultState,
   // eslint-disable-next-line
   blogPostDispatch: ({ type, payload }) => {}, // MISLIM DA JE BITNO STO SI OBEZBEDIO OVAKAV DEFAULT (SADA KADA BUDES KORISTIO OVAJ CONTEXT U DRUGIM FAJLOVIMA, IAMCES TACNE TYPE-OVE)
+
   headings: [{ depth: 0, value: "nothing" }],
   relativeLink: "nothing",
   seo: {
