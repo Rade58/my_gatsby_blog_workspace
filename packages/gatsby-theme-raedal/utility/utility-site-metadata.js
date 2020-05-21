@@ -1,4 +1,5 @@
 module.exports = ({
+  createdAt = new Date(),
   lang = "en",
   description = "raedal",
   themeColor = "#455A64",
@@ -7,6 +8,7 @@ module.exports = ({
   keywordTextColor = "#fff",
   keywordBorderColor = "crimson",
 }) => ({
+  createdAt,
   lang,
   description,
   themeColor,

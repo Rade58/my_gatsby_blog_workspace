@@ -99,6 +99,15 @@ exports.createSchemaCustomization = ({ actions }) => {
   // MOZES I VIDETI DA SAM KORISTIO I DIREKTIVU ZA      createdAt     KOJA CE MI DATI MOGUCNOST DA UPOTREBIM
   // Moment.js PAKET
 
+  // I POSTO SI ZAVRSIO SA DEFINISANJEM TYPE-OVA, MOZES DA ODES U HOOK onCreateNode GDE CES DEFINISATI
+  // ADDITIONAL FIELD-OVE KOJI CE BITI KREIRANI
+
+  // A NAKON TOGA DEFINISES RESOLVER-A, ZA        isUpdated
+  // __ --> __ __> __ => ==>__ --> __ __> __ => ==>__ --> __ __> __ => ==>__ --> __ __> __ => ==>__ --> __ __> __ => ==>
+  // USTVARI PRVO SKOKNI U      `packages/gatsby-theme-raedal/utility/utility-site-metadata.js`
+  // GDE CES DEFINISATI DEFAULT ZA        createdAt
+  // __ --> __ __> __ => ==>
+
   createTypes(`
     type BlogPostPage implements Node @dontInfer {
 
@@ -171,6 +180,7 @@ exports.createSchemaCustomization = ({ actions }) => {
 
   `);
 };
+// ------------------------TEKST OD RANIJE
 // KAO STO VIDIS GORE SAM PROSIRIO      GroupNameAndPathType, DODAJUCI
 // keywordColor I keywordTextColor
 
@@ -189,32 +199,17 @@ exports.createSchemaCustomization = ({ actions }) => {
 //                                SADA CU I ONAKO IAMTI CORRESPONDING MDXES
 
 // SVI HELPERI SU OVDE OBJASNJENI:     https://www.gatsbyjs.org/docs/node-api-helpers/#createContentDigest
+// ---------------------------------------------------------------------------------------------------------
+
 exports.onCreateNode = (
   { node, actions, getNode, createNodeId, createContentDigest },
   options
 ) => {
   if (!node.parent) return; // OVO JE I DALJE OK
 
-  // OVDE ZELIM DA NAPRAVIM PROVERU O KOJOJ SAM GOVORIO
-  // === !== === !== === !== ===
-  // if (getNode(node.parent).sourceInstanceName === "group-pages-raedal") {
-  // PROVERAVAM DA L ICE SE POJAVITI ONAJ NAME KOJI SAM ZADAO
-  // U CONFIGURACIJSKOM FAJLU GATSBY-JA
-  // console.log(getNode(node.parent).sourceInstanceName);
-  // }
-  // === !== === !== === !== ===
-
   const parentNode = getNode(node.parent);
 
-  // IMACU VISE USLOVNIH IZJAVA
-  // ODNOSNO TREBACE MI JEDNA USLOVNA IZJAVA DA HANDLE-UJEM ONO
-  // STO DOLAZI OD
-  //                                    "gatsby-theme-raedal"
-
-  // I DRUGA ZA ONO STA DOLAZI OD       "group-pages-raedal"
-  // ZATO BI OVDE TREBALO DA COMMIT-UJEM
-
-  // OVO OSTAJE ISTO   (   "/""     JE basePath )
+  // OVO OSTAJE ISTO   (   "/"     JE basePath )
   const { basePath } = withDefaults(options); // PO DEFAULT-U
 
   // I OVO SU ZAJEDNICKE STVARI ZA SVAKI NODE OD
