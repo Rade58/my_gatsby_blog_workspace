@@ -103,7 +103,7 @@ exports.createSchemaCustomization = ({ actions }) => {
   // ADDITIONAL FIELD-OVE KOJI CE BITI KREIRANI
 
   // A NAKON TOGA DEFINISES RESOLVER-A, ZA        isUpdated
-  // __ --> __ __> __ => ==>__ --> __ __> __ => ==>__ --> __ __> __ => ==>__ --> __ __> __ => ==>__ --> __ __> __ => ==>
+  // __ --> __ __> __ => ==>__ --> __ __> __ => ==>__ --> __ __> __ => ==>__ --> __ __> __ => ==>__ --> __ __> __ => ==>_
   // USTVARI PRVO SKOKNI U      `packages/gatsby-theme-raedal/utility/utility-site-metadata.js`
   // GDE CES DEFINISATI DEFAULT ZA        createdAt
   // __ --> __ __> __ => ==>
@@ -284,7 +284,7 @@ exports.onCreateNode = (
 
     /////////////////////////////////////////////////////////////////
   }
-
+  // OVO SAM SVE DEFINISAO RANIJE
   // === !== ===  KREIRAM NODE-OVE ZA GROUP STRANICE !== === !== ===
   // === !== ===   !== === !== ===
   /* console.log("=======================================================");
@@ -346,10 +346,9 @@ exports.onCreateNode = (
   }
 };
 
-// KREIRANJE RESOLVER ZA body FIELD
-
-//  SADA CU KREIRATI RESOLVER-A I ZA      groupPage     FIELD NA    BlogPostPage
-//                                                                      TYPE-U
+// __ --> __ __> __ => ==>__ --> __ __> __ => ==>__ --> __ __> __ => ==>__ --> __ __> __ => ==>__ --> __ __> __ => ==>_
+//   DAKLE POTREBNO JE DA DODAM RESOLVER ZA       isUpdated     FIELD     NA          BlogPostPage      TYPE-U
+// __ --> __ __> __ => ==>__ --> __ __> __ => ==>__ --> __ __> __ => ==>__ --> __ __> __ => ==>__ --> __ __> __ => ==>_
 
 exports.createResolvers = ({ createResolvers }) => {
   /*  console.log(
@@ -361,6 +360,41 @@ exports.createResolvers = ({ createResolvers }) => {
 
   createResolvers({
     BlogPostPage: {
+      // EVO ZADAJEM          isUpdated       FIELD  (NARAVNO, MOGU DA STAMPAM I VIDIM KAKO SVE IZGLEDA)
+
+      isUpdated: {
+        type: "Boolean!",
+        resolve: (source, args, context, info) => {
+          // console.log(source);
+
+          //  IZ source-A, TREBAM DA IZDVOJIM     updated   I   createdAt
+
+          const { createdAt, updated } = source;
+
+          if (!createdAt) return false;
+          if (!updated) return false;
+
+          // SADA OD OBE VREDNOSTI TREBAM DA IZDVOJIM     GODINU, MESEC, DAN U MESECU
+          const createdDate = new Date(createdAt);
+          const updatedDate = new Date(updated);
+
+          // OVO SU MOJE KONSTRUKCIJE STRINGOVA, NIJE NIKAKAV ROCKET SCIENCE
+          const createdString = `${createdDate.getFullYear()}-${createdDate.getMonth()}-${createdDate.getDate()}`;
+          const updatedString = `${updatedDate.getFullYear()}-${updatedDate.getMonth()}-${updatedDate.getDate()}`;
+
+          console.log({ createdString, updatedString });
+
+          // DAKLE AKO SU STRINGOVI ISTI, NISTA NIJE UPDATED
+
+          // AK OSU STRINGOVI RAZLICITI JESTE UPDATED
+
+          return !(createdString === updatedString);
+
+          // KREIRAJ NOVI BLOG POST DA VIDIS DA LI CE OVO POKAZATI FALSE
+          // I DA BIO SAM U PRAVU, USPESNO SAM DEFINISAO, OVAJ RESOLVER
+        },
+      },
+
       body: {
         type: "String!",
         resolve: (source, args, context, info) => {
