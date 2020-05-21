@@ -92,11 +92,20 @@ exports.createSchemaCustomization = ({ actions }) => {
     },
   });
 
-  // EVO DODAO SAM I NOVI FIELD GDE KORISTIM EXTENSION, ODNONO DIREKTIVU
-  // I TO JE KORISTIM NA DVA MESTA, ODNONO NA DVA FIELDA, U DVA RAZLICITA TYPE-A
+  // __ --> __ __> __ => ==> ODMAH NA POCETAK       BlogPostPage    TYPE-A, DODAJEM JOS NEKOLIKO TYPE-OVA
+  // DODAO SAM        createdAt         I DODAO SAM           isUpdated
+  // I SAM MOZES VIDETI, KAKO SU TYPED
+
+  // MOZES I VIDETI DA SAM KORISTIO I DIREKTIVU ZA      createdAt     KOJA CE MI DATI MOGUCNOST DA UPOTREBIM
+  // Moment.js PAKET
 
   createTypes(`
     type BlogPostPage implements Node @dontInfer {
+
+      createdAt: Date! @dateformat
+      isUpdated: Boolean!
+
+
       id: ID!
       title: String!
       path: String!
