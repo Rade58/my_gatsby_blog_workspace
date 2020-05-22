@@ -62,6 +62,7 @@ const HeadingMajor: FunctionComponent = () => {
         & div.times {
           display: flex;
           flex-direction: row;
+          flex-wrap: wrap;
           width: 100%;
 
           & h4.created {
@@ -69,11 +70,20 @@ const HeadingMajor: FunctionComponent = () => {
             margin-right: auto;
             margin-left: 1em;
             justify-self: flex-start;
+
+            & time {
+              white-space: nowrap;
+            }
           }
 
           & h4.updated {
             border: tomato solid 1px;
             margin-right: 1em;
+            width: min-content;
+
+            & time {
+              white-space: nowrap;
+            }
           }
         }
       `}
@@ -87,7 +97,7 @@ const HeadingMajor: FunctionComponent = () => {
 
       <div className="times">
         <h4 className="created">
-          <span>Published :</span>
+          <span>Published: </span>
           <time>{createdAt}</time>
         </h4>
         {isUpdated ? (

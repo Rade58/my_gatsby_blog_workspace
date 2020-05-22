@@ -53,16 +53,49 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
         & {
           
           
+          section.pubup{
 
-          .published, .updated {
-            align-self: flex-end;
-            margin-left: auto;
-            white-space: nowrap;
-            border: yellow solid 1px;
-            width: max-content;
-            margin-bottom: 0;
+            border: tomato solid 1px;
+
+            width: 100%;
+
+            display: flex;
+            flex-wrap: wrap;
+
+
+            & .published, .updated {
+              /* margin-left: auto; */
+              white-space: nowrap;
+              border: yellow solid 0px;
+              width: max-content;
+              margin-bottom: 4px;
+            }
+
+            & .published {
+              align-self: flex-start;
+              margin-right: auto;
+
+              & span {
+              text-decoration-line: underline;
+
+              }
+
+            }
+
+            & .updated {
+              align-self: flex-end;
+              /* text-decoration-line: underline; */
+              
+              & span {
+                text-decoration-line: underline;
+
+              }
+
+            }
+
+
+
           }
-
           a {
             text-decoration-line: none;
             border: 0px solid blanchedalmond;
@@ -73,9 +106,10 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
 
             h4 {
               font-size: 28px;
-              border: 1px solid black;
+              border: 1px solid pink;
               transition-property: transform;
               transition-duration: 0.78s;
+              width: fit-content;
             }
 
 
@@ -140,15 +174,17 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
           <p>{description}</p>
         </Link>
         <div className="styled-cont" />
-        <div className="published">
-          <span>Published: </span>
-          <time>{createdAt}</time>
-        </div>
-        {isUpdated ? (
-          <div className="updated">
-            <span> updated:</span> <time>{updated}</time>
+        <section className="pubup">
+          <div className="published">
+            <span>Published: </span>
+            <time>{createdAt}</time>
           </div>
-        ) : null}
+          {isUpdated ? (
+            <div className="updated">
+              <span> updated:</span> <time>{updated}</time>
+            </div>
+          ) : null}
+        </section>
       </div>
       <hr
         css={css`
