@@ -64,15 +64,44 @@ const HeadingMajor: FunctionComponent = () => {
           flex-direction: row;
           flex-wrap: wrap;
           width: 100%;
+          /* ------------------------------------------ */
+          /* @media screen and (min-width: 918px) {
+            h4.updated {
+              width: fit-content;
+            }
 
+            h4.created {
+              width: fit-content;
+            }
+          }
+
+          @media screen and (min-width: 1100px) {
+            h4.updated {
+              width: max-content;
+            }
+
+            h4.created {
+              width: max-content;
+            }
+          } */
+          /* ------------------------------------- */
           & h4.created {
             border: crimson solid 1px;
             margin-right: auto;
             margin-left: 1em;
-            justify-self: flex-start;
+            /* justify-self: flex-start; */
+            width: min-content;
+
+            @media screen and (min-width: 500px) {
+              width: max-content;
+            }
 
             & time {
               white-space: nowrap;
+            }
+
+            & span {
+              text-decoration-line: underline;
             }
           }
 
@@ -81,8 +110,16 @@ const HeadingMajor: FunctionComponent = () => {
             margin-right: 1em;
             width: min-content;
 
+            @media screen and (min-width: 500px) {
+              width: max-content;
+            }
+
             & time {
               white-space: nowrap;
+            }
+
+            & span {
+              text-decoration-line: underline;
             }
           }
         }
