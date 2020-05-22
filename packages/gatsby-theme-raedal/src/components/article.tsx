@@ -10,12 +10,15 @@ import { useContext, FunctionComponent, useEffect } from "react";
 import { blogPostContext } from "../context_n_reducers/context_n_reducer_blog_post";
 //
 
+// UVOZIM Heading KOMPONENTU
+import Heading from "./heading-major";
+//
+
 interface ArticlePropsI {
-  updated: string;
   body: string;
 }
 
-const Article: FunctionComponent<ArticlePropsI> = ({ body, updated }) => {
+const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
   //
   const { reducedBlogPostState } = useContext(blogPostContext);
   //
@@ -71,7 +74,7 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body, updated }) => {
         }
       `}
     >
-      <p>This page was updated {updated}</p>
+      <Heading />
       <MDXRenderer>{body}</MDXRenderer>
     </article>
   );

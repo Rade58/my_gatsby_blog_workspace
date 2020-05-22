@@ -52,7 +52,9 @@ const BlogPost: FunctionComponent<{
     isUpdated,
     //
     body,
+    // EVO GA updated I NJEGA PROSLEDJUJEM U CONTEXT PROVIDER-A
     updated,
+    //
     title,
     lang,
     description,
@@ -91,19 +93,22 @@ const BlogPost: FunctionComponent<{
         groupPage,
         createdAt,
         isUpdated,
+        updated, // ALI POSTO SI GA PROSLEDIO, MORAS DA ODES U context_n_reducer_blog_post.ts
+        //            DA GA I TAMO TYPE-UJES, I PROSLEDIS DEFAULT, JER OVDE TYPESCRIPT YELL-UJE NA TEBE JER NISI TO ODRADIO
       }}
     >
       {/* <HeaderStateProvider> */}
       {/* <Layout body={body} updated={updated} /> */}
 
       <Router>
-        <Layout path={encodeURI(relativeLink)} updated={updated} body={body} />
+        <Layout path={encodeURI(relativeLink)} body={body} />
 
         {headings.map(({ value }) => (
           <Layout
             key={value + relativeLink}
-            path={`${encodeURI(relativeLink)}#${encodeURI(value)}`}
-            updated={updated}
+            path={`${encodeURI(relativeLink)}#${encodeURI(value)
+              .replace(/%20/g, "-")
+              .replace(/ /g, "-")}`}
             body={body}
           />
         ))}

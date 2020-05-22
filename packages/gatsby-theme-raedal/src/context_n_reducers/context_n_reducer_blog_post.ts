@@ -94,6 +94,7 @@ export interface ContextBlogPostStateI {
 
   createdAt: string;
   isUpdated: boolean;
+  updated: string;
 }
 
 // OVO JE SAMO DEFAULT STATE I REDUCER-A NEMA JOS
@@ -113,6 +114,7 @@ export const blogPostContext: Context<ContextBlogPostStateI> = createContext({
   // ******************************************************
   //=== !== === !== === !== === !== === !== === !== === !==
 
+  updated: "",
   reducedBlogPostState: defaultState,
   // eslint-disable-next-line
   blogPostDispatch: ({ type, payload }) => {}, // MISLIM DA JE BITNO STO SI OBEZBEDIO OVAKAV DEFAULT (SADA KADA BUDES KORISTIO OVAJ CONTEXT U DRUGIM FAJLOVIMA, IAMCES TACNE TYPE-OVE)

@@ -55,11 +55,10 @@ import Seo from "../seo/seo";
 
 interface LayoutPropsI {
   body: string;
-  updated: string;
   path?: string;
 }
 
-const Layout: FunctionComponent<LayoutPropsI> = ({ body, updated }) => {
+const Layout: FunctionComponent<LayoutPropsI> = ({ body }) => {
   // === !==
 
   // === !==  LAYOUT REDUCER
@@ -139,7 +138,7 @@ const Layout: FunctionComponent<LayoutPropsI> = ({ body, updated }) => {
         {/* '''''''''''''''''''' */}
         <Main>
           <Seo {...seo} />
-          <Article updated={updated} body={body} />
+          <Article body={body} />
         </Main>
         {/* <button
           sx={{
