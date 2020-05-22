@@ -45,24 +45,20 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
         }}
         css={css`
         display: flex;
+        flex-direction: column;
 
         margin-bottom: 12px;
         position: relative;
 
         & {
           
-          h4 {
-            font-size: 28px;
-            border: 1px solid black;
-            transition-property: transform;
-            transition-duration: 0.78s;
-          }
+          
 
-          time {
+          .published, .updated {
             align-self: flex-end;
             margin-left: auto;
             white-space: nowrap;
-            border: yellow solid 0px;
+            border: yellow solid 1px;
             width: max-content;
             margin-bottom: 0;
           }
@@ -72,8 +68,17 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
             border: 0px solid blanchedalmond;
             width: fit-content;
             color: white;
-            margin-left:12px;
+            margin-left: 12px;
             margin-right: 18px;
+
+            h4 {
+              font-size: 28px;
+              border: 1px solid black;
+              transition-property: transform;
+              transition-duration: 0.78s;
+            }
+
+
           }
 
           div.styled-cont {
@@ -135,8 +140,15 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
           <p>{description}</p>
         </Link>
         <div className="styled-cont" />
-        <time>{createdAt}</time>
-        {isUpdated ? <time>{updated}</time> : null}
+        <div className="published">
+          <span>Published: </span>
+          <time>{createdAt}</time>
+        </div>
+        {isUpdated ? (
+          <div className="updated">
+            <span> updated:</span> <time>{updated}</time>
+          </div>
+        ) : null}
       </div>
       <hr
         css={css`
