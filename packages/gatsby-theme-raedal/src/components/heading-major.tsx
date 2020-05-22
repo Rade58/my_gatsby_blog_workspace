@@ -34,9 +34,10 @@ const HeadingMajor: FunctionComponent = () => {
 
           & h1.h-title {
             font-weight: 400;
-            margin: 20px auto;
+            margin-right: auto;
             font-size: 55px;
             border: pink solid 1px;
+            text-align: center;
           }
 
           & a {
@@ -66,11 +67,13 @@ const HeadingMajor: FunctionComponent = () => {
           & h4.created {
             border: crimson solid 1px;
             margin-right: auto;
+            margin-left: 1em;
             justify-self: flex-start;
           }
 
           & h4.updated {
             border: tomato solid 1px;
+            margin-right: 1em;
           }
         }
       `}
