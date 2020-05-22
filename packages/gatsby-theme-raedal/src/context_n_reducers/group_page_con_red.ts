@@ -26,6 +26,8 @@ export const groupPageReducer: Reducer<
   GroupPageReducedStateI,
   GroupPageReducerActionI
 > = (state, action) => {
+  // ZA SADA NEMA NISTA
+
   const blah = 1;
 
   return state;
@@ -78,6 +80,10 @@ export const groupPageContext: Context<GroupPageContextStateI> = createContext({
           description: "",
           themeColor: "",
         },
+        // DODAJEM JOS DVA
+        createdAt: "",
+        isUpdated: Boolean(false),
+        //
       },
     ],
     path: "",
@@ -89,7 +95,7 @@ export const groupPageContext: Context<GroupPageContextStateI> = createContext({
 
     //
 
-    updated: "",
+    // updated: "",
     // DODAJEM DVA DODATNA DEFAULT-A
     lang: "en",
     description: "",

@@ -27,6 +27,11 @@ export interface BlogPostPageI {
   title: string;
   path: string;
   updated: string;
+  // JOS MI TREBAJU DVE STVARI
+  createdAt: string;
+  isUpdated: boolean;
+  //
+
   frontMatter: {
     description: string;
     themeColor: string;
@@ -64,7 +69,7 @@ export interface GroupPageI {
   keywordTextColor: string;
   keywordBorderColor: string;
   //
-  updated: string;
+  updated?: string;
   blogPostPages: blogPostPageArray;
   allBlogKeywords: keywordsArray;
 }
@@ -100,7 +105,7 @@ export const TakeOneGroupPage = graphql`
       keywordBorderColor
       #
 
-      updated(fromNow: true)
+      # updated(fromNow: true)    # OVO NIJE POTREBNO
 
       # EVO KAO STO VIDIS PRILIKOM QUERYING SAM ZADAO ARGUMENTE
 
@@ -110,9 +115,13 @@ export const TakeOneGroupPage = graphql`
         title
         path
 
-        # I ZELIM POSEBAN FORMAT DATUMA ZA SLEDECI FIELD-U
-        # ZATO SAM GA PRVO PRAVIO QUERY U GRAPHI-JU
-        updated(formatString: "MMM Do, Y") # DAKLE OVAJ FORMAT ZELIM DA KORISTIM
+        # ON OSTO JE QUERY-EOVAO   updated     SADA QUERY-UJE     createdAt
+
+        createdAt(formatString: "MMM Do, Y")
+        updated(fromNow: true) #   A OVDE KORISTI MSADA     fromNow
+        # I TRAZIM JOS JEDAN FIELD
+        isUpdated
+
         # updatedFns(MMMMDoyyyy: true)   (ISPRAVKA OVO SAM DEPRECATE-OVAO)
 
         # POSTO CES KREIRATI CARD-OVE TVOJI BLOG POSTOVA
