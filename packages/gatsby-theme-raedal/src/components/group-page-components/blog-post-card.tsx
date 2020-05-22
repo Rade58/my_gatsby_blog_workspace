@@ -22,9 +22,13 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
     title,
     frontMatter,
     updated,
+    // PORED updated UZIMAM I     createdAt     I       isUpdated
+    createdAt,
+    isUpdated,
+    //
     keywordTextColor,
     keywordBorderColor,
-  } = props; // EVO KORISTIM I updated
+  } = props;
 
   const { description, themeColor } = frontMatter;
 
@@ -131,7 +135,8 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
           <p>{description}</p>
         </Link>
         <div className="styled-cont" />
-        <time>{updated}</time>
+        <time>{createdAt}</time>
+        {isUpdated ? <time>{updated}</time> : null}
       </div>
       <hr
         css={css`

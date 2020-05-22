@@ -87,11 +87,13 @@ const HeadingMajor: FunctionComponent = () => {
 
       <div className="times">
         <h4 className="created">
-          <span>Published :</span> {createdAt}
+          <span>Published :</span>
+          <time>{createdAt}</time>
         </h4>
         {isUpdated ? (
           <h4 className="updated">
-            <span>updated: </span> {updated}
+            <span>updated: </span>
+            <time>{updated}</time>
           </h4>
         ) : null}
       </div>
