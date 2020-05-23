@@ -85,12 +85,18 @@ const HeadingMajor: FunctionComponent = () => {
             }
           } */
           /* ------------------------------------- */
+
+          & time {
+            color: #e4cdc3;
+          }
+
           & h4.created {
-            border: crimson solid 1px;
+            border: crimson solid 0px;
             margin-right: auto;
             margin-left: 1em;
             /* justify-self: flex-start; */
             width: min-content;
+            font-weight: 400;
 
             @media screen and (min-width: 500px) {
               width: max-content;
@@ -98,17 +104,18 @@ const HeadingMajor: FunctionComponent = () => {
 
             & time {
               white-space: nowrap;
+              text-decoration-line: underline;
             }
 
             & span {
-              text-decoration-line: underline;
             }
           }
 
           & h4.updated {
-            border: tomato solid 1px;
+            border: tomato solid 0px;
             margin-right: 1em;
             width: min-content;
+            font-weight: 400;
 
             @media screen and (min-width: 500px) {
               width: max-content;
@@ -116,10 +123,10 @@ const HeadingMajor: FunctionComponent = () => {
 
             & time {
               white-space: nowrap;
+              text-decoration-line: underline;
             }
 
             & span {
-              text-decoration-line: underline;
             }
           }
         }
@@ -134,13 +141,11 @@ const HeadingMajor: FunctionComponent = () => {
 
       <div className="times">
         <h4 className="created">
-          <span>Published: </span>
-          <time>{createdAt}</time>
+          <span className="pubspan">Published</span>:<time> {createdAt}</time>
         </h4>
         {isUpdated ? (
           <h4 className="updated">
-            <span>updated: </span>
-            <time>{updated}</time>
+            <span className="upspan">updated</span>:<time> {updated}</time>
           </h4>
         ) : null}
       </div>
