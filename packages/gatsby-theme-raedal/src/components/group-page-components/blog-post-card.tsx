@@ -123,7 +123,11 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
               transition-property: transform;
               transition-duration: 0.78s;
               width: fit-content;
+              margin-left: 3rem;
+              margin-right: 0.2rem;
               /* z-index: 200; */
+
+              text-decoration-color: ${themeColor};
 
               &:hover {
                 text-decoration-line: underline;
@@ -176,7 +180,7 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
             }
 
             h4 {
-              transform: translate3d(18px, 28px, 18px);
+              transform: translateX(-28px);
             }
 
             & + hr {
@@ -208,7 +212,7 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
       </div>
       <hr
         css={css`
-          width: 80%;
+          width: 69%;
           margin: 12px auto;
           transition-property: all;
           transition-duration: 0.6s;
