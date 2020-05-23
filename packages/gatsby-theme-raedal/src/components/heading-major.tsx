@@ -80,7 +80,7 @@ const HeadingMajor: FunctionComponent = () => {
           } */
           /* ------------------------------------- */
           & a {
-            border: pink solid 4px;
+            border: pink solid 0px;
             height: min-content;
             width: min-content;
             justify-self: center;
@@ -91,6 +91,8 @@ const HeadingMajor: FunctionComponent = () => {
             margin-bottom: auto;
             transition-property: transform;
             transition-duration: 0.4s;
+
+            margin-right: ${isUpdated ? 0 : "1em"};
 
             & img {
               height: 2rem;
@@ -106,7 +108,7 @@ const HeadingMajor: FunctionComponent = () => {
           }
 
           & h4.created {
-            border: crimson solid 1px;
+            border: crimson solid 0px;
             margin-right: auto;
             margin-left: 1em;
             /* justify-self: flex-start; */
@@ -127,7 +129,7 @@ const HeadingMajor: FunctionComponent = () => {
           }
 
           & h4.updated {
-            border: tomato solid 1px;
+            border: tomato solid 0px;
             margin-right: 1em;
             margin-left: auto;
             width: min-content;
@@ -156,11 +158,11 @@ const HeadingMajor: FunctionComponent = () => {
         <h4 className="created">
           <span className="pubspan">Published</span>:<time> {createdAt}</time>
         </h4>
-        <div className="mark-line" />
+        {isUpdated ? <div className="mark-line" /> : null}
         <Link to={path}>
           <img src={`data:image/svg+xml;base64,${icon}`} alt="group-icon" />
         </Link>
-        <div className="mark-line" />
+        {isUpdated ? <div className="mark-line" /> : null}
         {isUpdated ? (
           <h4 className="updated">
             <span className="upspan">updated</span>:<time> {updated}</time>
