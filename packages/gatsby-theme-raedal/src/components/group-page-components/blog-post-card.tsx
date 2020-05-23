@@ -57,10 +57,13 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
 
             border: tomato solid 1px;
 
-            width: 100%;
+            /* width: 100%; */
 
             display: flex;
             flex-wrap: wrap;
+
+            margin-right: 2rem;
+            margin-left: 2rem;
 
 
             & .published, .updated {
@@ -76,8 +79,13 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
               margin-right: auto;
 
               & span {
-              text-decoration-line: underline;
+              /* text-decoration-line: underline; */
 
+              }
+              & time {
+                
+                text-decoration-line: underline;
+                color: #e4cdc3;
               }
 
             }
@@ -87,8 +95,13 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
               /* text-decoration-line: underline; */
               
               & span {
+                
+              }
+              
+              & time {
+                
                 text-decoration-line: underline;
-
+                color: #e4cdc3;
               }
 
             }
@@ -110,6 +123,12 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
               transition-property: transform;
               transition-duration: 0.78s;
               width: fit-content;
+              /* z-index: 200; */
+
+              &:hover {
+                text-decoration-line: underline;
+              }
+
             }
 
 
@@ -128,7 +147,8 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
               225deg,
               ${themeColor} 49%,
               ${cardBackgroundColor} 50%
-            );
+              );
+              /* #eed4d400 50% */
 
             border-radius: 100% 0% 100% 0% / 0% 100% 0% 100% ;
 
@@ -156,7 +176,7 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
             }
 
             h4 {
-              transform: translateX(28px)
+              transform: translate3d(18px, 28px, 18px);
             }
 
             & + hr {
