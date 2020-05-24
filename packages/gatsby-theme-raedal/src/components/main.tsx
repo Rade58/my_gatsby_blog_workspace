@@ -31,39 +31,33 @@ const Main: FunctionComponent = ({ children }) => {
 
         /* width: 100vw; */
 
-        grid-template-columns: repeat(8, minmax(0, 1fr));
-
-        @media screen and (min-width: 918px) {
-          grid-template-areas:
-            " . a a a a a b b"
-            " k a a a a a b b"
-            " k a a a a a b b"
-            " . a a a a a t t"
-            " . a a a a a . .";
-        }
-        @media screen and (min-width: 1100px) {
-          grid-template-areas:
-            " . a a a a a a b "
-            " k a a a a a a b "
-            " . t a a a a a b "
-            " . t a a a a a t "
-            " . k a a a a a t ";
-        }
+        grid-template-columns: repeat(10, minmax(0, 1fr));
 
         grid-template-areas:
-          " a a a a a a a a"
-          " a a a a a a a a"
-          " a a a a a a a a"
-          " a a a a a a a a"
-          " a a a a a a a a"
-          " b b b b b b b b"
-          " b b b b b b b b"
-          " b b b b b b b b"
-          " t t t t t t t t"
-          " t t t t t t t t"
-          " t t t t t t t t"
-          " k k k k k k k k"
-          " k k k k k k k k";
+          " a a a a a a a a a a"
+          " a a a a a a a a a a"
+          " a a a a a a a a a a"
+          " a a a a a a a a a a"
+          " a a a a a a a a a a"
+          " b b b b b b b b b b"
+          " b b b b b b b b b b"
+          " b b b b b b b b b b"
+          " t t t t t t t t t t"
+          " t t t t t t t t t t"
+          " t t t t t t t t t t"
+          " k k k k k k k k k k"
+          " k k k k k k k k k k";
+
+        /*==============================*/
+        & section.tofh2 {
+          grid-area: t;
+        }
+        & section.keywords {
+          grid-area: k;
+        }
+        & section.social-posting {
+          grid-area: s;
+        }
 
         & article {
           &.post-article {
@@ -80,27 +74,53 @@ const Main: FunctionComponent = ({ children }) => {
           }
         }
 
-        & section.adds {
-          margin-top: 42px;
+        /*==============================*/
 
-          grid-area: b;
+        @media screen and (min-width: 918px) {
+          grid-template-areas:
+            " a a a a a a a a k k"
+            " a a a a a a a a t t"
+            " a a a a a a a a s s"
+            " a a a a a a a a . ."
+            " a a a a a a a a . .";
 
-          /* align-self: stretch; */
+          & section.tofh2 {
+          }
+          & section.keywords {
+          }
+          & section.social-posting {
+          }
         }
 
-        & section.social-posting {
-          grid-area: t;
+        @media screen and (min-width: 1100px) {
+          grid-template-areas:
+            " k k a a a a a a s s"
+            " k k a a a a a a t t"
+            " . . a a a a a a . ."
+            " . . a a a a a a . ."
+            " . . a a a a a a . .";
 
-          border: yellow solid 2px;
-          position: sticky;
+          & section.tofh2 {
+            position: sticky;
 
-          top: 38vh;
-        }
+            top: 38vh;
 
-        & section.keywords {
-          grid-area: k;
-          position: sticky;
-          top: 58vh;
+            border: pink solid 1px;
+            width: fit-content;
+            height: max-content;
+
+            /* align-self: stretch; */
+          }
+
+          & section.keywords {
+            position: sticky;
+
+            top: 14vh;
+          }
+
+          & section.social-posting {
+            border: yellow solid 2px;
+          }
         }
       `}
     >
