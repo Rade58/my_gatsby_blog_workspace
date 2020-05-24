@@ -56,8 +56,16 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
         !pigDisapear ? "pig-reapeard" : "pig-disapeard"
       } ${header_pull_class}`}
       css={css`
+        @media screen and (min-width: 918px) {
+          /* padding-top: calc(38px + 58px); */
+
+          /* padding-top: 28px; */
+
+          margin-top: 0px;
+        }
+
         border: tomato solid 4px;
-        margin-top: 48px;
+        /* margin-top: 48px; */
 
         & > h1 {
           font-family: Oxygen, Ubuntu, Roboto, Cantarell, "Open Sans",
