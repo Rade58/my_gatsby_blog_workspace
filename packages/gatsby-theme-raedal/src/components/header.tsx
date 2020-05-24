@@ -99,7 +99,8 @@ const Header: FunctionComponent = () => {
 
   return (
     <header
-      className={scrolled_class}
+      // className={scrolled_class}
+      className="pull-up"
       sx={{
         backgroundImage: additionalStyles.headerBackgroundImage,
       }}
@@ -140,9 +141,9 @@ const Header: FunctionComponent = () => {
         }
       `}
     >
-      <NavInHeader />
+      {/* <NavInHeader /> */}
 
-      <section
+      {/* <section
         className="solial-icons"
         css={css`
           display: flex;
@@ -159,7 +160,6 @@ const Header: FunctionComponent = () => {
           }
         `}
       >
-        {/* {currentScroll} */}
         <a href="https://twitter.com/ra_decodes">
           <img src={gitHubIconUri} alt="github logo" />
         </a>
@@ -169,7 +169,7 @@ const Header: FunctionComponent = () => {
         <a href="https://github.com/Rade58" target="blank">
           <img src={gitHubIconUri} alt="github icon" />
         </a>
-      </section>
+      </section> */}
       <ScrollIndicator
         bc="rgb(38, 45, 59)"
         fill="rgba(153, 67, 95, 0.74)"
