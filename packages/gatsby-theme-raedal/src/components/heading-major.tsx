@@ -107,6 +107,10 @@ const HeadingMajor: FunctionComponent = () => {
             color: #e4cdc3;
           }
 
+          & h4 {
+            font-size: 14px;
+          }
+
           & h4.created {
             border: crimson solid 0px;
             margin-right: auto;
@@ -115,7 +119,7 @@ const HeadingMajor: FunctionComponent = () => {
             width: min-content;
             font-weight: 400;
 
-            @media screen and (min-width: 541px) {
+            @media screen and (min-width: 560px) {
               width: max-content;
             }
 
@@ -135,7 +139,7 @@ const HeadingMajor: FunctionComponent = () => {
             width: min-content;
             font-weight: 400;
 
-            @media screen and (min-width: 541px) {
+            @media screen and (min-width: 560px) {
               width: max-content;
             }
 
