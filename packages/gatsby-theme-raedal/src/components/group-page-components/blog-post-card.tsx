@@ -200,12 +200,12 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
         <div className="styled-cont" />
         <section className="pubup">
           <div className="published">
-            <span>Published: </span>
+            <span>Published: &nbsp;&nbsp;</span>
             <time>{createdAt}</time>
           </div>
           {isUpdated ? (
             <div className="updated">
-              <span> updated:</span> <time>{updated}</time>
+              <span> updated:</span> &nbsp;&nbsp;<time>{updated}</time>
             </div>
           ) : null}
         </section>

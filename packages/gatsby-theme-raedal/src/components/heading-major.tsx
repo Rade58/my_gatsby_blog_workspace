@@ -156,7 +156,8 @@ const HeadingMajor: FunctionComponent = () => {
 
       <div className="times">
         <h4 className="created">
-          <span className="pubspan">Published</span>:<time> {createdAt}</time>
+          <span className="pubspan">Published</span>:&nbsp;&nbsp;
+          <time> {createdAt}</time>
         </h4>
         {isUpdated ? <div className="mark-line" /> : null}
         <Link to={path}>
@@ -165,7 +166,8 @@ const HeadingMajor: FunctionComponent = () => {
         {isUpdated ? <div className="mark-line" /> : null}
         {isUpdated ? (
           <h4 className="updated">
-            <span className="upspan">updated</span>:<time> {updated}</time>
+            <span className="upspan">updated</span>:&nbsp;&nbsp;
+            <time> {updated}</time>
           </h4>
         ) : null}
       </div>
