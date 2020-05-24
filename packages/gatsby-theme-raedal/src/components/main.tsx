@@ -34,19 +34,10 @@ const Main: FunctionComponent = ({ children }) => {
         grid-template-columns: repeat(10, minmax(0, 1fr));
 
         grid-template-areas:
-          " a a a a a a a a a a"
-          " a a a a a a a a a a"
-          " a a a a a a a a a a"
-          " a a a a a a a a a a"
-          " a a a a a a a a a a"
-          " b b b b b b b b b b"
-          " b b b b b b b b b b"
-          " b b b b b b b b b b"
-          " t t t t t t t t t t"
-          " t t t t t t t t t t"
-          " t t t t t t t t t t"
-          " k k k k k k k k k k"
-          " k k k k k k k k k k";
+          "a a a a a a a a a a"
+          "t t t t t t t t t t"
+          "k k k k k k k k k k"
+          "s s s s s s s s s s";
 
         /*==============================*/
         & section.tofh2 {
@@ -79,16 +70,23 @@ const Main: FunctionComponent = ({ children }) => {
         @media screen and (min-width: 918px) {
           grid-template-areas:
             " a a a a a a a a k k"
-            " a a a a a a a a t t"
             " a a a a a a a a s s"
+            " a a a a a a a a t t"
             " a a a a a a a a . ."
             " a a a a a a a a . .";
 
           & section.tofh2 {
+            /* bottom: 12vh; */
+            position: sticky;
+            /* top: 12px; */
+            border: tomato solid 1px;
+            top: 50vh;
           }
           & section.keywords {
+            position: sticky;
           }
           & section.social-posting {
+            position: sticky;
           }
         }
 
