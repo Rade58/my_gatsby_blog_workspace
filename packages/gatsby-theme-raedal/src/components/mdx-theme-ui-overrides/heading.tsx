@@ -31,9 +31,12 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
 
   return (
     <div
-      style={{
-        paddingTop: pigDisapear ? "59px" : "calc(38px + 58px)",
-      }}
+      style={
+        {
+          // paddingTop: pigDisapear ? "59px" : "calc(38px + 58px)",
+          // paddingTop: "12px",
+        }
+      }
       className="heading-above"
       id={props.id}
       css={css`
@@ -44,11 +47,13 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
 
         display: flex;
 
-        padding-top: calc(30px + 58px);
+        padding-top: 34px;
         padding-bottom: 0px;
 
         @media screen and (min-width: 918px) {
-          padding-top: calc(38px + 58px);
+          /* padding-top: calc(38px + 58px); */
+
+          padding-top: 41px;
         }
       `}
     >
