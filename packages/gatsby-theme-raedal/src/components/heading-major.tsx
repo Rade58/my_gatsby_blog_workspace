@@ -39,6 +39,11 @@ const HeadingMajor: FunctionComponent = () => {
             font-size: 55px;
             border: pink solid 1px;
             text-align: center;
+
+            @media screen and (max-width: 600px) {
+              font-size: 46px;
+              font-weight: 300;
+            }
           }
         }
 
