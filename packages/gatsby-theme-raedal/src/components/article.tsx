@@ -46,7 +46,7 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
           /* h2: {
           paddingTop: !pigDisapear ? "58px" : "18px",
           paddingBottom: "18px",
-        }, */
+        },
           /* display: "flex",
         flexDirection: "column", */
         }
@@ -66,6 +66,15 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
 
         border: tomato solid 4px;
         /* margin-top: 48px; */
+
+        /* &.pig-reapeard {
+          margin-top
+        }  */
+
+        /* &.pig-disapeard {
+          
+        }
+        */
 
         & > h1 {
           font-family: Oxygen, Ubuntu, Roboto, Cantarell, "Open Sans",

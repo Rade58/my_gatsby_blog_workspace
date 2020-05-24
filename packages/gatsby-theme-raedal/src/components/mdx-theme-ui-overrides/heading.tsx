@@ -37,9 +37,16 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
           // paddingTop: "12px",
         }
       }
-      className="heading-above"
+      className={`heading-above ${pigDisapear ? "pdapear" : "papear"}`}
       id={props.id}
       css={css`
+        /* &.papear {
+        } */
+
+        &.pdapear {
+          padding-top: 12px;
+        }
+
         border: tomato solid 1px;
 
         transition-property: margin-top;
