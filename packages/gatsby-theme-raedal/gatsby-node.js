@@ -396,7 +396,8 @@ exports.createResolvers = ({ createResolvers }) => {
 
           // VODI RACUNA DA JE NIZ POVRATNA VREDNOST  runQuery-JA
           // JA OCEKUJEM I ZELIM SAMO NULTI CLAN, TAK ODA SAM U OBA SLUCAJA RESTRUKTURIRAO NIZ-OVE
-          const [blogPostPrev] = await context.nodeModel.runQuery({
+          // USTVARI NIJE MOGUCE RETRUKTURIRATI NIZOVE
+          const blogPostPrevArr = await context.nodeModel.runQuery({
             type: "BlogPostPage",
             query: {
               filter: {
@@ -406,7 +407,7 @@ exports.createResolvers = ({ createResolvers }) => {
             },
           });
 
-          const [blogPostNext] = await context.nodeModel.runQuery({
+          const blogPostNextArr = await context.nodeModel.runQuery({
             type: "BlogPostPage",
             query: {
               filter: {
@@ -416,12 +417,18 @@ exports.createResolvers = ({ createResolvers }) => {
             },
           });
 
-          console.log({ blogPostPrev, blogPostNext });
+          // console.log({ blogPostPrev, blogPostNext });
 
           // DAKLE NEKADA KAO STO ZNAS NIJE PRONADJENO NISTA U NIZU
           // OVO JE MOJ NACIN DA TO HANDLE-UJEM
-          const prevPagePath = blogPostPrev ? blogPostPrev.path : null;
-          const nextPagePath = blogPostNext ? blogPostNext.path : null;
+          const prevPagePath =
+            blogPostPrevArr && blogPostPrevArr[0]
+              ? blogPostPrevArr[0].path
+              : null;
+          const nextPagePath =
+            blogPostNextArr && blogPostNextArr[0]
+              ? blogPostNextArr[0].path
+              : null;
 
           return {
             prevPagePath,
