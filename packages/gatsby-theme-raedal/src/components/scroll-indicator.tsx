@@ -133,9 +133,9 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
           display: `${pigDisapear ? "none" : "block"}`,
         }}
       />
-      <LeftArrow />
+      {/* <LeftArrow /> */}
       <Pig ref={resizingDivRef} /* leftPercents={indicatorWidthPercent} */ />
-      <RightArrow />
+      {/* <RightArrow /> */}
       <div
         ref={resizingDivRef}
         // data-indicatorPercents={`${indicatorWidthPercent}`}

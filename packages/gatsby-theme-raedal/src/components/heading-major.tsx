@@ -14,7 +14,15 @@ const HeadingMajor: FunctionComponent = () => {
     blogPostContext
   );
   const { title, themeColor } = seo;
-  const { icon, path } = groupPage;
+
+  let icon;
+  let path;
+
+  if (groupPage) {
+    const { icon: ic, path: pa } = groupPage;
+    icon = ic;
+    path = pa;
+  }
 
   return (
     <section
@@ -169,9 +177,11 @@ const HeadingMajor: FunctionComponent = () => {
           <time> {createdAt}</time>
         </h4>
         {isUpdated ? <div className="mark-line" /> : null}
-        <Link to={path}>
-          <img src={`data:image/svg+xml;base64,${icon}`} alt="group-icon" />
-        </Link>
+        {!icon || !path ? null : (
+          <Link to={path}>
+            <img src={`data:image/svg+xml;base64,${icon}`} alt="group-icon" />
+          </Link>
+        )}
         {isUpdated ? <div className="mark-line" /> : null}
         {isUpdated ? (
           <h4 className="updated">
