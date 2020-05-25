@@ -58,3 +58,56 @@ A ONO STO TREBA DA BUDE OUTPUTED IS RESOLVERA JE OVAKAV OBJEKAT:
 
 ***
 
+# :four: VREDNOSTI KOJE CU KORISTITI, KAO ARGUMENTE PRI PISANJU QUERY-JA U RESOLVER-U
+
+U ODNOSU NA OVE VREDNOSTI CU PRAVITI DVA QUERY-JA U RESOLVER-U
+
+```js
+
+// ZA PREV PAGE
+
+source.groupPage.name
+
+(source.ordinalG - 1)
+
+```
+
+```js
+
+// ZA NEXT PAGE
+
+source.groupPage.name
+
+(source.ordinalG + 1)
+
+```
+
+# :five: PISANJE QUERY-JA U RESOLVER-U ZA `prevAndNextPagePath` FIELD NA `BlogPostPage` TYPE-U
+
+IAKO NECES KORISTITI GRAPHQL FORMAT DA NAPISES QUERY-JE, VEC TO RADIS U JAVASCRIPTU, TI IPAK NAPRAVI I DEVELOPUJ QUERY U Graphiql-U
+
+DAKLE TREBA TI QUERY, KOJI CE IMATI DVA ARGUMENTA
+
+$groupPageName, $
+
+OSTALO TI JE JASNO KAK ODA FORMIRAS
+
+EVO POGLEDAJ KAKAV SAM QUERY NAPRAVIO
+
+```php
+query TakePath($ordinalG: Int!, $groupName: String!){
+  blogPostPage(groupPage: {name: {eq: $groupName}}, ordinalG: {eq: $ordinalG}){
+    path
+  }
+}
+```
+
+ARGUMENTI
+
+```json
+{"ordinalG": 2, "groupName": "Typescript"}
+```
+
+A KAKO SAM OVAJ QUERY REKREIRAO U JAVASCRIPT-U (I TO DVA PUTA JER QUERY-UJEM ZA DVA NODE-A), POGLEDAJ U `createResolvers` HOOK-U node FAJLU
+
+
