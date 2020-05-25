@@ -387,12 +387,12 @@ exports.createResolvers = ({ createResolvers }) => {
       prevAndNextPagePath: {
         type: "PrevAndNextPagePath!",
         resolve: (source, args, context, next) => {
-          const a;
+          console.log(source);
           return {
             prevPagePath: "neki path",
-            nextPagePath: "neki drugi path"
-          }
-        }
+            nextPagePath: "neki drugi path",
+          };
+        },
       },
       // === !== === !== === !== === !==
 
@@ -417,7 +417,7 @@ exports.createResolvers = ({ createResolvers }) => {
           const createdString = `${createdDate.getFullYear()}-${createdDate.getMonth()}-${createdDate.getDate()}`;
           const updatedString = `${updatedDate.getFullYear()}-${updatedDate.getMonth()}-${updatedDate.getDate()}`;
 
-          console.log({ createdString, updatedString });
+          // console.log({ createdString, updatedString });
 
           // DAKLE AKO SU STRINGOVI ISTI, NISTA NIJE UPDATED
 

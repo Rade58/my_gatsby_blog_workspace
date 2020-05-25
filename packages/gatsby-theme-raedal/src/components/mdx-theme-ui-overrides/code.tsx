@@ -23,7 +23,7 @@ import {
   // Prism,
   Language,
   PrismTheme,
-  RenderProps,
+  RenderProps, // !== === !== ===   MORAS DA IZVEZES OVAJ TYPE (DOK NE NADJES BOLJE RESENJE)
   // DefaultProps,
 } from "prism-react-renderer";
 // GORNJI RenderProps  SAM UVEZAO NA HACKABLE NACIN TAK OSTO SAM OTISAO
