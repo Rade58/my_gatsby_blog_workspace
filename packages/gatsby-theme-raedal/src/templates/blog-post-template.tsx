@@ -14,8 +14,16 @@ import { SeoI } from "../seo/seo";
 
 import { PageKeywords } from "./group-page-template";
 
-// A SADA CU KREIRATI JEDAN TYPE VEZAN ZA GROUP PAGE
-// IMACE DAKEL SAMO ON OSTA M ITREBA I ZATO NECU UVOZITI ONAJ VEC POSTOJECI INTERFACE
+// === !== === !== === !== === !== === !== === !== === !== === !==
+// KREIRACU TYPESCRIPT INTERFACE, KOJ ISE ODNOSI NA ONO STO SE QUERY-UJE SA FIELDA
+//                                                                  prevAndNextPagePath
+export interface PrevAndNextPagePathI {
+  prevPagePath: string;
+  nextPagePath: string;
+}
+//
+// === !== === !== === !== === !== === !== === !== === !== === !==
+
 export interface GroupPagePickedI {
   name: string;
   path: string;
@@ -40,6 +48,9 @@ interface BlogPostTemplateProps {
   pageContext: PageContextI;
   data: {
     page: {
+      // ZELIM OVDE SLEDECI FIELD
+      prevAndNextPagePath: PrevAndNextPagePathI;
+
       // TYPE-UJEM, JOS DVA NOVA FIELD-A, ZA KOJIMA CU QUERY-EOVATI
       createdAt: string;
       isUpdated: boolean;
@@ -64,7 +75,14 @@ interface BlogPostTemplateProps {
 export const query = graphql`
   query TakeBlogPostPagzus($id: String) {
     page: blogPostPage(id: { eq: $id }) {
-      # QUERY-UJEM ZA JOS DVA FIELD-A
+      # QUERY-UJEM I ZA SLEDECIM FIELD-OM, I UZIMAM OBA FIELD-A IZ NJEGA
+      prevAndNextPagePath {
+        prevPagePath
+        nextPagePath
+      }
+      #
+
+      #
       createdAt(formatString: "MMM Do, Y") # A OVO JE FORMAT KOJI SAM IZABRAO
       isUpdated
       #
@@ -137,6 +155,8 @@ const BlogPostTemplate: FunctionComponent<BlogPostTemplateProps> = ({
   // IZDVOJICU I      groupPage      I          allBlogKeywords
 
   const {
+    //
+    prevAndNextPagePath, // IZDVAJAM I OVO
     // IZDVAJAM, JOS DVA FIELD-A
     createdAt,
     isUpdated,
@@ -159,6 +179,9 @@ const BlogPostTemplate: FunctionComponent<BlogPostTemplateProps> = ({
         createdAt,
         isUpdated,
         //
+        prevAndNextPagePath,
+        // PROSLEDJUJEM I OVO (I DA TYPESCRIPT PRESTANE DA YELL-UJE NA MENE IDEM DA PROSIRIM I PROPS TYPE-OVE OVE KOMPONENTE)
+
         body,
         title,
         updated,

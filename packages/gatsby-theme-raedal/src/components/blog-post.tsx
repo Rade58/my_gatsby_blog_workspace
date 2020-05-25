@@ -17,12 +17,18 @@ import HeaderStateProvider from "../context_n_reducers/context_providers/headerS
 
 // UVESCU TYPE-OVE ZA       groupPage      I ZA        allBlogKeywords
 
-import { Headings, GroupPagePickedI } from "../templates/blog-post-template"; // OVDE SAM SAMO UVEZAO TYPE ZA
+import {
+  Headings,
+  GroupPagePickedI,
+  PrevAndNextPagePathI,
+} from "../templates/blog-post-template"; // OVDE SAM SAMO UVEZAO TYPE ZA
 //                                                              groupPage  (TO JE ONAJ STO SAM SAMO PICK=OVAO STA M ITREBA, JER MI NE TREBA SVE)
 // UVOZIM DAKLE ONAJ VEZAN ZA KEYWORDS
 import { PageKeywords } from "../templates/group-page-template";
 
 interface PageProp extends SeoI {
+  // DODAO I OVO
+  prevAndNextPagePath: PrevAndNextPagePathI; // TYPESCRIPT VISE NE YELL-UJE NA TEBE
   // JOS DVA NOVA PROP TYPE-A, PRE NEGO STO ODEM DA DODAJEM NOVE TYPE-OVE I DEFINISEM
   // ODGOVARAJUCE DEFAULT VREDNOSTI U CONTEXT-U
   createdAt: string;
@@ -47,6 +53,7 @@ const BlogPost: FunctionComponent<{
   page: PageProp;
 }> = ({
   page: {
+    prevAndNextPagePath,
     //
     createdAt,
     isUpdated,
@@ -84,6 +91,7 @@ const BlogPost: FunctionComponent<{
   return (
     <BlogPostStateProvider
       value={{
+        prevAndNextPagePath,
         reducedBlogPostState,
         blogPostDispatch,
         headings,

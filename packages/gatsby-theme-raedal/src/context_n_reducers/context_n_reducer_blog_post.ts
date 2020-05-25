@@ -7,7 +7,12 @@ import {
 } from "react";
 
 // UVOZIM DVA TYPE-A, KOJA MI TREBAJU (HeadingI JE TU BIO OD RANIJE)
-import { HeadingI, GroupPagePickedI } from "../templates/blog-post-template";
+import {
+  HeadingI,
+  GroupPagePickedI,
+  //
+  PrevAndNextPagePathI,
+} from "../templates/blog-post-template";
 import { PageKeywords } from "../templates/group-page-template";
 //
 
@@ -74,6 +79,8 @@ export type BlogPostContDispatch = Dispatch<{
 }>;
 
 export interface ContextBlogPostStateI {
+  prevAndNextPagePath: PrevAndNextPagePathI;
+
   blogPostDispatch: BlogPostContDispatch;
 
   reducedBlogPostState: BlogPostStateI;
@@ -99,6 +106,12 @@ export interface ContextBlogPostStateI {
 
 // OVO JE SAMO DEFAULT STATE I REDUCER-A NEMA JOS
 export const blogPostContext: Context<ContextBlogPostStateI> = createContext({
+  //
+  prevAndNextPagePath: {
+    nextPagePath: "",
+    prevPagePath: "",
+  },
+
   // DAKLE OVE DVE VREDNOSTI SU SAM ODEFAULT-OVI
 
   createdAt: " ",
