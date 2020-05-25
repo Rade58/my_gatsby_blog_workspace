@@ -25,3 +25,5 @@ DVE KOMPONENTE SAM NEMASTOVITO NAZVAO
 I
 
 **`left-arrow.tsx`** (packages/gatsby-theme-raedal/src/components/left-arrow.tsx)
+
+POSTO SAM IH KREIRAO MOGU IH ISPROBATI
