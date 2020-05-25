@@ -386,11 +386,46 @@ exports.createResolvers = ({ createResolvers }) => {
       // === !== === !== === !== === !==
       prevAndNextPagePath: {
         type: "PrevAndNextPagePath!",
-        resolve: (source, args, context, next) => {
-          console.log(source);
+        resolve: async (source, args, context, next) => {
+          const { groupPage, ordinalG } = source;
+          const { name } = groupPage;
+
+          if (!name && !ordinalG) {
+            return { prevPagePath: null, nextPagePath: null };
+          }
+
+          // VODI RACUNA DA JE NIZ POVRATNA VREDNOST  runQuery-JA
+          // JA OCEKUJEM I ZELIM SAMO NULTI CLAN, TAK ODA SAM U OBA SLUCAJA RESTRUKTURIRAO NIZ-OVE
+          const [blogPostPrev] = await context.nodeModel.runQuery({
+            type: "BlogPostPage",
+            query: {
+              filter: {
+                groupPage: { name: { eq: name } },
+                ordinalG: { eq: ordinalG - 1 },
+              },
+            },
+          });
+
+          const [blogPostNext] = await context.nodeModel.runQuery({
+            type: "BlogPostPage",
+            query: {
+              filter: {
+                groupPage: { name: { eq: name } },
+                ordinalG: { eq: ordinalG + 1 },
+              },
+            },
+          });
+
+          console.log({ blogPostPrev, blogPostNext });
+
+          // DAKLE NEKADA KAO STO ZNAS NIJE PRONADJENO NISTA U NIZU
+          // OVO JE MOJ NACIN DA TO HANDLE-UJEM
+          const prevPagePath = blogPostPrev ? blogPostPrev.path : null;
+          const nextPagePath = blogPostNext ? blogPostNext.path : null;
+
           return {
-            prevPagePath: "neki path",
-            nextPagePath: "neki drugi path",
+            prevPagePath,
+            nextPagePath,
           };
         },
       },
