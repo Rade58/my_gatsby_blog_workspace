@@ -108,8 +108,17 @@ exports.createSchemaCustomization = ({ actions }) => {
   // GDE CES DEFINISATI DEFAULT ZA        createdAt
   // __ --> __ __> __ => ==>
 
+  // === !== === !== === !== === !== === !== === !==
+  // DODACI       ordinalG        TYPE ODMAH NA POCETAK
+  // TIPE CE MU BITI    Int
+  // I NARAVNO DRUGI KREIRACU FIELD       prevAndNextPagePath
+  // I ZA TA JFIELD CU KREIRATI, POSEBAN TYPE
+
   createTypes(`
     type BlogPostPage implements Node @dontInfer {
+
+      ordinalG: Int!
+      prevAndNextPagePath: PrevAndNextPagePath!
 
       createdAt: Date! @dateformat
       isUpdated: Boolean!
@@ -178,6 +187,12 @@ exports.createSchemaCustomization = ({ actions }) => {
       keywordBorderColor: String!
     }
 
+    type PrevAndNextPagePath {
+      prevPagePath: String
+      nextPagePath: String
+    }
+
+
   `);
 };
 // ------------------------TEKST OD RANIJE
@@ -231,6 +246,8 @@ exports.onCreateNode = (
     if (node.frontmatter.slug) slug = `/${node.frontmatter.slug}`;
 
     const {
+      // IZDVAJAM       ordinalG
+      ordinalG,
       // EVO IZDVOJIO SAM I       createdAt     (SADA SAM OTREBA DA GA UPOTREBIS, KAO NOVI FIELD, PRI KREIRANJU NODE-A)
       createdAt,
       //
@@ -247,6 +264,10 @@ exports.onCreateNode = (
       // CAK I OVA FUNKCIJA TRIGGER-UJE HOOK U CIJEM SAM OBIMU (INFO OD RANIJE)
       id,
       title,
+
+      // EVO ZADACU I ordinalG (ALI ZADACU I FIELD   prevAndNextPagePath   ZA KOJI CU, UBRZO I, KREIRATI   **  RESOLVER-A  **   )
+      ordinalG,
+      prevAndNextPagePath: {}, // DAKLE PROSLEDJUJEM MU BEZVEZE NESTO (PRAZAN OBJEKAT) (NIJE N IBITNO, JER KAO STO REKOH, KREIRACU RESOLVER-A)
       // EVO OVDE CU DODATI       createdAt     FIELD
       createdAt,
       // A ONAJ FIELD, KOJI CE SE MORATI RESOLVE-OVATI JESTE        isUpdated
