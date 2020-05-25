@@ -17,6 +17,8 @@ import {
   $_useReducerState,
   ACTION_TYPES_ENUM,
 } from "../context_n_reducers/context_n_reducer_header";
+import LeftArrow from "./left-arrow";
+import RightArrow from "./right-arrow";
 
 //
 // import { blogContext, ACTION_TYPES_ENUM } from "./layout";
@@ -131,8 +133,9 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
           display: `${pigDisapear ? "none" : "block"}`,
         }}
       />
+      <LeftArrow />
       <Pig ref={resizingDivRef} /* leftPercents={indicatorWidthPercent} */ />
-
+      <RightArrow />
       <div
         ref={resizingDivRef}
         // data-indicatorPercents={`${indicatorWidthPercent}`}
