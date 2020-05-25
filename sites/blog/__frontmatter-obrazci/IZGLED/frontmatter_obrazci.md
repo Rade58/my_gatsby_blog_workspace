@@ -1,5 +1,6 @@
 # ZA BLOG POST
 ---
+ordinalG: 8 (MOZE BITI OD NULA (UKLJUCUJUCI NULU) PA NADALJE
 createdAt: "2020-05-21T14:46:02.740Z"
 title: "Neki title"
 description: "neki description"
