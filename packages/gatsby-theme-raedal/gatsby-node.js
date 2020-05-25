@@ -381,8 +381,22 @@ exports.createResolvers = ({ createResolvers }) => {
 
   createResolvers({
     BlogPostPage: {
-      // EVO ZADAJEM          isUpdated       FIELD  (NARAVNO, MOGU DA STAMPAM I VIDIM KAKO SVE IZGLEDA)
+      // === !== === !== === !== === !==
+      // ZADAJEM RESOLVER-A ZA        prevAndNextPagePath  FIELD
+      // === !== === !== === !== === !==
+      prevAndNextPagePath: {
+        type: "PrevAndNextPagePath!",
+        resolve: (source, args, context, next) => {
+          const a;
+          return {
+            prevPagePath: "neki path",
+            nextPagePath: "neki drugi path"
+          }
+        }
+      },
+      // === !== === !== === !== === !==
 
+      // EVO ZADAJEM          isUpdated       FIELD  (NARAVNO, MOGU DA STAMPAM I VIDIM KAKO SVE IZGLEDA)
       isUpdated: {
         type: "Boolean!",
         resolve: (source, args, context, info) => {
