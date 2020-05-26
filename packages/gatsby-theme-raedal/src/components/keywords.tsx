@@ -46,7 +46,11 @@ const Keywords: FunctionComponent = () => {
           width: 100%;
           align-self: flex-end;
 
-          display: flex;
+          display: none;
+
+          @media screen and (min-width: 1100px) {
+            display: flex;
+          }
 
           & div.left-arrow,
           & div.right-arrow {

@@ -37,6 +37,10 @@ const Main: FunctionComponent = ({ children }) => {
 
         /* width: 100vw; */
 
+        /* === !== === !== === === !== === !== === */
+        
+        /* === !== === !== === === !== === !== === */
+
         grid-template-columns: repeat(10, minmax(0, 1fr));
 
         grid-template-areas:
@@ -143,12 +147,14 @@ const Main: FunctionComponent = ({ children }) => {
             position: sticky;
             /* top: 80vh; */
             top: 14vh;
+            display: none;
           }
 
           & > div.right-arrow {
             position: sticky;
             /* top: 80vh; */
             top: 14vh;
+            display: none;
           }
         }
       `}

@@ -14,7 +14,7 @@ const LeftArrow: FunctionComponent = () => {
   const { prevPagePath } = prevAndNextPagePath;
 
   return (
-    <div className="left-arrow" id="right-arr">
+    <div className="arr-nav left-arrow" id="right-arr">
       {!prevPagePath ? (
         <button type="button" disabled>
           x
