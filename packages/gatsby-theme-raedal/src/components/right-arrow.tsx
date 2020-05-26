@@ -14,14 +14,11 @@ const RightArrow: FunctionComponent = () => {
   const { nextPagePath } = prevAndNextPagePath;
 
   return (
-    <div
-      className="left-arrow"
-      css={css`
-        display: inline;
-      `}
-    >
+    <div className="right-arrow">
       {!nextPagePath ? (
-        <br />
+        <button type="button" disabled>
+          x
+        </button>
       ) : (
         <Link to={nextPagePath}>Next Tutorial &rarr;</Link>
       )}

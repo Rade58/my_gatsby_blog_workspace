@@ -10,6 +10,10 @@ import TableOfHeadings from "./table-of-headers";
 // SADA UVOZIM Keyword KOMPONENTU, KOJ UZELIM DA RENDER-UJEM KAO DEO GRID-A
 import Keywords from "./keywords";
 
+// UVOZIM DVA ARROW-A
+import LeftArrow from "./left-arrow";
+import RightArrow from "./right-arrow";
+
 // LOREM IPSUM
 // import LoremIpsum from "./dev-utility/lorem-ipsum";
 //
@@ -37,7 +41,8 @@ const Main: FunctionComponent = ({ children }) => {
           "a a a a a a a a a a"
           "t t t t t t t t t t"
           "k k k k k k k k k k"
-          "s s s s s s s s s s";
+          "s s s s s s s s s s"
+          "l r . . . . . . . .";
 
         /*==============================*/
         & section.tofh2 {
@@ -65,6 +70,17 @@ const Main: FunctionComponent = ({ children }) => {
           }
         }
 
+        & div.left-arrow {
+          grid-area: l;
+
+          border: tomato solid 4px;
+        }
+
+        & div.right-arrow {
+          grid-area: r;
+          border: olive solid 4px;
+        }
+
         /*==============================*/
 
         @media screen and (min-width: 918px) {
@@ -72,7 +88,7 @@ const Main: FunctionComponent = ({ children }) => {
             " a a a a a a a a k k"
             " a a a a a a a a s s"
             " a a a a a a a a t t"
-            " a a a a a a a a . ."
+            " a a a a a a a a l r"
             " a a a a a a a a . .";
 
           & section.tofh2 {
@@ -94,7 +110,7 @@ const Main: FunctionComponent = ({ children }) => {
           grid-template-areas:
             " k k a a a a a a s s"
             " k k a a a a a a t t"
-            " . . a a a a a a . ."
+            " l r a a a a a a . ."
             " . . a a a a a a . ."
             " . . a a a a a a . .";
 
@@ -119,6 +135,16 @@ const Main: FunctionComponent = ({ children }) => {
           & section.social-posting {
             border: yellow solid 2px;
           }
+
+          & div.left-arrow {
+            position: sticky;
+            top: 80vh;
+          }
+
+          & div.right-arrow {
+            position: sticky;
+            top: 60vh;
+          }
         }
       `}
     >
@@ -127,6 +153,8 @@ const Main: FunctionComponent = ({ children }) => {
       <TableOfHeadings />
       {/* EVO OVDE MOZES RENDER-OVATI Keywords */}
       <Keywords />
+      <LeftArrow />
+      <RightArrow />
       {/* <section className="adds">
         <h4>Adds</h4>
         <div>
