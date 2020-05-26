@@ -14,13 +14,23 @@ const RightArrow: FunctionComponent = () => {
   const { nextPagePath } = prevAndNextPagePath;
 
   return (
-    <div className="right-arrow">
+    <div className="right-arrow" id="right-arr">
       {!nextPagePath ? (
         <button type="button" disabled>
           x
         </button>
       ) : (
-        <Link to={nextPagePath}>Next Tutorial &rarr;</Link>
+        // <Link to={nextPagePath}>Next Tutorial &rarr;</Link>
+        <Link to={nextPagePath}>
+          <span
+            role="img"
+            aria-label="next tutorial"
+            aria-labelledby="right-arr"
+          >
+            Next Tutorial
+          </span>
+          ➡️
+        </Link>
       )}
     </div>
   );

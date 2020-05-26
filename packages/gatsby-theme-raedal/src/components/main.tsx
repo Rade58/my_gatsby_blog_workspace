@@ -143,7 +143,7 @@ const Main: FunctionComponent = ({ children }) => {
 
           & div.right-arrow {
             position: sticky;
-            top: 60vh;
+            top: 80vh;
           }
         }
       `}
