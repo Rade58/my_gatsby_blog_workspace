@@ -26,7 +26,7 @@ import {
 
 // import { $_useBlogPostReducerState } from "../context_n_reducers/context_n_reducer_blog_post";
 
-const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props) {
+const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
   const { reducedHeaderState, headerDispatch } = useContext(
     $_useReducerState.headerContext
   );
@@ -44,6 +44,10 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props) {
   const [currentScrollPercent, setCurrentScrollPercent] = useState(0);
 
   // ============================================================
+  // UKLONI PIG ANIMATION I SCROLL INDICATOR, AKO NEMA STA ILI NEMA MNOGO TOGA DA SE SCROLL-UJE
+
+  const [useScrollAnimation, setUseScrollAnimation] = useState(true);
+
   // ============================================================
 
   const windowRef = useRef<Window>();
@@ -64,6 +68,18 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props) {
   // ------------------------------------------------------
 
   // ------------------------------------------------------
+
+  useEffect(() => {
+    if (windowRef.current && bodyRef.current) {
+      // console.log( / windowRef.current.innerHeight);
+      // console.log(windowRef.current.scrol, windowRef.current.innerHeight);
+      if (bodyRef.current.scrollHeight / windowRef.current.innerHeight < 2) {
+        setUseScrollAnimation(false);
+      } else {
+        setUseScrollAnimation(true);
+      }
+    }
+  }, [windowRef, bodyRef]);
 
   const timerId1 = useRef<NodeJS.Timeout>();
   const timerId2 = useRef<NodeJS.Timeout>();
@@ -229,6 +245,9 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props) {
   return (
     <Fragment>
       <div
+        style={{
+          display: useScrollAnimation ? "block" : "none",
+        }}
         className="konti"
         css={css`
         /* transform: scale(4) translateY(200);
@@ -347,13 +366,12 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props) {
         `}
         // data-indicatorPercents={`${indicatorWidthPercent}`}
         className="resizer"
-        style={
-          {
-            // width: `${currentScrollPercent}%`,
-            // display: `${pigDisapear ? "none" : "block"}`,
-            // border: "red solid 8px",
-          }
-        }
+        style={{
+          display: useScrollAnimation ? "block" : "none",
+          // width: `${currentScrollPercent}%`,
+          // display: `${pigDisapear ? "none" : "block"}`,
+          // border: "red solid 8px",
+        }}
       />
     </Fragment>
   );
