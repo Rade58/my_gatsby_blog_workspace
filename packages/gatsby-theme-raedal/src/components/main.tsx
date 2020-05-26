@@ -48,17 +48,17 @@ const Main: FunctionComponent = ({ children }) => {
           ". . . . . . . . . .";
 
         /*==============================*/
-        & section.tofh2 {
+        & > section.tofh2 {
           grid-area: t;
         }
-        & section.keywords {
+        & > section.keywords {
           grid-area: k;
         }
-        & section.social-posting {
+        & > section.social-posting {
           grid-area: s;
         }
 
-        & article {
+        & > article {
           &.post-article {
             grid-area: a;
             /* width: 60vw; */
@@ -73,15 +73,15 @@ const Main: FunctionComponent = ({ children }) => {
           }
         }
 
-        & div.left-arrow {
+        & > div.left-arrow {
           grid-area: l;
 
-          border: tomato solid 4px;
+          /* border: tomato solid 4px; */
         }
 
-        & div.right-arrow {
+        & > div.right-arrow {
           grid-area: r;
-          border: olive solid 4px;
+          /* border: olive solid 4px; */
         }
 
         /*==============================*/
@@ -94,17 +94,17 @@ const Main: FunctionComponent = ({ children }) => {
             " a a a a a a a a l r"
             " a a a a a a a a . .";
 
-          & section.tofh2 {
+          & > section.tofh2 {
             /* bottom: 12vh; */
             position: sticky;
             /* top: 12px; */
             border: tomato solid 1px;
             top: 50vh;
           }
-          & section.keywords {
+          & > section.keywords {
             position: sticky;
           }
-          & section.social-posting {
+          & > section.social-posting {
             position: sticky;
           }
         }
@@ -113,11 +113,11 @@ const Main: FunctionComponent = ({ children }) => {
           grid-template-areas:
             " k k a a a a a a s s"
             " k k a a a a a a t t"
-            " l r a a a a a a . ."
+            " . . a a a a a a . ."
             " . . a a a a a a . ."
             " . . a a a a a a . .";
 
-          & section.tofh2 {
+          & > section.tofh2 {
             position: sticky;
 
             top: 38vh;
@@ -129,23 +129,23 @@ const Main: FunctionComponent = ({ children }) => {
             /* align-self: stretch; */
           }
 
-          & section.keywords {
+          & > section.keywords {
             position: sticky;
 
-            top: 14vh;
+            top: 28vh;
           }
 
-          & section.social-posting {
+          & > section.social-posting {
             border: yellow solid 2px;
           }
 
-          & div.left-arrow {
+          & > div.left-arrow {
             position: sticky;
             /* top: 80vh; */
             top: 14vh;
           }
 
-          & div.right-arrow {
+          & > div.right-arrow {
             position: sticky;
             /* top: 80vh; */
             top: 14vh;
