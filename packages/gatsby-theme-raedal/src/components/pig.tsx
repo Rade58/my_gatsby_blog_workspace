@@ -120,24 +120,6 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props) {
           if (bodyHeightRef.current !== bodyRef.current.scrollHeight) {
             bodyHeightRef.current = bodyRef.current.scrollHeight;
           }
-
-          if (bodyHeightRef.current) {
-            const scrollIndicatorPercents =
-              (100 * windowRef.current.scrollY) /
-              (bodyHeightRef.current - windowRef.current.innerHeight);
-
-            // eslint-disable-next-line
-
-            // if (resizingDivRef.current) {
-            // KADA PRITISNEM ONAJ HEADER, KOJI ONDA POSTAJE ACTIVE
-            // I JUMP-UJE STRANICU DA SE IZRAVNA SA NASLOVOM
-            // OVO DOLE POSTAJE NO OP
-
-            /* resizingDivRef.current.style.width = `${
-                scrollIndicatorPercents >= 0.8 ? scrollIndicatorPercents : 0
-              }%`; */
-            // }
-          }
         }
         if (windowRef.current && bodyRef.current && bodyRef.current.onscroll) {
           headerDispatch({
