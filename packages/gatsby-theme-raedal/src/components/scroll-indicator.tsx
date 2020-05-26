@@ -60,7 +60,7 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
 
   // const { pigDisapear } = reducedBlogPostState;
 
-  const resizingDivRef = useRef<HTMLDivElement>(null);
+  // const resizingDivRef = useRef<HTMLDivElement>(null);
 
   const { reducedHeaderState, headerDispatch } = useContext(
     $_useReducerState.headerContext
@@ -133,17 +133,8 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
         }}
       />
       {/* <LeftArrow /> */}
-      <Pig ref={resizingDivRef} /* leftPercents={indicatorWidthPercent} */ />
+      <Pig />
       {/* <RightArrow /> */}
-      <div
-        ref={resizingDivRef}
-        // data-indicatorPercents={`${indicatorWidthPercent}`}
-        className="resizer"
-        style={{
-          width: "0%",
-          // display: `${pigDisapear ? "none" : "block"}`,
-        }}
-      />
     </div>
   );
 };

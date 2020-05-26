@@ -10,6 +10,7 @@ import {
   MutableRefObject,
   useState,
   useRef,
+  Fragment,
 } from "react";
 import { css, keyframes } from "@emotion/core";
 import pigUri from "../ICONS/AJ_using/piggy_sprite.png";
@@ -25,46 +26,25 @@ import {
 
 // import { $_useBlogPostReducerState } from "../context_n_reducers/context_n_reducer_blog_post";
 
-const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
+const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props) {
   const { reducedHeaderState, headerDispatch } = useContext(
     $_useReducerState.headerContext
   );
-
-  /* const {
-    BLOG_POST_ACTION_TYPES_ENUM,
-    blogPostContext,
-  } = $_useBlogPostReducerState;
-
-  const { blogPostDispatch } = useContext(blogPostContext); */
 
   const { pigDisapear, scrolled_class, bodyHeight } = reducedHeaderState;
 
   const [animationStop, setAnimationStop] = useState(true);
 
-  // === !== !== ===    MUTATION OBSERVER STUFF
+  // ============================================================
+  // ============================================================
+  //   DIV REF NOT NEEDED
 
-  const resizingDivRef = ref as MutableRefObject<HTMLDivElement>;
+  // const resizingDivRef = useRef<HTMLDivElement>(null);
 
-  // const [animationStop, setAnimationStop] = useState(true);
+  const [currentScrollPercent, setCurrentScrollPercent] = useState(0);
 
-  // ______________________________
-  // OVO IZBACI
-  // const resizingElementObserver = useRef<MutationObserver>();
-
-  //______________________   READING SCROLL BUT USING REFS
-  // === === === !== !== !== === === ===_______________________________________
-  // === === === !== !== !== === === ===_______________________________________
-
-  // const indicatorPercentRef = useRef<number>(0);
-
-  // -------------------------------------------
-  /* const bodyHeightRef = useRef<number>(0);
-  bodyHeightRef.current = bodyHeight; */
-  // -------------------------------------------
-
-  // const [creatingFactor, setCreatingFactor] = useState(true);
-
-  // _____-----______ REFS FORR BODY AND WINDOW  -------
+  // ============================================================
+  // ============================================================
 
   const windowRef = useRef<Window>();
   const bodyRef = useRef<HTMLElement>();
@@ -101,9 +81,9 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
     }
 
     if (windowRef.current && bodyRef.current) {
-      if (resizingDivRef.current) {
+      /* if (resizingDivRef.current) {
         resizingDivRef.current.style.width = `${0}%`;
-      }
+      } */
 
       windowRef.current.onresize = (e) => {
         if (bodyRef.current) {
@@ -112,6 +92,25 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
       };
 
       bodyRef.current.onscroll = (e) => {
+        // eslint-disable-next-line
+
+        const resizer = document.getElementsByClassName("resizer")[0];
+
+        const scrollIndicatorPercent =
+          (100 * window.scrollY) /
+          (document.body.scrollHeight - window.innerHeight);
+
+        if (resizer && resizer instanceof HTMLElement) {
+          resizer.style.width = `${scrollIndicatorPercent}%`;
+
+          timerId1.current = setTimeout(() => {
+            setAnimationStop(false);
+          }, 1400);
+
+          timerId2.current = setTimeout(() => {
+            setScrollIndicatorWidth(scrollIndicatorPercent);
+          }, 1200);
+        }
         if (
           bodyRef.current &&
           bodyRef.current.clientWidth &&
@@ -126,23 +125,18 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
             const scrollIndicatorPercents =
               (100 * windowRef.current.scrollY) /
               (bodyHeightRef.current - windowRef.current.innerHeight);
-            if (resizingDivRef.current) {
-              // KADA PRITISNEM ONAJ HEADER, KOJI ONDA POSTAJE ACTIVE
-              // I JUMP-UJE STRANICU DA SE IZRAVNA SA NASLOVOM
-              // OVO DOLE POSTAJE NO OP
 
-              timerId1.current = setTimeout(() => {
-                setAnimationStop(false);
-              }, 1400);
+            // eslint-disable-next-line
 
-              timerId2.current = setTimeout(() => {
-                setScrollIndicatorWidth(scrollIndicatorPercents);
-              }, 1200);
+            // if (resizingDivRef.current) {
+            // KADA PRITISNEM ONAJ HEADER, KOJI ONDA POSTAJE ACTIVE
+            // I JUMP-UJE STRANICU DA SE IZRAVNA SA NASLOVOM
+            // OVO DOLE POSTAJE NO OP
 
-              resizingDivRef.current.style.width = `${
+            /* resizingDivRef.current.style.width = `${
                 scrollIndicatorPercents >= 0.8 ? scrollIndicatorPercents : 0
-              }%`;
-            }
+              }%`; */
+            // }
           }
         }
         if (windowRef.current && bodyRef.current && bodyRef.current.onscroll) {
@@ -153,7 +147,7 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
         }
       };
     }
-  }, [windowRef, bodyRef, bodyHeightRef, resizingDivRef]);
+  }, [windowRef, bodyRef, bodyHeightRef]);
 
   // CLEANING ON UNMOUNTING
   useEffect(
@@ -251,9 +245,10 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
   // console.log(pigDisapear);
 
   return (
-    <div
-      className="konti"
-      css={css`
+    <Fragment>
+      <div
+        className="konti"
+        css={css`
         /* transform: scale(4) translateY(200);
         position: absolute;
         z-index: 8; */
@@ -267,103 +262,118 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
         /* width: 80%; */
         /* border: red solid 1px; */
       `}
-      // style={{ display: pigDisapear ? "none" : "block" }}
-    >
-      {/* eslint-disable-next-line */}
-      <div
-        style={{
-          // left: `${leftPercents}%`
-          // transform: `translateX(${leftPercents}%)`,
-          marginLeft: `${scrollIndicatorWidth}%`,
-          transitionProperty: "margin-left",
-          transitionDuration: "4s",
-        }}
-        onTransitionEndCapture={() => {
-          setAnimationStop(true);
-        }}
-        role="img"
-        className="someDiv"
-        css={css`
-          transition-timing-function: ease-out;
-
-          @media screen and (min-width: 918px) {
-            margin-top: -1px;
-
-            width: 53px;
-          }
-
-          /* -------------------------------------------------------------*/
-
-          margin-top: 5.8px;
-
-          width: 42px;
-          /* width: 53px; */
-          /* ''''''''''''' */
-          /* height: 28px; */
-          /* -------------------------------------------------------------*/
-
-          display: inline-block;
-          border: tomato solid 0px;
-          position: absolute;
-
-          & > div.sprite {
-            border: currentColor solid 0px;
-            /* width: calc(100%/19); */
-
-            @media screen and (min-width: 918px) {
-              padding: 18.9px;
-              background-size: 26rem;
-            }
-
-            /* -------------------------------------------------------------*/
-            /* padding: 18.8px; */
-            padding: 14.8px;
-            /* -------------------------------------------------------------*/
-
-            box-sizing: border-box;
-
-            background-color: transparent;
-            background-image: url(${pigUri});
-            background-repeat: no-repeat;
-
-            /* ------------------------------------------------ */
-            /* background-size: 26rem; */
-            background-size: 328px;
-
-            height: 18px;
-            /* ------------------------ */
-            /* ------------------------------------------------- */
-            animation-duration: 0.24s;
-            animation-iteration-count: infinite;
-
-            animation-timing-function: steps(7, end);
-            animation-play-state: paused;
-          }
-        `}
+        // style={{ display: pigDisapear ? "none" : "block" }}
       >
         {/* eslint-disable-next-line */}
         <div
-          className="sprite"
-          onKeyDown={(e) => {
-            if (headerDispatch)
-              headerDispatch({ type: ACTION_TYPES_ENUM.PIG_DISAPEAR });
-          }}
-          onClick={(e) => {
-            if (headerDispatch)
-              headerDispatch({ type: ACTION_TYPES_ENUM.PIG_DISAPEAR });
-          }}
-          sx={{
-            animationName: `${stripski}`,
-            // animationPlayState: "paused",
-          }}
           style={{
-            transform: `rotateY(${angle}deg) translateY(-36px)`,
-            animationPlayState: `${animationStatus}`,
-            display: pigDisapear ? "none" : "block",
+            // left: `${leftPercents}%`
+            // transform: `translateX(${leftPercents}%)`,
+            marginLeft: `${scrollIndicatorWidth}%`,
+            transitionProperty: "margin-left",
+            transitionDuration: "4s",
           }}
-        />
+          onTransitionEndCapture={() => {
+            setAnimationStop(true);
+          }}
+          role="img"
+          className="someDiv"
+          css={css`
+            transition-timing-function: ease-out;
+
+            @media screen and (min-width: 918px) {
+              margin-top: -1px;
+
+              width: 53px;
+            }
+
+            /* -------------------------------------------------------------*/
+
+            margin-top: 5.8px;
+
+            width: 42px;
+            /* width: 53px; */
+            /* ''''''''''''' */
+            /* height: 28px; */
+            /* -------------------------------------------------------------*/
+
+            display: inline-block;
+            border: tomato solid 0px;
+            position: absolute;
+
+            & > div.sprite {
+              border: currentColor solid 0px;
+              /* width: calc(100%/19); */
+
+              @media screen and (min-width: 918px) {
+                padding: 18.9px;
+                background-size: 26rem;
+              }
+
+              /* -------------------------------------------------------------*/
+              /* padding: 18.8px; */
+              padding: 14.8px;
+              /* -------------------------------------------------------------*/
+
+              box-sizing: border-box;
+
+              background-color: transparent;
+              background-image: url(${pigUri});
+              background-repeat: no-repeat;
+
+              /* ------------------------------------------------ */
+              /* background-size: 26rem; */
+              background-size: 328px;
+
+              height: 18px;
+              /* ------------------------ */
+              /* ------------------------------------------------- */
+              animation-duration: 0.24s;
+              animation-iteration-count: infinite;
+
+              animation-timing-function: steps(7, end);
+              animation-play-state: paused;
+            }
+          `}
+        >
+          {/* eslint-disable-next-line */}
+          <div
+            className="sprite"
+            onKeyDown={(e) => {
+              if (headerDispatch)
+                headerDispatch({ type: ACTION_TYPES_ENUM.PIG_DISAPEAR });
+            }}
+            onClick={(e) => {
+              if (headerDispatch)
+                headerDispatch({ type: ACTION_TYPES_ENUM.PIG_DISAPEAR });
+            }}
+            sx={{
+              animationName: `${stripski}`,
+              // animationPlayState: "paused",
+            }}
+            style={{
+              transform: `rotateY(${angle}deg) translateY(-36px)`,
+              animationPlayState: `${animationStatus}`,
+              display: pigDisapear ? "none" : "block",
+            }}
+          />
+        </div>
       </div>
-    </div>
+      <div
+        css={css`
+          width: 0;
+        `}
+        // data-indicatorPercents={`${indicatorWidthPercent}`}
+        className="resizer"
+        style={
+          {
+            // width: `${currentScrollPercent}%`,
+            // display: `${pigDisapear ? "none" : "block"}`,
+            // border: "red solid 8px",
+          }
+        }
+      />
+    </Fragment>
   );
 });
 
