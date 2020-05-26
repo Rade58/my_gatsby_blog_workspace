@@ -262,6 +262,8 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
         /* display: ${pigDisapear ? "none" : "block"}; */
         background-color: tomato;
         width: 100%;
+        /* width: 80%; */
+        /* border: red solid 1px; */
       `}
       // style={{ display: pigDisapear ? "none" : "block" }}
     >
