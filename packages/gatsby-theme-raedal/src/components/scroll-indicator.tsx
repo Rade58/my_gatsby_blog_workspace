@@ -68,8 +68,35 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
 
   const { pigDisapear, scrolled_class, bodyHeight } = reducedHeaderState;
 
+  const windowRef = useRef<Window>();
+  const bodyRef = useRef<HTMLElement>();
+
+  const [useScrollAnimation, setUseScrollAnimation] = useState(true);
+
+  useLayoutEffect(() => {
+    if (!windowRef.current) {
+      windowRef.current = window || document.documentElement;
+    }
+    if (!bodyRef.current) {
+      bodyRef.current = document.body;
+    }
+
+    if (windowRef.current && bodyRef.current) {
+      // console.log( / windowRef.current.innerHeight);
+      // console.log(windowRef.current.scrol, windowRef.current.innerHeight);
+      if (bodyRef.current.scrollHeight / windowRef.current.innerHeight < 2) {
+        setUseScrollAnimation(false);
+      } else {
+        setUseScrollAnimation(true);
+      }
+    }
+  }, [windowRef, bodyRef]);
+
   return (
     <div
+      style={{
+        display: useScrollAnimation ? "block" : "none",
+      }}
       css={css`
         background-image: ${bcImg};
 

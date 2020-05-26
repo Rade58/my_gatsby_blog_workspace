@@ -69,7 +69,7 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
 
   // ------------------------------------------------------
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (windowRef.current && bodyRef.current) {
       // console.log( / windowRef.current.innerHeight);
       // console.log(windowRef.current.scrol, windowRef.current.innerHeight);
