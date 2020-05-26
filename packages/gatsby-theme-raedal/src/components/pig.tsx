@@ -84,6 +84,10 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
   const timerId1 = useRef<NodeJS.Timeout>();
   const timerId2 = useRef<NodeJS.Timeout>();
 
+  const [initialScrollMove, setInitialScrollMove] = useState<"go" | "no-go">(
+    "no-go"
+  );
+
   useLayoutEffect(() => {
     if (!windowRef.current) {
       windowRef.current = window;
@@ -119,13 +123,16 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
         if (resizer && resizer instanceof HTMLElement) {
           resizer.style.width = `${scrollIndicatorPercent}%`;
 
-          timerId1.current = setTimeout(() => {
-            setAnimationStop(false);
-          }, 1400);
+          if (initialScrollMove === "go") {
+            timerId1.current = setTimeout(() => {
+              setAnimationStop(false);
+            }, 1400);
 
-          timerId2.current = setTimeout(() => {
-            setScrollIndicatorWidth(scrollIndicatorPercent);
-          }, 1200);
+            timerId2.current = setTimeout(() => {
+              setScrollIndicatorWidth(scrollIndicatorPercent);
+            }, 1200);
+          }
+          if (initialScrollMove !== "go") setInitialScrollMove("go");
         }
         if (
           bodyRef.current &&
@@ -145,7 +152,7 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
         }
       };
     }
-  }, [windowRef, bodyRef, bodyHeightRef]);
+  }, [windowRef, bodyRef, bodyHeightRef, initialScrollMove]);
 
   // CLEANING ON UNMOUNTING
   useEffect(
