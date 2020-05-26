@@ -31,6 +31,8 @@ const Main: FunctionComponent = ({ children }) => {
   return (
     <main
       css={css`
+        /* position: relative; */
+
         display: grid;
 
         /* width: 100vw; */
@@ -38,11 +40,11 @@ const Main: FunctionComponent = ({ children }) => {
         grid-template-columns: repeat(10, minmax(0, 1fr));
 
         grid-template-areas:
-          "a a a a a a a a a a"
+          "l a a a a a a a a r"
           "t t t t t t t t t t"
           "k k k k k k k k k k"
           "s s s s s s s s s s"
-          "l r . . . . . . . .";
+          ". . . . . . . . . .";
 
         /*==============================*/
         & section.tofh2 {
@@ -138,12 +140,14 @@ const Main: FunctionComponent = ({ children }) => {
 
           & div.left-arrow {
             position: sticky;
-            top: 80vh;
+            /* top: 80vh; */
+            top: 14vh;
           }
 
           & div.right-arrow {
             position: sticky;
-            top: 80vh;
+            /* top: 80vh; */
+            top: 14vh;
           }
         }
       `}
