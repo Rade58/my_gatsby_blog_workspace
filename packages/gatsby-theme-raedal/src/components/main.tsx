@@ -40,7 +40,8 @@ const Main: FunctionComponent = ({ children }) => {
         grid-template-columns: repeat(10, minmax(0, 1fr));
 
         grid-template-areas:
-          "l a a a a a a a a r"
+          ". . . l . . r . . ."
+          "a a a a a a a a a a"
           "t t t t t t t t t t"
           "k k k k k k k k k k"
           "s s s s s s s s s s"
