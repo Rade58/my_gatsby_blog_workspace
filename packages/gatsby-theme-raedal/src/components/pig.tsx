@@ -139,7 +139,9 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
                 setScrollIndicatorWidth(scrollIndicatorPercents);
               }, 1200);
 
-              resizingDivRef.current.style.width = `${scrollIndicatorPercents}%`;
+              resizingDivRef.current.style.width = `${
+                scrollIndicatorPercents >= 0.8 ? scrollIndicatorPercents : 0
+              }%`;
             }
           }
         }

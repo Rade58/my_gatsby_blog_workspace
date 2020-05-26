@@ -115,6 +115,8 @@ const Layout: FunctionComponent<LayoutPropsI> = ({ body }) => {
               padding-top: 56px;
               scroll-behavior: "smooth";
 
+              border: pink solid 4px;
+
               /* OBRATI PAZNJU DA KADA DODAS MARGINE, TI CES IMATO OVERFLOW SCROLL */
               /* ZA BODY STO NIJE DOBRO */
 
