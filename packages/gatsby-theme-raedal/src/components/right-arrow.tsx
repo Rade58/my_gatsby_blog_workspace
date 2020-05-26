@@ -28,7 +28,7 @@ const RightArrow: FunctionComponent = () => {
             aria-labelledby="right-arr"
           >
             Next Tutorial
-          </span>
+          </span>{" "}
           ➡️
         </Link>
       )}

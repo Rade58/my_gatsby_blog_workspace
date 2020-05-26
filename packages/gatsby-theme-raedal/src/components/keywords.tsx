@@ -51,6 +51,13 @@ const Keywords: FunctionComponent = () => {
           & div.left-arrow,
           & div.right-arrow {
             font-size: 14px;
+            & a {
+              color: #e0c8ce;
+
+              &:hover {
+                color: #d3a6c2;
+              }
+            }
           }
 
           & div.left-arrow {

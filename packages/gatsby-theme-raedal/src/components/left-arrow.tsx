@@ -27,7 +27,7 @@ const LeftArrow: FunctionComponent = () => {
             aria-label="previous tutorial"
             aria-labelledby="right-arr"
           >
-            ⬅️
+            ⬅️{" "}
           </span>
           Previous Tutorial
         </Link>
