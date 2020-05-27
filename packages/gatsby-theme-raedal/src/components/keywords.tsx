@@ -20,8 +20,9 @@ const Keywords: FunctionComponent = () => {
   const { blogPostContext } = $_useBlogPostReducerState;
 
   // SAMO MI TREBAJU allBlogKeywords      ALI ZELI MDA PRIKAZEM I IKONU
-  const { allBlogKeywords, groupPage } = useContext(blogPostContext);
+  const { allBlogKeywords, groupPage, seo } = useContext(blogPostContext);
   const { icon, name, path, groupColor } = groupPage;
+  const { themeColor } = seo;
   // SVE OSTALO JE ISTO
 
   return (
@@ -41,7 +42,7 @@ const Keywords: FunctionComponent = () => {
 
         & div.separator {
           width: 28%;
-          border-top: 2px solid ${groupColor};
+          border-top: 2px solid ${themeColor};
           /* transform: translateY(50%); */
           align-self: center;
         }
@@ -50,11 +51,17 @@ const Keywords: FunctionComponent = () => {
           margin-top: 8px;
           display: flex;
           justify-content: center;
-          border: tomato solid 1px;
+          border: tomato solid 0px;
           width: 100%;
+
           & img {
             margin: auto;
             width: 1.4em;
+            transition-property: transform;
+            transition-duration: 0.2s;
+            &:hover {
+              transform: scale(1.2);
+            }
           }
         }
 
@@ -68,6 +75,7 @@ const Keywords: FunctionComponent = () => {
             justify-content: center;
             justify-items: space-between;
             justify-content: space-between;
+            align-content: stretch;
           }
 
           @media screen and (max-width: 1342px) {
@@ -79,6 +87,9 @@ const Keywords: FunctionComponent = () => {
           & div.right-arrow {
             font-size: 14px;
 
+            display: flex;
+            align-items: center;
+
             @media screen and (max-width: 1342px) {
               width: min-content;
             }
@@ -88,6 +99,7 @@ const Keywords: FunctionComponent = () => {
 
               &:hover {
                 color: #d3a6c2;
+                text-decoration-line: underline;
               }
             }
           }
@@ -97,7 +109,7 @@ const Keywords: FunctionComponent = () => {
             /* width: fit-content; */
             /*  */
             /* margin-right: auto; */
-            border: tomato solid 1px;
+            border: tomato solid 0px;
             flex-basis: content;
             flex-grow: 0;
             /* MORACU DA VIDIM KAK OVO DA DEFINISEM NA PRAVI NACIN */
@@ -108,7 +120,7 @@ const Keywords: FunctionComponent = () => {
             /* width: fit-content; */
             /*  */
             /* margin-left: auto; */
-            border: olive solid 1px;
+            border: olive solid 0px;
             flex-basis: content;
             flex-grow: 0;
           }

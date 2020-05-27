@@ -32,22 +32,32 @@ const RightArrow: FunctionComponent = () => {
           }
         }
 
-        & button[disabled] {
-          height: 20px;
-          width: 6rem;
-          font-size: 14px;
-          /* border: olive solid 4px; */
+        & div.disabled {
+          display: flex;
+          /* align-items: center; */
+          /* align-content: stretch; */
           margin: 0;
+          margin-right: 2rem;
+          border: 1px solid crimson;
+          border-radius: 4px;
+          width: 2rem;
+          justify-content: center;
+          /* width: 6rem; */
+          font-size: 14px;
+          user-select: none;
+          /* border: olive solid 4px; */
           padding: 0;
+          color: #a82964;
 
           &:hover {
             cursor: not-allowed;
+            text-decoration-line: line-through;
           }
         }
       `}
     >
       {!nextPagePath ? (
-        <button type="button" disabled>
+        <div className="disabled">
           <span
             role="img"
             aria-label="next tutorial"
@@ -55,7 +65,7 @@ const RightArrow: FunctionComponent = () => {
           >
             x{"        "}➡️
           </span>
-        </button>
+        </div>
       ) : (
         // <Link to={nextPagePath}>Next Tutorial &rarr;</Link>
         <Link to={nextPagePath}>

@@ -32,24 +32,32 @@ const LeftArrow: FunctionComponent = () => {
           }
         }
 
-        & button[disabled] {
-          height: 20px;
-          width: 6rem;
-          font-size: 14px;
-          /* border: olive solid 4px; */
+        & div.disabled {
+          display: flex;
+          /* align-items: center; */
+          /* align-items: center; */
           margin: 0;
+          margin-left: 2rem;
+          border: 1px solid crimson;
+          border-radius: 4px;
+          width: 2rem;
+          justify-content: center;
+          /* width: 6rem; */
+          font-size: 14px;
+          user-select: none;
+          /* border: olive solid 4px; */
           padding: 0;
-
-          vertical-align: center;
+          color: #a82964;
 
           &:hover {
             cursor: not-allowed;
+            text-decoration-line: line-through;
           }
         }
       `}
     >
       {!prevPagePath ? (
-        <button type="button" disabled>
+        <div className="disabled">
           <span
             role="img"
             aria-label="previous tutorial"
@@ -57,7 +65,7 @@ const LeftArrow: FunctionComponent = () => {
           >
             ⬅️{"        "}x
           </span>
-        </button>
+        </div>
       ) : (
         // <Link to={prevPagePath}>&larr; Previous Tutorial</Link>
         <Link to={prevPagePath}>
