@@ -44,7 +44,7 @@ const Keywords: FunctionComponent = () => {
 
         & div.arrows {
           width: 100%;
-          align-self: center;
+          
 
           display: none;
 
@@ -56,6 +56,12 @@ const Keywords: FunctionComponent = () => {
           & div.left-arrow,
           & div.right-arrow {
             font-size: 14px;
+            
+
+            @media screen and (max-width: 1342px) {
+              width: min-content;
+            }
+
             & a {
               color: #e0c8ce;
 
@@ -74,7 +80,6 @@ const Keywords: FunctionComponent = () => {
             flex-basis: content;
             flex-grow: 0;
             /* MORACU DA VIDIM KAK OVO DA DEFINISEM NA PRAVI NACIN */
-            width: min-content;
           }
 
           & div.right-arrow {
@@ -84,6 +89,7 @@ const Keywords: FunctionComponent = () => {
             margin-left: auto;
             border: olive solid 1px;
             flex-basis: content;
+            flex-grow: 0;
           }
         }
       `}

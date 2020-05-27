@@ -20,14 +20,13 @@ const LeftArrow: FunctionComponent = () => {
       css={css`
         & a {
           display: flex;
-          justify-items: flex-end;
-          & span[role="img"] {
-            border: crimson solid 1px;
-            margin-right: 12px;
-          }
+
+          align-items: center;
+          align-content: center;
 
           & span.prev {
-            border: yellow solid 1px;
+            /* border: yellow solid 1px; */
+            margin-left: 8px;
           }
         }
       `}

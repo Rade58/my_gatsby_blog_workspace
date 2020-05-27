@@ -20,6 +20,14 @@ const RightArrow: FunctionComponent = () => {
       css={css`
         & a {
           display: flex;
+
+          align-items: center;
+          align-content: center;
+
+          & span.next {
+            /* border: yellow solid 1px; */
+            margin-right: 8px;
+          }
         }
       `}
     >
