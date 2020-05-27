@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui";
 import { css } from "@emotion/core";
+import { Link } from "gatsby";
 import { useContext, FunctionComponent } from "react";
 
 // NAIME JA SAM CEO OVAJ FAJL PREKOPIRAO (packages/gatsby-theme-raedal/src/components/group-page-components/keywords.tsx)
@@ -18,9 +19,9 @@ import RightArrow from "./right-arrow";
 const Keywords: FunctionComponent = () => {
   const { blogPostContext } = $_useBlogPostReducerState;
 
-  // SAMO MI TREBAJU allBlogKeywords
-  const { allBlogKeywords } = useContext(blogPostContext);
-
+  // SAMO MI TREBAJU allBlogKeywords      ALI ZELI MDA PRIKAZEM I IKONU
+  const { allBlogKeywords, groupPage } = useContext(blogPostContext);
+  const { icon, name, path } = groupPage;
   // SVE OSTALO JE ISTO
 
   return (
@@ -40,6 +41,17 @@ const Keywords: FunctionComponent = () => {
 
         & div.separator {
           width: 100%;
+        }
+
+        & div.icon-image {
+          display: flex;
+          justify-content: center;
+          border: tomato solid 1px;
+          width: 100%;
+          & img {
+            margin: auto;
+            width: 1.4em;
+          }
         }
 
         & div.arrows {
@@ -99,11 +111,21 @@ const Keywords: FunctionComponent = () => {
         }
       `}
     >
-      {allBlogKeywords.map((member) => (
-        <Keyword {...member} key={`${member.keyword}-${member.path}`} />
-      ))}
+      {allBlogKeywords.map((member) => {
+        if (member.keyword !== name) {
+          return (
+            <Keyword {...member} key={`${member.keyword}-${member.path}`} />
+          );
+        }
+        return null;
+      })}
       <div className="separator">
         <hr />
+      </div>
+      <div className="icon-image">
+        <Link to={path}>
+          <img src={`data:image/svg+xml;base64,${icon}`} alt="group-icon" />
+        </Link>
       </div>
       <div className="arrows">
         <LeftArrow />
