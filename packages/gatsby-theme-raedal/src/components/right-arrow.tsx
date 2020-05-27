@@ -46,7 +46,7 @@ const RightArrow: FunctionComponent = () => {
           /* align-items: center; */
           /* align-content: stretch; */
           margin: 0;
-          margin-right: 2rem;
+          margin-right: 1rem;
           border: 1px solid crimson;
           border-radius: 4px;
           width: 4rem;

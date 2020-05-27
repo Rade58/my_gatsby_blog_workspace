@@ -47,7 +47,7 @@ const LeftArrow: FunctionComponent = () => {
           /* align-items: center; */
           /* align-items: center; */
           margin: 0;
-          margin-left: 2rem;
+          margin-left: 1rem;
           border: 1px solid crimson;
           border-radius: 4px;
 
