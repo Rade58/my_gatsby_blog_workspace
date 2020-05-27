@@ -73,6 +73,7 @@ const Keywords: FunctionComponent = () => {
             border: tomato solid 1px;
             flex-basis: content;
             flex-grow: 0;
+            /* MORACU DA VIDIM KAK OVO DA DEFINISEM NA PRAVI NACIN */
             width: min-content;
           }
 
