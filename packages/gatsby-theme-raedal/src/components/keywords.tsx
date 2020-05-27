@@ -44,12 +44,13 @@ const Keywords: FunctionComponent = () => {
 
         & div.arrows {
           width: 100%;
-          align-self: flex-end;
+          align-self: center;
 
           display: none;
 
           @media screen and (min-width: 1100px) {
             display: flex;
+            justify-content: center;
           }
 
           & div.left-arrow,
@@ -65,14 +66,20 @@ const Keywords: FunctionComponent = () => {
           }
 
           & div.left-arrow {
-            width: fit-content;
+            /* mozda i ne trebas koristiti width sa flex item-ima */
+            /* width: fit-content; */
+            /*  */
             margin-right: auto;
             border: tomato solid 1px;
             flex-basis: content;
+            flex-grow: 0;
+            width: min-content;
           }
 
           & div.right-arrow {
-            width: fit-content;
+            /* mozda i ne trebas koristiti width sa flex item-ima */
+            /* width: fit-content; */
+            /*  */
             margin-left: auto;
             border: olive solid 1px;
             flex-basis: content;

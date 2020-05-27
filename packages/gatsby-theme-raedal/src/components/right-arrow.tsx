@@ -30,7 +30,7 @@ const RightArrow: FunctionComponent = () => {
       ) : (
         // <Link to={nextPagePath}>Next Tutorial &rarr;</Link>
         <Link to={nextPagePath}>
-          Next Tutorial
+          <span className="next">Next Tutorial</span>
           <span
             role="img"
             aria-label="next tutorial"
