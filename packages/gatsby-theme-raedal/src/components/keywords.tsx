@@ -57,10 +57,12 @@ const Keywords: FunctionComponent = () => {
           & img {
             margin: auto;
             width: 1.4em;
-            transition-property: transform;
+            transition-property: transform border;
             transition-duration: 0.2s;
+            border-radius: 4px;
             &:hover {
               transform: scale(1.2);
+              border: ${themeColor} solid 1px;
             }
           }
         }
