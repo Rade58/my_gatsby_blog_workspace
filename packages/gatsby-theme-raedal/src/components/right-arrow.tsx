@@ -65,6 +65,7 @@ const RightArrow: FunctionComponent = () => {
 
           & span {
             color: #a82964;
+            opacity: 0.4;
           }
         }
       `}
