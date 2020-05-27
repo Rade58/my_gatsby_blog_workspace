@@ -72,7 +72,7 @@ const Keywords: FunctionComponent = () => {
 
           display: none;
 
-          @media screen and (min-width: 1100px) {
+          @media screen and (min-width: 1200px) {
             display: flex;
             justify-content: center;
             justify-items: space-between;

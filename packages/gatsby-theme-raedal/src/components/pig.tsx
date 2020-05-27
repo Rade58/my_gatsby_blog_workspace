@@ -289,7 +289,7 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
           css={css`
             transition-timing-function: ease-out;
 
-            @media screen and (min-width: 918px) {
+            @media screen and (min-width: 1100px) {
               margin-top: -1px;
 
               width: 53px;
@@ -313,7 +313,7 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
               border: currentColor solid 0px;
               /* width: calc(100%/19); */
 
-              @media screen and (min-width: 918px) {
+              @media screen and (min-width: 1100px) {
                 padding: 18.9px;
                 background-size: 26rem;
               }

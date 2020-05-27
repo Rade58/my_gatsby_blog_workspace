@@ -92,11 +92,11 @@ const Main: FunctionComponent = ({ children }) => {
 
         @media screen and (min-width: 918px) {
           grid-template-areas:
-            " l a a a a a a a a r"
-            " . a a a a a a a a ."
-            " . a a a a a a a a k"
-            " . a a a a a a a a t"
-            " . a a a a a a a a s";
+            " a a a a a a a a k k"
+            " a a a a a a a a s s"
+            " a a a a a a a a t t"
+            " a a a a a a a a l r"
+            " a a a a a a a a . .";
 
           & > section.tofh2 {
             /* bottom: 12vh; */
@@ -131,7 +131,7 @@ const Main: FunctionComponent = ({ children }) => {
           /* === !== === !== */
         }
 
-        @media screen and (min-width: 1100px) {
+        @media screen and (min-width: 1200px) {
           grid-template-areas:
             " k k a a a a a a s s"
             " k k a a a a a a t t"

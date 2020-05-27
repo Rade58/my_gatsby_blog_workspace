@@ -137,7 +137,7 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
           });
         }}
         css={css`
-          @media screen and (min-width: 918px) {
+          @media screen and (min-width: 1100px) {
             height: 38px;
           }
           width: 100%;
