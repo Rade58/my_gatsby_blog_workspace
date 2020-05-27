@@ -137,8 +137,13 @@ const HeadingMajor: FunctionComponent = () => {
             }
 
             & time {
+              display: block;
               white-space: nowrap;
               text-decoration-line: underline;
+
+              @media screen and (min-width: 560px) {
+                display: inline;
+              }
             }
 
             & span {
@@ -157,8 +162,13 @@ const HeadingMajor: FunctionComponent = () => {
             }
 
             & time {
+              display: block;
               white-space: nowrap;
               text-decoration-line: underline;
+
+              @media screen and (min-width: 560px) {
+                display: inline;
+              }
             }
 
             & span {
