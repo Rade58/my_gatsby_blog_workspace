@@ -24,9 +24,26 @@ const LeftArrow: FunctionComponent = () => {
           align-items: center;
           align-content: center;
 
+          text-decoration-line: none;
+
           & span.prev {
             /* border: yellow solid 1px; */
             margin-left: 8px;
+          }
+        }
+
+        & button[disabled] {
+          height: 20px;
+          width: 6rem;
+          font-size: 14px;
+          /* border: olive solid 4px; */
+          margin: 0;
+          padding: 0;
+
+          vertical-align: center;
+
+          &:hover {
+            cursor: not-allowed;
           }
         }
       `}

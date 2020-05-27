@@ -24,9 +24,24 @@ const RightArrow: FunctionComponent = () => {
           align-items: center;
           align-content: center;
 
+          text-decoration-line: none;
+
           & span.next {
             /* border: yellow solid 1px; */
             margin-right: 8px;
+          }
+        }
+
+        & button[disabled] {
+          height: 20px;
+          width: 6rem;
+          font-size: 14px;
+          /* border: olive solid 4px; */
+          margin: 0;
+          padding: 0;
+
+          &:hover {
+            cursor: not-allowed;
           }
         }
       `}

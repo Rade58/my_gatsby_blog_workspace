@@ -21,7 +21,7 @@ const Keywords: FunctionComponent = () => {
 
   // SAMO MI TREBAJU allBlogKeywords      ALI ZELI MDA PRIKAZEM I IKONU
   const { allBlogKeywords, groupPage } = useContext(blogPostContext);
-  const { icon, name, path } = groupPage;
+  const { icon, name, path, groupColor } = groupPage;
   // SVE OSTALO JE ISTO
 
   return (
@@ -40,10 +40,14 @@ const Keywords: FunctionComponent = () => {
         } */
 
         & div.separator {
-          width: 100%;
+          width: 28%;
+          border-top: 2px solid ${groupColor};
+          /* transform: translateY(50%); */
+          align-self: center;
         }
 
         & div.icon-image {
+          margin-top: 8px;
           display: flex;
           justify-content: center;
           border: tomato solid 1px;
@@ -119,13 +123,15 @@ const Keywords: FunctionComponent = () => {
         }
         return null;
       })}
-      <div className="separator">
+      {/* <div className="separator">
         <hr />
-      </div>
+      </div> */}
       <div className="icon-image">
+        <div className="separator" />
         <Link to={path}>
           <img src={`data:image/svg+xml;base64,${icon}`} alt="group-icon" />
         </Link>
+        <div className="separator" />
       </div>
       <div className="arrows">
         <LeftArrow />
