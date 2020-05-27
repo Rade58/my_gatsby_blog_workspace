@@ -72,8 +72,17 @@ const Keywords: FunctionComponent = () => {
 
           display: none;
 
-          @media screen and (min-width: 1200px) {
+          @media screen and (min-width: 918px) {
             display: flex;
+            flex-direction: column;
+            justify-content: center;
+            justify-items: space-between;
+            justify-content: space-between;
+            align-content: stretch;
+          }
+          @media screen and (min-width: 1100px) {
+            display: flex;
+            flex-direction: row;
             justify-content: center;
             justify-items: space-between;
             justify-content: space-between;
@@ -92,9 +101,21 @@ const Keywords: FunctionComponent = () => {
             display: flex;
             align-items: center;
 
-            @media screen and (max-width: 1342px) {
+            @media screen and (max-width: 1402px) {
               width: min-content;
+              border: crimson solid 1px;
             }
+            @media screen and (max-width: 1100px) {
+              width: max-content;
+              /* font-size: 8px; */
+              border: yellow solid 1px;
+            }
+
+            /* width: min-content; */
+
+            /* @media screen and (max-width: 1342px) {
+              width: min-content;
+            } */
 
             & a {
               color: #e0c8ce;
@@ -111,10 +132,15 @@ const Keywords: FunctionComponent = () => {
             /* width: fit-content; */
             /*  */
             /* margin-right: auto; */
-            border: tomato solid 0px;
-            flex-basis: content;
+            /* border: tomato solid 0px; */
+            /* flex-basis: content; */
             flex-grow: 0;
             /* MORACU DA VIDIM KAK OVO DA DEFINISEM NA PRAVI NACIN */
+
+            @media screen and (max-width: 1100px) {
+              align-self: flex-start;
+              margin-bottom: 4px;
+            }
           }
 
           & div.right-arrow {
@@ -122,9 +148,14 @@ const Keywords: FunctionComponent = () => {
             /* width: fit-content; */
             /*  */
             /* margin-left: auto; */
-            border: olive solid 0px;
-            flex-basis: content;
+            /* border: olive solid 0px; */
+            /* flex-basis: content; */
             flex-grow: 0;
+
+            @media screen and (max-width: 1100px) {
+              align-self: flex-end;
+              margin-top: 4px;
+            }
           }
         }
       `}

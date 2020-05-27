@@ -92,10 +92,10 @@ const Main: FunctionComponent = ({ children }) => {
 
         @media screen and (min-width: 918px) {
           grid-template-areas:
-            " a a a a a a a a k k"
             " a a a a a a a a s s"
+            " a a a a a a a a k k"
             " a a a a a a a a t t"
-            " a a a a a a a a l r"
+            " a a a a a a a a . ."
             " a a a a a a a a . .";
 
           & > section.tofh2 {
@@ -107,6 +107,7 @@ const Main: FunctionComponent = ({ children }) => {
           }
           & > section.keywords {
             position: sticky;
+            top: 8vh;
           }
           & > section.social-posting {
             position: sticky;
@@ -119,7 +120,9 @@ const Main: FunctionComponent = ({ children }) => {
             position: sticky;
             top: 80vh;
             font-size: 12px;
-            display: flex;
+            /* display: flex; */
+            /* ipak ne zelim da ih prikazujem na ovoj sirini */
+            display: none;
           }
 
           & > div.right-arrow {
