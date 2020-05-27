@@ -2,7 +2,7 @@
 import { jsx } from "theme-ui";
 import { css } from "@emotion/core";
 import { Link } from "gatsby";
-import { useContext, FunctionComponent } from "react";
+import { useContext, FunctionComponent, Fragment } from "react";
 
 // NAIME JA SAM CEO OVAJ FAJL PREKOPIRAO (packages/gatsby-theme-raedal/src/components/group-page-components/keywords.tsx)
 // A SADA SAMO TREBAM SREDITI JEDAN PATH, I KORISTITI BLOG POST CONTEXT, UMESTO GROUP PAGE CONTEXT-A
@@ -43,7 +43,7 @@ const Keywords: FunctionComponent = () => {
         & div.bigger-separator {
           width: 80%;
           margin: 1rem auto;
-          border-bottom: 2px solid ${themeColor};
+          border-bottom: 1px solid ${themeColor};
         }
 
         & div.separator {
@@ -166,6 +166,41 @@ const Keywords: FunctionComponent = () => {
         }
       `}
     >
+      <div
+        className="home-btn"
+        css={css`
+          border: crimson solid 0px;
+          width: 100%;
+          display: flex;
+          justify-content: space-around;
+          flex-wrap: nowrap;
+
+          & a {
+            color: white;
+            border: olive solid 0px;
+            margin-right: auto;
+            text-decoration-line: none;
+
+            &:hover {
+              text-decoration-line: underline;
+              text-decoration-color: ${themeColor};
+            }
+          }
+
+          & span[role="img"] {
+            margin-right: 2px;
+            margin-left: auto;
+            user-select: none;
+          }
+        `}
+      >
+        <span role="img" aria-label="go back to home page">
+          🏚️
+        </span>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <Link to="/">Home</Link>
+      </div>
+      <div className="bigger-separator" />
       {allBlogKeywords.map((member) => {
         if (member.keyword !== name) {
           return (
