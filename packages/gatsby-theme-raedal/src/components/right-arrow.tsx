@@ -46,10 +46,10 @@ const RightArrow: FunctionComponent = () => {
           /* align-items: center; */
           /* align-content: stretch; */
           margin: 0;
-          margin-right: 1rem;
+          margin-right: 0.5rem;
           border: 1px solid crimson;
           border-radius: 4px;
-          width: 4rem;
+          width: 5rem;
           justify-content: center;
           /* width: 6rem; */
           font-size: 14px;

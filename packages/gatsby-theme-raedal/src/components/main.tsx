@@ -38,7 +38,7 @@ const Main: FunctionComponent = ({ children }) => {
         /* width: 100vw; */
 
         /* === !== === !== === === !== === !== === */
-        
+
         /* === !== === !== === === !== === !== === */
 
         grid-template-columns: repeat(10, minmax(0, 1fr));
@@ -92,11 +92,11 @@ const Main: FunctionComponent = ({ children }) => {
 
         @media screen and (min-width: 918px) {
           grid-template-areas:
-            " a a a a a a a a k k"
-            " a a a a a a a a s s"
-            " a a a a a a a a t t"
-            " a a a a a a a a l r"
-            " a a a a a a a a . .";
+            " l a a a a a a a a r"
+            " . a a a a a a a a ."
+            " . a a a a a a a a k"
+            " . a a a a a a a a t"
+            " . a a a a a a a a s";
 
           & > section.tofh2 {
             /* bottom: 12vh; */
@@ -111,6 +111,24 @@ const Main: FunctionComponent = ({ children }) => {
           & > section.social-posting {
             position: sticky;
           }
+
+          /* === !== === !== */
+
+          & > div.right-arrow,
+          & > div.left-arrow {
+            position: sticky;
+            top: 80vh;
+            font-size: 12px;
+            display: flex;
+          }
+
+          & > div.right-arrow {
+            border: olive solid 1px;
+          }
+          & > div.left-arrow {
+            border: tomato solid 1px;
+          }
+          /* === !== === !== */
         }
 
         @media screen and (min-width: 1100px) {

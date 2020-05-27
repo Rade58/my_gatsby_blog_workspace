@@ -47,11 +47,11 @@ const LeftArrow: FunctionComponent = () => {
           /* align-items: center; */
           /* align-items: center; */
           margin: 0;
-          margin-left: 1rem;
+          margin-left: 0.5rem;
           border: 1px solid crimson;
           border-radius: 4px;
 
-          width: 4rem;
+          width: 5rem;
           justify-content: center;
           /* width: 6rem; */
           font-size: 14px;
