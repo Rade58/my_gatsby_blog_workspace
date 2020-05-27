@@ -44,7 +44,6 @@ const Keywords: FunctionComponent = () => {
 
         & div.arrows {
           width: 100%;
-          
 
           display: none;
 
@@ -53,10 +52,14 @@ const Keywords: FunctionComponent = () => {
             justify-content: center;
           }
 
+          @media screen and (max-width: 1342px) {
+            justify-content: space-around;
+            border: pink solid 1px;
+          }
+
           & div.left-arrow,
           & div.right-arrow {
             font-size: 14px;
-            
 
             @media screen and (max-width: 1342px) {
               width: min-content;
@@ -75,7 +78,7 @@ const Keywords: FunctionComponent = () => {
             /* mozda i ne trebas koristiti width sa flex item-ima */
             /* width: fit-content; */
             /*  */
-            margin-right: auto;
+            /* margin-right: auto; */
             border: tomato solid 1px;
             flex-basis: content;
             flex-grow: 0;
@@ -86,7 +89,7 @@ const Keywords: FunctionComponent = () => {
             /* mozda i ne trebas koristiti width sa flex item-ima */
             /* width: fit-content; */
             /*  */
-            margin-left: auto;
+            /* margin-left: auto; */
             border: olive solid 1px;
             flex-basis: content;
             flex-grow: 0;

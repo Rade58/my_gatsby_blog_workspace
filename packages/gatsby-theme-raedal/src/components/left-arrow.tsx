@@ -33,7 +33,13 @@ const LeftArrow: FunctionComponent = () => {
     >
       {!prevPagePath ? (
         <button type="button" disabled>
-          x
+          <span
+            role="img"
+            aria-label="previous tutorial"
+            aria-labelledby="left-arr"
+          >
+            ⬅️{"        "}x
+          </span>
         </button>
       ) : (
         // <Link to={prevPagePath}>&larr; Previous Tutorial</Link>

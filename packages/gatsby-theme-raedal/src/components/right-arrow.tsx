@@ -33,7 +33,13 @@ const RightArrow: FunctionComponent = () => {
     >
       {!nextPagePath ? (
         <button type="button" disabled>
-          x
+          <span
+            role="img"
+            aria-label="next tutorial"
+            aria-labelledby="right-arr"
+          >
+            x{"        "}➡️
+          </span>
         </button>
       ) : (
         // <Link to={nextPagePath}>Next Tutorial &rarr;</Link>
