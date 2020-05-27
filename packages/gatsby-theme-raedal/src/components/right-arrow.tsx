@@ -2,7 +2,7 @@
 import { jsx } from "theme-ui";
 import { css } from "@emotion/core";
 import { Link } from "gatsby";
-import { useContext, FunctionComponent } from "react";
+import { useContext, FunctionComponent, Fragment } from "react";
 import { $_useBlogPostReducerState } from "../context_n_reducers/context_n_reducer_blog_post";
 
 // ZAPAMTI DA MORAS HA HANDLE-UJES SITUACIJU
@@ -10,8 +10,9 @@ import { $_useBlogPostReducerState } from "../context_n_reducers/context_n_reduc
 
 const RightArrow: FunctionComponent = () => {
   const { blogPostContext } = $_useBlogPostReducerState;
-  const { prevAndNextPagePath } = useContext(blogPostContext);
+  const { prevAndNextPagePath, groupPage } = useContext(blogPostContext);
   const { nextPagePath } = prevAndNextPagePath;
+  const { groupColor } = groupPage;
 
   return (
     <div
@@ -29,7 +30,15 @@ const RightArrow: FunctionComponent = () => {
           & span.next {
             /* border: yellow solid 1px; */
             margin-right: 8px;
+            &:hover {
+              color: #d3a6c2;
+              text-decoration-line: underline;
+            }
           }
+        }
+
+        & span[role="img"].ic {
+          color: ${groupColor};
         }
 
         & div.disabled {
@@ -51,7 +60,11 @@ const RightArrow: FunctionComponent = () => {
 
           &:hover {
             cursor: not-allowed;
-            text-decoration-line: line-through;
+            /* text-decoration-line: overline; */
+          }
+
+          & span {
+            color: #a82964;
           }
         }
       `}
@@ -68,16 +81,19 @@ const RightArrow: FunctionComponent = () => {
         </div>
       ) : (
         // <Link to={nextPagePath}>Next Tutorial &rarr;</Link>
-        <Link to={nextPagePath}>
-          <span className="next">Next Tutorial</span>
+        <Fragment>
+          <Link to={nextPagePath}>
+            <span className="next">Next Tutorial</span>
+          </Link>
           <span
+            className="ic"
             role="img"
             aria-label="next tutorial"
             aria-labelledby="right-arr"
           >
             ➡️
           </span>
-        </Link>
+        </Fragment>
       )}
     </div>
   );

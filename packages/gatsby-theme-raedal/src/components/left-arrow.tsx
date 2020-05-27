@@ -2,7 +2,7 @@
 import { jsx } from "theme-ui";
 import { css } from "@emotion/core";
 import { Link } from "gatsby";
-import { useContext, FunctionComponent } from "react";
+import { useContext, FunctionComponent, Fragment } from "react";
 import { $_useBlogPostReducerState } from "../context_n_reducers/context_n_reducer_blog_post";
 
 // ZAPAMTI DA MORAS HA HANDLE-UJES SITUACIJU
@@ -10,8 +10,9 @@ import { $_useBlogPostReducerState } from "../context_n_reducers/context_n_reduc
 
 const LeftArrow: FunctionComponent = () => {
   const { blogPostContext } = $_useBlogPostReducerState;
-  const { prevAndNextPagePath } = useContext(blogPostContext);
+  const { prevAndNextPagePath, groupPage } = useContext(blogPostContext);
   const { prevPagePath } = prevAndNextPagePath;
+  const { groupColor } = groupPage;
 
   return (
     <div
@@ -29,7 +30,16 @@ const LeftArrow: FunctionComponent = () => {
           & span.prev {
             /* border: yellow solid 1px; */
             margin-left: 8px;
+
+            &:hover {
+              color: #d3a6c2;
+              text-decoration-line: underline;
+            }
           }
+        }
+
+        & span[role="img"].ic {
+          color: ${groupColor};
         }
 
         & div.disabled {
@@ -48,11 +58,14 @@ const LeftArrow: FunctionComponent = () => {
           user-select: none;
           /* border: olive solid 4px; */
           padding: 0;
-          color: #a82964;
 
           &:hover {
             cursor: not-allowed;
-            text-decoration-line: overline;
+            /* text-decoration-line: overline; */
+          }
+
+          & span {
+            color: #a82964;
           }
         }
       `}
@@ -69,16 +82,19 @@ const LeftArrow: FunctionComponent = () => {
         </div>
       ) : (
         // <Link to={prevPagePath}>&larr; Previous Tutorial</Link>
-        <Link to={prevPagePath}>
+        <Fragment>
           <span
+            className="ic"
             role="img"
             aria-label="previous tutorial"
             aria-labelledby="right-arr"
           >
             ⬅️
           </span>
-          <span className="prev">Previous Tutorial</span>
-        </Link>
+          <Link to={prevPagePath}>
+            <span className="prev">Previous Tutorial</span>
+          </Link>
+        </Fragment>
       )}
     </div>
   );

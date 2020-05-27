@@ -56,13 +56,13 @@ const Keywords: FunctionComponent = () => {
 
           & img {
             margin: auto;
-            width: 1.4em;
+            height: 1.4em;
             transition-property: transform border;
             transition-duration: 0.2s;
             border-radius: 4px;
             &:hover {
               transform: scale(1.2);
-              border: ${themeColor} solid 1px;
+              border: ${themeColor} solid 0.5px;
             }
           }
         }
@@ -99,10 +99,10 @@ const Keywords: FunctionComponent = () => {
             & a {
               color: #e0c8ce;
 
-              &:hover {
+              /* &:hover {
                 color: #d3a6c2;
                 text-decoration-line: underline;
-              }
+              } */
             }
           }
 
