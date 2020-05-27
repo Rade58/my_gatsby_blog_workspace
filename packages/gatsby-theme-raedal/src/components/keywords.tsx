@@ -30,7 +30,7 @@ const Keywords: FunctionComponent = () => {
       className="keywords"
       css={css`
         display: flex;
-        border: pink solid 1px;
+        border: pink solid 0px;
         padding: 6px;
         flex-wrap: wrap;
         align-content: flex-start;
@@ -39,6 +39,12 @@ const Keywords: FunctionComponent = () => {
         /* & > a {
           margin: 4px;
         } */
+
+        & div.bigger-separator {
+          width: 80%;
+          margin: 1rem auto;
+          border-bottom: 2px solid ${themeColor};
+        }
 
         & div.separator {
           width: 28%;
@@ -62,7 +68,7 @@ const Keywords: FunctionComponent = () => {
             border-radius: 4px;
             &:hover {
               transform: scale(1.2);
-              border: ${themeColor} solid 0.5px;
+              border: ${themeColor} solid 0.2px;
             }
           }
         }
@@ -85,13 +91,13 @@ const Keywords: FunctionComponent = () => {
             flex-direction: row;
             justify-content: center;
             justify-items: space-between;
-            justify-content: space-between;
+            justify-content: space-around;
             align-content: stretch;
           }
 
           @media screen and (max-width: 1342px) {
             justify-content: space-around;
-            border: pink solid 1px;
+            border: pink solid 0px;
           }
 
           & div.left-arrow,
@@ -103,12 +109,12 @@ const Keywords: FunctionComponent = () => {
 
             @media screen and (max-width: 1402px) {
               width: min-content;
-              border: crimson solid 1px;
+              border: crimson solid 0px;
             }
             @media screen and (max-width: 1100px) {
               width: max-content;
               /* font-size: 8px; */
-              border: yellow solid 1px;
+              border: yellow solid 0px;
             }
 
             /* width: min-content; */
@@ -182,6 +188,7 @@ const Keywords: FunctionComponent = () => {
         <LeftArrow />
         <RightArrow />
       </div>
+      <div className="bigger-separator" />
     </section>
   );
 };
