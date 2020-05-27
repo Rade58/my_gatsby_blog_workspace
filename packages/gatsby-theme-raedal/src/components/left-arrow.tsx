@@ -40,7 +40,8 @@ const LeftArrow: FunctionComponent = () => {
           margin-left: 2rem;
           border: 1px solid crimson;
           border-radius: 4px;
-          width: 2rem;
+
+          width: 4rem;
           justify-content: center;
           /* width: 6rem; */
           font-size: 14px;
@@ -51,7 +52,7 @@ const LeftArrow: FunctionComponent = () => {
 
           &:hover {
             cursor: not-allowed;
-            text-decoration-line: line-through;
+            text-decoration-line: overline;
           }
         }
       `}
