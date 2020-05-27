@@ -14,7 +14,15 @@ const RightArrow: FunctionComponent = () => {
   const { nextPagePath } = prevAndNextPagePath;
 
   return (
-    <div className="arr-nav right-arrow" id="right-arr">
+    <div
+      className="arr-nav right-arrow"
+      id="right-arr"
+      css={css`
+        & a {
+          display: flex;
+        }
+      `}
+    >
       {!nextPagePath ? (
         <button type="button" disabled>
           x
@@ -22,14 +30,14 @@ const RightArrow: FunctionComponent = () => {
       ) : (
         // <Link to={nextPagePath}>Next Tutorial &rarr;</Link>
         <Link to={nextPagePath}>
+          Next Tutorial
           <span
             role="img"
             aria-label="next tutorial"
             aria-labelledby="right-arr"
           >
-            Next Tutorial
-          </span>{" "}
-          ➡️
+            ➡️
+          </span>
         </Link>
       )}
     </div>

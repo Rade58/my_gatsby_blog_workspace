@@ -14,7 +14,15 @@ const LeftArrow: FunctionComponent = () => {
   const { prevPagePath } = prevAndNextPagePath;
 
   return (
-    <div className="arr-nav left-arrow" id="right-arr">
+    <div
+      className="arr-nav left-arrow"
+      id="right-arr"
+      css={css`
+        & a {
+          display: flex;
+        }
+      `}
+    >
       {!prevPagePath ? (
         <button type="button" disabled>
           x
@@ -27,7 +35,7 @@ const LeftArrow: FunctionComponent = () => {
             aria-label="previous tutorial"
             aria-labelledby="right-arr"
           >
-            ⬅️{" "}
+            ⬅️
           </span>
           Previous Tutorial
         </Link>

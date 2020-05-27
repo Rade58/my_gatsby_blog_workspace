@@ -67,10 +67,15 @@ const Keywords: FunctionComponent = () => {
           & div.left-arrow {
             width: fit-content;
             margin-right: auto;
+            border: tomato solid 1px;
+            flex-basis: content;
           }
 
           & div.right-arrow {
             width: fit-content;
+            margin-left: auto;
+            border: olive solid 1px;
+            flex-basis: content;
           }
         }
       `}
