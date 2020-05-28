@@ -102,17 +102,18 @@ const HeadingMajor: FunctionComponent = () => {
             /* margin-left: auto;  */
             margin-top: auto;
             margin-bottom: auto;
-            transition-property: transform;
-            transition-duration: 0.4s;
 
             margin-right: ${isUpdated ? 0 : "1em"};
 
             & img {
+              transition-property: transform;
+              transition-duration: 0.4s;
               height: 2rem;
-            }
-
-            &:hover {
-              transform: scale(1.2);
+              margin: 0;
+              padding: 0;
+              &:hover {
+                transform: scale3d(1.2, 1.2, 1.2);
+              }
             }
           }
 
