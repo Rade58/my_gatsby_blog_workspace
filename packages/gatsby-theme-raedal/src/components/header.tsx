@@ -36,6 +36,11 @@ import { $_useBlogPostReducerState } from "../context_n_reducers/context_n_reduc
 
 import { additionalStyles } from "../common-styles";
 
+// === !== === !== === !== === !== === !==
+// import RightArrow from "./right-arrow";
+// import LeftArrow from "./left-arrow";
+// === !== === !== === !== === !== === !==
+
 /* export type UseHeaderCustomHookReturn = [
   // HeaderStateI,
   FunctionComponent
@@ -169,6 +174,10 @@ const Header: FunctionComponent = () => {
           <img src={gitHubIconUri} alt="github icon" />
         </a>
       </section> */}
+
+      {/* <RightArrow /> */}
+      {/* <LeftArrow /> */}
+
       <ScrollIndicator
         bc="rgb(38, 45, 59)"
         fill="rgba(153, 67, 95, 0.74)"
