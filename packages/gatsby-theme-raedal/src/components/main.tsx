@@ -77,16 +77,13 @@ const Main: FunctionComponent = ({ children }) => {
           }
         }
 
-        & > div.left-arrow {
+        /* & > div.left-arrow {
           grid-area: l;
-
-          /* border: tomato solid 4px; */
         }
 
         & > div.right-arrow {
           grid-area: r;
-          /* border: olive solid 4px; */
-        }
+        } */
 
         /*==============================*/
 
@@ -115,22 +112,21 @@ const Main: FunctionComponent = ({ children }) => {
 
           /* === !== === !== */
 
-          & > div.right-arrow,
+          /* ipak ne zelim da ih prikazujem na ovoj sirini */
+          /* & > div.right-arrow,
           & > div.left-arrow {
             position: sticky;
             top: 80vh;
             font-size: 12px;
-            /* display: flex; */
-            /* ipak ne zelim da ih prikazujem na ovoj sirini */
             display: none;
-          }
+          } */
 
-          & > div.right-arrow {
+          /* & > div.right-arrow {
             border: olive solid 1px;
           }
           & > div.left-arrow {
             border: tomato solid 1px;
-          }
+          } */
           /* === !== === !== */
         }
 
@@ -164,19 +160,17 @@ const Main: FunctionComponent = ({ children }) => {
             border: yellow solid 2px;
           }
 
-          & > div.left-arrow {
+          /* & > div.left-arrow {
             position: sticky;
-            /* top: 80vh; */
             top: 14vh;
             display: none;
           }
 
           & > div.right-arrow {
             position: sticky;
-            /* top: 80vh; */
             top: 14vh;
             display: none;
-          }
+          } */
         }
       `}
     >
@@ -185,8 +179,8 @@ const Main: FunctionComponent = ({ children }) => {
       <TableOfHeadings />
       {/* EVO OVDE MOZES RENDER-OVATI Keywords */}
       <Keywords />
-      <LeftArrow />
-      <RightArrow />
+      {/* <LeftArrow />
+      <RightArrow /> */}
       {/* <section className="adds">
         <h4>Adds</h4>
         <div>
