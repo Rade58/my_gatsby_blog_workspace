@@ -178,7 +178,7 @@ const Keywords: FunctionComponent = () => {
           & a {
             color: white;
             border: olive solid 0px;
-            margin-right: auto;
+            margin-right: 0px;
             text-decoration-line: none;
 
             &:hover {
@@ -192,6 +192,11 @@ const Keywords: FunctionComponent = () => {
             margin-left: auto;
             user-select: none;
           }
+
+          & span.some_emo {
+            margin-left: 4px;
+            margin-right: auto;
+          }
         `}
       >
         <span role="img" aria-label="go back to home page">
@@ -199,6 +204,10 @@ const Keywords: FunctionComponent = () => {
         </span>
         &nbsp;&nbsp;&nbsp;&nbsp;
         <Link to="/">Home</Link>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <span className="some_emo" role="img" aria-label="random emoji">
+          🐗
+        </span>
       </div>
       <div className="bigger-separator" />
       {allBlogKeywords.map((member) => {
