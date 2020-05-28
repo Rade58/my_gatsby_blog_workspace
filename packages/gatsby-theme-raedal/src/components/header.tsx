@@ -99,8 +99,8 @@ const Header: FunctionComponent = () => {
 
   return (
     <header
-      // className={scrolled_class}
-      className="pull-up"
+      className={scrolled_class}
+      // className="pull-down"
       sx={{
         backgroundImage: additionalStyles.headerBackgroundImage,
       }}
