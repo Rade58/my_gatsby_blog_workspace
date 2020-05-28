@@ -39,6 +39,8 @@ import { additionalStyles } from "../common-styles";
 // === !== === !== === !== === !== === !==
 // import RightArrow from "./right-arrow";
 // import LeftArrow from "./left-arrow";
+import RightHArrow from "./right-h-arrow";
+import LeftHArrow from "./left-h-arrow";
 // === !== === !== === !== === !== === !==
 
 /* export type UseHeaderCustomHookReturn = [
@@ -177,6 +179,9 @@ const Header: FunctionComponent = () => {
 
       {/* <RightArrow /> */}
       {/* <LeftArrow /> */}
+      <LeftHArrow />
+      <RightHArrow />
+      {/* === !== === !== */}
 
       <ScrollIndicator
         bc="rgb(38, 45, 59)"
