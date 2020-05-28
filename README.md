@@ -12,6 +12,41 @@ IMACE U COSKOVIMA RIGHT, ODNOSNO LEFT ARROW
 
 `U NJEMU CE KASNIJE BITI DODAT ALGOLIA SEARCH NARAVNO` (KADA GA INTRODUCE-UJEM ZA MOJ PROJEKAT)
 
+***
+
+EVO KAKO SAM USTVARI RESIO SAKRIVANJE HEADER
+
+`packages/gatsby-theme-raedal/src/components/header.tsx`
+
+```css
+/* kada scroll-ujem down element treba da se digne above */
+&.pull-up {
+  top: -56px;
+}
+/* u suprotnom se spusta (ODNOSNO VRACA U POCETNI POLOZAJ) */
+&.pull-down {
+  top: 0;
+}
+
+/* !== === !== === A OVO JE ONO STA SAM DODAO === !== === !== */
+
+/* SAMO MENJAM VEREDNOSTI ZA KLASE AKO JE REC O MANJEM EKRANU */
+
+@media screen and (min-width: 918px) {
+  &.pull-down {
+    top: -56px;
+  }
+  &.pull-up {
+    top: -56px;
+  }
+}
+```
+
+**JA USTVARI NISAM SAKRIO HEADER (NISAM KORISTIO `dispaly` PROPERTI NIGDE)**
+
+**VEC SAM NAPRAVIO MEDIA QUERY-JE, KOJIMA SAM MODIFIKOVAO PULL UP I PULL DOWN KLASE, DA USTVARI OBE PULL-UJU UP HEADER**
+
+***
 
 A STO SE TICE PIG ANIMATION-A
 

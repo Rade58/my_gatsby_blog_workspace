@@ -100,7 +100,7 @@ const Header: FunctionComponent = () => {
   return (
     <header
       className={scrolled_class}
-      // className="pull-down"
+      // className="pull-up"
       sx={{
         backgroundImage: additionalStyles.headerBackgroundImage,
       }}
@@ -138,6 +138,17 @@ const Header: FunctionComponent = () => {
         /* u suprotnom se spusta (ODNOSNO VRACA U POCETNI POLOZAJ) */
         &.pull-down {
           top: 0;
+        }
+
+        /* SAMO MENJAM VEREDNOSTI ZA KLASE AKO JE REC O MANJEM EKRANU */
+
+        @media screen and (min-width: 918px) {
+          &.pull-down {
+            top: -56px;
+          }
+          &.pull-up {
+            top: -56px;
+          }
         }
       `}
     >
