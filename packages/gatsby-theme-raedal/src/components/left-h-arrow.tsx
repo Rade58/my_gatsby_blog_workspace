@@ -14,10 +14,14 @@ const LeftHArrow: FunctionComponent = () => {
     <section
       className="left-h-arr"
       css={css`
-        color: blanchedalmond;
+        /* color: blanchedalmond; */
       `}
     >
-      <Link to={prevPagePath}>&larr;</Link>
+      <Link to={prevPagePath}>
+        <span role="img" aria-label="previous tutorial">
+          ⬅️
+        </span>
+      </Link>
     </section>
   );
 };

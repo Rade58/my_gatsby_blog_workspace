@@ -14,10 +14,14 @@ const RightHArrow: FunctionComponent = () => {
     <section
       className="right-h-arr"
       css={css`
-        color: blanchedalmond;
+        /* color: blanchedalmond; */
       `}
     >
-      <Link to={nextPagePath}>&rarr;</Link>
+      <Link to={nextPagePath}>
+        <span role="img" aria-label="next tutorial">
+          ➡️
+        </span>
+      </Link>
     </section>
   );
 };

@@ -105,6 +105,8 @@ const Header: FunctionComponent = () => {
         z-index: 100;
         display: flex;
 
+        justify-content: space-between;
+
         /* width: 100%; */
 
         height: 58px;
@@ -145,6 +147,28 @@ const Header: FunctionComponent = () => {
             top: -56px;
           }
         }
+
+        /* === !== HEADER ARROWS === !==*/
+
+        & section.left-h-arr,
+        & section.right-h-arr {
+          & a {
+            & span[role="img"] {
+              color: blanchedalmond;
+              font-size: 38px;
+            }
+          }
+        }
+
+        & section.left-h-arr {
+          font-size: 34px;
+        }
+
+        & section.right-h-arr {
+          font-size: 34px;
+        }
+
+        /* =================== */
       `}
     >
       {/* <NavInHeader /> */}
