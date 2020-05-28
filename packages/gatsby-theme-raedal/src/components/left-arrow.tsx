@@ -52,12 +52,14 @@ const LeftArrow: FunctionComponent = () => {
           border-radius: 4px;
 
           width: 5rem;
-          justify-content: center;
+          justify-content: space-evenly;
           /* width: 6rem; */
           font-size: 14px;
           user-select: none;
           /* border: olive solid 4px; */
           padding: 0;
+          opacity: 0.4;
+          color: #a82964;
 
           &:hover {
             cursor: not-allowed;
@@ -65,8 +67,6 @@ const LeftArrow: FunctionComponent = () => {
           }
 
           & span {
-            color: #a82964;
-            opacity: 0.4;
           }
         }
       `}
@@ -78,8 +78,9 @@ const LeftArrow: FunctionComponent = () => {
             aria-label="previous tutorial"
             aria-labelledby="left-arr"
           >
-            ⬅️{"        "}x
+            ⬅️{"        "}
           </span>
+          <i>x</i>
         </div>
       ) : (
         // <Link to={prevPagePath}>&larr; Previous Tutorial</Link>

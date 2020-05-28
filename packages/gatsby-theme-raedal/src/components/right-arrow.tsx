@@ -50,12 +50,14 @@ const RightArrow: FunctionComponent = () => {
           border: 1px solid crimson;
           border-radius: 4px;
           width: 5rem;
-          justify-content: center;
+          justify-content: space-evenly;
           /* width: 6rem; */
           font-size: 14px;
           user-select: none;
           /* border: olive solid 4px; */
           padding: 0;
+          color: #a82964;
+          opacity: 0.4;
           color: #a82964;
 
           &:hover {
@@ -64,20 +66,19 @@ const RightArrow: FunctionComponent = () => {
           }
 
           & span {
-            color: #a82964;
-            opacity: 0.4;
           }
         }
       `}
     >
       {!nextPagePath ? (
         <div className="disabled">
+          <i>x</i>
           <span
             role="img"
             aria-label="next tutorial"
             aria-labelledby="right-arr"
           >
-            x{"        "}➡️
+            {"        "}➡️
           </span>
         </div>
       ) : (
