@@ -94,9 +94,12 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
 
   return (
     <div
-      style={{
-        display: useScrollAnimation ? "block" : "none",
-      }}
+      className={`${useScrollAnimation ? "show" : "no-show"}`}
+      style={
+        {
+          // display: useScrollAnimation ? "block" : "none",
+        }
+      }
       css={css`
         background-image: ${bcImg};
 
@@ -116,6 +119,24 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
           height: 100%;
           margin: 0;
           padding: 0;
+        }
+
+        & .no-show {
+          display: none;
+        }
+
+        & .show {
+          display: block;
+        }
+
+        @media screen and (max-width: 918px) {
+          .no-show {
+            display: none;
+          }
+
+          .show {
+            display: none;
+          }
         }
       `}
     >
@@ -154,10 +175,31 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
           /* rgb(27, 34, 39) */
           padding: 0;
           margin: 0;
+
+          & .no-show {
+            display: none;
+          }
+
+          & .show {
+            display: block;
+          }
+
+          @media screen and (max-width: 918px) {
+            .no-show {
+              display: none;
+            }
+
+            .show {
+              display: none;
+            }
+          }
         `}
-        style={{
-          display: `${pigDisapear ? "none" : "block"}`,
-        }}
+        className={`${pigDisapear ? "no-show" : "show"}`}
+        style={
+          {
+            // display: `${pigDisapear ? "none" : "block"}`,
+          }
+        }
       />
       {/* <LeftArrow /> */}
       <Pig />

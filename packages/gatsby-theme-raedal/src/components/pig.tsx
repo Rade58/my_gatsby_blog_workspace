@@ -252,10 +252,10 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
   return (
     <Fragment>
       <div
-        style={{
+        /* style={{
           display: useScrollAnimation ? "block" : "none",
-        }}
-        className="konti"
+        }} */
+        className={`konti ${useScrollAnimation ? "show" : "no-show"}`}
         css={css`
         /* transform: scale(4) translateY(200);
         position: absolute;
@@ -269,6 +269,27 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
         width: 100%;
         /* width: 80%; */
         /* border: red solid 1px; */
+
+
+        & .no-show {
+          display: none;
+        }
+
+        & .show {
+          display: block;
+        }
+
+        @media screen and (max-width: 918px) {
+          .no-show {
+            display: none;
+          }
+
+          .show {
+            display: none;
+          }
+
+        }
+
       `}
         // style={{ display: pigDisapear ? "none" : "block" }}
       >
@@ -346,7 +367,7 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
         >
           {/* eslint-disable-next-line */}
           <div
-            className="sprite"
+            className={`sprite ${pigDisapear ? "no-show" : "show"}`}
             onKeyDown={(e) => {
               if (headerDispatch)
                 headerDispatch({ type: ACTION_TYPES_ENUM.PIG_DISAPEAR });
@@ -359,10 +380,29 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
               animationName: `${stripski}`,
               // animationPlayState: "paused",
             }}
+            css={css`
+              & .no-show {
+                display: none;
+              }
+
+              & .show {
+                display: block;
+              }
+
+              @media screen and (max-width: 918px) {
+                .no-show {
+                  display: none;
+                }
+
+                .show {
+                  display: none;
+                }
+              }
+            `}
             style={{
               transform: `rotateY(${angle}deg) translateY(-36px)`,
               animationPlayState: `${animationStatus}`,
-              display: pigDisapear ? "none" : "block",
+              // display: pigDisapear ? "none" : "block",
             }}
           />
         </div>
