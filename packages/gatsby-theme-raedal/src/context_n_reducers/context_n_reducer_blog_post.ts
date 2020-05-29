@@ -64,7 +64,11 @@ export const blogPostReducer: Reducer<
 
   // !== === HANDLE-UJEM DAKLE DA LI JE MODAL PRIKAZAN ILI NIJE !== ===
   if (action.type === BLOG_POST_ACTION_TYPES_ENUM.KEYWORD_MODAL_TOGGLE) {
-    return { ...state, keywordModalIsShown: !state.keywordModalIsShown };
+    // ALI JA ZELIM OVDE PAYLOAD (MOZDA JE OVERKILL ALI CU DEFINISATI PAYLOAD)
+    // JER JEDINI DISPATCH KADA SE MODAL ZATVARA TREBAO BI DA BUDE DISPATCH SA
+    // false VREDNOSCU    keywordModalIsShown-A
+
+    return { ...state, keywordModalIsShown: action.payload }; // ZATO KORISTIM PAYLOAD
   }
 
   return state;
