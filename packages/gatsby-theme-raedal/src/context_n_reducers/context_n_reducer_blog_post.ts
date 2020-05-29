@@ -80,7 +80,7 @@ export const blogPostReducer: Reducer<
 export const defaultState: BlogPostStateI = {
   pigDisapear: false,
   header_pull_class: "pulled-down",
-  keywordModalIsShown: false,
+  keywordModalIsShown: true,
 };
 
 // CONTEXT stuff  === !==  === !==  === !==  === !==  === !==

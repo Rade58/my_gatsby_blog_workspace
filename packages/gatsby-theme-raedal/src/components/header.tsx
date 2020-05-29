@@ -208,8 +208,8 @@ const Header: FunctionComponent = () => {
       {/* <RightArrow /> */}
       {/* <LeftArrow /> */}
       <LeftHArrow />
-      <TableOfKeywords />
       <RightHArrow />
+      {/* <TableOfKeywords /> */}
       {/* === !== === !== */}
 
       <ScrollIndicator

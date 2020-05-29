@@ -3,7 +3,7 @@ import { jsx } from "theme-ui";
 
 import { css } from "@emotion/core";
 
-import { FunctionComponent } from "react";
+import { useContext, FunctionComponent } from "react";
 
 import TableOfHeadings from "./table-of-headers";
 
@@ -18,15 +18,16 @@ import RightArrow from "./right-arrow";
 // import LoremIpsum from "./dev-utility/lorem-ipsum";
 //
 
+// === !==  TABLE OF KEYWORDS, NESTOVACU USLOVNO U ODNOSU NA DEO REDUCER STATE-A
+import TableOfKeywords from "../static_query_components/table-of-keywords";
+// === !== BICE USLOVNO RENDERED NA SAMOM DNU MAIN-A
+
+import { $_useBlogPostReducerState } from "../context_n_reducers/context_n_reducer_blog_post";
+
 const Main: FunctionComponent = ({ children }) => {
-  let a;
-
-  /* "[h2, h3, h4, h5, h6]": {
-    padding-top: "45px",
-
-    padding-bottom: "18px",
-  }
- */
+  const { blogPostContext } = $_useBlogPostReducerState;
+  const { reducedBlogPostState } = useContext(blogPostContext);
+  const { keywordModalIsShown } = reducedBlogPostState;
 
   return (
     <main
@@ -206,6 +207,7 @@ const Main: FunctionComponent = ({ children }) => {
       {/* <LoremIpsum /> */}
       {/* <LoremIpsum /> */}
       {/* /////////////////////// */}
+      {keywordModalIsShown ? <TableOfKeywords /> : null}
     </main>
   );
 };
