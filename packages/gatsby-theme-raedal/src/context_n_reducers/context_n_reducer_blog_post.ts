@@ -20,11 +20,13 @@ export enum BLOG_POST_ACTION_TYPES_ENUM {
   PIG_AND_TRACK_DISAPEARD = "PIG_AND_TRACK_DISAPEARD",
   WINDOW_SCROLL_HEIGHT = "WINDOW_SCROLL_HEIGHT",
   HEADER_PULL_CHANGE = "HEADER_PULL_CHANGE",
+  KEYWORD_MODAL_TOGGLE = "KEYWORD_MODAL_TOGGLE",
 }
 
 export interface BlogPostStateI {
   pigDisapear: boolean;
   header_pull_class: "pulled-down" | "pulled-up";
+  keywordModalIsShown: boolean;
 }
 
 //
@@ -60,6 +62,11 @@ export const blogPostReducer: Reducer<
     return state;
   }
 
+  // !== === HANDLE-UJEM DAKLE DA LI JE MODAL PRIKAZAN ILI NIJE !== ===
+  if (action.type === BLOG_POST_ACTION_TYPES_ENUM.KEYWORD_MODAL_TOGGLE) {
+    return { ...state, keywordModalIsShown: !state.keywordModalIsShown };
+  }
+
   return state;
 };
 
@@ -69,6 +76,7 @@ export const blogPostReducer: Reducer<
 export const defaultState: BlogPostStateI = {
   pigDisapear: false,
   header_pull_class: "pulled-down",
+  keywordModalIsShown: false,
 };
 
 // CONTEXT stuff  === !==  === !==  === !==  === !==  === !==
