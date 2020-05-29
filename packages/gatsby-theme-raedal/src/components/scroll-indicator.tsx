@@ -2,6 +2,7 @@
 import { jsx } from "theme-ui";
 import {
   useLayoutEffect,
+  useEffect,
   useContext,
   useState,
   useRef,
@@ -73,7 +74,7 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
 
   const [useScrollAnimation, setUseScrollAnimation] = useState(true);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!windowRef.current) {
       windowRef.current = window || document.documentElement;
     }
@@ -82,6 +83,8 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
     }
 
     if (windowRef.current && bodyRef.current) {
+      console.log("=============================");
+
       // console.log( / windowRef.current.innerHeight);
       // console.log(windowRef.current.scrol, windowRef.current.innerHeight);
       if (bodyRef.current.scrollHeight / windowRef.current.innerHeight < 2) {
@@ -194,7 +197,9 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
             }
           }
         `}
-        className={`${pigDisapear ? "no-show" : "show"}`}
+        className={`nestoBlah ${
+          pigDisapear || !useScrollAnimation ? "no-show" : "show"
+        }`}
         style={
           {
             // display: `${pigDisapear ? "none" : "block"}`,

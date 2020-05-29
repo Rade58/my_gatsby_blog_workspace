@@ -20,12 +20,16 @@ const LeftHArrow: FunctionComponent = () => {
         /* color: blanchedalmond; */
       `}
     >
-      <Link to={prevPagePath}>
-        <span role="img" aria-label="previous tutorial">
-          {/* ⬅️ */}
-          <Octicon icon={octicon} size="medium" />
-        </span>
-      </Link>
+      {!prevPagePath ? (
+        "no"
+      ) : (
+        <Link to={prevPagePath}>
+          <span role="img" aria-label="previous tutorial">
+            {/* ⬅️ */}
+            <Octicon icon={octicon} size="medium" />
+          </span>
+        </Link>
+      )}
     </section>
   );
 };

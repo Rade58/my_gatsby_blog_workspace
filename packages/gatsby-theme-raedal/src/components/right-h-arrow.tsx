@@ -20,12 +20,16 @@ const RightHArrow: FunctionComponent = () => {
         /* color: blanchedalmond; */
       `}
     >
-      <Link to={nextPagePath}>
-        <span role="img" aria-label="next tutorial">
-          {/* ➡️ */}
-          <Octicon icon={octicon} size="medium" />
-        </span>
-      </Link>
+      {!nextPagePath ? (
+        "no"
+      ) : (
+        <Link to={nextPagePath}>
+          <span role="img" aria-label="next tutorial">
+            {/* ➡️ */}
+            <Octicon icon={octicon} size="medium" />
+          </span>
+        </Link>
+      )}
     </section>
   );
 };

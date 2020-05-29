@@ -300,6 +300,7 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
         {/* eslint-disable-next-line */}
         <div
           style={{
+            display: useScrollAnimation ? "inline-block" : "none",
             // left: `${leftPercents}%`
             // transform: `translateX(${leftPercents}%)`,
             marginLeft: `${scrollIndicatorWidth}%`,
@@ -371,7 +372,9 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
         >
           {/* eslint-disable-next-line */}
           <div
-            className={`sprite ${pigDisapear ? "no-show" : "show"}`}
+            className={`sprite ${
+              !pigDisapear || useScrollAnimation ? "show" : "no-show"
+            }`}
             onKeyDown={(e) => {
               if (headerDispatch)
                 headerDispatch({ type: ACTION_TYPES_ENUM.PIG_DISAPEAR });
