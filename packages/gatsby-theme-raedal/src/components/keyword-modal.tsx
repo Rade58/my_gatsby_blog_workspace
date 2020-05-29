@@ -37,10 +37,18 @@ const KeywordModal: FunctionComponent<KeywordModalPropsI> = ({ keywords }) => {
     Promise.resolve().then(() => {
       setTransitionClass("make-transition-front");
     });
-  });
+  }, []); // KAD JE SAMO KOD MOUNTINGA PRAZNA NIZ
+  // (A AKO ZELIM DA SE EFFECT CALLBACK IZVRSI PRI SVAKOJ PROMENI STATE-A, PRI SVAKOM RERENDER-U, ONDA
+  // NE STAVLJAM NISTA, KAO DRUGI ARGUMENT)
 
   useEffect(() => {
     // === !== ===          CLAENING OUT
+
+    let a;
+
+    return () => {
+      console.log("UNMOUNTING TABLE OF KEYWORDS");
+    };
   }, []);
 
   return (
@@ -74,16 +82,22 @@ const KeywordModal: FunctionComponent<KeywordModalPropsI> = ({ keywords }) => {
       tabIndex={-1}
       role="button"
       onClick={() => {
-        blogPostDispatch({
-          type: BLOG_POST_ACTION_TYPES_ENUM.KEYWORD_MODAL_TOGGLE,
-          payload: false,
-        });
+        setTransitionClass("make-transition-back");
+        setTimeout(() => {
+          blogPostDispatch({
+            type: BLOG_POST_ACTION_TYPES_ENUM.KEYWORD_MODAL_TOGGLE,
+            payload: false,
+          });
+        }, 2000);
       }}
       onKeyPress={() => {
-        blogPostDispatch({
-          type: BLOG_POST_ACTION_TYPES_ENUM.KEYWORD_MODAL_TOGGLE,
-          payload: false,
-        });
+        setTransitionClass("make-transition-back");
+        setTimeout(() => {
+          blogPostDispatch({
+            type: BLOG_POST_ACTION_TYPES_ENUM.KEYWORD_MODAL_TOGGLE,
+            payload: false,
+          });
+        }, 2000);
       }}
     >
       <ul>
