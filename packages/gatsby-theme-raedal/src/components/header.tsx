@@ -43,6 +43,10 @@ import RightHArrow from "./right-h-arrow";
 import LeftHArrow from "./left-h-arrow";
 // === !== === !== === !== === !== === !==
 
+// =======================================================
+import TableOfKeywords from "../static_query_components/table-of-keywords";
+// =======================================================
+
 /* export type UseHeaderCustomHookReturn = [
   // HeaderStateI,
   FunctionComponent
@@ -204,6 +208,7 @@ const Header: FunctionComponent = () => {
       {/* <RightArrow /> */}
       {/* <LeftArrow /> */}
       <LeftHArrow />
+      <TableOfKeywords />
       <RightHArrow />
       {/* === !== === !== */}
 

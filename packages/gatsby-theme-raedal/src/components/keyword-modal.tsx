@@ -29,6 +29,16 @@ const KeywordModal: FunctionComponent<KeywordModalPropsI> = ({ keywords }) => {
   return (
     <div
       style={{ display: keywordModalIsShown ? "block" : "none" }}
+      css={css`
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+
+        background-color: olive;
+        z-index: 2000;
+      `}
       tabIndex={-1}
       className="keywords-of-modal"
       role="button"
@@ -47,7 +57,7 @@ const KeywordModal: FunctionComponent<KeywordModalPropsI> = ({ keywords }) => {
     >
       <ul>
         {keywords.map(({ name, path, icon }) => (
-          <Link to={path}>
+          <Link to={path} key={name}>
             <span role="img" aria-label={name}>
               <img
                 src={`data:image/svg+xml;base64,${icon}`}
