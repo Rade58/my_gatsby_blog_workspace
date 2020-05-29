@@ -154,19 +154,19 @@ const Header: FunctionComponent = () => {
         & section.right-h-arr {
           & a {
             & span[role="img"] {
-              color: blanchedalmond;
-              font-size: 38px;
+              /* color: blanchedalmond; */
+              /* font-size: 38px; */
             }
           }
         }
 
-        & section.left-h-arr {
+        /* & section.left-h-arr {
           font-size: 34px;
         }
 
         & section.right-h-arr {
           font-size: 34px;
-        }
+        } */
 
         /* =================== */
       `}
