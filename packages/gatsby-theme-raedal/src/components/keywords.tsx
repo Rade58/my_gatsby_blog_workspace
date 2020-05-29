@@ -36,6 +36,10 @@ const Keywords: FunctionComponent = () => {
         align-content: flex-start;
         height: min-content;
 
+        @media screen and (max-width: 918px) {
+          display: none;
+        }
+
         /* & > a {
           margin: 4px;
         } */

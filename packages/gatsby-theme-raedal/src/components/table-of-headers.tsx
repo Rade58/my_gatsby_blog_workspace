@@ -18,7 +18,7 @@ interface TableOfHeadingsProps {
   headings?: HeadingI[];
 }
 
-const TableOfHeadings: FunctionComponent<TableOfHeadingsProps> = (props) => {
+const TableOfHeadings: FunctionComponent<TableOfHeadingsProps> = () => {
   const { blogPostContext } = $_useBlogPostReducerState;
 
   const { headings, relativeLink } = useContext(blogPostContext);
@@ -26,8 +26,21 @@ const TableOfHeadings: FunctionComponent<TableOfHeadingsProps> = (props) => {
   return (
     // OVO JE SAMO PROBNO IME KLASE (UKLONI OVO I DEFINISI PRAVU KLASU)
     <section
-      style={{ display: headings.length ? "inline-block" : "none" }}
-      className="tofh2"
+      // style={{ display: headings.length ? "inline-block" : "none" }}
+      className={`tofh2 ${headings.length ? "show-me" : "hide-me"}`}
+      css={css`
+        .show-me {
+          display: inline-block;
+        }
+
+        .hide-me {
+          display: none;
+        }
+
+        @media screen and (max-width: 918px) {
+          display: none;
+        }
+      `}
     >
       <ul>
         {headings &&
