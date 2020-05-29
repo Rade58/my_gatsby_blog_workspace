@@ -2,6 +2,7 @@
 import { jsx } from "theme-ui";
 import { Link } from "gatsby";
 import { css } from "@emotion/core";
+import Octicon, { getIconByName } from "@primer/octicons-react";
 import { useContext, FunctionComponent } from "react";
 import { $_useBlogPostReducerState } from "../context_n_reducers/context_n_reducer_blog_post";
 
@@ -9,6 +10,8 @@ const LeftHArrow: FunctionComponent = () => {
   const { blogPostContext } = $_useBlogPostReducerState;
   const { prevAndNextPagePath } = useContext(blogPostContext);
   const { prevPagePath } = prevAndNextPagePath;
+
+  const octicon = getIconByName("arrow-left");
 
   return (
     <section
@@ -19,7 +22,8 @@ const LeftHArrow: FunctionComponent = () => {
     >
       <Link to={prevPagePath}>
         <span role="img" aria-label="previous tutorial">
-          ⬅️
+          {/* ⬅️ */}
+          <Octicon icon={octicon} size="medium" />
         </span>
       </Link>
     </section>
