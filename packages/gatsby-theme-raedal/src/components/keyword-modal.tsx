@@ -62,8 +62,8 @@ const KeywordModal: FunctionComponent<KeywordModalPropsI> = ({ keywords }) => {
       css={css`
         background-image: linear-gradient(
           to right,
-          rgb(63, 44, 56),
-          rgb(38, 45, 59)
+          rgb(63, 44, 56, 0.9),
+          rgb(38, 45, 59, 0.9)
         );
 
         /* transform: translateY(101%); */
@@ -80,7 +80,9 @@ const KeywordModal: FunctionComponent<KeywordModalPropsI> = ({ keywords }) => {
         transition-property: transform;
         transition-duration: 0.4s;
 
-        background-color: #1b2227;
+        /* background-color: #1b2227; */
+        /* background-color: transparent; */
+        background-color: #1b2227de;
         z-index: 2000;
 
         &.make-transition-front {
