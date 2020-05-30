@@ -60,7 +60,7 @@ const KeywordModal: FunctionComponent<KeywordModalPropsI> = ({ keywords }) => {
       className={`keywords-of-modal ${transitionClass}`}
       // style={{ display: keywordModalIsShown ? "block" : "none" }}
       css={css`
-        transform: translateY(98%);
+        /* transform: translateY(101%); */
         position: fixed;
         top: 0;
         left: 0;
@@ -70,7 +70,7 @@ const KeywordModal: FunctionComponent<KeywordModalPropsI> = ({ keywords }) => {
         /* width: 100%; */
 
         transition-property: transform;
-        transition-duration: 2.8s;
+        transition-duration: 0.4s;
 
         background-color: olive;
         z-index: 2000;
@@ -80,7 +80,7 @@ const KeywordModal: FunctionComponent<KeywordModalPropsI> = ({ keywords }) => {
         }
 
         &.make-transition-back {
-          transform: translateY(98%);
+          transform: translateY(101%);
         }
       `}
       tabIndex={-1}
@@ -92,7 +92,7 @@ const KeywordModal: FunctionComponent<KeywordModalPropsI> = ({ keywords }) => {
             type: BLOG_POST_ACTION_TYPES_ENUM.KEYWORD_MODAL_TOGGLE,
             payload: false,
           });
-        }, 2000);
+        }, 1000);
       }}
       onKeyPress={() => {
         setTransitionClass("make-transition-back");
@@ -101,7 +101,7 @@ const KeywordModal: FunctionComponent<KeywordModalPropsI> = ({ keywords }) => {
             type: BLOG_POST_ACTION_TYPES_ENUM.KEYWORD_MODAL_TOGGLE,
             payload: false,
           });
-        }, 2000);
+        }, 1000);
       }}
     >
       <ul>

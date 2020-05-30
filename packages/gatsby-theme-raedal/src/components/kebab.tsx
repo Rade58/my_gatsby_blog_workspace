@@ -10,8 +10,9 @@ const Kebab: FunctionComponent = () => {
     blogPostContext,
     BLOG_POST_ACTION_TYPES_ENUM,
   } = $_useBlogPostReducerState;
-  const { blogPostDispatch } = useContext(blogPostContext);
+  const { blogPostDispatch, groupPage } = useContext(blogPostContext);
   const kebab = getIconByName("kebab-horizontal");
+  const { groupColor } = groupPage;
 
   return (
     <div
@@ -34,9 +35,17 @@ const Kebab: FunctionComponent = () => {
       css={css`
         cursor: pointer;
         display: inline-block;
+        display: flex;
+
+        & span {
+          color: ${groupColor};
+          align-self: center;
+        }
       `}
     >
-      <Octicon icon={kebab} size="medium" />
+      <span>
+        <Octicon icon={kebab} size="medium" />
+      </span>
     </div>
   );
 };
