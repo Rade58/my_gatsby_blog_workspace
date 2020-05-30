@@ -66,6 +66,9 @@ const KeywordModal: FunctionComponent<KeywordModalPropsI> = ({ keywords }) => {
           rgb(38, 45, 59, 0.9)
         );
 
+        display: flex;
+        flex-direction: column;
+
         /* transform: translateY(101%); */
         position: fixed;
         /* width: 100%; */
@@ -92,6 +95,36 @@ const KeywordModal: FunctionComponent<KeywordModalPropsI> = ({ keywords }) => {
         &.make-transition-back {
           transform: translateY(101%);
         }
+
+        /* === NEKA UNORDERED LIST BUDE FLEX CONTAINER !== */
+        & ul {
+          display: flex;
+          flex-direction: column;
+
+          border: tomato solid 1px;
+          /* align-items: center; */
+          padding-left: 0;
+
+          & li {
+            list-style-type: none;
+
+            border: olive solid 1px;
+
+            & a {
+              text-decoration-line: none;
+
+              & span[role="img"] {
+                & img {
+                  height: 1.5rem;
+                }
+              }
+
+              & span.group-name {
+                color: blanchedalmond;
+              }
+            }
+          }
+        }
       `}
       tabIndex={-1}
       role="button"
@@ -116,15 +149,17 @@ const KeywordModal: FunctionComponent<KeywordModalPropsI> = ({ keywords }) => {
     >
       <ul>
         {keywords.map(({ name, path, icon }) => (
-          <Link to={path} key={name}>
-            <span role="img" aria-label={name}>
-              <img
-                src={`data:image/svg+xml;base64,${icon}`}
-                alt="subject icon"
-              />
-            </span>
-            <span>{name}</span>
-          </Link>
+          <li>
+            <Link to={path} key={name}>
+              <span role="img" aria-label={name}>
+                <img
+                  src={`data:image/svg+xml;base64,${icon}`}
+                  alt="subject icon"
+                />
+              </span>
+              <span className="group-name">{name}</span>
+            </Link>
+          </li>
         ))}
       </ul>
     </div>
