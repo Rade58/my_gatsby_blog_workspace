@@ -110,22 +110,26 @@ const KeywordModal: FunctionComponent<KeywordModalPropsI> = ({ keywords }) => {
 
           & li {
             list-style-type: none;
+            display: flex;
+            justify-content: center;
 
             border: olive solid 1px;
 
             & a {
               text-decoration-line: none;
               display: flex;
+              align-items: center;
 
               border: tomato solid 1px;
               width: fit-content;
 
-              margin-left: 10vw;
+              /* margin-left: 10vw; */
 
               & span[role="img"] {
                 & img {
                   height: 1.5rem;
                   margin-right: 2rem;
+                  /* margin-top: 4px; */
                 }
               }
 

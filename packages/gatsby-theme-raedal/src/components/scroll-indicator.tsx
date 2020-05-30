@@ -105,7 +105,6 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
       }
       css={css`
         background-image: ${bcImg};
-
         background-color: ${bc};
 
         width: 100%;
