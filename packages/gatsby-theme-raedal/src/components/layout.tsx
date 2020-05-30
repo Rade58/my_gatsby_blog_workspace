@@ -103,6 +103,7 @@ const Layout: FunctionComponent<LayoutPropsI> = ({ body }) => {
 
             html {
               /*  */
+              scroll-behavior: smooth;
             }
 
             body {
@@ -113,7 +114,6 @@ const Layout: FunctionComponent<LayoutPropsI> = ({ body }) => {
               margin: 4px;
               background-color: rgb(27, 34, 39);
               padding-top: 56px;
-              scroll-behavior: "smooth";
 
               border: pink solid 4px;
 
