@@ -3,6 +3,7 @@ import { jsx } from "theme-ui";
 import { Link } from "gatsby";
 import { css } from "@emotion/core";
 import { useState, useContext, useEffect, FunctionComponent } from "react";
+import Octicon, { getIconByName } from "@primer/octicons-react";
 import { $_useBlogPostReducerState } from "../context_n_reducers/context_n_reducer_blog_post";
 
 export interface IndividualKeywordI {
@@ -21,14 +22,18 @@ const KeywordModal: FunctionComponent<KeywordModalPropsI> = ({ keywords }) => {
     blogPostContext,
   } = $_useBlogPostReducerState;
 
-  const { reducedBlogPostState, blogPostDispatch } = useContext(
+  const { reducedBlogPostState, blogPostDispatch, groupPage } = useContext(
     blogPostContext
   );
+  const { groupColor } = groupPage;
+
   const { keywordModalIsShown } = reducedBlogPostState; // OVO MOZDA I NECE TREBATI, JER SAM GA ISKORISTIO ON MOUNTING
 
   const [transitionClass, setTransitionClass] = useState<
     "make-transition-front" | "make-transition-back"
   >("make-transition-back");
+
+  const xocticon = getIconByName("x");
 
   useEffect(() => {
     // === !== === !==      MOUNTING
@@ -96,6 +101,21 @@ const KeywordModal: FunctionComponent<KeywordModalPropsI> = ({ keywords }) => {
           transform: translateY(101%);
         }
 
+        /*----------------------------------------*/
+
+        & div.octx {
+          border: red solid 1px;
+          display: flex;
+          justify-content: flex-end;
+          & span {
+            color: ${groupColor};
+            margin-top: 8px;
+            margin-right: 8px;
+          }
+        }
+
+        /*----------------------------------------*/
+
         /* === NEKA UNORDERED LIST BUDE FLEX CONTAINER !== */
         & ul {
           display: flex;
@@ -161,6 +181,11 @@ const KeywordModal: FunctionComponent<KeywordModalPropsI> = ({ keywords }) => {
         }, 1000);
       }}
     >
+      <div className="octx" role="img" aria-label="close">
+        <span>
+          <Octicon size="medium" icon={xocticon} />
+        </span>
+      </div>
       <ul>
         {keywords.map(({ name, path, icon }) => (
           <li>
