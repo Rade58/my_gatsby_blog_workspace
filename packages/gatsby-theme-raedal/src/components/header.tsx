@@ -3,6 +3,7 @@ import { jsx } from "theme-ui";
 
 import { css } from "@emotion/core";
 
+import { Link } from "gatsby";
 import {
   useContext,
   useLayoutEffect,
@@ -174,6 +175,18 @@ const Header: FunctionComponent = () => {
         } */
 
         /* =================== */
+
+        & div.home-link {
+          border: tomato solid 1px;
+
+          display: flex;
+          align-items: center;
+
+          & a {
+            color: blanchedalmond;
+            font-size: 1.4em;
+          }
+        }
       `}
     >
       {/* <NavInHeader /> */}
@@ -209,6 +222,27 @@ const Header: FunctionComponent = () => {
       {/* <RightArrow /> */}
       {/* <LeftArrow /> */}
       <LeftHArrow />
+      <div className="home-link">
+        <Link to="/">
+          <span role="img" aria-label="home">
+            🏡
+          </span>
+        </Link>
+      </div>
+      <div
+        className="alg-placehold"
+        css={css`
+          display: flex;
+          & > div {
+            width: 3rem;
+            border: blanchedalmond 2px inset;
+            height: 1rem;
+            margin: auto;
+          }
+        `}
+      >
+        <div />
+      </div>
       <Kebab />
       <RightHArrow />
       {/* <TableOfKeywords /> */}

@@ -188,8 +188,8 @@ const KeywordModal: FunctionComponent<KeywordModalPropsI> = ({ keywords }) => {
       </div>
       <ul>
         {keywords.map(({ name, path, icon }) => (
-          <li>
-            <Link to={path} key={name}>
+          <li key={name}>
+            <Link to={path}>
               <span role="img" aria-label={name}>
                 <img
                   src={`data:image/svg+xml;base64,${icon}`}
