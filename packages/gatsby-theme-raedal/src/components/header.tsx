@@ -44,7 +44,8 @@ import LeftHArrow from "./left-h-arrow";
 // === !== === !== === !== === !== === !==
 
 // =======================================================
-import TableOfKeywords from "../static_query_components/table-of-keywords";
+// import TableOfKeywords from "../static_query_components/table-of-keywords";
+import Kebab from "./kebab";
 // =======================================================
 
 /* export type UseHeaderCustomHookReturn = [
@@ -208,6 +209,7 @@ const Header: FunctionComponent = () => {
       {/* <RightArrow /> */}
       {/* <LeftArrow /> */}
       <LeftHArrow />
+      <Kebab />
       <RightHArrow />
       {/* <TableOfKeywords /> */}
       {/* === !== === !== */}
