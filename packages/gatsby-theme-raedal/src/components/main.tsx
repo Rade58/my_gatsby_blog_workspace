@@ -3,7 +3,7 @@ import { jsx } from "theme-ui";
 
 import { css } from "@emotion/core";
 
-import { useContext, FunctionComponent } from "react";
+import { useContext, useRef, FunctionComponent, createRef } from "react";
 
 import TableOfHeadings from "./table-of-headers";
 
@@ -22,6 +22,8 @@ import RightArrow from "./right-arrow";
 import TableOfKeywords from "../static_query_components/table-of-keywords";
 // === !== BICE USLOVNO RENDERED NA SAMOM DNU MAIN-A
 
+import JumperArrows from "./jumper-h";
+
 import { $_useBlogPostReducerState } from "../context_n_reducers/context_n_reducer_blog_post";
 
 const Main: FunctionComponent = ({ children }) => {
@@ -29,8 +31,11 @@ const Main: FunctionComponent = ({ children }) => {
   const { reducedBlogPostState } = useContext(blogPostContext);
   const { keywordModalIsShown } = reducedBlogPostState;
 
+  const mainRef = useRef<HTMLElement>(null);
+
   return (
     <main
+      ref={mainRef}
       css={css`
         /* position: relative; */
 
@@ -208,6 +213,7 @@ const Main: FunctionComponent = ({ children }) => {
       {/* <LoremIpsum /> */}
       {/* /////////////////////// */}
       {keywordModalIsShown ? <TableOfKeywords /> : null}
+      <JumperArrows ref={mainRef} gref={mainRef} />
     </main>
   );
 };

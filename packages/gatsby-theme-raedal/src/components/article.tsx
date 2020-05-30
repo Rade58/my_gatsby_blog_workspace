@@ -40,6 +40,7 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
 
   return (
     <article
+      id="my-article"
       sx={
         {
           // border: { variant: "borders.headerBorder" },

@@ -26,6 +26,9 @@ import {
 
 // import { $_useBlogPostReducerState } from "../context_n_reducers/context_n_reducer_blog_post";
 
+// POGLEDAJ (packages/gatsby-theme-raedal/src/components/jumper-h.tsx)
+// JER SAM TAMO LEPSE TYPE-OVAO REF FORWARDING
+
 const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
   const { reducedHeaderState, headerDispatch } = useContext(
     $_useReducerState.headerContext
