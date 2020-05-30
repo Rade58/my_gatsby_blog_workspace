@@ -62,6 +62,8 @@ const KeywordModal: FunctionComponent<KeywordModalPropsI> = ({ keywords }) => {
       css={css`
         /* transform: translateY(101%); */
         position: fixed;
+        width: 100%;
+        height: 100%;
         top: 0;
         left: 0;
         bottom: 0;
