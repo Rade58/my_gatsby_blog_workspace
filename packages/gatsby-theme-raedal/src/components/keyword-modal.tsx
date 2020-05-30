@@ -100,6 +100,9 @@ const KeywordModal: FunctionComponent<KeywordModalPropsI> = ({ keywords }) => {
         & ul {
           display: flex;
           flex-direction: column;
+          justify-content: space-evenly;
+
+          height: 80vh;
 
           border: tomato solid 1px;
           /* align-items: center; */
@@ -112,10 +115,17 @@ const KeywordModal: FunctionComponent<KeywordModalPropsI> = ({ keywords }) => {
 
             & a {
               text-decoration-line: none;
+              display: flex;
+
+              border: tomato solid 1px;
+              width: fit-content;
+
+              margin-left: 10vw;
 
               & span[role="img"] {
                 & img {
                   height: 1.5rem;
+                  margin-right: 2rem;
                 }
               }
 
