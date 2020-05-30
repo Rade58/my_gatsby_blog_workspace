@@ -229,6 +229,7 @@ const Header: FunctionComponent = () => {
           </span>
         </Link>
       </div>
+      {/* === !== ALGOLIA PLACEHOLDER === !== */}
       <div
         className="alg-placehold"
         css={css`
@@ -243,6 +244,7 @@ const Header: FunctionComponent = () => {
       >
         <div />
       </div>
+      {/* =====ALG GORE==== */}
       <Kebab />
       <RightHArrow />
       {/* <TableOfKeywords /> */}
