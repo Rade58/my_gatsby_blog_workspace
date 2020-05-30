@@ -60,6 +60,12 @@ const KeywordModal: FunctionComponent<KeywordModalPropsI> = ({ keywords }) => {
       className={`keywords-of-modal ${transitionClass}`}
       // style={{ display: keywordModalIsShown ? "block" : "none" }}
       css={css`
+        background-image: linear-gradient(
+          to right,
+          rgb(63, 44, 56),
+          rgb(38, 45, 59)
+        );
+
         /* transform: translateY(101%); */
         position: fixed;
         /* width: 100%; */
@@ -74,7 +80,7 @@ const KeywordModal: FunctionComponent<KeywordModalPropsI> = ({ keywords }) => {
         transition-property: transform;
         transition-duration: 0.4s;
 
-        background-color: olive;
+        background-color: #1b2227;
         z-index: 2000;
 
         &.make-transition-front {
