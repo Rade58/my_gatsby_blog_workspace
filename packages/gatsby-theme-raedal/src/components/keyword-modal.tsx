@@ -34,9 +34,13 @@ const KeywordModal: FunctionComponent<KeywordModalPropsI> = ({ keywords }) => {
     // === !== === !==      MOUNTING
 
     console.log("TABLE OF KEYWORDS");
-    Promise.resolve().then(() => {
+    /* Promise.resolve().then(() => {
       setTransitionClass("make-transition-front");
-    });
+    }); */
+
+    setTimeout(() => {
+      setTransitionClass("make-transition-front");
+    }, 1);
   }, []); // KAD JE SAMO KOD MOUNTINGA PRAZNA NIZ
   // (A AKO ZELIM DA SE EFFECT CALLBACK IZVRSI PRI SVAKOJ PROMENI STATE-A, PRI SVAKOM RERENDER-U, ONDA
   // NE STAVLJAM NISTA, KAO DRUGI ARGUMENT)
@@ -56,7 +60,7 @@ const KeywordModal: FunctionComponent<KeywordModalPropsI> = ({ keywords }) => {
       className={`keywords-of-modal ${transitionClass}`}
       // style={{ display: keywordModalIsShown ? "block" : "none" }}
       css={css`
-        /* transform: translateY(98%); */
+        transform: translateY(98%);
         position: fixed;
         top: 0;
         left: 0;
