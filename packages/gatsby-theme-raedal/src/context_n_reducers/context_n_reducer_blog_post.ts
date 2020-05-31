@@ -77,6 +77,12 @@ export const blogPostReducer: Reducer<
     return { ...state, keywordModalIsShown: action.payload }; // ZATO KORISTIM PAYLOAD
   }
 
+  if (action.type === BLOG_POST_ACTION_TYPES_ENUM.INTERSECTION) {
+    console.log(action.payload);
+
+    return { ...state, intersectedDivId: action.payload };
+  }
+
   return state;
 };
 
@@ -87,7 +93,7 @@ export const defaultState: BlogPostStateI = {
   pigDisapear: false,
   header_pull_class: "pulled-down",
   keywordModalIsShown: false,
-  intersectedDivId: "",
+  intersectedDivId: "#",
 };
 
 // CONTEXT stuff  === !==  === !==  === !==  === !==  === !==

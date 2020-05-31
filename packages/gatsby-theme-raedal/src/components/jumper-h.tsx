@@ -12,9 +12,13 @@ import {
   ForwardRefRenderFunction,
   RefObject,
   useImperativeHandle,
+  useLayoutEffect,
 } from "react";
 import Octicon, { getIconByName } from "@primer/octicons-react";
-import { $_useBlogPostReducerState } from "../context_n_reducers/context_n_reducer_blog_post";
+import {
+  $_useBlogPostReducerState,
+  BLOG_POST_ACTION_TYPES_ENUM,
+} from "../context_n_reducers/context_n_reducer_blog_post";
 
 interface JumperPropsI {
   mainReference: RefObject<HTMLElement>;
@@ -26,7 +30,13 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({
   articleReference,
 }) => {
   const { blogPostContext } = $_useBlogPostReducerState;
-  const { headings, relativeLink } = useContext(blogPostContext);
+  const {
+    headings,
+    relativeLink,
+    reducedBlogPostState,
+    blogPostDispatch,
+  } = useContext(blogPostContext);
+  const { intersectedDivId } = reducedBlogPostState;
 
   const [currentHeaderToBeClicked, setCurrentHeaderToBeClicked] = useState<
     number
@@ -45,9 +55,17 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({
   // DA BIH MOUGAO DA OBAVIM      UNOBSERVING
   // ODNONO SKIDANJE OBSERVERA
   // STO CU DEFINISATI KADA SE DOGODI UNMOUNTING KOMPONENTE
-  const interObservers = useRef<IntersectionObserver[]>([]); // ZA POCETAK JE OVO PRAZAN NIZ
+  // const interObservers = useRef<IntersectionObserver[]>([]); // ZA POCETAK JE OVO PRAZAN NIZ
   //                                                              NE MORAM OVO DA STAVLJAM KAO
   //                                                              DEPAENDANCY ZA useEffect
+
+  // const [interObs, setInterObs] = useState<IntersectionObserver[]>([])
+
+  const [currentId, setCurrentId] = useState<string>("");
+
+  const [previousBodyScrollHeight, setPreviousBodyScrollHeight] = useState<
+    number
+  >(0);
 
   useEffect(() => {
     // AKO NEMA NIJEDNOG HEDING DIV-A NE TREBAM NISTA I DA DEFINISEM
@@ -78,23 +96,49 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({
       //                                                   ROOT-A (VIEWPORT-A)
       //                                                      I    JEDNOG h2 HEADING DIV-A
 
+      const interObservers: IntersectionObserver[] = [];
+
       // ESLINT MI SAVETUJE DA UMESTO     for of   PETLJE KORISTIM
       //  forEach
 
       headings.forEach((headingDiv) => {
-        interObservers.current.push(
+        interObservers.push(
           new IntersectionObserver((entries, observer) => {
-            console.log({ entries, observer });
+            // console.log({ entries, observer, intersectedDivId });
+
+            // console.log(entries[0].target.id);
+
+            // console.log(`#${entries[0].target.id}`);
+
+            // console.log({ entries, observer });
+
+            console.log(entries[0]);
+
+            if (
+              currentId !== entries[0].target.id &&
+              entries[0].isIntersecting
+            ) {
+              setCurrentId(entries[0].target.id);
+            }
+
+            /* blogPostDispatch({
+              type: BLOG_POST_ACTION_TYPES_ENUM.INTERSECTION,
+              payload: `#${entries[0].target.id}`,
+            }); */
           }, options)
         );
       });
 
       // OVDE KACIM OBSERVER-A
       for (let i = 0; i < headings.length; i += 1) {
-        interObservers.current[i].observe(headingDivs[i]);
+        interObservers[i].observe(headingDivs[i]);
       }
     }
-  }, [articleReference]);
+  }, [articleReference, headings, blogPostDispatch]);
+
+  //
+  console.log(intersectedDivId);
+  //
 
   return (
     <Fragment>
@@ -103,6 +147,12 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({
           className="jumper-cont"
           css={css`
             /* visibility: hidden; */
+
+            border: crimson solid 1px;
+            position: fixed;
+            top: 200;
+            left: 0;
+            width: 100%;
 
             & .show-me {
               display: inline-block;
@@ -129,6 +179,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({
               border: crimson solid 8px;
             `}
           /> */}
+          {currentId}
           <div className="h-changer">
             <span className="up">
               <Octicon icon={triangleUp} size="medium" />

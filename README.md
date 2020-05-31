@@ -224,6 +224,8 @@ U SUTINI IDEM U: `packages/gatsby-theme-raedal/src/context_n_reducers/context_n_
 
 I TAMO MOZES VIDETI STA SAM URADIO U POGLEDU NOVIH DELOVA STATE-A I NOVIH ACTION-A
 
+# :four: `TRIGGERING DISPATCHA, U OBIMU INTERSECTION OBSERVER-OVOG CALLBACK-A, IZGLEDA DA NE FUNKCIONISE, JER KORISTIO SAM TU GRANU REDUCER-OVOG STATE-A I TO NIJE FUNKCIONISALO`
+
 ***************************************
 ***************************************
 

@@ -126,7 +126,7 @@ const Code: FunctionComponent<{
 
   //
 
-  console.log({ props });
+  // console.log({ props });
 
   const codeProps = preToCodeBlock(props);
 
