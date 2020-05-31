@@ -3,7 +3,13 @@ import { jsx } from "theme-ui";
 
 import { css } from "@emotion/core";
 
-import { useContext, useRef, FunctionComponent, createRef } from "react";
+import {
+  useContext,
+  useRef,
+  FunctionComponent,
+  createRef,
+  RefObject,
+} from "react";
 
 import TableOfHeadings from "./table-of-headers";
 
@@ -26,7 +32,14 @@ import JumperArrows from "./jumper-h";
 
 import { $_useBlogPostReducerState } from "../context_n_reducers/context_n_reducer_blog_post";
 
-const Main: FunctionComponent = ({ children }) => {
+interface MainPropsI {
+  articleReference: RefObject<HTMLElement>;
+}
+
+const Main: FunctionComponent<MainPropsI> = ({
+  children,
+  articleReference,
+}) => {
   const { blogPostContext } = $_useBlogPostReducerState;
   const { reducedBlogPostState } = useContext(blogPostContext);
   const { keywordModalIsShown } = reducedBlogPostState;
@@ -55,9 +68,17 @@ const Main: FunctionComponent = ({ children }) => {
           "t t t t t t t t t t"
           "k k k k k k k k k k"
           "s s s s s s s s s s"
-          ". . . . . . . . . .";
+          ". . . . j . . . . .";
 
         /*==============================*/
+
+        & > aside.jumper-cont {
+          grid-area: j;
+
+          width: 100%;
+          border: pink olid 4px;
+        }
+
         & > section.tofh2 {
           grid-area: t;
         }
@@ -213,7 +234,10 @@ const Main: FunctionComponent = ({ children }) => {
       {/* <LoremIpsum /> */}
       {/* /////////////////////// */}
       {keywordModalIsShown ? <TableOfKeywords /> : null}
-      <JumperArrows ref={mainRef} gref={mainRef} />
+      <JumperArrows
+        mainReference={mainRef}
+        articleReference={articleReference}
+      />
     </main>
   );
 };

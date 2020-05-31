@@ -12,6 +12,7 @@ import {
   // useRef,
   useContext,
   useEffect,
+  useRef,
   // -->  types
   FunctionComponent,
 } from "react";
@@ -68,7 +69,15 @@ const Layout: FunctionComponent<LayoutPropsI> = ({ body }) => {
   ); */
 
   ////////////////////////////////////////////////////////////////
+  const articleRef = useRef<HTMLElement>(null);
+  //
+  // PROVERA ARTICLE REF-A
+  /*  useEffect(() => {
+    console.log({ articleRef });
 
+    console.log(articleRef.current);
+  }, [articleRef]);
+ */
   const { blogPostContext } = $_useBlogPostReducerState;
 
   const { seo } = useContext(blogPostContext);
@@ -138,9 +147,9 @@ const Layout: FunctionComponent<LayoutPropsI> = ({ body }) => {
         </HeaderStateProvider>
 
         {/* '''''''''''''''''''' */}
-        <Main>
+        <Main articleReference={articleRef}>
           <Seo {...seo} />
-          <Article body={body} />
+          <Article body={body} ref={articleRef} />
         </Main>
         {/* <button
           sx={{
