@@ -102,10 +102,83 @@ React.RefObject<HTMLElement>
 
 ALI HAJDE PRVO DA DEFINISEM TAJ JUMPING FROM HEADER TO HEADER INSIDE `packages/gatsby-theme-raedal/src/components/jumper-h.tsx`, PA CU ONDA VIDETI KAKO DA REUSE-UJEM LOGIKU, KAKO ZNAM
 
+# :two: USPESNO SAM DEFINISAO `INTERSECTION OBSERVER-A`, ALI TREBA NOTE-OVATI, NEKOLIKO VAZNIH STVARI, KOJE SE TICU ROOT ELEMENTA, ALI, MALO TREBAM DA SE PODSETIM INTERSECRION OBSERVER API-A
+
+DA TI KAZEM DA ZADAVANJE *`document.documentElement`*-A, *KAO ROOT-A **NECE FUNKCIONISATI***, VEC 
+
+**`MORAM DA ZADAM DA VIEWPORT BUDE ROOT`**, A TAKAV JE API DA TO POSTIZEM PROSLEDJUJUCI `null` KAO ROOT ELEMENT
+
+```ts
+// JA CU IMATI VISE OBSERVER-A
+  // A ZASTO IH OVDE DEFINISEM ?
+  // DA BIH MOUGAO DA OBAVIM      UNOBSERVING
+  // ODNONO SKIDANJE OBSERVERA
+  // STO CU DEFINISATI KADA SE DOGODI UNMOUNTING KOMPONENTE
+  const interObservers = useRef<IntersectionObserver[]>([]); // ZA POCETAK JE OVO PRAZAN NIZ
+  //                                                              NE MORAM OVO DA STAVLJAM KAO
+  //                                                              DEPAENDANCY ZA useEffect
+
+  useEffect(() => {
+    // AKO NEMA NIJEDNOG HEDING DIV-A NE TREBAM NISTA I DA DEFINISEM
+    if (articleReference.current && headings.length) {
+      // UZEO SAM SVE    ELEMENTE KOJI IMAJU NESTED     h2    (U body-JU)
+      // MISLIM NA BODY PARSED BY     MDXRenderer
+      const headingDivs = articleReference.current.querySelectorAll(
+        "div.heading-above"
+      );
+
+      /*
+      console.log(headings);      // HEADINGS SU SVI DIV-OVI KOJI SU MI DOSTUPNI
+                                  //   IZ CONTEXT-OVOG STATE-A
+      console.log(relativeLink);  // TAKODJE I OVO SAM RANIJE PROSLEDIO KROZ CONTEXT    
+      */
+      //     MADA JA SAM SADA USTVARI GORE SA QUERY SELECTOROM, PRONASAO SVE
+      // div -OVE U KOJIMA SU  h2 ELEMENTI
+
+
+      // OPTIONS CE BITI ISTE ZA SVAKOG OD OBSERVER-A
+
+      const options = {
+        root: null, //        document.documentElement   SAM PRVOG STAVIO OVDE ALI TO
+        //                                                NIJE FUNKCIONISALU
+        //                    U SUSTINI     null      SE ODNOSI NA   VIEWPORT
+        rootMargin: "0px",
+        threshold: 1.0,
+      };
+
+      // IMACU VISE OBSERVER-A
+      // CILJ JE SVAKOM DA OBSERV-UJU                 INTERSECTION
+      //                                                   ROOT-A (VIEWPORT-A)
+      //                                                      I    JEDNOG h2 HEADING DIV-A
+
+      // ESLINT MI SAVETUJE DA UMESTO     for of   PETLJE KORISTIM
+      //  forEach
+
+      headings.forEach((headingDiv) => {
+        interObservers.current.push(
+          new IntersectionObserver((entries, observer) => {
+            console.log({ entries, observer });
+          }, options)
+        );
+      });
+
+      // OVDE KACIM OBSERVER-A
+      for (let i = 0; i < headings.length; i += 1) {
+        interObservers.current[i].observe(headingDivs[i]);
+      }
+    }
+  }, [articleReference]);
+```
+
+## STA CES PRIMETITI U VEZI CALLBACK-OVA, KOJI SE IZVRSAVAJU ZA SVAKI OD ELEMENATA KOJI SU OBSERVED U ODNSU NA POMENUTI VIEWPORT ROOT ?
+
+
+
+
+
 
 ******************************************
 ******************************************
-
 
 # :seven: ISTO TAKO 'Fira Code' FONT SE NE UCITAVA NA MOZILI, ALI PRIMETIO SAM DA JE TO SLUCAJ SA MNOGIM FONTOVIMA
 
