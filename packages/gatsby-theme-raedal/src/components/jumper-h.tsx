@@ -36,7 +36,6 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({
     reducedBlogPostState,
     blogPostDispatch,
   } = useContext(blogPostContext);
-  const { intersectedDivId } = reducedBlogPostState;
 
   const [currentHeaderToBeClicked, setCurrentHeaderToBeClicked] = useState<
     number
@@ -137,7 +136,6 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({
   }, [articleReference, headings, blogPostDispatch]);
 
   //
-  console.log(intersectedDivId);
   //
 
   return (
