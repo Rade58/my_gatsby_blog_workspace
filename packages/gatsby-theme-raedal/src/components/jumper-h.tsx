@@ -38,7 +38,15 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({
   // console.log({ mainReference, articleReference });
 
   useEffect(() => {
-    console.log(articleReference.current);
+    if (articleReference.current && headings.length) {
+      const headingDivs = articleReference.current.querySelectorAll(
+        "div.heading-above"
+      );
+
+      console.log(headingDivs);
+      console.log(headings);
+      console.log(relativeLink);
+    }
   }, [articleReference]);
 
   return (
