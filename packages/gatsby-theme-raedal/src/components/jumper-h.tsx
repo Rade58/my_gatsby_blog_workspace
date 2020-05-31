@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui";
 import { css } from "@emotion/core";
+import { Link } from "gatsby";
 import {
   useContext,
   useRef,
@@ -147,10 +148,10 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({
             /* visibility: hidden; */
 
             border: crimson solid 1px;
-            position: fixed;
+            /* position: fixed;
             top: 200;
             left: 0;
-            width: 100%;
+            width: 100%; */
 
             & .show-me {
               display: inline-block;
@@ -160,9 +161,9 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({
               display: none;
             }
 
-            @media screen and (min-width: 918px) {
+            /* @media screen and (min-width: 918px) {
               display: none;
-            }
+            } */
           `}
         >
           {/* <div
@@ -182,6 +183,44 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({
             <span className="up">
               <Octicon icon={triangleUp} size="medium" />
             </span>
+
+            {/* -------------TASBLE OF HEADINGS--------------- */}
+            <section
+              // style={{ display: headings.length ? "inline-block" : "none" }}
+              className={`tofh2 ${headings.length ? "show-me" : "hide-me"}`}
+              css={css`
+                .show-me {
+                  display: inline-block;
+                }
+
+                .hide-me {
+                  display: none;
+                }
+
+                @media screen and (max-width: 918px) {
+                  display: none;
+                }
+              `}
+            >
+              <ul>
+                {headings &&
+                  headings.length !== 0 &&
+                  headings.map(({ depth, value }) => (
+                    <li key={`${value}-${depth}`}>
+                      <Link
+                        to={`${encodeURI(relativeLink)}#${encodeURI(
+                          value.toLowerCase()
+                        )
+                          .replace(/%20/g, "-")
+                          .replace(/ /g, "-")}`}
+                      >
+                        {value}
+                      </Link>
+                    </li>
+                  ))}
+              </ul>
+            </section>
+            {/* ================================================ */}
             <span className="down">
               <Octicon icon={triangleDown} size="medium" />
             </span>

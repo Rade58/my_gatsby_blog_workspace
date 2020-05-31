@@ -15,7 +15,7 @@ import { $_useBlogPostReducerState } from "../context_n_reducers/context_n_reduc
 // AKO NEKAD BUDES ZELEO DA PROSLEDIS PROPSE, MADA SADA
 // TO NECU RADITI, JER KORISTIM CONTEXT
 interface TableOfHeadingsProps {
-  headings?: HeadingI[];
+  headings?: HeadingI[]; // DAKLE OVO NECU NI PROSLEDITI
 }
 
 const TableOfHeadings: FunctionComponent<TableOfHeadingsProps> = () => {

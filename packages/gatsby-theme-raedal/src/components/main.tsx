@@ -72,14 +72,14 @@ const Main: FunctionComponent<MainPropsI> = ({
 
         /*==============================*/
 
-        & > aside.jumper-cont {
+        /* & > aside.jumper-cont {
           grid-area: j;
 
           width: 100%;
           border: pink olid 4px;
-        }
+        } */
 
-        & > section.tofh2 {
+        & > aside.jumper-cont {
           grid-area: t;
         }
         & > section.keywords {
@@ -122,7 +122,7 @@ const Main: FunctionComponent<MainPropsI> = ({
             " a a a a a a a a . ."
             " a a a a a a a a . .";
 
-          & > section.tofh2 {
+          & > aside.jumper-cont {
             /* bottom: 12vh; */
             position: sticky;
             /* top: 12px; */
@@ -165,7 +165,7 @@ const Main: FunctionComponent<MainPropsI> = ({
             " . . a a a a a a . ."
             " . . a a a a a a . .";
 
-          & > section.tofh2 {
+          & > aside.jumper-cont {
             position: sticky;
 
             top: 38vh;
@@ -202,8 +202,12 @@ const Main: FunctionComponent<MainPropsI> = ({
       `}
     >
       {children}
-      {/* ZAMENI OVO KONKRETNIM KOMPONENTAMA, KADA IH BUDES NAPRAVIO */}
-      <TableOfHeadings />
+      {/* ------------------------- */}
+      {/* <TableOfHeadings />   NE KORITIM GA JER CE SVE IMPLEMENTIRATI SLEDECA KOMPONENTA     */}
+      <JumperArrows
+        mainReference={mainRef}
+        articleReference={articleReference}
+      />
       {/* EVO OVDE MOZES RENDER-OVATI Keywords */}
       <Keywords />
       {/* <LeftArrow />
@@ -234,10 +238,6 @@ const Main: FunctionComponent<MainPropsI> = ({
       {/* <LoremIpsum /> */}
       {/* /////////////////////// */}
       {keywordModalIsShown ? <TableOfKeywords /> : null}
-      <JumperArrows
-        mainReference={mainRef}
-        articleReference={articleReference}
-      />
     </main>
   );
 };
