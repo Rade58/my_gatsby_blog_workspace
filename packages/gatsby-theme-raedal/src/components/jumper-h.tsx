@@ -14,6 +14,7 @@ import {
   RefObject,
   useImperativeHandle,
   useLayoutEffect,
+  memo,
 } from "react";
 import Octicon, { getIconByName } from "@primer/octicons-react";
 import {
@@ -67,7 +68,17 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({
     number
   >(0);
 
-  useEffect(() => {
+  const [mountingTrigger, setMountingTrigger] = useState(false);
+
+  const interObservers = useRef<IntersectionObserver[]>([]);
+
+  console.log(interObservers.current);
+
+  useLayoutEffect(() => {
+    console.log("=== !==");
+    console.log({ artRef: articleReference.current, headings });
+    console.log("=== !==");
+
     // AKO NEMA NIJEDNOG HEDING DIV-A NE TREBAM NISTA I DA DEFINISEM
     if (articleReference.current && headings.length) {
       // UZEO SAM SVE    ELEMENTE KOJI IMAJU NESTED     h2    (U body-JU)
@@ -96,13 +107,13 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({
       //                                                   ROOT-A (VIEWPORT-A)
       //                                                      I    JEDNOG h2 HEADING DIV-A
 
-      const interObservers: IntersectionObserver[] = [];
+      // OVO TREBA DA BUDE U STATE-U
 
       // ESLINT MI SAVETUJE DA UMESTO     for of   PETLJE KORISTIM
       //  forEach
 
       headings.forEach((headingDiv) => {
-        interObservers.push(
+        interObservers.current.push(
           new IntersectionObserver((entries, observer) => {
             // console.log({ entries, observer, intersectedDivId });
 
@@ -131,13 +142,26 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({
 
       // OVDE KACIM OBSERVER-A
       for (let i = 0; i < headings.length; i += 1) {
-        interObservers[i].observe(headingDivs[i]);
+        interObservers.current[i].observe(headingDivs[i]);
       }
     }
-  }, [articleReference, headings, blogPostDispatch]);
+  }, []);
+
+  // RANDOM MOUNTINGZ
+
+  /* useEffect(() => {
+    console.log("RANDOM MOUNTINGZ");
+  }); */
 
   //
+  // unmounting
   //
+
+  useEffect(() => () => {
+    console.log("JUMPER UNMOUNTED!!!!");
+
+    // setMountingTrigger(!mountingTrigger);
+  });
 
   return (
     <Fragment>
@@ -147,7 +171,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({
           css={css`
             /* visibility: hidden; */
 
-            border: crimson solid 1px;
+            /* border: crimson solid 1px; */
             /* position: fixed;
             top: 200;
             left: 0;
