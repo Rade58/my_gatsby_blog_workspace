@@ -1,7 +1,7 @@
 /** @jsx jsx */
 
 import { jsx } from "theme-ui";
-import { useContext, FunctionComponent } from "react";
+import { useContext, useEffect, useRef, FunctionComponent } from "react";
 import { css } from "@emotion/core";
 
 import { Link } from "gatsby";
@@ -29,8 +29,30 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
 
   const { pigDisapear } = reducedBlogPostState;
 
+  const headingDivRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (headingDivRef.current && "IntersectionObserver" in window) {
+      // console.log(IntersectionObserver);
+
+      const interObserver = new IntersectionObserver(
+        (entries, observer) => {
+          console.log({ entries, observer });
+        },
+        {
+          root: null,
+          threshold: 1.0,
+          rootMargin: "0px",
+        }
+      );
+
+      interObserver.observe(headingDivRef.current);
+    }
+  }, []);
+
   return (
     <div
+      ref={headingDivRef}
       style={
         {
           // paddingTop: pigDisapear ? "59px" : "calc(38px + 58px)",
