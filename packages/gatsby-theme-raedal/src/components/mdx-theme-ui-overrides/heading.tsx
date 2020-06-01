@@ -30,12 +30,13 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
   const { pigDisapear } = reducedBlogPostState;
 
   const headingDivRef = useRef<HTMLDivElement>(null);
+  const interObserver = useRef<IntersectionObserver>();
 
   useEffect(() => {
     if (headingDivRef.current && "IntersectionObserver" in window) {
       // console.log(IntersectionObserver);
 
-      const interObserver = new IntersectionObserver(
+      interObserver.current = new IntersectionObserver(
         (entries, observer) => {
           console.log({ entries, observer });
         },
@@ -46,7 +47,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
         }
       );
 
-      interObserver.observe(headingDivRef.current);
+      interObserver.current.observe(headingDivRef.current);
     }
   }, []);
 

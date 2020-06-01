@@ -23,7 +23,7 @@ export enum BLOG_POST_ACTION_TYPES_ENUM {
   KEYWORD_MODAL_TOGGLE = "KEYWORD_MODAL_TOGGLE",
   // DODAJEM NOVI ACTION, KOJI BI TREBAO DISPATCH-OVATI
   // ONDA KADA SE DOGODI INTERSECTION
-  // INTERSECTION = "INTERSECTION", // NE RADI
+  INTERSECTION = "INTERSECTION",
 }
 
 export interface BlogPostStateI {
@@ -32,7 +32,7 @@ export interface BlogPostStateI {
   keywordModalIsShown: boolean;
   // NOVI FIELD REDUCER STATE, KOJI KEEP-UJE ID
   // TRENUTNOG, SA VIEWPORT-OM INTERSECTED DIV-A (U KOJEM JE h2)
-  // intersectedDivId: string;   // NE RADI
+  intersectedDivId: string;
 }
 
 //
@@ -77,13 +77,11 @@ export const blogPostReducer: Reducer<
     return { ...state, keywordModalIsShown: action.payload }; // ZATO KORISTIM PAYLOAD
   }
 
-  // NE RADI DOBRO
-  /* 
   if (action.type === BLOG_POST_ACTION_TYPES_ENUM.INTERSECTION) {
     console.log(action.payload);
 
     return { ...state, intersectedDivId: action.payload };
-  } */
+  }
 
   return state;
 };
@@ -95,7 +93,7 @@ export const defaultState: BlogPostStateI = {
   pigDisapear: false,
   header_pull_class: "pulled-down",
   keywordModalIsShown: false,
-  // intersectedDivId: "#", // NE RADI
+  intersectedDivId: "#",
 };
 
 // CONTEXT stuff  === !==  === !==  === !==  === !==  === !==

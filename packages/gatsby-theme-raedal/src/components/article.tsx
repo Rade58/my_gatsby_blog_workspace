@@ -47,8 +47,8 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
   );
 
   useEffect(() => {
-    console.log("=== !== ===  MOUNTING  !== === !==");
-    console.log({ body });
+    console.log("=== !== ===  MOUNTING ARTICLE  !== === !==");
+    // console.log({ body });
     console.log("=== !== === !== === !==");
   }, []);
 
