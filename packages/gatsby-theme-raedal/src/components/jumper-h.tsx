@@ -68,14 +68,17 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({
     number
   >(0);
 
-  const [mountingTrigger, setMountingTrigger] = useState(false);
+  const [mountObserver, setMountingTrigger] = useState(false);
 
-  const interObservers = useRef<IntersectionObserver[]>([]);
+  const [interObservers, setInterObservers] = useState<IntersectionObserver[]>(
+    []
+  );
 
-  console.log(interObservers.current);
+  console.log(interObservers);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     console.log("=== !==");
+    console.log("DANGEROUS MOUNTING");
     console.log({ artRef: articleReference.current, headings });
     console.log("=== !==");
 
@@ -112,8 +115,10 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({
       // ESLINT MI SAVETUJE DA UMESTO     for of   PETLJE KORISTIM
       //  forEach
 
+      const interObserversArray: IntersectionObserver[] = [];
+
       headings.forEach((headingDiv) => {
-        interObservers.current.push(
+        interObserversArray.push(
           new IntersectionObserver((entries, observer) => {
             // console.log({ entries, observer, intersectedDivId });
 
@@ -123,7 +128,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({
 
             // console.log({ entries, observer });
 
-            console.log(entries[0]);
+            console.log(entries[0].target);
 
             if (
               currentId !== entries[0].target.id &&
@@ -142,8 +147,10 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({
 
       // OVDE KACIM OBSERVER-A
       for (let i = 0; i < headings.length; i += 1) {
-        interObservers.current[i].observe(headingDivs[i]);
+        interObserversArray[i].observe(headingDivs[i]);
       }
+
+      setInterObservers(interObserversArray);
     }
   }, []);
 
@@ -157,40 +164,44 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({
   // unmounting
   //
 
-  useEffect(() => () => {
-    console.log("JUMPER UNMOUNTED!!!!");
+  useEffect(
+    () => () => {
+      console.log("JUMPER UNMOUNTED!!!!");
 
-    // setMountingTrigger(!mountingTrigger);
-  });
+      // setMountingTrigger(!mountingTrigger);
+    },
+    [] // ZA UNMOUNTIG SE STAVLJA NIZ NE ZABORAVI OPET
+  );
+
+  // console.log(interObservers[0].root);
 
   return (
     <Fragment>
-      {!headings.length ? null : (
-        <aside
-          className="jumper-cont"
-          css={css`
-            /* visibility: hidden; */
+      <aside
+        className="jumper-cont"
+        css={css`
+          /* visibility: hidden; */
 
-            /* border: crimson solid 1px; */
-            /* position: fixed;
+          /* border: crimson solid 1px; */
+          /* position: fixed;
             top: 200;
             left: 0;
             width: 100%; */
 
-            & .show-me {
-              display: inline-block;
-            }
+          & .show-me {
+            display: inline-block;
+          }
 
-            & .hide-me {
-              display: none;
-            }
+          & .hide-me {
+            display: none;
+          }
 
-            /* @media screen and (min-width: 918px) {
+          /* @media screen and (min-width: 918px) {
               display: none;
             } */
-          `}
-        >
-          {/* <div
+        `}
+      >
+        {/* <div
             ref={frameRef}
             className="frame"
             css={css`
@@ -202,58 +213,57 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({
               border: crimson solid 8px;
             `}
           /> */}
-          {currentId}
-          <div className="h-changer">
-            <span className="up">
-              <Octicon icon={triangleUp} size="medium" />
-            </span>
+        {currentId}
+        <div className="h-changer">
+          <span className="up">
+            <Octicon icon={triangleUp} size="medium" />
+          </span>
 
-            {/* -------------TASBLE OF HEADINGS--------------- */}
-            <section
-              // style={{ display: headings.length ? "inline-block" : "none" }}
-              className={`tofh2 ${headings.length ? "show-me" : "hide-me"}`}
-              css={css`
-                .show-me {
-                  display: inline-block;
-                }
+          {/* -------------TASBLE OF HEADINGS--------------- */}
+          <section
+            // style={{ display: headings.length ? "inline-block" : "none" }}
+            className={`tofh2 ${headings.length ? "show-me" : "hide-me"}`}
+            css={css`
+              .show-me {
+                display: inline-block;
+              }
 
-                .hide-me {
-                  display: none;
-                }
+              .hide-me {
+                display: none;
+              }
 
-                @media screen and (max-width: 918px) {
-                  display: none;
-                }
-              `}
-            >
-              <ul>
-                {headings &&
-                  headings.length !== 0 &&
-                  headings.map(({ depth, value }) => (
-                    <li key={`${value}-${depth}`}>
-                      <Link
-                        to={`${encodeURI(relativeLink)}#${encodeURI(
-                          value.toLowerCase()
-                        )
-                          .replace(/%20/g, "-")
-                          .replace(/ /g, "-")}`}
-                      >
-                        {value}
-                      </Link>
-                    </li>
-                  ))}
-              </ul>
-            </section>
-            {/* ================================================ */}
-            <span className="down">
-              <Octicon icon={triangleDown} size="medium" />
-            </span>
-          </div>
-          <div className="scroll-to-top">
-            <Octicon icon={arrowUp} size="medium" />
-          </div>
-        </aside>
-      )}
+              @media screen and (max-width: 918px) {
+                display: none;
+              }
+            `}
+          >
+            <ul>
+              {headings &&
+                headings.length !== 0 &&
+                headings.map(({ depth, value }) => (
+                  <li key={`${value}-${depth}`}>
+                    <Link
+                      to={`${encodeURI(relativeLink)}#${encodeURI(
+                        value.toLowerCase()
+                      )
+                        .replace(/%20/g, "-")
+                        .replace(/ /g, "-")}`}
+                    >
+                      {value}
+                    </Link>
+                  </li>
+                ))}
+            </ul>
+          </section>
+          {/* ================================================ */}
+          <span className="down">
+            <Octicon icon={triangleDown} size="medium" />
+          </span>
+        </div>
+        <div className="scroll-to-top">
+          <Octicon icon={arrowUp} size="medium" />
+        </div>
+      </aside>
     </Fragment>
   );
 };

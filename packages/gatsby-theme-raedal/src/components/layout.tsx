@@ -82,6 +82,8 @@ const Layout: FunctionComponent<LayoutPropsI> = ({ body }) => {
 
   const { seo } = useContext(blogPostContext);
 
+  // useEffect(() => {})
+
   useEffect(
     () => () => {
       console.log("!!!! LAYOUT UNMOUNTING !!!!");

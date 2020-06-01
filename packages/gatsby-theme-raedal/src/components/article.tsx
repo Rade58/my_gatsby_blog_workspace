@@ -4,7 +4,13 @@ import { css } from "@emotion/core";
 
 import { MDXRenderer } from "gatsby-plugin-mdx";
 
-import { useContext, FunctionComponent, useEffect, forwardRef } from "react";
+import {
+  useContext,
+  FunctionComponent,
+  useEffect,
+  forwardRef,
+  memo,
+} from "react";
 
 // OVDE ZELIM DA KORISTIM BLOG POST STATE (STO SAM I URADIO, DOLE U KOMPONENTI)
 import { blogPostContext } from "../context_n_reducers/context_n_reducer_blog_post";
@@ -101,4 +107,4 @@ const Article = forwardRef<HTMLElement, ArticlePropsI>(
   }
 );
 
-export default Article;
+export default memo(Article);
