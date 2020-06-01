@@ -3,12 +3,14 @@ import { jsx } from "theme-ui";
 import { css } from "@emotion/core";
 
 import { MDXRenderer } from "gatsby-plugin-mdx";
+import { Router } from "@reach/router";
 
 import {
   useContext,
   FunctionComponent,
   useEffect,
   forwardRef,
+  Fragment,
   memo,
 } from "react";
 
@@ -44,6 +46,12 @@ const Article = forwardRef<HTMLElement, ArticlePropsI>(
       },
       []
     );
+
+    useEffect(() => {
+      console.log("=== !== ===  MOUNTING  !== === !==");
+      console.log({ body });
+      console.log("=== !== === !== === !==");
+    }, []);
 
     return (
       <article
@@ -107,4 +115,4 @@ const Article = forwardRef<HTMLElement, ArticlePropsI>(
   }
 );
 
-export default memo(Article);
+export default Article;

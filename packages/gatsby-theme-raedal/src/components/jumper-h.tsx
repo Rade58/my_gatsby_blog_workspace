@@ -175,6 +175,8 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({
 
   // console.log(interObservers[0].root);
 
+  console.log(articleReference.current);
+
   return (
     <Fragment>
       <aside
