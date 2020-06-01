@@ -41,7 +41,7 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
     () => () => {
       console.log("~~~~~!! ARTICLE UNMOUNTED !!~~~~~");
 
-      // if (document.body.onscroll) document.body.onscroll = null;
+      if (document.body.onscroll) document.body.onscroll = null;
     },
     []
   );

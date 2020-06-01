@@ -78,7 +78,7 @@ export const blogPostReducer: Reducer<
   }
 
   if (action.type === BLOG_POST_ACTION_TYPES_ENUM.INTERSECTION) {
-    console.log(action.payload);
+    // console.log(action.payload);
 
     return { ...state, intersectedDivId: action.payload };
   }

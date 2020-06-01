@@ -1,7 +1,14 @@
 /** @jsx jsx */
 
 import { jsx } from "theme-ui";
-import { useContext, useEffect, useRef, FunctionComponent } from "react";
+import {
+  useContext,
+  useEffect,
+  useRef,
+  FunctionComponent,
+  memo,
+  useState,
+} from "react";
 import { css } from "@emotion/core";
 
 import { Link } from "gatsby";
@@ -46,10 +53,10 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
           console.log({ entries, observer });
 
           if (entries[0].isIntersecting) {
-            blogPostDispatch({
-              type: BLOG_POST_ACTION_TYPES_ENUM.INTERSECTION,
-              payload: entries[0].target.id,
-            });
+            /* blogPostDispatch({
+                type: BLOG_POST_ACTION_TYPES_ENUM.INTERSECTION,
+                payload: entries[0].target.id,
+              }); */
           }
         },
         {
@@ -62,6 +69,15 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
       interObserver.current.observe(headingDivRef.current);
     }
   }, []);
+
+  useEffect(
+    () => () => {
+      if (interObserver.current && headingDivRef.current) {
+        interObserver.current.unobserve(headingDivRef.current);
+      }
+    },
+    []
+  );
 
   return (
     <div
