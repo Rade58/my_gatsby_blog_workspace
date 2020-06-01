@@ -36,8 +36,6 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
     blogPostDispatch,
   } = useContext(blogPostContext);
 
-  const { intersectedDivId } = reducedBlogPostState;
-
   const [currentHeaderToBeClicked, setCurrentHeaderToBeClicked] = useState<
     number
   >(0);
@@ -73,6 +71,8 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
     []
   );
 
+  //
+
   console.log(interObservers);
 
   useEffect(() => {
@@ -99,6 +99,15 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
   );
 
   // console.log(interObservers[0].root);
+
+  const [intersectedDivId, setIntersectedDivId] = useState<string>("");
+
+  useEffect(() => {
+    blogPostDispatch({
+      type: BLOG_POST_ACTION_TYPES_ENUM.GIVE_SET_JUMPER_STATE,
+      payload: setIntersectedDivId,
+    });
+  }, []);
 
   return (
     <Fragment>

@@ -52,4 +52,10 @@ UZASNO, ZATO CU IPAK MORATI DA DEFINISEM SVE KORISCENJEM JAVASCRIPTA
 
 # !!!! MORAM REDEFINISATI `packages/gatsby-theme-raedal/src/components/mdx-theme-ui-overrides/heading.tsx` U POTPUNOSTI
 
+***
+***
 
+# USPEO SAM DA RESIM POMENUTI PROBLEM TAK OSTO NISAM MENJAO REDUCER-OV STATE
+
+***
+***

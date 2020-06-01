@@ -39,7 +39,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
     blogPostContext
   );
 
-  const { pigDisapear } = reducedBlogPostState;
+  const { pigDisapear, setIntersectedHeadingDivFunc } = reducedBlogPostState;
 
   const headingDivRef = useRef<HTMLDivElement>(null);
   const interObserver = useRef<IntersectionObserver>();
@@ -57,6 +57,8 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
                 type: BLOG_POST_ACTION_TYPES_ENUM.INTERSECTION,
                 payload: entries[0].target.id,
               }); */
+
+            setIntersectedHeadingDivFunc(entries[0].target.id);
           }
         },
         {
