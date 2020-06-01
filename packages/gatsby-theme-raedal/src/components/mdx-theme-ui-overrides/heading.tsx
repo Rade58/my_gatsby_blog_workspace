@@ -51,6 +51,8 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
       interObserver.current = new IntersectionObserver(
         (entries, observer) => {
           console.log({ entries, observer });
+          // console.log(observer.thresholds);
+          // console.log(entries[0].rootBounds);
 
           if (entries[0].isIntersecting) {
             /* blogPostDispatch({
@@ -63,7 +65,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
         },
         {
           root: null,
-          threshold: 1.0,
+          threshold: [0.35, 0.75],
           rootMargin: "0px",
         }
       );
