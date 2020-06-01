@@ -36,6 +36,8 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
     blogPostDispatch,
   } = useContext(blogPostContext);
 
+  const { intersectedDivId } = reducedBlogPostState;
+
   const [currentHeaderToBeClicked, setCurrentHeaderToBeClicked] = useState<
     number
   >(0);
@@ -59,7 +61,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
 
   // const [interObs, setInterObs] = useState<IntersectionObserver[]>([])
 
-  const [currentId, setCurrentId] = useState<string>("");
+  // const [currentId, setCurrentId] = useState<string>("");
 
   const [previousBodyScrollHeight, setPreviousBodyScrollHeight] = useState<
     number
@@ -136,7 +138,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
               border: crimson solid 8px;
             `}
           /> */}
-        {currentId}
+        {intersectedDivId}
         <div className="h-changer">
           <span className="up">
             <Octicon icon={triangleUp} size="medium" />

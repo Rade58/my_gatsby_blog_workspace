@@ -23,9 +23,14 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
 
   // KORISTICU I CONTEXT
 
-  const { blogPostContext } = $_useBlogPostReducerState;
+  const {
+    blogPostContext,
+    BLOG_POST_ACTION_TYPES_ENUM,
+  } = $_useBlogPostReducerState;
 
-  const { relativeLink, reducedBlogPostState } = useContext(blogPostContext);
+  const { relativeLink, reducedBlogPostState, blogPostDispatch } = useContext(
+    blogPostContext
+  );
 
   const { pigDisapear } = reducedBlogPostState;
 
@@ -39,6 +44,13 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
       interObserver.current = new IntersectionObserver(
         (entries, observer) => {
           console.log({ entries, observer });
+
+          if (entries[0].isIntersecting) {
+            blogPostDispatch({
+              type: BLOG_POST_ACTION_TYPES_ENUM.INTERSECTION,
+              payload: entries[0].target.id,
+            });
+          }
         },
         {
           root: null,
