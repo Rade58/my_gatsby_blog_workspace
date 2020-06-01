@@ -69,7 +69,7 @@ const Layout: FunctionComponent<LayoutPropsI> = ({ body }) => {
   ); */
 
   ////////////////////////////////////////////////////////////////
-  const articleRef = useRef<HTMLElement>(null);
+
   //
   // PROVERA ARTICLE REF-A
   /*  useEffect(() => {
@@ -149,9 +149,9 @@ const Layout: FunctionComponent<LayoutPropsI> = ({ body }) => {
         </HeaderStateProvider>
 
         {/* '''''''''''''''''''' */}
-        <Main articleReference={articleRef}>
+        <Main>
           <Seo {...seo} />
-          <Article body={body} ref={articleRef} />
+          <Article body={body} />
         </Main>
         {/* <button
           sx={{

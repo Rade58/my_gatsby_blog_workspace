@@ -33,13 +33,10 @@ import JumperArrows from "./jumper-h";
 import { $_useBlogPostReducerState } from "../context_n_reducers/context_n_reducer_blog_post";
 
 interface MainPropsI {
-  articleReference: RefObject<HTMLElement>;
+  articleReference?: RefObject<HTMLElement>;
 }
 
-const Main: FunctionComponent<MainPropsI> = ({
-  children,
-  articleReference,
-}) => {
+const Main: FunctionComponent<MainPropsI> = ({ children }) => {
   const { blogPostContext } = $_useBlogPostReducerState;
   const { reducedBlogPostState } = useContext(blogPostContext);
   const { keywordModalIsShown } = reducedBlogPostState;
@@ -204,10 +201,7 @@ const Main: FunctionComponent<MainPropsI> = ({
       {children}
       {/* ------------------------- */}
       {/* <TableOfHeadings />   NE KORITIM GA JER CE SVE IMPLEMENTIRATI SLEDECA KOMPONENTA     */}
-      <JumperArrows
-        mainReference={mainRef}
-        articleReference={articleReference}
-      />
+      <JumperArrows mainReference={mainRef} />
       {/* EVO OVDE MOZES RENDER-OVATI Keywords */}
       <Keywords />
       {/* <LeftArrow />

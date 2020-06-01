@@ -24,13 +24,10 @@ import {
 
 interface JumperPropsI {
   mainReference: RefObject<HTMLElement>;
-  articleReference: RefObject<HTMLElement>;
+  articleReference?: RefObject<HTMLElement>;
 }
 
-const JumperButtons: FunctionComponent<JumperPropsI> = ({
-  mainReference,
-  articleReference,
-}) => {
+const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
   const { blogPostContext } = $_useBlogPostReducerState;
   const {
     headings,
@@ -77,81 +74,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({
   console.log(interObservers);
 
   useEffect(() => {
-    console.log("=== !==");
-    console.log("DANGEROUS MOUNTING");
-    console.log({ artRef: articleReference.current, headings });
-    console.log("=== !==");
-
-    // AKO NEMA NIJEDNOG HEDING DIV-A NE TREBAM NISTA I DA DEFINISEM
-    if (articleReference.current && headings.length) {
-      // UZEO SAM SVE    ELEMENTE KOJI IMAJU NESTED     h2    (U body-JU)
-      // MISLIM NA BODY PARSED BY     MDXRenderer
-      const headingDivs = articleReference.current.querySelectorAll(
-        "div.heading-above"
-      );
-
-      /*
-      console.log(headings);
-      console.log(relativeLink);
-      */
-
-      // OPTIONS CE BITI ISTE ZA SVAKOG OD OBSERVER-A
-
-      const options = {
-        root: null, //        document.documentElement   SAM PRVOG STAVIO OVDE ALI TO
-        //                                                NIJE FUNKCIONISALU
-        //                    U SUSTINI     null      SE ODNOSI NA   VIEWPORT
-        rootMargin: "0px",
-        threshold: 1.0,
-      };
-
-      // IMACU VISE OBSERVER-A
-      // CILJ JE SVAKOM DA OBSERV-UJU                 INTERSECTION
-      //                                                   ROOT-A (VIEWPORT-A)
-      //                                                      I    JEDNOG h2 HEADING DIV-A
-
-      // OVO TREBA DA BUDE U STATE-U
-
-      // ESLINT MI SAVETUJE DA UMESTO     for of   PETLJE KORISTIM
-      //  forEach
-
-      const interObserversArray: IntersectionObserver[] = [];
-
-      headings.forEach((headingDiv) => {
-        interObserversArray.push(
-          new IntersectionObserver((entries, observer) => {
-            // console.log({ entries, observer, intersectedDivId });
-
-            // console.log(entries[0].target.id);
-
-            // console.log(`#${entries[0].target.id}`);
-
-            // console.log({ entries, observer });
-
-            console.log(entries[0].target);
-
-            if (
-              currentId !== entries[0].target.id &&
-              entries[0].isIntersecting
-            ) {
-              setCurrentId(entries[0].target.id);
-            }
-
-            /* blogPostDispatch({
-              type: BLOG_POST_ACTION_TYPES_ENUM.INTERSECTION,
-              payload: `#${entries[0].target.id}`,
-            }); */
-          }, options)
-        );
-      });
-
-      // OVDE KACIM OBSERVER-A
-      for (let i = 0; i < headings.length; i += 1) {
-        interObserversArray[i].observe(headingDivs[i]);
-      }
-
-      setInterObservers(interObserversArray);
-    }
+    console.log("JUMPER MOUNTED");
   }, []);
 
   // RANDOM MOUNTINGZ
@@ -174,8 +97,6 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({
   );
 
   // console.log(interObservers[0].root);
-
-  console.log(articleReference.current);
 
   return (
     <Fragment>
