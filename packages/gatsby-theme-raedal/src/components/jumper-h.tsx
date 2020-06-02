@@ -176,6 +176,9 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
                 width: 100%;
                 list-style-type: none;
                 & li {
+                  &.highlight {
+                    outline: crimson solid 1px;
+                  }
                 }
               }
 
@@ -188,7 +191,17 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
               {headings &&
                 headings.length !== 0 &&
                 headings.map(({ depth, value }) => (
-                  <li key={`${value}-${depth}`}>
+                  <li
+                    className={`${
+                      intersectedDivId ===
+                      encodeURI(value.toLowerCase())
+                        .replace(/%20/g, "-")
+                        .replace(/ /g, "-")
+                        ? "highlight"
+                        : ""
+                    }`}
+                    key={`${value}-${depth}`}
+                  >
                     <Link
                       onClick={() => {
                         console.log("clicked");
