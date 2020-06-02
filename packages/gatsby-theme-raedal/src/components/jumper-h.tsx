@@ -217,6 +217,8 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
             margin-left: auto;
             border-radius: 12px;
 
+            cursor: pointer;
+
             & > * {
               margin: 4px;
             }
@@ -406,7 +408,21 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
             </span>
           </Link>
         </div>
-        <div className="scroll-to-top">
+        <div
+          className="scroll-to-top"
+          role="button"
+          tabIndex={0}
+          onClick={() => {
+            window.scrollTo({
+              top: 0,
+            });
+          }}
+          onKeyPress={() => {
+            window.scrollTo({
+              top: 0,
+            });
+          }}
+        >
           <Octicon icon={arrowUp} size="medium" />
         </div>
       </aside>
