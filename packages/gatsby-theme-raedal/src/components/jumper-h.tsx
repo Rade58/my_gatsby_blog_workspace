@@ -100,12 +100,73 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
 
   const [intersectedDivId, setIntersectedDivId] = useState<string>("");
 
+  // MORAM KREIRATI DICTIONARY TYPE, ZA NORMALIZED hedaings OBJEKAT
+  const normalizedHeadingsRef = useRef<{
+    [key: string]: { value: string; depth: number };
+  }>({}); // OVAJ REF CE DOBITI U useEffect-U (SAMO ON MOUNTING, SVE STA MU TREBA)
+
+  // MORAO BIH KREIRATI I NIZ NAPRAVLJEN SAMO OD HEADINGS STRINGOVA
+  const justHeadingsArrayRef = useRef<string[]>([]);
+
+  const [loadArray, setLoadArray] = useState<boolean>(true);
+
   useEffect(() => {
     blogPostDispatch({
       type: BLOG_POST_ACTION_TYPES_ENUM.GIVE_SET_JUMPER_STATE,
       payload: setIntersectedDivId,
     });
+
+    // NORMALIZOVANJE     headings    NIZ-A
+    headings.forEach((hedingOb) => {
+      normalizedHeadingsRef.current[
+        `${encodeURI(hedingOb.value.toLowerCase())
+          .replace(/%20/g, "-")
+          .replace(/ /g, "-")}`.trim()
+      ] = {
+        value: `${encodeURI(hedingOb.value.toLowerCase())
+          .replace(/%20/g, "-")
+          .replace(/ /g, "-")}`.trim(),
+        depth: hedingOb.depth,
+      };
+
+      if (loadArray) {
+        justHeadingsArrayRef.current.push(
+          `${encodeURI(hedingOb.value.toLowerCase())
+            .replace(/%20/g, "-")
+            .replace(/ /g, "-")}`.trim()
+        );
+
+        setLoadArray(false);
+      }
+    });
   }, []);
+
+  const indexOfCurrentIntersHdiv = justHeadingsArrayRef.current.indexOf(
+    intersectedDivId
+  );
+
+  console.log(indexOfCurrentIntersHdiv);
+
+  console.log({
+    norm: normalizedHeadingsRef.current,
+    arr: justHeadingsArrayRef.current,
+    hs: headings,
+    intersectedDivId,
+  });
+
+  const previousIndex: number | undefined =
+    indexOfCurrentIntersHdiv - 1 >= 0
+      ? indexOfCurrentIntersHdiv - 1
+      : undefined;
+  const nextIndex: number | undefined =
+    indexOfCurrentIntersHdiv + 1 >= 0
+      ? indexOfCurrentIntersHdiv + 1
+      : undefined;
+
+  console.log({
+    previousIndex,
+    nextIndex,
+  });
 
   return (
     <Fragment>
@@ -150,9 +211,11 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
           /> */}
         {intersectedDivId}
         <div className="h-changer">
+          {/* <Link> */}
           <span className="up">
             <Octicon icon={triangleUp} size="medium" />
           </span>
+          {/* </Link> */}
 
           {/* -------------TASBLE OF HEADINGS--------------- */}
           <section
@@ -225,9 +288,11 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
             </ul>
           </section>
           {/* ================================================ */}
+          {/* <Link> */}
           <span className="down">
             <Octicon icon={triangleDown} size="medium" />
           </span>
+          {/* </Link> */}
         </div>
         <div className="scroll-to-top">
           <Octicon icon={arrowUp} size="medium" />
