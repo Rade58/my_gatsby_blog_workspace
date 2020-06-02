@@ -114,13 +114,12 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
 
         display: flex;
 
-        padding-top: 34px;
-        padding-bottom: 0px;
+        padding-top: 59px;
+        /* padding-top: 34px; */
+        padding-bottom: 42px;
 
-        @media screen and (min-width: 918px) {
+        @media screen and (max-width: 918px) {
           /* padding-top: calc(38px + 58px); */
-
-          padding-top: 41px;
         }
       `}
     >
