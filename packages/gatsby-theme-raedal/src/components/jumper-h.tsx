@@ -187,13 +187,13 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
           display: flex;
           flex-direction: column;
 
-          & .show-me {
+          /* & .show-me {
             display: flex;
           }
 
           & .hide-me {
             display: none;
-          }
+          } */
 
           /* @media screen and (min-width: 918px) {
               display: none;
@@ -216,8 +216,12 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
         <div
           className="h-changer"
           css={css`
-            & a {
+            & > a {
               color: blanchedalmond;
+
+              &:hover {
+                color: crimson;
+              }
 
               &.disabled {
                 /* display: none; */
@@ -247,7 +251,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
             className={`tofh2 ${headings.length ? "show-me" : "hide-me"}`}
             css={css`
               .show-me {
-                display: inline-block;
+                display: flex;
               }
 
               .hide-me {
@@ -256,20 +260,46 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
 
               @media screen and (max-width: 918px) {
                 display: none;
+
+                .show-me {
+                  display: none;
+                }
               }
 
               & ul {
                 padding: 0;
                 width: 100%;
+                overflow-y: auto;
+                overflow-x: hidden;
+
                 list-style-type: none;
                 & li {
+                  margin: 2px;
+
                   &.highlight {
-                    outline: crimson solid 1px;
+                    /* border: crimson solid 1px; */
+
+                    box-sizing: border-box;
+
+                    & a {
+                      color: crimson;
+                      text-decoration-line: underline;
+                      text-decoration-color: tomato;
+                    }
+                  }
+
+                  & a {
+                    color: blanchedalmond;
+
+                    text-decoration-line: none;
+
+                    &:hover {
+                      color: pink;
+                      text-decoration-line: underline;
+                      text-decoration-color: olive;
+                    }
                   }
                 }
-              }
-              & a {
-                color: blanchedalmond;
               }
             `}
           >
