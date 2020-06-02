@@ -184,7 +184,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
             left: 0;
             width: 100%; */
 
-          display: flex;
+          display: ${!headings.length ? "none" : "flex"};
           flex-direction: column;
 
           /* & .show-me {
@@ -198,6 +198,15 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
           /* @media screen and (min-width: 918px) {
               display: none;
             } */
+
+          & div.open-book {
+            border: olive solid 1px;
+            display: flex;
+
+            & span {
+              margin-right: auto;
+            }
+          }
         `}
       >
         {/* <div
@@ -213,6 +222,11 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
             `}
           /> */}
         {intersectedDivId}
+        <div className="open-book">
+          <span role="img" aria-label="table of content">
+            📖
+          </span>
+        </div>
         <div
           className="h-changer"
           css={css`
@@ -233,6 +247,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
                 /* display: none; */
                 pointer-events: none;
                 opacity: 0.2;
+                cursor: not-allowed;
               }
             }
           `}
