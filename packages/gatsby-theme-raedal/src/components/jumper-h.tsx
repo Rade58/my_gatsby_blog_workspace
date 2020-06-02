@@ -41,6 +41,8 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
 
   const { groupColor } = groupPage;
 
+  // const {  } = reducedBlogPostState;
+
   const { headerBackgroundImage } = additionalStyles;
 
   const [currentHeaderToBeClicked, setCurrentHeaderToBeClicked] = useState<
@@ -181,7 +183,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
   return (
     <Fragment>
       <aside
-        className="jumper-cont"
+        className={`jumper-cont ${""}`}
         css={css`
           /* visibility: hidden; */
 
@@ -201,6 +203,17 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
             bottom: 0;
             right: 0;
             left: 85vw;
+
+            transition-property: transform;
+            transition-duration: 0.2s;
+
+            &.pulled-down {
+              transform: translateX(60px);
+            }
+
+            &.pulled-up {
+              transform: translateX(-20px);
+            }
           }
 
           /* & .show-me {

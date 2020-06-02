@@ -31,7 +31,7 @@ export enum BLOG_POST_ACTION_TYPES_ENUM {
 
 export interface BlogPostStateI {
   pigDisapear: boolean;
-  header_pull_class: "pulled-down" | "pulled-up";
+  // header_pull_class: "pulled-down" | "pulled-up";
   keywordModalIsShown: boolean;
   // NOVI FIELD REDUCER STATE, KOJI KEEP-UJE ID
   // TRENUTNOG, SA VIEWPORT-OM INTERSECTED DIV-A (U KOJEM JE h2)
@@ -56,7 +56,7 @@ export const blogPostReducer: Reducer<
     return { ...state, pigDisapear: !prevPigDisapearance };
   }
 
-  if (action.type === BLOG_POST_ACTION_TYPES_ENUM.HEADER_PULL_CHANGE) {
+  /* if (action.type === BLOG_POST_ACTION_TYPES_ENUM.HEADER_PULL_CHANGE) {
     if (
       action.payload === "pulled-up" &&
       state.header_pull_class !== "pulled-up"
@@ -72,7 +72,7 @@ export const blogPostReducer: Reducer<
     }
 
     return state;
-  }
+  } */
 
   // !== === HANDLE-UJEM DAKLE DA LI JE MODAL PRIKAZAN ILI NIJE !== ===
   if (action.type === BLOG_POST_ACTION_TYPES_ENUM.KEYWORD_MODAL_TOGGLE) {
@@ -101,7 +101,8 @@ export const blogPostReducer: Reducer<
  DAKLE PRI KORISCENJU useReducer HOOK, TI CES PROSLEDITI I OVAJ DEFAULT STATE*/
 export const defaultState: BlogPostStateI = {
   pigDisapear: false,
-  header_pull_class: "pulled-down",
+  // header_pull_class: "pulled-down",
+
   keywordModalIsShown: false,
   // intersectedDivId: "#",
   setIntersectedHeadingDivFunc: () => {
