@@ -190,6 +190,13 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
           display: ${!headings.length ? "none" : "flex"};
           flex-direction: column;
 
+          @media screen and (max-width: 918px) {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            left: 80vw;
+          }
+
           /* & .show-me {
             display: flex;
           }
@@ -205,6 +212,10 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
           & div.open-book {
             border: olive solid 1px;
             display: flex;
+
+            @media screen and (max-width: 918px) {
+              display: none;
+            }
 
             & span {
               margin-right: auto;
