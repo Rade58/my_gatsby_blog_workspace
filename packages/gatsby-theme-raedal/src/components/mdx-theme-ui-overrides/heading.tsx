@@ -66,7 +66,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
         {
           root: null,
           threshold: [0.35, 0.75],
-          rootMargin: "0px",
+          rootMargin: "-20%",
         }
       );
 

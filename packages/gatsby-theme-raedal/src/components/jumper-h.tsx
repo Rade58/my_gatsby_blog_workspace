@@ -73,8 +73,6 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
 
   //
 
-  console.log(interObservers);
-
   useEffect(() => {
     console.log("JUMPER MOUNTED");
   }, []);
@@ -177,6 +175,15 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
                 headings.map(({ depth, value }) => (
                   <li key={`${value}-${depth}`}>
                     <Link
+                      onClick={() => {
+                        console.log("clicked");
+
+                        setIntersectedDivId(
+                          `#${encodeURI(value.toLowerCase())
+                            .replace(/%20/g, "-")
+                            .replace(/ /g, "-")}`
+                        );
+                      }}
                       to={`${encodeURI(relativeLink)}#${encodeURI(
                         value.toLowerCase()
                       )
