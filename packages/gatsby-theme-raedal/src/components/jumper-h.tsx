@@ -155,7 +155,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
   }); */
 
   const previousIndex: number | undefined =
-    indexOfCurrentIntersHdiv - 1 >= 0 ? indexOfCurrentIntersHdiv - 1 : 0;
+    indexOfCurrentIntersHdiv - 1 >= 0 ? indexOfCurrentIntersHdiv - 1 : -1;
   const nextIndex: number | undefined =
     indexOfCurrentIntersHdiv + 1 >= 0
       ? indexOfCurrentIntersHdiv + 1
@@ -234,7 +234,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
               }
             }}
             to={`${encodeURI(relativeLink)}#${prevDivHkey}`}
-            className={`${!prevDivHkey ? "disabled" : ""}`}
+            className={`${previousIndex < 0 ? "disabled" : ""}`}
           >
             <span className="up">
               <Octicon icon={triangleUp} size="medium" />
