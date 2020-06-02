@@ -34,7 +34,10 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
     relativeLink,
     reducedBlogPostState,
     blogPostDispatch,
+    groupPage,
   } = useContext(blogPostContext);
+
+  const { groupColor } = groupPage;
 
   const [currentHeaderToBeClicked, setCurrentHeaderToBeClicked] = useState<
     number
@@ -205,6 +208,17 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
 
             & span {
               margin-right: auto;
+            }
+          }
+
+          & div.scroll-to-top {
+            border: 2px solid ${groupColor};
+            width: fit-content;
+            margin-left: auto;
+            border-radius: 12px;
+
+            & > * {
+              margin: 4px;
             }
           }
         `}

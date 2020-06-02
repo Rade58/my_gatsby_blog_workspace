@@ -35,9 +35,14 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
     BLOG_POST_ACTION_TYPES_ENUM,
   } = $_useBlogPostReducerState;
 
-  const { relativeLink, reducedBlogPostState, blogPostDispatch } = useContext(
-    blogPostContext
-  );
+  const {
+    relativeLink,
+    reducedBlogPostState,
+    blogPostDispatch,
+    groupPage,
+  } = useContext(blogPostContext);
+
+  const { groupColor } = groupPage;
 
   const { pigDisapear, setIntersectedHeadingDivFunc } = reducedBlogPostState;
 
@@ -144,9 +149,11 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
 
           &:hover > a::before {
             content: "🔗";
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             position: absolute;
-            left: -30px;
+            top: 8px;
+            left: -28px;
+            color: ${groupColor};
           }
         `}
       >
