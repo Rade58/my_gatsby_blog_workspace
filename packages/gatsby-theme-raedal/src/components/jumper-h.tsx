@@ -22,6 +22,8 @@ import {
   BLOG_POST_ACTION_TYPES_ENUM,
 } from "../context_n_reducers/context_n_reducer_blog_post";
 
+import { additionalStyles } from "../common-styles";
+
 interface JumperPropsI {
   mainReference: RefObject<HTMLElement>;
   articleReference?: RefObject<HTMLElement>;
@@ -38,6 +40,8 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
   } = useContext(blogPostContext);
 
   const { groupColor } = groupPage;
+
+  const { headerBackgroundImage } = additionalStyles;
 
   const [currentHeaderToBeClicked, setCurrentHeaderToBeClicked] = useState<
     number
@@ -191,10 +195,12 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
           flex-direction: column;
 
           @media screen and (max-width: 918px) {
+            border-radius: 14px;
+
             position: fixed;
             bottom: 0;
             right: 0;
-            left: 80vw;
+            left: 85vw;
           }
 
           /* & .show-me {
@@ -228,6 +234,13 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
             margin-left: auto;
             border-radius: 12px;
 
+            @media screen and (max-width: 918px) {
+              background-color: ${"#1b2227c9"};
+
+              margin-left: auto;
+              margin-right: auto;
+            }
+
             cursor: pointer;
 
             & > * {
@@ -248,7 +261,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
               border: crimson solid 8px;
             `}
           /> */}
-        {intersectedDivId}
+        {/* {intersectedDivId} */}
         <div className="open-book">
           <span role="img" aria-label="table of content">
             📖
@@ -262,6 +275,10 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
             flex-direction: column;
 
             align-items: center;
+
+            @media screen and (max-width: 918px) {
+              background-color: ${"#1b2227c9"};
+            }
 
             & > a {
               color: blanchedalmond;
