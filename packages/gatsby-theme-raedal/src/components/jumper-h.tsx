@@ -120,8 +120,11 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
             left: 0;
             width: 100%; */
 
+          display: flex;
+          flex-direction: column;
+
           & .show-me {
-            display: inline-block;
+            display: flex;
           }
 
           & .hide-me {
@@ -166,6 +169,18 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
 
               @media screen and (max-width: 918px) {
                 display: none;
+              }
+
+              & ul {
+                padding: 0;
+                width: 100%;
+                list-style-type: none;
+                & li {
+                }
+              }
+
+              & a {
+                color: blanchedalmond;
               }
             `}
           >
