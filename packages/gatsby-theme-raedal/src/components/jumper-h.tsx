@@ -275,11 +275,18 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
                 list-style-type: none;
                 & li {
                   margin: 2px;
+                  margin-left: 20px;
 
                   &.highlight {
                     /* border: crimson solid 1px; */
 
                     box-sizing: border-box;
+
+                    &::before {
+                      position: absolute;
+                      left: 6px;
+                      content: "🖇️";
+                    }
 
                     & a {
                       color: crimson;
