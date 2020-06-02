@@ -118,18 +118,18 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
 
     // NORMALIZOVANJE     headings    NIZ-A
     headings.forEach((hedingOb) => {
-      normalizedHeadingsRef.current[
-        `${encodeURI(hedingOb.value.toLowerCase())
-          .replace(/%20/g, "-")
-          .replace(/ /g, "-")}`.trim()
-      ] = {
-        value: `${encodeURI(hedingOb.value.toLowerCase())
-          .replace(/%20/g, "-")
-          .replace(/ /g, "-")}`.trim(),
-        depth: hedingOb.depth,
-      };
-
       if (loadArray) {
+        normalizedHeadingsRef.current[
+          `${encodeURI(hedingOb.value.toLowerCase())
+            .replace(/%20/g, "-")
+            .replace(/ /g, "-")}`.trim()
+        ] = {
+          value: `${encodeURI(hedingOb.value.toLowerCase())
+            .replace(/%20/g, "-")
+            .replace(/ /g, "-")}`.trim(),
+          depth: hedingOb.depth,
+        };
+
         justHeadingsArrayRef.current.push(
           `${encodeURI(hedingOb.value.toLowerCase())
             .replace(/%20/g, "-")
@@ -145,14 +145,14 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
     intersectedDivId
   );
 
-  console.log(indexOfCurrentIntersHdiv);
+  /* console.log(indexOfCurrentIntersHdiv);
 
   console.log({
     norm: normalizedHeadingsRef.current,
     arr: justHeadingsArrayRef.current,
     hs: headings,
     intersectedDivId,
-  });
+  }); */
 
   const previousIndex: number | undefined =
     indexOfCurrentIntersHdiv - 1 >= 0
@@ -163,9 +163,18 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
       ? indexOfCurrentIntersHdiv + 1
       : undefined;
 
+  const prevDivHkey: string | undefined = previousIndex
+    ? justHeadingsArrayRef.current[previousIndex]
+    : undefined;
+  const nextDivHkey: string | undefined = nextIndex
+    ? justHeadingsArrayRef.current[nextIndex]
+    : undefined;
+
   console.log({
     previousIndex,
     nextIndex,
+    prevDivHkey,
+    nextDivHkey,
   });
 
   return (
@@ -210,12 +219,33 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
             `}
           /> */}
         {intersectedDivId}
-        <div className="h-changer">
-          {/* <Link> */}
-          <span className="up">
-            <Octicon icon={triangleUp} size="medium" />
-          </span>
-          {/* </Link> */}
+        <div
+          className="h-changer"
+          css={css`
+            & a {
+              color: blanchedalmond;
+
+              &.disabled {
+                /* display: none; */
+                pointer-events: none;
+                opacity: 0.2;
+              }
+            }
+          `}
+        >
+          <Link
+            onClick={() => {
+              if (previousIndex && prevDivHkey) {
+                setIntersectedDivId(prevDivHkey);
+              }
+            }}
+            to={`${encodeURI(relativeLink)}#${prevDivHkey}`}
+            className={`${!prevDivHkey ? "disabled" : ""}`}
+          >
+            <span className="up">
+              <Octicon icon={triangleUp} size="medium" />
+            </span>
+          </Link>
 
           {/* -------------TASBLE OF HEADINGS--------------- */}
           <section
@@ -244,7 +274,6 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
                   }
                 }
               }
-
               & a {
                 color: blanchedalmond;
               }
@@ -288,11 +317,20 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
             </ul>
           </section>
           {/* ================================================ */}
-          {/* <Link> */}
-          <span className="down">
-            <Octicon icon={triangleDown} size="medium" />
-          </span>
-          {/* </Link> */}
+
+          <Link
+            onClick={() => {
+              if (nextIndex && nextDivHkey) {
+                setIntersectedDivId(nextDivHkey);
+              }
+            }}
+            to={`${encodeURI(relativeLink)}#${nextDivHkey}`}
+            className={`${!nextDivHkey ? "disabled" : ""}`}
+          >
+            <span className="down">
+              <Octicon icon={triangleDown} size="medium" />
+            </span>
+          </Link>
         </div>
         <div className="scroll-to-top">
           <Octicon icon={arrowUp} size="medium" />
