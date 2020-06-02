@@ -150,7 +150,14 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
           }
         `}
       >
-        <Link to={`${encodeURI(relativeLink)}#${props.id}`}> </Link>
+        <Link
+          onClick={() => {
+            setIntersectedHeadingDivFunc(props.id);
+          }}
+          to={`${encodeURI(relativeLink)}#${props.id}`}
+        >
+          {" "}
+        </Link>
         {props.children}
       </Tag>
     </div>
