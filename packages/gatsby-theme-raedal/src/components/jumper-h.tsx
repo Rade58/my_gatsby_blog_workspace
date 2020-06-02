@@ -216,6 +216,12 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
         <div
           className="h-changer"
           css={css`
+            border: yellow solid 2px;
+            display: flex;
+            flex-direction: column;
+
+            align-items: center;
+
             & > a {
               color: blanchedalmond;
 
@@ -250,6 +256,14 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
             // style={{ display: headings.length ? "inline-block" : "none" }}
             className={`tofh2 ${headings.length ? "show-me" : "hide-me"}`}
             css={css`
+              width: 100%;
+              border: crimson solid 1px;
+              display: flex;
+
+              & > * {
+                border: yellow solid 1px;
+              }
+
               .show-me {
                 display: flex;
               }
