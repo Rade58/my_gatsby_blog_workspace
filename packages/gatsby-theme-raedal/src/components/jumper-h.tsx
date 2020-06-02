@@ -155,20 +155,14 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
   }); */
 
   const previousIndex: number | undefined =
-    indexOfCurrentIntersHdiv - 1 >= 0
-      ? indexOfCurrentIntersHdiv - 1
-      : undefined;
+    indexOfCurrentIntersHdiv - 1 >= 0 ? indexOfCurrentIntersHdiv - 1 : 0;
   const nextIndex: number | undefined =
     indexOfCurrentIntersHdiv + 1 >= 0
       ? indexOfCurrentIntersHdiv + 1
-      : undefined;
+      : indexOfCurrentIntersHdiv;
 
-  const prevDivHkey: string | undefined = previousIndex
-    ? justHeadingsArrayRef.current[previousIndex]
-    : undefined;
-  const nextDivHkey: string | undefined = nextIndex
-    ? justHeadingsArrayRef.current[nextIndex]
-    : undefined;
+  const prevDivHkey: string = justHeadingsArrayRef.current[previousIndex];
+  const nextDivHkey: string = justHeadingsArrayRef.current[nextIndex];
 
   console.log({
     previousIndex,
@@ -235,7 +229,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
         >
           <Link
             onClick={() => {
-              if (previousIndex && prevDivHkey) {
+              if (prevDivHkey) {
                 setIntersectedDivId(prevDivHkey);
               }
             }}
@@ -320,7 +314,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
 
           <Link
             onClick={() => {
-              if (nextIndex && nextDivHkey) {
+              if (nextDivHkey) {
                 setIntersectedDivId(nextDivHkey);
               }
             }}
