@@ -233,11 +233,12 @@ exports.createSchemaCustomization = ({ actions }) => {
       lang: String!
       about: String!
 
+      personalWebsite: String
+      
       authorImage: String
 
       authorPlaceholderSvg: String!
 
-      personalWebsite: String
 
       github: SocialMedia
       twitter: SocialMedia
