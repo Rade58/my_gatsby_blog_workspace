@@ -1,5 +1,5 @@
 const remarkSlug = require("remark-slug");
-const fs = require("fs");
+// const fs = require("fs");    // TREBA ZA CLOUDINARY (NE UKLANJAJ)
 const withDefaults = require("./utility/utility-options"); // DEFAULTS SU
 //                                                         basePath ->  "/""
 //                                                   contentPath  -> "blogposts"
@@ -16,7 +16,9 @@ const withDefaults = require("./utility/utility-options"); // DEFAULTS SU
 
 module.exports = (options) => {
   // SADA IZDVAJAM I      groupsPath
-  const { contentPath, useExternalMDX, groupsPath } = withDefaults(options);
+  const { contentPath, useExternalMDX, groupsPath, authorsPath } = withDefaults(
+    options
+  );
 
   // DAKLE TO CE BITI PATH FOLDER-A, RELATIVAN PATH NA SITE
   // GDE CU STAVLJATI MOJE GROUP PAGES
@@ -71,7 +73,14 @@ module.exports = (options) => {
           path: "devicons-in-use", // OVO JE DAKLE IME FOLDERA KOJE CE BITI NA SITE LEVEL-U
         },
       },
-
+      // authors
+      {
+        resolve: "gatsby-source-filesystem",
+        options: {
+          name: "author-pages",
+          path: authorsPath,
+        },
+      },
       // === !== === !== === !== === !== === !== === !== === !== === !== === !== === !==
       // === !== === !== === !== === !== === !== === !== === !== === !== === !== === !==
       !useExternalMDX && {

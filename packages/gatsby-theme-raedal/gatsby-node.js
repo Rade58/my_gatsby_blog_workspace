@@ -21,9 +21,9 @@ exports.onPreBootstrap = ({ store }, options) => {
   // DAKLE SADA IZDVAJAM I      groupsPath
   // I ZELIM DA SE NA NIVOU SITE-A KREIRA     FOLDER AKO GA NEMA
 
-  const { contentPath, groupsPath } = withDefaults(options);
+  const { contentPath, groupsPath, authorsPath } = withDefaults(options);
 
-  const blogDir = pathPackage.join(program.directory, contentPath); // DAKEL OVOM SE
+  const blogsDir = pathPackage.join(program.directory, contentPath); // DAKEL OVOM SE
   //                                                         APSOLUTNI
   //                                                  DIREKTORIJUM SITE-A
 
@@ -31,15 +31,23 @@ exports.onPreBootstrap = ({ store }, options) => {
 
   const groupsDir = pathPackage.join(program.directory, groupsPath);
 
+  const authorsDir = pathPackage.join(program.directory, authorsPath);
+
   // OVO SAM RANIJE RADIO
-  if (!fs.existsSync(blogDir)) {
-    mkdirp.sync(blogDir);
+  if (!fs.existsSync(blogsDir)) {
+    mkdirp.sync(blogsDir);
   }
 
   // SAD RADIM ISTO, SAMO ZA PREDHODNI PATH
   if (!fs.existsSync(groupsDir)) {
     // DAKLE KREIRAM FOLDER AKO GA NEMA
     mkdirp.sync(groupsDir);
+  }
+
+  // === !== === !===
+
+  if (!fs.existsSync(authorsDir)) {
+    mkdirp.sync(authorsDir);
   }
 };
 
@@ -193,6 +201,14 @@ exports.createSchemaCustomization = ({ actions }) => {
       prevPagePath: String
       nextPagePath: String
     }
+
+    type AuthorPage {
+
+      
+
+    }
+
+
 
 
   `);

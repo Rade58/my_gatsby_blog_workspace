@@ -5,5 +5,8 @@ module.exports = ({
   // CORRESPOND-UJU TO GROUP PAGES
   groupsPath = "grouppages",
   //
+  // author pages folder
+  authorsPath = "authors",
+  //
   useExternalMDX = false,
-}) => ({ basePath, contentPath, groupsPath, useExternalMDX });
+}) => ({ basePath, contentPath, groupsPath, authorsPath, useExternalMDX });
