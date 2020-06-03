@@ -314,7 +314,7 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
             setAnimationStop(true);
           }}
           role="img"
-          className="someDiv"
+          className={`someDiv ${pigDisapear ? "no-show" : ""}`}
           css={css`
             transition-timing-function: ease-out;
 
@@ -337,6 +337,13 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
             display: inline-block;
             border: tomato solid 0px;
             position: absolute;
+
+            &.no-show {
+              & > div.sprite {
+                display: none;
+                border: 0px solid pink;
+              }
+            }
 
             & > div.sprite {
               border: currentColor solid 0px;

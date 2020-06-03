@@ -184,10 +184,13 @@ const Keywords: FunctionComponent = () => {
             border: olive solid 0px;
             margin-right: 0px;
             text-decoration-line: none;
+            font-weight: 400;
+            font-size: 1rem;
 
             &:hover {
               text-decoration-line: underline;
               text-decoration-color: ${themeColor};
+              text-decoration-style: solid;
             }
           }
 
