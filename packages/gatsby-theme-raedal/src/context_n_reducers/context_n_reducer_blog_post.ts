@@ -43,7 +43,7 @@ export interface BlogPostStateI {
     | ((val: any) => void);
 
   setJumpersSlidingClass:
-    | Dispatch<SetStateAction<string>>
+    | Dispatch<SetStateAction<"slide-left" | "slide-right">>
     | ((val: any) => void);
 }
 
