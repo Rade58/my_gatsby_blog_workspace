@@ -146,6 +146,8 @@ exports.createSchemaCustomization = ({ actions }) => {
   createTypes(`
     type BlogPostPage implements Node @dontInfer {
 
+      author: AuthorPage!
+
       ordinalG: Int!
       prevAndNextPagePath: PrevAndNextPagePath!
 
@@ -227,8 +229,21 @@ exports.createSchemaCustomization = ({ actions }) => {
 
       authorID: ID!
       name: String!
+      
+      lang: String!
+      about: String!
 
+      authorImage: String
+
+      authorPlaceholderSvg: String!
+
+      personalWebsite: String
+
+      github: SocialMedia
       twitter: SocialMedia
+      instagram: SocialMedia
+      facebook: SocialMedia
+      youtube: SocialMedia
 
 
     }
@@ -236,6 +251,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     type SocialMedia {
       name: String!
       url: String!
+      icon: String!
     }
 
 
