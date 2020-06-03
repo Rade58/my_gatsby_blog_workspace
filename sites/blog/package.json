@@ -18,6 +18,7 @@
     "clean": "gatsby clean",
     "prod": "gatsby build",
     "serve": "gatsby serve",
-    "currdate": "node utility/printCurrentDate.ts"
+    "currdate": "node utility/printCurrentDate.ts",
+    "newauthor": "node utility/printUserId.ts"
   }
 }

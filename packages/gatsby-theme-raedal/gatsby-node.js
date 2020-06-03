@@ -204,7 +204,7 @@ exports.createSchemaCustomization = ({ actions }) => {
 
     type AuthorPage {
 
-      
+      authorID: ID!
 
     }
 
