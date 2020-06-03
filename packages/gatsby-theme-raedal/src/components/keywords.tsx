@@ -204,7 +204,7 @@ const Keywords: FunctionComponent = () => {
         `}
       >
         <span role="img" aria-label="go back to home page">
-          🏚️
+          🏡
         </span>
         &nbsp;&nbsp;&nbsp;&nbsp;
         <Link to="/">Home</Link>
