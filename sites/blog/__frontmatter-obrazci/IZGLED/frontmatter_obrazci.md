@@ -12,6 +12,8 @@ group: GraphQL
 
 # ZA GROUP
 ---
+lang: "en"
+description: "Neki description
 group: graphql
 groupColor: "#e04681"
 keywordTextColor: "#fff"

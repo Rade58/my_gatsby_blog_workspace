@@ -39,7 +39,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
     groupPage,
   } = useContext(blogPostContext);
 
-  const { groupColor } = groupPage;
+  const { groupColor, underlineColor } = groupPage;
 
   // const { headerBackgroundImage } = additionalStyles;
 
@@ -251,7 +251,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
           }
 
           & div.scroll-to-top {
-            border: 2px solid ${groupColor};
+            border: 2px solid ${underlineColor};
             width: fit-content;
             margin-left: auto;
             border-radius: 12px;

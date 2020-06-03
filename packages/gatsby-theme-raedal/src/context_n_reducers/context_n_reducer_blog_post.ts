@@ -198,6 +198,7 @@ export const blogPostContext: Context<ContextBlogPostStateI> = createContext({
     icon: "",
     name: "",
     path: "",
+    underlineColor: "",
   },
   allBlogKeywords: [
     {

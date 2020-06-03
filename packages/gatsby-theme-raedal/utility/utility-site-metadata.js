@@ -8,6 +8,7 @@ module.exports = ({
   groupColor = "#e04681",
   keywordTextColor = "#fff",
   keywordBorderColor = "crimson",
+  underlineColor = "olive",
 }) => ({
   ordinalG,
   createdAt,
@@ -18,4 +19,5 @@ module.exports = ({
   groupColor,
   keywordTextColor,
   keywordBorderColor,
+  underlineColor,
 });

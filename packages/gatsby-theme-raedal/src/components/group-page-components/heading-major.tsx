@@ -19,6 +19,7 @@ const HeadingMajor: FunctionComponent = () => {
     groupColor,
     keywordBorderColor,
     keywordTextColor,
+    underlineColor,
     icon,
   } = groupPage; // NAME CE BITI ONO STA JE U TITLE-U
 
@@ -90,16 +91,16 @@ const HeadingMajor: FunctionComponent = () => {
             &.group-name-span {
               text-decoration-line: overline underline;
               text-decoration-style: solid;
-              text-decoration-color: ${groupColor};
+              text-decoration-color: ${underlineColor};
               /* border-right: ${groupColor} medium groove; */
               /* border-left: ${groupColor} medium double; */
               font-family: - -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             }
 
             &.emo {
-              border-right: groove ${groupColor} thick;
-              border-left: groove ${groupColor} thick;
-              border-top: ridge ${groupColor} thick;
+              border-right: groove ${underlineColor} thick;
+              border-left: groove ${underlineColor} thick;
+              border-top: ridge ${underlineColor} thick;
               /* padding: 4.8px; */
               padding-left: 4px;
               padding-right: 3px;

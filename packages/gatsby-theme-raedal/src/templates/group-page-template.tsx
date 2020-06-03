@@ -68,6 +68,7 @@ export interface GroupPageI {
   // OVO SAM DODAO
   keywordTextColor: string;
   keywordBorderColor: string;
+  underlineColor: string;
   //
   updated?: string;
   blogPostPages: blogPostPageArray;
@@ -104,6 +105,8 @@ export const TakeOneGroupPage = graphql`
       keywordTextColor
       keywordBorderColor
       #
+
+      underlineColor
 
       # updated(fromNow: true)    # OVO NIJE POTREBNO
 

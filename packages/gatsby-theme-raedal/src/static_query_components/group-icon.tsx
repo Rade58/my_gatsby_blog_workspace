@@ -1,5 +1,0 @@
-/** @jsx jsx */
-import { jsx } from "theme-ui";
-
-// ODUSTAO OD PRAVLJENJA, JER SE BOJIM VELIKOG BROJA GROUP APGE-OVA
-// PREVISE LOOPING-A QUERIED NIZOVA

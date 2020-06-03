@@ -29,6 +29,7 @@ export interface GroupPagePickedI {
   path: string;
   icon: string;
   groupColor: string;
+  underlineColor: string;
 }
 
 export interface HeadingI {
@@ -106,6 +107,7 @@ export const query = graphql`
         # I TO BAS ANCHOR TREBA DA BUDE OKO ICONA, ODNONO LOG-AO GROUP SUBJECT-A
         icon
         groupColor
+        underlineColor
       }
 
       # DAKLE ZELIM DA IMAM SVE KEYWORD-OVE, KAO NA GROUP PAGE-U

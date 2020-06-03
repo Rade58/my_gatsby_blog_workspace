@@ -166,6 +166,8 @@ exports.createSchemaCustomization = ({ actions }) => {
 
       keywordBorderColor: String!
 
+      underlineColor: String!
+
       updated: Date! @dateformat
 
       updatedFns: Date! @formateDateFns @deprecated(reason: "date=fns paket ne radi nesto dobro")
@@ -325,6 +327,7 @@ exports.onCreateNode = (
       groupColor,
       keywordBorderColor,
       keywordTextColor,
+      underlineColor,
       // NEKA TU BUDU PROPERTIJI I LANG I DESCRIPTION
       lang,
       description,
@@ -350,6 +353,9 @@ exports.onCreateNode = (
       groupColor,
       keywordTextColor,
       keywordBorderColor,
+      //
+      underlineColor,
+      //
       updated: modifiedTime,
       updatedFns: modifiedTime,
       // TREBA DA POSTOJI I PARENT

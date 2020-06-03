@@ -92,6 +92,7 @@ export const groupPageContext: Context<GroupPageContextStateI> = createContext({
     // OVO SAM DODAO, JER JE TYPESCRIPT YELLOVAO NA MENE
     keywordBorderColor: "",
     keywordTextColor: "",
+    underlineColor: "",
 
     //
 
