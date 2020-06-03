@@ -21,7 +21,14 @@ exports.onPreBootstrap = ({ store }, options) => {
   // DAKLE SADA IZDVAJAM I      groupsPath
   // I ZELIM DA SE NA NIVOU SITE-A KREIRA     FOLDER AKO GA NEMA
 
-  const { contentPath, groupsPath, authorsPath } = withDefaults(options);
+  const {
+    contentPath,
+    groupsPath,
+    authorsPath,
+    authorsPictures,
+    socialSvgs,
+    deviconsInUse,
+  } = withDefaults(options);
 
   const blogsDir = pathPackage.join(program.directory, contentPath); // DAKEL OVOM SE
   //                                                         APSOLUTNI
@@ -32,6 +39,10 @@ exports.onPreBootstrap = ({ store }, options) => {
   const groupsDir = pathPackage.join(program.directory, groupsPath);
 
   const authorsDir = pathPackage.join(program.directory, authorsPath);
+
+  const deviconsDir = pathPackage.join(program.directory, deviconsInUse);
+  const socialIconsDir = pathPackage.join(program.directory, socialSvgs);
+  const authorsImagesDir = pathPackage.join(program.directory, authorsPictures);
 
   // OVO SAM RANIJE RADIO
   if (!fs.existsSync(blogsDir)) {
@@ -44,10 +55,20 @@ exports.onPreBootstrap = ({ store }, options) => {
     mkdirp.sync(groupsDir);
   }
 
-  // === !== === !===
-
   if (!fs.existsSync(authorsDir)) {
     mkdirp.sync(authorsDir);
+  }
+
+  // === !== === !===
+
+  if (!fs.existsSync(deviconsDir)) {
+    mkdirp.sync(deviconsDir);
+  }
+  if (!fs.existsSync(socialIconsDir)) {
+    mkdirp.sync(socialIconsDir);
+  }
+  if (!fs.existsSync(authorsImagesDir)) {
+    mkdirp.sync(authorsImagesDir);
   }
 };
 
@@ -202,12 +223,20 @@ exports.createSchemaCustomization = ({ actions }) => {
       nextPagePath: String
     }
 
-    type AuthorPage {
+    type AuthorPage implements Node @dontInfer {
 
       authorID: ID!
+      name: String!
+
+      twitter: SocialMedia
+
 
     }
 
+    type SocialMedia {
+      name: String!
+      url: String!
+    }
 
 
 

@@ -8,5 +8,17 @@ module.exports = ({
   // author pages folder
   authorsPath = "authors",
   //
+  deviconsInUse = "devicons-in-use",
+  authorsPictures = "authors-images",
+  socialSvgs = "social-icons",
   useExternalMDX = false,
-}) => ({ basePath, contentPath, groupsPath, authorsPath, useExternalMDX });
+}) => ({
+  basePath,
+  contentPath,
+  groupsPath,
+  authorsPath,
+  useExternalMDX,
+  deviconsInUse,
+  authorsPictures,
+  socialSvgs,
+});

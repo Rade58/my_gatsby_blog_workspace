@@ -16,9 +16,15 @@ const withDefaults = require("./utility/utility-options"); // DEFAULTS SU
 
 module.exports = (options) => {
   // SADA IZDVAJAM I      groupsPath
-  const { contentPath, useExternalMDX, groupsPath, authorsPath } = withDefaults(
-    options
-  );
+  const {
+    contentPath,
+    useExternalMDX,
+    groupsPath,
+    authorsPath,
+    deviconsInUse,
+    authorsPictures,
+    socialSvgs,
+  } = withDefaults(options);
 
   // DAKLE TO CE BITI PATH FOLDER-A, RELATIVAN PATH NA SITE
   // GDE CU STAVLJATI MOJE GROUP PAGES
@@ -70,7 +76,7 @@ module.exports = (options) => {
         resolve: "gatsby-source-filesystem",
         options: {
           name: "devicons-raedal",
-          path: "devicons-in-use", // OVO JE DAKLE IME FOLDERA KOJE CE BITI NA SITE LEVEL-U
+          path: deviconsInUse, // OVO JE DAKLE IME FOLDERA KOJE CE BITI NA SITE LEVEL-U
         },
       },
       // authors
@@ -79,6 +85,23 @@ module.exports = (options) => {
         options: {
           name: "author-pages",
           path: authorsPath,
+        },
+      },
+      // === !== === !== === !== === !==
+      // ZA SLIKE AUTORA
+      {
+        resolve: "gatsby-source-filesystem",
+        options: {
+          name: "authors-pictures",
+          path: authorsPictures,
+        },
+      },
+      // ZA SOCIJALNE IKONE
+      {
+        resolve: "gatsby-source-filesystem",
+        options: {
+          name: "social-svgs",
+          path: socialSvgs,
         },
       },
       // === !== === !== === !== === !== === !== === !== === !== === !== === !== === !==
