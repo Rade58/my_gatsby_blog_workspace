@@ -41,13 +41,15 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
 
   const { groupColor } = groupPage;
 
-  // const {  } = reducedBlogPostState;
-
-  const { headerBackgroundImage } = additionalStyles;
+  // const { headerBackgroundImage } = additionalStyles;
 
   const [currentHeaderToBeClicked, setCurrentHeaderToBeClicked] = useState<
     number
   >(0);
+
+  const [slideClass, setSlideClass] = useState<"slide-left" | "slide-right">(
+    "slide-right"
+  );
 
   const triangleUp = getIconByName("triangle-up");
   const triangleDown = getIconByName("triangle-down");
@@ -120,9 +122,16 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
   const [loadArray, setLoadArray] = useState<boolean>(true);
 
   useEffect(() => {
+    //
     blogPostDispatch({
       type: BLOG_POST_ACTION_TYPES_ENUM.GIVE_SET_JUMPER_STATE,
       payload: setIntersectedDivId,
+    });
+
+    // SALJEM SET STATE FUNKCIJU KOJA DEFINISE KOJA CE SE SLIDING KLASA KORISTITI
+    blogPostDispatch({
+      type: BLOG_POST_ACTION_TYPES_ENUM.GIVE_SET_JUMPER_SLIDING,
+      payload: setSlideClass,
     });
 
     // NORMALIZOVANJE     headings    NIZ-A
@@ -183,7 +192,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
   return (
     <Fragment>
       <aside
-        className={`jumper-cont ${""}`}
+        className={`jumper-cont ${slideClass}`}
         css={css`
           /* visibility: hidden; */
 
@@ -207,11 +216,11 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
             transition-property: transform;
             transition-duration: 0.2s;
 
-            &.pulled-down {
+            &.slide-right {
               transform: translateX(60px);
             }
 
-            &.pulled-up {
+            &.slide-left {
               transform: translateX(-20px);
             }
           }

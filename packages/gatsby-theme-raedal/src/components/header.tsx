@@ -62,6 +62,12 @@ const Header: FunctionComponent = () => {
     $_useReducerState.headerContext
   );
 
+  const { blogPostContext } = $_useBlogPostReducerState;
+
+  const { reducedBlogPostState } = useContext(blogPostContext);
+
+  const { setJumpersSlidingClass } = reducedBlogPostState;
+
   const {
     scrolled_class /* , currentScroll, pigDisapear  */,
   } = reducedHeaderState;
@@ -97,6 +103,12 @@ const Header: FunctionComponent = () => {
   // ZBOG PROMENE ATRIBUT NA REF-U
 
   // === !== === !== === !== === !== === !== === !== === !== === !== === !== === !==
+
+  useEffect(() => {
+    setJumpersSlidingClass(
+      scrolled_class === "pull-down" ? "slide-left" : "slide-right"
+    );
+  });
 
   return (
     <header

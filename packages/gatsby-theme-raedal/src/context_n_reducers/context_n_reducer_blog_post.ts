@@ -27,6 +27,8 @@ export enum BLOG_POST_ACTION_TYPES_ENUM {
   // ONDA KADA SE DOGODI INTERSECTION
   // INTERSECTION = "INTERSECTION",
   GIVE_SET_JUMPER_STATE = "GIVE_SET_JUMPER_STATE",
+  //
+  GIVE_SET_JUMPER_SLIDING = "GIVE_SET_JUMPER_SLIDING",
 }
 
 export interface BlogPostStateI {
@@ -37,6 +39,10 @@ export interface BlogPostStateI {
   // TRENUTNOG, SA VIEWPORT-OM INTERSECTED DIV-A (U KOJEM JE h2)
   // intersectedDivId: string;
   setIntersectedHeadingDivFunc:
+    | Dispatch<SetStateAction<string>>
+    | ((val: any) => void);
+
+  setJumpersSlidingClass:
     | Dispatch<SetStateAction<string>>
     | ((val: any) => void);
 }
@@ -50,6 +56,10 @@ export const blogPostReducer: Reducer<
   BlogPostStateI,
   { type: BLOG_POST_ACTION_TYPES_ENUM; payload?: any }
 > = (state, action) => {
+  if (action.type === BLOG_POST_ACTION_TYPES_ENUM.GIVE_SET_JUMPER_SLIDING) {
+    return { ...state, setJumpersSlidingClass: action.payload };
+  }
+
   if (action.type === BLOG_POST_ACTION_TYPES_ENUM.PIG_AND_TRACK_DISAPEARD) {
     const prevPigDisapearance = state.pigDisapear;
 
@@ -107,6 +117,9 @@ export const defaultState: BlogPostStateI = {
   // intersectedDivId: "#",
   setIntersectedHeadingDivFunc: () => {
     console.log("SET STATE");
+  },
+  setJumpersSlidingClass: () => {
+    console.log("SLIDE LEFT OR RIGHT");
   },
 };
 
