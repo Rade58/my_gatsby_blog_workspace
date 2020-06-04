@@ -1,4 +1,18 @@
 module.exports = ({
+  // ZA authot page
+  // DEFAULTS KOJI SU TU ODNOSICE SE NA MENE (I OVO CE BITI KA OSAFEGUARD AKO SAM ZABORAVIO NESTO DA DODAM)
+  authorID = null,
+  authorName = "Rade Bajić",
+  about = "Rade is a web developer that is passionate about learning through teaching. Favorite technologies: Typescript, GraphQL and many more.",
+  github = "https://github.com/Rade58",
+  twitter = "https://twitter.com/ra_decodes",
+  instagram = "https://www.instagram.com/rade_writes_code/",
+  facebook = null,
+  linkedin = null,
+  youtube = null,
+  personalWebsite = null,
+  // -------------------------------------
+  author = null,
   ordinalG = 0,
   createdAt = new Date(),
   lang = "en",
@@ -10,6 +24,7 @@ module.exports = ({
   keywordBorderColor = "crimson",
   underlineColor = "olive",
 }) => ({
+  author,
   ordinalG,
   createdAt,
   lang,
@@ -20,4 +35,15 @@ module.exports = ({
   keywordTextColor,
   keywordBorderColor,
   underlineColor,
+  //
+  authorID,
+  authorName,
+  about,
+  github,
+  twitter,
+  instagram,
+  facebook,
+  linkedin,
+  youtube,
+  personalWebsite,
 });

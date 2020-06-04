@@ -12,7 +12,7 @@ const withDefaults = require("./utility/utility-options"); // DEFAULTS SU
 //                                                   useExternalMDX  --> false
 //                A DODAO SAM I NOVI DEFAULT ZA     groupsPath  -->    "grouppages"
 //
-const withSiteHelmetDefaults = require("./utility/utility-site-metadata"); // HELMET DEFAULTS (ONO STO SE SERVIRA ZA DEFAULT ZA FIELD frontMatter KOJI SAM KREIRAO) (DODAO SAM U FUNKCIJU I DEFAULTOVE ZA    group    I   groupColor     )
+const withFrontmatterDefaults = require("./utility/utility-site-metadata"); // (ONO STO SE SERVIRA ZA DEFAULT ZA FIELD frontMatter KOJI SAM KREIRAO)
 //
 
 exports.onPreBootstrap = ({ store }, options) => {
@@ -227,30 +227,34 @@ exports.createSchemaCustomization = ({ actions }) => {
 
     type AuthorPage implements Node @dontInfer {
 
+      id: ID!
+
       authorID: ID!
-      name: String!
+      authorName: String!
       
       lang: String!
       about: String!
 
-      personalWebsite: String
       
       authorImage: String
-
       authorPlaceholderSvg: String!
+      
 
-
+      personalWebsite: String
+      
       github: SocialMedia
       twitter: SocialMedia
       instagram: SocialMedia
+
       facebook: SocialMedia
       youtube: SocialMedia
+      linkedin: SocialMedia
 
 
     }
 
     type SocialMedia {
-      name: String!
+      network: String!
       url: String!
       icon: String!
     }
@@ -322,7 +326,7 @@ exports.onCreateNode = (
       /* groupColor,
       keywordTextColor,
       keywordBorderColor, */ // OVO COMMENTED OUT PROVIDE-UJE GROUP PAGE (NE TREBA OVDE)
-    } = withSiteHelmetDefaults(node.frontmatter); // MISLEADING IME FUNKCIJE, ALI NEKA OSTANE
+    } = withFrontmatterDefaults(node.frontmatter); // MISLEADING IME FUNKCIJE, ALI NEKA OSTANE
 
     actions.createNode({
       // CAK I OVA FUNKCIJA TRIGGER-UJE HOOK U CIJEM SAM OBIMU (INFO OD RANIJE)
@@ -396,7 +400,7 @@ exports.onCreateNode = (
       // JER SVAKAKO CE MI POMENUTE STVARI TREBA TI ZA
       // SEO
       // ZATO SKOKNI SAD U SDL DA DODAS I OVE TYPE-OVE
-    } = withSiteHelmetDefaults(node.frontmatter);
+    } = withFrontmatterDefaults(node.frontmatter);
 
     const { contentDigest } = node.internal;
 
@@ -431,6 +435,47 @@ exports.onCreateNode = (
       // EVO OVDE PROSLEDJUJEM GROUP NAME === !== === !==
       icon: group,
       // === !== === !== === !== === !== === !== === !==
+    });
+  }
+
+  // === !== === !== !== KREIRANJE    AuthorPage      NODE-OVA
+
+  if (parentNode.sourceInstanceName === "author-pages-raedal") {
+    const id = createNodeId(`AuthorPage-${node.id}`);
+
+    const {
+      authorID,
+      authorName,
+      about,
+      lang,
+      github,
+      twitter,
+      instagram,
+      youtube,
+      facebook,
+      linkedin,
+      personalWebsite,
+    } = withFrontmatterDefaults(node.frontmatter);
+
+    const contentDigest = node.internal;
+
+    actions.createNode({
+      id,
+      internal: {
+        type: "AuthorPage",
+        contentDigest,
+      },
+      authorID,
+      authorName,
+      about,
+      lang,
+      github: { network: "github", url: github },
+      twitter: { network: "twitter", url: twitter },
+      instagram: { network: "instagram", url: instagram },
+      youtube: { network: "youtube", url: youtube },
+      facebook: { network: "facebook", url: facebook },
+      linkedin: { network: "linkedin", url: linkedin },
+      personalWebsite,
     });
   }
 };

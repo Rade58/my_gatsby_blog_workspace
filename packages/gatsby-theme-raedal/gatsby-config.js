@@ -83,7 +83,7 @@ module.exports = (options) => {
       {
         resolve: "gatsby-source-filesystem",
         options: {
-          name: "author-pages",
+          name: "author-pages-raedal",
           path: authorsPath,
         },
       },

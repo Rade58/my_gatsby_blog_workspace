@@ -1,6 +1,9 @@
 ---
 authorID: "kLikTYeLy_5gfuTRVv8qx"  (ONO STO DOBIJES RUNN-INGOM POMENUTOG SCRIPTA (nanoid PAKET))
-name: "Rade Bajić"
+# POSTO SI TI DEFINISAODA SI TI DEFAULT, U MOM SLUCAJU SAMO MOGU UNETI GORNJI ID, BEZ ICEGA
+# STA CU I URADITI, JER SAM U 'packages/gatsby-theme-raedal/utility/utility-site-metadata.js' DEFINISAO DEFAULT-OVE, KOJI SE ODNOSE NA MENE
+
+authorName: "Rade Bajić"
 lang: "en"
 about: "Rade is a web developer that is passionate about learning through teaching. Favorite technologies: Typescript, GraphQL and many more."
 github: "https://github.com/Rade58"
@@ -11,5 +14,6 @@ instagram: "https://www.instagram.com/rade_writes_code/"
 personalWebsite: ""
 facebook: ""
 youtube: ""
+linkedin: "
 
 ---
