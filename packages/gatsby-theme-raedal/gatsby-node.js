@@ -314,6 +314,8 @@ exports.onCreateNode = (
     if (node.frontmatter.slug) slug = `/${node.frontmatter.slug}`;
 
     const {
+      //
+      author,
       // IZDVAJAM       ordinalG
       ordinalG,
       // EVO IZDVOJIO SAM I       createdAt     (SADA SAM OTREBA DA GA UPOTREBIS, KAO NOVI FIELD, PRI KREIRANJU NODE-A)
@@ -332,6 +334,10 @@ exports.onCreateNode = (
       // CAK I OVA FUNKCIJA TRIGGER-UJE HOOK U CIJEM SAM OBIMU (INFO OD RANIJE)
       id,
       title,
+
+      //
+      author, // KREIRACU RESOLVER-A
+      //
 
       // EVO ZADACU I ordinalG (ALI ZADACU I FIELD   prevAndNextPagePath   ZA KOJI CU, UBRZO I, KREIRATI   **  RESOLVER-A  **   )
       ordinalG,
@@ -476,6 +482,10 @@ exports.onCreateNode = (
       facebook: { network: "facebook", url: facebook },
       linkedin: { network: "linkedin", url: linkedin },
       personalWebsite,
+
+      // ZA SLEDECE FIELD-OVE CU NAPRAVITI RESOLVERE
+      authorImage: "", // TREBA DA PRONADJEM IMAGE IZ    "{userId}.jpg/png"     authors-images   FOLDER
+      authorPlaceholderSvg: "", // TREBA DA PRONADJEM     "author_placeholer.svg"    `social-icons` FOLDER
     });
   }
 };
