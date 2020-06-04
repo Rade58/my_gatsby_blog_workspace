@@ -236,7 +236,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       about: String!
 
       
-      authorImage: String
+      authorImage: AuthorImage
       authorPlaceholderSvg: String!
       
 
@@ -257,6 +257,11 @@ exports.createSchemaCustomization = ({ actions }) => {
       network: String!
       url: String!
       icon: String!
+    }
+
+    type AuthorImage {
+      image: String!
+      mediaType: String!
     }
 
 
@@ -504,14 +509,47 @@ exports.createResolvers = ({ createResolvers }) => {
 
   createResolvers({
     // DAODAJE M RESOLVERE ZA   AuthorPage   TYPE
-    /* AuthorPage: {
+    AuthorPage: {
       authorImage: {
-        type: "String",
+        type: "AuthorImage",
         resolve: async (source, args, context, next) => {
+          // let blah;
 
-        }
+          const { authorID: name } = source;
+
+          const resultArray = await context.nodeModel.runQuery({
+            type: "File",
+            query: {
+              filter: {
+                sourceInstanceName: { eq: "authors-pictures" },
+                name: { eq: name },
+              },
+            },
+          });
+
+          const { absolutePath, internal } = resultArray[0];
+          const { mediaType } = internal;
+
+          return new Promise((res, rej) => {
+            fs.readFile(
+              absolutePath,
+              { encoding: "base64" },
+              (error, result) => {
+                if (error)
+                  return rej(new Error("author image file couldn't be read"));
+
+                return res({
+                  image: result,
+                  mediaType,
+                });
+              }
+            );
+          });
+
+          // return "";
+        },
       },
-    }, */
+    },
     //  === !== === !== ===
 
     BlogPostPage: {
