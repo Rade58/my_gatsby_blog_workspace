@@ -463,7 +463,7 @@ exports.onCreateNode = (
       personalWebsite,
     } = withFrontmatterDefaults(node.frontmatter);
 
-    const contentDigest = node.internal;
+    const { contentDigest } = node.internal;
 
     actions.createNode({
       id,
