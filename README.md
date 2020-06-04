@@ -268,3 +268,58 @@ USPESN OSAM NAPRAVIO RESOLVER-A
 }
 ```
 
+## SADA PRAVIM RESOLVERA ZA `authorPlaceholderSvg`
+
+PRAVIM GA SLICNO KAI I PREDHODNOG RESOLVER-A SAMO STO CU U OVOM SLUCAJU BITI EKSPLICITAN DA ZELIM
+
+- `author_placeholder.svg`
+
+SA SLEDECEG **`sourceInstanceName`**-A
+
+- `"social-svgs"`
+
+EVO KAKAV SAM QUERY NAPRAVIO U GRAPHIQL-U
+
+```php
+{
+  allFile(filter: {
+    sourceInstanceName: {eq: "social-svgs"},
+    name: {eq: "author_placeholder"}
+    internal: {mediaType: {eq: "image/svg+xml"}}
+  }){
+    
+    nodes {
+      absolutePath
+
+      internal {
+        mediaType
+      }
+    }
+    
+    
+  }
+    
+}
+```
+
+DA NE SIRIM PRICU PRETERANO, MOZES I SAM POGLEDATI KAKO SAM NAPRAVIO RESOLVER-A
+
+DAKLE OVA IKONICA CE BITI UZETA IZ ONOG ISTOG FOLDERA GDE SU TI SVE SOCIJALNE IKONE
+
+TO JE `sites/blog/social-icons`
+
+
+###################################################
+
+***
+
+PODSETNIK:
+
+REDEFINISI SVAKU UPOTREBU `context.nodeModel.runQuery` NA TO DA UVEK KORISTIS `sourceInstanceName` KADA FILTRIRAS
+
+MOZDA SKRATIS VREME BUILD-A
+
+***
+
+
+

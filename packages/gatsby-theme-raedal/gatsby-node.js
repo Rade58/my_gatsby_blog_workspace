@@ -237,7 +237,7 @@ exports.createSchemaCustomization = ({ actions }) => {
 
       
       authorImage: AuthorImage
-      authorPlaceholderSvg: String!
+      authorPlaceholderSvg: AuthorImage!
       
 
       personalWebsite: String
@@ -547,6 +547,51 @@ exports.createResolvers = ({ createResolvers }) => {
           });
 
           // return "";
+        },
+      },
+      authorPlaceholderSvg: {
+        type: "AuthorImage!",
+        resolve: async (source, args, context, next) => {
+          // console.log("QUERY EXECUTED!!!");
+
+          const name = "author_placeholder";
+          const myMediaType = "image/svg+xml";
+
+          const resultArray = await context.nodeModel.runQuery({
+            type: "File",
+            query: {
+              filter: {
+                sourceInstanceName: { eq: "social-svgs" },
+                name: { eq: name },
+                internal: {
+                  mediaType: { eq: myMediaType },
+                },
+              },
+            },
+          });
+
+          // console.log(resultArray);
+
+          const { absolutePath, internal } = resultArray[0];
+          const { mediaType } = internal;
+
+          return new Promise((res, rej) => {
+            fs.readFile(
+              absolutePath,
+              { encoding: "base64" },
+              (error, result) => {
+                if (error)
+                  return rej(
+                    new Error("Couldn't read author placeholder svg image")
+                  );
+
+                return res({
+                  image: result,
+                  mediaType,
+                });
+              }
+            );
+          });
         },
       },
     },
