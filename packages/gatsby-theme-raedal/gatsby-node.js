@@ -503,6 +503,17 @@ exports.createResolvers = ({ createResolvers }) => {
   ); */
 
   createResolvers({
+    // DAODAJE M RESOLVERE ZA   AuthorPage   TYPE
+    /* AuthorPage: {
+      authorImage: {
+        type: "String",
+        resolve: async (source, args, context, next) => {
+
+        }
+      },
+    }, */
+    //  === !== === !== ===
+
     BlogPostPage: {
       // === !== === !== === !== === !==
       // ZADAJEM RESOLVER-A ZA        prevAndNextPagePath  FIELD
