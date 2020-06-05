@@ -11,6 +11,7 @@ const withDefaults = require("./utility/utility-options"); // DEFAULTS SU
 //                                                   contentPath  -> "blogposts"
 //                                                   useExternalMDX  --> false
 //                A DODAO SAM I NOVI DEFAULT ZA     groupsPath  -->    "grouppages"
+//                                            DODAO JOS, KAKO JE MOJA TEMA RASLA
 //
 const withFrontmatterDefaults = require("./utility/utility-site-metadata"); // (ONO STO SE SERVIRA ZA DEFAULT ZA FIELD frontMatter KOJI SAM KREIRAO)
 //
@@ -257,14 +258,14 @@ exports.createSchemaCustomization = ({ actions }) => {
     }
 
     type SocialMedia {
-      network: String!
-      url: String!
-      icon: AuthorImage!
+      network: String
+      url: String
+      icon: AuthorImage
     }
 
     type AuthorImage {
-      image: String!
-      mediaType: String!
+      image: String
+      mediaType: String
     }
 
 

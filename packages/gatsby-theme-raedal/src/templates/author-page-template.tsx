@@ -20,7 +20,70 @@ export interface AuthorPageTemplatePropsI {
 export const TakeOneAuthorPage = graphql`
   query getAythorPage($id: String!) {
     authorPage(id: { eq: $id }) {
+      authorID
       authorName
+      lang
+      about
+
+      authorImage {
+        image
+        mediaType
+      }
+      authorPlaceholderSvg {
+        image
+        mediaType
+      }
+
+      github {
+        network
+        url
+        icon {
+          image
+          mediaType
+        }
+      }
+      twitter {
+        network
+        url
+        icon {
+          image
+          mediaType
+        }
+      }
+      instagram {
+        network
+        url
+        icon {
+          image
+          mediaType
+        }
+      }
+      linkedin {
+        network
+        url
+        icon {
+          image
+          mediaType
+        }
+      }
+      youtube {
+        network
+        url
+        icon {
+          image
+          mediaType
+        }
+      }
+      facebook {
+        network
+        url
+        icon {
+          image
+          mediaType
+        }
+      }
+
+      personalWebsite
     }
   }
 `;
