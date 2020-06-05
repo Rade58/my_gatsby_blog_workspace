@@ -7,14 +7,39 @@ export interface AuthorPageContextPropI {
   id: string;
 }
 
-export interface AuthorPageDataPropI {
-  authorID: string;
-}
-
 export interface AuthorPageTemplatePropsI {
   pageContext: AuthorPageContextPropI;
   data: AuthorPageDataPropI;
   location: LocationI;
+}
+
+export interface AuthorPageDataPropI {
+  authorID: string;
+  authorName: string;
+  about: string;
+  lang: string;
+
+  authorImage: AuthorImageI;
+  authorPlaceholderSvg: AuthorImageI;
+  github: SocialMedia;
+  twitter: SocialMedia;
+  instagram: SocialMedia;
+  linkedin: SocialMedia | null;
+  youtube: SocialMedia | null;
+  facebook: SocialMedia | null;
+
+  personalWebsite: string | null;
+}
+
+export interface AuthorImageI {
+  image: string;
+  mediaType: string;
+}
+
+export interface SocialMedia {
+  network: string;
+  url: string;
+  icon: AuthorImageI;
 }
 
 export const TakeOneAuthorPage = graphql`
