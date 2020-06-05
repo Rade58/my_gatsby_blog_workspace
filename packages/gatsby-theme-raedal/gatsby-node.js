@@ -146,7 +146,7 @@ exports.createSchemaCustomization = ({ actions }) => {
   createTypes(`
     type BlogPostPage implements Node @dontInfer {
 
-      author: AuthorPage!
+      author: AuthorPage
 
       ordinalG: Int!
       prevAndNextPagePath: PrevAndNextPagePath!
