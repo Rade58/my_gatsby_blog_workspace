@@ -1,10 +1,6 @@
 import { createContext, Reducer, Dispatch, Context } from "react";
 
-import {
-  AuthorPageDataI,
-  SocialMedia,
-  AuthorImageI,
-} from "../templates/author-page-template";
+import { AuthorPageDataI } from "../templates/author-page-template";
 import { LocationI } from "../templates/group-page-template";
 
 export enum AUTHOR_PAGE_ACTION_TYPES_ENUM {
