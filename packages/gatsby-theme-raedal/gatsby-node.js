@@ -231,6 +231,9 @@ exports.createSchemaCustomization = ({ actions }) => {
 
       authorID: ID!
       authorName: String!
+
+      path: String!
+
       
       lang: String!
       about: String!
@@ -476,6 +479,7 @@ exports.onCreateNode = (
         type: "AuthorPage",
         contentDigest,
       },
+      path: pathPackage.resolve("/", "author/", authorID.toLowerCase()),
       authorID,
       authorName,
       about,
@@ -1125,6 +1129,37 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       path: singleGroupPageData.path,
       // KOMPONENTA, KOJA CE BITI RENDERED
       component: require.resolve("./src/templates/group-page-template.tsx"),
+    });
+  }
+
+  // === !==  MAKING AUTHOR PAGES === !== ===
+
+  const authorsOb = await graphql(`
+    query {
+      authors: allAuthorPage {
+        nodes {
+          id
+          path
+        }
+      }
+    }
+  `);
+
+  if (authorsOb.errors) {
+    reporter.panic(
+      "Something went wrong with query for all authors",
+      authorsOb.errors
+    );
+  }
+
+  const authors = authorsOb.data.authors.nodes;
+
+  // eslint-disable-next-line
+  for (let author of authors) {
+    actions.createPage({
+      context: { id: author.id },
+      path: author.path,
+      component: require.resolve("./src/templates/author-page-template.tsx"),
     });
   }
 };
