@@ -757,6 +757,31 @@ exports.createResolvers = ({ createResolvers }) => {
           //                                                              ALI IPAK SAM TO HANDLE-OVAO
         },
       },
+
+      // === !== author=== !== ===
+      author: {
+        type: "AuthorPage",
+        resolve: async (source, args, context, next) => {
+          const { author } = source;
+
+          const resultArray = await context.nodeModel.runQuery({
+            type: "AuthorPage",
+            query: {
+              filter: {
+                // internal: {sourceInstanceName: {eq: "author-pages-raedal"}},
+                authorID: { eq: author },
+              },
+            },
+          });
+
+          // const authorOb = resultArray[0];
+
+          if (!resultArray) return null;
+
+          return resultArray.length ? resultArray[0] : null;
+        },
+      },
+      // === !== === !== ===
     },
     // EVO DEFINISEM RESOLVER ZA     blogPostPages   FIELD NA      GroupPage    TYPE-U
     GroupPage: {
