@@ -9,11 +9,11 @@ export interface AuthorPageContextPropI {
 
 export interface AuthorPageTemplatePropsI {
   pageContext: AuthorPageContextPropI;
-  data: AuthorPageDataPropI;
+  data: AuthorPageDataI;
   location: LocationI;
 }
 
-export interface AuthorPageDataPropI {
+export interface AuthorPageDataI {
   authorID: string;
   authorName: string;
   about: string;
@@ -24,11 +24,11 @@ export interface AuthorPageDataPropI {
   github: SocialMedia;
   twitter: SocialMedia;
   instagram: SocialMedia;
-  linkedin: SocialMedia | null;
-  youtube: SocialMedia | null;
-  facebook: SocialMedia | null;
+  linkedin: SocialMedia;
+  youtube: SocialMedia;
+  facebook: SocialMedia;
 
-  personalWebsite: string | null;
+  personalWebsite: string;
 }
 
 export interface AuthorImageI {
@@ -38,7 +38,10 @@ export interface AuthorImageI {
 
 export interface SocialMedia {
   network: string;
-  url: string;
+  /**
+   * @description OBRATI PAZNJU DA URL MOZE BITI NULL (OVO SAM ZADAO ZBOG CONTEXTA AK OSE SECAS A VEROVATN OSE NE SECAS (PROBLE MSA CONTEXT-OM KOJ ISAM RESIO))
+   */
+  url?: string | null;
   icon: AuthorImageI;
 }
 

@@ -58,8 +58,9 @@ export interface GroupPageContextStateI {
 // ***************************************************
 
 export const groupPageContext: Context<GroupPageContextStateI> = createContext({
-  // eslint-disable-next-line
-  groupPageDispatch: ({ type, payload }) => {},
+  groupPageDispatch: ({ type, payload }) => {
+    let blah;
+  },
   reducedState: defaultReducerState,
   groupPage: {
     allBlogKeywords: [
