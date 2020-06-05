@@ -56,7 +56,10 @@ const defaultAuthorImage = () => ({
 });
 const defaultSocialMedia = () => ({
   network: "",
-  // url: "",
+  // url: "",  // KADA JE NEKI FIELD DTYPED KAO OPCION NE SMEM GA PROOSLEDJIVATI
+  // KAO DEFAULT U CONTEXT
+  // POGLEDAJ                     PECULIAR STUFF.md
+  // ZA PROBLEM KOJI SAM IMAO
   icon: defaultAuthorImage(),
 });
 //
@@ -91,4 +94,29 @@ export const authorPageContext: Context<AuthorPageContextStateI> = createContext
   }
 );
 
-//  KREIRAM PROVIDER-A
+//  UZIMAM PROVIDER-A
+
+const { Provider: AuthorPageStateProvider } = authorPageContext;
+
+//  === !==  === !==  === !==  === !==  === !==
+// NAKON OVOGA OSTAJE DA GRUPISEM SVE, PO PRAKSI KAKVU SAM
+// KORISTIO I ZA RANIJE CONTEXTE
+
+// (2)
+/**
+ * @description Ne zaboravi da ti treba useContext HOOK (U FUNCTION COMPONENTS-IMA, JE TO NAJBOLJI NACIN ZA KORISCENJE ONOGA STO TI OBEZBEDJUJE CONTEXT) (CONTEXT JE VEC KRERAN U FAJLU IZ KOJEG SI OVO UVEZAO); A I SAM ZNANS DA CE TI TREBATI ACTION, ZATO SU I ONI OVDE
+ */
+export const $_useAuthorPageState = {
+  AUTHOR_PAGE_ACTION_TYPES_ENUM,
+  authorPageContext,
+};
+
+// (1)
+/**
+ * @description SVE STO TI TREBA ZA KREIRANJE STATE STORE-A I NJEGOCO SLANJE KROZ CONTEXT (OVDE CE TI TREBATI   useReducer  HOOK ) (CONTEXT JE VEC KRIRAN U FAJLU IZ KOJEG SI OVO UVEZAO)
+ */
+export const $_createAuthorPageReducerState = {
+  authorPageReducer,
+  AuthorPageStateProvider,
+  defaultReducerState,
+};
