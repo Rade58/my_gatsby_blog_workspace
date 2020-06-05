@@ -256,7 +256,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     type SocialMedia {
       network: String!
       url: String!
-      icon: String!
+      icon: AuthorImage!
     }
 
     type AuthorImage {
@@ -893,6 +893,44 @@ exports.createResolvers = ({ createResolvers }) => {
           // === !== === !== === !== === !==
 
           return arrayOfKeywordObjects;
+        },
+      },
+    },
+    SocialMedia: {
+      icon: {
+        type: "AuthorImage!",
+        resolve: async (source, args, context, next) => {
+          const { network } = source;
+
+          const resultArray = await context.nodeModel.runQuery({
+            type: "File",
+            query: {
+              filter: {
+                sourceInstanceName: { eq: "social-svgs" },
+                name: { eq: network },
+                internal: { mediaType: { eq: "image/svg+xml" } },
+              },
+            },
+          });
+
+          const { absolutePath, internal } = resultArray[0];
+          const { mediaType } = internal;
+
+          return new Promise((res, rej) => {
+            fs.readFile(
+              absolutePath,
+              { encoding: "base64" },
+              (error, result) => {
+                if (error)
+                  return rej(new Error(`coundn't read ${network} icon`));
+
+                return res({
+                  image: result,
+                  mediaType,
+                });
+              }
+            );
+          });
         },
       },
     },
