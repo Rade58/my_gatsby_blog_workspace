@@ -4,7 +4,7 @@
 query authorPosts($authorID: ID!){
   allBlogPostPage(
     limit: 10,
-    sort: {order: DESC, fields: createdAt},
+    sort: {order: DESC, fields: updated},
 		filter: {
       author: {authorID: {eq: $authorID}}
     }
@@ -85,6 +85,26 @@ BILO BI GUBLJENJE VREMENA DA PISEM RESOLVERE
 JER NE ZNAM KAKV BI UOPSTE QUERY PRAVIO U RESOLVER-I I STA BIH VRACAO (**ZASTO PRAVITI RESOLVER ZA NESTO STA VEC IMAS**)
 
 # KADA TO ZAVRSIS MOZES PROSIRITI AUTHOR PAGE TEMPLATE QUERY, KAKO BI PROSIRIO POSTOJECI QUERY
+
+SAM ODA TI KAZEM DA ONAJ `runQuery` FROM RESOLVER, NE MOZE PRIHVATATI limit KAO ARGUMENT
+
+A INSIDE `sort` ONI PROPERTIJI order I fields TREBAJU DA BUDU NIZOVI
+
+TAKO DA SAM PRIBLIZAN QUERY ONOM GORE NAPRAVIO OVAKO
+
+```js
+
+const resultArray = await context.nodeModel.runQuery({
+  type: "BlogPostPage",
+  query: {
+    // limit: "10",   // OVO JE IZBACENO
+    sort: { order: ["DESC"], fields: ["updated"] },     // A OVO UNUTRA SU NIZOVI KAO STO VIDIS
+    filter: { author: { authorID: { eq: authorID } } },
+  },
+});
+```
+
+DAKLE LIMIT JA MOGU SAM OBAVITI PROGRAMATICALLY, NIJE NIKAKV PROBLEM
 
 
 ########

@@ -254,6 +254,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       youtube: SocialMedia
       linkedin: SocialMedia
 
+      lastTenPosts: [OneOfLastTenPosts]!
 
     }
 
@@ -266,6 +267,28 @@ exports.createSchemaCustomization = ({ actions }) => {
     type AuthorImage {
       image: String
       mediaType: String
+    }
+
+
+    type OneOfLastTenPosts {
+      
+      createdAt: Date! @dateformat
+      updated: Date! @dateformat
+
+      path: String!
+      title: String!
+      description: String!
+      themeColor: String!
+
+      group: GroupForAuthor
+
+    }
+
+    type GroupForAuthor {
+      path: String!
+      name: String!
+      icon: String!
+      underlineColor: String!
     }
 
 
@@ -515,6 +538,28 @@ exports.createResolvers = ({ createResolvers }) => {
   createResolvers({
     // DAODAJE M RESOLVERE ZA   AuthorPage   TYPE
     AuthorPage: {
+      lastTenPosts: {
+        type: "[OneOfLastTenPosts]!",
+        resolve: async (source, args, context, next) => {
+          const { authorID } = source;
+
+          console.log({ authorID });
+
+          const resultArray = await context.nodeModel.runQuery({
+            type: "BlogPostPage",
+            query: {
+              // limit: "10",
+              sort: { order: ["DESC"], fields: ["updated"] },
+              filter: { author: { authorID: { eq: authorID } } },
+            },
+          });
+
+          console.log(resultArray);
+
+          return [];
+        },
+      },
+
       authorImage: {
         type: "AuthorImage",
         resolve: async (source, args, context, next) => {
