@@ -116,7 +116,11 @@ MORAS NAPRAVITI QUERY, AL IDOBRO JE DA IMAS name GROUP PAGE ADOSTUPAN
 
 ALI MORAO SAM DA KORISTIM LOOP DA BIH I U LOOP-U PRAVIO INDIVIDUALNE QUERY-JE ZA GROUP PAGE-OVIMA
 
-EVO NA KRAJU KAKVOG SAM RESOLVER-A DEVELOP-OVAO
+# QUERY JE PROSAO ALI `icon` NA GROUP PAGE-U JE TAKODJE BILO NESTO ZA STA SAM DEFINISAO RESOLVER-A
+
+ZATO BIH MORAO OPET DA DEFINISEM QUERY, UPRAVO ZA TAJ icon
+
+I EVO KAKVOG SAM RESOLVERA NA KRAJU DEVELOP-OVAO
 
 ```js
 lastTenPosts: {
@@ -132,6 +136,8 @@ lastTenPosts: {
         filter: { author: { authorID: { eq: authorID } } },
       },
     });
+
+    // console.log(resultArray);
 
     const arrayOfPromises = [];
 
@@ -159,19 +165,52 @@ lastTenPosts: {
                 },
               },
             })
-            .then((groupPageResultArray) => {
+            .then(async (groupPageResultArray) => {
+              // MORAM DA PRAVI MDODADATNI QUERY ZATO JE then-OV CALLBACK ASYNC, JER CU KORISTITI  await
               const {
                 path: groupPath,
                 name,
-                icon,
+                icon: iconName,
                 underlineColor,
               } = groupPageResultArray[0]; // NIKAD NE ZABORAVI DA NAZAD DOBIJAS NIZ
+
+              const iconNameArgument = iconName.toLowerCase();
+
+              const iconArray = await context.nodeModel.runQuery({
+                type: "File",
+                query: {
+                  filter: {
+                    sourceInstanceName: { eq: "devicons-raedal" },
+                    name: { eq: iconNameArgument },
+                  },
+                },
+              });
+
+              // ALI NE SAM OTO, MORACU DA CITAM FAJL
+
+              const { absolutePath } = iconArray[0]; // I OPET PONAVLJAM NE ZABORAVI DA JE OVO NIZ
+
+              let base64ValueIcon;
+
+              await new Promise((resolve, reject) => {
+                fs.readFile(
+                  absolutePath,
+                  { encoding: "base64" },
+                  (error, result) => {
+                    if (error) return reject(error);
+
+                    base64ValueIcon = result;
+
+                    return resolve();
+                  }
+                );
+              });
 
               return res({
                 group: {
                   path: groupPath,
                   name,
-                  icon,
+                  icon: base64ValueIcon,
                   underlineColor,
                 },
                 description,
@@ -187,13 +226,12 @@ lastTenPosts: {
       );
     }
 
-    console.log(arrayOfPromises);
+    // console.log(arrayOfPromises);
 
     return Promise.all(arrayOfPromises);
   },
 },
 ```
-
 
 # ZATIM PROSIRUJEM SVE TYPESCRIPT INTERFACE-OVE
 
