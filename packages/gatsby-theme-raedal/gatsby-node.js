@@ -277,6 +277,7 @@ exports.createSchemaCustomization = ({ actions }) => {
 
       path: String!
       title: String!
+
       description: String!
       themeColor: String!
 
@@ -543,8 +544,6 @@ exports.createResolvers = ({ createResolvers }) => {
         resolve: async (source, args, context, next) => {
           const { authorID } = source;
 
-          console.log({ authorID });
-
           const resultArray = await context.nodeModel.runQuery({
             type: "BlogPostPage",
             query: {
@@ -554,9 +553,41 @@ exports.createResolvers = ({ createResolvers }) => {
             },
           });
 
-          console.log(resultArray);
+          // console.log(resultArray);
 
-          return [];
+          const postsArray = [];
+
+          for (let i = 0; i < 10; i += 1) {
+            const currentOb = resultArray[i];
+            const {
+              createdAt,
+              updated,
+              path,
+              title,
+              frontMatter,
+              groupPage,
+            } = currentOb;
+
+            const { description, themeColor } = frontMatter;
+            const { path: groupPath, name, icon, underlineColor } = groupPage;
+
+            postsArray.push({
+              group: {
+                path: groupPath,
+                name,
+                icon,
+                underlineColor,
+              },
+              createdAt,
+              updated,
+              path,
+              title,
+              description,
+              themeColor,
+            });
+          }
+
+          return postsArray;
         },
       },
 

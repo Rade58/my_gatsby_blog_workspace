@@ -98,7 +98,7 @@ const resultArray = await context.nodeModel.runQuery({
   type: "BlogPostPage",
   query: {
     // limit: "10",   // OVO JE IZBACENO
-    sort: { order: ["DESC"], fields: ["updated"] },     // A OVO UNUTRA SU NIZOVI KAO STO VIDIS
+    sort: { order: ["DESC"], fields: ["updated"] },     // A OVO UNUTRA SU NIZOVI KAO STO VIDIS (MORAJU BITI NIZOVI)
     filter: { author: { authorID: { eq: authorID } } },
   },
 });
