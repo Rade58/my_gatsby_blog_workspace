@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import { graphql } from "gatsby";
-import AuthorPageLayout from "../components/author-page-components/layout-author";
+import AuthorPage from "../components/author-page-components/author-page";
 
 import { LocationI } from "./group-page-template"; // NE KORITIM NI ZASTA, ALI DA ZNAM DA POSTOJI
 
@@ -10,7 +10,7 @@ export interface AuthorPageContextPropI {
 
 export interface AuthorPageTemplatePropsI {
   pageContext: AuthorPageContextPropI;
-  data: AuthorPageDataI;
+  data: { authorPage: AuthorPageDataI };
   location: LocationI;
 }
 
@@ -121,8 +121,9 @@ const AuthorPageTemplate: FunctionComponent<AuthorPageTemplatePropsI> = (
   props
 ) => {
   const { pageContext, data } = props;
+  const { authorPage } = data;
 
-  return <AuthorPageLayout authorPage={data} />;
+  return <AuthorPage authorPage={authorPage} />;
 };
 
 export default AuthorPageTemplate;

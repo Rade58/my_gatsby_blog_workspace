@@ -1,38 +1,28 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui";
-import { css } from "@emotion/core";
-import { FunctionComponent, useReducer, Fragment } from "react";
-import { $_createAuthorPageReducerState } from "../../context_n_reducers/author_page_con_red";
-import { AuthorPageDataI } from "../../templates/author-page-template";
+import { css, Global } from "@emotion/core";
+import { Fragment, FunctionComponent } from "react";
+import AuthorSeo from "../../seo/author-seo";
+import { additionalStyles } from "../../common-styles";
 
-const AuthorLayout: FunctionComponent<{ authorPage: AuthorPageDataI }> = (
-  props
-) => {
-  const { authorPage } = props;
-
-  const {
-    AuthorPageStateProvider,
-    authorPageReducer,
-    defaultReducerState,
-  } = $_createAuthorPageReducerState;
-
-  const [reducedState, dispatch] = useReducer(
-    authorPageReducer,
-    defaultReducerState
-  );
-
-  console.log(dispatch);
+const LayoutAuthor: FunctionComponent = () => {
+  const { bodyBackgroundColor } = additionalStyles;
 
   return (
     <Fragment>
-      <AuthorPageStateProvider
-        value={{ authorPage, reducedState, authorPageDispatch: dispatch }}
-      >
-        <pre>{JSON.stringify({ data: authorPage, reducedState }, null, 2)}</pre>
-        <pre>{JSON.stringify(dispatch, null, 2)}</pre>
-      </AuthorPageStateProvider>
+      <AuthorSeo />
+      <Global
+        styles={{
+          body: {
+            backgroundColor: bodyBackgroundColor,
+            fontFamily:
+              "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
+          },
+        }}
+      />
+      <div>Something</div>
     </Fragment>
   );
 };
 
-export default AuthorLayout;
+export default LayoutAuthor;

@@ -2,7 +2,7 @@ module.exports = ({
   // ZA authot page
   // DEFAULTS KOJI SU TU ODNOSICE SE NA MENE (I OVO CE BITI KA OSAFEGUARD AKO SAM ZABORAVIO NESTO DA DODAM)
   authorID = null,
-  authorName = "Rade Bajić",
+  authorName = "Rade Bajic",
   about = "Rade is a web developer that is passionate about learning through teaching. Favorite technologies: Typescript, GraphQL and many more.",
   github = "https://github.com/Rade58",
   twitter = "https://twitter.com/ra_decodes",
