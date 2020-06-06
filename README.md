@@ -25,11 +25,41 @@ query authorPosts($authorID: ID!){
       author: {authorID: {eq: $authorID}}
     }
   ){
-    
+    	# NE ZNA MDA LI JE OVO SVE STO CE MI BITI POTREBNO
+    	# NAJBOLJE JE DA DOBRO PORAZMISLIM
+    	# STA MI JOS MOZE TREBATI
   		nodes {
-        createdAt
+        
+        createdAt(formatString: "MMM Do, Y")
+        updated(fromNow: true)
 
-        # NARAVNO ODLUCICU STA MI JOS TREBA
+        # TREBA MI PATH I TITLE ZA SVAK IGROUP PAGE
+        # DA BI NAPRAVIO LINK
+        path
+        title
+        # OVAJ FIELD SAM RANIJE DEFINISAO KAO frontMatter
+        # MOZDA JE TO BILO GLUPO OD MENE
+        # MOZDA JE MALO MISLEADING, AL IZNAM STA JE UNDER HIM
+        frontMatter {
+          # OVO JE ZATO STO CU NAPRAVITI CARD
+          #ZA POMENUTI POST (MOZDA BI TREBAL ODA IMA
+        	# KRATAK DESCRIPTION)
+          description
+          themeColor
+        }
+        # U COSKU CARDA CE BITI DUGME ZA GRUPU
+        # KOJOJ TI POSTOVI PRIPADAJU
+      
+        groupPage {
+          # OVO MI TREBA DA FORMIRAM LINK DO GROUP PAGE
+          path
+          name   # OVO MOZDA NE TREBA JER CU
+          # IPAK DISPLAY-OVATI SLEDECI ICON
+          icon
+          underlineColor
+        }
+        
+        
       }
     
   }
@@ -51,9 +81,17 @@ ZATO STO ZELIM DA QUERY-UJEM U ODNOSU NA `authorID`
 
 **a to nije moguce sa `useStaticQuery`** HOOKOM
 
+## GORE QUERY-UJEM I NEKE BOJE
+
+MOZDA CE MI TREBATI DA NEKEKO SA BOJAM STILIZUJEM CARD-OVE
+
 ## SADA KADA SAM KREIRAO QUERY MOGU DA PROSIRIM TYPE AuthorPage DODAJUCI MU FIELD, `mostRecentPosts`
 
-ZA KOJI CU NAPISATI RESOLVERA U KOJEM CU IMPLEMENTIRATI GORNJI QUERY
+## USTVARI ZASTO PISATI POSEBAN TYPE, KADA MOGU DA PROSIRIM AUTHOR PAGE TEMPLATE QUERY
+
+ALI NEMAM TU MOC DA NAPRAVIM OVAKAV QUERY SA PARAMETRIMA, JER SAM VEC NAPRAVIO QUERY
+
+**MORACU IPAK DA REDEFINISEM SCHEMA-U**
 
 ########
 
