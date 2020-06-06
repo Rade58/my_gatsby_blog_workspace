@@ -133,8 +133,6 @@ lastTenPosts: {
       },
     });
 
-    // console.log(resultArray);
-
     const arrayOfPromises = [];
 
     for (let i = 0; i < 10; i += 1) {
@@ -145,7 +143,7 @@ lastTenPosts: {
         updated,
         path,
         title,
-      } = resultArrayBlogPost[i];
+      } = resultArrayBlogPost[i]; // NE ZABORAVI DA JE OVO NIZ
       const { name: groupPageName } = groupPage;
 
       const { description, themeColor } = frontMatter;
@@ -161,13 +159,13 @@ lastTenPosts: {
                 },
               },
             })
-            .then((groupPageResult) => {
+            .then((groupPageResultArray) => {
               const {
                 path: groupPath,
                 name,
                 icon,
                 underlineColor,
-              } = groupPageResult;
+              } = groupPageResultArray[0]; // NIKAD NE ZABORAVI DA NAZAD DOBIJAS NIZ
 
               return res({
                 group: {
@@ -188,6 +186,8 @@ lastTenPosts: {
         })
       );
     }
+
+    console.log(arrayOfPromises);
 
     return Promise.all(arrayOfPromises);
   },
