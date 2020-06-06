@@ -544,7 +544,7 @@ exports.createResolvers = ({ createResolvers }) => {
         resolve: async (source, args, context, next) => {
           const { authorID } = source;
 
-          const resultArray = await context.nodeModel.runQuery({
+          const resultArrayBlogPost = await context.nodeModel.runQuery({
             type: "BlogPostPage",
             query: {
               // limit: "10",
@@ -555,39 +555,61 @@ exports.createResolvers = ({ createResolvers }) => {
 
           // console.log(resultArray);
 
-          const postsArray = [];
+          const arrayOfPromises = [];
 
           for (let i = 0; i < 10; i += 1) {
-            const currentOb = resultArray[i];
             const {
+              groupPage,
+              frontMatter,
               createdAt,
               updated,
               path,
               title,
-              frontMatter,
-              groupPage,
-            } = currentOb;
+            } = resultArrayBlogPost[i];
+            const { name: groupPageName } = groupPage;
 
             const { description, themeColor } = frontMatter;
-            const { path: groupPath, name, icon, underlineColor } = groupPage;
 
-            postsArray.push({
-              group: {
-                path: groupPath,
-                name,
-                icon,
-                underlineColor,
-              },
-              createdAt,
-              updated,
-              path,
-              title,
-              description,
-              themeColor,
-            });
+            arrayOfPromises.push(
+              new Promise((res, rej) => {
+                context.nodeModel
+                  .runQuery({
+                    type: "GroupPage",
+                    query: {
+                      filter: {
+                        name: { eq: groupPageName },
+                      },
+                    },
+                  })
+                  .then((groupPageResult) => {
+                    const {
+                      path: groupPath,
+                      name,
+                      icon,
+                      underlineColor,
+                    } = groupPageResult;
+
+                    return res({
+                      group: {
+                        path: groupPath,
+                        name,
+                        icon,
+                        underlineColor,
+                      },
+                      description,
+                      themeColor,
+                      createdAt,
+                      updated,
+                      path,
+                      title,
+                    });
+                  })
+                  .catch((error) => rej(error));
+              })
+            );
           }
 
-          return postsArray;
+          return Promise.all(arrayOfPromises);
         },
       },
 

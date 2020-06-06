@@ -106,6 +106,98 @@ const resultArray = await context.nodeModel.runQuery({
 
 DAKLE LIMIT JA MOGU SAM OBAVITI PROGRAMATICALLY, NIJE NIKAKV PROBLEM
 
+# USTVARI MORAM NAPRAVITI JOS JEDAN QUERY A TO JE ONAJ ZA GRPOUP PAGE-OM
+
+SECAS SE I ZA SAMOG groupPage NA `BlogPostPage` TYPE TI SI PISAO RESOLVER-A, E PA NIJE TI ON OVDE DOSTUPAN
+
+MORAS NAPRAVITI QUERY, AL IDOBRO JE DA IMAS name GROUP PAGE ADOSTUPAN
+
+# USPESNO SAM KREIRAO POMENUTOG RESOLVERA, A SADA CU DA PROSIRIM QUERY U TEMPLATE-U
+
+ALI MORAO SAM DA KORISTIM LOOP DA BIH I U LOOP-U PRAVIO INDIVIDUALNE QUERY-JE ZA GROUP PAGE-OVIMA
+
+EVO NA KRAJU KAKVOG SAM RESOLVER-A DEVELOP-OVAO
+
+```js
+lastTenPosts: {
+  type: "[OneOfLastTenPosts]!",
+  resolve: async (source, args, context, next) => {
+    const { authorID } = source;
+
+    const resultArrayBlogPost = await context.nodeModel.runQuery({
+      type: "BlogPostPage",
+      query: {
+        // limit: "10",
+        sort: { order: ["DESC"], fields: ["updated"] },
+        filter: { author: { authorID: { eq: authorID } } },
+      },
+    });
+
+    // console.log(resultArray);
+
+    const arrayOfPromises = [];
+
+    for (let i = 0; i < 10; i += 1) {
+      const {
+        groupPage,
+        frontMatter,
+        createdAt,
+        updated,
+        path,
+        title,
+      } = resultArrayBlogPost[i];
+      const { name: groupPageName } = groupPage;
+
+      const { description, themeColor } = frontMatter;
+
+      arrayOfPromises.push(
+        new Promise((res, rej) => {
+          context.nodeModel
+            .runQuery({
+              type: "GroupPage",
+              query: {
+                filter: {
+                  name: { eq: groupPageName },
+                },
+              },
+            })
+            .then((groupPageResult) => {
+              const {
+                path: groupPath,
+                name,
+                icon,
+                underlineColor,
+              } = groupPageResult;
+
+              return res({
+                group: {
+                  path: groupPath,
+                  name,
+                  icon,
+                  underlineColor,
+                },
+                description,
+                themeColor,
+                createdAt,
+                updated,
+                path,
+                title,
+              });
+            })
+            .catch((error) => rej(error));
+        })
+      );
+    }
+
+    return Promise.all(arrayOfPromises);
+  },
+},
+```
+
+
+# ZATIM PROSIRUJEM SVE TYPESCRIPT INTERFACE-OVE
+
+
 
 ########
 
