@@ -29,7 +29,7 @@ const AuthorPage: FunctionComponent<{ authorPage: AuthorPageDataI }> = (
     <Fragment>
       <AuthorPageStateProvider
         value={{
-          authorPage: { ...authorPage },
+          authorPage,
           reducedState,
           authorPageDispatch: dispatch,
         }}

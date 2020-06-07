@@ -30,7 +30,39 @@ export interface AuthorPageDataI {
   facebook: SocialMedia;
 
   personalWebsite: string;
+
+  // DODAJEM NOVI FIELD
+  lastTenPosts: {
+    createdAt: string;
+    updated: string;
+    path: string;
+    title: string;
+    description: string;
+    themeColor: string;
+    group: {
+      path: string;
+      name: string;
+      icon: string;
+      underlineColor: string;
+    };
+  };
 }
+
+/* 
+lastTenPosts {
+  path
+  createdAt
+  updated
+  title
+  description
+  themeColor
+  group {
+    path
+    name
+    icon
+    underlineColor
+  }
+} */
 
 export interface AuthorImageI {
   image: string;
@@ -113,6 +145,21 @@ export const TakeOneAuthorPage = graphql`
       }
 
       personalWebsite
+
+      lastTenPosts {
+        createdAt
+        updated
+        path
+        title
+        description
+        themeColor
+        group {
+          path
+          name
+          icon
+          underlineColor
+        }
+      }
     }
   }
 `;
