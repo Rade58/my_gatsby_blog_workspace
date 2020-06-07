@@ -6,6 +6,7 @@ import AuthorSeo from "../../seo/author-seo";
 import { additionalStyles } from "../../common-styles";
 import theme from "../../gatsby-plugin-theme-ui/index";
 import Header from "./heade-author";
+import Main from "./main-author";
 
 const LayoutAuthor: FunctionComponent = () => {
   const { bodyBackgroundColor } = additionalStyles;
@@ -26,6 +27,7 @@ const LayoutAuthor: FunctionComponent = () => {
         {/* <div>Something</div> */}
         {/* MESTO ZA HEADER I MAIN */}
         <Header />
+        <Main />
       </ThemeProvider>
     </Fragment>
   );
