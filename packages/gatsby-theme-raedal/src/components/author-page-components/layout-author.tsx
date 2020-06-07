@@ -5,6 +5,7 @@ import { Fragment, FunctionComponent } from "react";
 import AuthorSeo from "../../seo/author-seo";
 import { additionalStyles } from "../../common-styles";
 import theme from "../../gatsby-plugin-theme-ui/index";
+import Header from "./heade-author";
 
 const LayoutAuthor: FunctionComponent = () => {
   const { bodyBackgroundColor } = additionalStyles;
@@ -22,8 +23,9 @@ const LayoutAuthor: FunctionComponent = () => {
             },
           }}
         />
-        <div>Something</div>
+        {/* <div>Something</div> */}
         {/* MESTO ZA HEADER I MAIN */}
+        <Header />
       </ThemeProvider>
     </Fragment>
   );

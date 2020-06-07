@@ -285,7 +285,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
         {/* {intersectedDivId} */}
         <div className="open-book">
           <span role="img" aria-label="table of content">
-            📖
+            # 📖
           </span>
         </div>
         <div
