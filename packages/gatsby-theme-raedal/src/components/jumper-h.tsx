@@ -85,7 +85,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
   //
 
   useEffect(() => {
-    console.log("JUMPER MOUNTED");
+    // console.log("JUMPER MOUNTED");
   }, []);
 
   // RANDOM MOUNTINGZ
@@ -100,8 +100,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
 
   useEffect(
     () => () => {
-      console.log("JUMPER UNMOUNTED!!!!");
-
+      // console.log("JUMPER UNMOUNTED!!!!");
       // setMountingTrigger(!mountingTrigger);
     },
     [] // ZA UNMOUNTIG SE STAVLJA NIZ NE ZABORAVI OPET
@@ -182,12 +181,12 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
   const prevDivHkey: string = justHeadingsArrayRef.current[previousIndex];
   const nextDivHkey: string = justHeadingsArrayRef.current[nextIndex];
 
-  console.log({
+  /* console.log({
     previousIndex,
     nextIndex,
     prevDivHkey,
     nextDivHkey,
-  });
+  }); */
 
   return (
     <Fragment>
@@ -422,7 +421,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
                   >
                     <Link
                       onClick={() => {
-                        console.log("clicked");
+                        // console.log("clicked");
 
                         setIntersectedDivId(
                           `#${encodeURI(value.toLowerCase())

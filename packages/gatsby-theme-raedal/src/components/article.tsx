@@ -31,11 +31,11 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
   const { reducedBlogPostState } = useContext(blogPostContext);
   //
 
-  const { pigDisapear, header_pull_class } = reducedBlogPostState;
+  const { pigDisapear /* , header_pull_class */ } = reducedBlogPostState;
 
-  console.log(header_pull_class);
+  // console.log(header_pull_class);
 
-  console.log({ pigDisapear });
+  // console.log({ pigDisapear });
 
   useEffect(
     () => () => {
@@ -69,7 +69,7 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
       // style={{ display: "flex" }}
       className={`post-article ${
         !pigDisapear ? "pig-reapeard" : "pig-disapeard"
-      } ${header_pull_class}`}
+      }`}
       css={css`
         @media screen and (min-width: 918px) {
           /* padding-top: calc(38px + 58px); */

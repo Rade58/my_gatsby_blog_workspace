@@ -70,6 +70,10 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
 
   // ------------------------------------------------------
 
+  const [opacityClass, setOpacityClass] = useState<"is-opaque" | "not-opaque">(
+    "not-opaque"
+  );
+
   // ------------------------------------------------------
 
   useEffect(() => {
@@ -117,9 +121,27 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
       };
 
       bodyRef.current.onscroll = (e) => {
-        // eslint-disable-next-line
-
         const resizer = document.getElementsByClassName("resizer")[0];
+
+        // setTimeout(() => {
+        // === OVO JE U SET TIMEOUT FUNKCIJI JER U SUPROTNOM JE DOLAZILO DO NEKOG PREKIDA TRCANJA PRASETA !==
+        // setOpacityClass("is-opaque");
+        // NE MOGU TRENUTN ODA DOKUCIMA ZASTO JE TO TAKO, ALI KAD FUNKCIONISE OVAKO NEKA GA
+        // === !==
+        // }, 1000);
+
+        if (resizer) {
+          const resizerWidth = resizer.getBoundingClientRect().width;
+          const windowWidth = window.innerWidth;
+
+          // console.log((100 * resizerWidth) / windowWidth);
+
+          if ((100 * resizerWidth) / windowWidth < 2) {
+            setOpacityClass("not-opaque");
+          } else {
+            setOpacityClass("is-opaque");
+          }
+        }
 
         const scrollIndicatorPercent =
           (100 * window.scrollY) /
@@ -127,6 +149,8 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
 
         if (resizer && resizer instanceof HTMLElement) {
           resizer.style.width = `${scrollIndicatorPercent}%`;
+          //
+          //
 
           if (initialScrollMove === "go") {
             timerId1.current = setTimeout(() => {
@@ -384,7 +408,7 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
           <div
             className={`sprite ${
               !pigDisapear || useScrollAnimation ? "show" : "no-show"
-            }`}
+            } ${opacityClass}`}
             onKeyDown={(e) => {
               if (headerDispatch)
                 headerDispatch({ type: ACTION_TYPES_ENUM.PIG_DISAPEAR });
@@ -398,6 +422,18 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
               // animationPlayState: "paused",
             }}
             css={css`
+              transition-timing-function: ease-out;
+              transition-property: opacity;
+              transition-duration: 4s;
+
+              &.is-opaque {
+                opacity: 1;
+              }
+
+              &.not-opaque {
+                opacity: 0;
+              }
+
               & .no-show {
                 display: none;
               }
