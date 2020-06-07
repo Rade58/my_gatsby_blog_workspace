@@ -17,6 +17,23 @@ const Header: FunctionComponent = () => {
         width: 100%;
         background-color: ${bodyBackgroundColor};
         background-image: ${headerBackgroundImage};
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+
+        & div.home {
+          border: blanchedalmond solid 1px;
+          & a {
+            color: blanchedalmond;
+          }
+        }
+
+        & div.algolia-search-placeholder {
+          width: 20vw;
+          height: auto;
+          border: pink solid 1px;
+        }
       `}
     >
       <div className="home">
@@ -27,6 +44,7 @@ const Header: FunctionComponent = () => {
           Home
         </Link>
       </div>
+      <div className="algolia-search-placeholder" />
     </header>
   );
 };
