@@ -147,8 +147,8 @@ export const TakeOneAuthorPage = graphql`
       personalWebsite
 
       lastTenPosts {
-        createdAt
-        updated
+        createdAt(formatString: "MMM Do, Y")
+        updated(fromNow: true)
         path
         title
         description
