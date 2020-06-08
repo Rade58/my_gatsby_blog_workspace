@@ -43,15 +43,23 @@ const LastTenPosts: FunctionComponent<PropsLastTenPostsI> = (props) => {
     >
       {/* {JSON.stringify(lastTenPosts, null, 2)} */}
       {lastTenPosts.map((post) => {
-        const { title, description, createdAt, updated } = post;
+        const {
+          title,
+          description,
+          createdAt,
+          updated,
+          group,
+          path: postPath,
+          themeColor,
+        } = post;
 
         return (
           <div className="card" key={title}>
             <h1>{title}</h1>
             <p>{description}</p>
             <div className="times">
-              <div>{createdAt}</div>
-              <div>{updated}</div>
+              <div>published: {createdAt}</div>
+              <div>updated: {updated}</div>
             </div>
           </div>
         );
