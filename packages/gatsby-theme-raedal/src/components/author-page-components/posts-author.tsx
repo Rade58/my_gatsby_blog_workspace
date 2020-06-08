@@ -99,6 +99,10 @@ const LastTenPosts: FunctionComponent<PropsLastTenPostsI> = (props) => {
           & div.times {
             margin-top: auto;
 
+            margin-bottom: 4px;
+            margin-left: 6px;
+            margin-right: 6px;
+
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
