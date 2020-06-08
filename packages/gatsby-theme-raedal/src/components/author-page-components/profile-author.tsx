@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx } from "theme-ui";
+import { jsx, Divider } from "theme-ui";
 import { css } from "@emotion/core";
 import { FunctionComponent, useContext } from "react";
 
@@ -10,7 +10,18 @@ const Profile: FunctionComponent = () => {
 
   const { authorPage } = useContext(authorPageContext);
 
-  const { authorPlaceholderSvg, authorImage, about, authorName } = authorPage;
+  const {
+    authorPlaceholderSvg,
+    authorImage,
+    about,
+    authorName,
+    github,
+    twitter,
+    instagram,
+    facebook,
+    youtube,
+    linkedin,
+  } = authorPage;
   const { image: iconBase64, mediaType: iconMediaType } = authorPlaceholderSvg;
   const {
     image: authorImageBase64,
@@ -54,6 +65,11 @@ const Profile: FunctionComponent = () => {
           border: yellow solid 1px;
           font-size: 2.8rem;
           font-weight: 200;
+          align-self: center;
+        }
+
+        & div.social-media {
+          border: orange solid 1px;
         }
       `}
     >
@@ -72,7 +88,10 @@ const Profile: FunctionComponent = () => {
       </div>
       <h1 className="author-name">{authorName}</h1>
       <div className="about-author">{about}</div>
-      <div className="social-media">placeholder</div>
+      <div className="social-media">
+        {twitter.url && <div>twitter</div>}
+        {linkedin.url && <div>linkedin</div>}
+      </div>
     </section>
   );
 };
