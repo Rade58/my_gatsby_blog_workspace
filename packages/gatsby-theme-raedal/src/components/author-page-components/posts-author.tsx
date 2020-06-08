@@ -93,12 +93,27 @@ const LastTenPosts: FunctionComponent<PropsLastTenPostsI> = (props) => {
 
           & p.descr {
             margin: 10px;
+            text-align: center;
           }
 
           & div.times {
+            margin-top: auto;
+
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            flex-wrap: wrap;
             border: olive solid 1px;
+
+            & time {
+              font-size: 0.8rem;
+              text-decoration-line: underline;
+              color: blanchedalmond;
+            }
+
+            & > div {
+              width: max-content;
+              font-size: 0.8rem;
+            }
 
             & > div:nth-of-type(1) {
               margin-right: auto;
@@ -138,8 +153,12 @@ const LastTenPosts: FunctionComponent<PropsLastTenPostsI> = (props) => {
             <p className="descr">{description}</p>
             <hr />
             <div className="times">
-              <div>published: {createdAt}</div>
-              <div>updated: {updated}</div>
+              <div>
+                published: <time>{createdAt}</time>
+              </div>
+              <div>
+                updated: <time>{updated}</time>
+              </div>
             </div>
           </div>
         );
