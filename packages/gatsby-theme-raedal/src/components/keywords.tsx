@@ -69,7 +69,7 @@ const Keywords: FunctionComponent = () => {
             height: 1.4em;
             transition-property: transform border;
             transition-duration: 0.2s;
-            border-radius: 4px;
+            border-radius: 2px;
             &:hover {
               transform: scale3d(1.2, 1.2, 1.2);
               border: ${themeColor} solid 0.2px;

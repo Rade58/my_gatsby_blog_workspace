@@ -28,16 +28,40 @@ const LastTenPosts: FunctionComponent<PropsLastTenPostsI> = (props) => {
 
         justify-content: center;
 
-        width: 98vw;
+        width: 68vw;
         margin-right: auto;
         margin-left: auto;
 
         & div.card {
           background-color: ${cardBackgroundColor};
-          border: olive solid 1px;
+          border: olive solid 0px;
           margin-left: 4px;
           margin-right: 4px;
           margin-bottom: 8px;
+          border-radius: 2px;
+
+          & h1 {
+            & a {
+              color: blanchedalmond;
+              text-decoration-line: none;
+
+              &:hover {
+                text-decoration-line: underline;
+                text-decoration-color: blanchedalmond;
+              }
+            }
+          }
+
+          & div.group-icon {
+            & a {
+              & img {
+                height: 2rem;
+                &:hover {
+                  transform: scale3d(1.1, 1.1, 1.1);
+                }
+              }
+            }
+          }
         }
       `}
     >
@@ -53,9 +77,18 @@ const LastTenPosts: FunctionComponent<PropsLastTenPostsI> = (props) => {
           themeColor,
         } = post;
 
+        const { icon, path, underlineColor, name } = group;
+
         return (
           <div className="card" key={title}>
-            <h1>{title}</h1>
+            <h1>
+              <Link to={encodeURI(postPath)}>{title}</Link>
+            </h1>
+            <div className="group-icon">
+              <Link to={encodeURI(path)}>
+                <img src={`data:image/svg+xml;base64,${icon}`} alt={name} />
+              </Link>
+            </div>
             <p>{description}</p>
             <div className="times">
               <div>published: {createdAt}</div>
