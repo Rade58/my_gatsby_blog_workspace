@@ -122,7 +122,7 @@ const LastTenPosts: FunctionComponent<PropsLastTenPostsI> = (props) => {
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
-            border: olive solid 1px;
+            border: olive solid 0px;
 
             & time {
               font-size: 0.85rem;

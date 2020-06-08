@@ -127,7 +127,7 @@ const Profile: FunctionComponent = () => {
         }
 
         & section.last-ten-posts {
-          border: tomato solid 4px;
+          border: tomato solid 0px;
         }
 
         & div.recent-heading {
@@ -137,8 +137,8 @@ const Profile: FunctionComponent = () => {
 
           & h2 {
             color: blanchedalmond;
-            margin-right: 4rem;
-            margin-left: 4rem;
+            margin-right: 2rem;
+            margin-left: 2rem;
           }
 
           & span.separ {
@@ -146,6 +146,15 @@ const Profile: FunctionComponent = () => {
             width: 28vw;
             background-color: blanchedalmond;
             background-image: ${headerBackgroundImage};
+
+            @media screen and (max-width: 690px) {
+              width: 18vw;
+            }
+            
+            @media screen and (max-width: 364px) {
+              width: 4vw;
+            }
+
           }
         }
       `}
