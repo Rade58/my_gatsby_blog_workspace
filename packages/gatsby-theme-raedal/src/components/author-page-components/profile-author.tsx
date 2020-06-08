@@ -10,7 +10,7 @@ const Profile: FunctionComponent = () => {
 
   const { authorPage } = useContext(authorPageContext);
 
-  const { authorPlaceholderSvg, authorImage } = authorPage;
+  const { authorPlaceholderSvg, authorImage, about, authorName } = authorPage;
   const { image: iconBase64, mediaType: iconMediaType } = authorPlaceholderSvg;
   const {
     image: authorImageBase64,
@@ -23,6 +23,9 @@ const Profile: FunctionComponent = () => {
       css={css`
         border: tomato solid 1px;
         display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        width: 100%;
 
         /* === !==  AMO PROBNO  === !==  === */
         /* & img {
@@ -34,11 +37,23 @@ const Profile: FunctionComponent = () => {
           border: blanchedalmond solid 4px;
           border-radius: 50%;
           overflow: hidden;
-          width: 20vw;
+          width: 10vw;
+          align-self: center;
+          margin-top: 10vh;
 
           & img {
             width: 100%;
           }
+        }
+
+        & div.about-author {
+          border: olive solid 1px;
+        }
+
+        & h1.author-name {
+          border: yellow solid 1px;
+          font-size: 2.8rem;
+          font-weight: 200;
         }
       `}
     >
@@ -55,6 +70,9 @@ const Profile: FunctionComponent = () => {
           />
         )}
       </div>
+      <h1 className="author-name">{authorName}</h1>
+      <div className="about-author">{about}</div>
+      <div className="social-media">placeholder</div>
     </section>
   );
 };
