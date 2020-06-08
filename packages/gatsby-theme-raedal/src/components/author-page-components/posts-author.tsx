@@ -23,12 +23,12 @@ const LastTenPosts: FunctionComponent<PropsLastTenPostsI> = (props) => {
       className="last-ten-posts"
       css={css`
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 340px));
+        grid-template-columns: repeat(auto-fit, minmax(200px, 360px));
         grid-template-rows: auto;
 
         justify-content: center;
 
-        width: 78vw;
+        width: 98vw;
         margin-right: auto;
         margin-left: auto;
 
@@ -46,7 +46,7 @@ const LastTenPosts: FunctionComponent<PropsLastTenPostsI> = (props) => {
         const { title, description, createdAt, updated } = post;
 
         return (
-          <div className="card">
+          <div className="card" key={title}>
             <h1>{title}</h1>
             <p>{description}</p>
             <div className="times">

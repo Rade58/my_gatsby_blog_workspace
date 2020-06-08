@@ -25,6 +25,7 @@ const Profile: FunctionComponent = () => {
     facebook,
     youtube,
     linkedin,
+    personalWebsite,
   } = authorPage;
   const { image: iconBase64, mediaType: iconMediaType } = authorPlaceholderSvg;
   const {
@@ -85,6 +86,10 @@ const Profile: FunctionComponent = () => {
           & > * {
             margin-left: 4px;
             margin-right: 4px;
+
+            &.personal-site {
+              background-color: blanchedalmond;
+            }
           }
         }
 
@@ -115,6 +120,13 @@ const Profile: FunctionComponent = () => {
         {facebook.url && <SocialMediaCard {...facebook} />}
         {instagram.url && <SocialMediaCard {...instagram} />}
         {youtube.url && <SocialMediaCard {...youtube} />}
+        {personalWebsite && (
+          <div className="personal-site">
+            <a href={personalWebsite} about="__blank">
+              Website
+            </a>
+          </div>
+        )}
       </div>
       <LastTenPosts lastTenPosts={lastTenPosts} />
     </section>
