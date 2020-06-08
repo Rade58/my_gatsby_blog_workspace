@@ -23,13 +23,21 @@ const LastTenPosts: FunctionComponent<PropsLastTenPostsI> = (props) => {
       className="last-ten-posts"
       css={css`
         display: grid;
-        width: 80vw;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 340px));
+        grid-template-rows: auto;
+
+        justify-content: center;
+
+        width: 78vw;
         margin-right: auto;
         margin-left: auto;
 
         & div.card {
           background-color: ${cardBackgroundColor};
           border: olive solid 1px;
+          margin-left: 4px;
+          margin-right: 4px;
+          margin-bottom: 8px;
         }
       `}
     >
