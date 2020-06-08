@@ -6,12 +6,15 @@ import { FunctionComponent } from "react";
 
 import { LastTenPostsType } from "../../templates/author-page-template";
 
+import { additionalStyles } from "../../common-styles";
+
 interface PropsLastTenPostsI {
   lastTenPosts: LastTenPostsType;
 }
 
 const LastTenPosts: FunctionComponent<PropsLastTenPostsI> = (props) => {
   const { lastTenPosts } = props;
+  const { cardBackgroundColor } = additionalStyles;
 
   console.log(lastTenPosts);
 
@@ -23,12 +26,28 @@ const LastTenPosts: FunctionComponent<PropsLastTenPostsI> = (props) => {
         width: 80vw;
         margin-right: auto;
         margin-left: auto;
+
+        & div.card {
+          background-color: ${cardBackgroundColor};
+          border: olive solid 1px;
+        }
       `}
     >
       {/* {JSON.stringify(lastTenPosts, null, 2)} */}
-      {lastTenPosts.map((post) => (
-        <div>{post.title}</div>
-      ))}
+      {lastTenPosts.map((post) => {
+        const { title, description, createdAt, updated } = post;
+
+        return (
+          <div className="card">
+            <h1>{title}</h1>
+            <p>{description}</p>
+            <div className="times">
+              <div>{createdAt}</div>
+              <div>{updated}</div>
+            </div>
+          </div>
+        );
+      })}
     </section>
   );
 };
