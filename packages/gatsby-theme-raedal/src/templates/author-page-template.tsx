@@ -14,6 +14,23 @@ export interface AuthorPageTemplatePropsI {
   location: LocationI;
 }
 
+export interface PostsI {
+  createdAt: string;
+  updated: string;
+  path: string;
+  title: string;
+  description: string;
+  themeColor: string;
+  group: {
+    path: string;
+    name: string;
+    icon: string;
+    underlineColor: string;
+  };
+}
+
+export type LastTenPostsType = PostsI[];
+
 export interface AuthorPageDataI {
   authorID: string;
   authorName: string;
@@ -32,20 +49,7 @@ export interface AuthorPageDataI {
   personalWebsite: string;
 
   // DODAJEM NOVI FIELD
-  lastTenPosts: {
-    createdAt: string;
-    updated: string;
-    path: string;
-    title: string;
-    description: string;
-    themeColor: string;
-    group: {
-      path: string;
-      name: string;
-      icon: string;
-      underlineColor: string;
-    };
-  };
+  lastTenPosts: LastTenPostsType; // OVO JE NIZ NE ZABORAVI
 }
 
 /* 

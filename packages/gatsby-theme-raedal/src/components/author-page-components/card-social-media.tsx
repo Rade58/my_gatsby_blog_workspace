@@ -1,6 +1,5 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui";
-import { Link } from "gatsby";
 import { css } from "@emotion/core";
 import { FunctionComponent } from "react";
 
@@ -14,7 +13,13 @@ const SocialMediaCard: FunctionComponent<SocialMedia> = (props) => {
     <div
       className="social-media-card"
       css={css`
-        height: 2em;
+        height: 3em;
+        border: red solid 1px;
+        width: fit-content;
+
+        & img {
+          height: 100%;
+        }
       `}
     >
       {url && (

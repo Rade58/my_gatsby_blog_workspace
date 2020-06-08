@@ -86,20 +86,22 @@ export const authorPageContext: Context<AuthorPageContextStateI> = createContext
       youtube: defaultSocialMedia(),
       facebook: defaultSocialMedia(),
       linkedin: defaultSocialMedia(),
-      lastTenPosts: {
-        createdAt: "",
-        description: "",
-        path: "",
-        themeColor: "",
-        title: "",
-        updated: "",
-        group: {
-          icon: "",
-          name: "",
+      lastTenPosts: [
+        {
+          createdAt: "",
+          description: "",
           path: "",
-          underlineColor: "",
+          themeColor: "",
+          title: "",
+          updated: "",
+          group: {
+            icon: "",
+            name: "",
+            path: "",
+            underlineColor: "",
+          },
         },
-      },
+      ],
     },
   }
 );

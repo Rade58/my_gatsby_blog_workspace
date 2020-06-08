@@ -4,6 +4,7 @@ import { css } from "@emotion/core";
 import { FunctionComponent, useContext } from "react";
 
 import SocialMediaCard from "./card-social-media";
+import LastTenPosts from "./posts-author";
 
 import { $_useAuthorPageState } from "../../context_n_reducers/author_page_con_red";
 
@@ -14,6 +15,7 @@ const Profile: FunctionComponent = () => {
 
   const {
     authorPlaceholderSvg,
+    lastTenPosts,
     authorImage,
     about,
     authorName,
@@ -39,6 +41,11 @@ const Profile: FunctionComponent = () => {
         flex-direction: column;
         flex-wrap: nowrap;
         width: 100%;
+
+        & > * {
+          margin-top: 4px;
+          margin-bottom: 4px;
+        }
 
         /* === !==  AMO PROBNO  === !==  === */
         /* & img {
@@ -72,6 +79,17 @@ const Profile: FunctionComponent = () => {
 
         & div.social-media {
           border: orange solid 1px;
+          display: flex;
+          justify-content: center;
+
+          & > * {
+            margin-left: 4px;
+            margin-right: 4px;
+          }
+        }
+
+        & section.last-ten-posts {
+          border: tomato solid 4px;
         }
       `}
     >
@@ -98,6 +116,7 @@ const Profile: FunctionComponent = () => {
         {instagram.url && <SocialMediaCard {...instagram} />}
         {youtube.url && <SocialMediaCard {...youtube} />}
       </div>
+      <LastTenPosts lastTenPosts={lastTenPosts} />
     </section>
   );
 };
