@@ -7,8 +7,11 @@ import SocialMediaCard from "./card-social-media";
 import LastTenPosts from "./posts-author";
 
 import { $_useAuthorPageState } from "../../context_n_reducers/author_page_con_red";
+import { additionalStyles } from "../../common-styles";
 
 const Profile: FunctionComponent = () => {
+  const { headerBackgroundImage } = additionalStyles;
+
   const { authorPageContext } = $_useAuthorPageState;
 
   const { authorPage } = useContext(authorPageContext);
@@ -58,7 +61,7 @@ const Profile: FunctionComponent = () => {
           border: blanchedalmond solid 4px;
           border-radius: 50%;
           overflow: hidden;
-          width: 10vw;
+          width: 198px;
           align-self: center;
           margin-top: 10vh;
 
@@ -69,6 +72,8 @@ const Profile: FunctionComponent = () => {
 
         & div.about-author {
           border: olive solid 1px;
+          width: 60vw;
+          margin: auto;
         }
 
         & h1.author-name {
@@ -95,6 +100,25 @@ const Profile: FunctionComponent = () => {
 
         & section.last-ten-posts {
           border: tomato solid 4px;
+        }
+
+        & div.recent-heading {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          & h2 {
+            color: blanchedalmond;
+            margin-right: 4rem;
+            margin-left: 4rem;
+          }
+
+          & span.separ {
+            height: 2px;
+            width: 28vw;
+            background-color: blanchedalmond;
+            background-image: ${headerBackgroundImage};
+          }
         }
       `}
     >
@@ -127,6 +151,11 @@ const Profile: FunctionComponent = () => {
             </a>
           </div>
         )}
+      </div>
+      <div className="recent-heading">
+        <span className="separ" />
+        <h2>RecentPosts</h2>
+        <span className="separ" />
       </div>
       <LastTenPosts lastTenPosts={lastTenPosts} />
     </section>
