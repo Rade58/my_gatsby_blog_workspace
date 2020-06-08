@@ -3,6 +3,8 @@ import { jsx, Divider } from "theme-ui";
 import { css } from "@emotion/core";
 import { FunctionComponent, useContext } from "react";
 
+import SocialMediaCard from "./card-social-media";
+
 import { $_useAuthorPageState } from "../../context_n_reducers/author_page_con_red";
 
 const Profile: FunctionComponent = () => {
@@ -89,8 +91,12 @@ const Profile: FunctionComponent = () => {
       <h1 className="author-name">{authorName}</h1>
       <div className="about-author">{about}</div>
       <div className="social-media">
-        {twitter.url && <div>twitter</div>}
-        {linkedin.url && <div>linkedin</div>}
+        {twitter.url && <SocialMediaCard {...twitter} />}
+        {linkedin.url && <SocialMediaCard {...github} />}
+        {github.url && <SocialMediaCard {...github} />}
+        {facebook.url && <SocialMediaCard {...facebook} />}
+        {instagram.url && <SocialMediaCard {...instagram} />}
+        {youtube.url && <SocialMediaCard {...youtube} />}
       </div>
     </section>
   );

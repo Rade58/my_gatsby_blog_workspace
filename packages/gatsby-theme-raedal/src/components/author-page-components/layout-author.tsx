@@ -5,7 +5,7 @@ import { Fragment, FunctionComponent } from "react";
 import AuthorSeo from "../../seo/author-seo";
 import { additionalStyles } from "../../common-styles";
 import theme from "../../gatsby-plugin-theme-ui/index";
-import Header from "./heade-author";
+import Header from "./header-author";
 import Main from "./main-author";
 
 const LayoutAuthor: FunctionComponent = () => {
