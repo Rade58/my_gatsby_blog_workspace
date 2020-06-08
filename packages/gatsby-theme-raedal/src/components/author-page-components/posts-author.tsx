@@ -40,7 +40,41 @@ const LastTenPosts: FunctionComponent<PropsLastTenPostsI> = (props) => {
           margin-bottom: 8px;
           border-radius: 2px;
 
+          display: flex;
+          flex-direction: column;
+
+          position: relative;
+
+          & div.group-icon {
+            position: absolute;
+
+            /* margin-left: auto; */
+
+            right: 4px;
+
+            width: 10%;
+
+            border: pink solid 0px;
+
+            margin-right: 6px;
+            margin-top: 6px;
+
+            & a {
+              & img {
+                height: 2rem;
+                &:hover {
+                  transform: scale3d(1.1, 1.1, 1.1);
+                }
+              }
+            }
+          }
+
           & h1 {
+            width: 78%;
+
+            margin-top: 5px;
+            margin-left: 6px;
+
             & a {
               color: blanchedalmond;
               text-decoration-line: none;
@@ -52,14 +86,25 @@ const LastTenPosts: FunctionComponent<PropsLastTenPostsI> = (props) => {
             }
           }
 
-          & div.group-icon {
-            & a {
-              & img {
-                height: 2rem;
-                &:hover {
-                  transform: scale3d(1.1, 1.1, 1.1);
-                }
-              }
+          & hr {
+            width: 50%;
+            color: crimson;
+          }
+
+          & p.descr {
+            margin: 10px;
+          }
+
+          & div.times {
+            display: flex;
+            flex-direction: column;
+            border: olive solid 1px;
+
+            & > div:nth-of-type(1) {
+              margin-right: auto;
+            }
+            & > div:not(:nth-of-type(1)) {
+              margin-left: auto;
             }
           }
         }
@@ -81,15 +126,17 @@ const LastTenPosts: FunctionComponent<PropsLastTenPostsI> = (props) => {
 
         return (
           <div className="card" key={title}>
-            <h1>
-              <Link to={encodeURI(postPath)}>{title}</Link>
-            </h1>
             <div className="group-icon">
               <Link to={encodeURI(path)}>
                 <img src={`data:image/svg+xml;base64,${icon}`} alt={name} />
               </Link>
             </div>
-            <p>{description}</p>
+            <h1>
+              <Link to={encodeURI(postPath)}>{title}</Link>
+            </h1>
+            <hr />
+            <p className="descr">{description}</p>
+            <hr />
             <div className="times">
               <div>published: {createdAt}</div>
               <div>updated: {updated}</div>
