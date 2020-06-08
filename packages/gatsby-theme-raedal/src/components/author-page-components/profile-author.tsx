@@ -57,17 +57,45 @@ const Profile: FunctionComponent = () => {
         } */
         /* === !== === !== === !== */
 
-        & div.author-image {
-          border: blanchedalmond solid 4px;
-          border-radius: 50%;
+        & > div.author-image {
+          border: blanchedalmond solid 0px;
+
+          /* === !== === BORDER IMAGE !== === !== */
+          /* border-image: ${headerBackgroundImage}; */
+
+          /* === !== === !== === !== === !== === */
+
+
+
+
+          /* border-radius: 50%; */
           overflow: hidden;
-          width: 198px;
+          width: 204px;
+          height: 204px;
           align-self: center;
           margin-top: 10vh;
+          position: relative;
 
-          & img {
-            width: 100%;
+          & > div {
+
+            background-image: ${headerBackgroundImage};
+            background-color: blanchedalmond;
+            width: 198px;
+            height: 198px;
+            padding: 8px;
+            margin: auto;
+
+            border-radius: 50%;
+
+            & img {
+              width: 100%;
+              border-radius: 50%;
+              margin-top: 1px;
+            }
+
           }
+
+
         }
 
         & div.about-author {
@@ -123,17 +151,19 @@ const Profile: FunctionComponent = () => {
       `}
     >
       <div className="author-image">
-        {authorImageBase64 ? (
-          <img
-            src={`data:${authorImageMediaType};base64,${authorImageBase64}`}
-            alt="profile placeholder"
-          />
-        ) : (
-          <img
-            src={`data:${iconMediaType};base64,${iconBase64}`}
-            alt="profile placeholder"
-          />
-        )}
+        <div>
+          {authorImageBase64 ? (
+            <img
+              src={`data:${authorImageMediaType};base64,${authorImageBase64}`}
+              alt="profile placeholder"
+            />
+          ) : (
+            <img
+              src={`data:${iconMediaType};base64,${iconBase64}`}
+              alt="profile placeholder"
+            />
+          )}
+        </div>
       </div>
       <h1 className="author-name">{authorName}</h1>
       <div className="about-author">{about}</div>
@@ -154,7 +184,7 @@ const Profile: FunctionComponent = () => {
       </div>
       <div className="recent-heading">
         <span className="separ" />
-        <h2>RecentPosts</h2>
+        <h2>Recent Posts</h2>
         <span className="separ" />
       </div>
       <LastTenPosts lastTenPosts={lastTenPosts} />
