@@ -23,12 +23,28 @@ const LastTenPosts: FunctionComponent<PropsLastTenPostsI> = (props) => {
       className="last-ten-posts"
       css={css`
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 360px));
+        grid-template-columns: repeat(auto-fit, 100%);
         grid-template-rows: auto;
 
         justify-content: center;
 
-        width: 68vw;
+        width: 100%;
+
+        @media screen and (min-width: 700px) {
+          width: 88vw;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 520px));
+        }
+
+        @media screen and (min-width: 910px) {
+          width: 78vw;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 460px));
+        }
+
+        @media screen and (min-width: 1086px) {
+          width: 68vw;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 360px));
+        }
+
         margin-right: auto;
         margin-left: auto;
 
@@ -109,14 +125,14 @@ const LastTenPosts: FunctionComponent<PropsLastTenPostsI> = (props) => {
             border: olive solid 1px;
 
             & time {
-              font-size: 0.8rem;
+              font-size: 0.85rem;
               text-decoration-line: underline;
               color: blanchedalmond;
             }
 
             & > div {
               width: max-content;
-              font-size: 0.8rem;
+              font-size: 0.85rem;
             }
 
             & > div:nth-of-type(1) {
