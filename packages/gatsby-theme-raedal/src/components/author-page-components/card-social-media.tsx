@@ -18,12 +18,12 @@ const SocialMediaCard: FunctionComponent<SocialMedia> = (props) => {
       `}
     >
       {url && (
-        <Link to={url}>
+        <a href={url} target="__blank">
           <img
             src={`data:${mediaType};base64,${image}`}
             alt="social media icon"
           />
-        </Link>
+        </a>
       )}
     </div>
   );
