@@ -24,6 +24,12 @@ const Header: FunctionComponent = () => {
 
           & a {
             color: blanchedalmond;
+            text-decoration-line: none;
+            font-size: 1.2rem;
+
+            &:hover {
+              text-decoration-line: underline;
+            }
           }
         }
 

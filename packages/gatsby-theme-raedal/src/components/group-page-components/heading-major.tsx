@@ -98,9 +98,9 @@ const HeadingMajor: FunctionComponent = () => {
             }
 
             &.emo {
-              border-right: groove ${underlineColor} thick;
-              border-left: groove ${underlineColor} thick;
-              border-top: ridge ${underlineColor} thick;
+              /* border-right: groove ${underlineColor} thick; */
+              /* border-left: groove ${underlineColor} thick; */
+              /* border-top: ridge ${underlineColor} thick; */
               /* padding: 4.8px; */
               padding-left: 4px;
               padding-right: 3px;
