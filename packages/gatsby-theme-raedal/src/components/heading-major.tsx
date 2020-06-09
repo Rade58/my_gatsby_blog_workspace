@@ -7,8 +7,11 @@ import { Link } from "gatsby";
 //
 import { $_useBlogPostReducerState } from "../context_n_reducers/context_n_reducer_blog_post";
 //
+import { additionalStyles } from "../common-styles";
+//
 
 const HeadingMajor: FunctionComponent = () => {
+  const { headerBackgroundImage } = additionalStyles;
   const { blogPostContext } = $_useBlogPostReducerState;
   const { createdAt, isUpdated, updated, seo, groupPage } = useContext(
     blogPostContext
@@ -203,9 +206,9 @@ const HeadingMajor: FunctionComponent = () => {
       </div>
       <div
         css={css`
-          border-top: ${themeColor} solid 2px;
           width: 80%;
-          height: 0px;
+          height: 2px;
+          background-image: ${headerBackgroundImage};
         `}
       />
     </section>
