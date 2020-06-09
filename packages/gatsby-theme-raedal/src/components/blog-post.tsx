@@ -21,12 +21,14 @@ import {
   Headings,
   GroupPagePickedI,
   PrevAndNextPagePathI,
+  AuthorI,
 } from "../templates/blog-post-template"; // OVDE SAM SAMO UVEZAO TYPE ZA
 //                                                              groupPage  (TO JE ONAJ STO SAM SAMO PICK=OVAO STA M ITREBA, JER MI NE TREBA SVE)
 // UVOZIM DAKLE ONAJ VEZAN ZA KEYWORDS
 import { PageKeywords } from "../templates/group-page-template";
 
 interface PageProp extends SeoI {
+  author: AuthorI;
   // DODAO I OVO
   prevAndNextPagePath: PrevAndNextPagePathI; // TYPESCRIPT VISE NE YELL-UJE NA TEBE
   // JOS DVA NOVA PROP TYPE-A, PRE NEGO STO ODEM DA DODAJEM NOVE TYPE-OVE I DEFINISEM
@@ -71,6 +73,7 @@ const BlogPost: FunctionComponent<{
     // uzimam i ovo
     allBlogKeywords,
     groupPage,
+    author,
   },
 }) => {
   const {
@@ -91,6 +94,7 @@ const BlogPost: FunctionComponent<{
   return (
     <BlogPostStateProvider
       value={{
+        author,
         prevAndNextPagePath,
         reducedBlogPostState,
         blogPostDispatch,

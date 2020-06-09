@@ -14,6 +14,7 @@ import {
   GroupPagePickedI,
   //
   PrevAndNextPagePathI,
+  AuthorI,
 } from "../templates/blog-post-template";
 import { PageKeywords } from "../templates/group-page-template";
 //
@@ -154,6 +155,7 @@ export interface ContextBlogPostStateI {
   createdAt: string;
   isUpdated: boolean;
   updated: string;
+  author: AuthorI;
 }
 
 // OVO JE SAMO DEFAULT STATE I REDUCER-A NEMA JOS
@@ -209,6 +211,7 @@ export const blogPostContext: Context<ContextBlogPostStateI> = createContext({
       keywordTextColor: "",
     },
   ],
+  author: { authorName: "", path: "" },
 });
 
 // GOTO VO CES UVEK KORISTITI     useContext    HOOK

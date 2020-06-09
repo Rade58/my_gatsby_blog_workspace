@@ -13,10 +13,12 @@ import { additionalStyles } from "../common-styles";
 const HeadingMajor: FunctionComponent = () => {
   const { headerBackgroundImage } = additionalStyles;
   const { blogPostContext } = $_useBlogPostReducerState;
-  const { createdAt, isUpdated, updated, seo, groupPage } = useContext(
+  const { createdAt, isUpdated, updated, seo, groupPage, author } = useContext(
     blogPostContext
   );
   const { title, themeColor } = seo;
+
+  const { authorName, path: authorPath } = author;
 
   let icon;
   let path;
@@ -36,6 +38,18 @@ const HeadingMajor: FunctionComponent = () => {
         flex-direction: column;
         align-items: center;
         align-content: stretch;
+
+        & div.author {
+          margin-bottom: 28px;
+          & a {
+            color: blanchedalmond;
+            text-decoration-line: none;
+
+            &:hover {
+              text-decoration-line: underline;
+            }
+          }
+        }
 
         & .headingz {
           display: flex;
@@ -203,6 +217,9 @@ const HeadingMajor: FunctionComponent = () => {
             <time> {updated}</time>
           </h4>
         ) : null}
+      </div>
+      <div className="author">
+        author: &nbsp;&nbsp;<Link to={encodeURI(authorPath)}>{authorName}</Link>
       </div>
       <div
         css={css`

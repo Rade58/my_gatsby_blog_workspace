@@ -45,6 +45,11 @@ export interface PageContextI {
   relativeLink: string;
 }
 
+export interface AuthorI {
+  path: string;
+  authorName: string;
+}
+
 interface BlogPostTemplateProps {
   pageContext: PageContextI;
   data: {
@@ -69,6 +74,8 @@ interface BlogPostTemplateProps {
       allBlogKeywords: PageKeywords[];
 
       groupPage: GroupPagePickedI;
+
+      author: AuthorI;
     };
   };
 }
@@ -122,6 +129,13 @@ export const query = graphql`
 
       # DOBRA STVAR JE STO TI VEC I IMAS KRIRANO POMENUTU KOMPONENTU NAMENJENU RENDERINGU
       # KEYWORD-OVA
+
+      # UZIMAM I AUTORA
+
+      author {
+        path
+        authorName
+      }
     }
   }
 `;
@@ -169,6 +183,7 @@ const BlogPostTemplate: FunctionComponent<BlogPostTemplateProps> = ({
     frontMatter,
     groupPage,
     allBlogKeywords,
+    author,
   } = data.page;
 
   //  I NJIH CU     ZADATI DOLE U page      PROP, ALI MORAM DA PROSIRIM I PROP TYPES ZA   BlogPost   KOMPONENTU
@@ -194,6 +209,7 @@ const BlogPostTemplate: FunctionComponent<BlogPostTemplateProps> = ({
         groupPage,
         // POSTO SAM ZAVRSI OSA OVIM VREME JE DA PROSIRIM I CONTEXT TYPE-OVE
         // TAKODJE DA CONTEXT-U PROSLEDIM DEFAULT-OVE U SKLADU SA TI MTYPE-OVIMA
+        author,
       }}
     />
   );
