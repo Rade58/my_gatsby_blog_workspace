@@ -120,6 +120,8 @@ const Header: FunctionComponent = () => {
       css={css`
         /* border-top: 14px solid purple; */
 
+        padding-top: 6px;
+
         z-index: 100;
         display: flex;
 
@@ -148,11 +150,11 @@ const Header: FunctionComponent = () => {
         transition-duration: 0.2s;
         /* kada scroll-ujem down element treba da se digne above */
         &.pull-up {
-          top: -56px;
+          top: -60px;
         }
         /* u suprotnom se spusta (ODNOSNO VRACA U POCETNI POLOZAJ) */
         &.pull-down {
-          top: 0;
+          top: -4px;
         }
 
         /* SAMO MENJAM VEREDNOSTI ZA KLASE AKO JE REC O MANJEM EKRANU */

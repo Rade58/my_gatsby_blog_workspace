@@ -121,6 +121,10 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
           height: 100%;
           margin: 0;
           padding: 0;
+
+          @media screen and (max-width: 918px) {
+            margin-top: 4px;
+          }
         }
 
         & .no-show {
