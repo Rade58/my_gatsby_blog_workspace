@@ -44,10 +44,17 @@ const HeadingMajor: FunctionComponent = () => {
           & a {
             color: blanchedalmond;
             text-decoration-line: none;
+            border: blanchedalmond solid 1px;
+            border-radius: 1px;
+            padding: 2px;
 
             &:hover {
               text-decoration-line: underline;
             }
+          }
+
+          &:after {
+            content: "  👩";
           }
         }
 

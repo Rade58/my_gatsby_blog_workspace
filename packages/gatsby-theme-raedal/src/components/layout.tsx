@@ -126,7 +126,7 @@ const Layout: FunctionComponent<LayoutPropsI> = ({ body }) => {
               background-color: rgb(27, 34, 39);
               padding-top: 56px;
 
-              border: pink solid 4px;
+              border: pink solid 0px;
 
               /* OBRATI PAZNJU DA KADA DODAS MARGINE, TI CES IMATO OVERFLOW SCROLL */
               /* ZA BODY STO NIJE DOBRO */
