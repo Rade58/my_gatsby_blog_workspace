@@ -78,6 +78,13 @@ const HeadingMajor: FunctionComponent = () => {
           flex-wrap: wrap;
           width: 100%;
 
+          & div.vertical-separator {
+            height: 10vh;
+            width: 2px;
+            background-color: blanchedalmond;
+            background-image: ${headerBackgroundImage};
+          }
+
           & .mark-line {
             width: 10%;
             border-top: ${themeColor} solid 1px;
@@ -200,6 +207,7 @@ const HeadingMajor: FunctionComponent = () => {
       </div>
 
       <div className="times">
+        <div className="vertical-separator" />
         <h4 className="created">
           <span className="pubspan">Published</span>:&nbsp;&nbsp;
           <time> {createdAt}</time>
@@ -217,6 +225,7 @@ const HeadingMajor: FunctionComponent = () => {
             <time> {updated}</time>
           </h4>
         ) : null}
+        <div className="vertical-separator" />
       </div>
       <div className="author">
         author: &nbsp;&nbsp;<Link to={encodeURI(authorPath)}>{authorName}</Link>

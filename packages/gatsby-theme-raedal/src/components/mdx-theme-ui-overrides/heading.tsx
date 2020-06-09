@@ -129,7 +129,6 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
         css={css`
           position: relative;
           z-index: 50;
-          font-weight: 200;
 
           border: blanchedalmond solid 1px;
           margin-left: auto;
