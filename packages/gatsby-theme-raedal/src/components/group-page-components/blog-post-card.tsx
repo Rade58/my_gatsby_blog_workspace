@@ -62,9 +62,11 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
             display: flex;
             flex-wrap: wrap;
 
-            margin-top: 8px;
+            margin-top: 18px;
             margin-right: 2rem;
             margin-left: 2rem;
+
+            font-size: 0.9rem;
 
 
 
@@ -113,19 +115,26 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
 
 
           }
-          a {
+          
+          & a {
             text-decoration-line: none;
             border: 0px solid blanchedalmond;
             width: fit-content;
             color: white;
             margin-left: 12px;
             margin-right: 18px;
+
+
+            & p {
+              margin-left: 20%;
+            }
             
             & div.card-separ {
               height: 2px;
               width: 80%;
               background-color: blanchedalmond;
-              background-image: ${headerBackgroundImage};
+              /* background-image: ${headerBackgroundImage}; */
+              background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
               margin-right: auto;
               margin-left: auto;
             }
@@ -140,6 +149,8 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
               margin-left: 3rem;
               margin-right: 0.2rem;
               /* z-index: 200; */
+
+              font-weight: 200;
 
               text-decoration-color: ${themeColor};
 
@@ -181,24 +192,24 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
 
             border-left-color: ${themeColor};
 
-            opacity: 0.48;
+            /* opacity: 0.48; */
             /* border-bottom-color: transparent; */
             /* border-top-color: ${themeColor}; */
 
-            div.styled-cont {
+            /* div.styled-cont {
 
               height: 3.8rem;
               width: 3.8rem;
               border-radius: 0% 100% 0% 100% / 0% 0% 100% 100%  ;
 
-            }
+            } */
 
             h4 {
               /* transform: translateX(-28px); */
             }
 
             & + hr {
-              width: 100%
+              /* width: 100% */
             }
 
           }
