@@ -110,13 +110,36 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
         align-items: center;
 
         justify-items: flex-start;
+        overflow: hidden;
 
         & h2 {
           font-weight: 200;
           margin-left: 10%;
-          width: max-content;
           color: blanchedalmond;
           position: relative;
+
+          border: pink solid 1px;
+          display: flex;
+          width: max-content;
+          align-items: center;
+
+          &::after {
+            content: "";
+            background-color: blanchedalmond;
+            background-image: linear-gradient(
+              to right,
+              #fa709a 0%,
+              #fee140 100%
+            );
+            height: 2px;
+            margin-left: 1em;
+            border: blanchedalmond solid 0px;
+            width: 600%;
+            overflow: hidden;
+            position: absolute;
+            left: 100%;
+            flex-shrink: 1;
+          }
         }
 
         &.pdapear {
