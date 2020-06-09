@@ -166,7 +166,7 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
           & > aside.jumper-cont {
             position: sticky;
 
-            top: 38vh;
+            top: 48vh;
 
             border: pink solid 1px;
             width: fit-content;
@@ -178,7 +178,7 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
           & > section.keywords {
             position: sticky;
 
-            top: 28vh;
+            top: 48vh;
           }
 
           & > section.social-posting {

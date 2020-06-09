@@ -13,6 +13,7 @@ import { css } from "@emotion/core";
 
 import { Link } from "gatsby";
 import { $_useBlogPostReducerState } from "../../context_n_reducers/context_n_reducer_blog_post";
+import { additionalStyles } from "../../common-styles";
 
 type HeadingsI = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
@@ -27,6 +28,8 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
   Tag
 ) => (props) => {
   if (!props.id) return <Tag {...props} />;
+
+  const { headerBackgroundImage } = additionalStyles;
 
   // KORISTICU I CONTEXT
 
@@ -103,6 +106,19 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
         /* &.papear {
         } */
 
+        display: flex;
+        align-items: center;
+
+        justify-items: flex-start;
+
+        & h2 {
+          font-weight: 200;
+          margin-left: 10%;
+          width: max-content;
+          color: blanchedalmond;
+          position: relative;
+        }
+
         &.pdapear {
           padding-top: 12px;
         }
@@ -127,12 +143,11 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
         {...props}
         id={undefined}
         css={css`
-          position: relative;
           z-index: 50;
 
-          border: blanchedalmond solid 1px;
-          margin-left: auto;
-          margin-right: auto;
+          border: blanchedalmond solid 0px;
+          /* margin-left: auto; */
+          /* margin-right: auto; */
           margin-top: 0;
           margin-bottom: 0;
           width: max-content;

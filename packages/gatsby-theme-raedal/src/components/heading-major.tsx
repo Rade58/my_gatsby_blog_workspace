@@ -46,7 +46,8 @@ const HeadingMajor: FunctionComponent = () => {
             text-decoration-line: none;
             border: blanchedalmond solid 1px;
             border-radius: 1px;
-            padding: 2px;
+            padding: 4px;
+            border-radius: 2px;
 
             &:hover {
               text-decoration-line: underline;
