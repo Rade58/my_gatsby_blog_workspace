@@ -104,6 +104,11 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
           transition-property: padding-top;
           transition-duration: 200ms;
         }
+
+        & > p {
+          font-size: 24px;
+          font-weight: 100;
+        }
       `}
     >
       <Heading />

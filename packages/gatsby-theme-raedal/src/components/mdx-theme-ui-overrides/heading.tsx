@@ -129,22 +129,25 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
         css={css`
           position: relative;
           z-index: 50;
+          font-weight: 200;
 
           border: blanchedalmond solid 1px;
           margin-left: auto;
           margin-right: auto;
           margin-top: 0;
           margin-bottom: 0;
-          width: max-content & > a {
+          width: max-content;
+
+          /* & > a {
             text-decoration-line: none;
             color: inherit;
             margin-left: 10%;
 
-            /* box-sizing: border-box; */
+            box-sizing: border-box;
 
             border: pink solid 1px;
             position: relative;
-          }
+          } */
 
           &:hover > a::before {
             content: "🔗";
