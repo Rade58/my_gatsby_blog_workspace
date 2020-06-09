@@ -58,10 +58,10 @@ const HeadingMajor: FunctionComponent = () => {
           border: olive solid 0px;
 
           & h1.h-title {
-            font-weight: 400;
+            font-weight: 200;
             margin-right: auto;
             margin-left: auto;
-            font-size: 55px;
+            font-size: 58px;
             border: pink solid 0px;
             text-align: center;
 

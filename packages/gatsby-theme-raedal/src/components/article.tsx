@@ -94,10 +94,12 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
         & > h1 {
           font-family: Oxygen, Ubuntu, Roboto, Cantarell, "Open Sans",
             "Helvetica Neue", sans-serif;
-          font-weight: 300;
+          /* font-weight: 300; */
           color: #fff;
           margin: 0 auto;
           width: fit-content;
+          /* font-size: 58px; */
+          /* font-weight: 200; */
         }
 
         & > div > h2 {
