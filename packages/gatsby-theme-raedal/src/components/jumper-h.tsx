@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui";
 import { css } from "@emotion/core";
-import { Link } from "gatsby";
+import { Link, navigate } from "gatsby";
 import {
   useContext,
   useRef,
@@ -465,11 +465,19 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
             window.scrollTo({
               top: 0,
             });
+
+            setTimeout(() => {
+              navigate(relativeLink);
+            }, 500);
           }}
           onKeyPress={() => {
             window.scrollTo({
               top: 0,
             });
+
+            setTimeout(() => {
+              navigate(relativeLink);
+            }, 500);
           }}
         >
           <Octicon icon={arrowUp} size="medium" />
