@@ -16,7 +16,11 @@ import { $_useBlogPostReducerState } from "../context_n_reducers/context_n_reduc
 import LeftArrow from "./left-arrow";
 import RightArrow from "./right-arrow";
 
+import { additionalStyles } from "../common-styles";
+
 const Keywords: FunctionComponent = () => {
+  const { headerBackgroundImage } = additionalStyles;
+
   const { blogPostContext } = $_useBlogPostReducerState;
 
   // SAMO MI TREBAJU allBlogKeywords      ALI ZELI MDA PRIKAZEM I IKONU
@@ -47,7 +51,10 @@ const Keywords: FunctionComponent = () => {
         & div.bigger-separator {
           width: 80%;
           margin: 1rem auto;
-          border-bottom: 1px solid ${themeColor};
+          /* border-bottom: 1px solid ${themeColor}; */
+          height: 2px;
+          background-color: ${themeColor};
+          background-image: ${headerBackgroundImage};
         }
 
         & div.separator {

@@ -14,7 +14,7 @@ interface PropsLastTenPostsI {
 
 const LastTenPosts: FunctionComponent<PropsLastTenPostsI> = (props) => {
   const { lastTenPosts } = props;
-  const { cardBackgroundColor } = additionalStyles;
+  const { cardBackgroundColor, headerBackgroundImage } = additionalStyles;
 
   console.log(lastTenPosts);
 
@@ -102,9 +102,14 @@ const LastTenPosts: FunctionComponent<PropsLastTenPostsI> = (props) => {
             }
           }
 
-          & hr {
-            width: 50%;
-            color: crimson;
+          & div.separ-post {
+            height: 2px;
+            width: 80%;
+            background-color: blanchedalmond;
+            background-image: ${headerBackgroundImage};
+            margin-top: auto;
+            margin-right: auto;
+            margin-left: auto;
           }
 
           & p.descr {
@@ -113,7 +118,7 @@ const LastTenPosts: FunctionComponent<PropsLastTenPostsI> = (props) => {
           }
 
           & div.times {
-            margin-top: auto;
+            margin-top: 8px;
 
             margin-bottom: 4px;
             margin-left: 6px;
@@ -169,9 +174,9 @@ const LastTenPosts: FunctionComponent<PropsLastTenPostsI> = (props) => {
             <h1>
               <Link to={encodeURI(postPath)}>{title}</Link>
             </h1>
-            <hr />
+            <div className="separ-post" />
             <p className="descr">{description}</p>
-            <hr />
+            <div className="separ-post" />
             <div className="times">
               <div>
                 published: <time>{createdAt}</time>

@@ -32,7 +32,7 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
 
   const { description, themeColor } = frontMatter;
 
-  const { bodyBackgroundColor, cardBackgroundColor } = additionalStyles;
+  const { cardBackgroundColor, headerBackgroundImage } = additionalStyles;
 
   return (
     <Fragment>
@@ -55,15 +55,19 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
           
           section.pubup{
 
-            border: tomato solid 1px;
+            border: tomato solid 0px;
 
             /* width: 100%; */
 
             display: flex;
             flex-wrap: wrap;
 
+            margin-top: 8px;
             margin-right: 2rem;
             margin-left: 2rem;
+
+
+
 
 
             & .published, .updated {
@@ -116,10 +120,20 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
             color: white;
             margin-left: 12px;
             margin-right: 18px;
+            
+            & div.card-separ {
+              height: 2px;
+              width: 80%;
+              background-color: blanchedalmond;
+              background-image: ${headerBackgroundImage};
+              margin-right: auto;
+              margin-left: auto;
+            }
+
 
             h4 {
               font-size: 28px;
-              border: 1px solid pink;
+              border: 0px solid pink;
               transition-property: transform;
               transition-duration: 0.78s;
               width: fit-content;
@@ -180,7 +194,7 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
             }
 
             h4 {
-              transform: translateX(-28px);
+              /* transform: translateX(-28px); */
             }
 
             & + hr {
@@ -195,7 +209,9 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
       >
         <Link to={path}>
           <h4>{title}</h4>
+          <div className="card-separ" />
           <p>{description}</p>
+          <div className="card-separ" />
         </Link>
         <div className="styled-cont" />
         <section className="pubup">
