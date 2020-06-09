@@ -79,7 +79,7 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
           margin-top: 0px;
         }
 
-        border: tomato solid 4px;
+        border: tomato solid 0px;
         /* margin-top: 48px; */
 
         /* &.pig-reapeard {

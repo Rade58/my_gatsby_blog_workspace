@@ -77,6 +77,7 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
         } */
 
         & > aside.jumper-cont {
+          margin-left: 18px;
           grid-area: t;
         }
         & > section.keywords {
