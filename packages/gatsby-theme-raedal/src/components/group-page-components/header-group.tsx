@@ -17,17 +17,31 @@ const Header: FunctionComponent = () => {
       }}
       css={css`
         display: flex;
+        justify-content: space-evenly;
 
-        & a {
-          color: blanchedalmond;
+        & div.home {
+          border: solid pink 1px;
+
+          & a {
+            color: blanchedalmond;
+          }
+        }
+
+        & div.algolia-placeholder {
+          width: 10vw;
+          height: auto;
+          border: blanchedalmond solid 1px;
         }
       `}
     >
-      <Link to="/">
-        <span role="img" aria-label="home">
-          🏡
-        </span>
-      </Link>
+      <div className="home">
+        <Link to="/">
+          <span role="img" aria-label="home">
+            🏡
+          </span>
+        </Link>
+      </div>
+      <div className="algolia-placeholder" />
     </header>
   );
 };
