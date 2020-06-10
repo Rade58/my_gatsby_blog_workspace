@@ -98,14 +98,17 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
   return (
     <div
       className={`${useScrollAnimation ? "show" : "no-show"}`}
-      style={
-        {
-          // display: useScrollAnimation ? "block" : "none",
-        }
-      }
+      style={{
+        // display: useScrollAnimation ? "block" : "none",
+        backgroundColor: !pigDisapear ? bc : "#d386a457",
+        backgroundImage: !pigDisapear
+          ? "inherit"
+          : "linear-gradient(90deg, rgba(89,207,140,0.48783263305322133) 12%, rgba(218,139,64,0.5326505602240896) 91%)",
+      }}
       css={css`
-        background-image: ${bcImg};
+        /* background-image: ${bcImg}; */
         background-color: ${bc};
+        /* background-color: pink; */
 
         width: 100%;
         height: 4px;
@@ -163,6 +166,15 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
             type: BLOG_POST_ACTION_TYPES_ENUM.PIG_AND_TRACK_DISAPEARD,
           });
         }}
+        className={`nestoBlah ${
+          pigDisapear || !useScrollAnimation ? "no-show" : "show"
+        }`}
+        style={{
+          backgroundImage: pigDisapear
+            ? "none"
+            : "linear-gradient(to right,rgb(63, 44, 56),rgb(38, 45, 59))",
+          // display: `${pigDisapear ? "none" : "block"}`,
+        }}
         css={css`
           @media screen and (min-width: 1100px) {
             height: 38px;
@@ -173,11 +185,6 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
           height: 30px;
           /* -------------------------------------------------------  */
           border: pink solid 0px;
-          background-image: linear-gradient(
-            to right,
-            rgb(63, 44, 56),
-            rgb(38, 45, 59)
-          );
           /* rgb(27, 34, 39) */
           padding: 0;
           margin: 0;
@@ -200,14 +207,6 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
             }
           }
         `}
-        className={`nestoBlah ${
-          pigDisapear || !useScrollAnimation ? "no-show" : "show"
-        }`}
-        style={
-          {
-            // display: `${pigDisapear ? "none" : "block"}`,
-          }
-        }
       />
       {/* <LeftArrow /> */}
       <Pig />

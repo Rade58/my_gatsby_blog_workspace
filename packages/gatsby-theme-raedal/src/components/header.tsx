@@ -66,7 +66,7 @@ const Header: FunctionComponent = () => {
 
   const { reducedBlogPostState } = useContext(blogPostContext);
 
-  const { setJumpersSlidingClass } = reducedBlogPostState;
+  const { setJumpersSlidingClass, pigDisapear } = reducedBlogPostState;
 
   const {
     scrolled_class /* , currentScroll, pigDisapear  */,
@@ -112,13 +112,13 @@ const Header: FunctionComponent = () => {
 
   return (
     <header
+      // style={{backgroundColor: pigDisapear?"":"inherit"}}
       className={scrolled_class}
       // className="pull-up"
-      sx={{
-        backgroundImage: additionalStyles.headerBackgroundImage,
-      }}
+
       css={css`
         /* border-top: 14px solid purple; */
+        background-image: ${additionalStyles.headerBackgroundImage};
 
         padding-top: 6px;
 

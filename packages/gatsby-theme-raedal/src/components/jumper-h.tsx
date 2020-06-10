@@ -464,14 +464,15 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
           role="button"
           tabIndex={0}
           onClick={() => {
-            const promise = new Promise((res, rej) => {
+            let a;
+            return new Promise((res, rej) => {
               window.scrollTo({
                 top: 0,
               });
               res();
             })
               .then(() => {
-                let a;
+                let b;
 
                 return new Promise((resolve, rject) => {
                   setTimeout(() => {

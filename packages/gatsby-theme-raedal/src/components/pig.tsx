@@ -471,6 +471,9 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
         className="resizer"
         style={{
           display: useScrollAnimation ? "block" : "none",
+          backgroundImage: !pigDisapear
+            ? " linear-gradient(90deg, rgba(207,146,81,0.4598214285714286) 20%, rgba(207,89,141,0.41220238095238093) 85%)"
+            : "linear-gradient(90deg, rgba(207,146,81,1) 20%, rgba(207,89,141,1) 85%)",
           // width: `${currentScrollPercent}%`,
           // display: `${pigDisapear ? "none" : "block"}`,
           // border: "red solid 8px",
