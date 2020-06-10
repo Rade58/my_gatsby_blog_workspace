@@ -68,12 +68,15 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
                 payload: entries[0].target.id,
               }); */
 
-            setIntersectedHeadingDivFunc(entries[0].target.id);
+            setTimeout(() => {
+              // console.log(entries[0].target.id);
+              setIntersectedHeadingDivFunc(entries[0].target.id);
+            }, 100);
           }
         },
         {
           root: null,
-          threshold: 1.0,
+          threshold: [0.25, 0.75],
           rootMargin: "0px",
         }
       );
