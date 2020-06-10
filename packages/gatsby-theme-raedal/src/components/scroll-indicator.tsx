@@ -103,7 +103,7 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
         backgroundColor: !pigDisapear ? bc : "#d386a457",
         backgroundImage: !pigDisapear
           ? "inherit"
-          : "linear-gradient(90deg, rgba(89,207,140,0.48783263305322133) 12%, rgba(218,139,64,0.5326505602240896) 91%)",
+          : "linear-gradient(90deg, rgba(103,207,89,0.5970763305322129) 24%, rgba(81,111,207,0.76234243697479) 94%)",
       }}
       css={css`
         /* background-image: ${bcImg}; */
