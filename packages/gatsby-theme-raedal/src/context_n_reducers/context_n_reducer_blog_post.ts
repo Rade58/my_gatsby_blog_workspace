@@ -30,6 +30,8 @@ export enum BLOG_POST_ACTION_TYPES_ENUM {
   GIVE_SET_JUMPER_STATE = "GIVE_SET_JUMPER_STATE",
   //
   GIVE_SET_JUMPER_SLIDING = "GIVE_SET_JUMPER_SLIDING",
+  //
+  GIVE_SET_OPACITY_CLASS_FUNC = "GIVE_SET_OPACITY_CLASS_FUNC",
 }
 
 export interface BlogPostStateI {
@@ -45,6 +47,10 @@ export interface BlogPostStateI {
 
   setJumpersSlidingClass:
     | Dispatch<SetStateAction<"slide-left" | "slide-right">>
+    | ((val: any) => void);
+
+  setPigOpacityClassFunc:
+    | Dispatch<SetStateAction<"is-opaque" | "not-opaque">>
     | ((val: any) => void);
 }
 
@@ -104,6 +110,10 @@ export const blogPostReducer: Reducer<
     return { ...state, setIntersectedHeadingDivFunc: action.payload };
   }
 
+  if (action.type === BLOG_POST_ACTION_TYPES_ENUM.GIVE_SET_OPACITY_CLASS_FUNC) {
+    return { ...state, setPigOpacityClassFunc: action.payload };
+  }
+
   return state;
 };
 
@@ -121,6 +131,9 @@ export const defaultState: BlogPostStateI = {
   },
   setJumpersSlidingClass: () => {
     console.log("SLIDE LEFT OR RIGHT");
+  },
+  setPigOpacityClassFunc: () => {
+    console.log("SET OPACITY CLASS FOR THE PIG");
   },
 };
 

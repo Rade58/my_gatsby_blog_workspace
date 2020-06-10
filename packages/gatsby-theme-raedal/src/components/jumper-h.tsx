@@ -39,6 +39,8 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
     groupPage,
   } = useContext(blogPostContext);
 
+  const { setPigOpacityClassFunc } = reducedBlogPostState;
+
   const { groupColor, underlineColor } = groupPage;
 
   // const { headerBackgroundImage } = additionalStyles;
@@ -462,13 +464,27 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
           role="button"
           tabIndex={0}
           onClick={() => {
-            window.scrollTo({
-              top: 0,
-            });
+            const promise = new Promise((res, rej) => {
+              window.scrollTo({
+                top: 0,
+              });
+              res();
+            })
+              .then(() => {
+                let a;
 
-            setTimeout(() => {
-              navigate(relativeLink);
-            }, 500);
+                return new Promise((resolve, rject) => {
+                  setTimeout(() => {
+                    navigate(relativeLink);
+                    resolve();
+                  }, 800);
+                });
+              })
+              .then(() => {
+                setTimeout(() => {
+                  setPigOpacityClassFunc("not-opaque");
+                }, 1000);
+              });
           }}
           onKeyPress={() => {
             window.scrollTo({
