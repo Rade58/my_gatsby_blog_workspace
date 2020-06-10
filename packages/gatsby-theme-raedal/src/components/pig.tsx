@@ -24,7 +24,7 @@ import {
   ACTION_TYPES_ENUM,
 } from "../context_n_reducers/context_n_reducer_header";
 
-// import { $_useBlogPostReducerState } from "../context_n_reducers/context_n_reducer_blog_post";
+import { $_useBlogPostReducerState } from "../context_n_reducers/context_n_reducer_blog_post";
 
 // POGLEDAJ (packages/gatsby-theme-raedal/src/components/jumper-h.tsx)
 // JER SAM TAMO LEPSE TYPE-OVAO REF FORWARDING
@@ -33,6 +33,13 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
   const { reducedHeaderState, headerDispatch } = useContext(
     $_useReducerState.headerContext
   );
+
+  const {
+    BLOG_POST_ACTION_TYPES_ENUM,
+    blogPostContext,
+  } = $_useBlogPostReducerState;
+
+  const { blogPostDispatch } = useContext(blogPostContext);
 
   const { pigDisapear, scrolled_class, bodyHeight } = reducedHeaderState;
 
@@ -73,6 +80,13 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
   const [opacityClass, setOpacityClass] = useState<"is-opaque" | "not-opaque">(
     "not-opaque"
   );
+
+  useEffect(() => {
+    blogPostDispatch({
+      type: BLOG_POST_ACTION_TYPES_ENUM.GIVE_SET_OPACITY_CLASS_FUNC,
+      payload: setOpacityClass,
+    });
+  }, [setOpacityClass]);
 
   // ------------------------------------------------------
 

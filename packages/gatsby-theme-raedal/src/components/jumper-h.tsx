@@ -165,20 +165,28 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
   }, []);
 
   useEffect(() => {
+    console.log(intersectedDivId.length);
+
     if (!intersectedDivId.length) {
       const promise = new Promise((res, rej) => {
         window.scrollTo({ top: 0 });
 
         setTimeout(() => {
           res();
-        }, 200);
+        }, 406);
       }).then(() => {
         setTimeout(() => {
           setIntersectedDivId("");
-        }, 500);
+
+          console.log("pig-opacity");
+
+          setTimeout(() => {
+            setPigOpacityClassFunc("not-opaque");
+          }, 100);
+        }, 408);
       });
     }
-  }, []);
+  }, [setPigOpacityClassFunc]);
 
   const indexOfCurrentIntersHdiv = justHeadingsArrayRef.current.indexOf(
     intersectedDivId
