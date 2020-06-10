@@ -22,6 +22,8 @@ import {
   BLOG_POST_ACTION_TYPES_ENUM,
 } from "../context_n_reducers/context_n_reducer_blog_post";
 
+import JumperUL from "./jump-ul";
+
 import { additionalStyles } from "../common-styles";
 
 interface JumperPropsI {
@@ -122,6 +124,8 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
 
   const [loadArray, setLoadArray] = useState<boolean>(true);
 
+  console.log(normalizedHeadingsRef.current);
+
   useEffect(() => {
     //
     blogPostDispatch({
@@ -138,21 +142,19 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
     // NORMALIZOVANJE     headings    NIZ-A
     headings.forEach((hedingOb) => {
       if (loadArray) {
-        normalizedHeadingsRef.current[
-          `${encodeURI(hedingOb.value.toLowerCase())
-            .replace(/%20/g, "-")
-            .replace(/ /g, "-")}`.trim()
-        ] = {
+        normalizedHeadingsRef.current[hedingOb.value] = {
           value: `${encodeURI(hedingOb.value.toLowerCase())
             .replace(/%20/g, "-")
-            .replace(/ /g, "-")}`.trim(),
+            .replace(/ /g, "-")
+            .replace(/'/g, "")}`.trim(),
           depth: hedingOb.depth,
         };
 
         justHeadingsArrayRef.current.push(
           `${encodeURI(hedingOb.value.toLowerCase())
             .replace(/%20/g, "-")
-            .replace(/ /g, "-")}`.trim()
+            .replace(/ /g, "-")
+            .replace(/'/g, "")}`.trim()
         );
 
         setLoadArray(false);
@@ -350,10 +352,10 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
           <Link
             onClick={() => {
               if (prevDivHkey) {
-                setIntersectedDivId(prevDivHkey.replace(/'/g, ""));
+                setIntersectedDivId(prevDivHkey);
               }
             }}
-            to={`${encodeURI(relativeLink)}#${prevDivHkey?.replace(/'/g, "")}`}
+            to={`${encodeURI(relativeLink)}#${prevDivHkey}`}
             className={`${previousIndex < 0 ? "disabled" : ""}`}
           >
             <span className="up">
@@ -434,55 +436,22 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
               }
             `}
           >
-            <ul>
-              {headings &&
-                headings.length !== 0 &&
-                headings.map(({ depth, value }) => (
-                  <li
-                    className={`${
-                      intersectedDivId ===
-                      encodeURI(value.toLowerCase())
-                        .replace(/%20/g, "-")
-                        .replace(/ /g, "-")
-                        .replace(/'/g, "")
-                        ? "highlight"
-                        : ""
-                    }`}
-                    key={`${value}-${depth}`}
-                  >
-                    <Link
-                      onClick={() => {
-                        // console.log("clicked");
-
-                        setIntersectedDivId(
-                          `#${encodeURI(value.toLowerCase())
-                            .replace(/%20/g, "-")
-                            .replace(/ /g, "-")
-                            .replace(/'/g, "")}`
-                        );
-                      }}
-                      to={`${encodeURI(relativeLink)}#${encodeURI(
-                        value.toLowerCase()
-                      )
-                        .replace(/%20/g, "-")
-                        .replace(/ /g, "-")
-                        .replace(/'/g, "")}`}
-                    >
-                      {value}
-                    </Link>
-                  </li>
-                ))}
-            </ul>
+            <JumperUL
+              intersectedDivId={intersectedDivId}
+              normalizedHeadings={normalizedHeadingsRef.current}
+              relativeLink={relativeLink}
+              setIntersectedDivId={setIntersectedDivId}
+            />
           </section>
           {/* ================================================ */}
 
           <Link
             onClick={() => {
               if (nextDivHkey) {
-                setIntersectedDivId(nextDivHkey.replace(/'/g, ""));
+                setIntersectedDivId(nextDivHkey);
               }
             }}
-            to={`${encodeURI(relativeLink)}#${nextDivHkey?.replace(/'/g, "")}`}
+            to={`${encodeURI(relativeLink)}#${nextDivHkey}`}
             className={`${!nextDivHkey ? "disabled" : ""}`}
           >
             <span className="down">

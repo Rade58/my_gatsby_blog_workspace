@@ -31,6 +31,8 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
 
   const { headerBackgroundImage } = additionalStyles;
 
+  // console.log(props.id);
+
   // KORISTICU I CONTEXT
 
   const {
@@ -58,6 +60,8 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
 
       interObserver.current = new IntersectionObserver(
         (entries, observer) => {
+          console.log(entries[0].target.id);
+
           // console.log({ entries, observer });
           // console.log(observer.thresholds);
           // console.log(entries[0].rootBounds);
@@ -203,7 +207,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
           onClick={() => {
             setIntersectedHeadingDivFunc(props.id);
           }}
-          to={`${encodeURI(relativeLink)}#${props.id.replace(/'/g, "")}`}
+          to={`${encodeURI(relativeLink)}#${props.id}`}
         >
           {" "}
         </Link>
