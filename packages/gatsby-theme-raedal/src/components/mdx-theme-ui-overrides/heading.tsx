@@ -203,7 +203,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
           onClick={() => {
             setIntersectedHeadingDivFunc(props.id);
           }}
-          to={`${encodeURI(relativeLink)}#${props.id}`}
+          to={`${encodeURI(relativeLink)}#${props.id.replace(/'/g, "")}`}
         >
           {" "}
         </Link>

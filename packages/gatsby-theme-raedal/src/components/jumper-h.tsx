@@ -350,10 +350,10 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
           <Link
             onClick={() => {
               if (prevDivHkey) {
-                setIntersectedDivId(prevDivHkey);
+                setIntersectedDivId(prevDivHkey.replace(/'/g, ""));
               }
             }}
-            to={`${encodeURI(relativeLink)}#${prevDivHkey}`}
+            to={`${encodeURI(relativeLink)}#${prevDivHkey?.replace(/'/g, "")}`}
             className={`${previousIndex < 0 ? "disabled" : ""}`}
           >
             <span className="up">
@@ -407,8 +407,8 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
                     box-sizing: border-box;
 
                     &::before {
-                      position: absolute;
-                      left: 6px;
+                      position: relative;
+                      left: -6px;
                       content: "🖇️";
                     }
 
@@ -444,6 +444,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
                       encodeURI(value.toLowerCase())
                         .replace(/%20/g, "-")
                         .replace(/ /g, "-")
+                        .replace(/'/g, "")
                         ? "highlight"
                         : ""
                     }`}
@@ -456,14 +457,16 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
                         setIntersectedDivId(
                           `#${encodeURI(value.toLowerCase())
                             .replace(/%20/g, "-")
-                            .replace(/ /g, "-")}`
+                            .replace(/ /g, "-")
+                            .replace(/'/g, "")}`
                         );
                       }}
                       to={`${encodeURI(relativeLink)}#${encodeURI(
                         value.toLowerCase()
                       )
                         .replace(/%20/g, "-")
-                        .replace(/ /g, "-")}`}
+                        .replace(/ /g, "-")
+                        .replace(/'/g, "")}`}
                     >
                       {value}
                     </Link>
@@ -476,10 +479,10 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
           <Link
             onClick={() => {
               if (nextDivHkey) {
-                setIntersectedDivId(nextDivHkey);
+                setIntersectedDivId(nextDivHkey.replace(/'/g, ""));
               }
             }}
-            to={`${encodeURI(relativeLink)}#${nextDivHkey}`}
+            to={`${encodeURI(relativeLink)}#${nextDivHkey?.replace(/'/g, "")}`}
             className={`${!nextDivHkey ? "disabled" : ""}`}
           >
             <span className="down">
@@ -517,13 +520,29 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
               });
           }}
           onKeyPress={() => {
-            window.scrollTo({
-              top: 0,
-            });
+            let a;
+            return new Promise((res, rej) => {
+              window.scrollTo({
+                top: 0,
+              });
+              res();
+            })
+              .then(() => {
+                let b;
 
-            setTimeout(() => {
-              navigate(relativeLink);
-            }, 500);
+                return new Promise((resolve, rject) => {
+                  setTimeout(() => {
+                    navigate(relativeLink);
+                    setIntersectedDivId("");
+                    resolve();
+                  }, 800);
+                });
+              })
+              .then(() => {
+                setTimeout(() => {
+                  setPigOpacityClassFunc("not-opaque");
+                }, 1000);
+              });
           }}
         >
           <Octicon icon={arrowUp} size="medium" />

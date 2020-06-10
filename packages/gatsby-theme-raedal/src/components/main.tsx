@@ -54,8 +54,16 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
         /* width: 100vw; */
 
         /* === !== === !== === === !== === !== === */
+        /* === !== === !== === === !== === !== === */
+        & > aside.jumper-cont {
+          & ul {
+            overflow-y: auto;
+            height: 24vh;
+          }
+        }
 
         /* === !== === !== === === !== === !== === */
+        /* === !== === !== ===GRID STUFF AND BREAKPOINTS === !== === !== === */
 
         grid-template-columns: repeat(10, minmax(0, 1fr));
 
@@ -165,12 +173,17 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
 
           & > aside.jumper-cont {
             position: sticky;
-
             top: 48vh;
-
+            /* height: max-content; */
             border: pink solid 1px;
             width: fit-content;
-            height: max-content;
+
+            /* ------------------------- */
+            /* position: fixed;
+
+            right: 10px;
+            height: 60%; */
+            /* ------------------------- */
 
             /* align-self: stretch; */
           }
