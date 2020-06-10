@@ -165,17 +165,19 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
   }, []);
 
   useEffect(() => {
-    const promise = new Promise((res, rej) => {
-      window.scrollTo({ top: 0 });
+    if (!intersectedDivId.length) {
+      const promise = new Promise((res, rej) => {
+        window.scrollTo({ top: 0 });
 
-      setTimeout(() => {
-        res();
-      }, 200);
-    }).then(() => {
-      setTimeout(() => {
-        setIntersectedDivId("");
-      }, 500);
-    });
+        setTimeout(() => {
+          res();
+        }, 200);
+      }).then(() => {
+        setTimeout(() => {
+          setIntersectedDivId("");
+        }, 500);
+      });
+    }
   }, []);
 
   const indexOfCurrentIntersHdiv = justHeadingsArrayRef.current.indexOf(
