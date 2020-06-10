@@ -334,8 +334,11 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
             transitionProperty: "margin-left",
             transitionDuration: "4s",
           }}
-          onTransitionEndCapture={() => {
-            setAnimationStop(true);
+          onTransitionEndCapture={(e) => {
+            // console.log(e.propertyName);
+            if (e.propertyName !== "opacity") {
+              setAnimationStop(true);
+            }
           }}
           role="img"
           className={`someDiv ${pigDisapear ? "no-show" : ""}`}
