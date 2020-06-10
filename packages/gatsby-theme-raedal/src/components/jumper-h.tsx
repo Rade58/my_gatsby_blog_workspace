@@ -158,6 +158,24 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
         setLoadArray(false);
       }
     });
+    /* setTimeout(() => {
+      console.log("intersected div");
+      setIntersectedDivId("");
+    }, 500); */
+  }, []);
+
+  useEffect(() => {
+    const promise = new Promise((res, rej) => {
+      window.scrollTo({ top: 0 });
+
+      setTimeout(() => {
+        res();
+      }, 200);
+    }).then(() => {
+      setTimeout(() => {
+        setIntersectedDivId("");
+      }, 500);
+    });
   }, []);
 
   const indexOfCurrentIntersHdiv = justHeadingsArrayRef.current.indexOf(
@@ -477,6 +495,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
                 return new Promise((resolve, rject) => {
                   setTimeout(() => {
                     navigate(relativeLink);
+                    setIntersectedDivId("");
                     resolve();
                   }, 800);
                 });
