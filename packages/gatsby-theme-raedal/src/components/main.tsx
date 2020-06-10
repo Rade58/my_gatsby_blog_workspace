@@ -58,7 +58,8 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
         & > aside.jumper-cont {
           & ul {
             overflow-y: auto;
-            height: 24vh;
+            max-height: 24vh;
+            height: fit-content;
           }
         }
 

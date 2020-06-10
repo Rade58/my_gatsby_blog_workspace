@@ -124,7 +124,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
 
   const [loadArray, setLoadArray] = useState<boolean>(true);
 
-  console.log(normalizedHeadingsRef.current);
+  // console.log(normalizedHeadingsRef.current);
 
   useEffect(() => {
     //
@@ -167,7 +167,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
   }, []);
 
   useEffect(() => {
-    console.log(intersectedDivId.length);
+    // console.log(intersectedDivId.length);
 
     if (!intersectedDivId.length) {
       const promise = new Promise((res, rej) => {
@@ -180,7 +180,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
         setTimeout(() => {
           setIntersectedDivId("");
 
-          console.log("pig-opacity");
+          // console.log("pig-opacity");
 
           setTimeout(() => {
             setPigOpacityClassFunc("not-opaque");

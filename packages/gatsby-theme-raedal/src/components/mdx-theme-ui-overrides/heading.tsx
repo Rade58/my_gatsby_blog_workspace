@@ -60,7 +60,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
 
       interObserver.current = new IntersectionObserver(
         (entries, observer) => {
-          console.log(entries[0].target.id);
+          // console.log(entries[0].target.id);
 
           // console.log({ entries, observer });
           // console.log(observer.thresholds);
