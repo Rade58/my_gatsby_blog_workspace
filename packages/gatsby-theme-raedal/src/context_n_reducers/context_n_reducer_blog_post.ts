@@ -169,6 +169,7 @@ export interface ContextBlogPostStateI {
   isUpdated: boolean;
   updated: string;
   author: AuthorI;
+  body: string;
 }
 
 // OVO JE SAMO DEFAULT STATE I REDUCER-A NEMA JOS
@@ -225,6 +226,7 @@ export const blogPostContext: Context<ContextBlogPostStateI> = createContext({
     },
   ],
   author: { authorName: "", path: "" },
+  body: "",
 });
 
 // GOTO VO CES UVEK KORISTITI     useContext    HOOK

@@ -13,6 +13,7 @@ import {
   useContext,
   useEffect,
   useRef,
+  memo,
   // -->  types
   FunctionComponent,
 } from "react";
@@ -38,6 +39,10 @@ import Main from "./main";
 import Article from "./article";
 import Seo from "../seo/seo";
 // === !==  === !==  === !==  === !==  === !==  === !==
+// === !==  === !==  === !==  === !==  === !==  === !==
+const MemoizedArticle = memo(Article);
+// === !==  === !==  === !==  === !==  === !==  === !==
+// === !==  === !==  === !==  === !==  === !==  === !==
 
 // CONTEXT ZA Layout LEVEL
 /* import { $_createLayoutReducerState } from "../context_n_reducers/_context_n_reducer_layout"; */
@@ -55,7 +60,7 @@ import Seo from "../seo/seo";
 //
 
 interface LayoutPropsI {
-  body: string;
+  body?: string;
   path?: string;
 }
 
@@ -151,7 +156,7 @@ const Layout: FunctionComponent<LayoutPropsI> = ({ body }) => {
         {/* '''''''''''''''''''' */}
         <Main>
           <Seo {...seo} />
-          <Article body={body} />
+          <Article />
         </Main>
         {/* <button
           sx={{

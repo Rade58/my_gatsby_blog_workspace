@@ -72,10 +72,10 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
                 payload: entries[0].target.id,
               }); */
 
-            setTimeout(() => {
-              // console.log(entries[0].target.id);
-              setIntersectedHeadingDivFunc(entries[0].target.id);
-            }, 100);
+            // setTimeout(() => {
+            // console.log(entries[0].target.id);
+            setIntersectedHeadingDivFunc(entries[0].target.id);
+            // }, 100);
           }
         },
         {

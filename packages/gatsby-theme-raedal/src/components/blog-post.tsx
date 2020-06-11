@@ -94,6 +94,7 @@ const BlogPost: FunctionComponent<{
   return (
     <BlogPostStateProvider
       value={{
+        body,
         author,
         prevAndNextPagePath,
         reducedBlogPostState,
@@ -113,7 +114,7 @@ const BlogPost: FunctionComponent<{
       {/* <Layout body={body} updated={updated} /> */}
 
       {/* <Router> */}
-      <Layout path={encodeURI(relativeLink)} body={body} />
+      <Layout path={encodeURI(relativeLink)} />
 
       {/* {headings.map(({ value }) => (
           <Layout

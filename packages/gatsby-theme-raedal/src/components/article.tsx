@@ -14,6 +14,8 @@ import {
   memo,
 } from "react";
 
+import MemoMdxComponent from "./MEMOIZED/mem-mdx";
+
 // OVDE ZELIM DA KORISTIM BLOG POST STATE (STO SAM I URADIO, DOLE U KOMPONENTI)
 import { blogPostContext } from "../context_n_reducers/context_n_reducer_blog_post";
 //
@@ -23,7 +25,7 @@ import Heading from "./heading-major";
 //
 
 interface ArticlePropsI {
-  body: string;
+  body?: string;
 }
 
 const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
@@ -114,7 +116,8 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
       `}
     >
       <Heading />
-      <MDXRenderer>{body}</MDXRenderer>
+      {/* <MDXRenderer>{body}</MDXRenderer> */}
+      <MemoMdxComponent />
     </article>
   );
 };
