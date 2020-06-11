@@ -28,5 +28,8 @@
     "type-check": "tsc",
     "lint": "eslint --ignore-path .gitignore . --ext ts --ext tsx --ext js --ext jsx",
     "lint:fix": "yarn lint --fix"
+  },
+  "dependencies": {
+    "@types/mdx-js__react": "^1.5.2"
   }
 }

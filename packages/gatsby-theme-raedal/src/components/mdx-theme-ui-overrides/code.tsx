@@ -44,6 +44,7 @@ import preToCodeBlock from "../../utility/preToCodeBlock";
 import { $_useBlogPostReducerState } from "../../context_n_reducers/context_n_reducer_blog_post"; */
 
 // === !===
+console.log(theme);
 
 // === !===
 

@@ -5,6 +5,8 @@ import { css } from "@emotion/core";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import { Router } from "@reach/router";
 
+import { MDXProvider } from "@mdx-js/react";
+
 import {
   useContext,
   FunctionComponent,
@@ -14,7 +16,7 @@ import {
   memo,
 } from "react";
 
-import MemoMdxComponent from "./MEMOIZED/mem-mdx";
+import MemoMdxRendererComponent from "./MEMOIZED/mem-mdx";
 
 // OVDE ZELIM DA KORISTIM BLOG POST STATE (STO SAM I URADIO, DOLE U KOMPONENTI)
 import { blogPostContext } from "../context_n_reducers/context_n_reducer_blog_post";
@@ -23,6 +25,12 @@ import { blogPostContext } from "../context_n_reducers/context_n_reducer_blog_po
 // UVOZIM Heading KOMPONENTU
 import Heading from "./heading-major";
 //
+
+// === !== === !== ===
+import Code from "./mdx-theme-ui-overrides/code";
+
+import getHeading from "./mdx-theme-ui-overrides/heading";
+// === !== === !== ===
 
 interface ArticlePropsI {
   body?: string;
@@ -55,70 +63,77 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
   }, []);
 
   return (
-    <article
-      id="my-article"
-      sx={
-        {
-          // border: { variant: "borders.headerBorder" },
-          /* h2: {
-          paddingTop: !pigDisapear ? "58px" : "18px",
+    <MDXProvider
+      components={{
+        pre: Code,
+        h2: getHeading("h2"),
+      }}
+    >
+      <article
+        id="my-article"
+        sx={
+          {
+            // border: { variant: "borders.headerBorder" },
+            /* h2: {
+            paddingTop: !pigDisapear ? "58px" : "18px",
           paddingBottom: "18px",
         },
           /* display: "flex",
         flexDirection: "column", */
+          }
         }
-      }
-      // style={{ display: "flex" }}
-      className={`post-article ${
-        !pigDisapear ? "pig-reapeard" : "pig-disapeard"
-      }`}
-      css={css`
-        @media screen and (min-width: 918px) {
-          /* padding-top: calc(38px + 58px); */
+        // style={{ display: "flex" }}
+        className={`post-article ${
+          !pigDisapear ? "pig-reapeard" : "pig-disapeard"
+        }`}
+        css={css`
+          @media screen and (min-width: 918px) {
+            /* padding-top: calc(38px + 58px); */
 
-          /* padding-top: 28px; */
+            /* padding-top: 28px; */
 
-          margin-top: 0px;
-        }
+            margin-top: 0px;
+          }
 
-        border: tomato solid 0px;
-        /* margin-top: 48px; */
+          border: tomato solid 0px;
+          /* margin-top: 48px; */
 
-        /* &.pig-reapeard {
+          /* &.pig-reapeard {
           margin-top
         }  */
 
-        /* &.pig-disapeard {
+          /* &.pig-disapeard {
           
         }
         */
 
-        & > h1 {
-          font-family: Oxygen, Ubuntu, Roboto, Cantarell, "Open Sans",
-            "Helvetica Neue", sans-serif;
-          /* font-weight: 300; */
-          color: #fff;
-          margin: 0 auto;
-          width: fit-content;
-          /* font-size: 58px; */
-          /* font-weight: 200; */
-        }
+          & > h1 {
+            font-family: Oxygen, Ubuntu, Roboto, Cantarell, "Open Sans",
+              "Helvetica Neue", sans-serif;
+            /* font-weight: 300; */
+            color: #fff;
+            margin: 0 auto;
+            width: fit-content;
+            /* font-size: 58px; */
+            /* font-weight: 200; */
+          }
 
-        & > div > h2 {
-          transition-property: padding-top;
-          transition-duration: 200ms;
-        }
+          & > div > h2 {
+            transition-property: padding-top;
+            transition-duration: 200ms;
+          }
 
-        & > p {
-          font-size: 24px;
-          font-weight: 100;
-        }
-      `}
-    >
-      <Heading />
-      {/* <MDXRenderer>{body}</MDXRenderer> */}
-      <MemoMdxComponent />
-    </article>
+          & > p {
+            font-size: 24px;
+            font-weight: 100;
+          }
+        `}
+      >
+        <Heading />
+        {/* <MDXRenderer>{body}</MDXRenderer> */}
+        <MemoMdxRendererComponent />
+      </article>
+    </MDXProvider>
   );
 };
 
