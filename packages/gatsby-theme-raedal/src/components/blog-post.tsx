@@ -112,10 +112,10 @@ const BlogPost: FunctionComponent<{
       {/* <HeaderStateProvider> */}
       {/* <Layout body={body} updated={updated} /> */}
 
-      <Router>
-        <Layout path={encodeURI(relativeLink)} body={body} />
+      {/* <Router> */}
+      <Layout path={encodeURI(relativeLink)} body={body} />
 
-        {headings.map(({ value }) => (
+      {/* {headings.map(({ value }) => (
           <Layout
             key={value + relativeLink}
             path={`${encodeURI(relativeLink)}#${encodeURI(value)
@@ -124,7 +124,7 @@ const BlogPost: FunctionComponent<{
             body={body}
           />
         ))}
-      </Router>
+      </Router> */}
       {/* </HeaderStateProvider> */}
     </BlogPostStateProvider>
   );

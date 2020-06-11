@@ -1,4 +1,4 @@
-import React, { FunctionComponent, SetStateAction } from "react";
+import React, { FunctionComponent, SetStateAction, useEffect } from "react";
 import { Link } from "gatsby";
 
 interface JumpULPropsI {
@@ -45,9 +45,34 @@ const JumpUL: FunctionComponent<JumpULPropsI> = (props) => {
             }`}
             key={`${value}-${depth}`}
           >
-            <Link
+            {/* <button
+              type="button"
               onClick={() => {
+                const element = document.querySelector(`#${encodeURI(value)}`);
+
+                console.log(`#${encodeURI(value)}`);
+                console.log(element);
+
+                if (element) {
+                  element.scrollIntoView();
+                }
+              }}
+            >
+              Pritisni
+            </button> */}
+
+            <Link
+              onClick={(e) => {
                 // console.log("clicked");
+
+                const element = document.querySelector(`#${encodeURI(value)}`);
+
+                console.log(`#${encodeURI(value)}`);
+                console.log(element);
+
+                if (element) {
+                  element.scrollIntoView(); // OVO SAM SAMO STAVIO DA ISPROBAM (I DAALJE JE SCROLLING SPOR)
+                }
 
                 setIntersectedDivId(`#${encodeURI(value)}`);
               }}

@@ -458,6 +458,21 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
               <Octicon icon={triangleDown} size="medium" />
             </span>
           </Link>
+          {/* === !== ===  SAMO PROVERAVAM DA LI CE FUNKCIONISATI  !== === */}
+          {/* <a
+            onClick={() => {
+              if (nextDivHkey) {
+                setIntersectedDivId(nextDivHkey);
+              }
+            }}
+            className={`${!nextDivHkey ? "disabled" : ""}`}
+            href={`#${nextDivHkey}`}
+          >
+            <span className="down">
+              <Octicon icon={triangleDown} size="medium" />
+            </span>
+          </a> */}
+          {/* === !== === !== === */}
         </div>
         <div
           className="scroll-to-top"
@@ -476,6 +491,8 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
 
                 return new Promise((resolve, rject) => {
                   setTimeout(() => {
+                    // console.log(window.location);
+
                     navigate(relativeLink);
                     setIntersectedDivId("");
                     resolve();
@@ -502,6 +519,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
                 return new Promise((resolve, rject) => {
                   setTimeout(() => {
                     navigate(relativeLink);
+
                     setIntersectedDivId("");
                     resolve();
                   }, 800);

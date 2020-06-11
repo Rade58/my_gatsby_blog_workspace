@@ -13,3 +13,5 @@ A TO CE BITI
 `packages/gatsby-theme-raedal/src/components/jump-ul.tsx`
 
 I OVO SAM USPESNO DEFINISAO
+
+# MEDJUTIM PREBACIVANJE S NASLOVA N NASLOV JE SPORO
