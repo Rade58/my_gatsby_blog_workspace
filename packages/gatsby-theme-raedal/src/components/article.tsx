@@ -30,6 +30,9 @@ import Heading from "./heading-major";
 import Code from "./mdx-theme-ui-overrides/code";
 
 import getHeading from "./mdx-theme-ui-overrides/heading";
+
+const H2Component: FunctionComponent<{ id: string }> = getHeading("h2");
+
 // === !== === !== ===
 
 interface ArticlePropsI {
@@ -66,7 +69,7 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
     <MDXProvider
       components={{
         pre: Code,
-        h2: getHeading("h2"),
+        h2: H2Component,
       }}
     >
       <article
