@@ -91,6 +91,8 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
 
   useEffect(
     () => () => {
+      console.log("HEADING BODY UNMOUNTING");
+
       if (interObserver.current && headingDivRef.current) {
         interObserver.current.unobserve(headingDivRef.current);
       }

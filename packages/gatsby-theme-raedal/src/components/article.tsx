@@ -39,7 +39,7 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
 
   useEffect(
     () => () => {
-      console.log("~~~~~!! ARTICLE UNMOUNTED !!~~~~~");
+      console.log("~~~~~!! ARTICLE  UNMOUNTING !!~~~~~");
 
       if (document.body.onscroll) document.body.onscroll = null;
     },
@@ -47,9 +47,9 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
   );
 
   useEffect(() => {
-    console.log("=== !== ===  MOUNTING ARTICLE  !== === !==");
+    // console.log("=== !== ===  MOUNTING ARTICLE  !== === !==");
     // console.log({ body });
-    console.log("=== !== === !== === !==");
+    // console.log("=== !== === !== === !==");
   }, []);
 
   return (

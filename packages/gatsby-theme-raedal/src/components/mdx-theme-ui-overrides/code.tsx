@@ -8,6 +8,7 @@ import {
   // useLayoutEffect,
   FunctionComponent,
   ReactNode,
+  useEffect,
 } from "react";
 
 // EVO UVEZAO SAM LOADABLE
@@ -123,6 +124,13 @@ const Code: FunctionComponent<{
   children: { props: { metastring?: string } };
 }> = (props) => {
   //
+
+  useEffect(
+    () => () => {
+      console.log("CODE UNMOUNTING!");
+    },
+    []
+  );
 
   //
 
