@@ -62,7 +62,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
         (entries, observer) => {
           // console.log(entries[0].target.id);
 
-          console.log({ entries, observer });
+          // console.log({ entries, observer });
           // console.log(observer.thresholds);
           // console.log(entries[0].rootBounds);
 
