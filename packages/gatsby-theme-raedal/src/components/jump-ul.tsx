@@ -63,21 +63,31 @@ const JumpUL: FunctionComponent<JumpULPropsI> = (props) => {
             </button> */}
 
             <Link
-              onClick={(e) => {
+              onSubmit={(e) => {
                 // console.log("clicked");
 
-                const element = document.querySelector(`#${encodeURI(value)}`);
+                // const element = document.querySelector(`#${encodeURI(value)}`);
 
                 console.log(`#${encodeURI(value)}`);
-                console.log(element);
-
+                // console.log(element);
+                /* 
                 if (element) {
                   element.scrollIntoView(); // OVO SAM SAMO STAVIO DA ISPROBAM (I DAALJE JE SCROLLING SPOR)
-                }
+                } */
 
-                setIntersectedDivId(`#${encodeURI(value)}`);
+                const val = `#${encodeURI(value)}`;
+
+                if (intersectedDivId === val) return e.preventDefault();
+
+                setIntersectedDivId(val);
               }}
-              to={`${encodeURI(relativeLink)}#${encodeURI(value)}`}
+              to={`${encodeURI(relativeLink)}#${
+                intersectedDivId !== `#${encodeURI(value)}`
+                  ? encodeURI(value)
+                  : encodeURI(
+                      intersectedDivId.substr(1, intersectedDivId.length)
+                    )
+              }`}
             >
               {headingName}
             </Link>
