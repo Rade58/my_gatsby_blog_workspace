@@ -413,8 +413,12 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
                     background-color: blanchedalmond;
                     background-image: linear-gradient(
                       to right,
-                      #fa709a 0%,
-                      #fee140 100%
+                      #e4afcb 0%,
+                      #b8cbb8 0%,
+                      #b8cbb8 0%,
+                      #e2c58b 30%,
+                      #c2ce9c 64%,
+                      #7edbdc 100%
                     );
                   }
 

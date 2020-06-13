@@ -150,7 +150,7 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
 
           // console.log((100 * resizerWidth) / windowWidth);
 
-          if ((100 * resizerWidth) / windowWidth < 2) {
+          if ((100 * resizerWidth) / windowWidth < 1.2) {
             setOpacityClass("not-opaque");
           } else {
             setOpacityClass("is-opaque");
