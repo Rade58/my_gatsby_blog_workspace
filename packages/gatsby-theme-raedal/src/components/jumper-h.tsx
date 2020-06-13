@@ -32,6 +32,7 @@ interface JumperPropsI {
 }
 
 const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
+  const { headerBackgroundImage } = additionalStyles;
   const { blogPostContext } = $_useBlogPostReducerState;
   const {
     headings,
@@ -269,15 +270,50 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
             } */
 
           & div.open-book {
-            border: olive solid 1px;
+            border: olive solid 0px;
             display: flex;
+            justify-content: space-evenly;
 
-            @media screen and (max-width: 918px) {
-              display: none;
+            & > a {
+              margin-left: auto;
+              margin-right: 46%;
+
+              color: blanchedalmond;
+
+              &:active {
+                color: crimson;
+              }
+
+              &.disabled {
+                /* display: none; */
+                pointer-events: none;
+                opacity: 0.2;
+                cursor: not-allowed;
+              }
             }
 
-            & span {
-              margin-right: auto;
+            @media screen and (max-width: 918px) {
+              & span.ha {
+                display: none;
+              }
+
+              & span.boo {
+                display: none;
+              }
+
+              & > a {
+                margin-left: auto;
+                margin-right: auto;
+              }
+            }
+
+            & > span {
+              /* margin-right: auto; */
+
+              justify-self: flex-start;
+              & span.ha {
+                color: crimson;
+              }
             }
           }
 
@@ -300,6 +336,13 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
               margin: 4px;
             }
           }
+
+          & div.medium-separ {
+            background-image: ${headerBackgroundImage};
+            background-color: blanchedalmond;
+            height: 2px;
+            width: 80%;
+          }
         `}
       >
         {/* <div
@@ -317,38 +360,11 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
         {/* {intersectedDivId} */}
         <div className="open-book">
           <span role="img" aria-label="table of content">
-            # 📖
+            <span className="ha">#</span>{" "}
+            <span className="boo" role="img" aria-label="book">
+              📖
+            </span>
           </span>
-        </div>
-        <div
-          className="h-changer"
-          css={css`
-            border: yellow solid 2px;
-            display: flex;
-            flex-direction: column;
-
-            align-items: center;
-
-            @media screen and (max-width: 918px) {
-              background-color: ${"#1b2227c9"};
-            }
-
-            & > a {
-              color: blanchedalmond;
-
-              &:hover {
-                color: crimson;
-              }
-
-              &.disabled {
-                /* display: none; */
-                pointer-events: none;
-                opacity: 0.2;
-                cursor: not-allowed;
-              }
-            }
-          `}
-        >
           <Link
             onClick={() => {
               if (prevDivHkey) {
@@ -362,6 +378,37 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
               <Octicon icon={triangleUp} size="medium" />
             </span>
           </Link>
+        </div>
+        <div
+          className="h-changer"
+          css={css`
+            border: yellow solid 0px;
+            display: flex;
+            flex-direction: column;
+
+            align-items: center;
+
+            @media screen and (max-width: 918px) {
+              background-color: ${"#1b2227c9"};
+            }
+
+            & > a {
+              color: blanchedalmond;
+
+              &:active {
+                color: crimson;
+              }
+
+              &.disabled {
+                /* display: none; */
+                pointer-events: none;
+                opacity: 0.2;
+                cursor: not-allowed;
+              }
+            }
+          `}
+        >
+          <div className="medium-separ" />
 
           {/* -------------TASBLE OF HEADINGS--------------- */}
           <section
@@ -369,11 +416,11 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
             className={`tofh2 ${headings.length ? "show-me" : "hide-me"}`}
             css={css`
               width: 100%;
-              border: crimson solid 1px;
+              border: crimson solid 0px;
               display: flex;
 
               & > * {
-                border: yellow solid 1px;
+                border: yellow solid 0px;
               }
 
               .show-me {
@@ -462,6 +509,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
               setIntersectedDivId={setIntersectedDivId}
             />
           </section>
+          <div className="medium-separ" />
           {/* ================================================ */}
 
           <Link
