@@ -237,6 +237,8 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
           display: ${!headings.length ? "none" : "flex"};
           flex-direction: column;
 
+          width: max-content;
+
           @media screen and (max-width: 918px) {
             border-radius: 14px;
 
@@ -281,7 +283,18 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
               color: blanchedalmond;
 
               &:active {
-                color: crimson;
+                color: ${underlineColor};
+              }
+
+              @media screen and (min-width: 918px) {
+              /* background-color: ${"#1b2227c9"}; */
+
+                &:hover {
+                  opacity: 0.8;
+                  color: ${underlineColor};
+                }
+              /* margin-top: 2vh; */
+
               }
 
               &.disabled {
@@ -331,6 +344,33 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
 
               margin-top: 1vh;
             }
+
+                /* ---------------------------------------- */
+            
+            &:active {
+              color: ${underlineColor};
+            }
+
+            @media screen and (min-width: 918px) {
+            /* background-color: ${"#1b2227c9"}; */
+
+              &:hover {
+                opacity: 0.8;
+                color: ${underlineColor};
+              }
+            /* margin-top: 2vh; */
+
+            }
+
+
+
+
+              /* ---------------------------------------- */
+
+
+
+
+
 
             cursor: pointer;
 
@@ -414,8 +454,21 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
               color: blanchedalmond;
 
               &:active {
-                color: crimson;
+                color: ${underlineColor};
               }
+              
+              @media screen and (min-width: 918px) {
+              /* background-color: ${"#1b2227c9"}; */
+
+                &:hover {
+                  opacity: 0.8;
+                  color: ${underlineColor};
+                }
+              /* margin-top: 2vh; */
+
+              }
+
+
 
               &.disabled {
                 /* display: none; */
@@ -487,6 +540,13 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
                     );
                   }
 
+                  &::before {
+                    position: relative;
+                    left: -8px;
+                    content: "🖇️";
+                    visibility: hidden;
+                  }
+
                   &.highlight {
                     /* border: crimson solid 1px; */
 
@@ -494,8 +554,9 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
 
                     &::before {
                       position: relative;
-                      left: -6px;
+                      left: -8px;
                       content: "🖇️";
+                      visibility: visible;
                     }
 
                     & a {
