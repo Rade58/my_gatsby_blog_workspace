@@ -1,5 +1,6 @@
 import React, { FunctionComponent, SetStateAction, useEffect } from "react";
 import { Link } from "gatsby";
+import { css } from "@emotion/core";
 
 interface JumpULPropsI {
   normalizedHeadings: NormalizedHeadingsI;
@@ -80,6 +81,7 @@ const JumpUL: FunctionComponent<JumpULPropsI> = (props) => {
             >
               {headingName}
             </Link>
+            <div className="small-separ" />
           </li>
         );
       })}

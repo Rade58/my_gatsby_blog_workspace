@@ -403,6 +403,21 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
                   margin: 2px;
                   margin-left: 20px;
 
+                  & div.small-separ {
+                    height: 1px;
+                    width: 98%;
+                    padding: 0;
+                    margin: 0;
+                    margin-left: auto;
+                    margin-right: auto;
+                    background-color: blanchedalmond;
+                    background-image: linear-gradient(
+                      to right,
+                      #fa709a 0%,
+                      #fee140 100%
+                    );
+                  }
+
                   &.highlight {
                     /* border: crimson solid 1px; */
 
