@@ -328,6 +328,8 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
 
               margin-left: auto;
               margin-right: auto;
+
+              margin-top: 1vh;
             }
 
             cursor: pointer;
@@ -342,6 +344,19 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
             background-color: blanchedalmond;
             height: 2px;
             width: 80%;
+
+            border-radius: 1px;
+
+            @media screen and (max-width: 918px) {
+              &:nth-of-type(1) {
+                margin-top: 2vh;
+              }
+            }
+            @media screen and (max-width: 918px) {
+              &:nth-of-type(2) {
+                margin-bottom: 2vh;
+              }
+            }
           }
         `}
       >
@@ -389,7 +404,10 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
             align-items: center;
 
             @media screen and (max-width: 918px) {
-              background-color: ${"#1b2227c9"};
+              /* background-color: ${"#1b2227c9"}; */
+
+              /* margin-top: 2vh; */
+
             }
 
             & > a {
