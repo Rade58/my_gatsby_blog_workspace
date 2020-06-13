@@ -318,12 +318,12 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
           }
 
           & div.scroll-to-top {
-            border: 2px solid ${underlineColor};
             width: fit-content;
             margin-left: auto;
             border-radius: 12px;
 
             @media screen and (max-width: 918px) {
+              border: 2px solid ${underlineColor};
               background-color: ${"#1b2227c9"};
 
               margin-left: auto;
