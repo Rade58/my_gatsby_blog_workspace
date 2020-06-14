@@ -80,6 +80,7 @@ const Keywords: FunctionComponent = () => {
             &:hover {
               transform: scale3d(1.2, 1.2, 1.2);
               border: ${themeColor} solid 0.2px;
+              border-radius: 8px;
             }
           }
         }

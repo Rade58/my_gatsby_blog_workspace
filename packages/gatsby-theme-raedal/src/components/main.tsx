@@ -92,7 +92,7 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
         & > section.keywords {
           grid-area: k;
         }
-        & > section.social-posting {
+        & > section.comercial {
           grid-area: s;
         }
 
@@ -140,8 +140,17 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
             position: sticky;
             top: 8vh;
           }
-          & > section.social-posting {
-            position: sticky;
+
+          & > section.comercial {
+            border: yellow solid 2px;
+
+            &::before {
+              display: block;
+              content: " ";
+              width: 100%;
+              height: 200px;
+              border: crimson solid 1px;
+            }
           }
 
           /* === !== === !== */
@@ -195,8 +204,16 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
             top: 48vh;
           }
 
-          & > section.social-posting {
+          & > section.comercial {
             border: yellow solid 2px;
+
+            &::before {
+              display: block;
+              content: " ";
+              width: 100%;
+              height: 200px;
+              border: crimson solid 1px;
+            }
           }
 
           /* & > div.left-arrow {
@@ -232,7 +249,7 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
           est.
         </div>
       </section> */}
-      <section className="social-posting">twitter instagram</section>
+      <section className="comercial">Comercial</section>
       {/* ------------------------------------------------------------- */}
       {/* /////////-----------------------///////////////// */}
       {/* <div
