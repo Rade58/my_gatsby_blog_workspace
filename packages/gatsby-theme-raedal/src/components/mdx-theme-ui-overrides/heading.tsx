@@ -123,6 +123,8 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
 
         & h2 {
           font-weight: 200;
+          font-size: 28px;
+
           margin-left: 10%;
           color: blanchedalmond;
           position: relative;
@@ -194,6 +196,17 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
             border: pink solid 1px;
             position: relative;
           } */
+
+          @media screen and (max-width: 648px) {
+            & a::before {
+              content: "🔗";
+              font-size: 1.4rem;
+              position: absolute;
+              top: 8px;
+              left: -28px;
+              color: ${groupColor};
+            }
+          }
 
           &:hover > a::before {
             content: "🔗";

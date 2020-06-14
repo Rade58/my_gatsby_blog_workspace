@@ -133,6 +133,11 @@ const Layout: FunctionComponent<LayoutPropsI> = ({ body }) => {
 
               border: pink solid 0px;
 
+              @media screen and (max-width: 648px) {
+                border: pink solid 1px;
+                padding: 18px;
+              }
+
               /* OBRATI PAZNJU DA KADA DODAS MARGINE, TI CES IMATO OVERFLOW SCROLL */
               /* ZA BODY STO NIJE DOBRO */
 

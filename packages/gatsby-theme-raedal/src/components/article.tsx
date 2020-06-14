@@ -127,8 +127,16 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
           }
 
           & > p {
-            font-size: 24px;
+            font-size: 22px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+              Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+              sans-serif;
             font-weight: 100;
+            margin-bottom: 1.24rem;
+
+            @media screen and (max-width: 648px) {
+              font-size: 1.24em;
+            }
           }
         `}
       >
