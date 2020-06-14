@@ -401,7 +401,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
             background-image: ${headerBackgroundImage};
             background-color: blanchedalmond;
             height: 2px;
-            width: 80%;
+            width: 48%;
 
             border-radius: 1px;
 

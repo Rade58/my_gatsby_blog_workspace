@@ -29,7 +29,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
 ) => (props) => {
   if (!props.id) return <Tag {...props} />;
 
-  const { headerBackgroundImage } = additionalStyles;
+  const { headerBackgroundImage, bodyBackgroundColor } = additionalStyles;
 
   // console.log(props.id);
 
@@ -125,25 +125,26 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
           font-weight: 200;
           font-size: 28px;
 
-          margin-left: 10%;
-          color: blanchedalmond;
+          margin-left: 2rem;
+          /* color: blanchedalmond; */
+          color: #e9a33a;
           position: relative;
 
-          border: pink solid 1px;
+          border: pink solid 0px;
           display: flex;
           width: max-content;
           align-items: center;
 
           &::after {
             content: "";
-            background-color: blanchedalmond;
-            background-image: linear-gradient(
-              to right,
-              #fa709a 0%,
-              #fee140 100%
+            background-color: ${bodyBackgroundColor};
+            background: linear-gradient(
+              94deg,
+              rgba(107, 75, 89, 0.9920343137254902) 3%,
+              rgba(65, 91, 116, 0.2413340336134454) 8%
             );
-            height: 2px;
-            margin-left: 1em;
+            height: 2.8px;
+            margin-left: 0.2em;
             border: blanchedalmond solid 0px;
             width: 600%;
             overflow: hidden;
@@ -157,7 +158,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
           padding-top: 12px;
         }
 
-        border: tomato solid 1px;
+        border: tomato solid 0px;
 
         transition-property: margin-top;
         transition-duration: 4s;
