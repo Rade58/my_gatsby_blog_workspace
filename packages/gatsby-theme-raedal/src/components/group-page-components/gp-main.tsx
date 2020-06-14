@@ -46,6 +46,10 @@ const MainGp: FunctionComponent = (props) => {
           display: none;
         }
 
+        & aside.adds {
+          position: static;
+        }
+
         & section {
           display: flex;
 
@@ -78,7 +82,7 @@ const MainGp: FunctionComponent = (props) => {
             grid-area: a;
             flex-direction: column;
 
-            position: sticky;
+            /* position: sticky; */
             top: 10px;
           }
 
@@ -90,8 +94,8 @@ const MainGp: FunctionComponent = (props) => {
         @media screen and (min-width: 918px) {
           grid-template-areas:
             "s h h h h h . ."
-            "a c c c c c k k"
-            "a c c c c c . ."
+            ". c c c c c a a"
+            ". c c c c c k k"
             ". c c c c c . ."
             ". . l l l l . ."
             ". . l l l l . ."
@@ -99,6 +103,16 @@ const MainGp: FunctionComponent = (props) => {
 
           & section.keywords {
             display: flex;
+          }
+
+          & aside.adds {
+            position: static;
+          }
+
+          & aside.courses {
+            /* grid-area: s; */
+            position: sticky;
+            top: 8px;
           }
         }
 
@@ -114,6 +128,12 @@ const MainGp: FunctionComponent = (props) => {
 
           & section.keywords {
             display: flex;
+          }
+
+          & aside.courses {
+            /* grid-area: s; */
+            position: static;
+            /* top: 8px; */
           }
         }
 
