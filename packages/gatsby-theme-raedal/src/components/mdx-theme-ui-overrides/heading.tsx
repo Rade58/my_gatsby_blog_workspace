@@ -138,10 +138,11 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
           &::after {
             content: "";
             background-color: ${bodyBackgroundColor};
-            background: linear-gradient(
+            background-image: linear-gradient(
               94deg,
-              rgba(107, 75, 89, 0.9920343137254902) 3%,
-              rgba(65, 91, 116, 0.2413340336134454) 8%
+              rgba(107, 75, 89, 0.9920343137254902) 2%,
+              rgba(191, 72, 102, 1) 4%,
+              rgba(27, 34, 39, 0.8631827731092436) 6%
             );
             height: 2.8px;
             margin-left: 0.2em;

@@ -72,7 +72,7 @@ const HeadingMajor: FunctionComponent = () => {
             font-size: 58px;
             border: pink solid 0px;
             text-align: center;
-            color: #e9a33a;
+            color: #eba119;
             /* color: blanchedalmond; */
 
             @media screen and (max-width: 600px) {
