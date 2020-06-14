@@ -220,7 +220,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
           }
 
           & > a::before {
-            visibility: hidden;
+            opacity: 0;
             content: "🔗";
             font-size: 1.4rem;
             position: absolute;
@@ -230,7 +230,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
           }
 
           &:hover > a::before {
-            visibility: visible;
+            opacity: 1;
           }
         `}
       >
