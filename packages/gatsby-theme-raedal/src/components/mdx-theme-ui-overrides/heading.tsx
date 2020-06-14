@@ -152,6 +152,15 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
             position: absolute;
             left: 100%;
             flex-shrink: 1;
+
+            transition-property: width;
+            transition-duration: 0.8s;
+          }
+
+          &:hover {
+            &::after {
+              width: 1000%;
+            }
           }
         }
 
@@ -210,13 +219,18 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
             }
           }
 
-          &:hover > a::before {
+          & > a::before {
+            visibility: hidden;
             content: "🔗";
             font-size: 1.4rem;
             position: absolute;
             top: 8px;
             left: -28px;
             color: ${groupColor};
+          }
+
+          &:hover > a::before {
+            visibility: visible;
           }
         `}
       >
