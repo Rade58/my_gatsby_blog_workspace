@@ -31,8 +31,11 @@ const Kebab: FunctionComponent = () => {
       aria-label="kebab"
       css={css`
         cursor: pointer;
-        display: inline-block;
         display: flex;
+
+        @media screen and (min-width: 918px) {
+          display: none;
+        }
 
         & span {
           color: ${groupColor};

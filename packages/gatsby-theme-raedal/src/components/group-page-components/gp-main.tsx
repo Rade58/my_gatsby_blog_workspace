@@ -27,40 +27,6 @@ const MainGp: FunctionComponent = (props) => {
 
         grid-template-columns: repeat(8, minmax(0, 1fr));
 
-        @media screen and (min-width: 918px) {
-          grid-template-areas:
-            "s h h h h h . ."
-            "a c c c c c k k"
-            "a c c c c c . ."
-            ". c c c c c . ."
-            ". . l l l l . ."
-            ". . l l l l . ."
-            ". . l l l l . .";
-        }
-
-        @media screen and (min-width: 1100px) {
-          grid-template-areas:
-            "s s h h h h a a"
-            "k k c c c c a a"
-            ". . c c c c . ."
-            ". . c c c c . ."
-            ". . l l l l . ."
-            ". . l l l l . ."
-            ". . l l l l . .";
-        }
-
-        grid-template-areas:
-          "h h h h h h h h"
-          "c c c c c c c c"
-          "c c c c c c c c"
-          "c c c c c c c c"
-          ". . s s s s . ."
-          ". . s s s s . ."
-          ". . k k k k . ."
-          ". . k k k k . ."
-          ". . a a a a . ."
-          ". . l l l l . .";
-
         & .lorem {
           grid-area: l;
           display: flex;
@@ -74,6 +40,10 @@ const MainGp: FunctionComponent = (props) => {
             /* color: #fff; */
             /* height: min-content; */
           }
+        }
+
+        & section.keywords {
+          display: none;
         }
 
         & section {
@@ -116,6 +86,48 @@ const MainGp: FunctionComponent = (props) => {
             grid-area: s;
           }
         }
+
+        @media screen and (min-width: 918px) {
+          grid-template-areas:
+            "s h h h h h . ."
+            "a c c c c c k k"
+            "a c c c c c . ."
+            ". c c c c c . ."
+            ". . l l l l . ."
+            ". . l l l l . ."
+            ". . l l l l . .";
+
+          & section.keywords {
+            display: flex;
+          }
+        }
+
+        @media screen and (min-width: 1100px) {
+          grid-template-areas:
+            "s s h h h h a a"
+            "k k c c c c a a"
+            ". . c c c c . ."
+            ". . c c c c . ."
+            ". . l l l l . ."
+            ". . l l l l . ."
+            ". . l l l l . .";
+
+          & section.keywords {
+            display: flex;
+          }
+        }
+
+        grid-template-areas:
+          "h h h h h h h h"
+          "c c c c c c c c"
+          "c c c c c c c c"
+          "c c c c c c c c"
+          ". . s s s s . ."
+          ". . s s s s . ."
+          ". . k k k k . ."
+          ". . k k k k . ."
+          ". . a a a a . ."
+          ". . l l l l . .";
       `}
     >
       {children}
