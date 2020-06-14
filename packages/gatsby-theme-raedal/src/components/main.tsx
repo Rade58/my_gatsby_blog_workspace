@@ -176,7 +176,7 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
             position: sticky;
             top: 48vh;
             /* height: max-content; */
-            border: pink solid 1px;
+            border: pink solid 0px;
             width: fit-content;
 
             /* ------------------------- */

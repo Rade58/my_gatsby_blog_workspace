@@ -32,7 +32,7 @@ interface JumperPropsI {
 }
 
 const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
-  const { headerBackgroundImage } = additionalStyles;
+  const { headerBackgroundImage, bodyBackgroundColor } = additionalStyles;
   const { blogPostContext } = $_useBlogPostReducerState;
   const {
     headings,
@@ -234,6 +234,22 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
             left: 0;
             width: 100%; */
 
+          background-color: #20282e;
+
+          border-radius: 16px;
+          box-shadow:
+          0 2.8px 2.2px rgba(0, 0, 0, 0.02),
+          0 6.7px 5.3px rgba(0, 0, 0, 0.028),
+          0 12.5px 10px rgba(0, 0, 0, 0.035),
+          0 22.3px 17.9px rgba(0, 0, 0, 0.042),
+          0 41.8px 33.4px rgba(0, 0, 0, 0.05),
+          0 100px 80px rgba(0, 0, 0, 0.07)
+          ;
+
+
+          padding-top: 1vh;
+          padding-bottom: 1vh;
+
           display: ${!headings.length ? "none" : "flex"};
           flex-direction: column;
 
@@ -334,6 +350,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
             width: fit-content;
             margin-left: auto;
             border-radius: 12px;
+            margin-right: 4px;
 
             @media screen and (max-width: 918px) {
               border: 2px solid ${underlineColor};
@@ -521,6 +538,13 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
                   margin: 2px;
                   margin-left: 20px;
 
+                  /* background-color: rgb(89, 70, 92); */
+                  background-image: linear-gradient(
+                    133deg,
+                    rgba(89, 70, 92, 0.5466561624649859) 17%,
+                    rgba(42, 49, 56, 0.3169642857142857) 80%
+                  );
+
                   & div.small-separ {
                     height: 1px;
                     width: 98%;
@@ -542,9 +566,10 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
 
                   &::before {
                     position: relative;
-                    left: -8px;
+                    left: -14px;
                     content: "🖇️";
                     visibility: hidden;
+                    margin-right: 4px;
                   }
 
                   &.highlight {
@@ -554,9 +579,10 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
 
                     &::before {
                       position: relative;
-                      left: -8px;
+                      left: -14px;
                       content: "🖇️";
                       visibility: visible;
+                      margin-right: 4px;
                     }
 
                     & a {
@@ -572,7 +598,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
                     text-decoration-line: none;
 
                     &:hover {
-                      color: pink;
+                      color: ${underlineColor};
                       text-decoration-line: underline;
                       text-decoration-color: olive;
                     }
