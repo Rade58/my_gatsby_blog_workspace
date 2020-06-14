@@ -137,6 +137,20 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
             @media screen and (max-width: 648px) {
               font-size: 1.24em;
             }
+
+            & > code {
+              background-color: #a043845b;
+            }
+          }
+
+          & * {
+            & em {
+              background-color: pink;
+            }
+
+            & strong {
+              border: pink solid 1px;
+            }
           }
         `}
       >
