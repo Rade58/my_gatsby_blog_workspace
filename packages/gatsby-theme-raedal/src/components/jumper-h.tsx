@@ -293,10 +293,10 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
             justify-content: space-evenly;
 
             & > a {
+              color: blanchedalmond;
               margin-left: auto;
               margin-right: 46%;
 
-              color: blanchedalmond;
 
               &:active {
                 color: ${underlineColor};
@@ -331,6 +331,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
               }
 
               & > a {
+              color: crimson;
                 margin-left: auto;
                 margin-right: auto;
               }
@@ -468,7 +469,9 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
             }
 
             & > a {
+
               color: blanchedalmond;
+
 
               &:active {
                 color: ${underlineColor};
@@ -482,6 +485,12 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
                   color: ${underlineColor};
                 }
               /* margin-top: 2vh; */
+
+              }
+
+
+              @media screen and (max-width: 918px) {
+                color:  crimson;
 
               }
 
