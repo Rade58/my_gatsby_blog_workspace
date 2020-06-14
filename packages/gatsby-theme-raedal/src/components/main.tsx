@@ -133,7 +133,7 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
             /* bottom: 12vh; */
             position: sticky;
             /* top: 12px; */
-            border: tomato solid 1px;
+            border: tomato solid 0px;
             top: 50vh;
           }
           & > section.keywords {

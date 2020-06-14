@@ -234,7 +234,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
             left: 0;
             width: 100%; */
 
-          background-color: #20282e;
+          background-color: #20282e88;
 
           border-radius: 16px;
           box-shadow:
@@ -253,7 +253,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
           display: ${!headings.length ? "none" : "flex"};
           flex-direction: column;
 
-          width: max-content;
+          /* width: max-content; */
 
           @media screen and (max-width: 918px) {
             border-radius: 14px;
@@ -353,7 +353,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
             margin-right: 4px;
 
             @media screen and (max-width: 918px) {
-              border: 2px solid ${underlineColor};
+              border: 0px solid ${underlineColor};
               background-color: ${"#1b2227c9"};
 
               margin-left: auto;
@@ -541,8 +541,8 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
                   /* background-color: rgb(89, 70, 92); */
                   background-image: linear-gradient(
                     133deg,
-                    rgba(89, 70, 92, 0.5466561624649859) 17%,
-                    rgba(42, 49, 56, 0.3169642857142857) 80%
+                    rgba(42, 49, 56, 0.9051995798319328) 13%,
+                    rgba(89, 70, 92, 0.05085784313725494) 85%
                   );
 
                   & div.small-separ {
