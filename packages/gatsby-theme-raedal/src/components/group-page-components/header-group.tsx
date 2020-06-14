@@ -6,6 +6,8 @@ import { FunctionComponent } from "react";
 
 import { additionalStyles } from "../../common-styles";
 
+import Kebab from "./kebab-gr";
+
 const Header: FunctionComponent = () => {
   let a;
 
@@ -47,6 +49,7 @@ const Header: FunctionComponent = () => {
           </span>
         </Link>
       </div>
+      <Kebab />
       <div className="algolia-placeholder" />
     </header>
   );

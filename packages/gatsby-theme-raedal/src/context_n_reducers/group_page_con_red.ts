@@ -6,11 +6,11 @@ import { GroupPageI, LocationI } from "../templates/group-page-template";
 // ODNOSNO ONOG DELA KOJI NIJE OBEZBEDJEN OD STRANE REDUCER-A
 
 export enum GROUP_PAGE_ACTIONS {
-  PLACEHOLDER = "PLACEGOLDER",
+  TOGGLE_KEYWORDS_MODAL = "TOGGLE_KEYWORDS_MODAL",
 }
 
 export interface GroupPageReducedStateI {
-  placeholder?: string;
+  keywordsModalIsOpen: boolean;
 }
 
 export interface GroupPageReducerActionI {
@@ -28,17 +28,22 @@ export const groupPageReducer: Reducer<
 > = (state, action) => {
   // ZA SADA NEMA NISTA
 
-  const blah = 1;
+  if (action.type === GROUP_PAGE_ACTIONS.TOGGLE_KEYWORDS_MODAL) {
+    return { ...state, keywordsModalIsOpen: action.payload };
+  }
 
   return state;
 };
 
 // ***************************************************
+// ***************************************************
 
 /**
  * @description (1) OVAJ OBJEKAT, PORED DISPATCH FUNKCIJE JE JEDAN OD DEFAULT-OVA ZADAT PRI POZIVANJU    createContext-A (TO JE OVDE VEC URADJENO ;  (2)  A KORISTI SE KAO I DEFAULT STATE ZA REDUCER-A
  DAKLE PRI KORISCENJU useReducer HOOK, TI CES PROSLEDITI I OVAJ DEFAULT STATE*/
-export const defaultReducerState: GroupPageReducedStateI = {};
+export const defaultReducerState: GroupPageReducedStateI = {
+  keywordsModalIsOpen: false,
+};
 
 // DISPATCHER TYPE
 

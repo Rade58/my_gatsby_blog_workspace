@@ -2,12 +2,19 @@
 import { jsx } from "theme-ui";
 import { css } from "@emotion/core";
 
-import { FunctionComponent } from "react";
+import { FunctionComponent, useContext } from "react";
+
+import TableOfKeywords from "../../static_query_components/gr-table-of-keywords";
+import { $_useGroupPageState } from "../../context_n_reducers/group_page_con_red";
 
 // NEKA MAIN BUDE GRID (A TU CU LOGIKU, KASNIJE DODATI)
 
 const MainGp: FunctionComponent = (props) => {
   const { children } = props;
+
+  const { groupPageContext } = $_useGroupPageState;
+  const { reducedState } = useContext(groupPageContext);
+  const { keywordsModalIsOpen } = reducedState;
 
   return (
     <main
@@ -112,6 +119,7 @@ const MainGp: FunctionComponent = (props) => {
       `}
     >
       {children}
+      {keywordsModalIsOpen ? <TableOfKeywords /> : null}
     </main>
   );
 };
