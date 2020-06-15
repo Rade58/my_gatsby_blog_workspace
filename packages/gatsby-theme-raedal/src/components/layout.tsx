@@ -112,7 +112,7 @@ const Layout: FunctionComponent<LayoutPropsI> = ({ body }) => {
 
             @font-face {
               font-family: "Fira Code";
-              src: url(${myFonts.FiraCodeVariableFont}) format("ttf-variations");
+              src: url(${myFonts.FiraCodeVariableFont}) format("truetype");
 
               font-weight: 125 950;
               font-stretch: 75% 125%;
