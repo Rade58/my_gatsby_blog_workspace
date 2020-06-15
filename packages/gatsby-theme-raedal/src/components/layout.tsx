@@ -33,6 +33,9 @@ import { $_useBlogPostReducerState } from "../context_n_reducers/context_n_reduc
 
 // ********  useHeader CUSTOM HOOK   ********************
 import Header from "./header";
+
+// === !==  === !==  ===FONTOVI !==  === !==  === !==  === !==
+import myFonts from "../fonts/fonts";
 // === !==  === !==  === !==  === !==  === !==  === !==
 
 import Main from "./main";
@@ -109,8 +112,7 @@ const Layout: FunctionComponent<LayoutPropsI> = ({ body }) => {
 
             @font-face {
               font-family: "Fira Code";
-              src: url("../../fonts/fira/FiraCode-VariableFont_wght.ttf")
-                format("ttf-variations");
+              src: url(${myFonts.FiraCodeVariableFont}) format("ttf-variations");
 
               font-weight: 125 950;
               font-stretch: 75% 125%;
@@ -118,13 +120,11 @@ const Layout: FunctionComponent<LayoutPropsI> = ({ body }) => {
             }
 
             @font-face {
-              font-family: "Caveat";
-              src: url("../fonts/caveat/Caveat-Regular.ttf")
-                format("ttf-variations");
+              font-family: "Caevat";
+              src: url(${myFonts.CaveatRegularFont}) format("truetype");
 
-              font-weight: 400 700;
-              font-stretch: 75% 125%;
-              font-style: oblique 0deg 20deg;
+              font-style: normal;
+              font-weight: normal;
             }
 
             html {

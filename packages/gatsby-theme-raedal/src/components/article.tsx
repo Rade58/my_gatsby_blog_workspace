@@ -146,11 +146,11 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
           & * {
             & em {
               color: #a3577d;
+              font-family: "Caevat";
             }
 
             & strong {
               color: #2a6480;
-              font-family: "Caveat";
             }
           }
         `}

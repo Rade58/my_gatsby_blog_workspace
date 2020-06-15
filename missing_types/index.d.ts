@@ -58,3 +58,8 @@ declare module "nothing";
   export = GatsbyImage;
 }
  */
+
+/**
+ * @description OVO SU FONTOVI
+ */
+declare module "*.ttf";
