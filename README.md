@@ -10,3 +10,8 @@
 
 ## STILIZUJ I UNORDERED LISTE ILI ORDERED LISTE
 
+***
+
+***
+
+STO SE TICE FONT-OVA MISLIM DA CU MORATI DA KORISTIM <https://www.digitalocean.com/community/tutorials/gatsbyjs-custom-fonts-in-gatsby>

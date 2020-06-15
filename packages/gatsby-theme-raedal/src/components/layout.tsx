@@ -117,6 +117,16 @@ const Layout: FunctionComponent<LayoutPropsI> = ({ body }) => {
               font-style: oblique 0deg 20deg;
             }
 
+            @font-face {
+              font-family: "Caveat";
+              src: url("../fonts/caveat/Caveat-Regular.ttf")
+                format("ttf-variations");
+
+              font-weight: 400 700;
+              font-stretch: 75% 125%;
+              font-style: oblique 0deg 20deg;
+            }
+
             html {
               /*  */
               scroll-behavior: smooth;

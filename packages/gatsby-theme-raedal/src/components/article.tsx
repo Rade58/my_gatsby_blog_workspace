@@ -145,11 +145,12 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
 
           & * {
             & em {
-              background-color: pink;
+              color: #a3577d;
             }
 
             & strong {
-              border: pink solid 1px;
+              color: #2a6480;
+              font-family: "Caveat";
             }
           }
         `}
