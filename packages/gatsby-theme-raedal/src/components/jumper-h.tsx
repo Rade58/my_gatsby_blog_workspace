@@ -241,7 +241,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
 
           background-color: #20282e88;
 
-          border-radius: 16px;
+          border-radius: 8px;
 
           /* box-shadow:
           0 2.8px 2.2px rgba(0, 0, 0, 0.02),

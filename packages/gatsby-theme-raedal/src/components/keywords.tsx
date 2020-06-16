@@ -45,7 +45,7 @@ box-shadow:
   0 19px 179px -28px rgba(0, 0, 0, 0.38)
 ;
 
-      border-radius: 18px;
+      border-radius: 8px;
 
 
         display: flex;
