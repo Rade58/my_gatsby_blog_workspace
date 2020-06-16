@@ -125,6 +125,14 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
             margin-right: 18px;
 
 
+            &:active {
+              & h4{
+                color: goldenrod;
+              }
+            }
+
+
+
             & p {
               margin-left: 20%;
             }
@@ -157,6 +165,15 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
               &:hover {
                 text-decoration-line: underline;
               }
+
+
+              @media screen and (max-width: 918px) {
+                text-decoration-line: underline;
+
+                
+
+              }
+
 
             }
 
