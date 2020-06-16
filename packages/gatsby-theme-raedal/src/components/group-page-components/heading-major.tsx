@@ -87,6 +87,7 @@ const HeadingMajor: FunctionComponent = () => {
           border: solid 0px white;
           text-align: center;
           font-weight: 400;
+          text-shadow: 0.2px 0.2px 0.2px ${groupColor};
 
           & span {
             &.group-name-span {

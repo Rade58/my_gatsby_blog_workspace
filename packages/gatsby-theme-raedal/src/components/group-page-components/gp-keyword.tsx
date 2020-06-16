@@ -35,6 +35,11 @@ const GpKeyword: FunctionComponent<PageKeywords> = (props) => {
       color: ${keywordTextColor};
       background-color: ${keywordColor};
     }
+
+    &:hover {
+      opacity: 0.8;
+    }
+
   `;
 
   return <KeywordLink to={path}>{keyword}</KeywordLink>;

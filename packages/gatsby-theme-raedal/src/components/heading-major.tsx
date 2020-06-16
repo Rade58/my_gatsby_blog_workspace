@@ -47,10 +47,10 @@ const HeadingMajor: FunctionComponent = () => {
           & a {
             color: blanchedalmond;
             text-decoration-line: none;
-            border: ${themeColor} outset 2px;
+            border: goldenrod outset 2px;
             border-radius: 6px;
             padding: 8px;
-            background-color: #da84b970;
+            background-color: #ceaae446;
 
             &:hover {
               /* text-decoration-line: underline; */
@@ -59,6 +59,10 @@ const HeadingMajor: FunctionComponent = () => {
             }
             &::after {
               content: " 😁";
+            }
+
+            &:active {
+              color: goldenrod;
             }
           }
         }

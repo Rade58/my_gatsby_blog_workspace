@@ -162,7 +162,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
 
           &:hover {
             &::after {
-              width: 1900px;
+              width: 2900px;
             }
           }
         }
