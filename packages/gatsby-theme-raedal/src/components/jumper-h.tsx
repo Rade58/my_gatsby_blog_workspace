@@ -569,6 +569,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
                 & li {
                   margin: 2px;
                   margin-left: 20px;
+                  display: flex;
 
                   /* background-color: rgb(89, 70, 92); */
                   background-image: linear-gradient(
@@ -577,7 +578,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
                     rgba(89, 70, 92, 0.05085784313725494) 85%
                   );
 
-                  & div.small-separ {
+                  /* & div.small-separ {
                     height: 1px;
                     width: 98%;
                     padding: 0;
@@ -594,7 +595,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
                       #c2ce9c 64%,
                       #7edbdc 100%
                     );
-                  }
+                  } */
 
                   &::before {
                     position: relative;
@@ -628,6 +629,8 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
                     color: blanchedalmond;
 
                     text-decoration-line: none;
+                    display: flex;
+                    height: min-content;
 
                     &:hover {
                       color: ${underlineColor};
