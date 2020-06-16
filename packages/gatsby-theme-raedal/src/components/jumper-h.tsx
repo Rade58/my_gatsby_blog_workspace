@@ -272,7 +272,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
 
           @media screen and (max-width: 918px) {
 
-background-image: linear-gradient(38deg, rgba(55,61,65,0.6446953781512605) 57%, rgba(88,120,108,0.7315301120448179) 94%);
+            background-image: linear-gradient(38deg, rgba(55,61,65,0.6446953781512605) 57%, rgba(88,120,108,0.7315301120448179) 94%);
 
             border-radius: 14px;
 
