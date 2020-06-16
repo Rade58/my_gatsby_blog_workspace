@@ -336,6 +336,11 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
                 pointer-events: none;
                 opacity: 0.2;
                 cursor: not-allowed;
+
+                &:hover {
+                  cursor: not-allowed;
+                }
+
               }
             }
 
