@@ -224,7 +224,6 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
           & > a:active {
             &::before {
               color: goldenrod;
-              text-decoration-line: underline;
             }
           }
 
