@@ -139,6 +139,7 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
           & > section.keywords {
             position: sticky;
             top: 8vh;
+            margin: 8px 8px 8px 14px;
           }
 
           & > section.comercial {
@@ -202,6 +203,8 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
             position: sticky;
 
             top: 8vh;
+
+            margin: 0 14px 0px 8px;
           }
 
           & > section.comercial {

@@ -33,6 +33,21 @@ const Keywords: FunctionComponent = () => {
     <section
       className="keywords"
       css={css`
+
+box-shadow:
+  0 3.1px 7.7px -28px rgba(0, 0, 0, 0.091),
+  0 5.8px 19.5px -28px rgba(0, 0, 0, 0.132),
+  0 8.1px 36.4px -28px rgba(0, 0, 0, 0.163),
+  0 10px 59.4px -28px rgba(0, 0, 0, 0.19),
+  0 11.6px 89.3px -28px rgba(0, 0, 0, 0.217),
+  0 13.2px 124.4px -28px rgba(0, 0, 0, 0.248),
+  0 15.4px 157.5px -28px rgba(0, 0, 0, 0.289),
+  0 19px 179px -28px rgba(0, 0, 0, 0.38)
+;
+
+      border-radius: 18px;
+
+
         display: flex;
         border: pink solid 0px;
         padding: 6px;

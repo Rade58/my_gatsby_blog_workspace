@@ -226,6 +226,9 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
       <aside
         className={`jumper-cont ${slideClass}`}
         css={css`
+
+          margin-right: 8px;
+
           /* visibility: hidden; */
 
           /* border: crimson solid 1px; */
