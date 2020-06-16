@@ -137,17 +137,19 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
 
           &::after {
             content: "";
+            display: inline-block;
+            position: absolute;
             background-color: ${bodyBackgroundColor};
             background-image: linear-gradient(
               94deg,
               rgba(107, 75, 89, 0.9920343137254902) 2%,
               rgba(191, 72, 102, 1) 4%,
-              rgba(27, 34, 39, 0.8631827731092436) 6%
+              rgba(27, 34, 39, 0) 7%
             );
             height: 1.8px;
             margin-left: 0.2em;
             border: blanchedalmond solid 0px;
-            width: 400px;
+            width: 800px;
             overflow: hidden;
             position: absolute;
             left: 100%;
@@ -159,7 +161,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
 
           &:hover {
             &::after {
-              width: 400%;
+              width: 1900px;
             }
           }
         }
@@ -208,17 +210,6 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
             position: relative;
           } */
 
-          @media screen and (max-width: 648px) {
-            & a::before {
-              content: "🔗";
-              font-size: 1.4rem;
-              position: absolute;
-              top: 8px;
-              left: -28px;
-              color: ${groupColor};
-            }
-          }
-
           & > a::before {
             opacity: 0;
             content: "🔗";
@@ -227,6 +218,17 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
             top: 8px;
             left: -28px;
             color: ${groupColor};
+          }
+          @media screen and (max-width: 648px) {
+            & a::before {
+              content: "🔗";
+              font-size: 1.4rem;
+              position: absolute;
+              top: 8px;
+              left: -28px;
+              color: ${groupColor};
+              opacity: 1;
+            }
           }
 
           &:hover > a::before {
