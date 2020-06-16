@@ -109,10 +109,10 @@ const Layout: FunctionComponent<LayoutPropsI> = ({ body }) => {
         <Global
           styles={css`
             /* DEFINISUCU OVDE     @font-face    NAMENJEN ZA CODE BLOCK  (ODNOSN OZA PRISM)    */
-
+            /* === !==  @ FONT FACES  === !== === */
             @font-face {
               font-family: "Fira Code";
-              src: url(${myFonts.FiraCodeVariableFont}) format("truetype");
+              src: url(${myFonts.FiraCodeVariableFontPath}) format("truetype");
 
               font-weight: 125 950;
               font-stretch: 75% 125%;
@@ -121,11 +121,45 @@ const Layout: FunctionComponent<LayoutPropsI> = ({ body }) => {
 
             @font-face {
               font-family: "Caevat";
-              src: url(${myFonts.CaveatRegularFont}) format("truetype");
+              src: url(${myFonts.CaveatRegularFontPath}) format("truetype");
 
-              font-style: normal;
+              /* font-style: normal;
               font-weight: normal;
+              */
+
+              font-weight: 125 950;
+              font-stretch: 75% 125%;
+              font-style: oblique 0deg 20deg;
             }
+
+            @font-face {
+              font-family: "Handlee";
+              src: url(${myFonts.HandleeFontPath}) format("truetype");
+
+              font-weight: 125 950;
+              font-stretch: 75% 125%;
+              font-style: italic;
+            }
+
+            @font-face {
+              font-family: "Siriarcha";
+              src: url(${myFonts.SiriarchaFontPath}) format("truetype");
+
+              font-weight: 125 950;
+              font-stretch: 75% 125%;
+              font-style: italic;
+            }
+
+            @font-face {
+              font-family: "Bad Script";
+              src: url(${myFonts.BadScriptPath}) format("truetype");
+
+              font-weight: 125 950;
+              font-stretch: 75% 125%;
+              font-style: oblique 0deg 20deg;
+            }
+
+            /* === !== === !== === !== === !== === !== === !== === !== */
 
             html {
               /*  */

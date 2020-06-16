@@ -132,7 +132,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
 
           border: pink solid 0px;
           display: flex;
-          width: max-content;
+          width: fit-content;
           align-items: center;
 
           &::after {
@@ -144,10 +144,10 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
               rgba(191, 72, 102, 1) 4%,
               rgba(27, 34, 39, 0.8631827731092436) 6%
             );
-            height: 2.8px;
+            height: 1.8px;
             margin-left: 0.2em;
             border: blanchedalmond solid 0px;
-            width: 600%;
+            width: 400px;
             overflow: hidden;
             position: absolute;
             left: 100%;
@@ -159,7 +159,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
 
           &:hover {
             &::after {
-              width: 1000%;
+              width: 400%;
             }
           }
         }

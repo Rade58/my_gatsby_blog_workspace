@@ -140,17 +140,19 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
 
             & > code {
               background-color: #a043845b;
+              font-size: 1.3rem;
             }
           }
 
           & * {
             & em {
-              color: #a3577d;
-              font-family: "Caevat";
+              color: #df9dbe;
+              font-family: "Bad Script";
+              font-weight: 100;
             }
 
             & strong {
-              color: #2a6480;
+              color: #a16fc2;
             }
           }
         `}
