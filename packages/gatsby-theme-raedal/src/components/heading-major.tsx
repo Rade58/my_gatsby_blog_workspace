@@ -84,7 +84,7 @@ const HeadingMajor: FunctionComponent = () => {
             padding: 0 3vh;
             /* color: blanchedalmond; */
 
-            text-shadow: 2px 2px 4px #c93c8359;
+            text-shadow: 1px 1px 1px #c93c8359;
 
             @media screen and (max-width: 600px) {
               font-size: 46px;

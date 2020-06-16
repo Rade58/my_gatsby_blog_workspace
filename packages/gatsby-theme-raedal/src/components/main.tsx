@@ -202,7 +202,7 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
           & > section.keywords {
             position: sticky;
 
-            top: 8vh;
+            top: 48vh;
 
             margin: 0 14px 0px 8px;
           }
