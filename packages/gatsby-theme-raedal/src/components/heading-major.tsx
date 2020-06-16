@@ -22,11 +22,13 @@ const HeadingMajor: FunctionComponent = () => {
 
   let icon;
   let path;
+  let groupColor;
 
   if (groupPage) {
-    const { icon: ic, path: pa } = groupPage;
+    const { icon: ic, path: pa, groupColor: gk } = groupPage;
     icon = ic;
     path = pa;
+    groupColor = gk;
   }
 
   return (
@@ -41,21 +43,23 @@ const HeadingMajor: FunctionComponent = () => {
 
         & div.author {
           margin-bottom: 28px;
+          margin-top: 1vh;
           & a {
             color: blanchedalmond;
             text-decoration-line: none;
-            border: blanchedalmond solid 1px;
-            border-radius: 1px;
-            padding: 4px;
-            border-radius: 2px;
+            border: ${themeColor} outset 2px;
+            border-radius: 6px;
+            padding: 8px;
+            background-color: #da84b970;
 
             &:hover {
-              text-decoration-line: underline;
+              /* text-decoration-line: underline; */
+              background-color: ${groupColor};
+              color: white;
             }
-          }
-
-          &:after {
-            content: "  👩";
+            &::after {
+              content: " 😁";
+            }
           }
         }
 
@@ -73,9 +77,10 @@ const HeadingMajor: FunctionComponent = () => {
             border: pink solid 0px;
             text-align: center;
             color: #eba119;
+            padding: 0 3vh;
             /* color: blanchedalmond; */
 
-            text-shadow: 1px 1px 1px pink, 1px 1px 1px goldenrod;
+            text-shadow: 2px 2px 4px #c93c8359;
 
             @media screen and (max-width: 600px) {
               font-size: 46px;

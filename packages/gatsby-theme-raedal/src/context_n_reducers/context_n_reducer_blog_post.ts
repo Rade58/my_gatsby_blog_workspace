@@ -127,13 +127,13 @@ export const defaultState: BlogPostStateI = {
   keywordModalIsShown: false,
   // intersectedDivId: "#",
   setIntersectedHeadingDivFunc: () => {
-    console.log("SET STATE");
+    // console.log("SET STATE");
   },
   setJumpersSlidingClass: () => {
-    console.log("SLIDE LEFT OR RIGHT");
+    // console.log("SLIDE LEFT OR RIGHT");
   },
   setPigOpacityClassFunc: () => {
-    console.log("SET OPACITY CLASS FOR THE PIG");
+    // console.log("SET OPACITY CLASS FOR THE PIG");
   },
 };
 

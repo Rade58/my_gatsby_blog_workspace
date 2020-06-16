@@ -200,6 +200,8 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
           margin-bottom: 0;
           width: max-content;
 
+          text-shadow: 1px 1px 1px #df4ea248;
+
           /* & > a {
             text-decoration-line: none;
             color: inherit;
@@ -219,6 +221,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
             top: 8px;
             left: -28px;
             color: ${groupColor};
+            text-shadow: 1px 1px 1px ${groupColor};
           }
 
           & > a:active {
@@ -232,15 +235,19 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
               content: "🔗";
               font-size: 1.4rem;
               position: absolute;
-              top: 8px;
+              /* top: 8px; */
               left: -28px;
               color: ${groupColor};
               opacity: 1;
             }
           }
 
-          &:hover > a::before {
-            opacity: 1;
+          &:hover {
+            cursor: default;
+
+            & > a::before {
+              opacity: 1;
+            }
           }
         `}
       >
