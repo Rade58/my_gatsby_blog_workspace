@@ -233,6 +233,8 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
             top: 200;
             left: 0;
             width: 100%; */
+          
+          z-index: 200;
 
           background-color: #20282e88;
 
@@ -256,6 +258,9 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
           /* width: max-content; */
 
           @media screen and (max-width: 918px) {
+
+background-image: linear-gradient(38deg, rgba(55,61,65,0.6446953781512605) 57%, rgba(88,120,108,0.7315301120448179) 94%);
+
             border-radius: 14px;
 
             position: fixed;

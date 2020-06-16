@@ -136,6 +136,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
           align-items: center;
 
           &::after {
+            z-index: 100;
             content: "";
             display: inline-block;
             position: absolute;
@@ -219,6 +220,14 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
             left: -28px;
             color: ${groupColor};
           }
+
+          & > a:active {
+            &::before {
+              color: goldenrod;
+              text-decoration-line: underline;
+            }
+          }
+
           @media screen and (max-width: 648px) {
             & a::before {
               content: "🔗";
