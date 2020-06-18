@@ -187,6 +187,8 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
 
                   & ul {
                     list-style-type: none;
+                    margin-top: 4px;
+                    margin-bottom: 8px;
 
                     & li::before {
                       content: "⚜️ ";
@@ -203,11 +205,45 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
                   }
                 }
               }
+
+              & ol {
+                border: tomato solid 0px;
+                list-style-type: none;
+                margin-top: 4px;
+                margin-bottom: 8px;
+
+                counter-reset: ola;
+
+                & > li {
+                  font-size: 0.9em;
+                  counter-increment: ola;
+
+                  &::before {
+                    color: crimson;
+                    content: counter(ola, lower-alpha) ") " !important;
+                  }
+                }
+
+                & ul {
+                  list-style-type: none;
+                  margin-top: 4px;
+                  margin-bottom: 8px;
+
+                  & li::before {
+                    content: "⚜️ ";
+                    font-size: 0.5em;
+                    margin-right: 0.3em;
+                    color: crimson;
+                    position: relative;
+                    bottom: 0.2em;
+                  }
+                }
+              }
             }
           }
 
           & > ol {
-            border: tomato solid 1px;
+            border: tomato solid 0px;
 
             list-style-type: none;
 
@@ -216,10 +252,62 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
             counter-reset: olcount;
 
             & > li {
+              font-size: 20px;
+
               &::before {
                 color: crimson;
                 counter-increment: olcount;
                 content: counter(olcount) " 🠒 " " ";
+              }
+
+              & ol {
+                list-style-type: none;
+                margin-top: 4px;
+                margin-bottom: 8px;
+
+                counter-reset: ol2;
+
+                & li {
+                  font-size: 0.9em;
+                  counter-increment: ol2;
+
+                  &::before {
+                    color: crimson;
+                    content: counter(ol2, lower-alpha) ") ";
+                  }
+                }
+              }
+
+              & ul {
+                list-style-type: none;
+
+                & > li::before {
+                  content: "🌀 " !important;
+                  display: inline-block;
+                  font-size: 0.4em;
+                  color: crimson;
+                  margin-right: 0.4em;
+                  position: relative;
+                  bottom: 0.2em;
+                }
+
+                & ol {
+                  list-style-type: none;
+                  margin-top: 4px;
+                  margin-bottom: 8px;
+
+                  counter-reset: ol4;
+
+                  & li {
+                    font-size: 0.9em;
+                    counter-increment: ol4;
+
+                    &::before {
+                      color: crimson;
+                      content: counter(ol4, lower-alpha) ") ";
+                    }
+                  }
+                }
               }
             }
           }
