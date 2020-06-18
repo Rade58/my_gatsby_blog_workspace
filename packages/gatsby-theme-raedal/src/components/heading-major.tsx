@@ -256,6 +256,12 @@ const HeadingMajor: FunctionComponent = () => {
           width: 80%;
           height: 2px;
           background-image: ${headerBackgroundImage};
+          box-shadow: 0 3.2px 3.1px -4px rgba(0, 0, 0, 0.067),
+            0 7.8px 6.7px -4px rgba(0, 0, 0, 0.117),
+            0 14.7px 11.3px -4px rgba(0, 0, 0, 0.155),
+            0 26.1px 18px -4px rgba(0, 0, 0, 0.243),
+            0 48.9px 31.4px -4px rgba(0, 0, 0, 0.383),
+            0 117px 80px -4px rgba(0, 0, 0, 0.54);
         `}
       />
     </section>

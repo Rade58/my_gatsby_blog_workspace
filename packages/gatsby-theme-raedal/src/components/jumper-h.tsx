@@ -288,7 +288,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
             transition-duration: 0.2s;
 
             &.slide-right {
-              transform: translateX(100%);
+              transform: translateX(150%);
             }
 
             &.slide-left {
