@@ -147,17 +147,15 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
           }
 
           & > ul {
-            /* background-color: #fff; */
             border: tomato solid 1px;
-            /* list-style-image: radial-gradient(
-              circle,
-              rgba(213, 120, 131, 0.865983893557423) 21%,
-              rgba(158, 203, 125, 0.3449754901960784) 58%,
-              rgba(88, 120, 108, 0.7679446778711485) 91%,
-              rgba(190, 102, 144, 1) 100%
-            );
- */
-            list-style-type: square;
+            list-style-type: none;
+
+            & > li::before {
+              content: "📋 ";
+              font-size: 0.5em;
+              color: crimson;
+              margin-right: 0.5em;
+            }
           }
 
           & * {
