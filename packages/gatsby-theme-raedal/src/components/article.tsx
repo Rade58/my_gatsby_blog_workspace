@@ -147,14 +147,44 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
           }
 
           & > ul {
-            border: tomato solid 1px;
+            border: tomato solid 0px;
             list-style-type: none;
 
             & > li::before {
               content: "📋 ";
+              display: inline-block;
+              margin-bottom: 0.4em;
               font-size: 0.5em;
               color: crimson;
               margin-right: 0.5em;
+              position: relative;
+              bottom: 0.2em;
+            }
+
+            & > li {
+              font-size: 18px;
+
+              & > ul {
+                list-style-type: none;
+                border: red solid 0px;
+                margin-top: 4px;
+                margin-bottom: 8px;
+
+                & > li::before {
+                  content: "🌀 ";
+                  display: inline-block;
+                  font-size: 0.4em;
+                  color: crimson;
+                  margin-right: 0.4em;
+                  position: relative;
+                  bottom: 0.2em;
+                }
+
+                & > li {
+                  & > ul {
+                  }
+                }
+              }
             }
           }
 
