@@ -162,7 +162,7 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
             }
 
             & > li {
-              font-size: 18px;
+              font-size: 20px;
 
               & > ul {
                 list-style-type: none;
@@ -180,10 +180,46 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
                   bottom: 0.2em;
                 }
 
-                & > li {
-                  & > ul {
+                & li {
+                  font-size: 0.9em;
+
+                  color: blanchedalmond;
+
+                  & ul {
+                    list-style-type: none;
+
+                    & li::before {
+                      content: "⚜️ ";
+                      font-size: 0.5em;
+                      margin-right: 0.3em;
+                      color: crimson;
+                      position: relative;
+                      bottom: 0.2em;
+                    }
+                  }
+
+                  & li {
+                    color: #e7d0e0;
                   }
                 }
+              }
+            }
+          }
+
+          & > ol {
+            border: tomato solid 1px;
+
+            list-style-type: none;
+
+            list-style-position: inside;
+
+            counter-reset: olcount;
+
+            & > li {
+              &::before {
+                color: crimson;
+                counter-increment: olcount;
+                content: counter(olcount) " 🠒 " " ";
               }
             }
           }
