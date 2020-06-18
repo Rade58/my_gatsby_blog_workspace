@@ -32,8 +32,7 @@ KORISTICU GENERATED CONTENT U KOJI CU STAVLJATI EMOJIS
 
 SVE U SVEMU KORISTIO SAM PSEUDO ELEMENTE
 
-
-## _______________
+## FONTOVI
 
 STO SE TICE FONT-OVA MISLIM DA CU MORATI DA KORISTIM <https://www.digitalocean.com/community/tutorials/gatsbyjs-custom-fonts-in-gatsby>
 

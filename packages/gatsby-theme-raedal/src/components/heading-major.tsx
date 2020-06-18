@@ -51,6 +51,7 @@ const HeadingMajor: FunctionComponent = () => {
             border-radius: 6px;
             padding: 8px;
             background-color: #ceaae446;
+            font-size: 14px;
 
             &:hover {
               /* text-decoration-line: underline; */
@@ -59,6 +60,7 @@ const HeadingMajor: FunctionComponent = () => {
             }
             &::after {
               content: " 😁";
+              font-size: 12px;
             }
 
             &:active {

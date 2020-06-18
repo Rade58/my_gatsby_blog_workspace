@@ -44,6 +44,17 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
           backgroundColor: `${cardBackgroundColor}`,
         }}
         css={css`
+
+        box-shadow:
+          0 8.5px 28.1px -99px rgba(0, 0, 0, 0.111),
+          0 20px 49.1px -99px rgba(0, 0, 0, 0.16),
+          0 40.5px 70.8px -99px rgba(0, 0, 0, 0.209),
+          0 100px 149px -99px rgba(0, 0, 0, 0.32)
+        ;
+
+
+        border-radius: 2px;
+
         display: flex;
         flex-direction: column;
 
@@ -140,9 +151,9 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
             & div.card-separ {
               height: 2px;
               width: 80%;
-              background-color: blanchedalmond;
+              /* background-color: blanchedalmond; */
               /* background-image: ${headerBackgroundImage}; */
-              background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
+              background-image: linear-gradient(to right, #fa709941 0%, #fee1402f 100%);
               margin-right: auto;
               margin-left: auto;
             }
