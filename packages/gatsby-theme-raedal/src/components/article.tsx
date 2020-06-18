@@ -90,6 +90,8 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
           !pigDisapear ? "pig-reapeard" : "pig-disapeard"
         }`}
         css={css`
+          color: #ffffee;
+
           @media screen and (min-width: 918px) {
             /* padding-top: calc(38px + 58px); */
 
@@ -152,7 +154,7 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
             }
 
             & strong {
-              color: #a16fc2;
+              color: #bb99d1;
             }
           }
         `}
