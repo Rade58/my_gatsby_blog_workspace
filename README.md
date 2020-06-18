@@ -15,3 +15,5 @@
 ***
 
 STO SE TICE FONT-OVA MISLIM DA CU MORATI DA KORISTIM <https://www.digitalocean.com/community/tutorials/gatsbyjs-custom-fonts-in-gatsby>
+
+ALI SAM IPAK OVDE: `NOTABLE.md` **OBJASNIO KAK OSAM IMPLEMENTIRAO FONT-OVE**

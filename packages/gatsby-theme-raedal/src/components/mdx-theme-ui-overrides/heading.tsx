@@ -123,7 +123,11 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
 
         & h2 {
           font-weight: 200;
-          font-size: 28px;
+          font-size: 30px;
+
+          @media screen and (max-width: 918px) {
+            font-size: 24px;
+          }
 
           margin-left: 2rem;
           /* color: blanchedalmond; */

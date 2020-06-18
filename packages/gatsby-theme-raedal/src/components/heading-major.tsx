@@ -54,7 +54,7 @@ const HeadingMajor: FunctionComponent = () => {
 
             &:hover {
               /* text-decoration-line: underline; */
-              background-color: ${groupColor};
+              background-color: #a2cf6760;
               color: white;
             }
             &::after {
