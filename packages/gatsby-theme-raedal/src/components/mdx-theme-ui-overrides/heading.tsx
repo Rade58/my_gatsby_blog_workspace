@@ -169,11 +169,12 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
 
         &.pdapear {
           padding-top: 12px;
+          margin-top: 47px;
         }
 
         border: tomato solid 0px;
 
-        transition-property: margin-top;
+        /* transition-property: margin-top; */
         transition-duration: 4s;
 
         display: flex;
