@@ -425,6 +425,14 @@ const Code: FunctionComponent<{
                 cursor: default;
 
                 &:hover {
+                  background-image: linear-gradient(
+                    90deg,
+                    rgba(99, 117, 120, 1) 18%,
+                    rgba(107, 110, 149, 1) 100%
+                  );
+                }
+
+                &:active {
                 }
               }
             `}
