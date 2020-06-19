@@ -329,16 +329,34 @@ const Code: FunctionComponent<{
           <div
             className="pathnlang"
             css={css`
-              border: pink solid 1px;
+              border: pink solid 0px;
+
+              box-shadow: 0 0px 31.6px -96px rgba(0, 0, 0, 0.245),
+                0 0px 50.7px -96px rgba(0, 0, 0, 0.351),
+                0 0px 70.3px -96px rgba(0, 0, 0, 0.439),
+                0 0px 106.2px -96px rgba(0, 0, 0, 0.545),
+                0 0px 159px -96px rgba(0, 0, 0, 0.79);
+
               display: flex;
               flex-wrap: wrap;
 
+              border-top-left-radius: 8px;
+              border-top-right-radius: 8px;
+
+              background-image: linear-gradient(
+                90deg,
+                rgba(93, 85, 82, 1) 4%,
+                rgba(51, 52, 61, 1) 100%
+              );
+
               [data-language] {
-                border: red solid 1px;
+                border: red solid 0px;
 
                 &::before {
+                  color: blanchedalmond;
                   content: attr(data-language);
                   display: inline-block;
+                  padding-left: 0.8em;
                 }
               }
 
@@ -350,8 +368,10 @@ const Code: FunctionComponent<{
                   /* position: absolute; */
                   /* top: 0; */
                   /* right: 0; */
-                  color: crimson;
-                  background-color: white;
+                  color: #eb8da4;
+                  /* background-color: white; */
+
+                  margin-right: 0.8em;
                 }
               }
 
@@ -385,9 +405,16 @@ const Code: FunctionComponent<{
                 font-size: 14px;
               }
 
+              box-shadow: 0 8.6px 18.1px -82px rgba(0, 0, 0, 0.049),
+                0 20.2px 31.6px -82px rgba(0, 0, 0, 0.07),
+                0 40.9px 45.6px -82px rgba(0, 0, 0, 0.091),
+                0 101px 96px -82px rgba(0, 0, 0, 0.14);
+
               font-size: 12px;
 
               font-family: "Fira Code", monospace, "monospace";
+
+              margin-top: 0px;
 
               span.token.comment {
                 font-style: italic;

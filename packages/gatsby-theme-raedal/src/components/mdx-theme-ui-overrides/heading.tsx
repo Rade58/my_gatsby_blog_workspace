@@ -240,10 +240,11 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
               content: "🔗";
               font-size: 1.4rem;
               position: absolute;
-              /* top: 8px; */
+              top: -0px;
               left: -28px;
               color: ${groupColor};
               opacity: 1;
+              font-size: 0.8em;
             }
           }
 
