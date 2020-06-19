@@ -358,6 +358,12 @@ const Code: FunctionComponent<{
                   display: inline-block;
                   padding-left: 0.8em;
                 }
+
+                @media screen and (max-width: 718px) {
+                  &::before {
+                    font-size: 0.8em;
+                  }
+                }
               }
 
               [data-code-path] {
@@ -372,6 +378,12 @@ const Code: FunctionComponent<{
                   /* background-color: white; */
 
                   margin-right: 0.8em;
+                }
+
+                @media screen and (max-width: 718px) {
+                  &::after {
+                    font-size: 0.8em;
+                  }
                 }
               }
 
