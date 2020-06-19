@@ -405,8 +405,8 @@ const Code: FunctionComponent<{
                 border: tomato solid 0px;
                 border-radius: 4px;
                 z-index: 1;
-                top: 30.8px;
-                right: 6px;
+                top: 33.8px;
+                right: 9.8px;
                 padding: 2.8px 6px;
                 font-size: 14px;
                 background-color: rgb(99, 117, 120);
@@ -423,16 +423,24 @@ const Code: FunctionComponent<{
 
                 user-select: none;
                 cursor: default;
+                color: black;
 
                 &:hover {
                   background-image: linear-gradient(
                     90deg,
-                    rgba(99, 117, 120, 1) 18%,
-                    rgba(107, 110, 149, 1) 100%
+                    rgba(33, 14, 30, 1) 18%,
+                    rgba(26, 32, 33, 1) 100%
                   );
+                  color: blanchedalmond;
                 }
 
                 &:active {
+                  background-image: linear-gradient(
+                    90deg,
+                    rgba(33, 14, 30, 1) 18%,
+                    rgba(26, 32, 33, 1) 100%
+                  );
+                  color: blanchedalmond;
                 }
               }
             `}
