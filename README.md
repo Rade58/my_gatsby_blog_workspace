@@ -11,3 +11,9 @@ PRATICU OVAJ TUTORIJAL
 <https://www.w3schools.com/howto/howto_js_copy_clipboard.asp>
 
 MISLIM DA CU MORATI DA KORISTIM REFS
+
+USTVARI NAJVAZNIJE STA SAM KORISTIO BIO JE `navigator.clipboard.copyText()`
+
+I TU SAM STAVLJAO ONO STO JE VREDNSOT **`codeString`**-A
+
+POGLEDAJ I SAM KAK OSAM TO URADIO

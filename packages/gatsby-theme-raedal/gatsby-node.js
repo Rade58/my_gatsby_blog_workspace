@@ -541,7 +541,7 @@ exports.createResolvers = ({ createResolvers }) => {
     AuthorPage: {
       lastTenPosts: {
         type: "[OneOfLastTenPosts]!",
-        resolve: async (source, args, context, next) => {
+        resolve: async (source, args, context, info) => {
           const { authorID } = source;
 
           const resultArrayBlogPost = await context.nodeModel.runQuery({
@@ -650,7 +650,7 @@ exports.createResolvers = ({ createResolvers }) => {
 
       authorImage: {
         type: "AuthorImage",
-        resolve: async (source, args, context, next) => {
+        resolve: async (source, args, context, info) => {
           // let blah;
 
           const { authorID: name } = source;
@@ -689,7 +689,7 @@ exports.createResolvers = ({ createResolvers }) => {
       },
       authorPlaceholderSvg: {
         type: "AuthorImage!",
-        resolve: async (source, args, context, next) => {
+        resolve: async (source, args, context, info) => {
           // console.log("QUERY EXECUTED!!!");
 
           const name = "author_placeholder";
@@ -741,7 +741,7 @@ exports.createResolvers = ({ createResolvers }) => {
       // === !== === !== === !== === !==
       prevAndNextPagePath: {
         type: "PrevAndNextPagePath!",
-        resolve: async (source, args, context, next) => {
+        resolve: async (source, args, context, info) => {
           const { groupPage, ordinalG } = source;
           const { name } = groupPage;
 
@@ -899,7 +899,7 @@ exports.createResolvers = ({ createResolvers }) => {
       // === !== author=== !== ===
       author: {
         type: "AuthorPage",
-        resolve: async (source, args, context, next) => {
+        resolve: async (source, args, context, info) => {
           const { author } = source;
 
           const resultArray = await context.nodeModel.runQuery({
@@ -1062,7 +1062,7 @@ exports.createResolvers = ({ createResolvers }) => {
     SocialMedia: {
       icon: {
         type: "AuthorImage!",
-        resolve: async (source, args, context, next) => {
+        resolve: async (source, args, context, info) => {
           const { network } = source;
 
           const resultArray = await context.nodeModel.runQuery({

@@ -440,11 +440,17 @@ const Code: FunctionComponent<{
               tabIndex={0}
               onClick={() => {
                 if (preRef.current) {
-                  console.log(preRef.current);
+                  // console.log(preRef.current);
+
+                  navigator.clipboard.writeText(codeString);
                 }
               }}
               onKeyPress={() => {
-                console.log("blah");
+                if (preRef.current) {
+                  // console.log(preRef.current);
+
+                  navigator.clipboard.writeText(codeString);
+                }
               }}
               role="button"
               aria-label="copy from code block"
