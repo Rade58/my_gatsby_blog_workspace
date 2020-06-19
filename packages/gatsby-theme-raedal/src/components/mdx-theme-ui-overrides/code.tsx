@@ -9,6 +9,7 @@ import {
   FunctionComponent,
   ReactNode,
   useEffect,
+  useRef,
 } from "react";
 
 // EVO UVEZAO SAM LOADABLE
@@ -139,8 +140,12 @@ const Code: FunctionComponent<{
 
   const codeProps = preToCodeBlock(props);
 
+  // === !== pre REF === !== ===
+  const preRef = useRef<HTMLPreElement>(null);
+  // ===========================
+
   if (!codeProps) {
-    return <pre {...props} />;
+    return <pre {...props} ref={preRef} />;
   }
 
   const { codeString, language } = codeProps;
@@ -331,6 +336,8 @@ const Code: FunctionComponent<{
             css={css`
               border: pink solid 0px;
 
+              position: relative;
+
               box-shadow: 0 0px 31.6px -96px rgba(0, 0, 0, 0.245),
                 0 0px 50.7px -96px rgba(0, 0, 0, 0.351),
                 0 0px 70.3px -96px rgba(0, 0, 0, 0.439),
@@ -392,6 +399,34 @@ const Code: FunctionComponent<{
                   display: none;
                 }
               }
+
+              & div.copy-button {
+                position: absolute;
+                border: tomato solid 0px;
+                border-radius: 4px;
+                z-index: 1;
+                top: 30.8px;
+                right: 6px;
+                padding: 2.8px 6px;
+                font-size: 14px;
+                background-color: rgb(99, 117, 120);
+                background-image: linear-gradient(
+                  90deg,
+                  rgba(107, 110, 149, 1) 18%,
+                  rgba(99, 117, 120, 1) 100%
+                );
+                box-shadow: 0 2.9px 47.5px -35px rgba(0, 0, 0, 0.08),
+                  0 7.4px 80.6px -35px rgba(0, 0, 0, 0.04),
+                  0 15.1px 104px -35px rgba(0, 0, 0, 0.035),
+                  0 31px 129.8px -35px rgba(0, 0, 0, 0.03),
+                  0 85px 232px -35px rgba(0, 0, 0, 0.02);
+
+                user-select: none;
+                cursor: default;
+
+                &:hover {
+                }
+              }
             `}
           >
             <div data-language={`${nolang(language) ? "" : language}`} />
@@ -400,9 +435,26 @@ const Code: FunctionComponent<{
                 takeCodePath(metastring) ? takeCodePath(metastring) : 0
               }`}
             />
+            <div
+              className="copy-button"
+              tabIndex={0}
+              onClick={() => {
+                if (preRef.current) {
+                  console.log(preRef.current);
+                }
+              }}
+              onKeyPress={() => {
+                console.log("blah");
+              }}
+              role="button"
+              aria-label="copy from code block"
+            >
+              Copy
+            </div>
           </div>
           {/* === !== === !== === !== === !== === !== === !== === !== === !==  */}
           <pre
+            ref={preRef}
             className={className}
             style={style}
             sx={{
@@ -416,6 +468,8 @@ const Code: FunctionComponent<{
               @media screen and (min-width: 918px) {
                 font-size: 14px;
               }
+
+              position: relative;
 
               box-shadow: 0 8.6px 18.1px -82px rgba(0, 0, 0, 0.049),
                 0 20.2px 31.6px -82px rgba(0, 0, 0, 0.07),
