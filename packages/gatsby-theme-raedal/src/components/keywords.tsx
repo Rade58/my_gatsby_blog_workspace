@@ -34,16 +34,27 @@ const Keywords: FunctionComponent = () => {
       className="keywords"
       css={css`
 
-box-shadow:
-  0 3.1px 7.7px -28px rgba(0, 0, 0, 0.091),
-  0 5.8px 19.5px -28px rgba(0, 0, 0, 0.132),
-  0 8.1px 36.4px -28px rgba(0, 0, 0, 0.163),
-  0 10px 59.4px -28px rgba(0, 0, 0, 0.19),
-  0 11.6px 89.3px -28px rgba(0, 0, 0, 0.217),
-  0 13.2px 124.4px -28px rgba(0, 0, 0, 0.248),
-  0 15.4px 157.5px -28px rgba(0, 0, 0, 0.289),
-  0 19px 179px -28px rgba(0, 0, 0, 0.38)
-;
+/*       box-shadow:
+        0 3.1px 7.7px -28px rgba(0, 0, 0, 0.091),
+        0 5.8px 19.5px -28px rgba(0, 0, 0, 0.132),
+        0 8.1px 36.4px -28px rgba(0, 0, 0, 0.163),
+        0 10px 59.4px -28px rgba(0, 0, 0, 0.19),
+        0 11.6px 89.3px -28px rgba(0, 0, 0, 0.217),
+        0 13.2px 124.4px -28px rgba(0, 0, 0, 0.248),
+        0 15.4px 157.5px -28px rgba(0, 0, 0, 0.289),
+        0 19px 179px -28px rgba(0, 0, 0, 0.38)
+      ; */
+
+      box-shadow:
+          0 -1.3px 6.2px rgba(0, 0, 0, 0.093),
+          0 -0.9px 14px rgba(0, 0, 0, 0.134),
+          0 2.2px 26.8px rgba(0, 0, 0, 0.166),
+          0 9px 52.3px rgba(0, 0, 0, 0.194),
+          0 21.9px 64.7px rgba(0, 0, 0, 0.226),
+          0 46.8px 73.1px rgba(0, 0, 0, 0.267),
+          0 100px 80px rgba(0, 0, 0, 0.36)
+          ;
+
 
       border-radius: 8px;
 
