@@ -10,6 +10,7 @@ import {
   ReactNode,
   useEffect,
   useRef,
+  useCallback,
 } from "react";
 
 // EVO UVEZAO SAM LOADABLE
@@ -143,10 +144,6 @@ const Code: FunctionComponent<{
   // === !== pre REF === !== ===
   const preRef = useRef<HTMLPreElement>(null);
   // ===========================
-
-  useEffect(() => {
-    console.log(preRef.current);
-  }, [preRef]);
 
   if (!codeProps) {
     return <pre {...props} ref={preRef} />;
@@ -295,6 +292,31 @@ const Code: FunctionComponent<{
         //  EVO TI CES OVDE UPRAVO KORISTII VARIANT KOJI SE ZOVE
         // prism-highlight (OVO SAM REKAO DAVNO RANIJE)
         <div
+          onKeyDown={(e) => {
+            const left = 37;
+            const right = 39;
+            const preEl = (e.target as HTMLDivElement).querySelector("pre");
+
+            if (preEl?.offsetWidth !== preEl?.scrollWidth) {
+              if (e.keyCode === left) {
+                // console.log(preEl);
+
+                preEl?.scrollBy(-10, 0);
+              }
+
+              if (e.keyCode === right) {
+                // console.log(preEl);
+
+                console.log(preEl?.offsetWidth);
+
+                console.log(preEl?.scrollWidth);
+
+                preEl?.scrollBy(10, 0);
+              }
+            }
+          }}
+          tabIndex={0}
+          role="button"
           className="language-styles"
           css={css`
             /* CISTO DA ZNAS DA TI SE SLEDECE NALAZI  U     packages/gatsby-theme-raedal/src/components/layout.tsx    (U GLOBAL STILOVIMA)  */
@@ -308,6 +330,8 @@ const Code: FunctionComponent<{
             }*/
             /*  JER IZ NEKOG RAZLOGA KADA GA DEFINISEM OVDE NE RADI  */
             /* --------------------------------------- */
+
+            outline: none;
 
             /* OVO CE BITI KLASA KOJA HIGHLIGHT-UJE SPECIFIC LINE */
             .highlight-specific-line {
@@ -461,7 +485,7 @@ const Code: FunctionComponent<{
               onClick={() => {
                 if (preRef.current) {
                   // console.log(preRef.current);
-
+                  console.log(preRef.current);
                   navigator.clipboard.writeText(codeString);
                 }
               }}
