@@ -46,7 +46,7 @@ import preToCodeBlock from "../../utility/preToCodeBlock";
 import { $_useBlogPostReducerState } from "../../context_n_reducers/context_n_reducer_blog_post"; */
 
 // === !===
-console.log(theme);
+// console.log(theme);
 
 // === !===
 
@@ -307,9 +307,9 @@ const Code: FunctionComponent<{
               if (e.keyCode === right) {
                 // console.log(preEl);
 
-                console.log(preEl?.offsetWidth);
+                // console.log(preEl?.offsetWidth);
 
-                console.log(preEl?.scrollWidth);
+                // console.log(preEl?.scrollWidth);
 
                 preEl?.scrollBy(10, 0);
               }
@@ -485,7 +485,7 @@ const Code: FunctionComponent<{
               onClick={() => {
                 if (preRef.current) {
                   // console.log(preRef.current);
-                  console.log(preRef.current);
+                  // console.log(preRef.current);
                   navigator.clipboard.writeText(codeString);
                 }
               }}
@@ -510,7 +510,8 @@ const Code: FunctionComponent<{
             sx={{
               variant: "prism-highlight",
               p: 2,
-              overflowX: "scroll",
+              // overflowX: "scroll",
+              overflowX: "auto",
               /* fontSize: "12px;", */
               // wordSpacing: "0.3em",
             }}
