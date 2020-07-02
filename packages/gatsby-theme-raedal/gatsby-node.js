@@ -230,7 +230,7 @@ exports.createSchemaCustomization = ({ actions }) => {
 
       id: ID!
 
-      authorID: ID!
+      authorID: String!
       authorName: String!
 
       path: String!
@@ -1269,7 +1269,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   // === !==  MAKING AUTHOR PAGES === !== ===
 
   const authorsOb = await graphql(`
-    query {
+    query TakeAuthorsNodes {
       authors: allAuthorPage {
         nodes {
           id
@@ -1278,6 +1278,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       }
     }
   `);
+
+  console.log(JSON.stringify(authorsOb, null, 2));
 
   if (authorsOb.errors) {
     reporter.panic(

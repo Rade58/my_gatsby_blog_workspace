@@ -144,6 +144,10 @@ const Code: FunctionComponent<{
   const preRef = useRef<HTMLPreElement>(null);
   // ===========================
 
+  useEffect(() => {
+    console.log(preRef.current);
+  }, [preRef]);
+
   if (!codeProps) {
     return <pre {...props} ref={preRef} />;
   }
@@ -461,7 +465,7 @@ const Code: FunctionComponent<{
                   navigator.clipboard.writeText(codeString);
                 }
               }}
-              onKeyPress={() => {
+              onKeyPress={(e) => {
                 if (preRef.current) {
                   // console.log(preRef.current);
 
