@@ -27,7 +27,7 @@ import Heading from "./heading-major";
 
 // === !== === !== ===
 //
-import Hero from "./hero";
+// import Hero from "./hero";
 // === !== === !== ===
 
 import Code from "./mdx-theme-ui-overrides/code";
@@ -329,7 +329,7 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
         `}
       >
         <Heading />
-        <Hero />
+        {/* <Hero /> */}
         {/* <MDXRenderer>{body}</MDXRenderer> */}
         <MemoMdxRendererComponent />
       </article>

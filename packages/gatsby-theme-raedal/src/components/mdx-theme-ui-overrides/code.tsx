@@ -17,7 +17,7 @@ import {
 import loadable from "@loadable/component";
 //
 
-import theme from "prism-react-renderer/themes/oceanicNext";
+import theme from "prism-react-renderer/themes/palenight";
 
 // === !===
 
@@ -505,7 +505,7 @@ const Code: FunctionComponent<{
           {/* === !== === !== === !== === !== === !== === !== === !== === !==  */}
           <pre
             ref={preRef}
-            className={className}
+            className={`${className}`}
             style={style}
             sx={{
               variant: "prism-highlight",

@@ -25,13 +25,14 @@ const Hero: FunctionComponent<{ hero?: IFluidObject }> = (props) => {
       className="hero-container"
       css={css`
         border: crimson solid 0px;
+        overflow: hidden;
       `}
     >
       {!hero ? (
         <div
           css={css`
             background-image: url(..${heroImage});
-            background-position-x: 40%;
+            background-position-x: 19%;
             background-position-y: 19%;
             background-repeat: no-repeat;
             background-size: 138%;
@@ -42,15 +43,19 @@ const Hero: FunctionComponent<{ hero?: IFluidObject }> = (props) => {
               0 7.6px 24.1px -23px rgba(0, 0, 0, 0.117),
               0 15px 80px -23px rgba(0, 0, 0, 0.18);
 
-            width: 100%;
+            width: 112%;
             height: 38vh;
             border: pink solid 0px;
 
             border-radius: 2px;
 
             margin-top: 2vh;
+
+            /* TRANSITION PROPERTIES */
           `}
-        />
+        >
+          Enum type in GraphQL
+        </div>
       ) : (
         <BackgroundGatsbyImage fluid={hero} Tag="div" />
       )}
