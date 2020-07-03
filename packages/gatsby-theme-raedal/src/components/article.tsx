@@ -24,9 +24,12 @@ import { blogPostContext } from "../context_n_reducers/context_n_reducer_blog_po
 
 // UVOZIM Heading KOMPONENTU
 import Heading from "./heading-major";
-//
 
 // === !== === !== ===
+//
+import Hero from "./hero";
+// === !== === !== ===
+
 import Code from "./mdx-theme-ui-overrides/code";
 
 import getHeading from "./mdx-theme-ui-overrides/heading";
@@ -326,6 +329,7 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
         `}
       >
         <Heading />
+        <Hero />
         {/* <MDXRenderer>{body}</MDXRenderer> */}
         <MemoMdxRendererComponent />
       </article>

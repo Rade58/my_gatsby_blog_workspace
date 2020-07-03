@@ -63,3 +63,13 @@ declare module "nothing";
  * @description OVO SU FONTOVI
  */
 declare module "*.ttf";
+
+/**
+ * @description jpg
+ */
+declare module "*.jpg";
+
+/**
+ * @description jpeg
+ */
+declare module "*.jpeg";
