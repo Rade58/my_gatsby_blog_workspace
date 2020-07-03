@@ -2,28 +2,4 @@
 
 MISLIM DA OVO MORAM DOSTA BOLJE DA OPTIMIZUJEM
 
-# DEVELOP-UJ KOMPONENTU, KOJOM CES PRIKAZIVATI HERO IMAGE
-
-***
-
-NA KRAJU SAM ODUSTAO OD OVOGA JER PRASE KA OSCROLL INDICATOR I JOS I SLIKA JE TOO MUCH
-
-***
-
-**DAKLE KORISTIM GATSBY IMAGE I KORISTIM CLOUDINARY**
-
-PODSETI SE OVOGA:
-
-<https://github.com/Rade58/intermediate-gatsby/tree/4_5_USING_THEMES_images_n_clodinary#sada-mozes-da-u-nekoj-komponenti-napravis-static-query-i-da-pull-ujes-in-image>
-
-JEDINO ME MUCI KAKO DA NAPRAVIM NESTO KAO PARALAX
-
-E NE MORAS KORISTI gatsby-image VEC MOZES KORISTITI gatsby-background-image
-
-<https://www.gatsbyjs.org/packages/gatsby-background-image/>
-
-# INSTALIRAJ GATSBY BACKGROUND IMAGE
-
-- `yarn workspace gatsby-theme-raedal add gatsby-background-image`
-
-# MORAM OPET PROSIRITI FRONTMATTER A S TIME I TYPESCRIPT STUFF
+VRATICU SE NA OVO KASNIJE JER ZELI MDA SE POZABAVIM SLIKAMA
