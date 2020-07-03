@@ -2,7 +2,7 @@
 import { jsx } from "theme-ui";
 import { css } from "@emotion/core";
 import { FunctionComponent, useCallback, useEffect, useState } from "react";
-import BackgroundImage, { IFluidObject } from "gatsby-background-image";
+import BackgroundGatsbyImage, { IFluidObject } from "gatsby-background-image";
 
 const Hero: FunctionComponent<{ hero?: IFluidObject }> = (props) => {
   const { hero } = props;
@@ -20,23 +20,41 @@ const Hero: FunctionComponent<{ hero?: IFluidObject }> = (props) => {
     loadImage();
   }, [loadImage]);
 
-  return !hero ? (
+  return (
     <div
+      className="hero-container"
       css={css`
-        width: 100%;
-        background-image: url(..${heroImage});
-        background-position-x: 19%;
-        background-position-y: 19%;
-        background-repeat: no-repeat;
-        background-size: 138%;
-        height: 38vh;
-        border: pink solid 0px;
-
-        margin-top: 2vh;
+        border: crimson solid 0px;
       `}
-    />
-  ) : (
-    <BackgroundImage fluid={hero} Tag="div" />
+    >
+      {!hero ? (
+        <div
+          css={css`
+            background-image: url(..${heroImage});
+            background-position-x: 40%;
+            background-position-y: 19%;
+            background-repeat: no-repeat;
+            background-size: 138%;
+            background-attachment: scroll;
+
+            box-shadow: 0 4.9px 3.6px -23px rgba(0, 0, 0, 0.063),
+              0 6.5px 10px -23px rgba(0, 0, 0, 0.09),
+              0 7.6px 24.1px -23px rgba(0, 0, 0, 0.117),
+              0 15px 80px -23px rgba(0, 0, 0, 0.18);
+
+            width: 100%;
+            height: 38vh;
+            border: pink solid 0px;
+
+            border-radius: 2px;
+
+            margin-top: 2vh;
+          `}
+        />
+      ) : (
+        <BackgroundGatsbyImage fluid={hero} Tag="div" />
+      )}
+    </div>
   );
 };
 
