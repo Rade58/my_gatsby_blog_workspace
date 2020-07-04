@@ -1227,27 +1227,50 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
           // === !==  EVO OVO JE RELATED ZA CLOUDINARY=== !== === cloudImagesArrayName  (ON CE BITI PROSLEDJENA QUERY VARIJABLA)
           // ISTO TAKO IZGLEDA DA FRAGMENT NE FUNKCIONISE
-          const cloudinaryAssets = await graphql(
-            `
-              query CloudImages($reg: String!) {
-                allFile(filter: { name: { regex: $reg } }) {
-                  nodes {
-                    childCloudinaryAsset {
-                      fluid {
-                        src
+          // ALI MORAM MODIFIKOVATI SEARCH PARAM
+
+          // OVDE CE USTVARI BITI DATA
+          let cloudinaryAssets;
+          // NECU DA RUNN-UJEM QUERY AKO SEARCH PARAMETAR JESTE PRAZAN STRING
+          if (!cloudImagesArrayName) {
+            cloudinaryAssets = { data: { allFile: { nodes: [] } } }; // PRAVIM OVAKVU STRUKTURU, JER CE MI BITI LAKSE DA ISKORITIM VREDNOST
+          } else {
+            cloudinaryAssets = await graphql(
+              `
+                query CloudImages($reg: String!) {
+                  allFile(filter: { name: { regex: $reg } }) {
+                    nodes {
+                      childCloudinaryAsset {
+                        fluid {
+                          aspectRatio
+                          base64
+                          sizes
+                          src
+                          srcSet
+                        }
                       }
                     }
                   }
                 }
-              }
-            `,
-            // MEDJUTIM MORACES KREIRATI STRING U REGEXP FORMATU
-            { reg: `/${cloudImagesArrayName}/` }
-          );
-          // === === ===
+              `,
+              // QUERY VARIABLE, KOJA MORA BITI STRING U OBLIKU REGEXP-A
+              { reg: `/${cloudImagesArrayName}/` }
+            );
+          }
+
+          // === !== ERROR HANDLING === !== ===
+          if (cloudinaryAssets.errors) {
+            reporter.panic(
+              "Something went wrong with QUERY FOR CLOUDINARY ASSETS",
+              cloudinaryAssets.errors
+            );
+          }
+          // === !== === !== ===
+
+          const cloudinaryArray = cloudinaryAssets.data.allFile.nodes;
 
           if (cloudinaryAssets) {
-            console.log(JSON.stringify(cloudinaryAssets, null, 2));
+            console.log(JSON.stringify(cloudinaryArray, null, 2));
           }
 
           actions.createPage({
