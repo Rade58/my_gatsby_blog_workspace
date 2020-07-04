@@ -81,3 +81,6 @@ packages/gatsby-theme-raedal/src/ICONS/svg
 # ENVIROMENT VARIABLES
 packages/gatsby-theme-raedal/.env.development
 sites/blog/.env.development
+
+# cloudinary assets
+sites/blog/cloud-images
