@@ -129,8 +129,64 @@ TREBA DA BUDE TYPED KAO `String` NARAVNO
 
 # :six: KADA SI TO URADIO MOZES PRI KREIRANJU BLOG POST PAGE-OVA, ODNONO PRE KREIRANJA, DA QUERY-UJES I ZA CLOUDINARY ASSETS
 
-**ALI GORNJI QUERY, KOJI SAM PREDSTAVIO JE NEPOVOLJAN, JER 'PRETRESA SVE FAJLOVE', JER KORISTIM allFile QUERY**
+**OVO MOZES POGLEDATI KAKO SAM URADIO**
 
-`MISLIM DA JE TO LOSE I DA TREBAM OSMISLITI NOVI QUERY`
+ISKORISTIO SAM VEC POSTOJECI QUERY, (ODNONO PROMISE KOJI JE TADA NASTAO) ZA ONIM HEADINGSIMA, PA SAM USTVARI U then-OV CALLBACK NACINIO ASYNC FUNKCIJOM, TAK ODA SAM MOGAO KORISTITI await I TAKO DA SAM MOGAO DA NA NAJLAKSI NACIN PROSLEDIM DATA U CONTEXT STRANICE
 
-PROBAJ TO DA URADIS PA STAMPAJ VREDNOST, AKO DOBIJES ARRAY KOJI NIJE PRAZAN
+EVO TI TACNO KAKAV SAM QUERY NAPRAVIO
+
+```js
+// OVO JE U OBIMU then-OVOG CALLBACK-A, KOJEG SAM UCINIO async FUNKCIJOM
+
+let cloudinaryAssets;
+          // NECU DA RUNN-UJEM QUERY AKO SEARCH PARAMETAR JESTE PRAZAN STRING
+if (!cloudImagesArrayName) {
+  cloudinaryAssets = { data: { allFile: { nodes: [] } } }; // PRAVIM OVAKVU STRUKTURU, JER CE MI BITI LAKSE DA ISKORITIM VREDNOST
+} else {
+  cloudinaryAssets = await graphql(
+    `
+      query CloudImages($reg: String!) {
+        allFile(filter: { name: { regex: $reg } }) {
+          nodes {
+            cloudinary: childCloudinaryAsset {
+              fluid {
+                aspectRatio
+                base64
+                sizes
+                src
+                srcSet
+              }
+            }
+          }
+        }
+      }
+    `,
+    // QUERY VARIABLE, KOJA MORA BITI STRING U OBLIKU REGEXP-A
+    { reg: `/${cloudImagesArrayName}/` }
+  );
+}
+
+// === !== ERROR HANDLING === !== ===
+if (cloudinaryAssets.errors) {
+  reporter.panic(
+    "Something went wrong with QUERY FOR CLOUDINARY ASSETS",
+    cloudinaryAssets.errors
+  );
+}
+// === !== === !== ===
+
+const cloudinaryArray = cloudinaryAssets.data.allFile.nodes;
+
+if (cloudinaryArray.length) {
+  console.log(JSON.stringify(cloudinaryArray, null, 2));
+}
+
+```
+
+# :seven: PRI KREIRANJU PAGE, U CONTEXT SAM PROSLEDIO GORNJI NIZ `cloudinaryArray`
+
+DAKLE SADA U CONTEXT-U IMAM PROPERTI KOJI IMA IME cloudinaryArray
+
+SADA BIH MOGAO DA SA FRONTEND CODE-A, DAKLE U BROWSERU STAMPAM OVAJ NIZM, KONKRETNO KADA POSETIM ONAJ PAGE, ZA KOJI SAM DEFINISAO SLIKE
+
+

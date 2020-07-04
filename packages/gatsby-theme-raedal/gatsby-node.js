@@ -1218,10 +1218,10 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           // ALI AKO POSTOJI    error     PROPERTI
           // TO ZNACI DA QUERY NIJE BIO USPESAN
 
-          if (queryResult.error) {
+          if (queryResult.errors) {
             reporter.panic(
               "Couldnt get headings for the current page",
-              queryResult.error
+              queryResult.errors
             );
           }
 
@@ -1240,7 +1240,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                 query CloudImages($reg: String!) {
                   allFile(filter: { name: { regex: $reg } }) {
                     nodes {
-                      childCloudinaryAsset {
+                      cloudinary: childCloudinaryAsset {
                         fluid {
                           aspectRatio
                           base64
@@ -1269,7 +1269,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
           const cloudinaryArray = cloudinaryAssets.data.allFile.nodes;
 
-          if (cloudinaryAssets) {
+          if (cloudinaryArray.length) {
             console.log(JSON.stringify(cloudinaryArray, null, 2));
           }
 
@@ -1282,6 +1282,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
               // (A OVO MI JE POTREBNO ZA LINK TAG
               // KOD LINKED HEADERS-A)
               relativeLink: path,
+              cloudinaryArray,
             },
             path,
             // component: componentPath,
