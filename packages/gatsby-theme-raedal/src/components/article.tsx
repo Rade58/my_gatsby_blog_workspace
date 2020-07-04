@@ -34,6 +34,10 @@ import Code from "./mdx-theme-ui-overrides/code";
 
 import getHeading from "./mdx-theme-ui-overrides/heading";
 
+// === !== === !== ===
+import CloudImage from "./mdx-theme-ui-overrides/cloud-image";
+// === !== === !== ===
+
 const H2Component: FunctionComponent<{ id: string }> = getHeading("h2");
 
 // === !== === !== ===
@@ -73,6 +77,7 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
       components={{
         pre: Code,
         h2: H2Component,
+        h5: CloudImage,
       }}
     >
       <article
