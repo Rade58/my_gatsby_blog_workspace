@@ -23,6 +23,9 @@ module.exports = ({
   keywordTextColor = "#fff",
   keywordBorderColor = "crimson",
   underlineColor = "olive",
+
+  // ARRAY SLIKA SA CLOUDINARY-JA
+  cloudImagesArrayName = "",
 }) => ({
   author,
   ordinalG,
@@ -46,4 +49,6 @@ module.exports = ({
   linkedin,
   youtube,
   personalWebsite,
+  //
+  cloudImagesArrayName,
 });

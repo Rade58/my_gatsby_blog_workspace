@@ -147,6 +147,8 @@ exports.createSchemaCustomization = ({ actions }) => {
   createTypes(`
     type BlogPostPage implements Node @dontInfer {
 
+      cloudImagesArrayName: String!
+
       author: AuthorPage
 
       ordinalG: Int!
@@ -347,6 +349,8 @@ exports.onCreateNode = (
     if (node.frontmatter.slug) slug = `/${node.frontmatter.slug}`;
 
     const {
+      // IZDVAJAM STRING
+      cloudImagesArrayName,
       //
       author,
       // IZDVAJAM       ordinalG
@@ -408,6 +412,11 @@ exports.onCreateNode = (
       // MISLIM DA TI VEC IMAS RESOLVER KOJI UPRAVO UZIMA GORNJI
       // group FIELD I SA NJEGA UZIMA STA MU TREBA DA BI QUERY-EOVAO
       // APROPRIATE GROUP PAGE
+
+      // SALJEM I FIELD, KOJI CE PREDSTAVLJATI QUERY PARAM ZA CLOUDINARY
+      // A SEARCH CU OBAVITI ILI PRI KREIRANJU PAGE-OVA ILI NAKON STO KREIRAM PAGE (JOS RAZMATRAM STA MOGU)
+
+      cloudImagesArrayName,
     });
 
     /////////////////////////////////////////////////////////////////
@@ -1143,12 +1152,18 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   // TO JE ZATO STO CU KASNIJE NA OSNOVU TOG id-JA JA USTVARI PRAVITI
   // QUERY ZA HEADINGSIMA
 
+  // === !== NOVO STA SAM DODAO === !==
+  // QUERY-UJEM SADA I ZA ONIM STRINGOM       cloudImagesArrayName
+  // === !== === !==
+
   const result = await graphql(`
     query MyPages {
       pages: allBlogPostPage {
         nodes {
           id
           path
+
+          cloudImagesArrayName
 
           parent {
             id
@@ -1177,7 +1192,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     const parentId = blogPost.parent.id;
 
     // console.log({ parentId });
-    const { id, path } = blogPost;
+    const { id, path, cloudImagesArrayName } = blogPost; // KAO STO VIDIS IZDVOJIO SAM I    cloudImagesArrayName
+
+    // CONVINIENTLY, QUERY ZA CLOUDINARY ASSET-OVIAM PRAVIM U DONJEM then-U
 
     arrayOfPromises.push(
       new Promise((res, rej) => {
@@ -1193,7 +1210,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             }
           `,
           { id: parentId } // EVO OVDE SAM PROSLEDIO QUERY VARIJABLU
-        ).then((queryResult) => {
+        ).then(async (queryResult) => {
+          // OVO MOZE BITI I ASYNC FUNKCIJA
           // ZNAS DA RESULTAT GRAPHQL QUERY-JA, UVEK POSTOJI
           // DAKLE ERROR INSTANCA NIKADA NIJE THROWN
 
@@ -1205,6 +1223,31 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
               "Couldnt get headings for the current page",
               queryResult.error
             );
+          }
+
+          // === !==  EVO OVO JE RELATED ZA CLOUDINARY=== !== === cloudImagesArrayName  (ON CE BITI PROSLEDJENA QUERY VARIJABLA)
+          // ISTO TAKO IZGLEDA DA FRAGMENT NE FUNKCIONISE
+          const cloudinaryAssets = await graphql(
+            `
+              query CloudImages($reg: String!) {
+                allFile(filter: { name: { regex: $reg } }) {
+                  nodes {
+                    childCloudinaryAsset {
+                      fluid {
+                        src
+                      }
+                    }
+                  }
+                }
+              }
+            `,
+            // MEDJUTIM MORACES KREIRATI STRING U REGEXP FORMATU
+            { reg: `/${cloudImagesArrayName}/` }
+          );
+          // === === ===
+
+          if (cloudinaryAssets) {
+            console.log(JSON.stringify(cloudinaryAssets, null, 2));
           }
 
           actions.createPage({
@@ -1279,7 +1322,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     }
   `);
 
-  console.log(JSON.stringify(authorsOb, null, 2));
+  // console.log(JSON.stringify(authorsOb, null, 2));
 
   if (authorsOb.errors) {
     reporter.panic(
