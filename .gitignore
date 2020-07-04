@@ -83,4 +83,4 @@ packages/gatsby-theme-raedal/.env.development
 sites/blog/.env.development
 
 # cloudinary assets
-sites/blog/cloud-images
+sites/blog/cloud-images/
