@@ -22,6 +22,7 @@ import {
   GroupPagePickedI,
   PrevAndNextPagePathI,
   AuthorI,
+  cloudinaryArrType,
 } from "../templates/blog-post-template"; // OVDE SAM SAMO UVEZAO TYPE ZA
 //                                                              groupPage  (TO JE ONAJ STO SAM SAMO PICK=OVAO STA M ITREBA, JER MI NE TREBA SVE)
 // UVOZIM DAKLE ONAJ VEZAN ZA KEYWORDS
@@ -45,6 +46,8 @@ interface PageProp extends SeoI {
   groupPage: GroupPagePickedI;
   allBlogKeywords: PageKeywords[]; // SAD SE MOZES VRATITI U TEMPLATE DA PROSLEDIS SVE STA TREBA,
   //                                  ZA OVU KOMPONENTU,  A VIDECES ERROR AKO TO NA URADIS JER NI JEDAN OD OFIELD-OVA NIJE OPTIONAL
+
+  cloudinaryArray: cloudinaryArrType;
 }
 
 // TI SI U OVOJ KOMPONENTI INDIREKTNO RENDER-OVAO     Helmet
@@ -74,6 +77,7 @@ const BlogPost: FunctionComponent<{
     allBlogKeywords,
     groupPage,
     author,
+    cloudinaryArray,
   },
 }) => {
   const {
@@ -94,6 +98,9 @@ const BlogPost: FunctionComponent<{
   return (
     <BlogPostStateProvider
       value={{
+        //
+        cloudinaryArray,
+        //
         body,
         author,
         prevAndNextPagePath,

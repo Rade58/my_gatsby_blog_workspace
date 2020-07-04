@@ -229,6 +229,7 @@ const BlogPostTemplate: FunctionComponent<BlogPostTemplateProps> = ({
         // POSTO SAM ZAVRSI OSA OVIM VREME JE DA PROSIRIM I CONTEXT TYPE-OVE
         // TAKODJE DA CONTEXT-U PROSLEDIM DEFAULT-OVE U SKLADU SA TI MTYPE-OVIMA
         author,
+        cloudinaryArray,
       }}
     />
   );

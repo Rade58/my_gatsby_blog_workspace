@@ -15,6 +15,8 @@ import {
   //
   PrevAndNextPagePathI,
   AuthorI,
+  //
+  cloudinaryArrType,
 } from "../templates/blog-post-template";
 import { PageKeywords } from "../templates/group-page-template";
 //
@@ -170,6 +172,9 @@ export interface ContextBlogPostStateI {
   updated: string;
   author: AuthorI;
   body: string;
+  //
+  cloudinaryArray: cloudinaryArrType;
+  //
 }
 
 // OVO JE SAMO DEFAULT STATE I REDUCER-A NEMA JOS
@@ -227,6 +232,14 @@ export const blogPostContext: Context<ContextBlogPostStateI> = createContext({
   ],
   author: { authorName: "", path: "" },
   body: "",
+  //
+  cloudinaryArray: [
+    {
+      cloudinary: {
+        fluid: { aspectRatio: 0, base64: "", sizes: "", src: "", srcSet: "" },
+      },
+    },
+  ],
 });
 
 // GOTO VO CES UVEK KORISTITI     useContext    HOOK
