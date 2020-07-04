@@ -40,9 +40,26 @@ export interface HeadingI {
 
 export type Headings = HeadingI[];
 
+// CLOUDINARY --------------
+export interface CloudinaryI {
+  cloudinary: {
+    fluid: {
+      aspectRatio: number;
+      base64: string;
+      sizes: string;
+      src: string;
+      srcSet: string;
+    };
+  };
+}
+
+export type cloudinaryArrType = CloudinaryI[];
+// --------------------------
+
 export interface PageContextI {
   headings: Headings;
   relativeLink: string;
+  cloudinaryArray: cloudinaryArrType;
 }
 
 export interface AuthorI {
@@ -166,7 +183,9 @@ const BlogPostTemplate: FunctionComponent<BlogPostTemplateProps> = ({
 
   // ZATO ZA SADA, SAMO IZDVAJAM     hedings  IZ   pageContext-A
 
-  const { headings, relativeLink } = pageContext;
+  const { headings, relativeLink, cloudinaryArray } = pageContext;
+
+  console.log(cloudinaryArray);
 
   // IZDVOJICU I      groupPage      I          allBlogKeywords
 

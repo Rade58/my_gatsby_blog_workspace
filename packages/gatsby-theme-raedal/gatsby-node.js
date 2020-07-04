@@ -1282,6 +1282,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
               // (A OVO MI JE POTREBNO ZA LINK TAG
               // KOD LINKED HEADERS-A)
               relativeLink: path,
+              // DODAO SAM I NIZ, U KOJEM TREBA DA BUDU SLIKE SA CLOUDINARY-JA
               cloudinaryArray,
             },
             path,
