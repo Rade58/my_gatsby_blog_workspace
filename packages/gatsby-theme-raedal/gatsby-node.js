@@ -578,7 +578,7 @@ exports.createResolvers = ({ createResolvers }) => {
 
           const arrayOfPromises = [];
 
-          if (resultArrayBlogPost.length) {
+          if (resultArrayBlogPost && resultArrayBlogPost.length) {
             for (let i = 0; i < 10; i += 1) {
               const {
                 groupPage,
