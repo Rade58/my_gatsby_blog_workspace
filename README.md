@@ -46,4 +46,11 @@ USPEO SAM I SAMO JE POTREBNO **ODCOMMENT**-OVATI SLEDECU USLOVNU IZJAVU U `packa
 
 ```
 
+**I NAJVECA STVAR JE DA DEINSTALIRAS TRANSFORMER-A**
+
+- `yarn workspace gatsby-theme-raedal remove gatsby-transformer-cloudinary`
+
 ***
+
+SADA MZOES DA SE VRATIS DEVELOPMENTU BEZ CLOUDINARY-JA
+
