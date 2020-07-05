@@ -16,6 +16,18 @@ const withDefaults = require("./utility/utility-options"); // DEFAULTS SU
 const withFrontmatterDefaults = require("./utility/utility-site-metadata"); // (ONO STO SE SERVIRA ZA DEFAULT ZA FIELD frontMatter KOJI SAM KREIRAO)
 //
 
+///////////////////////////
+// DEFINISANJE FOLDERA ZA KOMPONENTE KOJE MOGU UVOZITI NA NIVOU SITE-A
+// MISLIM DA OVO NIJE USPELO, A MOZDA JA OVO I POGRESNO DEFINISEM
+/* exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    resolve: {
+      modules: [pathPackage.resolve(__dirname, "src"), "node_modules"],
+    },
+  });
+}; */
+///////////////////////////
+
 exports.onPreBootstrap = ({ store }, options) => {
   const { program } = store.getState();
 
@@ -1367,3 +1379,5 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     });
   }
 };
+
+// === !== === !== === !== ===
