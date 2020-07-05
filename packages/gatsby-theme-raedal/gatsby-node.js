@@ -1242,9 +1242,11 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           // ALI MORAM MODIFIKOVATI SEARCH PARAM
 
           // OVDE CE USTVARI BITI DATA
-          let cloudinaryAssets;
+          const cloudinaryAssets = { data: { allFile: { nodes: [] } } }; // LAKSE JE OVAKO DA COMMENT-UJEM OUT SLEDECI CODE
           // NECU DA RUNN-UJEM QUERY AKO SEARCH PARAMETAR JESTE PRAZAN STRING
-          if (!cloudImagesArrayName) {
+
+          // SAM OTREBAS OVO DA ODCOMMENT-UJES OUT KADA ZELIS DA KORISTIS CLOUDINARY
+          /* if (!cloudImagesArrayName) {
             cloudinaryAssets = { data: { allFile: { nodes: [] } } }; // PRAVIM OVAKVU STRUKTURU, JER CE MI BITI LAKSE DA ISKORITIM VREDNOST
           } else {
             cloudinaryAssets = await graphql(
@@ -1269,13 +1271,15 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
               { reg: `/${cloudImagesArrayName}/` }
             );
           }
-
+ */
           // === !== ERROR HANDLING === !== ===
           if (cloudinaryAssets.errors) {
             reporter.panic(
               "Something went wrong with QUERY FOR CLOUDINARY ASSETS",
               cloudinaryAssets.errors
             );
+
+            // cloudinaryAssets = { data: { allFile: { nodes: [] } } };
           }
           // === !== === !== ===
 

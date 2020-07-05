@@ -8,9 +8,9 @@ const withDefaults = require("./utility/utility-options"); // DEFAULTS SU
 // === !== === !== === !== SAMO PRIVREMENO COMMENTED OUT
 // ENVIROMENT STUFF   ///////////////////////
 
-require("dotenv").config({
+/* require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
-});
+}); */
 // === !== === !== === !== === !== === !==
 //////////////////////////////////////////
 
@@ -49,7 +49,7 @@ module.exports = (options) => {
       },
       // === !== === !==   OVO JE DOBRO MESTO ZA KONFIGURIRANJE     ****    CLOUDINARY-JA   ****   === !== === !==
       // === !== === !== === !== === !== === !== PRIVREMENO COMMENTED OUT === !== === !== === !==
-      {
+      /* {
         resolve: "gatsby-source-filesystem",
         options: {
           name: "cloud-assets",
@@ -66,7 +66,7 @@ module.exports = (options) => {
           // A IME FOLDER NA CLOUD-U MOZE BITI RANDOM
           uploadFolder: "raedal-blog",
         },
-      },
+      }, */
       // === !== === !==  === !== === !== === !== === !== === !== === !== === !== === !==
       // === !== === !== === !== === !== === !== === !== === !== === !== === !== === !==
       // OVIM ZELIM DA LOAD-UJEM SVE MOGUCE IKONICE VEZANE ZA SITE, ODNOSNO DEVICONS-E
