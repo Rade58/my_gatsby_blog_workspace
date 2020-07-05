@@ -1,17 +1,26 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui";
-import { FunctionComponent } from "react";
+import { FunctionComponent, useContext } from "react";
+import GatsbyImage, { FluidObject } from "gatsby-image";
+import { $_useBlogPostReducerState } from "../../context_n_reducers/context_n_reducer_blog_post";
 
-const CloudImage: FunctionComponent<{ metastring: string }> = (props) => {
-  const { metastring } = props;
+const CloudImage: FunctionComponent = (props) => {
+  const { children } = props;
 
-  console.log({ props }); // NEMA METASTRINGA ALI IMA ID ZATO STO JE HEADER
+  const imageNumber = parseInt(children as string, 10);
 
-  // ALI VAZNIJE JE DA IMA CHILDREN
+  const { blogPostContext } = $_useBlogPostReducerState;
 
-  // ALI ZASTO NE BIH RENDER-OVAO CUSTOM KOMPONENTU, SA NUMERACIJAM, BEZ DA OVERIDE-UJEM BILO STA
+  const { cloudinaryArray } = useContext(blogPostContext);
 
-  return <h6>Nesto</h6>;
+  console.log(imageNumber);
+
+  return (
+    <GatsbyImage
+      fluid={cloudinaryArray[imageNumber].cloudinary.fluid}
+      alt="cloud image"
+    />
+  );
 };
 
 export default CloudImage;
