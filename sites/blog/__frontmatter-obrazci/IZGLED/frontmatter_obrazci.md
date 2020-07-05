@@ -9,6 +9,7 @@ lang: "en"
 themeColor: "blanchedalmond"
 slug: graphql/client side/intro
 group: GraphQL
+cloudImagesArrayName: "IME KOJE CE BITI U IMENIMA SLIKA KARAKTERISTICNIM ZA PAGE"
 ---
 
 # ZA GROUP

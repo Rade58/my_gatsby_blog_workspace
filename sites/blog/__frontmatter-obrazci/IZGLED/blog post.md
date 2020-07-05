@@ -10,4 +10,5 @@ lang: "en"
 themeColor: "#356192"
 slug: typescript/intro
 group: GraphQL
+cloudImagesArrayName: "IME KOJE CE BITI U IMENIMA SLIKA KARAKTERISTICNIM ZA PAGE"
 ---

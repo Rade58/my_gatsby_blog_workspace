@@ -578,94 +578,97 @@ exports.createResolvers = ({ createResolvers }) => {
 
           const arrayOfPromises = [];
 
-          for (let i = 0; i < 10; i += 1) {
-            const {
-              groupPage,
-              frontMatter,
-              createdAt,
-              updated,
-              path,
-              title,
-            } = resultArrayBlogPost[i]; // NE ZABORAVI DA JE OVO NIZ
-            const { name: groupPageName } = groupPage;
+          if (resultArrayBlogPost.length) {
+            for (let i = 0; i < 10; i += 1) {
+              const {
+                groupPage,
+                frontMatter,
+                createdAt,
+                updated,
+                path,
+                title,
+              } = resultArrayBlogPost[i]; // NE ZABORAVI DA JE OVO NIZ
+              const { name: groupPageName } = groupPage;
 
-            const { description, themeColor } = frontMatter;
+              const { description, themeColor } = frontMatter;
 
-            arrayOfPromises.push(
-              new Promise((res, rej) => {
-                context.nodeModel
-                  .runQuery({
-                    type: "GroupPage",
-                    query: {
-                      filter: {
-                        name: { eq: groupPageName },
-                      },
-                    },
-                  })
-                  .then(async (groupPageResultArray) => {
-                    // MORAM DA PRAVI MDODADATNI QUERY ZATO JE then-OV CALLBACK ASYNC, JER CU KORISTITI  await
-                    const {
-                      path: groupPath,
-                      name,
-                      icon: iconName,
-                      underlineColor,
-                    } = groupPageResultArray[0]; // NIKAD NE ZABORAVI DA NAZAD DOBIJAS NIZ
-
-                    const iconNameArgument = iconName.toLowerCase();
-
-                    const iconArray = await context.nodeModel.runQuery({
-                      type: "File",
+              arrayOfPromises.push(
+                new Promise((res, rej) => {
+                  context.nodeModel
+                    .runQuery({
+                      type: "GroupPage",
                       query: {
                         filter: {
-                          sourceInstanceName: { eq: "devicons-raedal" },
-                          name: { eq: iconNameArgument },
+                          name: { eq: groupPageName },
                         },
                       },
-                    });
-
-                    // ALI NE SAM OTO, MORACU DA CITAM FAJL
-
-                    const { absolutePath } = iconArray[0]; // I OPET PONAVLJAM NE ZABORAVI DA JE OVO NIZ
-
-                    let base64ValueIcon;
-
-                    await new Promise((resolve, reject) => {
-                      fs.readFile(
-                        absolutePath,
-                        { encoding: "base64" },
-                        (error, result) => {
-                          if (error) return reject(error);
-
-                          base64ValueIcon = result;
-
-                          return resolve();
-                        }
-                      );
-                    });
-
-                    return res({
-                      group: {
+                    })
+                    .then(async (groupPageResultArray) => {
+                      // MORAM DA PRAVI MDODADATNI QUERY ZATO JE then-OV CALLBACK ASYNC, JER CU KORISTITI  await
+                      const {
                         path: groupPath,
                         name,
-                        icon: base64ValueIcon,
+                        icon: iconName,
                         underlineColor,
-                      },
-                      description,
-                      themeColor,
-                      createdAt,
-                      updated,
-                      path,
-                      title,
-                    });
-                  })
-                  .catch((error) => rej(error));
-              })
-            );
+                      } = groupPageResultArray[0]; // NIKAD NE ZABORAVI DA NAZAD DOBIJAS NIZ
+
+                      const iconNameArgument = iconName.toLowerCase();
+
+                      const iconArray = await context.nodeModel.runQuery({
+                        type: "File",
+                        query: {
+                          filter: {
+                            sourceInstanceName: { eq: "devicons-raedal" },
+                            name: { eq: iconNameArgument },
+                          },
+                        },
+                      });
+
+                      // ALI NE SAM OTO, MORACU DA CITAM FAJL
+
+                      const { absolutePath } = iconArray[0]; // I OPET PONAVLJAM NE ZABORAVI DA JE OVO NIZ
+
+                      let base64ValueIcon;
+
+                      await new Promise((resolve, reject) => {
+                        fs.readFile(
+                          absolutePath,
+                          { encoding: "base64" },
+                          (error, result) => {
+                            if (error) return reject(error);
+
+                            base64ValueIcon = result;
+
+                            return resolve();
+                          }
+                        );
+                      });
+
+                      return res({
+                        group: {
+                          path: groupPath,
+                          name,
+                          icon: base64ValueIcon,
+                          underlineColor,
+                        },
+                        description,
+                        themeColor,
+                        createdAt,
+                        updated,
+                        path,
+                        title,
+                      });
+                    })
+                    .catch((error) => rej(error));
+                })
+              );
+            }
+
+            return Promise.all(arrayOfPromises);
           }
 
+          return [];
           // console.log(arrayOfPromises);
-
-          return Promise.all(arrayOfPromises);
         },
       },
 
@@ -1374,14 +1377,26 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   const authors = authorsOb.data.authors.nodes;
 
+  const authorsPromises = [];
+
   // eslint-disable-next-line
   for (let author of authors) {
-    actions.createPage({
-      context: { id: author.id },
-      path: author.path,
-      component: require.resolve("./src/templates/author-page-template.tsx"),
-    });
+    authorsPromises.push(
+      new Promise((res, rej) => {
+        actions.createPage({
+          context: { id: author.id },
+          path: author.path,
+          component: require.resolve(
+            "./src/templates/author-page-template.tsx"
+          ),
+        });
+
+        res();
+      })
+    );
   }
+
+  await Promise.all(authorsPromises);
 };
 
 // === !== === !== === !== ===
