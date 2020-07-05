@@ -231,17 +231,51 @@ TO JE BILO OVDE:
 
 ***
 
-SADA IMAM NEKOLIKO PITANJA
+**ODLUCIO SAM DA OVERR-IDE-UJEM `h5` ELEMENT U MDXProvider-U**
 
-- KOJI ELEMENT IZ MDX-A UPOTREBITI KAKO BIH UMESTO MESTO NJEGA, JA RENDER-OVAO
+UMESTO h5 SERVIRAM `packages/gatsby-theme-raedal/src/components/mdx-theme-ui-overrides/cloud-image.tsx`
+
+```md
+<!-- UMESTO OVOGA -->
+##### 8
+
+<!-- SERVIRAM POMENUTU KOMPONENTU -->
+```
+
+OBRATI PAZNJU DA KADA DODAJES SLIKE DA IH NUMERISES OD 0 (NULE)
 
 ***
 
-##############
-############
-#########
-####
+# MISLIM DA MI QUERY NIJE U REDU, MORAM GA KORIGOVATTI ZBOG KVALITETA SLIKE
 
-USPEO SI DA DEFINISES TAK OSTO OVERRIDE-UJES h5
+POSTOJI JOS QUERY PARAMETARA KOJE SAM MOGAO DA UNESEM
 
-ALI ISPROBAJ DA SERVIRAS KOMPONENTU IZ static FOLDERA U MDX-U (NE JER JE static samo za slike i ostalo)
+KAO STO JE **`maxWidth`**
+
+ALI MORAM I DA PROSIRIM QUERY NA JOS VREDNOSTI, POGODNIH ZA FLUID OPTION GATSBY IMAGE-A (**NEMA DODATNIH FIELD-OVA KOJE BI MOGAO DA QUERY-UJEM**)
+
+MOJ QUERY U `packages/gatsby-theme-raedal/gatsby-node.js` IZGLEDA OVAKO (`createPages HOOK`)
+
+```php
+query CloudImages($reg: String!) {
+  allFile(filter: { name: { regex: $reg } }) {
+    nodes {
+      cloudinary: childCloudinaryAsset {
+        fluid(maxWidth: 1880) {
+          aspectRatio
+          base64
+          sizes
+          src
+          srcSet
+        }
+      }
+    }
+  }
+}
+```
+
+**I USPEO SAM**
+
+UVERI OSAM SE DA JE KVALITET SLIKE MNOGO BOLJI
+
+A PRI LOADING-U SLIKE PRIMECUJE SE ONAJ BLUR EFFECT

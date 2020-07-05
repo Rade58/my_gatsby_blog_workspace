@@ -1253,7 +1253,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                   allFile(filter: { name: { regex: $reg } }) {
                     nodes {
                       cloudinary: childCloudinaryAsset {
-                        fluid {
+                        fluid(maxWidth: 1880) {
                           aspectRatio
                           base64
                           sizes
