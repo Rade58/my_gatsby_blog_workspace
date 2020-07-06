@@ -104,6 +104,10 @@ const LastTenPosts: FunctionComponent<PropsLastTenPostsI> = (props) => {
                 text-decoration-line: underline;
                 text-decoration-color: blanchedalmond;
               }
+
+              @media screen and (max-width: 680px) {
+                text-decoration-line: underline;
+              }
             }
           }
 
@@ -138,6 +142,11 @@ const LastTenPosts: FunctionComponent<PropsLastTenPostsI> = (props) => {
               font-size: 0.85rem;
               text-decoration-line: underline;
               color: blanchedalmond;
+
+              @media screen and (max-width: 680px) {
+                text-decoration-line: none;
+                color: #e5979e;
+              }
             }
 
             & > div {
