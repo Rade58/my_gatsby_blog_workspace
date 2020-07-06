@@ -330,7 +330,7 @@ const Code: FunctionComponent<{
             }*/
             /*  JER IZ NEKOG RAZLOGA KADA GA DEFINISEM OVDE NE RADI  */
             /* --------------------------------------- */
-
+            margin-left: 8px;
             outline: none;
 
             /* OVO CE BITI KLASA KOJA HIGHLIGHT-UJE SPECIFIC LINE */
