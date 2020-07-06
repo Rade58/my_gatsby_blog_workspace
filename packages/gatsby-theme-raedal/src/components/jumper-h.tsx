@@ -285,7 +285,7 @@ box-shadow:
             border-radius: 14px;
 
             position: fixed;
-            bottom: 0;
+            bottom: 8px;
             right: 0;
             left: 85vw;
 
@@ -690,6 +690,13 @@ box-shadow:
           {/* === !== === !== === */}
         </div>
         <div
+          css={css`
+            border: crimson solid 0px;
+
+            @media screen and (max-width: 600px) {
+              margin-bottom: -6px;
+            }
+          `}
           className="scroll-to-top"
           role="button"
           tabIndex={0}

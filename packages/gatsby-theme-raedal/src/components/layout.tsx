@@ -178,8 +178,8 @@ const Layout: FunctionComponent<LayoutPropsI> = ({ body }) => {
               border: pink solid 0px;
 
               @media screen and (max-width: 648px) {
-                border: pink solid 1px;
-                padding: 18px;
+                border: pink solid 0px;
+                padding: 10px;
               }
 
               /* OBRATI PAZNJU DA KADA DODAS MARGINE, TI CES IMATO OVERFLOW SCROLL */
