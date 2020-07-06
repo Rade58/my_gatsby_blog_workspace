@@ -368,11 +368,11 @@ const Code: FunctionComponent<{
 
               position: relative;
 
-              box-shadow: 0 0px 31.6px -96px rgba(0, 0, 0, 0.245),
+              /* box-shadow: 0 0px 31.6px -96px rgba(0, 0, 0, 0.245),
                 0 0px 50.7px -96px rgba(0, 0, 0, 0.351),
                 0 0px 70.3px -96px rgba(0, 0, 0, 0.439),
                 0 0px 106.2px -96px rgba(0, 0, 0, 0.545),
-                0 0px 159px -96px rgba(0, 0, 0, 0.79);
+                0 0px 159px -96px rgba(0, 0, 0, 0.79); */
 
               display: flex;
               flex-wrap: wrap;
@@ -524,10 +524,11 @@ const Code: FunctionComponent<{
 
               position: relative;
 
-              box-shadow: 0 8.6px 18.1px -82px rgba(0, 0, 0, 0.049),
-                0 20.2px 31.6px -82px rgba(0, 0, 0, 0.07),
-                0 40.9px 45.6px -82px rgba(0, 0, 0, 0.091),
-                0 101px 96px -82px rgba(0, 0, 0, 0.14);
+              box-shadow: 0 0.5px 2.2px -15px rgba(0, 0, 0, 0.036),
+                0 1.4px 3.6px -15px rgba(0, 0, 0, 0.083),
+                0 2.8px 4.8px -15px rgba(0, 0, 0, 0.183),
+                0 5.8px 6.5px -15px rgba(0, 0, 0, 0.235),
+                0 16px 11px -15px rgba(0, 0, 0, 0.27);
 
               font-size: 12px;
 
