@@ -14,7 +14,7 @@ const SocialMediaCard: FunctionComponent<SocialMedia> = (props) => {
       className="social-media-card"
       css={css`
         height: 3em;
-        border: red solid 1px;
+        border: red solid 0px;
         width: fit-content;
 
         & img {

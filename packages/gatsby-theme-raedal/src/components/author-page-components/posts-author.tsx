@@ -56,6 +56,11 @@ const LastTenPosts: FunctionComponent<PropsLastTenPostsI> = (props) => {
           margin-bottom: 8px;
           border-radius: 2px;
 
+          @media screen and (max-width: 680px) {
+            margin-left: 8px;
+            margin-right: 8px;
+          }
+
           display: flex;
           flex-direction: column;
 

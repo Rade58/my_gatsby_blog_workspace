@@ -40,7 +40,7 @@ const Profile: FunctionComponent = () => {
     <section
       className="profile"
       css={css`
-        border: tomato solid 1px;
+        border: tomato solid 0px;
         display: flex;
         flex-direction: column;
         flex-wrap: nowrap;
@@ -99,20 +99,25 @@ const Profile: FunctionComponent = () => {
         }
 
         & div.about-author {
-          border: olive solid 1px;
+          border: olive solid 0px;
           width: 60vw;
           margin: auto;
+
+          @media screen and (max-width: 680px) {
+            width: 90vw;
+          }
+
         }
 
         & h1.author-name {
-          border: yellow solid 1px;
+          border: yellow solid 0px;
           font-size: 2.8rem;
           font-weight: 200;
           align-self: center;
         }
 
         & div.social-media {
-          border: orange solid 1px;
+          border: orange solid 0px;
           display: flex;
           justify-content: center;
 
