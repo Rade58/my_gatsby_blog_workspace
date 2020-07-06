@@ -521,12 +521,12 @@ exports.onCreateNode = (
 
     actions.createNode({
       id,
+      path: pathPackage.resolve("/", "author/", authorID.toLowerCase()),
+      authorID,
       internal: {
         type: "AuthorPage",
         contentDigest,
       },
-      path: pathPackage.resolve("/", "author/", authorID.toLowerCase()),
-      authorID,
       authorName,
       about,
       lang,
@@ -1366,7 +1366,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     }
   `);
 
-  // console.log(JSON.stringify(authorsOb, null, 2));
+  console.log(JSON.stringify(authorsOb, null, 2));
 
   if (authorsOb.errors) {
     reporter.panic(
