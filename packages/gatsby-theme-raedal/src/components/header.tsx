@@ -119,10 +119,10 @@ const Header: FunctionComponent = () => {
       css={css`
         /* border-top: 14px solid purple; */
 
-        box-shadow: 0 0px 2.2px rgba(0, 0, 0, 0.55),
-          0 0.1px 5.3px rgba(0, 0, 0, 0.434), 0 0.2px 10px rgba(0, 0, 0, 0.382),
-          0 0.5px 17.9px rgba(0, 0, 0, 0.355),
-          0 0.9px 33.4px rgba(0, 0, 0, 0.326), 0 2px 80px rgba(0, 0, 0, 0.262);
+        box-shadow: 0 0.6px 2.7px rgba(0, 0, 0, 0.187),
+          0 1.5px 6.9px rgba(0, 0, 0, 0.225), 0 3px 14.2px rgba(0, 0, 0, 0.238),
+          0 6.2px 29.2px rgba(0, 0, 0, 0.239), 0 17px 80px rgba(0, 0, 0, 0.23);
+
         background-image: ${additionalStyles.headerBackgroundImage};
 
         padding-top: 6px;

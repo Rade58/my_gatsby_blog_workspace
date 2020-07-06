@@ -330,7 +330,7 @@ const Code: FunctionComponent<{
             }*/
             /*  JER IZ NEKOG RAZLOGA KADA GA DEFINISEM OVDE NE RADI  */
             /* --------------------------------------- */
-            margin-left: 8px;
+            margin-left: 1px;
             outline: none;
 
             /* OVO CE BITI KLASA KOJA HIGHLIGHT-UJE SPECIFIC LINE */
@@ -355,6 +355,8 @@ const Code: FunctionComponent<{
               .line-number-style {
                 font-size: 14px;
               }
+
+              margin-left: 8px;
             }
           `}
         >

@@ -152,6 +152,11 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
               );
               height: 2px;
             }
+
+            @media screen and (max-width: 648px) {
+              font-size: 1.29em;
+              margin-left: 0.2em;
+            }
           }
 
           & > h1 {
@@ -181,6 +186,8 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
 
             @media screen and (max-width: 648px) {
               font-size: 1.24em;
+              padding: 0;
+              margin: 0;
             }
 
             & > code {

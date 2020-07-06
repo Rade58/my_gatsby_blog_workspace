@@ -48,9 +48,11 @@ const TableOfHeadings: FunctionComponent<TableOfHeadingsProps> = () => {
           headings.map(({ depth, value }) => (
             <li key={`${value}-${depth}`}>
               <Link
-                to={`${encodeURI(relativeLink)}#${encodeURI(value.toLowerCase())
+                to={`${encodeURI(relativeLink)}#${value
+                  .toLowerCase()
                   .replace(/%20/g, "-")
-                  .replace(/ /g, "-")}`}
+                  .replace(/ /g, "-")
+                  .replace(/\)/g, "-")}`}
               >
                 {value}
               </Link>

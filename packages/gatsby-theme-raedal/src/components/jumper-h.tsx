@@ -147,7 +147,8 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
           value: `${encodeURI(hedingOb.value.toLowerCase())
             .replace(/%20/g, "-")
             .replace(/ /g, "-")
-            .replace(/'/g, "")}`.trim(),
+            .replace(/'/g, "")
+            .replace(/\)/g, "")}`.trim(),
           depth: hedingOb.depth,
         };
 
@@ -155,7 +156,8 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
           `${encodeURI(hedingOb.value.toLowerCase())
             .replace(/%20/g, "-")
             .replace(/ /g, "-")
-            .replace(/'/g, "")}`.trim()
+            .replace(/'/g, "")
+            .replace(/\)/g, "")}`.trim()
         );
 
         setLoadArray(false);
