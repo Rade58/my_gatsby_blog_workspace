@@ -331,6 +331,7 @@ const Code: FunctionComponent<{
             /*  JER IZ NEKOG RAZLOGA KADA GA DEFINISEM OVDE NE RADI  */
             /* --------------------------------------- */
             margin-left: 0px;
+            margin-bottom: 12px;
             outline: none;
 
             /* OVO CE BITI KLASA KOJA HIGHLIGHT-UJE SPECIFIC LINE */
@@ -364,6 +365,8 @@ const Code: FunctionComponent<{
           <div
             className="pathnlang"
             css={css`
+              margin-top: 18px;
+
               border: pink solid 0px;
 
               position: relative;

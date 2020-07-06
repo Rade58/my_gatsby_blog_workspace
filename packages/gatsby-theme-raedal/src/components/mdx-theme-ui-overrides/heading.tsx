@@ -238,13 +238,12 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
           @media screen and (max-width: 648px) {
             & a::before {
               content: "🔗";
-              font-size: 1.4rem;
               position: absolute;
-              top: -0px;
+              top: 3px;
               left: -28px;
               color: ${groupColor};
               opacity: 1;
-              font-size: 0.8em;
+              font-size: 0.7em;
             }
           }
 
