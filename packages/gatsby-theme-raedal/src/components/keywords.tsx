@@ -45,15 +45,14 @@ const Keywords: FunctionComponent = () => {
         0 19px 179px -28px rgba(0, 0, 0, 0.38)
       ; */
 
+
       box-shadow:
-          0 -1.3px 6.2px rgba(0, 0, 0, 0.093),
-          0 -0.9px 14px rgba(0, 0, 0, 0.134),
-          0 2.2px 26.8px rgba(0, 0, 0, 0.166),
-          0 9px 52.3px rgba(0, 0, 0, 0.194),
-          0 21.9px 64.7px rgba(0, 0, 0, 0.226),
-          0 46.8px 73.1px rgba(0, 0, 0, 0.267),
-          0 100px 80px rgba(0, 0, 0, 0.36)
-          ;
+  0 0.1px 5.3px rgba(0, 0, 0, 0.51),
+  0 0.5px 17.9px rgba(0, 0, 0, 0.355),
+  0 2px 80px rgba(0, 0, 0, 0.302)
+;
+
+
 
 
       border-radius: 8px;

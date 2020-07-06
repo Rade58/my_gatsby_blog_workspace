@@ -119,6 +119,40 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
           
         }
         */
+          & > h3 {
+            color: #e7ba76;
+            font-weight: 300;
+            margin-left: 4rem;
+            font-size: 26px;
+            display: flex;
+            align-items: center;
+            &::before {
+              content: "";
+              margin-right: 12px;
+              display: block;
+              width: 1.8rem;
+              background-color: inherit;
+              background-image: linear-gradient(
+                90deg,
+                rgba(26, 32, 33, 0) 19%,
+                rgba(206, 159, 208, 1) 84%
+              );
+              height: 2px;
+            }
+            &::after {
+              content: "";
+              margin-left: 12px;
+              display: block;
+              width: 2.8rem;
+              background-color: inherit;
+              background-image: linear-gradient(
+                90deg,
+                rgba(206, 159, 208, 1) 19%,
+                rgba(26, 32, 33, 0) 84%
+              );
+              height: 2px;
+            }
+          }
 
           & > h1 {
             font-family: Oxygen, Ubuntu, Roboto, Cantarell, "Open Sans",
@@ -143,6 +177,7 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
               sans-serif;
             font-weight: 100;
             margin-bottom: 1.24rem;
+            padding: 0 0.8em;
 
             @media screen and (max-width: 648px) {
               font-size: 1.24em;

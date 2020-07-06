@@ -95,7 +95,7 @@ const Header: FunctionComponent = () => {
 
       console.log("!!!!HEADER IS UNMOUNTING!!!!");
     };
-  }, []);
+  }, [scrollHandlerAttachedOnBody]);
   ////////////////////////////////////////////////////////////////////////
 
   // === !== === !== === !== === !== === !== === !== === !== === !== === !== === !==
@@ -119,11 +119,10 @@ const Header: FunctionComponent = () => {
       css={css`
         /* border-top: 14px solid purple; */
 
-        box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.02),
-          0 6.7px 5.3px rgba(0, 0, 0, 0.028), 0 12.5px 10px rgba(0, 0, 0, 0.035),
-          0 22.3px 17.9px rgba(0, 0, 0, 0.042),
-          0 41.8px 33.4px rgba(0, 0, 0, 0.05), 0 100px 80px rgba(0, 0, 0, 0.07);
-
+        box-shadow: 0 0px 2.2px rgba(0, 0, 0, 0.55),
+          0 0.1px 5.3px rgba(0, 0, 0, 0.434), 0 0.2px 10px rgba(0, 0, 0, 0.382),
+          0 0.5px 17.9px rgba(0, 0, 0, 0.355),
+          0 0.9px 33.4px rgba(0, 0, 0, 0.326), 0 2px 80px rgba(0, 0, 0, 0.262);
         background-image: ${additionalStyles.headerBackgroundImage};
 
         padding-top: 6px;
