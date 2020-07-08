@@ -44,7 +44,21 @@ const HeadingMajor: FunctionComponent = () => {
         & div.author {
           margin-bottom: 28px;
           margin-top: 1vh;
+
+ 
+
           & a {
+
+            box-shadow:
+  0 0.1px 0.7px -4px rgba(0, 0, 0, 0.135),
+  0 0.3px 1.7px -4px rgba(0, 0, 0, 0.194),
+  0 0.5px 3.1px -4px rgba(0, 0, 0, 0.24),
+  0 0.9px 5.6px -4px rgba(0, 0, 0, 0.286),
+  0 1.7px 10.4px -4px rgba(0, 0, 0, 0.345),
+  0 4px 25px -4px rgba(0, 0, 0, 0.48)
+;
+
+
             color: blanchedalmond;
             text-decoration-line: none;
             border: goldenrod outset 2px;
