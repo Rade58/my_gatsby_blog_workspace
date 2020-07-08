@@ -19,7 +19,7 @@ import RightArrow from "./right-arrow";
 import { additionalStyles } from "../common-styles";
 
 const Keywords: FunctionComponent = () => {
-  const { headerBackgroundImage } = additionalStyles;
+  const { headerBackgroundImage, bodyBackgroundColor } = additionalStyles;
 
   const { blogPostContext } = $_useBlogPostReducerState;
 
@@ -96,9 +96,21 @@ const Keywords: FunctionComponent = () => {
 
         & div.separator {
           width: 28%;
-          border-top: 2px solid ${themeColor};
+          /* border-top: 2px solid ${themeColor}; */
           /* transform: translateY(50%); */
           align-self: center;
+          height: 2px;
+          background-color: ${themeColor};
+
+          &.separator-1 {
+            background-image:  linear-gradient(90deg, ${themeColor} 26%, ${bodyBackgroundColor} 76%);
+          }
+          
+          &.separator-2 {
+            background-image:  linear-gradient(90deg, ${bodyBackgroundColor} 26%, ${themeColor} 76%);
+          }
+
+
         }
 
         & div.icon-image {
@@ -243,11 +255,13 @@ const Keywords: FunctionComponent = () => {
             margin-right: 2px;
             margin-left: auto;
             user-select: none;
+            color: blanchedalmond;
           }
 
           & span.some_emo {
             margin-left: 4px;
             margin-right: auto;
+            color: blanchedalmond;
           }
         `}
       >
@@ -274,11 +288,11 @@ const Keywords: FunctionComponent = () => {
         <hr />
       </div> */}
       <div className="icon-image">
-        <div className="separator" />
+        <div className="separator separator-1" />
         <Link to={path}>
           <img src={`data:image/svg+xml;base64,${icon}`} alt="group-icon" />
         </Link>
-        <div className="separator" />
+        <div className="separator separator-2" />
       </div>
       <div className="arrows">
         <LeftArrow />
