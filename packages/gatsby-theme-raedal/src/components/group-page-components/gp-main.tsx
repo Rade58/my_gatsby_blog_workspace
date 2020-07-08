@@ -19,7 +19,7 @@ const MainGp: FunctionComponent = (props) => {
   return (
     <main
       css={css`
-        border: crimson solid 1px;
+        border: crimson solid 0px;
         display: grid;
         padding: 10px;
 

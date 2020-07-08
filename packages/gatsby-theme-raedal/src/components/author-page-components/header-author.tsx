@@ -18,6 +18,10 @@ const Header: FunctionComponent = () => {
         background-color: ${bodyBackgroundColor};
         background-image: ${headerBackgroundImage};
 
+        box-shadow: 0 2.4px 1.4px rgba(0, 0, 0, 0.07),
+          0 5.8px 1.8px rgba(0, 0, 0, 0.057),
+          0 10.5px 2.8px rgba(0, 0, 0, 0.041), 0 14px 4px rgba(0, 0, 0, 0.021);
+
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
@@ -25,9 +29,13 @@ const Header: FunctionComponent = () => {
         & div.home {
           margin: 8px 0;
 
-          border: blanchedalmond solid 1px;
+          border: blanchedalmond solid 0px;
           & a {
             color: blanchedalmond;
+            text-decoration-line: none;
+            &:hover {
+              text-decoration-line: underline;
+            }
           }
         }
 

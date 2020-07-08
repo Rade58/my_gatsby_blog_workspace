@@ -119,9 +119,9 @@ const Header: FunctionComponent = () => {
       css={css`
         /* border-top: 14px solid purple; */
 
-        box-shadow: 0 0.6px 2.7px rgba(0, 0, 0, 0.187),
-          0 1.5px 6.9px rgba(0, 0, 0, 0.225), 0 3px 14.2px rgba(0, 0, 0, 0.238),
-          0 6.2px 29.2px rgba(0, 0, 0, 0.239), 0 17px 80px rgba(0, 0, 0, 0.23);
+        box-shadow: 0 2.4px 1.3px rgba(0, 0, 0, 0.22),
+          0 5.8px 2.4px rgba(0, 0, 0, 0.178),
+          0 10.5px 3.3px rgba(0, 0, 0, 0.128), 0 14px 4px rgba(0, 0, 0, 0.067);
 
         background-image: ${additionalStyles.headerBackgroundImage};
 

@@ -118,6 +118,16 @@ const ScrollIndicator: FunctionComponent<ScrollIndicatorProps> = ({
         margin: 0;
         padding: 0;
 
+        & > div.nestoBlah {
+          box-shadow:
+            0 2.4px 1.3px rgba(0, 0, 0, 0.22),
+            0 5.8px 2.4px rgba(0, 0, 0, 0.178),
+            0 10.5px 3.3px rgba(0, 0, 0, 0.128),
+            0 14px 4px rgba(0, 0, 0, 0.067)
+          ;
+
+        }
+
         & > div.resizer {
           background-color: ${fill};
 

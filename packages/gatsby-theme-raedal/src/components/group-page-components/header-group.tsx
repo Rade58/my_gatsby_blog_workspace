@@ -23,7 +23,7 @@ const Header: FunctionComponent = () => {
 
         & div.home {
           margin: 8px 0;
-          border: solid pink 1px;
+          border: solid pink 0px;
 
           & a {
             color: blanchedalmond;
@@ -40,13 +40,14 @@ const Header: FunctionComponent = () => {
           width: 10vw;
           height: auto;
           border: blanchedalmond solid 1px;
+          margin: 8px 0;
         }
       `}
     >
       <div className="home">
         <Link to="/">
           <span role="img" aria-label="home">
-            🏡
+            🏡 Home
           </span>
         </Link>
       </div>
