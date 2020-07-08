@@ -110,12 +110,33 @@ const HeadingMajor: FunctionComponent = () => {
 
           & .mark-line {
             width: 10%;
-            border-top: ${themeColor} solid 1px;
+            /* border-top: ${groupColor} solid 1px; */
             align-self: center;
+            height: 1px;
+
+
 
             @media screen and (max-width: 368px) {
               display: none;
             }
+          }
+
+          & .mark-line-1 {
+
+            background-image: linear-gradient(
+              90deg,
+              ${themeColor} 38%,
+              rgba(26, 32, 33, 0) 78%
+            );
+            
+          }
+
+          & .mark-line-2 {
+            background-image: linear-gradient(
+              90deg,
+              rgba(26, 32, 33, 0) 28%,
+              ${themeColor} 68%
+            );
           }
 
           /* ------------------------------------------ */
@@ -235,13 +256,13 @@ const HeadingMajor: FunctionComponent = () => {
           <span className="pubspan">Published</span>:&nbsp;&nbsp;
           <time> {createdAt}</time>
         </h4>
-        {isUpdated ? <div className="mark-line" /> : null}
+        {isUpdated ? <div className="mark-line mark-line-1" /> : null}
         {!icon || !path ? null : (
           <Link to={path}>
             <img src={`data:image/svg+xml;base64,${icon}`} alt="group-icon" />
           </Link>
         )}
-        {isUpdated ? <div className="mark-line" /> : null}
+        {isUpdated ? <div className="mark-line mark-line-2" /> : null}
         {isUpdated ? (
           <h4 className="updated">
             <span className="upspan">updated</span>:&nbsp;&nbsp;
