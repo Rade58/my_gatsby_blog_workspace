@@ -45,12 +45,14 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
         }}
         css={css`
 
-        box-shadow:
-          0 8.5px 28.1px -99px rgba(0, 0, 0, 0.111),
-          0 20px 49.1px -99px rgba(0, 0, 0, 0.16),
-          0 40.5px 70.8px -99px rgba(0, 0, 0, 0.209),
-          0 100px 149px -99px rgba(0, 0, 0, 0.32)
-        ;
+            box-shadow:
+              0 0px 1.3px rgba(0, 0, 0, 0.07),
+              0 0px 2.4px rgba(0, 0, 0, 0.057),
+              0 0px 3.3px rgba(0, 0, 0, 0.041),
+              0 0px 4px rgba(0, 0, 0, 0.021)
+            ;
+            
+
 
 
         border-radius: 2px;
@@ -168,6 +170,9 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
               margin-left: 3rem;
               margin-right: 0.2rem;
               /* z-index: 200; */
+
+              margin-bottom: 0.4em;
+              margin-top: 0.6em;
 
               font-weight: 200;
 

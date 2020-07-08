@@ -22,6 +22,7 @@ const Header: FunctionComponent = () => {
         justify-content: space-evenly;
 
         & div.home {
+          margin: 8px 0;
           border: solid pink 1px;
 
           & a {
