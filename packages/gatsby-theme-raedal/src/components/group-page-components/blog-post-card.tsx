@@ -93,20 +93,27 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
               margin-bottom: 4px;
             }
 
+            
+            
             & .published {
               align-self: flex-start;
               margin-right: auto;
-
+              
               & span {
-              /* text-decoration-line: underline; */
-
+                /* text-decoration-line: underline; */
+                
               }
               & time {
                 
                 text-decoration-line: underline;
                 color: #e4cdc3;
+                
+                @media screen and (max-width: 680px){
+                  text-decoration-line: none;
+                }
               }
-
+              
+              
             }
 
             & .updated {
@@ -121,6 +128,10 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
                 
                 text-decoration-line: underline;
                 color: #e4cdc3;
+
+                @media screen and (max-width: 680px){
+                  text-decoration-line: none;
+                }
               }
 
             }
