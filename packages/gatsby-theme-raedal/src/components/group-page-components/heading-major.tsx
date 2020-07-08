@@ -67,6 +67,7 @@ const HeadingMajor: FunctionComponent = () => {
             border: pink solid 0px;
             margin-left: auto;
             margin-right: auto;
+            margin-top: 2em;
           `}
           src={`data:image/svg+xml;base64,${icon}`}
           alt="subject-logo"
@@ -94,6 +95,9 @@ const HeadingMajor: FunctionComponent = () => {
               text-decoration-line: overline underline;
               text-decoration-style: solid;
               text-decoration-color: ${underlineColor};
+
+              
+
               /* border-right: ${groupColor} medium groove; */
               /* border-left: ${groupColor} medium double; */
               font-family: - -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
