@@ -37,6 +37,18 @@ const Header: FunctionComponent = () => {
             &:hover {
               text-decoration-line: underline;
             }
+
+            &::after {
+              content: " Home";
+            }
+
+            @media screen and (max-width: 680px) {
+              text-decoration-line: underline;
+
+              &::after {
+                content: "";
+              }
+            }
           }
         }
 
@@ -51,7 +63,7 @@ const Header: FunctionComponent = () => {
       <div className="home">
         <Link to="/">
           <span role="img" aria-label="home">
-            🏡 Home
+            🏡
           </span>
         </Link>
       </div>
