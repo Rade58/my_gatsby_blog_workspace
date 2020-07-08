@@ -145,7 +145,7 @@ const LastTenPosts: FunctionComponent<PropsLastTenPostsI> = (props) => {
 
               @media screen and (max-width: 680px) {
                 text-decoration-line: none;
-                color: #e5979e;
+                color: #dd8ab8;
               }
             }
 

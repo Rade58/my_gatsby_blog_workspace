@@ -101,7 +101,8 @@ const Profile: FunctionComponent = () => {
         & div.about-author {
           border: olive solid 0px;
           width: 60vw;
-          margin: auto;
+          margin: 20px auto;
+          text-align: center;
 
           @media screen and (max-width: 680px) {
             width: 90vw;
@@ -144,6 +145,13 @@ const Profile: FunctionComponent = () => {
             color: blanchedalmond;
             margin-right: 2rem;
             margin-left: 2rem;
+            
+            @media screen and (max-width: 680px) {
+              margin-right: 0.4rem;
+              margin-left: 0.4rem;
+            
+            }
+
           }
 
           & span.separ {
@@ -153,11 +161,7 @@ const Profile: FunctionComponent = () => {
             background-image: ${headerBackgroundImage};
 
             @media screen and (max-width: 690px) {
-              width: 18vw;
-            }
-            
-            @media screen and (max-width: 364px) {
-              width: 4vw;
+              width: 48px;
             }
 
           }
