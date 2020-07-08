@@ -17,6 +17,14 @@ const SocialMediaCard: FunctionComponent<SocialMedia> = (props) => {
         border: red solid 0px;
         width: fit-content;
 
+        position: relative;
+        transition-property: transform;
+        transition-duration: 0.2s;
+
+        &:hover {
+          transform: rotateZ(360deg);
+        }
+
         & img {
           height: 100%;
         }

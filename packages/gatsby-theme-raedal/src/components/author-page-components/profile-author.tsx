@@ -117,7 +117,7 @@ const Profile: FunctionComponent = () => {
           align-self: center;
           color: #cab3bb;
 
-          text-shadow: 1px 1px #bd7888;
+          text-shadow: 0.4px 0.8px #bd7888;
         }
 
         & div.social-media {
@@ -143,6 +143,8 @@ const Profile: FunctionComponent = () => {
           display: flex;
           justify-content: center;
           align-items: center;
+
+          text-shadow: 0.4px 0.8px #bd7888;
 
           & h2 {
             color: blanchedalmond;
