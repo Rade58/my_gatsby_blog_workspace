@@ -115,6 +115,9 @@ const Profile: FunctionComponent = () => {
           font-size: 2.8rem;
           font-weight: 200;
           align-self: center;
+          color: #cab3bb;
+
+          text-shadow: 1px 1px #bd7888;
         }
 
         & div.social-media {
@@ -145,6 +148,8 @@ const Profile: FunctionComponent = () => {
             color: blanchedalmond;
             margin-right: 2rem;
             margin-left: 2rem;
+            font-weight: 400;
+            color: #cab3bb;
             
             @media screen and (max-width: 680px) {
               margin-right: 0.4rem;

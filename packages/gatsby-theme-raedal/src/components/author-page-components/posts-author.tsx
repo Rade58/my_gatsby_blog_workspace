@@ -28,6 +28,10 @@ const LastTenPosts: FunctionComponent<PropsLastTenPostsI> = (props) => {
 
         justify-content: center;
 
+        /* ---------------------- */
+
+        /* ---------------------- */
+
         width: 100%;
 
         @media screen and (min-width: 700px) {
@@ -59,6 +63,13 @@ const LastTenPosts: FunctionComponent<PropsLastTenPostsI> = (props) => {
           @media screen and (max-width: 680px) {
             margin-left: 8px;
             margin-right: 8px;
+            /* ------------------------------------------- */
+            box-shadow: 0 0px 15px -22px rgba(0, 0, 0, 0.157),
+              0 0px 16.9px -22px rgba(0, 0, 0, 0.225),
+              0 0px 18.2px -22px rgba(0, 0, 0, 0.293),
+              0 0px 30px -22px rgba(0, 0, 0, 0.45);
+
+            /* ------------------------------------------- */
           }
 
           display: flex;
