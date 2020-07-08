@@ -53,14 +53,14 @@ const Keywords: FunctionComponent = () => {
 ; */
 
 
-box-shadow:
-  0 0.1px 6.9px -7px rgba(0, 0, 0, 0.087),
-  0 0.1px 11.5px -7px rgba(0, 0, 0, 0.187),
-  0 0.3px 15.2px -7px rgba(0, 0, 0, 0.357),
-  0 0.4px 19.1px -7px rgba(0, 0, 0, 0.43),
-  0 0.8px 25.2px -7px rgba(0, 0, 0, 0.477),
-  0 2px 40px -7px rgba(0, 0, 0, 0.52)
-;
+          box-shadow:
+            0 0.1px 6.9px -7px rgba(0, 0, 0, 0.087),
+            0 0.1px 11.5px -7px rgba(0, 0, 0, 0.187),
+            0 0.3px 15.2px -7px rgba(0, 0, 0, 0.357),
+            0 0.4px 19.1px -7px rgba(0, 0, 0, 0.43),
+            0 0.8px 25.2px -7px rgba(0, 0, 0, 0.477),
+            0 2px 40px -7px rgba(0, 0, 0, 0.52)
+          ;
 
 
 

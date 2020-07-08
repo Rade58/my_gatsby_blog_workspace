@@ -40,6 +40,14 @@ const GpKeyword: FunctionComponent<PageKeywords> = (props) => {
       opacity: 0.8;
     }
 
+    box-shadow:
+  0 0.3px 0.7px rgba(0, 0, 0, 0.42),
+  0 0.8px 1.8px rgba(0, 0, 0, 0.29),
+  0 1.6px 3.7px rgba(0, 0, 0, 0.234),
+  0 3.3px 7.7px rgba(0, 0, 0, 0.186),
+  0 9px 21px rgba(0, 0, 0, 0.13)
+;
+
   `;
 
   return <KeywordLink to={path}>{keyword}</KeywordLink>;
