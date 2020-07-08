@@ -23,6 +23,8 @@ const Header: FunctionComponent = () => {
         justify-content: space-evenly;
 
         & div.home {
+          margin: 8px 0;
+
           border: blanchedalmond solid 1px;
           & a {
             color: blanchedalmond;
@@ -32,6 +34,7 @@ const Header: FunctionComponent = () => {
         & div.algolia-search-placeholder {
           width: 20vw;
           height: auto;
+          margin: 10px;
           border: pink solid 1px;
         }
       `}
