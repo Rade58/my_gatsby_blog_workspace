@@ -110,6 +110,7 @@ const LastTenPosts: FunctionComponent<PropsLastTenPostsI> = (props) => {
             & a {
               color: blanchedalmond;
               text-decoration-line: none;
+              font-weight: 400;
 
               &:hover {
                 text-decoration-line: underline;

@@ -60,13 +60,11 @@ const Profile: FunctionComponent = () => {
         & > div.author-image {
           border: blanchedalmond solid 0px;
 
+
           /* === !== === BORDER IMAGE !== === !== */
           /* border-image: ${headerBackgroundImage}; */
 
           /* === !== === !== === !== === !== === */
-
-
-
 
           /* border-radius: 50%; */
           overflow: hidden;
