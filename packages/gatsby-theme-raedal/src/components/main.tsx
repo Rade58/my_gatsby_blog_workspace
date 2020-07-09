@@ -39,15 +39,28 @@ interface MainPropsI {
 const Main: FunctionComponent<MainPropsI> = ({ children }) => {
   const { blogPostContext } = $_useBlogPostReducerState;
   const { reducedBlogPostState } = useContext(blogPostContext);
-  const { keywordModalIsShown } = reducedBlogPostState;
+  const { keywordModalIsShown, comercialIsVisible } = reducedBlogPostState;
 
   const mainRef = useRef<HTMLElement>(null);
 
   return (
     <main
       ref={mainRef}
+      className={`${comercialIsVisible ? "comercialVis" : "comercialHid"}`}
       css={css`
         /* position: relative; */
+
+        &.comercialVis {
+          & .comercial {
+            visibility: visible;
+          }
+        }
+
+        &.comercialHid {
+          & .comercial {
+            visibility: hidden;
+          }
+        }
 
         display: grid;
 
@@ -144,6 +157,11 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
 
           & > section.comercial {
             border: yellow solid 2px;
+            margin: 18px;
+            /* visibility: hidden;   */
+            /* position: fixed;
+            top: 58px;
+            right: 18px; */
 
             &::before {
               display: block;
@@ -209,6 +227,12 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
 
           & > section.comercial {
             border: yellow solid 2px;
+
+            /* visibility: hidden; */
+            position: sticky;
+            /* position: fixed;
+            top: 58px;
+            right: 18px; */
 
             &::before {
               display: block;

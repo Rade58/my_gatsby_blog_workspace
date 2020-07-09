@@ -8,6 +8,7 @@ import {
   FunctionComponent,
   memo,
   useState,
+  useCallback,
 } from "react";
 import { css } from "@emotion/core";
 
@@ -45,11 +46,39 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
     reducedBlogPostState,
     blogPostDispatch,
     groupPage,
+    headings,
   } = useContext(blogPostContext);
 
+  /* console.log({ propsId: props.id, headings });
+  console.log(
+    `${encodeURI(headings[0].value.toLowerCase())
+      .replace(/%20/g, "-")
+      .replace(/ /g, "-")
+      .replace(/'/g, "")
+      .replace(/\)/g, "")}`.trim() === props.id
+  );
+ */
   const { groupColor } = groupPage;
 
   const { pigDisapear, setIntersectedHeadingDivFunc } = reducedBlogPostState;
+
+  // console.log({ comercialIsVisible });
+
+  // === !== === !== === !== ===
+  const [thatIsFirstHeading, setThatIsFirstHeading] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (
+      `${encodeURI(headings[0].value.toLowerCase())
+        .replace(/%20/g, "-")
+        .replace(/ /g, "-")
+        .replace(/'/g, "")
+        .replace(/\)/g, "")}`.trim() === props.id
+    ) {
+      setThatIsFirstHeading(true);
+    }
+  }, []);
+  // === !== === !== === !== ===
 
   const headingDivRef = useRef<HTMLDivElement>(null);
   const interObserver = useRef<IntersectionObserver>();
@@ -87,6 +116,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
 
       interObserver.current.observe(headingDivRef.current);
     }
+    // eslint-disable-next-line
   }, [setIntersectedHeadingDivFunc]);
 
   useEffect(

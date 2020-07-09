@@ -53,7 +53,6 @@ const Keywords: FunctionComponent = () => {
         }
       `}
     >
-      {/* ---separator--- */}
       <div className="separator separator-1" />
       {allBlogKeywords.map((member) => (
         <Keyword {...member} key={`${member.keyword}-${member.path}`} />
