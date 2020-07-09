@@ -35,11 +35,10 @@ export enum BLOG_POST_ACTION_TYPES_ENUM {
   //
   GIVE_SET_OPACITY_CLASS_FUNC = "GIVE_SET_OPACITY_CLASS_FUNC",
   //
-  SHOW_COMERCIAL = "SHOW_COMERCIAL",
+  GIVE_SHOW_COMERCIAL = "GIVE_SHOW_COMERCIAL",
 }
 
 export interface BlogPostStateI {
-  comercialIsVisible: boolean;
   //
   pigDisapear: boolean;
   // header_pull_class: "pulled-down" | "pulled-up";
@@ -57,6 +56,10 @@ export interface BlogPostStateI {
 
   setPigOpacityClassFunc:
     | Dispatch<SetStateAction<"is-opaque" | "not-opaque">>
+    | ((val: any) => void);
+
+  setShowComercial:
+    | Dispatch<SetStateAction<"comercialVis" | "comercialHid">>
     | ((val: any) => void);
 }
 
@@ -120,8 +123,8 @@ export const blogPostReducer: Reducer<
     return { ...state, setPigOpacityClassFunc: action.payload };
   }
 
-  if (action.type === BLOG_POST_ACTION_TYPES_ENUM.SHOW_COMERCIAL) {
-    return { ...state, comercialIsVisible: !state.comercialIsVisible };
+  if (action.type === BLOG_POST_ACTION_TYPES_ENUM.GIVE_SHOW_COMERCIAL) {
+    return { ...state, setShowComercial: action.payload };
   }
 
   return state;
@@ -131,7 +134,9 @@ export const blogPostReducer: Reducer<
  * @description (1) OVAJ OBJEKAT, PORED DISPATCH FUNKCIJE JE JEDAN OD DEFAULT-OVA ZADAT PRI POZIVANJU    createContext-A (TO JE OVDE VEC URADJENO ;  (2)  A KORISTI SE KAO I DEFAULT STATE ZA REDUCER-A
  DAKLE PRI KORISCENJU useReducer HOOK, TI CES PROSLEDITI I OVAJ DEFAULT STATE*/
 export const defaultState: BlogPostStateI = {
-  comercialIsVisible: false,
+  setShowComercial() {
+    //
+  },
   pigDisapear: false,
   // header_pull_class: "pulled-down",
 

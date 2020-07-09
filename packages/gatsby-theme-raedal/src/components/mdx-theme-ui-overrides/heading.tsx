@@ -60,7 +60,11 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
  */
   const { groupColor } = groupPage;
 
-  const { pigDisapear, setIntersectedHeadingDivFunc } = reducedBlogPostState;
+  const {
+    pigDisapear,
+    setIntersectedHeadingDivFunc,
+    setShowComercial,
+  } = reducedBlogPostState;
 
   // console.log({ comercialIsVisible });
 
@@ -105,7 +109,19 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
             // console.log(entries[0].target.id);
             setIntersectedHeadingDivFunc(entries[0].target.id);
             // }, 100);
+            if (thatIsFirstHeading) {
+              console.log(thatIsFirstHeading);
+              setTimeout(() => {
+                setShowComercial("comercialVis");
+              }, 200);
+
+              console.log({ time: entries[0].time });
+            }
           }
+
+          /* if (thatIsFirstHeading) {
+            setShowComercial("comercialHid");
+          } */
         },
         {
           root: null,

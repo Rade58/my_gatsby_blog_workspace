@@ -9,6 +9,8 @@ import {
   FunctionComponent,
   createRef,
   RefObject,
+  useState,
+  useEffect,
 } from "react";
 
 import TableOfHeadings from "./table-of-headers";
@@ -37,28 +39,44 @@ interface MainPropsI {
 }
 
 const Main: FunctionComponent<MainPropsI> = ({ children }) => {
-  const { blogPostContext } = $_useBlogPostReducerState;
-  const { reducedBlogPostState } = useContext(blogPostContext);
-  const { keywordModalIsShown, comercialIsVisible } = reducedBlogPostState;
+  const {
+    blogPostContext,
+    BLOG_POST_ACTION_TYPES_ENUM,
+  } = $_useBlogPostReducerState;
+  const { reducedBlogPostState, blogPostDispatch } = useContext(
+    blogPostContext
+  );
+  const { keywordModalIsShown, setShowComercial } = reducedBlogPostState;
+
+  const [comercialClass, setComercialClass] = useState<
+    "comercialVis" | "comercialHid"
+  >("comercialHid");
+
+  useEffect(() => {
+    blogPostDispatch({
+      type: BLOG_POST_ACTION_TYPES_ENUM.GIVE_SHOW_COMERCIAL,
+      payload: setComercialClass,
+    });
+  }, []);
 
   const mainRef = useRef<HTMLElement>(null);
 
   return (
     <main
       ref={mainRef}
-      className={`${comercialIsVisible ? "comercialVis" : "comercialHid"}`}
+      className={`${comercialClass}`}
       css={css`
         /* position: relative; */
 
         &.comercialVis {
           & .comercial {
-            visibility: visible;
+            opacity: 1;
           }
         }
 
         &.comercialHid {
           & .comercial {
-            visibility: hidden;
+            opacity: 0;
           }
         }
 
@@ -228,10 +246,13 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
           & > section.comercial {
             border: yellow solid 2px;
 
+            transition-property: opacity;
+            transition-duration: 0.8s;
+
             /* visibility: hidden; */
             position: sticky;
-            /* position: fixed;
             top: 58px;
+            /* position: fixed;
             right: 18px; */
 
             &::before {

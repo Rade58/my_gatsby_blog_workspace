@@ -42,7 +42,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
     groupPage,
   } = useContext(blogPostContext);
 
-  const { setPigOpacityClassFunc } = reducedBlogPostState;
+  const { setPigOpacityClassFunc, setShowComercial } = reducedBlogPostState;
 
   const { groupColor, underlineColor } = groupPage;
 
@@ -187,6 +187,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
 
           setTimeout(() => {
             setPigOpacityClassFunc("not-opaque");
+            setShowComercial("comercialHid");
           }, 100);
         }, 408);
       });
