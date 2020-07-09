@@ -49,7 +49,7 @@ const Keywords: FunctionComponent = () => {
           }
         }
         & a:nth-of-type(1) {
-          margin-left: 8%;
+          margin-left: 4%;
         }
       `}
     >
