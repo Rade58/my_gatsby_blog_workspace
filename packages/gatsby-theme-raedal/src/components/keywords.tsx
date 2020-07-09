@@ -173,7 +173,7 @@ const Keywords: FunctionComponent = () => {
             display: flex;
             align-items: center;
 
-            @media screen and (max-width: 1402px) {
+            @media screen and (max-width: 1458px) {
               width: min-content;
               border: crimson solid 0px;
             }
