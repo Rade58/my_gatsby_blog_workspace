@@ -173,6 +173,7 @@ const BlogPostCard: FunctionComponent<BlogPostCardPropsI> = (props) => {
 
 
             h4 {
+              color: blanchedalmond;
               font-size: 28px;
               border: 0px solid pink;
               transition-property: transform;

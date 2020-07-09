@@ -84,14 +84,15 @@ const HeadingMajor: FunctionComponent = () => {
       </span>
       <h1
         css={css`
-          
           border: solid 0px white;
           text-align: center;
           font-weight: 400;
           text-shadow: 0.2px 0.2px 0.2px ${groupColor};
+          margin-bottom: 3rem;
 
           & span {
             &.group-name-span {
+              color: blanchedalmond;
               text-decoration-line: overline underline;
               text-decoration-style: solid;
               text-decoration-color: ${underlineColor};
@@ -110,6 +111,7 @@ const HeadingMajor: FunctionComponent = () => {
               /* padding: 4.8px; */
               padding-left: 4px;
               padding-right: 3px;
+              color: blanchedalmond;
               
             }
           }
