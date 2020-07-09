@@ -222,6 +222,11 @@ const HeadingMajor: FunctionComponent = () => {
               @media screen and (min-width: 560px) {
                 display: inline;
               }
+
+              @media screen and (max-width: 680px){
+                text-decoration-line: none;
+              }
+
             }
 
             & span {
@@ -247,6 +252,11 @@ const HeadingMajor: FunctionComponent = () => {
               @media screen and (min-width: 560px) {
                 display: inline;
               }
+
+              @media screen and (max-width: 680px){
+                text-decoration-line: none;
+              }
+
             }
 
             & span {
