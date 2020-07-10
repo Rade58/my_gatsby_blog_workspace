@@ -2,7 +2,13 @@
 import { jsx } from "theme-ui";
 import { css } from "@emotion/core";
 
-import { FunctionComponent, useContext } from "react";
+import {
+  FunctionComponent,
+  useContext,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 
 import TableOfKeywords from "../../static_query_components/gr-table-of-keywords";
 import { $_useGroupPageState } from "../../context_n_reducers/group_page_con_red";
@@ -15,6 +21,20 @@ const MainGp: FunctionComponent = (props) => {
   const { groupPageContext } = $_useGroupPageState;
   const { reducedState } = useContext(groupPageContext);
   const { keywordsModalIsOpen } = reducedState;
+
+  const [visibilityClass, setVisibilityClass] = useState<
+    "hidden-class" | "visible-class"
+  >();
+
+  const handleVisibilityClass = useCallback(() => {
+    window.onscroll = () => {
+      console.log("stuff");
+    };
+  }, []);
+
+  useEffect(() => {
+    handleVisibilityClass();
+  });
 
   return (
     <main
@@ -93,10 +113,10 @@ const MainGp: FunctionComponent = (props) => {
 
         @media screen and (min-width: 918px) {
           grid-template-areas:
-            "s h h h h h . ."
-            ". c c c c c a a"
-            ". c c c c c k k"
-            ". c c c c c . ."
+            ". . h h h h . ."
+            "s s c c c c a a"
+            ". . c c c c k k"
+            ". . c c c c . ."
             ". . l l l l . ."
             ". . l l l l . ."
             ". . l l l l . .";
@@ -113,12 +133,16 @@ const MainGp: FunctionComponent = (props) => {
             /* grid-area: s; */
             position: sticky;
             top: 8px;
+            flex-basis: 18vw;
+            flex-shrink: 0;
           }
         }
 
         @media screen and (min-width: 1100px) {
           grid-template-areas:
-            "s s h h h h a a"
+            ". . h h h h . ."
+            ". . h h h h . ."
+            "s s c c c c a a"
             "k k c c c c a a"
             ". . c c c c . ."
             ". . c c c c . ."
@@ -128,12 +152,20 @@ const MainGp: FunctionComponent = (props) => {
 
           & section.keywords {
             display: flex;
+            top: 22vh;
           }
 
           & aside.courses {
             /* grid-area: s; */
-            position: static;
+            position: sticky;
+            height: 22vh;
             /* top: 8px; */
+          }
+
+          & aside.adds {
+            position: sticky;
+            top: 8px;
+            margin-left: 8px;
           }
         }
 

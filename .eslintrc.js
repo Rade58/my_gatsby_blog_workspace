@@ -91,7 +91,8 @@ module.exports = {
         avoidEscape: true,
       },
     ],
-    indent: ["warn", 2, { SwitchCase: 1 }],
+    // indent: ["warn", 2, { SwitchCase: 1 }],
+    "@typescript-eslint/indent": ["warn", 2],
     "prettier/prettier": [
       0,
       {
