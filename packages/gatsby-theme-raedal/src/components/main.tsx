@@ -43,7 +43,7 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
     blogPostContext,
     BLOG_POST_ACTION_TYPES_ENUM,
   } = $_useBlogPostReducerState;
-  const { reducedBlogPostState, blogPostDispatch } = useContext(
+  const { reducedBlogPostState, blogPostDispatch, headings } = useContext(
     blogPostContext
   );
   const { keywordModalIsShown, setShowComercial } = reducedBlogPostState;
@@ -61,10 +61,13 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
 
   const mainRef = useRef<HTMLElement>(null);
 
+  const comercialClasses: "comercialVis" | "comercialHid" =
+    headings.length < 2 ? "comercialVis" : comercialClass;
+
   return (
     <main
       ref={mainRef}
-      className={`${comercialClass}`}
+      className={`${comercialClasses}`}
       css={css`
         /* position: relative; */
 
