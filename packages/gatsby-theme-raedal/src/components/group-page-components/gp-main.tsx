@@ -24,7 +24,7 @@ const MainGp: FunctionComponent = (props) => {
 
   const [visibilityClass, setVisibilityClass] = useState<
     "hidden-class" | "visible-class"
-  >();
+  >("hidden-class");
 
   const handleVisibilityClass = useCallback(() => {
     window.onscroll = () => {
@@ -46,7 +46,7 @@ const MainGp: FunctionComponent = (props) => {
 
   useEffect(() => {
     handleVisibilityClass();
-  });
+  }, [handleVisibilityClass]);
 
   return (
     <main
@@ -166,19 +166,23 @@ const MainGp: FunctionComponent = (props) => {
           &.visible-class {
             & aside.courses {
               opacity: 1;
+              transform: translateX(0px);
             }
             & aside.adds {
               opacity: 1;
+              transform: translateX(0px);
             }
           }
 
           &.hidden-class {
             & aside.courses {
               opacity: 0;
+              transform: translateX(-200px);
             }
 
             & aside.adds {
               opacity: 0;
+              transform: translateX(200px);
             }
           }
 
@@ -192,16 +196,18 @@ const MainGp: FunctionComponent = (props) => {
             position: sticky;
             height: 22vh;
             /* top: 8px; */
-            transition-property: opacity;
-            transition-duration: 2.8s;
+            transition-property: opacity transform;
+            transition-duration: 1.4s;
+            transition-timing-function: ease-in;
           }
 
           & aside.adds {
             position: sticky;
             top: 8px;
             margin-left: 8px;
-            transition-property: opacity;
+            transition-property: opacity transform;
             transition-duration: 0.6s;
+            transition-timing-function: ease-in;
           }
         }
 
