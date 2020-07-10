@@ -72,18 +72,6 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
         /* position: relative; */
         width: 100%;
 
-        &.comercialVis {
-          & .comercial {
-            opacity: 1;
-          }
-        }
-
-        &.comercialHid {
-          & .comercial {
-            opacity: 0;
-          }
-        }
-
         display: grid;
 
         /* width: 100vw; */
@@ -111,6 +99,10 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
           "s s s s s s s s s s"
           ". . . . j . . . . .";
 
+        & > aside.course {
+          display: none;
+        }
+
         /*==============================*/
 
         /* & > aside.jumper-cont {
@@ -119,6 +111,12 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
           width: 100%;
           border: pink olid 4px;
         } */
+
+        & > aside.course {
+          grid-area: b;
+          border: crimson solid 1px;
+          margin: 18px;
+        }
 
         & > aside.jumper-cont {
           margin-left: 18px;
@@ -161,8 +159,12 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
             " a a a a a a a a s s"
             " a a a a a a a a k k"
             " a a a a a a a a t t"
-            " a a a a a a a a . ."
+            " a a a a a a a a b b"
             " a a a a a a a a . .";
+
+          & > aside.course {
+            display: none;
+          }
 
           & > aside.jumper-cont {
             /* bottom: 12vh; */
@@ -180,6 +182,7 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
           & > section.comercial {
             border: yellow solid 2px;
             margin: 18px;
+
             /* visibility: hidden;   */
             /* position: fixed;
             top: 58px;
@@ -216,11 +219,29 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
 
         @media screen and (min-width: 1200px) {
           grid-template-areas:
-            " k k a a a a a a s s"
+            " b b a a a a a a s s"
             " k k a a a a a a t t"
             " . . a a a a a a . ."
             " . . a a a a a a . ."
             " . . a a a a a a . .";
+
+          &.comercialVis {
+            & .comercial {
+              opacity: 1;
+            }
+          }
+
+          &.comercialHid {
+            & .comercial {
+              opacity: 0;
+            }
+          }
+
+          & > aside.course {
+            position: sticky;
+            display: block;
+            top: 58px;
+          }
 
           & > aside.jumper-cont {
             position: sticky;
@@ -302,6 +323,7 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
         </div>
       </section> */}
       <section className="comercial">Comercial</section>
+      <aside className="course">Buy my course</aside>
       {/* ------------------------------------------------------------- */}
       {/* /////////-----------------------///////////////// */}
       {/* <div
