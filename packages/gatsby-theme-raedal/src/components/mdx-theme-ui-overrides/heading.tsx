@@ -110,12 +110,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
             setIntersectedHeadingDivFunc(entries[0].target.id);
             // }, 100);
             if (thatIsFirstHeading) {
-              console.log(thatIsFirstHeading);
-              setTimeout(() => {
-                setShowComercial("comercialVis");
-              }, 200);
-
-              console.log({ time: entries[0].time });
+              setShowComercial("comercialVis");
             }
           }
 

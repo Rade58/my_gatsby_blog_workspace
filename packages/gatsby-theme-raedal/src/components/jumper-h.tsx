@@ -192,7 +192,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
         }, 408);
       });
     }
-  }, [intersectedDivId.length, setPigOpacityClassFunc]);
+  }, [intersectedDivId.length, setPigOpacityClassFunc, setShowComercial]);
 
   const indexOfCurrentIntersHdiv = justHeadingsArrayRef.current.indexOf(
     intersectedDivId
@@ -725,6 +725,7 @@ box-shadow:
               .then(() => {
                 setTimeout(() => {
                   setPigOpacityClassFunc("not-opaque");
+                  setShowComercial("comercialHid");
                 }, 1000);
               });
           }}
@@ -751,6 +752,7 @@ box-shadow:
               .then(() => {
                 setTimeout(() => {
                   setPigOpacityClassFunc("not-opaque");
+                  setShowComercial("comercialHid");
                 }, 1000);
               });
           }}

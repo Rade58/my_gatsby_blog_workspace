@@ -57,7 +57,7 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
       type: BLOG_POST_ACTION_TYPES_ENUM.GIVE_SHOW_COMERCIAL,
       payload: setComercialClass,
     });
-  }, []);
+  }, [setComercialClass]);
 
   const mainRef = useRef<HTMLElement>(null);
 

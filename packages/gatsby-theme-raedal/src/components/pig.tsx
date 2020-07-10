@@ -39,7 +39,11 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
     blogPostContext,
   } = $_useBlogPostReducerState;
 
-  const { blogPostDispatch } = useContext(blogPostContext);
+  const { blogPostDispatch, reducedBlogPostState } = useContext(
+    blogPostContext
+  );
+
+  const { setShowComercial } = reducedBlogPostState;
 
   const { pigDisapear, scrolled_class, bodyHeight } = reducedHeaderState;
 
@@ -152,6 +156,7 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
 
           if ((100 * resizerWidth) / windowWidth < 1.2) {
             setOpacityClass("not-opaque");
+            setShowComercial("comercialHid");
           } else {
             setOpacityClass("is-opaque");
           }
