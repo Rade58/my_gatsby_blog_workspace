@@ -228,12 +228,22 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
           &.comercialVis {
             & .comercial {
               opacity: 1;
+              transform: translateX(0px);
+            }
+            & .course {
+              opacity: 1;
+              transform: translateX(0px);
             }
           }
 
           &.comercialHid {
             & .comercial {
               opacity: 0;
+              transform: translateX(408px);
+            }
+            & .course {
+              opacity: 0;
+              transform: translateX(-408px);
             }
           }
 
@@ -241,6 +251,9 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
             position: sticky;
             display: block;
             top: 58px;
+
+            transition-property: opacity transform;
+            transition-duration: 0.2s;
           }
 
           & > aside.jumper-cont {
@@ -271,7 +284,7 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
           & > section.comercial {
             border: yellow solid 2px;
 
-            transition-property: opacity;
+            transition-property: opacity transform;
             transition-duration: 0.8s;
 
             /* visibility: hidden; */
