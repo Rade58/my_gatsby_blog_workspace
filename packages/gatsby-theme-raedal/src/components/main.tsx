@@ -70,6 +70,7 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
       className={`${comercialClasses}`}
       css={css`
         /* position: relative; */
+        width: 100%;
 
         &.comercialVis {
           & .comercial {

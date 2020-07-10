@@ -186,15 +186,17 @@ const MainGp: FunctionComponent = (props) => {
             }
           }
 
+          --heightOfCourses: 22vh;
+
           & section.keywords {
             display: flex;
-            top: 22vh;
+            top: var(--heightOfCourses);
           }
 
           & aside.courses {
             /* grid-area: s; */
             position: sticky;
-            height: 22vh;
+            height: var(--heightOfCourses);
             /* top: 8px; */
             transition-property: opacity transform;
             transition-duration: 1.4s;

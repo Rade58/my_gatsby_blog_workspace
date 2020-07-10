@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, ThemeProvider } from "theme-ui";
-import { Global } from "@emotion/core";
+import { css, Global } from "@emotion/core";
 import { Fragment, FunctionComponent } from "react";
 
 // PROVIDING TEME
@@ -37,13 +37,20 @@ const LayoutGroupPage: FunctionComponent = () => {
   return (
     <Fragment>
       <Global
-        styles={{
-          body: {
-            backgroundColor: additionalStyles.bodyBackgroundColor,
-            fontFamily:
-              "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
-          },
-        }}
+        styles={css`
+          html {
+            width: 100%;
+          }
+
+          body {
+            width: 100%;
+            overflow-x: hidden;
+            background-color: ${additionalStyles.bodyBackgroundColor};
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+              Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+              sans-serif;
+          }
+        `}
       />
       {/* MOZDA JE OVO DOBRO MESTO ZA HELMET */}
       <GroupSeo />
