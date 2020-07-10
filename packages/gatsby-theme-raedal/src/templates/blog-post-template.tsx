@@ -185,7 +185,7 @@ const BlogPostTemplate: FunctionComponent<BlogPostTemplateProps> = ({
 
   const { headings, relativeLink, cloudinaryArray } = pageContext;
 
-  console.log(cloudinaryArray);
+  // console.log(cloudinaryArray);
 
   // IZDVOJICU I      groupPage      I          allBlogKeywords
 

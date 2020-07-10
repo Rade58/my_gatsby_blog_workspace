@@ -472,6 +472,10 @@ box-shadow:
           </span>
           <Link
             onClick={() => {
+              setTimeout(() => {
+                setPigOpacityClassFunc("is-opaque");
+                setShowComercial("comercialVis");
+              }, 100);
               if (prevDivHkey) {
                 setIntersectedDivId(prevDivHkey);
               }
@@ -666,6 +670,10 @@ box-shadow:
               if (nextDivHkey) {
                 setIntersectedDivId(nextDivHkey);
               }
+              setTimeout(() => {
+                setPigOpacityClassFunc("is-opaque");
+                setShowComercial("comercialVis");
+              }, 100);
             }}
             to={`${encodeURI(relativeLink)}#${nextDivHkey}`}
             className={`${!nextDivHkey ? "disabled" : ""}`}

@@ -1,6 +1,13 @@
-import React, { FunctionComponent, SetStateAction, useEffect } from "react";
+import React, {
+  FunctionComponent,
+  SetStateAction,
+  useEffect,
+  useContext,
+} from "react";
 import { Link } from "gatsby";
 import { css } from "@emotion/core";
+
+import { $_useBlogPostReducerState } from "../context_n_reducers/context_n_reducer_blog_post";
 
 interface JumpULPropsI {
   normalizedHeadings: NormalizedHeadingsI;
@@ -23,7 +30,10 @@ const makeHeadingzArray = function (
   return entries;
 };
 const JumpUL: FunctionComponent<JumpULPropsI> = (props) => {
-  let a;
+  const { blogPostContext } = $_useBlogPostReducerState;
+
+  const { reducedBlogPostState } = useContext(blogPostContext);
+  const { setShowComercial, setPigOpacityClassFunc } = reducedBlogPostState;
 
   const {
     normalizedHeadings,
@@ -63,6 +73,12 @@ const JumpUL: FunctionComponent<JumpULPropsI> = (props) => {
             </button> */}
 
             <Link
+              onClick={() => {
+                setTimeout(() => {
+                  setShowComercial("comercialVis");
+                  setPigOpacityClassFunc("is-opaque");
+                }, 600);
+              }}
               onSubmit={(e) => {
                 // console.log("clicked");
 
