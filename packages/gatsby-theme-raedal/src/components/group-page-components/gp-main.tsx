@@ -28,9 +28,21 @@ const MainGp: FunctionComponent = (props) => {
 
   const handleVisibilityClass = useCallback(() => {
     window.onscroll = () => {
-      console.log("stuff");
+      // console.log(document.body.scrollHeight / window.scrollY);
+
+      if (document.body.scrollHeight / window.scrollY < 6) {
+        setVisibilityClass("visible-class");
+      } else {
+        setVisibilityClass("hidden-class");
+      }
+
+      /* console.log({
+        scrollY: window.scrollY,
+        bodyScrollHeight: document.body.scrollHeight,
+        odnos: document.body.scrollHeight/window.scrollY
+      }); */
     };
-  }, []);
+  }, [setVisibilityClass]);
 
   useEffect(() => {
     handleVisibilityClass();
@@ -38,6 +50,7 @@ const MainGp: FunctionComponent = (props) => {
 
   return (
     <main
+      className={visibilityClass}
       css={css`
         border: crimson solid 0px;
         display: grid;
@@ -150,6 +163,25 @@ const MainGp: FunctionComponent = (props) => {
             ". . l l l l . ."
             ". . l l l l . .";
 
+          &.visible-class {
+            & aside.courses {
+              opacity: 1;
+            }
+            & aside.adds {
+              opacity: 1;
+            }
+          }
+
+          &.hidden-class {
+            & aside.courses {
+              opacity: 0;
+            }
+
+            & aside.adds {
+              opacity: 0;
+            }
+          }
+
           & section.keywords {
             display: flex;
             top: 22vh;
@@ -160,12 +192,16 @@ const MainGp: FunctionComponent = (props) => {
             position: sticky;
             height: 22vh;
             /* top: 8px; */
+            transition-property: opacity;
+            transition-duration: 2.8s;
           }
 
           & aside.adds {
             position: sticky;
             top: 8px;
             margin-left: 8px;
+            transition-property: opacity;
+            transition-duration: 0.6s;
           }
         }
 
