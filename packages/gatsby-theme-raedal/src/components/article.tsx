@@ -199,6 +199,7 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
           & > ul {
             border: tomato solid 0px;
             list-style-type: none;
+            font-weight: 200;
 
             & > li::before {
               content: "📋 ";
@@ -213,6 +214,7 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
 
             & > li {
               font-size: 20px;
+              color: #dfd289;
 
               & > ul {
                 list-style-type: none;
@@ -224,7 +226,6 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
                   content: "🌀 ";
                   display: inline-block;
                   font-size: 0.4em;
-                  color: crimson;
                   margin-right: 0.4em;
                   position: relative;
                   bottom: 0.2em;
@@ -232,8 +233,6 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
 
                 & li {
                   font-size: 0.9em;
-
-                  color: blanchedalmond;
 
                   & ul {
                     list-style-type: none;
@@ -303,6 +302,8 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
 
             & > li {
               font-size: 20px;
+              color: #dfd289;
+              font-weight: 200;
 
               &::before {
                 color: crimson;
