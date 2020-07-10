@@ -170,7 +170,7 @@ const Layout: FunctionComponent<LayoutPropsI> = ({ body }) => {
               /* PRIMETIO SAM DA JE JASON KADA JE DEFINISAO ZA BODY */
               /* USTVARI DODAO MARGINE 4px */
               /* PA SAM I JA DODAO; IAKO NE ZNAM ZASTO */
-
+              overflow-x: hidden;
               margin: 4px;
               background-color: rgb(27, 34, 39);
               padding-top: 56px;
