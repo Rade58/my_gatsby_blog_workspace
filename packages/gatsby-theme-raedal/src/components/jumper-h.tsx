@@ -188,7 +188,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
           setTimeout(() => {
             setPigOpacityClassFunc("not-opaque");
             setShowComercial("comercialHid");
-          }, 100);
+          }, 600);
         }, 408);
       });
     }
@@ -475,7 +475,7 @@ box-shadow:
               setTimeout(() => {
                 setPigOpacityClassFunc("is-opaque");
                 setShowComercial("comercialVis");
-              }, 100);
+              }, 600);
               if (prevDivHkey) {
                 setIntersectedDivId(prevDivHkey);
               }
