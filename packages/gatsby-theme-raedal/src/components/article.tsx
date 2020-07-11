@@ -77,7 +77,7 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
       components={{
         pre: Code,
         h2: H2Component,
-        h5: CloudImage,
+        h5: CloudImage, // CLOUDINARY IMAGE (##### redni broj slike)
       }}
     >
       <article
@@ -200,6 +200,8 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
             border: tomato solid 0px;
             list-style-type: none;
             font-weight: 200;
+            width: fit-content;
+            margin-left: 4.8em;
 
             & > li::before {
               content: "📋 ";
@@ -250,7 +252,7 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
                   }
 
                   & li {
-                    color: #e7d0e0;
+                    /* color: #e7d0e0;   */
                   }
                 }
               }
@@ -297,6 +299,10 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
             list-style-type: none;
 
             list-style-position: inside;
+
+            border: tomato solid 0px;
+            width: fit-content;
+            margin-left: 4.8em;
 
             counter-reset: olcount;
 
@@ -363,15 +369,32 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
             }
           }
 
+          & blockquote {
+            border-width: 3.4px;
+            border-left-color: crimson;
+            border-left-style: solid;
+            padding-left: 4px;
+            font-style: italic;
+            font-weight: 100;
+            margin-left: 14%;
+          }
+
           & * {
             & em {
-              color: #df9dbe;
+              color: #dfd289;
               font-family: "Bad Script";
               font-weight: 100;
             }
 
             & strong {
-              color: #bb99d1;
+              color: #df9dbe;
+              font-size: 1.6rem;
+            }
+            & code {
+              background-color: #a043845b;
+              font-size: 1.3rem;
+              color: #dfd289;
+              font-family: monospace;
             }
           }
         `}
