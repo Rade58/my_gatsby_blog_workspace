@@ -90,7 +90,7 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
       type: BLOG_POST_ACTION_TYPES_ENUM.GIVE_SET_OPACITY_CLASS_FUNC,
       payload: setOpacityClass,
     });
-  }, [setOpacityClass]);
+  }, [BLOG_POST_ACTION_TYPES_ENUM.GIVE_SET_OPACITY_CLASS_FUNC, blogPostDispatch, setOpacityClass]);
 
   // ------------------------------------------------------
 

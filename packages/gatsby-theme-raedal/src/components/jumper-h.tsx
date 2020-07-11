@@ -668,8 +668,13 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
               }
               setTimeout(() => {
                 setPigOpacityClassFunc("is-opaque");
+                console.log(
+                  "pig is opaque",
+                  JSON.stringify(setPigOpacityClassFunc, null, 2),
+                  setPigOpacityClassFunc
+                );
                 setShowComercial("comercialVis");
-              }, 100);
+              }, 600);
             }}
             to={`${encodeURI(relativeLink)}#${nextDivHkey}`}
             className={`${!nextDivHkey ? "disabled" : ""}`}
