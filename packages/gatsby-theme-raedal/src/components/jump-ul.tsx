@@ -45,7 +45,22 @@ const JumpUL: FunctionComponent<JumpULPropsI> = (props) => {
   type hType = typeof normalizedHeadings;
 
   return (
-    <ul>
+    <ul
+      css={css`
+        --scrollbarBackgroundColor: #d48ea5;
+        --thumbBackgroundColor: #423b3d;
+
+        &::-webkit-scrollbar {
+          width: 6px;
+        }
+
+        border: crimson solid 2px;
+
+        scrollbar-width: thin;
+        scrollbar-color: var(--thumbBackgroundColor)
+          var(--scrollbarBackgroundColor);
+      `}
+    >
       {makeHeadingzArray(normalizedHeadings).map((heading) => {
         const [headingName, { value, depth }] = heading;
 

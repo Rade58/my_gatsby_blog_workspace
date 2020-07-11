@@ -569,6 +569,32 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
               }
 
               & ul {
+                /* -------- SCROLLBAR -------- */
+
+                --scrollbarBackgroundColor: #d48ea5;
+                --thumbBackgroundColor: #423b3d;
+
+                &::-webkit-scrollbar {
+                  width: 8px;
+                }
+
+                scrollbar-width: thin;
+                scrollbar-color: var(--thumbBackgroundColor)
+                  var(--scrollbarBackgroundColor);
+
+                &::-webkit-scrollbar-track {
+                  background-color: var(--scrollbarBackgroundColor);
+                  border-radius: 6px;
+                }
+
+                &::-webkit-scrollbar-thumb {
+                  background-color: var(--thumbBackgroundColor);
+                  border-radius: 4px;
+                  border: var(--scrollbarBackgroundColor) solid 2px;
+                }
+
+                /* === !== === !== === !== === !== === */
+
                 padding: 0;
                 width: 100%;
                 overflow-y: auto;
