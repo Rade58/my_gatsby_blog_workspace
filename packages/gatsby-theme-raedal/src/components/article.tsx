@@ -377,6 +377,7 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
             font-style: italic;
             font-weight: 100;
             margin-left: 14%;
+            color: #dfd289;
           }
 
           & * {
