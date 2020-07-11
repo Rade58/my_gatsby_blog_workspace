@@ -203,6 +203,15 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
             width: fit-content;
             margin-left: 4.8em;
 
+            & a {
+              color: #f1e9f0;
+              text-decoration-line: underline;
+
+              &:hover {
+                text-decoration-line: none;
+              }
+            }
+
             & > li::before {
               content: "📋 ";
               display: inline-block;
@@ -304,6 +313,15 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
             width: fit-content;
             margin-left: 4.8em;
 
+            & a {
+              color: #f1e9f0;
+              text-decoration-line: underline;
+
+              &:hover {
+                text-decoration-line: none;
+              }
+            }
+
             counter-reset: olcount;
 
             & > li {
@@ -378,6 +396,10 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
             font-weight: 100;
             margin-left: 14%;
             color: #dfd289;
+
+            @media screen and (min-width: 680px) {
+              width: 68%;
+            }
           }
 
           & * {
