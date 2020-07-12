@@ -1,1 +1,10 @@
 # ZELIM SADA DA STILIZUJEM SCROLLBARS ZA SVE ELEMENTE KOJI SU SCROLLABLE U MOM BLOG POST LAYOUT-U
+
+SCROLLBAR SAM STILIZOVAO ZA UNORDERED LIST, OVDE:
+
+- `packages/gatsby-theme-raedal/src/components/jumper-h.tsx`
+
+# KAKO DA JOS STILIZUJES SCROLLBAR MOZES VIDETI NA SLEDECOJ STRANICI
+
+<https://css-tricks.com/the-current-state-of-styling-scrollbars/>
+
