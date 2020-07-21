@@ -130,6 +130,10 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
   // console.log(normalizedHeadingsRef.current);
 
   useEffect(() => {
+    let canceled = false;
+
+    if (canceled) return;
+
     //
     blogPostDispatch({
       type: BLOG_POST_ACTION_TYPES_ENUM.GIVE_SET_JUMPER_STATE,
@@ -169,10 +173,18 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
       console.log("intersected div");
       setIntersectedDivId("");
     }, 500); */
+
+    return () => {
+      canceled = true;
+    };
   }, [blogPostDispatch, headings, loadArray]);
 
   useEffect(() => {
     // console.log(intersectedDivId.length);
+
+    let canceled = false;
+
+    if (canceled) return;
 
     if (!intersectedDivId.length) {
       const promise = new Promise((res, rej) => {
@@ -194,6 +206,10 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
         }, 408);
       });
     }
+
+    return () => {
+      canceled = true;
+    };
   }, [intersectedDivId.length, setPigOpacityClassFunc, setShowComercial]);
 
   const indexOfCurrentIntersHdiv = justHeadingsArrayRef.current.indexOf(
@@ -549,6 +565,8 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
               width: 100%;
               border: crimson solid 0px;
               display: flex;
+
+              position: relative;
 
               & > * {
                 border: yellow solid 0px;
