@@ -3,28 +3,18 @@ import { jsx } from "theme-ui";
 
 import { css } from "@emotion/core";
 
-import {
-  // useContext,
-  // useLayoutEffect,
-  FunctionComponent,
-  ReactNode,
-  useEffect,
-  useRef,
-  useCallback,
-} from "react";
+import { FunctionComponent, ReactNode, useEffect, useRef } from "react";
 
-// EVO UVEZAO SAM LOADABLE
 import loadable from "@loadable/component";
-//
-
 import theme from "prism-react-renderer/themes/palenight";
 
 // === !===
 
-import {
+import Highlight, {
   // defaultProps,
   // Prism,
   Language,
+  defaultProps,
   PrismTheme,
   RenderProps, // !== === !== ===   MORAS DA IZVEZES OVAJ TYPE (DOK NE NADJES BOLJE RESENJE)
   // DefaultProps,
@@ -32,39 +22,16 @@ import {
 // GORNJI RenderProps  SAM UVEZAO NA HACKABLE NACIN TAK OSTO SAM OTISAO
 // U TYPE DEFINITION I IZVEZAO GA (AKO IKADA UPDATE-UJES TYPE DEF ZA LOADABLE,
 // OPET CE TYPESCRIPT YELL-OVATI NA TEBE)
-// === !===
-// === !===
-// === !===
-import styled from "@emotion/styled";
-// === !===
-// === !===
-// === !===
 
 import preToCodeBlock from "../../utility/preToCodeBlock";
 
-/* import { $_useReducerState } from "../../context_n_reducers/context_n_reducer_header";
-import { $_useBlogPostReducerState } from "../../context_n_reducers/context_n_reducer_blog_post"; */
-
-// === !===
-// console.log(theme);
-
-// === !===
-
 // A SADA CU DA KORISTIM LOADABLE
-const LazyPrismHighlighter = loadable(async () => {
-  const PrismModule = await import("prism-react-renderer");
+const LazyPrismHighlighter = () => {
+  // const PrismModule = await import("prism-react-renderer");
 
-  const Highlight = PrismModule.default;
+  // const Highlight = PrismModule.default;
 
-  const { defaultProps } = PrismModule;
-
-  // DA POKUSAM DA WRAPP-UJEM      Highlight        INTO STYLED COMPONENT
-  const StyledHighlight = styled(Highlight)`
-    [data-language] {
-      border: blanchedalmon solid 2px;
-    }
-  `;
-  // I KORISTICU StyledHighlight UMESTO Highlight
+  // const { defaultProps } = PrismModule;
 
   const LazyPrismHighlight: FunctionComponent<{
     language: Language;
@@ -119,8 +86,8 @@ const LazyPrismHighlighter = loadable(async () => {
     );
   };
 
-  return LazyPrismHighlight;
-});
+  // return LazyPrismHighlight;
+};
 
 const Code: FunctionComponent<{
   metastring?: string;
@@ -287,7 +254,7 @@ const Code: FunctionComponent<{
   // DIV-U
 
   return (
-    <LazyPrismHighlighter code={codeString} language={language} theme={theme}>
+    <Highlight code={codeString} language={language} theme={theme}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         //  EVO TI CES OVDE UPRAVO KORISTII VARIANT KOJI SE ZOVE
         // prism-highlight (OVO SAM REKAO DAVNO RANIJE)
@@ -572,7 +539,7 @@ const Code: FunctionComponent<{
           </pre>
         </div>
       )}
-    </LazyPrismHighlighter>
+    </Highlight>
   );
 };
 
