@@ -95,17 +95,25 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
   // ------------------------------------------------------
 
   useEffect(() => {
-    console.log("IT HAPPENS");
+    let canceled = false;
 
-    if (windowRef.current && bodyRef.current) {
-      // console.log( / windowRef.current.innerHeight);
-      // console.log(windowRef.current.scrol, windowRef.current.innerHeight);
-      if (bodyRef.current.scrollHeight / windowRef.current.innerHeight < 2) {
-        setUseScrollAnimation(false);
-      } else {
-        setUseScrollAnimation(true);
+    if (!canceled) {
+      console.log("IT HAPPENS");
+
+      if (windowRef.current && bodyRef.current) {
+        // console.log( / windowRef.current.innerHeight);
+        // console.log(windowRef.current.scrol, windowRef.current.innerHeight);
+        if (bodyRef.current.scrollHeight / windowRef.current.innerHeight < 2) {
+          setUseScrollAnimation(false);
+        } else {
+          setUseScrollAnimation(true);
+        }
       }
     }
+
+    return () => {
+      canceled = true;
+    };
   }, [windowRef, bodyRef]);
 
   const timerId1 = useRef<NodeJS.Timeout>();
