@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui";
 import { Link } from "gatsby";
-import { FunctionComponent, SetStateAction } from "react";
+import { useEffect, FunctionComponent, SetStateAction, Dispatch } from "react";
 
 interface HeadingSinglePropsI {
   intersectedDivId: string;
@@ -9,6 +9,7 @@ interface HeadingSinglePropsI {
   value: string;
   depth: number;
   headingName: string;
+  headingsLength?: number;
   relativeLink: string;
   setShowComercial: (
     value: SetStateAction<"comercialVis" | "comercialHid">
@@ -17,6 +18,7 @@ interface HeadingSinglePropsI {
     value: SetStateAction<"is-opaque" | "not-opaque">
   ) => void;
   setIntersectedDivId: (value: SetStateAction<string>) => void;
+  setSpinnerIsVisible?: Dispatch<React.SetStateAction<boolean>>;
 }
 
 const HeadingSingle: FunctionComponent<HeadingSinglePropsI> = (props) => {
@@ -30,9 +32,30 @@ const HeadingSingle: FunctionComponent<HeadingSinglePropsI> = (props) => {
     setIntersectedDivId,
     value,
     depth,
+    setSpinnerIsVisible,
+    headingsLength,
   } = props;
 
-  console.log(index);
+  useEffect(() => {
+    let canceled = false;
+
+    if (canceled) return;
+
+    if (setSpinnerIsVisible && headingsLength) {
+      if (index === 0) {
+        setSpinnerIsVisible(true);
+      }
+      if (index === headingsLength - 1) {
+        setSpinnerIsVisible(false);
+      }
+    }
+
+    return () => {
+      canceled = true;
+    };
+  }, []);
+
+  // console.log(index);
 
   return (
     <li

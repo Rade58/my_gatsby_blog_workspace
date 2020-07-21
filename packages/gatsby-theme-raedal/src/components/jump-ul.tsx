@@ -1,10 +1,10 @@
 import React, {
   FunctionComponent,
   SetStateAction,
-  useEffect,
   useContext,
+  useState,
 } from "react";
-import { Link } from "gatsby";
+// import { Link } from "gatsby";
 import { css } from "@emotion/core";
 
 import HeadingSingle from "./heading-j-single";
@@ -31,11 +31,18 @@ const makeHeadingzArray = function (
 
   return entries;
 };
+
 const JumpUL: FunctionComponent<JumpULPropsI> = (props) => {
   const { blogPostContext } = $_useBlogPostReducerState;
 
-  const { reducedBlogPostState } = useContext(blogPostContext);
+  const { reducedBlogPostState, headingsLength } = useContext(blogPostContext);
   const { setShowComercial, setPigOpacityClassFunc } = reducedBlogPostState;
+
+  //
+  const [spinnerIsVisible, setSpinnerIsVisible] = useState<boolean>(true);
+
+  console.log(spinnerIsVisible);
+  //
 
   const {
     normalizedHeadings,
@@ -67,6 +74,25 @@ const JumpUL: FunctionComponent<JumpULPropsI> = (props) => {
     >
       {headingzArray.map((heading, index) => {
         const [headingName, { value, depth }] = heading;
+
+        if (index === 0 || index === headingsLength - 1) {
+          return (
+            <HeadingSingle
+              headingsLength={headingsLength}
+              setSpinnerIsVisible={setSpinnerIsVisible}
+              key={`${value}-${depth}`}
+              depth={depth}
+              headingName={headingName}
+              index={index}
+              intersectedDivId={intersectedDivId}
+              relativeLink={relativeLink}
+              setIntersectedDivId={setIntersectedDivId}
+              setPigOpacityClassFunc={setPigOpacityClassFunc}
+              setShowComercial={setShowComercial}
+              value={value}
+            />
+          );
+        }
 
         return (
           <HeadingSingle
