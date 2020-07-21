@@ -48,7 +48,7 @@
     "typescript": "^3.8.3"
   },
   "peerDependencies": {
-    "gatsby": "^2.23.20",
+    "gatsby": "^2.24.7",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   }

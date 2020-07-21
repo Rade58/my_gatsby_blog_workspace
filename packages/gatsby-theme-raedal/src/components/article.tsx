@@ -66,12 +66,6 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
     []
   );
 
-  useEffect(() => {
-    // console.log("=== !== ===  MOUNTING ARTICLE  !== === !==");
-    // console.log({ body });
-    // console.log("=== !== === !== === !==");
-  }, []);
-
   return (
     <MDXProvider
       components={{

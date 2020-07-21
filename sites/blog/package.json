@@ -6,8 +6,8 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "gatsby": "^2.23.20",
-    "gatsby-plugin-typescript": "^2.4.13",
+    "gatsby": "^2.24.7",
+    "gatsby-plugin-typescript": "^2.4.16",
     "gatsby-theme-raedal": "*",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"

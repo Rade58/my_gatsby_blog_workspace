@@ -38,14 +38,22 @@ const KeywordModal: FunctionComponent<KeywordModalPropsI> = ({ keywords }) => {
   useEffect(() => {
     // === !== === !==      MOUNTING
 
-    console.log("TABLE OF KEYWORDS");
-    /* Promise.resolve().then(() => {
-      setTransitionClass("make-transition-front");
-    }); */
+    let canceled = false;
 
-    setTimeout(() => {
-      setTransitionClass("make-transition-front");
-    }, 1);
+    if (!canceled) {
+      console.log("TABLE OF KEYWORDS");
+      /* Promise.resolve().then(() => {
+        setTransitionClass("make-transition-front");
+      }); */
+
+      setTimeout(() => {
+        setTransitionClass("make-transition-front");
+      }, 1);
+    }
+
+    return () => {
+      canceled = true;
+    };
   }, []); // KAD JE SAMO KOD MOUNTINGA PRAZNA NIZ
   // (A AKO ZELIM DA SE EFFECT CALLBACK IZVRSI PRI SVAKOJ PROMENI STATE-A, PRI SVAKOM RERENDER-U, ONDA
   // NE STAVLJAM NISTA, KAO DRUGI ARGUMENT)

@@ -86,10 +86,18 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
   );
 
   useEffect(() => {
-    blogPostDispatch({
-      type: BLOG_POST_ACTION_TYPES_ENUM.GIVE_SET_OPACITY_CLASS_FUNC,
-      payload: setOpacityClass,
-    });
+    let canceled = false;
+
+    if (!canceled) {
+      blogPostDispatch({
+        type: BLOG_POST_ACTION_TYPES_ENUM.GIVE_SET_OPACITY_CLASS_FUNC,
+        payload: setOpacityClass,
+      });
+    }
+
+    return () => {
+      canceled = true;
+    };
   }, [BLOG_POST_ACTION_TYPES_ENUM.GIVE_SET_OPACITY_CLASS_FUNC, blogPostDispatch, setOpacityClass]);
 
   // ------------------------------------------------------
@@ -232,6 +240,10 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
 
       if (bodyRef.current && bodyRef.current.onscroll) {
         bodyRef.current.onscroll = null;
+
+        if (windowRef.current) {
+          windowRef.current.onresize = null;
+        }
       }
     },
     [] // NE ZABORAVI OVO
