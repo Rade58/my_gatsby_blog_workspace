@@ -72,6 +72,9 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
   const [thatIsFirstHeading, setThatIsFirstHeading] = useState<boolean>(false);
 
   useEffect(() => {
+    let canceled = false;
+    if (canceled) return;
+
     if (
       `${encodeURI(headings[0].value.toLowerCase())
         .replace(/%20/g, "-")
@@ -81,6 +84,10 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
     ) {
       setThatIsFirstHeading(true);
     }
+
+    return () => {
+      canceled = true;
+    };
   }, []);
   // === !== === !== === !== ===
 
@@ -88,6 +95,10 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
   const interObserver = useRef<IntersectionObserver>();
 
   useEffect(() => {
+    let canceled = false;
+
+    if (canceled) return;
+
     if (headingDivRef.current && "IntersectionObserver" in window) {
       // console.log(IntersectionObserver);
 
@@ -127,6 +138,11 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
 
       interObserver.current.observe(headingDivRef.current);
     }
+
+    return () => {
+      canceled = true;
+    };
+
     // eslint-disable-next-line
   }, [setIntersectedHeadingDivFunc]);
 
