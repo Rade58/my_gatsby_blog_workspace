@@ -3,9 +3,20 @@ import { jsx } from "theme-ui";
 
 import { css } from "@emotion/core";
 
-import { FunctionComponent, ReactNode, useEffect, useRef } from "react";
+import {
+  // useContext,
+  // useLayoutEffect,
+  FunctionComponent,
+  ReactNode,
+  useEffect,
+  useRef,
+  useCallback,
+} from "react";
 
+// EVO UVEZAO SAM LOADABLE
 import loadable from "@loadable/component";
+//
+
 import theme from "prism-react-renderer/themes/palenight";
 
 // === !===
@@ -22,43 +33,60 @@ import Highlight, {
 // GORNJI RenderProps  SAM UVEZAO NA HACKABLE NACIN TAK OSTO SAM OTISAO
 // U TYPE DEFINITION I IZVEZAO GA (AKO IKADA UPDATE-UJES TYPE DEF ZA LOADABLE,
 // OPET CE TYPESCRIPT YELL-OVATI NA TEBE)
+// === !===
+// === !===
+// === !===
+import styled from "@emotion/styled";
+// === !===
+// === !===
+// === !===
 
 import preToCodeBlock from "../../utility/preToCodeBlock";
 
+/* import { $_useReducerState } from "../../context_n_reducers/context_n_reducer_header";
+import { $_useBlogPostReducerState } from "../../context_n_reducers/context_n_reducer_blog_post"; */
+
+// === !===
+// console.log(theme);
+
+// === !===
+
 // A SADA CU DA KORISTIM LOADABLE
-const LazyPrismHighlighter = () => {
-  // const PrismModule = await import("prism-react-renderer");
+/* const LazyPrismHighlighter = loadable(async () => {
+  const PrismModule = await import("prism-react-renderer");
 
   // const Highlight = PrismModule.default;
 
-  // const { defaultProps } = PrismModule;
+  const { defaultProps } = PrismModule;
 
-  const LazyPrismHighlight: FunctionComponent<{
-    language: Language;
-    code: string;
-    theme: PrismTheme;
-    children: (props: RenderProps) => ReactNode;
-    // metastring?: string;
-  }> = (props) => {
-    // IZ PROP-A CU IZDVOJITI metastring
+  
+ */
+const LazyPrismHighlight: FunctionComponent<{
+  language: Language;
+  code: string;
+  theme: PrismTheme;
+  children: (props: RenderProps) => ReactNode;
+  // metastring?: string;
+}> = (props) => {
+  // IZ PROP-A CU IZDVOJITI metastring
 
-    const { code, language, children /*, metastring */ } = props;
+  const { code, language, children /*, metastring */ } = props;
 
-    // console.log(metastring);
+  // console.log(metastring);
 
-    // === !== === !== === !==
-    // const { ACTION_TYPES_ENUM, headerContext } = $_useReducerState;
+  // === !== === !== === !==
+  // const { ACTION_TYPES_ENUM, headerContext } = $_useReducerState;
 
-    // const { headerDispatch } = useContext(headerContext);
+  // const { headerDispatch } = useContext(headerContext);
 
-    // const {
-    //   BLOG_POST_ACTION_TYPES_ENUM,
-    //   blogPostContext,
-    // } = $_useBlogPostReducerState;
+  // const {
+  //   BLOG_POST_ACTION_TYPES_ENUM,
+  //   blogPostContext,
+  // } = $_useBlogPostReducerState;
 
-    // const { blogPostDispatch } = useContext(blogPostContext);
+  // const { blogPostDispatch } = useContext(blogPostContext);
 
-    /* useLayoutEffect(() => {
+  /* useLayoutEffect(() => {
       console.log("*********USE LAYOUT EFFECT**********");
 
       const bodyEl = document.body || document.getElementsByTagName("body")[0];
@@ -73,21 +101,21 @@ const LazyPrismHighlighter = () => {
       // blogPostDispatch
     }, []); */
 
-    return (
-      <Highlight
-        {...props}
-        {...defaultProps}
-        code={code}
-        language={language}
-        theme={theme}
-      >
-        {children}
-      </Highlight>
-    );
-  };
-
-  // return LazyPrismHighlight;
+  return (
+    <Highlight
+      {...props}
+      {...defaultProps}
+      code={code}
+      language={language}
+      theme={theme}
+    >
+      {children}
+    </Highlight>
+  );
 };
+
+/*   return LazyPrismHighlight;
+}); */
 
 const Code: FunctionComponent<{
   metastring?: string;
@@ -254,7 +282,7 @@ const Code: FunctionComponent<{
   // DIV-U
 
   return (
-    <Highlight code={codeString} language={language} theme={theme}>
+    <LazyPrismHighlight code={codeString} language={language} theme={theme}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         //  EVO TI CES OVDE UPRAVO KORISTII VARIANT KOJI SE ZOVE
         // prism-highlight (OVO SAM REKAO DAVNO RANIJE)
@@ -539,7 +567,7 @@ const Code: FunctionComponent<{
           </pre>
         </div>
       )}
-    </Highlight>
+    </LazyPrismHighlight>
   );
 };
 
