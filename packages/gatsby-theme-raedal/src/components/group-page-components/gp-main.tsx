@@ -45,7 +45,15 @@ const MainGp: FunctionComponent = (props) => {
   }, [setVisibilityClass]);
 
   useEffect(() => {
-    handleVisibilityClass();
+    let canceled = false;
+
+    if (!canceled) {
+      handleVisibilityClass();
+    }
+
+    return () => {
+      canceled = true;
+    };
   }, [handleVisibilityClass]);
 
   return (

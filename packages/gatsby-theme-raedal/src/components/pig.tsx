@@ -116,90 +116,102 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
   );
 
   useLayoutEffect(() => {
-    if (!windowRef.current) {
-      windowRef.current = window;
-    }
-    if (!bodyRef.current) {
-      bodyRef.current =
-        document.body || document.getElementsByTagName("body")[0];
-      // currentBodyScrollHeightRef.current = bodyRef.current.scrollHeight;
+    let canceled = false;
 
-      // bodyRef.current.scrollBy({ top: 200 });
-    }
+    if (!canceled) {
+      if (!windowRef.current) {
+        windowRef.current = window;
+      }
+      if (!bodyRef.current) {
+        bodyRef.current =
+          document.body || document.getElementsByTagName("body")[0];
+        // currentBodyScrollHeightRef.current = bodyRef.current.scrollHeight;
 
-    if (windowRef.current && bodyRef.current) {
-      /* if (resizingDivRef.current) {
+        // bodyRef.current.scrollBy({ top: 200 });
+      }
+
+      if (windowRef.current && bodyRef.current) {
+        /* if (resizingDivRef.current) {
         resizingDivRef.current.style.width = `${0}%`;
       } */
 
-      windowRef.current.onresize = (e) => {
-        if (bodyRef.current) {
-          bodyHeightRef.current = bodyRef.current.scrollHeight;
-        }
-      };
-
-      bodyRef.current.onscroll = (e) => {
-        const resizer = document.getElementsByClassName("resizer")[0];
-
-        // setTimeout(() => {
-        // === OVO JE U SET TIMEOUT FUNKCIJI JER U SUPROTNOM JE DOLAZILO DO NEKOG PREKIDA TRCANJA PRASETA !==
-        // setOpacityClass("is-opaque");
-        // NE MOGU TRENUTN ODA DOKUCIMA ZASTO JE TO TAKO, ALI KAD FUNKCIONISE OVAKO NEKA GA
-        // === !==
-        // }, 1000);
-
-        if (resizer) {
-          const resizerWidth = resizer.getBoundingClientRect().width;
-          const windowWidth = window.innerWidth;
-
-          // console.log((100 * resizerWidth) / windowWidth);
-
-          if ((100 * resizerWidth) / windowWidth < 1.2) {
-            setOpacityClass("not-opaque");
-            setShowComercial("comercialHid");
-          } else {
-            setOpacityClass("is-opaque");
-          }
-        }
-
-        const scrollIndicatorPercent =
-          (100 * window.scrollY) /
-          (document.body.scrollHeight - window.innerHeight);
-
-        if (resizer && resizer instanceof HTMLElement) {
-          resizer.style.width = `${scrollIndicatorPercent}%`;
-          //
-          //
-
-          if (initialScrollMove === "go") {
-            timerId1.current = setTimeout(() => {
-              setAnimationStop(false);
-            }, 1400);
-
-            timerId2.current = setTimeout(() => {
-              setScrollIndicatorWidth(scrollIndicatorPercent);
-            }, 1200);
-          }
-          if (initialScrollMove !== "go") setInitialScrollMove("go");
-        }
-        if (
-          bodyRef.current &&
-          bodyRef.current.clientWidth &&
-          windowRef.current &&
-          windowRef.current.scrollY
-        ) {
-          if (bodyHeightRef.current !== bodyRef.current.scrollHeight) {
+        windowRef.current.onresize = (e) => {
+          if (bodyRef.current) {
             bodyHeightRef.current = bodyRef.current.scrollHeight;
           }
-        }
-        if (windowRef.current && bodyRef.current && bodyRef.current.onscroll) {
-          headerDispatch({
-            type: ACTION_TYPES_ENUM.CHANGE_CURRENT_SCROLL,
-            payload: windowRef.current.scrollY,
-          });
-        }
-      };
+        };
+
+        bodyRef.current.onscroll = (e) => {
+          const resizer = document.getElementsByClassName("resizer")[0];
+
+          // setTimeout(() => {
+          // === OVO JE U SET TIMEOUT FUNKCIJI JER U SUPROTNOM JE DOLAZILO DO NEKOG PREKIDA TRCANJA PRASETA !==
+          // setOpacityClass("is-opaque");
+          // NE MOGU TRENUTN ODA DOKUCIMA ZASTO JE TO TAKO, ALI KAD FUNKCIONISE OVAKO NEKA GA
+          // === !==
+          // }, 1000);
+
+          if (resizer) {
+            const resizerWidth = resizer.getBoundingClientRect().width;
+            const windowWidth = window.innerWidth;
+
+            // console.log((100 * resizerWidth) / windowWidth);
+
+            if ((100 * resizerWidth) / windowWidth < 1.2) {
+              setOpacityClass("not-opaque");
+              setShowComercial("comercialHid");
+            } else {
+              setOpacityClass("is-opaque");
+            }
+          }
+
+          const scrollIndicatorPercent =
+            (100 * window.scrollY) /
+            (document.body.scrollHeight - window.innerHeight);
+
+          if (resizer && resizer instanceof HTMLElement) {
+            resizer.style.width = `${scrollIndicatorPercent}%`;
+            //
+            //
+
+            if (initialScrollMove === "go") {
+              timerId1.current = setTimeout(() => {
+                setAnimationStop(false);
+              }, 1400);
+
+              timerId2.current = setTimeout(() => {
+                setScrollIndicatorWidth(scrollIndicatorPercent);
+              }, 1200);
+            }
+            if (initialScrollMove !== "go") setInitialScrollMove("go");
+          }
+          if (
+            bodyRef.current &&
+            bodyRef.current.clientWidth &&
+            windowRef.current &&
+            windowRef.current.scrollY
+          ) {
+            if (bodyHeightRef.current !== bodyRef.current.scrollHeight) {
+              bodyHeightRef.current = bodyRef.current.scrollHeight;
+            }
+          }
+          if (
+            windowRef.current &&
+            bodyRef.current &&
+            bodyRef.current.onscroll
+          ) {
+            headerDispatch({
+              type: ACTION_TYPES_ENUM.CHANGE_CURRENT_SCROLL,
+              payload: windowRef.current.scrollY,
+            });
+          }
+        };
+      }
     }
+
+    return () => {
+      canceled = true;
+    };
   }, [windowRef, bodyRef, bodyHeightRef, initialScrollMove]);
 
   // CLEANING ON UNMOUNTING

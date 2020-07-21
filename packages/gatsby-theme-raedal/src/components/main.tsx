@@ -53,10 +53,17 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
   >("comercialHid");
 
   useEffect(() => {
-    blogPostDispatch({
-      type: BLOG_POST_ACTION_TYPES_ENUM.GIVE_SHOW_COMERCIAL,
-      payload: setComercialClass,
-    });
+    let canceled = false;
+    if (!canceled) {
+      blogPostDispatch({
+        type: BLOG_POST_ACTION_TYPES_ENUM.GIVE_SHOW_COMERCIAL,
+        payload: setComercialClass,
+      });
+    }
+
+    return () => {
+      canceled = true;
+    };
   }, [setComercialClass]);
 
   const mainRef = useRef<HTMLElement>(null);

@@ -105,9 +105,17 @@ const Header: FunctionComponent = () => {
   // === !== === !== === !== === !== === !== === !== === !== === !== === !== === !==
 
   useEffect(() => {
-    setJumpersSlidingClass(
-      scrolled_class === "pull-down" ? "slide-left" : "slide-right"
-    );
+    let canceled = false;
+
+    if (!canceled) {
+      setJumpersSlidingClass(
+        scrolled_class === "pull-down" ? "slide-left" : "slide-right"
+      );
+    }
+
+    return () => {
+      canceled = true;
+    };
   });
 
   return (
