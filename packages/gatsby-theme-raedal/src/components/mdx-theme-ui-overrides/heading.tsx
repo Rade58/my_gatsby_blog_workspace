@@ -47,7 +47,13 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
     blogPostDispatch,
     groupPage,
     headings,
+    headingsLength,
   } = useContext(blogPostContext);
+
+  /* console.log("=== !== === !== === !== === !== ===");
+  console.log({ headingsLength, headings, id: props.id });
+  // console.log({});
+  console.log("=== !== === !== === !== === !== ==="); */
 
   /* console.log({ propsId: props.id, headings });
   console.log(

@@ -95,6 +95,8 @@ const BlogPost: FunctionComponent<{
 
   // console.log(relativeLink);
 
+  const headingsLength = headings.length;
+
   return (
     <BlogPostStateProvider
       value={{
@@ -107,6 +109,7 @@ const BlogPost: FunctionComponent<{
         reducedBlogPostState,
         blogPostDispatch,
         headings,
+        headingsLength,
         relativeLink,
         seo: { title, lang, description, themeColor },
         allBlogKeywords,

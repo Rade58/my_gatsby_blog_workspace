@@ -167,6 +167,7 @@ export interface ContextBlogPostStateI {
 
   reducedBlogPostState: BlogPostStateI;
   headings: HeadingI[];
+  headingsLength: number;
   relativeLink: string;
 
   seo: {
@@ -220,6 +221,7 @@ export const blogPostContext: Context<ContextBlogPostStateI> = createContext({
   blogPostDispatch: ({ type, payload }) => {}, // MISLIM DA JE BITNO STO SI OBEZBEDIO OVAKAV DEFAULT (SADA KADA BUDES KORISTIO OVAJ CONTEXT U DRUGIM FAJLOVIMA, IAMCES TACNE TYPE-OVE)
 
   headings: [{ depth: 0, value: "nothing" }],
+  headingsLength: 0,
   relativeLink: "nothing",
   seo: {
     description: "placeholder",

@@ -42,6 +42,8 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
     groupPage,
   } = useContext(blogPostContext);
 
+  // console.log({ headingsLength: headings.length });
+
   const { setPigOpacityClassFunc, setShowComercial } = reducedBlogPostState;
 
   const { groupColor, underlineColor } = groupPage;
