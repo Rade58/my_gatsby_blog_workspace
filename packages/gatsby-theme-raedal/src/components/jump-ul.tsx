@@ -82,6 +82,9 @@ const JumpUL: FunctionComponent<JumpULPropsI> = (props) => {
   return (
     <Fragment>
       <div
+        style={{
+          transform: !spinnerIsVisible ? "translateY(-120%)" : "translateY(0%)",
+        }}
         css={css`
           /* border: pink solid 4px; */
           position: fixed;
@@ -92,6 +95,9 @@ const JumpUL: FunctionComponent<JumpULPropsI> = (props) => {
           background-color: #db81a679;
           background-image: ${headerBackgroundImage};
           z-index: 600;
+
+          transition-property: transform;
+          transition-duration: 0.8s;
 
           & div.sp-cont {
             width: 58px;

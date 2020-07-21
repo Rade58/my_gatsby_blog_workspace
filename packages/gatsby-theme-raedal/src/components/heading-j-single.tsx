@@ -43,10 +43,14 @@ const HeadingSingle: FunctionComponent<HeadingSinglePropsI> = (props) => {
 
     if (setSpinnerIsVisible && headingsLength) {
       if (index === 0) {
-        setSpinnerIsVisible(true);
+        setTimeout(() => {
+          setSpinnerIsVisible(true);
+        }, 10);
       }
       if (index === headingsLength - 1) {
-        setSpinnerIsVisible(false);
+        setTimeout(() => {
+          setSpinnerIsVisible(false);
+        }, 18);
       }
     }
 
