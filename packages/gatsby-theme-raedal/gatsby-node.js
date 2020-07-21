@@ -501,6 +501,8 @@ exports.onCreateNode = (
   // === !== === !== !== KREIRANJE    AuthorPage      NODE-OVA
 
   if (parentNode.sourceInstanceName === "author-pages-raedal") {
+    console.log(JSON.stringify(node.frontmatter, null, 2));
+
     const id = createNodeId(`AuthorPage-${node.id}`);
 
     const {
@@ -522,6 +524,7 @@ exports.onCreateNode = (
     actions.createNode({
       id,
       path: pathPackage.resolve("/", "author/", authorID.toLowerCase()),
+      parent: node.id,
       authorID,
       internal: {
         type: "AuthorPage",
@@ -1366,7 +1369,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     }
   `);
 
-  console.log(JSON.stringify(authorsOb, null, 2));
+  // console.log(JSON.stringify(authorsOb, null, 2));
 
   if (authorsOb.errors) {
     reporter.panic(
