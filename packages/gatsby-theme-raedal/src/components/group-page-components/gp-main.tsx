@@ -27,21 +27,23 @@ const MainGp: FunctionComponent = (props) => {
   >("hidden-class");
 
   const handleVisibilityClass = useCallback(() => {
-    window.onscroll = () => {
-      // console.log(document.body.scrollHeight / window.scrollY);
+    if (typeof window !== "undefined") {
+      window.onscroll = () => {
+        // console.log(document.body.scrollHeight / window.scrollY);
 
-      if (document.body.scrollHeight / window.scrollY < 6) {
-        setVisibilityClass("visible-class");
-      } else {
-        setVisibilityClass("hidden-class");
-      }
+        if (document.body.scrollHeight / window.scrollY < 6) {
+          setVisibilityClass("visible-class");
+        } else {
+          setVisibilityClass("hidden-class");
+        }
 
-      /* console.log({
+        /* console.log({
         scrollY: window.scrollY,
         bodyScrollHeight: document.body.scrollHeight,
         odnos: document.body.scrollHeight/window.scrollY
       }); */
-    };
+      };
+    }
   }, [setVisibilityClass]);
 
   useEffect(() => {
@@ -49,6 +51,10 @@ const MainGp: FunctionComponent = (props) => {
 
     if (!canceled) {
       handleVisibilityClass();
+    }
+
+    if (typeof window !== "undefined") {
+      document.body.style.overflowY = "scroll";
     }
 
     return () => {
