@@ -118,6 +118,14 @@ const Header: FunctionComponent = () => {
     };
   });
 
+  // console.log(window.outerWidth);
+  // console.log(window.innerWidth);
+
+  /* if(window.innerWidth){
+
+  }
+ */
+
   return (
     <header
       // style={{backgroundColor: pigDisapear?"":"inherit"}}

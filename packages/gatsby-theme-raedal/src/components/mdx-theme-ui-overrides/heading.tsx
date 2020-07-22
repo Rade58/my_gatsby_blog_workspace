@@ -119,6 +119,11 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
             // console.log({ entries, observer });
             // console.log(observer.thresholds);
             // console.log(entries[0].rootBounds);
+            /* if (thatIsFirstHeading) {
+              setShowComercial("comercialVis");
+            } */
+
+            console.log(50);
 
             if (entries[0].isIntersecting) {
               /* blogPostDispatch({
@@ -131,8 +136,12 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
               setIntersectedHeadingDivFunc(entries[0].target.id);
               // }, 100);
 
+              console.log(thatIsFirstHeading);
+
               if (thatIsFirstHeading) {
-                setShowComercial("comercialVis");
+                setTimeout(() => {
+                  setShowComercial("comercialVis");
+                }, 200);
               }
 
               /* console.log(setIntersectedHeadingDivFunc);
@@ -149,7 +158,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
           },
           {
             root: null,
-            threshold: [0.5],
+            threshold: [0.25, 0.75],
             rootMargin: "0px",
           }
         );
@@ -163,7 +172,12 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
     };
 
     // eslint-disable-next-line
-  }, [setIntersectedHeadingDivFunc, interObserver.current, headingDivRef]);
+  }, [
+    setIntersectedHeadingDivFunc,
+    interObserver.current,
+    headingDivRef,
+    setShowComercial,
+  ]);
 
   useEffect(
     () => () => {
