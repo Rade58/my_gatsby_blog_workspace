@@ -53,7 +53,7 @@ const JumpUL: FunctionComponent<JumpULPropsI> = (props) => {
   const spinnerContainerRef = useRef<HTMLDivElement>(null);
 
   if (typeof window !== "undefined") {
-    if (spinnerIsVisible) {
+    if (spinnerIsVisible && headingsLength > 1) {
       document.body.style.overflowY = "hidden";
     } else {
       document.body.style.overflowY = "visible";
