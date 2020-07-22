@@ -7,6 +7,7 @@ import {
   useContext,
   useState,
   Fragment,
+  useRef,
 } from "react";
 // import { Link } from "gatsby";
 import { css, keyframes } from "@emotion/core";
@@ -47,7 +48,9 @@ const JumpUL: FunctionComponent<JumpULPropsI> = (props) => {
   //
   const [spinnerIsVisible, setSpinnerIsVisible] = useState<boolean>(true);
 
-  console.log(spinnerIsVisible);
+  // console.log(spinnerIsVisible);
+
+  const spinnerContainerRef = useRef<HTMLDivElement>(null);
 
   if (spinnerIsVisible) {
     document.body.style.overflowY = "hidden";
@@ -79,9 +82,20 @@ const JumpUL: FunctionComponent<JumpULPropsI> = (props) => {
   }
 `;
 
+  // console.log(spinnerContainerRef.current);
+
   return (
     <Fragment>
       <div
+        className="modal-spinner-stuff"
+        ref={spinnerContainerRef}
+        onTransitionEnd={() => {
+          setTimeout(() => {
+            if (spinnerContainerRef && spinnerContainerRef.current) {
+              spinnerContainerRef.current.style.display = "none";
+            }
+          }, 100);
+        }}
         style={{
           transform: !spinnerIsVisible ? "translateY(-120%)" : "translateY(0%)",
         }}
