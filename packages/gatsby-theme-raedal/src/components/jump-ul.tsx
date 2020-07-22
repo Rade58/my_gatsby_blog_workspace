@@ -113,7 +113,7 @@ const JumpUL: FunctionComponent<JumpULPropsI> = (props) => {
           z-index: 600;
 
           transition-property: transform;
-          transition-duration: 0.8s;
+          transition-duration: 1s;
 
           & div.sp-cont {
             width: 58px;

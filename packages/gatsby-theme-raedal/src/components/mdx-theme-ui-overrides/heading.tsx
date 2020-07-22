@@ -98,7 +98,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
   // === !== === !== === !== ===
 
   const headingDivRef = useRef<HTMLDivElement>(null);
-  const interObserver = useRef<IntersectionObserver>();
+  const interObserver = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
     let canceled = false;
@@ -108,41 +108,54 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
     if (headingDivRef.current && "IntersectionObserver" in window) {
       // console.log(IntersectionObserver);
 
-      interObserver.current = new IntersectionObserver(
-        (entries, observer) => {
-          // console.log(entries[0].target.id);
+      if (setIntersectedHeadingDivFunc) {
+        // if (interObserver.current) {
+        interObserver.current?.unobserve(headingDivRef.current);
 
-          // console.log({ entries, observer });
-          // console.log(observer.thresholds);
-          // console.log(entries[0].rootBounds);
+        interObserver.current = new IntersectionObserver(
+          (entries, observer) => {
+            // console.log(entries[0].target.id);
 
-          if (entries[0].isIntersecting) {
-            /* blogPostDispatch({
+            // console.log({ entries, observer });
+            // console.log(observer.thresholds);
+            // console.log(entries[0].rootBounds);
+
+            if (entries[0].isIntersecting) {
+              /* blogPostDispatch({
                 type: BLOG_POST_ACTION_TYPES_ENUM.INTERSECTION,
                 payload: entries[0].target.id,
               }); */
 
-            // setTimeout(() => {
-            // console.log(entries[0].target.id);
-            setIntersectedHeadingDivFunc(entries[0].target.id);
-            // }, 100);
-            if (thatIsFirstHeading) {
-              setShowComercial("comercialVis");
-            }
-          }
+              // setTimeout(() => {
+              // console.log(entries[0].target.id);
+              setIntersectedHeadingDivFunc(entries[0].target.id);
+              // }, 100);
 
-          /* if (thatIsFirstHeading) {
+              if (thatIsFirstHeading) {
+                setShowComercial("comercialVis");
+              }
+
+              /* console.log(setIntersectedHeadingDivFunc);
+              console.log(entries[0]);
+              */
+              console.log(entries[0].target.id);
+
+              // console.log({ if: entries[0].intersectionRatio });
+            }
+
+            /* if (thatIsFirstHeading) {
             setShowComercial("comercialHid");
           } */
-        },
-        {
-          root: null,
-          threshold: [0, 0.75],
-          rootMargin: "0px",
-        }
-      );
-
-      interObserver.current.observe(headingDivRef.current);
+          },
+          {
+            root: null,
+            threshold: [0.5],
+            rootMargin: "0px",
+          }
+        );
+        interObserver.current.observe(headingDivRef.current);
+        // }
+      }
     }
 
     return () => {
@@ -150,7 +163,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
     };
 
     // eslint-disable-next-line
-  }, [setIntersectedHeadingDivFunc]);
+  }, [setIntersectedHeadingDivFunc, interObserver.current, headingDivRef]);
 
   useEffect(
     () => () => {

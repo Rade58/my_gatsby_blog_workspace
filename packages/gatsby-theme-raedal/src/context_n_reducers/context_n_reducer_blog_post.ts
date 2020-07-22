@@ -36,6 +36,8 @@ export enum BLOG_POST_ACTION_TYPES_ENUM {
   GIVE_SET_OPACITY_CLASS_FUNC = "GIVE_SET_OPACITY_CLASS_FUNC",
   //
   GIVE_SHOW_COMERCIAL = "GIVE_SHOW_COMERCIAL",
+
+  GIVE_SET_HEADING_IS_GOING_UP = "GIVE_SET_HEADING_IS_GOING_UP",
 }
 
 export interface BlogPostStateI {
@@ -61,6 +63,8 @@ export interface BlogPostStateI {
   setShowComercial:
     | Dispatch<SetStateAction<"comercialVis" | "comercialHid">>
     | ((val: any) => void);
+
+  setHeadingIsGoingUp: Dispatch<SetStateAction<boolean>> | ((val: any) => void);
 }
 
 //
@@ -127,6 +131,12 @@ export const blogPostReducer: Reducer<
     return { ...state, setShowComercial: action.payload };
   }
 
+  if (
+    action.type === BLOG_POST_ACTION_TYPES_ENUM.GIVE_SET_HEADING_IS_GOING_UP
+  ) {
+    return { ...state, setHeadingIsGoingUp: action.payload };
+  }
+
   return state;
 };
 
@@ -150,6 +160,10 @@ export const defaultState: BlogPostStateI = {
   },
   setPigOpacityClassFunc: () => {
     // console.log("SET OPACITY CLASS FOR THE PIG");
+  },
+
+  setHeadingIsGoingUp: () => {
+    // console.log("SET IF HEADING LEAVES INTERSECTION OBSERVER")
   },
 };
 

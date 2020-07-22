@@ -116,6 +116,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
   // console.log(interObservers[0].root);
 
   const [intersectedDivId, setIntersectedDivId] = useState<string>("");
+  // const [headingIsGoingUp, setHeadingIsGoingUp] = useState<boolean>(false);
 
   // MORAM KREIRATI DICTIONARY TYPE, ZA NORMALIZED hedaings OBJEKAT
   const normalizedHeadingsRef = useRef<{
@@ -145,6 +146,13 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
       type: BLOG_POST_ACTION_TYPES_ENUM.GIVE_SET_JUMPER_SLIDING,
       payload: setSlideClass,
     });
+
+    // AKO HEADING NAPUSTA INTERSECTION OBSERVER-A
+
+    // blogPostDispatch({
+    //   type: BLOG_POST_ACTION_TYPES_ENUM.GIVE_SET_HEADING_IS_GOING_UP,
+    //   payload: setHeadingIsGoingUp,
+    // });
 
     // NORMALIZOVANJE     headings    NIZ-A
     headings.forEach((hedingOb) => {
@@ -225,12 +233,21 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
     intersectedDivId,
   }); */
 
+  // console.log(headingIsGoingUp);
+
   const previousIndex: number | undefined =
     indexOfCurrentIntersHdiv - 1 >= 0 ? indexOfCurrentIntersHdiv - 1 : -1;
   const nextIndex: number | undefined =
     indexOfCurrentIntersHdiv + 1 >= 0
       ? indexOfCurrentIntersHdiv + 1
       : indexOfCurrentIntersHdiv;
+
+  /* if (headingIsGoingUp) {
+    // kasnije
+
+    previousIndex = 0;
+    nextIndex = 0;
+  } */
 
   const prevDivHkey: string = justHeadingsArrayRef.current[previousIndex];
   const nextDivHkey: string = justHeadingsArrayRef.current[nextIndex];
