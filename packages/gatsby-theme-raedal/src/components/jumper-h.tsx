@@ -118,7 +118,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
   const [intersectedDivId, setIntersectedDivId] = useState<string>("");
   const [headingIsGoingUp, setHeadingIsGoingUp] = useState<boolean>(false);
 
-  console.log(headingIsGoingUp);
+  // console.log(headingIsGoingUp);
 
   // MORAM KREIRATI DICTIONARY TYPE, ZA NORMALIZED hedaings OBJEKAT
   const normalizedHeadingsRef = useRef<{
@@ -775,11 +775,11 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
               }
               setTimeout(() => {
                 setPigOpacityClassFunc("is-opaque");
-                console.log(
+                /* console.log(
                   "pig is opaque",
                   JSON.stringify(setPigOpacityClassFunc, null, 2),
                   setPigOpacityClassFunc
-                );
+                ); */
                 setShowComercial("comercialVis");
               }, 600);
             }}

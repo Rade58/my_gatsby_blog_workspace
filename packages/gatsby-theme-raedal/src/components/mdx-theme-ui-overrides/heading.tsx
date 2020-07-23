@@ -117,7 +117,16 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
           (entries, observer) => {
             // console.log(entries[0].target.id);
 
-            // console.log("amazing", entries[0].intersectionRect.y === 0);
+            console.log("amazing ClientRect", entries[0].intersectionRect);
+            console.log("amazing InterRect", entries[0].boundingClientRect);
+
+            /* if (
+              entries[0].intersectionRect.y === 0 &&
+              entries[0].boundingClientRect.y < 0
+            ) {
+              setHeadingIsGoingUp(false);
+              return;
+            } */
 
             /* if (
               window &&
@@ -130,7 +139,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
 
             }*/
 
-            console.log(entries[0].intersectionRatio);
+            // console.log(entries[0].intersectionRatio);
 
             // console.log({ entries, observer });
             // console.log(observer.thresholds);
