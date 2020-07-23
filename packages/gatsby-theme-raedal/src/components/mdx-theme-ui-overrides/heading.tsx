@@ -70,6 +70,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
     pigDisapear,
     setIntersectedHeadingDivFunc,
     setShowComercial,
+    setHeadingIsGoingUp,
   } = reducedBlogPostState;
 
   // console.log({ comercialIsVisible });
@@ -123,9 +124,24 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
               setShowComercial("comercialVis");
             } */
 
-            console.log(50);
+            if (thatIsFirstHeading) {
+              setTimeout(() => {
+                setShowComercial("comercialVis");
+              }, 2);
+            }
+
+            // console.log(entries[0].intersectionRect);
+
+            if (
+              entries[0].intersectionRect.top === 0 ||
+              entries[0].intersectionRect.top < 0
+            ) {
+              setHeadingIsGoingUp(true);
+            }
 
             if (entries[0].isIntersecting) {
+              console.log(entries[0].intersectionRect);
+
               /* blogPostDispatch({
                 type: BLOG_POST_ACTION_TYPES_ENUM.INTERSECTION,
                 payload: entries[0].target.id,
@@ -136,18 +152,26 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
               setIntersectedHeadingDivFunc(entries[0].target.id);
               // }, 100);
 
+              /* if (!(entries[0].intersectionRect.top > 0)) {
+                setHeadingIsGoingUp(true);
+                console.log(entries[0].intersectionRect);
+              } else { */
+              setHeadingIsGoingUp(false);
+              // console.log(entries[0].intersectionRect);
+              // }
+
               console.log(thatIsFirstHeading);
 
-              if (thatIsFirstHeading) {
+              /* if (thatIsFirstHeading) {
                 setTimeout(() => {
                   setShowComercial("comercialVis");
                 }, 200);
-              }
+              } */
 
               /* console.log(setIntersectedHeadingDivFunc);
               console.log(entries[0]);
               */
-              console.log(entries[0].target.id);
+              // console.log(entries[0].target.id);
 
               // console.log({ if: entries[0].intersectionRatio });
             }
@@ -158,7 +182,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
           },
           {
             root: null,
-            threshold: [0.25, 0.75],
+            threshold: [0.25],
             rootMargin: "0px",
           }
         );
@@ -177,6 +201,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
     interObserver.current,
     headingDivRef,
     setShowComercial,
+    setHeadingIsGoingUp,
   ]);
 
   useEffect(
