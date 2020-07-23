@@ -117,6 +117,21 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
           (entries, observer) => {
             // console.log(entries[0].target.id);
 
+            // console.log("amazing", entries[0].intersectionRect.y === 0);
+
+            /* if (
+              window &&
+              window.location.pathname.includes("#") &&
+              entries[0].intersectionRect.y === 0
+            ) {
+              setIntersectedHeadingDivFunc(entries[0].target.id);
+
+              return;
+
+            }*/
+
+            console.log(entries[0].intersectionRatio);
+
             // console.log({ entries, observer });
             // console.log(observer.thresholds);
             // console.log(entries[0].rootBounds);
@@ -159,6 +174,16 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
               // setTimeout(() => {
               // console.log(entries[0].target.id);
 
+              /* if (
+                entries[0].intersectionRect.left &&
+                entries[0].intersectionRect.right
+              ) {
+                setIntersectedHeadingDivFunc(entries[0].target.id);
+                setHeadingIsGoingUp(false);
+
+                return;
+              } */
+
               if (entries[0].boundingClientRect.y > 0) {
                 // console.log("going up");
                 // setHeadingIsGoingUp(true);
@@ -196,13 +221,22 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
               // -------------------------------------------
               /* eslint-disable-next-line */
 
-              console.log(entries[0].boundingClientRect);
-              console.log(entries[0].intersectionRect);
+              // console.log(entries[0].boundingClientRect);
+              // console.log(entries[0].intersectionRect);
+              /* 
+              if (
+                entries[0].intersectionRect.left &&
+                entries[0].intersectionRect.right
+              ) {
+                setHeadingIsGoingUp(false);
+                setIntersectedHeadingDivFunc(entries[0].target.id);
+
+                return;
+              } */
 
               if (entries[0].boundingClientRect.top > 0) {
                 setHeadingIsGoingUp(true);
                 // console.log("going up");
-                // if (entries[0].intersectionRect.bottom === 0) return;
 
                 // console.log(entries[0]);
               }
