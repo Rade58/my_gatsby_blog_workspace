@@ -159,12 +159,15 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
               // setTimeout(() => {
               // console.log(entries[0].target.id);
 
-              if (entries[0].boundingClientRect.top > 0) {
+              if (entries[0].boundingClientRect.y > 0) {
                 // console.log("going up");
                 // setHeadingIsGoingUp(true);
                 setIntersectedHeadingDivFunc(entries[0].target.id);
               }
-              setHeadingIsGoingUp(false);
+
+              if (entries[0].boundingClientRect.y > 0) {
+                setHeadingIsGoingUp(false);
+              }
 
               // }, 100);
 
@@ -192,13 +195,22 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
             } else {
               // -------------------------------------------
               /* eslint-disable-next-line */
-              if (entries[0].boundingClientRect.y >= 0) {
-                // console.log("going up");
-                if (!entries[0].intersectionRect.height) return;
+
+              console.log(entries[0].boundingClientRect);
+              console.log(entries[0].intersectionRect);
+
+              if (entries[0].boundingClientRect.top > 0) {
                 setHeadingIsGoingUp(true);
+                // console.log("going up");
+                // if (entries[0].intersectionRect.bottom === 0) return;
 
                 // console.log(entries[0]);
               }
+
+              if (entries[0].boundingClientRect.y > 0) {
+                setHeadingIsGoingUp(false);
+              }
+
               // -------------------------------------------
             }
 
@@ -209,7 +221,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
           {
             root: null,
             threshold: [0.25],
-            rootMargin: "0px",
+            rootMargin: "50px",
           }
         );
         interObserver.current.observe(headingDivRef.current);
