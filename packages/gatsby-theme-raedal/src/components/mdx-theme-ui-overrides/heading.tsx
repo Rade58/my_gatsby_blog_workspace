@@ -163,8 +163,8 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
                 // console.log("going up");
                 // setHeadingIsGoingUp(true);
                 setIntersectedHeadingDivFunc(entries[0].target.id);
-                setHeadingIsGoingUp(false);
               }
+              setHeadingIsGoingUp(false);
 
               // }, 100);
 
@@ -192,9 +192,11 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
             } else {
               // -------------------------------------------
               /* eslint-disable-next-line */
-              if (entries[0].boundingClientRect.top > 0) {
+              if (entries[0].boundingClientRect.y >= 0) {
                 // console.log("going up");
                 setHeadingIsGoingUp(true);
+
+                // console.log(entries[0]);
               }
               // -------------------------------------------
             }
