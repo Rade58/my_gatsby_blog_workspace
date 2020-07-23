@@ -229,6 +229,10 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
   // -------------------
   //
   useEffect(() => {
+    let canceled = false;
+
+    if (canceled) return;
+
     if (headingIsGoingUp) {
       const indexOfCurrent = justHeadingsArrayRef.current.indexOf(
         intersectedDivId
@@ -237,11 +241,15 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
       if (indexOfCurrent > 0) {
         const lowerIndex = indexOfCurrent - 1;
 
-        console.log(justHeadingsArrayRef);
+        // console.log(justHeadingsArrayRef);
 
         setIntersectedDivId(justHeadingsArrayRef.current[lowerIndex]);
       }
     }
+
+    return () => {
+      canceled = true;
+    };
   }, [headingIsGoingUp]);
 
   /* if (headingIsGoingUp && indexOfCurrentIntersHdiv !== 0) {
@@ -282,6 +290,18 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
     prevDivHkey,
     nextDivHkey,
   }); */
+
+  /* console.log("*************** PREV STUFF ******************");
+  console.log(prevDivHkey);
+  console.log("**********************************************");
+
+  console.log("-------------------- CURR STUFF---------------------");
+  console.log(intersectedDivId, indexOfCurrentIntersHdiv);
+  console.log("-----------------------------------------");
+
+  console.log("*************** PREV STUFF ******************");
+  console.log(nextDivHkey);
+  console.log("**********************************************"); */
 
   return (
     <Fragment>

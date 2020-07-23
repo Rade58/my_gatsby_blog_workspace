@@ -34,7 +34,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
 
   // console.log(props.id);
 
-  // KORISTICU I CONTEXT
+  // console.log(window.location);
 
   const {
     blogPostContext,
@@ -194,6 +194,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
               /* eslint-disable-next-line */
               if (entries[0].boundingClientRect.y >= 0) {
                 // console.log("going up");
+                if (!entries[0].intersectionRect.height) return;
                 setHeadingIsGoingUp(true);
 
                 // console.log(entries[0]);
