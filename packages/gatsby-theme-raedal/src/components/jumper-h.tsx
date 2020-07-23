@@ -118,6 +118,8 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
   const [intersectedDivId, setIntersectedDivId] = useState<string>("");
   const [headingIsGoingUp, setHeadingIsGoingUp] = useState<boolean>(false);
 
+  console.log(headingIsGoingUp);
+
   // MORAM KREIRATI DICTIONARY TYPE, ZA NORMALIZED hedaings OBJEKAT
   const normalizedHeadingsRef = useRef<{
     [key: string]: { value: string; depth: number };
@@ -224,6 +226,24 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
     intersectedDivId
   );
 
+  // -------------------
+  //
+  useEffect(() => {
+    if (headingIsGoingUp) {
+      const indexOfCurrent = justHeadingsArrayRef.current.indexOf(
+        intersectedDivId
+      );
+
+      if (indexOfCurrent > 0) {
+        const lowerIndex = indexOfCurrent - 1;
+
+        console.log(justHeadingsArrayRef);
+
+        setIntersectedDivId(justHeadingsArrayRef.current[lowerIndex]);
+      }
+    }
+  }, [headingIsGoingUp]);
+
   /* if (headingIsGoingUp && indexOfCurrentIntersHdiv !== 0) {
     indexOfCurrentIntersHdiv -= 1;
   }
@@ -236,6 +256,8 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
     hs: headings,
     intersectedDivId,
   }); */
+
+  // console.log(headingIsGoingUp);
 
   const previousIndex: number | undefined =
     indexOfCurrentIntersHdiv - 1 >= 0 ? indexOfCurrentIntersHdiv - 1 : -1;

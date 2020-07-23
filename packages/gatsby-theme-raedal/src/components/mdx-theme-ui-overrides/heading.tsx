@@ -95,7 +95,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
     return () => {
       canceled = true;
     };
-  }, []);
+  }, [setThatIsFirstHeading]);
   // === !== === !== === !== ===
 
   const headingDivRef = useRef<HTMLDivElement>(null);
@@ -124,23 +124,32 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
               setShowComercial("comercialVis");
             } */
 
-            if (thatIsFirstHeading) {
-              setTimeout(() => {
-                setShowComercial("comercialVis");
-              }, 2);
-            }
+            /* console.log("--------------------------");
+            console.log("NOT INTERSECTING");
+            console.log(entries[0]);
+            console.log("--------------------------"); */
 
             // console.log(entries[0].intersectionRect);
 
-            if (
+            /* if (
               entries[0].intersectionRect.top === 0 ||
               entries[0].intersectionRect.top < 0
             ) {
               setHeadingIsGoingUp(true);
+            } */
+            if (thatIsFirstHeading) {
+              setTimeout(() => {
+                setShowComercial("comercialVis");
+              }, 20);
             }
 
             if (entries[0].isIntersecting) {
-              console.log(entries[0].intersectionRect);
+              // console.log(entries[0].intersectionRect);
+
+              /* console.log("***************************");
+              console.log("INTERSECTING");
+              console.log(entries[0]);
+              console.log("****************************"); */
 
               /* blogPostDispatch({
                 type: BLOG_POST_ACTION_TYPES_ENUM.INTERSECTION,
@@ -149,18 +158,24 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
 
               // setTimeout(() => {
               // console.log(entries[0].target.id);
-              setIntersectedHeadingDivFunc(entries[0].target.id);
+
+              if (entries[0].boundingClientRect.top > 0) {
+                // console.log("going up");
+                // setHeadingIsGoingUp(true);
+                setIntersectedHeadingDivFunc(entries[0].target.id);
+                setHeadingIsGoingUp(false);
+              }
+
               // }, 100);
 
               /* if (!(entries[0].intersectionRect.top > 0)) {
                 setHeadingIsGoingUp(true);
                 console.log(entries[0].intersectionRect);
               } else { */
-              setHeadingIsGoingUp(false);
               // console.log(entries[0].intersectionRect);
               // }
 
-              console.log(thatIsFirstHeading);
+              // console.log(thatIsFirstHeading);
 
               /* if (thatIsFirstHeading) {
                 setTimeout(() => {
@@ -174,6 +189,14 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
               // console.log(entries[0].target.id);
 
               // console.log({ if: entries[0].intersectionRatio });
+            } else {
+              // -------------------------------------------
+              /* eslint-disable-next-line */
+              if (entries[0].boundingClientRect.top > 0) {
+                // console.log("going up");
+                setHeadingIsGoingUp(true);
+              }
+              // -------------------------------------------
             }
 
             /* if (thatIsFirstHeading) {
