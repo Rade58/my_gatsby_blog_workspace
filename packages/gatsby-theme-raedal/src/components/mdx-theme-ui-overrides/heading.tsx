@@ -124,9 +124,9 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
               return;
             }
 
-            console.log("BOUNDING CLIENT RECT", entries[0].boundingClientRect);
-            console.log("INTERSECTION RECT", entries[0].intersectionRect);
-            console.log("IS INTERSECTING", entries[0].isIntersecting);
+            // console.log("BOUNDING CLIENT RECT", entries[0].boundingClientRect);
+            // console.log("INTERSECTION RECT", entries[0].intersectionRect);
+            // console.log("IS INTERSECTING", entries[0].isIntersecting);
 
             // console.log(entries[0].target.id);
 
