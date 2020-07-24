@@ -115,6 +115,19 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
 
         interObserver.current = new IntersectionObserver(
           (entries, observer) => {
+            //
+
+            if (
+              !entries[0].isIntersecting &&
+              entries[0].intersectionRect.y === 0
+            ) {
+              return;
+            }
+
+            console.log("BOUNDING CLIENT RECT", entries[0].boundingClientRect);
+            console.log("INTERSECTION RECT", entries[0].intersectionRect);
+            console.log("IS INTERSECTING", entries[0].isIntersecting);
+
             // console.log(entries[0].target.id);
 
             // console.log("amazing ClientRect", entries[0].intersectionRect);
