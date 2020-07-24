@@ -1,7 +1,9 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui";
+import { css } from "@emotion/core";
 import { Link } from "gatsby";
 import { useEffect, FunctionComponent, SetStateAction, Dispatch } from "react";
+import { BLOG_POST_ACTION_TYPES_ENUM } from "../context_n_reducers/context_n_reducer_blog_post";
 
 interface HeadingSinglePropsI {
   intersectedDivId: string;
@@ -19,6 +21,10 @@ interface HeadingSinglePropsI {
   ) => void;
   setIntersectedDivId: (value: SetStateAction<string>) => void;
   setSpinnerIsVisible?: Dispatch<React.SetStateAction<boolean>>;
+  blogPostDispatch: Dispatch<{
+    type: BLOG_POST_ACTION_TYPES_ENUM;
+    payload?: any;
+  }>;
 }
 
 const HeadingSingle: FunctionComponent<HeadingSinglePropsI> = (props) => {
@@ -34,6 +40,7 @@ const HeadingSingle: FunctionComponent<HeadingSinglePropsI> = (props) => {
     depth,
     setSpinnerIsVisible,
     headingsLength,
+    blogPostDispatch,
   } = props;
 
   useEffect(() => {

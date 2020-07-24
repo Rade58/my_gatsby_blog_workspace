@@ -38,6 +38,8 @@ export enum BLOG_POST_ACTION_TYPES_ENUM {
   GIVE_SHOW_COMERCIAL = "GIVE_SHOW_COMERCIAL",
 
   GIVE_SET_HEADING_IS_GOING_UP = "GIVE_SET_HEADING_IS_GOING_UP",
+
+  PREVENT_INTERSECTION_OBSERVER = "PREVENT_INTERSECTION_OBSERVER",
 }
 
 export interface BlogPostStateI {
@@ -65,6 +67,7 @@ export interface BlogPostStateI {
     | ((val: any) => void);
 
   setHeadingIsGoingUp: Dispatch<SetStateAction<boolean>> | ((val: any) => void);
+  intersectionPrevented: boolean;
 }
 
 //
@@ -137,6 +140,12 @@ export const blogPostReducer: Reducer<
     return { ...state, setHeadingIsGoingUp: action.payload };
   }
 
+  if (
+    action.type === BLOG_POST_ACTION_TYPES_ENUM.PREVENT_INTERSECTION_OBSERVER
+  ) {
+    return { ...state, intersectionPrevented: action.payload };
+  }
+
   return state;
 };
 
@@ -165,6 +174,7 @@ export const defaultState: BlogPostStateI = {
   setHeadingIsGoingUp: () => {
     // console.log("SET IF HEADING LEAVES INTERSECTION OBSERVER")
   },
+  intersectionPrevented: false,
 };
 
 // CONTEXT stuff  === !==  === !==  === !==  === !==  === !==

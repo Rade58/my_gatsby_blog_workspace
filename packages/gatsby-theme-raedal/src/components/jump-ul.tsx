@@ -40,9 +40,14 @@ const makeHeadingzArray = function (
 const JumpUL: FunctionComponent<JumpULPropsI> = (props) => {
   const { headerBackgroundImage } = additionalStyles;
 
-  const { blogPostContext } = $_useBlogPostReducerState;
+  const {
+    blogPostContext,
+    BLOG_POST_ACTION_TYPES_ENUM,
+  } = $_useBlogPostReducerState;
 
-  const { reducedBlogPostState, headingsLength } = useContext(blogPostContext);
+  const { reducedBlogPostState, headingsLength, blogPostDispatch } = useContext(
+    blogPostContext
+  );
   const { setShowComercial, setPigOpacityClassFunc } = reducedBlogPostState;
 
   //
@@ -188,6 +193,7 @@ const JumpUL: FunctionComponent<JumpULPropsI> = (props) => {
           if (index === 0 || index === headingsLength - 1) {
             return (
               <HeadingSingle
+                blogPostDispatch={blogPostDispatch}
                 headingsLength={headingsLength}
                 setSpinnerIsVisible={setSpinnerIsVisible}
                 key={`${value}-${depth}`}
@@ -206,6 +212,7 @@ const JumpUL: FunctionComponent<JumpULPropsI> = (props) => {
 
           return (
             <HeadingSingle
+              blogPostDispatch={blogPostDispatch}
               key={`${value}-${depth}`}
               depth={depth}
               headingName={headingName}
