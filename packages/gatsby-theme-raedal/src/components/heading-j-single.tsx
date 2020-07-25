@@ -78,6 +78,8 @@ const HeadingSingle: FunctionComponent<HeadingSinglePropsI> = (props) => {
             setShowComercial("comercialVis");
             setPigOpacityClassFunc("is-opaque");
           }, 600);
+          const val = `#${encodeURI(value)}`;
+          setIntersectedDivId(val);
         }}
         onSubmit={(e) => {
           console.log(`#${encodeURI(value)}`);
@@ -85,8 +87,6 @@ const HeadingSingle: FunctionComponent<HeadingSinglePropsI> = (props) => {
           const val = `#${encodeURI(value)}`;
 
           if (intersectedDivId === val) return e.preventDefault();
-
-          setIntersectedDivId(val);
         }}
         to={`${encodeURI(relativeLink)}#${
           intersectedDivId !== `#${encodeURI(value)}`

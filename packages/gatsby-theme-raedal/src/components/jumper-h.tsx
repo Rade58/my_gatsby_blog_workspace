@@ -117,7 +117,6 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
 
   const [intersectedDivId, setIntersectedDivId] = useState<string>("");
   const [headingIsGoingUp, setHeadingIsGoingUp] = useState<boolean>(false);
-  const [linkIsExecuted, setLinkIsExecuted] = useState<boolean>(false); // DISPATCH-U I OVO (INTERSECTION OBSERVER CE GA STAVITI NA FALSE)
 
   /* console.log("--------------------------------");
   console.log(headingIsGoingUp);
@@ -164,11 +163,6 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
     blogPostDispatch({
       type: BLOG_POST_ACTION_TYPES_ENUM.GIVE_SET_HEADING_IS_GOING_UP,
       payload: setHeadingIsGoingUp,
-    });
-
-    blogPostDispatch({
-      type: BLOG_POST_ACTION_TYPES_ENUM.GIV_SET_LINK_IS_EXECUTED,
-      payload: setLinkIsExecuted,
     });
 
     // NORMALIZOVANJE     headings    NIZ-A
@@ -251,20 +245,6 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
     // console.log(linkIsExecuted);
     // console.log(intersectedDivId);
 
-    if (linkIsExecuted) {
-      const indexOfCurrent = justHeadingsArrayRef.current.indexOf(
-        intersectedDivId
-      );
-      // console.log("EXECUTED");
-      if (indexOfCurrent > 0) {
-        // console.log(justHeadingsArrayRef);
-
-        setIntersectedDivId(justHeadingsArrayRef.current[indexOfCurrent]);
-
-        return;
-      }
-    }
-
     if (headingIsGoingUp) {
       const indexOfCurrent = justHeadingsArrayRef.current.indexOf(
         intersectedDivId
@@ -284,7 +264,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
     return () => {
       canceled = true;
     };
-  }, [headingIsGoingUp, linkIsExecuted]);
+  }, [headingIsGoingUp]);
 
   ////////////////////////////////////////==================================/////////////////
   /* useEffect(() => {
@@ -592,7 +572,6 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
                 setShowComercial("comercialVis");
               }, 600);
               if (prevDivHkey) {
-                setLinkIsExecuted(true);
                 setIntersectedDivId(prevDivHkey);
               }
             }}
@@ -812,7 +791,6 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
           <Link
             onClick={() => {
               if (nextDivHkey) {
-                setLinkIsExecuted(true);
                 setIntersectedDivId(nextDivHkey);
               }
               setTimeout(() => {

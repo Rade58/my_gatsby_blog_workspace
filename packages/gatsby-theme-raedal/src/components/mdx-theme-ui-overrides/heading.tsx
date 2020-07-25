@@ -71,8 +71,6 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
     setIntersectedHeadingDivFunc,
     setShowComercial,
     setHeadingIsGoingUp,
-    intersectionPrevented,
-    setLinkIsExecuted,
   } = reducedBlogPostState;
 
   // console.log(intersectionPrevented);
@@ -122,6 +120,8 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
 
         interObserver.current = new IntersectionObserver(
           (entries, observer) => {
+            return;
+
             // OPET JE OVO PROBLEMATICNO (ALI SACUVAJ CODE)  ///////////////////////
             /* if (
               !entries[0].isIntersecting &&
@@ -153,7 +153,6 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
             if (entries[0].isIntersecting) {
               if (boundingRect.top > 0) {
                 setHeadingIsGoingUp(false);
-                setLinkIsExecuted(false);
                 setIntersectedHeadingDivFunc(entries[0].target.id);
                 if (thatIsFirstHeading) {
                   setTimeout(() => {
@@ -176,16 +175,8 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
                   JSON.stringify(entries[0].intersectionRatio, null, 2),
                   JSON.stringify(entries[0].intersectionRect, null, 2)
                 ); */
-                setLinkIsExecuted(false);
                 setHeadingIsGoingUp(true);
               }
-            }
-
-            if (
-              !entries[0].intersectionRect.bottom &&
-              !entries[0].intersectionRect.top
-            ) {
-              setLinkIsExecuted(true);
             }
 
             ////////////////////////////--------
@@ -236,7 +227,6 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
     setShowComercial,
     setHeadingIsGoingUp,
     isFirstMount,
-    setLinkIsExecuted,
   ]);
 
   useEffect(
