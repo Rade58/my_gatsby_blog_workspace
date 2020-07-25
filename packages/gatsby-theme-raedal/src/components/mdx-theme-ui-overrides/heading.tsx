@@ -129,11 +129,14 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
               return;
             } */
             //
-            if (thatIsFirstHeading) {
+
+            // -------------------------------------------
+            /* if (thatIsFirstHeading) {
               setTimeout(() => {
                 setShowComercial("comercialVis");
               }, 20);
-            }
+            } */
+            //-----------------------------------------
 
             //
             console.log(entries[0].boundingClientRect);
@@ -144,6 +147,11 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
               if (boundingRect.top > 0) {
                 setHeadingIsGoingUp(false);
                 setIntersectedHeadingDivFunc(entries[0].target.id);
+                if (thatIsFirstHeading) {
+                  setTimeout(() => {
+                    setShowComercial("comercialVis");
+                  }, 20);
+                }
               }
             } else {
               // eslint-disable-next-line
