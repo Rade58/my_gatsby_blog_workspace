@@ -117,8 +117,12 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
 
   const [intersectedDivId, setIntersectedDivId] = useState<string>("");
   const [headingIsGoingUp, setHeadingIsGoingUp] = useState<boolean>(false);
+  const [linkIsExecuted, setLinkIsExecuted] = useState<boolean>(false); // DISPATCH-U I OVO (INTERSECTION OBSERVER CE GA STAVITI NA FALSE)
 
-  // console.log(headingIsGoingUp);
+  /* console.log("--------------------------------");
+  console.log(headingIsGoingUp);
+  console.log(intersectedDivId);
+  console.log("--------------------------------"); */
 
   // MORAM KREIRATI DICTIONARY TYPE, ZA NORMALIZED hedaings OBJEKAT
   const normalizedHeadingsRef = useRef<{
@@ -131,6 +135,12 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
   const [loadArray, setLoadArray] = useState<boolean>(true);
 
   // console.log(normalizedHeadingsRef.current);
+
+  useEffect(() => {
+    console.log("ID CHANGED ID CHANGED ID CHANGED ID CHANGED");
+
+    console.log(intersectedDivId);
+  }, [intersectedDivId]);
 
   useEffect(() => {
     let canceled = false;
@@ -154,6 +164,11 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
     blogPostDispatch({
       type: BLOG_POST_ACTION_TYPES_ENUM.GIVE_SET_HEADING_IS_GOING_UP,
       payload: setHeadingIsGoingUp,
+    });
+
+    blogPostDispatch({
+      type: BLOG_POST_ACTION_TYPES_ENUM.GIV_SET_LINK_IS_EXECUTED,
+      payload: setLinkIsExecuted,
     });
 
     // NORMALIZOVANJE     headings    NIZ-A
@@ -233,11 +248,28 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
 
     if (canceled) return;
 
+    // console.log(linkIsExecuted);
+    // console.log(intersectedDivId);
+
+    if (linkIsExecuted) {
+      const indexOfCurrent = justHeadingsArrayRef.current.indexOf(
+        intersectedDivId
+      );
+      // console.log("EXECUTED");
+      if (indexOfCurrent > 0) {
+        // console.log(justHeadingsArrayRef);
+
+        setIntersectedDivId(justHeadingsArrayRef.current[indexOfCurrent]);
+
+        return;
+      }
+    }
+
     if (headingIsGoingUp) {
       const indexOfCurrent = justHeadingsArrayRef.current.indexOf(
         intersectedDivId
       );
-
+      // console.log("EXECUTED");
       if (indexOfCurrent > 0) {
         const lowerIndex = indexOfCurrent - 1;
 
@@ -245,12 +277,20 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
 
         setIntersectedDivId(justHeadingsArrayRef.current[lowerIndex]);
       }
-    }
+    } /*  else {
+      setIntersectedDivId(justHeadingsArrayRef.current[indexOfCurrent]);
+    } */
 
     return () => {
       canceled = true;
     };
-  }, [headingIsGoingUp]);
+  }, [headingIsGoingUp, linkIsExecuted]);
+
+  ////////////////////////////////////////==================================/////////////////
+  /* useEffect(() => {
+    setHeadingIsGoingUp(false);
+  }, []); */
+  ////////////////////////////////////////==================================/////////////////
 
   /* if (headingIsGoingUp && indexOfCurrentIntersHdiv !== 0) {
     indexOfCurrentIntersHdiv -= 1;
@@ -552,6 +592,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
                 setShowComercial("comercialVis");
               }, 600);
               if (prevDivHkey) {
+                setLinkIsExecuted(true);
                 setIntersectedDivId(prevDivHkey);
               }
             }}
@@ -771,6 +812,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
           <Link
             onClick={() => {
               if (nextDivHkey) {
+                setLinkIsExecuted(true);
                 setIntersectedDivId(nextDivHkey);
               }
               setTimeout(() => {

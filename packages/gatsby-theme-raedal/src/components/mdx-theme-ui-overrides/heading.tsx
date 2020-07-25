@@ -72,9 +72,10 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
     setShowComercial,
     setHeadingIsGoingUp,
     intersectionPrevented,
+    setLinkIsExecuted,
   } = reducedBlogPostState;
 
-  console.log(intersectionPrevented);
+  // console.log(intersectionPrevented);
 
   // console.log({ comercialIsVisible });
 
@@ -140,19 +141,19 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
 
             if (isFirstMount) {
               setIsFirstMount(false);
-              setHeadingIsGoingUp(false);
-
+              // setHeadingIsGoingUp(false);
               return;
             }
 
             //
-            console.log(JSON.stringify(entries[0].intersectionRect, null, 2));
+            // console.log(JSON.stringify(entries[0].intersectionRect, null, 2));
             //
 
             const boundingRect = entries[0].boundingClientRect;
             if (entries[0].isIntersecting) {
               if (boundingRect.top > 0) {
                 setHeadingIsGoingUp(false);
+                setLinkIsExecuted(false);
                 setIntersectedHeadingDivFunc(entries[0].target.id);
                 if (thatIsFirstHeading) {
                   setTimeout(() => {
@@ -164,12 +165,30 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
               // eslint-disable-next-line
               if (boundingRect.bottom > 0) {
                 // setIntersectedHeadingDivFunc(entries[0].target.id);
+
+                /* if (boundingRect.bottom > 0 && boundingRect.top > 0) {
+                  setHeadingIsGoingUp(false);
+                  return;
+                } */
+
+                /*  console.log(
+                  JSON.stringify(entries[0].boundingClientRect, null, 2),
+                  JSON.stringify(entries[0].intersectionRatio, null, 2),
+                  JSON.stringify(entries[0].intersectionRect, null, 2)
+                ); */
+                setLinkIsExecuted(false);
                 setHeadingIsGoingUp(true);
               }
             }
 
-            ////////////////////////////--------
+            if (
+              !entries[0].intersectionRect.bottom &&
+              !entries[0].intersectionRect.top
+            ) {
+              setLinkIsExecuted(true);
+            }
 
+            ////////////////////////////--------
             /*
             if (entries[0].isIntersecting) {
               if (entries[0].boundingClientRect.y > 0) {
@@ -217,6 +236,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
     setShowComercial,
     setHeadingIsGoingUp,
     isFirstMount,
+    setLinkIsExecuted,
   ]);
 
   useEffect(
