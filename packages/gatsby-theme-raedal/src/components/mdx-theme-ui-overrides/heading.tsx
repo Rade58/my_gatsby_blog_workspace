@@ -129,17 +129,31 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
               return;
             } */
             //
-
-            //
-            console.log(entries[0].boundingClientRect);
-            //
-
             if (thatIsFirstHeading) {
               setTimeout(() => {
                 setShowComercial("comercialVis");
               }, 20);
             }
 
+            //
+            console.log(entries[0].boundingClientRect);
+            //
+
+            const boundingRect = entries[0].boundingClientRect;
+            if (entries[0].isIntersecting) {
+              if (boundingRect.top > 0) {
+                setHeadingIsGoingUp(false);
+                setIntersectedHeadingDivFunc(entries[0].target.id);
+              }
+            } else {
+              // eslint-disable-next-line
+              if (boundingRect.bottom > 0) {
+                // setIntersectedHeadingDivFunc(entries[0].target.id);
+                setHeadingIsGoingUp(true);
+              }
+            }
+
+            /*
             if (entries[0].isIntersecting) {
               if (entries[0].boundingClientRect.y > 0) {
                 setIntersectedHeadingDivFunc(entries[0].target.id);
@@ -161,11 +175,11 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
               }
 
               // -------------------------------------------
-            }
+            } */
           },
           {
             root: null,
-            threshold: [0.25],
+            threshold: [0],
             rootMargin: "0px",
           }
         );
