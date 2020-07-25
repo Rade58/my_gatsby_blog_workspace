@@ -139,7 +139,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
             //-----------------------------------------
 
             //
-            console.log(entries[0].boundingClientRect);
+            console.log(JSON.stringify(entries[0].intersectionRect, null, 2));
             //
 
             const boundingRect = entries[0].boundingClientRect;
@@ -160,6 +160,8 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
                 setHeadingIsGoingUp(true);
               }
             }
+
+            ////////////////////////////--------
 
             /*
             if (entries[0].isIntersecting) {
