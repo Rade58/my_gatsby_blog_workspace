@@ -75,15 +75,14 @@ const HeadingSingle: FunctionComponent<HeadingSinglePropsI> = (props) => {
       <Link
         onClick={() => {
           setTimeout(() => {
+            console.log(`#${encodeURI(value)}`, intersectedDivId);
+            const val = `#${encodeURI(value)}`;
+            setIntersectedDivId(val);
             setShowComercial("comercialVis");
             setPigOpacityClassFunc("is-opaque");
           }, 600);
-          const val = `#${encodeURI(value)}`;
-          setIntersectedDivId(val);
         }}
         onSubmit={(e) => {
-          console.log(`#${encodeURI(value)}`);
-
           const val = `#${encodeURI(value)}`;
 
           if (intersectedDivId === val) return e.preventDefault();
