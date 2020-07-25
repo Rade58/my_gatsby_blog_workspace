@@ -101,7 +101,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
   }, [setThatIsFirstHeading]);
 
   // === !== === !== === !== ===
-
+  const [isFirstMount, setIsFirstMount] = useState<boolean>(true);
   // === !== === !== === !== ===
 
   const headingDivRef = useRef<HTMLDivElement>(null);
@@ -137,6 +137,13 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
               }, 20);
             } */
             //-----------------------------------------
+
+            if (isFirstMount) {
+              setIsFirstMount(false);
+              setHeadingIsGoingUp(false);
+
+              return;
+            }
 
             //
             console.log(JSON.stringify(entries[0].intersectionRect, null, 2));
@@ -209,6 +216,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
     headingDivRef,
     setShowComercial,
     setHeadingIsGoingUp,
+    isFirstMount,
   ]);
 
   useEffect(
