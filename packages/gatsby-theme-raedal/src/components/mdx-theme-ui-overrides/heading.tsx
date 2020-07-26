@@ -120,7 +120,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
 
         interObserver.current = new IntersectionObserver(
           (entries, observer) => {
-            return;
+            // return;
 
             // OPET JE OVO PROBLEMATICNO (ALI SACUVAJ CODE)  ///////////////////////
             /* if (
