@@ -44,7 +44,11 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
 
   // console.log({ headingsLength: headings.length });
 
-  const { setPigOpacityClassFunc, setShowComercial } = reducedBlogPostState;
+  const {
+    setPigOpacityClassFunc,
+    setShowComercial,
+    linkIsExecuted,
+  } = reducedBlogPostState;
 
   const { groupColor, underlineColor } = groupPage;
 
@@ -310,6 +314,36 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
     prevDivHkey,
     nextDivHkey,
   }); */
+  // === !== === COUNTER STUFF (CHANGING INSIDE HEADING)
+  // DON'T FORGET TO ADD A RESET FOR A COUNTER
+  const [headingCounter, setHeadingCounter] = useState<number>(0);
+
+  useEffect(() => {
+    console.log(headingCounter, headings.length);
+    if (headingCounter === headings.length) {
+      blogPostDispatch({
+        type: BLOG_POST_ACTION_TYPES_ENUM.CHANGE_LINK_IS_EXECUTED,
+        payload: false,
+      });
+    }
+  }, [headingCounter]);
+
+  useEffect(() => {
+    // RESET
+
+    if (headingCounter === headings.length) {
+      setHeadingCounter(0);
+    }
+  }, [linkIsExecuted]);
+
+  // SAMO COUNTER FUNKCIJU DISPATCH-UJEM
+
+  useEffect(() => {
+    blogPostDispatch({
+      type: BLOG_POST_ACTION_TYPES_ENUM.GIVE_SET_HEADING_COUNTER,
+      payload: setHeadingCounter,
+    });
+  }, [setHeadingCounter]);
 
   /* console.log("*************** PREV STUFF ******************");
   console.log(prevDivHkey);
@@ -572,6 +606,10 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
                 setShowComercial("comercialVis");
               }, 600);
               if (prevDivHkey) {
+                blogPostDispatch({
+                  type: BLOG_POST_ACTION_TYPES_ENUM.CHANGE_LINK_IS_EXECUTED,
+                  payload: true,
+                });
                 setIntersectedDivId(prevDivHkey);
               }
             }}
@@ -791,6 +829,10 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
           <Link
             onClick={() => {
               if (nextDivHkey) {
+                blogPostDispatch({
+                  type: BLOG_POST_ACTION_TYPES_ENUM.CHANGE_LINK_IS_EXECUTED,
+                  payload: true,
+                });
                 setIntersectedDivId(nextDivHkey);
               }
               setTimeout(() => {

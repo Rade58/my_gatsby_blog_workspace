@@ -42,6 +42,11 @@ export enum BLOG_POST_ACTION_TYPES_ENUM {
   PREVENT_INTERSECTION_OBSERVER = "PREVENT_INTERSECTION_OBSERVER",
 
   GIV_SET_LINK_IS_EXECUTED = "GIV_SET_LINK_IS_EXECUTED",
+
+  // === !== === !==
+  CHANGE_LINK_IS_EXECUTED = "CHANGE_LINK_IS_EXECUTED",
+  GIVE_SET_HEADING_COUNTER = "GIVE_SET_HEADING_COUNTER",
+  // === !== === !==
 }
 
 export interface BlogPostStateI {
@@ -72,6 +77,10 @@ export interface BlogPostStateI {
   intersectionPrevented: boolean;
 
   setLinkIsExecuted: Dispatch<SetStateAction<boolean>> | ((val: any) => void);
+  //
+  linkIsExecuted: boolean;
+  setHeadingCounter: Dispatch<SetStateAction<number>>;
+  //
 }
 
 //
@@ -154,6 +163,14 @@ export const blogPostReducer: Reducer<
     return { ...state, setLinkIsExecuted: action.payload };
   }
 
+  if (action.type === BLOG_POST_ACTION_TYPES_ENUM.CHANGE_LINK_IS_EXECUTED) {
+    return { ...state, linkIsExecuted: action.payload };
+  }
+
+  if (action.type === BLOG_POST_ACTION_TYPES_ENUM.GIVE_SET_HEADING_COUNTER) {
+    return { ...state, setHeadingCounter: action.payload };
+  }
+
   return state;
 };
 
@@ -186,6 +203,12 @@ export const defaultState: BlogPostStateI = {
   setLinkIsExecuted: () => {
     // console.log("SET IF LINK IS EXECUTED")
   },
+  //
+  linkIsExecuted: false,
+  setHeadingCounter: () => {
+    //
+  },
+  //
 };
 
 // CONTEXT stuff  === !==  === !==  === !==  === !==  === !==
