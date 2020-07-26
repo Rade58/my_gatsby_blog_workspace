@@ -67,6 +67,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
   const [loadArray, setLoadArray] = useState<boolean>(true);
 
   // ==========================================================
+  // ==========================================================
   const [clickedId, setClickedId] = useState<string>("");
   const [isOverTheButtonOrJumper, setIsOverTheButtonOrJumper] = useState<
     boolean
@@ -87,6 +88,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
 
   console.log({ clickedId, intersectedDivId });
 
+  // ==========================================================
   // ==========================================================
 
   useEffect(() => {

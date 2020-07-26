@@ -50,6 +50,10 @@ export enum BLOG_POST_ACTION_TYPES_ENUM {
 
   //
   GIVE_SET_CLICKED_ID = "GIVE_SET_CLICKED_ID",
+
+  //
+  GIVE_SET_IS_OVER_THE_JUMPER = "GIVE_SET_IS_OVER_THE_JUMPER",
+  //
 }
 
 export interface BlogPostStateI {
@@ -85,6 +89,8 @@ export interface BlogPostStateI {
   setHeadingCounter: Dispatch<SetStateAction<number>>;
   //
   setClickedId: Dispatch<SetStateAction<string>>;
+
+  setIsOverTheButtonOrJumper: Dispatch<SetStateAction<boolean>>;
 }
 
 //
@@ -179,6 +185,10 @@ export const blogPostReducer: Reducer<
     return { ...state, setClickedId: action.payload };
   }
 
+  if (action.type === BLOG_POST_ACTION_TYPES_ENUM.GIVE_SET_IS_OVER_THE_JUMPER) {
+    return { ...state, setIsOverTheButtonOrJumper: action.payload };
+  }
+
   return state;
 };
 
@@ -218,6 +228,9 @@ export const defaultState: BlogPostStateI = {
   },
   //
   setClickedId: () => {
+    //
+  },
+  setIsOverTheButtonOrJumper() {
     //
   },
 };
