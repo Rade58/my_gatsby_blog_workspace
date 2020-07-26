@@ -74,19 +74,21 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
   >(false);
 
   useEffect(() => {
-    if (!isOverTheButtonOrJumper) return;
-    if (clickedId === "") return;
     setIntersectedDivId(clickedId);
-  }, [clickedId, isOverTheButtonOrJumper]);
+  }, [clickedId]);
 
   useEffect(() => {
     blogPostDispatch({
       type: BLOG_POST_ACTION_TYPES_ENUM.GIVE_SET_CLICKED_ID,
       payload: setClickedId,
     });
-  }, [setClickedId, blogPostDispatch]);
+    blogPostDispatch({
+      type: BLOG_POST_ACTION_TYPES_ENUM.GIVE_SET_IS_OVER_THE_JUMPER,
+      payload: setIsOverTheButtonOrJumper,
+    });
+  }, [setClickedId, setIsOverTheButtonOrJumper, blogPostDispatch]);
 
-  console.log({ clickedId, intersectedDivId });
+  // console.log({ clickedId, intersectedDivId });
 
   // ==========================================================
   // ==========================================================
@@ -181,13 +183,21 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
     };
   }, [intersectedDivId.length, setPigOpacityClassFunc, setShowComercial]);
 
-  const indexOfCurrentIntersHdiv = justHeadingsArrayRef.current.indexOf(
-    intersectedDivId
-  );
+  const [indexOfCurrentIntersHdiv, setIndexOfCurrentIntersHdiv] = useState<
+    number
+  >(justHeadingsArrayRef.current.indexOf(intersectedDivId));
+
+  useEffect(() => {
+    setIndexOfCurrentIntersHdiv(
+      justHeadingsArrayRef.current.indexOf(intersectedDivId)
+    );
+  }, [intersectedDivId]);
 
   // -------------------
   //
   useEffect(() => {
+    console.log("ovo se desilo");
+
     let canceled = false;
 
     if (canceled) return;
@@ -281,6 +291,19 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
   return (
     <Fragment>
       <aside
+        onMouseEnter={() => {
+          // console.log("ENTERED JUMPER");
+
+          setClickedId(intersectedDivId);
+          setIsOverTheButtonOrJumper(true);
+        }}
+        onMouseLeave={() => {
+          // console.log("LEFT JUMPER");
+
+          setIntersectedDivId(clickedId);
+          setHeadingIsGoingUp(false);
+          setIsOverTheButtonOrJumper(false);
+        }}
         className={`jumper-cont ${slideClass}`}
         css={css`
 
