@@ -209,8 +209,8 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
           },
           {
             root: null,
-            threshold: [0],
-            rootMargin: "0px",
+            threshold: [0.25, 0.75],
+            rootMargin: "-2px",
           }
         );
         interObserver.current.observe(headingDivRef.current);
