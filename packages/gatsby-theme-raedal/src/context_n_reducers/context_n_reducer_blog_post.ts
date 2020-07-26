@@ -47,6 +47,9 @@ export enum BLOG_POST_ACTION_TYPES_ENUM {
   CHANGE_LINK_IS_EXECUTED = "CHANGE_LINK_IS_EXECUTED",
   GIVE_SET_HEADING_COUNTER = "GIVE_SET_HEADING_COUNTER",
   // === !== === !==
+
+  //
+  GIVE_SET_CLICKED_ID = "GIVE_SET_CLICKED_ID",
 }
 
 export interface BlogPostStateI {
@@ -81,6 +84,7 @@ export interface BlogPostStateI {
   linkIsExecuted: boolean;
   setHeadingCounter: Dispatch<SetStateAction<number>>;
   //
+  setClickedId: Dispatch<SetStateAction<string>>;
 }
 
 //
@@ -171,6 +175,10 @@ export const blogPostReducer: Reducer<
     return { ...state, setHeadingCounter: action.payload };
   }
 
+  if (action.type === BLOG_POST_ACTION_TYPES_ENUM.GIVE_SET_CLICKED_ID) {
+    return { ...state, setClickedId: action.payload };
+  }
+
   return state;
 };
 
@@ -209,6 +217,9 @@ export const defaultState: BlogPostStateI = {
     //
   },
   //
+  setClickedId: () => {
+    //
+  },
 };
 
 // CONTEXT stuff  === !==  === !==  === !==  === !==  === !==

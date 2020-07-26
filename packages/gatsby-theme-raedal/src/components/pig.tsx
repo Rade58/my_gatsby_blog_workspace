@@ -131,6 +131,8 @@ const Pig = forwardRef<HTMLDivElement, {}>(function PigComponent(props, ref) {
     "no-go"
   );
 
+  const timerIdRef = useRef<NodeJS.Timeout>();
+
   useLayoutEffect(() => {
     let canceled = false;
 

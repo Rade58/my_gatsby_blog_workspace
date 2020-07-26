@@ -163,7 +163,7 @@ const Layout: FunctionComponent<LayoutPropsI> = ({ body }) => {
 
             html {
               /*  */
-              scroll-behavior: smooth;
+              /* scroll-behavior: smooth; */
             }
 
             body {

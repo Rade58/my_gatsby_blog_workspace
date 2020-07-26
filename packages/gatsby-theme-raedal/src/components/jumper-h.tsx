@@ -66,6 +66,29 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
 
   const [loadArray, setLoadArray] = useState<boolean>(true);
 
+  // ==========================================================
+  const [clickedId, setClickedId] = useState<string>("");
+  const [isOverTheButtonOrJumper, setIsOverTheButtonOrJumper] = useState<
+    boolean
+  >(false);
+
+  useEffect(() => {
+    if (!isOverTheButtonOrJumper) return;
+    if (clickedId === "") return;
+    setIntersectedDivId(clickedId);
+  }, [clickedId, isOverTheButtonOrJumper]);
+
+  useEffect(() => {
+    blogPostDispatch({
+      type: BLOG_POST_ACTION_TYPES_ENUM.GIVE_SET_CLICKED_ID,
+      payload: setClickedId,
+    });
+  }, [setClickedId, blogPostDispatch]);
+
+  console.log({ clickedId, intersectedDivId });
+
+  // ==========================================================
+
   useEffect(() => {
     let canceled = false;
 
@@ -170,6 +193,12 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
     const indexOfCurrent = justHeadingsArrayRef.current.indexOf(
       intersectedDivId
     );
+
+    if (isOverTheButtonOrJumper) {
+      // setClickedId("");
+      return;
+    }
+
     if (headingIsGoingUp) {
       // console.log("EXECUTED");
       if (indexOfCurrent > 0) {
@@ -186,7 +215,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
     return () => {
       canceled = true;
     };
-  }, [headingIsGoingUp]);
+  }, [headingIsGoingUp, isOverTheButtonOrJumper]);
 
   ////////////////////////////////////////==================================/////////////////
   /* useEffect(() => {
@@ -496,7 +525,8 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
                 setShowComercial("comercialVis");
               }, 600);
               if (prevDivHkey) {
-                setIntersectedDivId(prevDivHkey);
+                // setIntersectedDivId(prevDivHkey);
+                setClickedId(prevDivHkey);
               }
             }}
             to={`${encodeURI(relativeLink)}#${prevDivHkey}`}
@@ -715,7 +745,8 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
           <Link
             onClick={() => {
               if (nextDivHkey) {
-                setIntersectedDivId(nextDivHkey);
+                // setIntersectedDivId(nextDivHkey);
+                setClickedId(nextDivHkey);
               }
               setTimeout(() => {
                 setPigOpacityClassFunc("is-opaque");
