@@ -7,14 +7,9 @@ import {
   useRef,
   useState,
   Fragment,
-  forwardRef,
   useEffect,
   FunctionComponent,
-  ForwardRefRenderFunction,
   RefObject,
-  useImperativeHandle,
-  useLayoutEffect,
-  memo,
 } from "react";
 import Octicon, { getIconByName } from "@primer/octicons-react";
 import {
@@ -52,12 +47,6 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
 
   const { groupColor, underlineColor } = groupPage;
 
-  // const { headerBackgroundImage } = additionalStyles;
-
-  const [currentHeaderToBeClicked, setCurrentHeaderToBeClicked] = useState<
-    number
-  >(0);
-
   const [slideClass, setSlideClass] = useState<"slide-left" | "slide-right">(
     "slide-right"
   );
@@ -66,84 +55,16 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
   const triangleDown = getIconByName("triangle-down");
   const arrowUp = getIconByName("arrow-up");
 
-  // const frameRef = useRef<HTMLDivElement>(null);
-  // const frameIsObserved = useState<boolean>(false);
-  // console.log({ mainReference, articleReference });
-
-  // JA CU IMATI VISE OBSERVER-A
-  // A ZASTO IH OVDE DEFINISEM ?
-  // DA BIH MOUGAO DA OBAVIM      UNOBSERVING
-  // ODNONO SKIDANJE OBSERVERA
-  // STO CU DEFINISATI KADA SE DOGODI UNMOUNTING KOMPONENTE
-  // const interObservers = useRef<IntersectionObserver[]>([]); // ZA POCETAK JE OVO PRAZAN NIZ
-  //                                                              NE MORAM OVO DA STAVLJAM KAO
-  //                                                              DEPAENDANCY ZA useEffect
-
-  // const [interObs, setInterObs] = useState<IntersectionObserver[]>([])
-
-  // const [currentId, setCurrentId] = useState<string>("");
-
-  const [previousBodyScrollHeight, setPreviousBodyScrollHeight] = useState<
-    number
-  >(0);
-
-  const [mountObserver, setMountingTrigger] = useState(false);
-
-  const [interObservers, setInterObservers] = useState<IntersectionObserver[]>(
-    []
-  );
-
-  //
-
-  useEffect(() => {
-    // console.log("JUMPER MOUNTED");
-  }, []);
-
-  // RANDOM MOUNTINGZ
-
-  /* useEffect(() => {
-    console.log("RANDOM MOUNTINGZ");
-  }); */
-
-  //
-  // unmounting
-  //
-
-  useEffect(
-    () => () => {
-      // console.log("JUMPER UNMOUNTED!!!!");
-      // setMountingTrigger(!mountingTrigger);
-    },
-    [] // ZA UNMOUNTIG SE STAVLJA NIZ NE ZABORAVI OPET
-  );
-
-  // console.log(interObservers[0].root);
-
   const [intersectedDivId, setIntersectedDivId] = useState<string>("");
   const [headingIsGoingUp, setHeadingIsGoingUp] = useState<boolean>(false);
 
-  /* console.log("--------------------------------");
-  console.log(headingIsGoingUp);
-  console.log(intersectedDivId);
-  console.log("--------------------------------"); */
-
-  // MORAM KREIRATI DICTIONARY TYPE, ZA NORMALIZED hedaings OBJEKAT
   const normalizedHeadingsRef = useRef<{
     [key: string]: { value: string; depth: number };
-  }>({}); // OVAJ REF CE DOBITI U useEffect-U (SAMO ON MOUNTING, SVE STA MU TREBA)
+  }>({});
 
-  // MORAO BIH KREIRATI I NIZ NAPRAVLJEN SAMO OD HEADINGS STRINGOVA
   const justHeadingsArrayRef = useRef<string[]>([]);
 
   const [loadArray, setLoadArray] = useState<boolean>(true);
-
-  // console.log(normalizedHeadingsRef.current);
-
-  useEffect(() => {
-    console.log("ID CHANGED ID CHANGED ID CHANGED ID CHANGED");
-
-    console.log(intersectedDivId);
-  }, [intersectedDivId]);
 
   useEffect(() => {
     let canceled = false;
@@ -246,13 +167,10 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
 
     if (canceled) return;
 
-    // console.log(linkIsExecuted);
-    // console.log(intersectedDivId);
-
+    const indexOfCurrent = justHeadingsArrayRef.current.indexOf(
+      intersectedDivId
+    );
     if (headingIsGoingUp) {
-      const indexOfCurrent = justHeadingsArrayRef.current.indexOf(
-        intersectedDivId
-      );
       // console.log("EXECUTED");
       if (indexOfCurrent > 0) {
         const lowerIndex = indexOfCurrent - 1;
@@ -261,9 +179,9 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
 
         setIntersectedDivId(justHeadingsArrayRef.current[lowerIndex]);
       }
-    } /*  else {
-      setIntersectedDivId(justHeadingsArrayRef.current[indexOfCurrent]);
-    } */
+    } else {
+      // setIntersectedDivId(justHeadingsArrayRef.current[indexOfCurrent]);
+    }
 
     return () => {
       canceled = true;
@@ -316,34 +234,6 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
   }); */
   // === !== === COUNTER STUFF (CHANGING INSIDE HEADING)
   // DON'T FORGET TO ADD A RESET FOR A COUNTER
-  const [headingCounter, setHeadingCounter] = useState<number>(0);
-
-  useEffect(() => {
-    console.log(headingCounter, headings.length);
-    if (headingCounter === headings.length) {
-      blogPostDispatch({
-        type: BLOG_POST_ACTION_TYPES_ENUM.CHANGE_LINK_IS_EXECUTED,
-        payload: false,
-      });
-    }
-  }, [headingCounter]);
-
-  useEffect(() => {
-    // RESET
-
-    if (headingCounter === headings.length) {
-      setHeadingCounter(0);
-    }
-  }, [linkIsExecuted]);
-
-  // SAMO COUNTER FUNKCIJU DISPATCH-UJEM
-
-  useEffect(() => {
-    blogPostDispatch({
-      type: BLOG_POST_ACTION_TYPES_ENUM.GIVE_SET_HEADING_COUNTER,
-      payload: setHeadingCounter,
-    });
-  }, [setHeadingCounter]);
 
   /* console.log("*************** PREV STUFF ******************");
   console.log(prevDivHkey);
@@ -606,10 +496,6 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
                 setShowComercial("comercialVis");
               }, 600);
               if (prevDivHkey) {
-                blogPostDispatch({
-                  type: BLOG_POST_ACTION_TYPES_ENUM.CHANGE_LINK_IS_EXECUTED,
-                  payload: true,
-                });
                 setIntersectedDivId(prevDivHkey);
               }
             }}
@@ -829,10 +715,6 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
           <Link
             onClick={() => {
               if (nextDivHkey) {
-                blogPostDispatch({
-                  type: BLOG_POST_ACTION_TYPES_ENUM.CHANGE_LINK_IS_EXECUTED,
-                  payload: true,
-                });
                 setIntersectedDivId(nextDivHkey);
               }
               setTimeout(() => {

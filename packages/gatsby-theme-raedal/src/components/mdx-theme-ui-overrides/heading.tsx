@@ -72,8 +72,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
     setShowComercial,
     setHeadingIsGoingUp,
     //
-    linkIsExecuted,
-    setHeadingCounter,
+
     //
   } = reducedBlogPostState;
 
@@ -125,65 +124,62 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
         interObserver.current = new IntersectionObserver(
           (entries, observer) => {
             // return;
-            if (!linkIsExecuted) {
-              // OPET JE OVO PROBLEMATICNO (ALI SACUVAJ CODE)  ///////////////////////
-              /* if (
+
+            // OPET JE OVO PROBLEMATICNO (ALI SACUVAJ CODE)  ///////////////////////
+            /* if (
               !entries[0].isIntersecting &&
               entries[0].intersectionRect.y === 0
             ) {
               return;
             } */
-              //
+            //
 
-              // -------------------------------------------
-              /* if (thatIsFirstHeading) {
+            // -------------------------------------------
+            /* if (thatIsFirstHeading) {
               setTimeout(() => {
                 setShowComercial("comercialVis");
               }, 20);
             } */
-              //-----------------------------------------
+            //-----------------------------------------
 
-              if (isFirstMount) {
-                setIsFirstMount(false);
-                // setHeadingIsGoingUp(false);
-                return;
-              }
+            if (isFirstMount) {
+              setIsFirstMount(false);
+              // setHeadingIsGoingUp(false);
+              return;
+            }
 
-              //
-              // console.log(JSON.stringify(entries[0].intersectionRect, null, 2));
-              //
+            //
+            // console.log(JSON.stringify(entries[0].intersectionRect, null, 2));
+            //
 
-              const boundingRect = entries[0].boundingClientRect;
-              if (entries[0].isIntersecting) {
-                if (boundingRect.top > 0) {
-                  setHeadingIsGoingUp(false);
-                  setIntersectedHeadingDivFunc(entries[0].target.id);
-                  if (thatIsFirstHeading) {
-                    setTimeout(() => {
-                      setShowComercial("comercialVis");
-                    }, 20);
-                  }
+            const boundingRect = entries[0].boundingClientRect;
+            if (entries[0].isIntersecting) {
+              if (boundingRect.top > 0) {
+                setHeadingIsGoingUp(false);
+                setIntersectedHeadingDivFunc(entries[0].target.id);
+                if (thatIsFirstHeading) {
+                  setTimeout(() => {
+                    setShowComercial("comercialVis");
+                  }, 20);
                 }
-              } else {
-                // eslint-disable-next-line
-                if (boundingRect.bottom > 0) {
-                  // setIntersectedHeadingDivFunc(entries[0].target.id);
+              }
+            } else {
+              // eslint-disable-next-line
+              if (boundingRect.bottom > 0) {
+                // setIntersectedHeadingDivFunc(entries[0].target.id);
 
-                  /* if (boundingRect.bottom > 0 && boundingRect.top > 0) {
+                /* if (boundingRect.bottom > 0 && boundingRect.top > 0) {
                   setHeadingIsGoingUp(false);
                   return;
                 } */
 
-                  /*  console.log(
+                /*  console.log(
                   JSON.stringify(entries[0].boundingClientRect, null, 2),
                   JSON.stringify(entries[0].intersectionRatio, null, 2),
                   JSON.stringify(entries[0].intersectionRect, null, 2)
                 ); */
-                  setHeadingIsGoingUp(true);
-                }
+                setHeadingIsGoingUp(true);
               }
-            } else {
-              setHeadingCounter((old) => old + 1);
             }
 
             ////////////////////////////--------
@@ -234,8 +230,6 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
     setShowComercial,
     setHeadingIsGoingUp,
     isFirstMount,
-    linkIsExecuted,
-    setHeadingCounter,
   ]);
 
   /* useEffect(() => {
