@@ -75,14 +75,23 @@ const HeadingSingle: FunctionComponent<HeadingSinglePropsI> = (props) => {
       className={`${intersectedDivId === encodeURI(value) ? "highlight" : ""}`}
     >
       <Link
-        onClick={() => {
+        onClick={(e) => {
           // const val = `#${encodeURI(value)}`;
 
-          const val1 = encodeURI(value);
+          const val = encodeURI(value);
+          const hashVal = `#${val}`;
+          const { hash } = window.location;
 
-          console.log(val1);
-          setClickedId(val1);
+          if (hash === hashVal) {
+            e.preventDefault(); // OVO SDPRECAVA DA SE ANIMACIJA PRKIDA KADA KLIKCEM UZASTOPNO NA ISTI LINK
 
+            return;
+          }
+
+          // console.log(val1);
+          setClickedId(val);
+
+          // console.log(window.location);
           setTimeout(() => {
             /* console.log(`#${encodeURI(value)}`, intersectedDivId);
             console.log(setClickedId);
@@ -91,15 +100,17 @@ const HeadingSingle: FunctionComponent<HeadingSinglePropsI> = (props) => {
             setPigOpacityClassFunc("is-opaque");
           }, 600);
         }}
-        /* onSubmit={(e) => {
-          const val = `${encodeURI(value)}`;
+        // MISLIM DA JE onSubmit HANDLER BESPOTREBAN ALI NEKA GA ZA SADA
+        onSubmit={(e) => {
+          const val = `#${encodeURI(value)}`;
+          const hashVal = `#${val}`;
+          const { hash } = window.location;
 
-          // if (intersectedDivId === val) return;
+          if (hash === hashVal) e.preventDefault();
 
-          console.log(val);
-
-          // setIntersectedDivId(val);
-        }} */
+          // if() e.preventDefault()
+        }}
+        // -----------------------------------------------------------
         to={`${encodeURI(relativeLink)}#${
           intersectedDivId !== `#${encodeURI(value)}`
             ? encodeURI(value)
