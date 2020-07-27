@@ -72,7 +72,8 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
     setShowComercial,
     setHeadingIsGoingUp,
     //
-
+    setIsOverTheButtonOrJumper,
+    setClickedId,
     //
   } = reducedBlogPostState;
 
@@ -82,6 +83,10 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
 
   // === !== === !== === !== ===
   const [thatIsFirstHeading, setThatIsFirstHeading] = useState<boolean>(false);
+
+  const [mouseIsOverTheHeading, setMouseIsOverTheHeading] = useState<boolean>(
+    false
+  );
 
   useEffect(() => {
     let canceled = false;
@@ -124,6 +129,10 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
         interObserver.current = new IntersectionObserver(
           (entries, observer) => {
             // return;
+
+            if (mouseIsOverTheHeading) return;
+
+            console.log("IT CONTINUES");
 
             // OPET JE OVO PROBLEMATICNO (ALI SACUVAJ CODE)  ///////////////////////
             /* if (
@@ -406,7 +415,12 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
       >
         <Link
           onClick={() => {
+            setIsOverTheButtonOrJumper(false);
             setIntersectedHeadingDivFunc(props.id);
+            setIsOverTheButtonOrJumper(true);
+            setClickedId(props.id);
+
+            console.log("CLICKED");
           }}
           to={`${encodeURI(relativeLink)}#${props.id}`}
         >

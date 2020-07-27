@@ -51,7 +51,10 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
   const { reducedBlogPostState } = useContext(blogPostContext);
   //
 
-  const { pigDisapear /* , header_pull_class */ } = reducedBlogPostState;
+  const {
+    pigDisapear /* , header_pull_class */,
+    setIsOverTheButtonOrJumper,
+  } = reducedBlogPostState;
 
   // console.log(header_pull_class);
 
