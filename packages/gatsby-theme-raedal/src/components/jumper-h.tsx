@@ -299,8 +299,9 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
           }
         }}
         onWheelCapture={(e) => {
-          // e.preventDefault();
-          e.stopPropagation();
+          if (window) {
+            document.body;
+          }
         }}
         onMouseEnter={() => {
           // console.log("ENTERED JUMPER");
