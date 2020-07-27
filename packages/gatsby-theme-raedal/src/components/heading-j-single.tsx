@@ -25,6 +25,7 @@ interface HeadingSinglePropsI {
     type: BLOG_POST_ACTION_TYPES_ENUM;
     payload?: any;
   }>;
+  setClickedId: Dispatch<SetStateAction<string>>;
 }
 
 const HeadingSingle: FunctionComponent<HeadingSinglePropsI> = (props) => {
@@ -41,6 +42,7 @@ const HeadingSingle: FunctionComponent<HeadingSinglePropsI> = (props) => {
     setSpinnerIsVisible,
     headingsLength,
     blogPostDispatch,
+    setClickedId,
   } = props;
 
   useEffect(() => {
@@ -74,19 +76,30 @@ const HeadingSingle: FunctionComponent<HeadingSinglePropsI> = (props) => {
     >
       <Link
         onClick={() => {
+          // const val = `#${encodeURI(value)}`;
+
+          const val1 = encodeURI(value);
+
+          console.log(val1);
+          setClickedId(val1);
+
           setTimeout(() => {
-            console.log(`#${encodeURI(value)}`, intersectedDivId);
-            const val = `#${encodeURI(value)}`;
-            setIntersectedDivId(val);
+            /* console.log(`#${encodeURI(value)}`, intersectedDivId);
+            console.log(setClickedId);
+            console.log(val); */
             setShowComercial("comercialVis");
             setPigOpacityClassFunc("is-opaque");
           }, 600);
         }}
-        onSubmit={(e) => {
-          const val = `#${encodeURI(value)}`;
+        /* onSubmit={(e) => {
+          const val = `${encodeURI(value)}`;
 
-          if (intersectedDivId === val) return e.preventDefault();
-        }}
+          // if (intersectedDivId === val) return;
+
+          console.log(val);
+
+          // setIntersectedDivId(val);
+        }} */
         to={`${encodeURI(relativeLink)}#${
           intersectedDivId !== `#${encodeURI(value)}`
             ? encodeURI(value)

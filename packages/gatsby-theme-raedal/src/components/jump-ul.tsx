@@ -48,7 +48,11 @@ const JumpUL: FunctionComponent<JumpULPropsI> = (props) => {
   const { reducedBlogPostState, headingsLength, blogPostDispatch } = useContext(
     blogPostContext
   );
-  const { setShowComercial, setPigOpacityClassFunc } = reducedBlogPostState;
+  const {
+    setShowComercial,
+    setPigOpacityClassFunc,
+    setClickedId,
+  } = reducedBlogPostState;
 
   //
   const [spinnerIsVisible, setSpinnerIsVisible] = useState<boolean>(true);
@@ -193,6 +197,7 @@ const JumpUL: FunctionComponent<JumpULPropsI> = (props) => {
           if (index === 0 || index === headingsLength - 1) {
             return (
               <HeadingSingle
+                setClickedId={setClickedId}
                 blogPostDispatch={blogPostDispatch}
                 headingsLength={headingsLength}
                 setSpinnerIsVisible={setSpinnerIsVisible}
@@ -212,6 +217,7 @@ const JumpUL: FunctionComponent<JumpULPropsI> = (props) => {
 
           return (
             <HeadingSingle
+              setClickedId={setClickedId}
               blogPostDispatch={blogPostDispatch}
               key={`${value}-${depth}`}
               depth={depth}

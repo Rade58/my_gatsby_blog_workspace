@@ -185,7 +185,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
 
   const [indexOfCurrentIntersHdiv, setIndexOfCurrentIntersHdiv] = useState<
     number
-  >(justHeadingsArrayRef.current.indexOf(intersectedDivId));
+  >(0);
 
   useEffect(() => {
     setIndexOfCurrentIntersHdiv(
@@ -193,10 +193,30 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
     );
   }, [intersectedDivId]);
 
+  useEffect(() => {
+    setIndexOfCurrentIntersHdiv(
+      justHeadingsArrayRef.current.indexOf(clickedId)
+    );
+  }, [clickedId]);
+
+  /*  useEffect(() => {
+    console.log("----------------------------------------------------");
+    console.log(justHeadingsArrayRef.current);
+    console.log(indexOfCurrentIntersHdiv);
+    console.log(intersectedDivId);
+    console.log(clickedId);
+    console.log("------------------------------------------------------");
+  }, [indexOfCurrentIntersHdiv]);
+
+  useEffect(() => {
+    console.log(indexOfCurrentIntersHdiv);
+    console.log(clickedId);
+  }, [intersectedDivId, clickedId]);
+ */
   // -------------------
   //
   useEffect(() => {
-    console.log("ovo se desilo");
+    // console.log("ovo se desilo");
 
     let canceled = false;
 
@@ -212,7 +232,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
     }
 
     if (headingIsGoingUp) {
-      // console.log("EXECUTED");
+      console.log("EXECUTED");
       if (indexOfCurrent > 0) {
         const lowerIndex = indexOfCurrent - 1;
 
@@ -227,7 +247,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
     return () => {
       canceled = true;
     };
-  }, [headingIsGoingUp, isOverTheButtonOrJumper]);
+  }, [headingIsGoingUp, isOverTheButtonOrJumper, clickedId]);
 
   ////////////////////////////////////////==================================/////////////////
   /* useEffect(() => {
@@ -291,18 +311,6 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
   return (
     <Fragment>
       <aside
-        onMouseMoveCapture={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          if (window) {
-            //
-          }
-        }}
-        onWheelCapture={(e) => {
-          if (window) {
-            document.body;
-          }
-        }}
         onMouseEnter={() => {
           // console.log("ENTERED JUMPER");
 
@@ -312,7 +320,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
         onMouseLeave={() => {
           // console.log("LEFT JUMPER");
 
-          setIntersectedDivId(clickedId);
+          // setIntersectedDivId(clickedId);
           setHeadingIsGoingUp(false);
           setIsOverTheButtonOrJumper(false);
         }}
