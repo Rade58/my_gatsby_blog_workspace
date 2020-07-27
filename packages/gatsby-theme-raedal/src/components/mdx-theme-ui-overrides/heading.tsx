@@ -208,7 +208,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
             } */
           },
           {
-            root: null,
+            root: null /* || document.body.querySelector("article") */,
             threshold: [0],
             rootMargin: "0px",
           }

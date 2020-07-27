@@ -94,6 +94,10 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
         css={css`
           color: #ffffee;
 
+          /* height: 90vh;
+          border: pink solid 4px;
+          overflow-y: scroll; */
+
           @media screen and (min-width: 918px) {
             /* padding-top: calc(38px + 58px); */
 

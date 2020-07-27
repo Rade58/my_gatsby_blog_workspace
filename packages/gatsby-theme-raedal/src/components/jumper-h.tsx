@@ -291,6 +291,17 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
   return (
     <Fragment>
       <aside
+        onMouseMoveCapture={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (window) {
+            //
+          }
+        }}
+        onWheelCapture={(e) => {
+          // e.preventDefault();
+          e.stopPropagation();
+        }}
         onMouseEnter={() => {
           // console.log("ENTERED JUMPER");
 
@@ -307,6 +318,7 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
         className={`jumper-cont ${slideClass}`}
         css={css`
 
+          /* overscroll-behavior: none; */
           margin-right: 8px;
 
           /* visibility: hidden; */
