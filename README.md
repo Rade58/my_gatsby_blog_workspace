@@ -37,10 +37,23 @@ ALI TO SAM RESIO OVAKO, NA PRILICNO HACKY NACIN
 
 # POMENUTI PROBLEM IZ PROSLOG NASLOVA SAM USTVARI RESIO, NA onClick KORISTECI, `e.preventDefault`, ZATIM `anchor.scrollIntoView`, ZATIM `window.scrollBy(0, -58)`
 
-# A SADA MI OSTAJE DA SE POZABAVIM ON wheell
+# (OVO NE RESAVA PROBLEM) A SADA MI OSTAJE DA SE POZABAVIM ON wheell HANDLER-OM (OVO NE RESAVA MOJE PROBLEME)
 
 MOZDA MOGU DA KORISTIM onWheeel, DA SCROLL-UJEM INTO VIEW TRENUTNI ANCHOR
 
 ILI MOZDA DA SVAKI KLIK NA BILO KOJI OD DUGMADI USTVARI `setIsOverTheButtonOrJumper(true);`
 
 A DA MOUSEWHEEL NAPRAVI `setIsOverTheButtonOrJumper(false);`
+
+ZA WHEEL RESENJE UZETO SA STACK OVERFLOW-A
+
+```js
+// NE RADI NI OVO
+$(".scroll-div").on("wheel", function ( e ) {
+  var event = e.originalEvent,
+    d = -event.deltaY || -event.detail ;
+
+  this.scrollTop += ( d < 0 ? 1 : -1 ) * 30;
+  e.preventDefault();
+});
+```

@@ -310,9 +310,27 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
   console.log(nextDivHkey);
   console.log("**********************************************"); */
 
+  //
+  const [currentScrollY, setCurrentScrollY] = useState<number>(0);
+  //
+
+  useEffect(() => {
+    if (!window) return;
+
+    setCurrentScrollY(window.scrollY);
+  }, [isOverTheButtonOrJumper]);
+
   return (
     <Fragment>
       <aside
+        onMouseMove={() => {
+          setClickedId(intersectedDivId);
+          setIsOverTheButtonOrJumper(true);
+        }}
+        onWheel={() => {
+          setHeadingIsGoingUp(false);
+          setIsOverTheButtonOrJumper(false);
+        }}
         onMouseEnter={() => {
           // console.log("ENTERED JUMPER");
 
