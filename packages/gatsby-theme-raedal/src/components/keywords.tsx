@@ -92,7 +92,7 @@ const Keywords: FunctionComponent = () => {
 
         & div.bigger-separator {
           width: 80%;
-          margin: 1rem auto;
+          margin: 1.2rem auto;
           /* border-bottom: 1px solid ${themeColor}; */
           height: 2px;
           background-color: ${themeColor};
