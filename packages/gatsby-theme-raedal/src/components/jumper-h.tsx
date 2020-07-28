@@ -231,6 +231,8 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
       return;
     }
 
+    console.log({ headingIsGoingUp, isOverTheButtonOrJumper });
+
     if (headingIsGoingUp) {
       console.log("EXECUTED");
       if (indexOfCurrent > 0) {

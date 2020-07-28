@@ -162,33 +162,37 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
             //
 
             const boundingRect = entries[0].boundingClientRect;
+
             if (entries[0].isIntersecting) {
-              if (boundingRect.top > 0) {
-                setHeadingIsGoingUp(false);
-                setIntersectedHeadingDivFunc(entries[0].target.id);
-                if (thatIsFirstHeading) {
-                  setTimeout(() => {
-                    setShowComercial("comercialVis");
-                  }, 20);
-                }
+              console.log(boundingRect);
+              setHeadingIsGoingUp(false);
+              setIntersectedHeadingDivFunc(entries[0].target.id);
+              if (thatIsFirstHeading) {
+                setTimeout(() => {
+                  setShowComercial("comercialVis");
+                }, 20);
               }
+              // }
             } else {
               // eslint-disable-next-line
-              if (boundingRect.bottom > 0) {
-                // setIntersectedHeadingDivFunc(entries[0].target.id);
+              console.log(boundingRect);
 
-                /* if (boundingRect.bottom > 0 && boundingRect.top > 0) {
+              if (boundingRect.y < 0) {
+                return;
+              }
+              // setIntersectedHeadingDivFunc(entries[0].target.id);
+
+              /* if (boundingRect.bottom > 0 && boundingRect.top > 0) {
                   setHeadingIsGoingUp(false);
                   return;
                 } */
 
-                /*  console.log(
+              /*  console.log(
                   JSON.stringify(entries[0].boundingClientRect, null, 2),
                   JSON.stringify(entries[0].intersectionRatio, null, 2),
                   JSON.stringify(entries[0].intersectionRect, null, 2)
                 ); */
-                setHeadingIsGoingUp(true);
-              }
+              setHeadingIsGoingUp(true);
             }
 
             ////////////////////////////--------
@@ -415,10 +419,11 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
       >
         <Link
           onClick={() => {
-            setIsOverTheButtonOrJumper(false);
+            /* setIsOverTheButtonOrJumper(false);
             setIntersectedHeadingDivFunc(props.id);
             setIsOverTheButtonOrJumper(true);
             setClickedId(props.id);
+            setIsOverTheButtonOrJumper(false); */
 
             console.log("CLICKED");
           }}

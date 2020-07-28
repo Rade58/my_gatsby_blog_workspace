@@ -78,6 +78,17 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
       }}
     >
       <article
+        onMouseEnter={(e) => {
+          // console.log(e.relatedTarget);
+          setIsOverTheButtonOrJumper(false);
+        }}
+        onMouseOver={(e) => {
+          // console.log(e.relatedTarget);
+          setIsOverTheButtonOrJumper(false);
+        }}
+        onFocus={() => {
+          //
+        }}
         id="my-article"
         sx={
           {
