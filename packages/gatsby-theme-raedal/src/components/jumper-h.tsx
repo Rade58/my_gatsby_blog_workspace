@@ -231,10 +231,10 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
       return;
     }
 
-    console.log({ headingIsGoingUp, isOverTheButtonOrJumper });
+    // console.log({ headingIsGoingUp, isOverTheButtonOrJumper });
 
     if (headingIsGoingUp) {
-      console.log("EXECUTED");
+      // console.log("EXECUTED");
       if (indexOfCurrent > 0) {
         const lowerIndex = indexOfCurrent - 1;
 
@@ -309,16 +309,6 @@ const JumperButtons: FunctionComponent<JumperPropsI> = ({ mainReference }) => {
   console.log("*************** PREV STUFF ******************");
   console.log(nextDivHkey);
   console.log("**********************************************"); */
-
-  //
-  const [currentScrollY, setCurrentScrollY] = useState<number>(0);
-  //
-
-  useEffect(() => {
-    if (!window) return;
-
-    setCurrentScrollY(window.scrollY);
-  }, [isOverTheButtonOrJumper]);
 
   return (
     <Fragment>

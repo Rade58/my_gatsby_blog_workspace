@@ -132,7 +132,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
 
             if (mouseIsOverTheHeading) return;
 
-            console.log("IT CONTINUES");
+            // console.log("IT CONTINUES");
 
             // OPET JE OVO PROBLEMATICNO (ALI SACUVAJ CODE)  ///////////////////////
             /* if (
@@ -164,7 +164,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
             const boundingRect = entries[0].boundingClientRect;
 
             if (entries[0].isIntersecting) {
-              console.log(boundingRect);
+              // console.log(boundingRect);
               setHeadingIsGoingUp(false);
               setIntersectedHeadingDivFunc(entries[0].target.id);
               if (thatIsFirstHeading) {
@@ -175,7 +175,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
               // }
             } else {
               // eslint-disable-next-line
-              console.log(boundingRect);
+              // console.log(boundingRect);
 
               if (boundingRect.y < 0) {
                 return;
@@ -429,16 +429,16 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
 
             const anchor = e.target as HTMLAnchorElement;
 
-            const rect = anchor.getBoundingClientRect();
+            // const rect = anchor.getBoundingClientRect();
 
             anchor.scrollIntoView();
             window.scrollBy(0, -58);
 
-            console.log(rect);
+            // console.log(rect);
 
             setIntersectedHeadingDivFunc(props.id);
 
-            console.log("CLICKED");
+            // console.log("CLICKED");
           }}
           to={`${encodeURI(relativeLink)}#${props.id}`}
         >
