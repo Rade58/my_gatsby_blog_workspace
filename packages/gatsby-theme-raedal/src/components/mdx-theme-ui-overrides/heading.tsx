@@ -418,12 +418,24 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
         `}
       >
         <Link
-          onClick={() => {
+          onClick={(e) => {
             /* setIsOverTheButtonOrJumper(false);
             setIntersectedHeadingDivFunc(props.id);
             setIsOverTheButtonOrJumper(true);
             setClickedId(props.id);
             setIsOverTheButtonOrJumper(false); */
+
+            e.preventDefault();
+
+            const anchor = e.target as HTMLAnchorElement;
+
+            const rect = anchor.getBoundingClientRect();
+
+            anchor.scrollIntoView();
+
+            console.log(rect);
+
+            setIntersectedHeadingDivFunc(props.id);
 
             console.log("CLICKED");
           }}
