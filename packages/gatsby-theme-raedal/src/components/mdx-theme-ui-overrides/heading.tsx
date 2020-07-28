@@ -432,6 +432,7 @@ const giveHeading: (Tag: HeadingsI) => FunctionComponent<{ id: string }> = (
             const rect = anchor.getBoundingClientRect();
 
             anchor.scrollIntoView();
+            window.scrollBy(0, -58);
 
             console.log(rect);
 
