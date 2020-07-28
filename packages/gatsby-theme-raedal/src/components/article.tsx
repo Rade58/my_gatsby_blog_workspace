@@ -88,6 +88,7 @@ const Article: FunctionComponent<ArticlePropsI> = ({ body }) => {
         }}
         onFocus={() => {
           //
+          console.log("article focused");
         }}
         id="my-article"
         sx={

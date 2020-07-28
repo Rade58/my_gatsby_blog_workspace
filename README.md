@@ -57,3 +57,18 @@ $(".scroll-div").on("wheel", function ( e ) {
   e.preventDefault();
 });
 ```
+
+# PROBLEM SAM RESIO STO ZA JUMPER-A, onWheell, DEFINISEM JEDNO, A onMouseMove DEFINISEM DRUGO
+
+EVO OVAKO SAM TO RESIO
+
+```jsx
+onMouseMove={() => {
+  setClickedId(intersectedDivId);
+  setIsOverTheButtonOrJumper(true);
+}}
+onWheel={() => {
+  setHeadingIsGoingUp(false);
+  setIsOverTheButtonOrJumper(false);
+}}
+```
