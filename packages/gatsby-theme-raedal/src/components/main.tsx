@@ -46,7 +46,7 @@ const Main: FunctionComponent<MainPropsI> = ({ children }) => {
   const { reducedBlogPostState, blogPostDispatch, headings } = useContext(
     blogPostContext
   );
-  const { keywordModalIsShown, setShowComercial } = reducedBlogPostState;
+  const { keywordModalIsShown } = reducedBlogPostState;
 
   const [comercialClass, setComercialClass] = useState<
     "comercialVis" | "comercialHid"
