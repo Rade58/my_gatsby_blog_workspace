@@ -1,0 +1,62 @@
+# :one: IMAO SAM PROBLEM KADA DEFINISEM CONTEXT-OV STATE DEFAULT-OVE
+
+AKO SAM TYPE-OVAO NA PRIMER OVAKO
+
+```ts
+
+interface State {
+  a: boolean;
+}
+
+```
+
+DEFUALT STATE BI SAMO MOGAO ZADATI OVAKO
+
+```ts
+{
+  a: Boolean(false)
+}
+
+```
+
+MOZDA JE TO BROBLEM **`Context`** INTERFACE-A
+
+I MOZDA ZA STA GOD DA SI TYPE-OVAO SA `boolean` CES MORATI DA ASSIGN-UJES UZ POMOC `Boolean` FUNKCIJE
+
+# OVO SLEDECE MI JE VELIKA DILEMA "ZASTO JE BAS TAKO", A TICE SE REACT-OVOG CONTEXT-A I TYPING-A PRILIKOM NJEGOVOG KREIRANJA
+
+**`TYPESCRIPT UVEK YELL-UJE NA MENE KADA KREIRAM CONTEXT, AKO`**
+
+KORISTIM OR PRILIKOM TYPING-A
+
+OBRATI PAZNJU NA SLEDECE
+
+```ts
+interface ContextStateI {
+  birds: number | string;
+}
+
+export const somePageContext: Context<ContextStateI> = createContext(
+  {
+    birds: 4
+  }
+);
+```
+
+**UVEK CE BITI, CRVENOM LINT BOJOM PODVUCEN `somePageContext`**
+
+A KADA UKLONIM (|) SVE BUDE U REDU (NE ZNAM ZASTO JE TAKO)
+
+**OVO SAM USPEO DA RESIM TAKO STO SAM ZADAO DA FIELD BUDE OPCION**
+
+```ts
+interface ContextStateI {
+  birds?: number | string;
+}
+
+export const somePageContext: Context<ContextStateI> = createContext({});
+```
+
+**A U TOM SLUCAJU NISTA NE PROSLEDJUJES KAO DEFAULT**
+
+MORAM SE SECATI OVOGA DOK RADIM SA CONTEXT-OM

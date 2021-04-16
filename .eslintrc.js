@@ -66,12 +66,16 @@ module.exports = {
     "import/extensions": 0,
     "react/jsx-one-expression-per-line": 0,
     "react/no-danger": 0,
+    "react/jsx-indent": 1,
     "react/display-name": 1,
     "react/react-in-jsx-scope": 0,
     "react/jsx-uses-react": 1,
     "react/forbid-prop-types": 0,
     "react/no-unescaped-entities": 0,
     "react/prop-types": 0,
+    "react/jsx-fragments": 0,
+    "react/jsx-props-no-spreading": 1,
+    "prefer-destructuring": 1,
     "react/jsx-filename-extension": [
       1,
       {
@@ -81,15 +85,16 @@ module.exports = {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     quotes: [
-      2,
+      0,
       "backtick",
       {
         avoidEscape: true,
       },
     ],
-    indent: ["error", 2, { SwitchCase: 1 }],
+    // indent: ["warn", 2, { SwitchCase: 1 }],
+    "@typescript-eslint/indent": ["warn", 2],
     "prettier/prettier": [
-      "error",
+      0,
       {
         trailingComma: "es5",
         semi: true,

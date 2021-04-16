@@ -1,0 +1,115 @@
+//   **********   DARK THEME  **************
+$header-background-image: linear-gradient(
+  to right,
+  rgb(63, 44, 56),
+  rgb(38, 45, 59)
+);
+
+$main-background-image: rgb(255, 255, 255);
+
+$body-background-color: rgb(27, 34, 39);
+
+$body-background-color-hash: #1b2227;
+
+$body-background-color-little-darker: #2a3438;
+$body-background-color-little-darker-opaque: #11191a;
+
+//   **************************************
+
+// _____________  scroll indicator colors
+
+$scroll-indicator_filling: rgba(153, 67, 95, 0.74);
+$scroll-indicator_background: transparent;
+// _____________________-
+
+// SOCIAL ICON COLORS
+
+$social-icon: #ccc5c9;
+
+$syntah-highlight-specific-line: #d43c6a73;
+
+$line-number-text-color: #ac8ca688;
+
+$graphql-theme-color: #e04681;
+
+$random-color: #1b2227;
+
+$typescript-color: #356192;
+$typescript-border-color: #0a0a0e;
+
+$javascript-color: #d4d121;
+$javascript-border-color: #111010;
+
+$javascript-color: #141111;
+
+$backend: #d4b3cb;
+
+$react-color: #2160a8;
+
+.blah {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+$react-border-color: #f1e9f0;
+$react-text-color: #aacdee;
+$react-background: #325a70;
+
+$time-color: #e4cdc3;
+
+$random-color: #eed4d400;
+
+$arrow-color: #e0c8ce;
+$arrow-color-hover: #d3a6c2;
+
+$disabled-color: #a82964;
+
+$modal-background-color: #8143998e;
+
+$jumper-background-color: #1b2227c9;
+
+$twitter-color: #1da1f2;
+$instagram-color: #d386a457;
+
+$jumper: #20282e88;
+
+$h2col: #eba119;
+
+$codecol: #a043845b;
+
+$pisana-slova-color: #df9dbe;
+
+$pi-color-pa: #2a6480;
+
+$strong-color: #bb99d1;
+
+$rod-shadow: #da559733;
+
+$t-shad-h2: #df4ea248;
+
+$author-button: #ceaae446;
+
+$overal-text-color: #ffffee;
+
+$author-button-hover: #a2cf6760;
+
+$ulcolor: #e7d0e0;
+
+$group-page-separator: linear-gradient(to right, #a3274c1e 0%, #7f32b31f 100%);
+
+$path-color: #eb8da4;
+
+$h3: #e7ba76;
+
+$time-color-time: #dd8ab8;
+
+$author-name-color: #cab3bb;
+
+$author-name-shadow-color: #bd7c8c;
+
+$ulcolor: #dfd289;
+
+$scrollbarBackground: #d48ea5;
+$thumbBackgroundColor: #423b3d;
+
+$spinner-modal: #db81a679;

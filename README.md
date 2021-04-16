@@ -1,67 +1,74 @@
-# DEVELOPMENT NOTES
+# PREVENT-UJ SCROLLING ON WHEEL, PREKO JUMPER-A
 
-# :one: `package.json` TVOJE TEME **NEMA** `"private": true`
+NIJE MOGUCE
 
-## MISLIM DA gatsby , react , react-dom MOZES DA INSTALIRAS KAO PEER DEPENDANCY U TEMI
+# ALI MOGUCE GRANU STATE `isOverTheButtonOrJumper` DISPATCH-OVATI (DO REDUCER-A) SVAKI PUT KADA SE PROMENI
 
-ALI MISLIM DA JE DOBRO DA IH KAO DEPENDANCIES INSTALIRAS NA SITE LEVELU
+OVO DAKLE ZAHTEVA PRAVLJENJ NOVE GRANE U REDUCER STATE-U, NA KOJU UTICE `setIsOverTheButtonOrJumper` (DAKLE MENJA JE), KADA SE I OVA GRANA PROMENI
 
-- `yarn workspace blog add gatsby react react-dom`
+NA OVAJ NACIN MOGU NEKAKO SPRECITI SCROLLING WIND-OVA, KADA JE POMENUTA STVAR UNUTRA
 
-# :two: TYPESCRIPT SUPPORT
+# JA SAM PREVENT-OVA CLICK, KADA JE INTERSECTION ID ISTI KAO I VALUE TRENUTNOG INTERSECTED, ODNONO CLICKED LINKA, U SUPROTNOM DOGADJA SE MALI PREKID ANIMACIJE
 
-[PRATIO SAM OVAJ CLANAK](https://www.lekoarts.de/en/blog/setting-up-a-gatsby-themes-workspace-with-typescript-eslint-and-cypress)
+ODNONIO KADA JE window.location.hash ISTI KAO TRENUTNO VEC KLIKNUTI LINK, JA SAM U ON CLICK HANDLERU PREVENT-OVAO DEFAULT
 
-INSTALIRAM PLUGIN U TEMU
+PREDPOSTAVLJAM DA SE OVAKO SPRECAVA EVENT BUBBLING STO I PREKIDA ANIMACIJU
 
-- `yarn workspace gatsby-theme-raedal add gatsby-plugin-typescript`
+# (NE VALJA JER UNISTAVA NESTO DRUGO) IMAM PROBLEM PRI KOJEM JE KLIK DIREKTNO NA `h2` ELEMENT, (TARGETING LINKA, ODNOSNO HASHA), OPET PRAVIO POREMECEN POREDAK OKO TOGA STA JE HIGHLIGHTED U JUMPER-U
 
-- `touch packages/gatsby-theme-raedal/gatsby-config.js`
+ALI TO SAM RESIO OVAKO, NA PRILICNO HACKY NACIN
 
-- `touch packages/gatsby-theme-raedal/gatsby-config.js`
+```jsx
+<Link
+  onClick={() => {
+    // EVO VIDIS KOLIKO IMAM PROMENA STANJA DA BI SVE BILO OK
+    setIsOverTheButtonOrJumper(false);
+    setIntersectedHeadingDivFunc(props.id);
+    setIsOverTheButtonOrJumper(true);
+    setClickedId(props.id);
 
-```js
-module.exports = {
-  plugins: ["gatsby-plugin-typescript"],
-};
+    console.log("CLICKED");
+  }}
+  to={`${encodeURI(relativeLink)}#${props.id}`}
+>
+  {" "}
+</Link>
 ```
 
----
+# POMENUTI PROBLEM IZ PROSLOG NASLOVA SAM USTVARI RESIO, NA onClick KORISTECI, `e.preventDefault`, ZATIM `anchor.scrollIntoView`, ZATIM `window.scrollBy(0, -58)`
 
-ps. OVO NEMA VEZE SA TYPESCRIPT-OM, ALI NEMOJ DA ZABORAVIS DA NA NIVOU blog-A DEFINISES `gatsby-config.js` I U NJEMU SPECIFICIRAS TVOJU TEMU
+# (OVO NE RESAVA PROBLEM) A SADA MI OSTAJE DA SE POZABAVIM ON wheell HANDLER-OM (OVO NE RESAVA MOJE PROBLEME)
 
----
+MOZDA MOGU DA KORISTIM onWheeel, DA SCROLL-UJEM INTO VIEW TRENUTNI ANCHOR
 
-## STO SE TICE TYPESCRIPT-OVI TYPE DEFINICIJA ZA RAZNE PAKETE INSTALIRAS IH U ROOT
+ILI MOZDA DA SVAKI KLIK NA BILO KOJI OD DUGMADI USTVARI `setIsOverTheButtonOrJumper(true);`
 
-KORISTIS `-W` FLAG PRI INSTALACIJI
+A DA MOUSEWHEEL NAPRAVI `setIsOverTheButtonOrJumper(false);`
 
-- `yarn add -D -W @types/node @types/react @types/react-dom`
+ZA WHEEL RESENJE UZETO SA STACK OVERFLOW-A
 
-## TYPE CHECKING CES DEFINISATI TAKO STO CES TYPESCRIPT INSTALIRATI U ROOT-U KAO DEV DEPENDANCY; I TAK OSTO CES DEFINISATI tsconfig.js
+```js
+// NE RADI NI OVO
+$(".scroll-div").on("wheel", function ( e ) {
+  var event = e.originalEvent,
+    d = -event.deltaY || -event.detail ;
 
-- `yarn add -D -W typescript`
+  this.scrollTop += ( d < 0 ? 1 : -1 ) * 30;
+  e.preventDefault();
+});
+```
 
-- `tsc --init`
+# PROBLEM SAM RESIO STO ZA JUMPER-A, onWheell, DEFINISEM JEDNO, A onMouseMove DEFINISEM DRUGO
 
-STO SE TICE ONOGASTA CE BITI U `tsconfig.json`, NISAM NISTA CUSTOMIZOVAO VEC PREPISAO IZ CLANKA, PA POGLEDAJ O CEM USE RADI
+EVO OVAKO SAM TO RESIO
 
-**DODAJ I SCRIPT KOJI CE SE ZVATI** `type-check` **I TO DODAJES U ROOT-U** (NJEGOVA VREDNSOT JE SAMO `"tsc"`)
-
-## PODESAVANJE ESLINT-A I PRETTIER-A
-
-SVE INSTLACIJE OBAVLJAM U ROOT-U
-
-- `yarn add -D -W @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint eslint-config-airbnb eslint-config-prettier eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-prettier eslint-plugin-react eslint-plugin-react-hooks prettier`
-
-I DODAJEM CONFIG FAJLOVE TO THE ROOT
-
-- `touch .eslintrc.js`
-
-I U NJEGA SAM SVE PREKOPIRAO, PREKOPIRAO JER OVO JE KONFIGURACIJA FROM `airbnb`
-
-**LINTING SCRIPTOVE SAM TAKODJE DODAO U** `package.json` FAJL U ROOT-U
-
-## TAKODJE SAM PODESIO I `.eslintignore` FAJL
-
-JER ZELIM DA SPECIFICIRAM DA ESLINT IGNORISE KONFIGURACIJSKE FAJLOVE, BILO GDE DA SU
+```jsx
+onMouseMove={() => {
+  setClickedId(intersectedDivId);
+  setIsOverTheButtonOrJumper(true);
+}}
+onWheel={() => {
+  setHeadingIsGoingUp(false);
+  setIsOverTheButtonOrJumper(false);
+}}
+```
